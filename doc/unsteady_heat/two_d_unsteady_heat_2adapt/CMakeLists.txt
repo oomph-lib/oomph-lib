@@ -18,14 +18,13 @@ set(DST_GIF "${CMAKE_CURRENT_SOURCE_DIR}/figures/domain.gif")
 # Make sure we have a symlink
 add_custom_command(
   OUTPUT "${DST_GIF}"
-  COMMAND
-    ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ensure_symlink.cmake"
-    "${SRC_GIF}" "${DST_GIF}"
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SRC_GIF}" "${DST_GIF}"
   DEPENDS "${SRC_GIF}"
-  COMMENT "Ensuring symlink ${DST_GIF} --> ${SRC_GIF}"
+  COMMENT "Copying domain.gif for documentation"
   VERBATIM)
 
-# Create a target that needs STAMP, which will trigger the above command
+# Create a custom target to drive the copy. When the target is built, it relies
+# on the copied image existing, which will in turn trigger the above command
 add_custom_target(generate_domain_gif ALL DEPENDS "${DST_GIF}")
 
 message(VERBOSE "Leaving two_d_unsteady_heat_2adapt subdirectory")
