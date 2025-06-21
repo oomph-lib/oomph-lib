@@ -20,8 +20,8 @@
 # =============================================================================
 include_guard()
 
-set(TRILINOS_GIT_URL  https://github.com/trilinos/Trilinos.git)
-set(TRILINOS_GIT_TAG  trilinos-release-16-0-0)
+set(TRILINOS_GIT_URL https://github.com/trilinos/Trilinos.git)
+set(TRILINOS_GIT_TAG trilinos-release-16-0-0)
 set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
 
 # TODO: Handle deprecated packages more gracefully

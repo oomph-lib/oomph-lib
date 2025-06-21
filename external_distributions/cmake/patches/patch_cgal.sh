@@ -39,6 +39,7 @@ if grep -qR '\bBUILD_TESTING\b' "${CGAL_ROOT_DIR}"; then
     if grep -qR '\bBUILD_TESTING\b' "${CGAL_ROOT_DIR}"; then
         echo "It looks like you failed to change all occurrences of BUILD_TESTING!"
         grep -R '\bBUILD_TESTING\b' "${CGAL_ROOT_DIR}"
+        exit 1
     else
         echo "No BUILD_TESTING tokens found."
     fi
@@ -46,9 +47,8 @@ fi
 
 # -----------------------------------------------------------------------------
 # Force Boost to be found via CONFIG mode (CMake 1.72)
-# File: cmake/modules/CGAL_SetupBoost.cmake
 # -----------------------------------------------------------------------------
-BOOST_FILE="${CGAL_ROOT_DIR}/cmake/modules/CGAL_SetupBoost.cmake"
+BOOST_FILE="${CGAL_ROOT_DIR}/Installation/cmake/modules/CGAL_SetupBoost.cmake"
 
 echo ""
 if [[ -f ${BOOST_FILE} ]]; then
@@ -60,8 +60,8 @@ if [[ -f ${BOOST_FILE} ]]; then
     fi
 else
     echo "Expected Boost cmake module not found: ${BOOST_FILE}"
+    exit 1
 fi
 
 echo ""
 echo "Yay! Looks like it all worked!"
-echo ""

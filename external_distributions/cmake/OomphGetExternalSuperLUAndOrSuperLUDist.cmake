@@ -198,7 +198,7 @@ if(OOMPH_ENABLE_MPI)
   endif()
 
   oomph_get_external_project_helper(
-    PROJECT_NAME  superlu_dist
+    PROJECT_NAME superlu_dist
     GIT_REPOSITORY ${SUPERLU_DIST_GIT_URL}
     GIT_TAG v9.1.0
     GIT_SHALLOW TRUE

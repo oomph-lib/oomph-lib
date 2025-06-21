@@ -1,2 +1,0 @@
-SUBDIRS = \
-two_dim
