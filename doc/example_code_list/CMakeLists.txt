@@ -2,7 +2,7 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered example_code_list subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(example_code_list C CXX Fortran)
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../..")
 

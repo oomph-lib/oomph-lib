@@ -11,7 +11,7 @@ endif()
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered pml_fourier_decomposed_helmholtz subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(pml_fourier_decomposed_helmholtz C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

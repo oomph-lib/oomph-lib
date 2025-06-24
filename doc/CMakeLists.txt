@@ -3,7 +3,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered doc subdirectory")
 
 # Project meta & global options
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(doc LANGUAGES C CXX Fortran)
 
 # This doc build is *configure + build* only

@@ -12,7 +12,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE
         "Entered deliberately_broken_code_for_self_test_test subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(deliberately_broken_code_for_self_test_test C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

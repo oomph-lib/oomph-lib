@@ -4,7 +4,7 @@ message(
   VERBOSE
   "Entered distributed_general_purpose_block_preconditioners subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(distributed_general_purpose_block_preconditioners C CXX Fortran)
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 
