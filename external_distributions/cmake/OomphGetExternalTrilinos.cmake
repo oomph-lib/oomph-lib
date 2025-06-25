@@ -25,10 +25,13 @@ set(TRILINOS_GIT_TAG trilinos-release-16-0-0)
 set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
 
 # TODO: Handle deprecated packages more gracefully
-message(
-  WARNING
-    "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 without making the necessary oomph-lib changes to handle this."
-)
+if (NOT TRILINOS_GIT_TAG STREQUAL "trilinos-release-16-0-0")
+  message(
+    WARNING
+      "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 "
+      "without making the necessary oomph-lib changes to handle this."
+  )
+endif()
 
 # On Ubuntu, Trilinos doesn't appear to link to gfortran when using OpenBLAS,
 # resulting in error described here:

@@ -12,7 +12,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE
         "Entered linearised_free_surface_axisym_navier_stokes subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(linearised_free_surface_axisym_navier_stokes C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

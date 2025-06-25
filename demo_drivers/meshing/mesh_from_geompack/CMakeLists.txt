@@ -11,7 +11,7 @@ endif()
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered mesh_from_geompack subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(mesh_from_geompack C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

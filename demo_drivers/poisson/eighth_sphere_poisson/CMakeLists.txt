@@ -11,7 +11,7 @@ endif()
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered eighth_sphere_poisson subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(eighth_sphere_poisson C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

@@ -12,7 +12,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE
         "Entered mesh_from_inline_triangle_internal_boundaries subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(mesh_from_inline_triangle_internal_boundaries C CXX Fortran)
 
 if(NOT oomphlib_FOUND)
