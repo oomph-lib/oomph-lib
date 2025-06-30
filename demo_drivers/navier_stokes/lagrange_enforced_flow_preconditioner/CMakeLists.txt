@@ -11,7 +11,7 @@ endif()
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered lagrange_enforced_flow_preconditioner subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(lagrange_enforced_flow_preconditioner C CXX Fortran)
 
 if(NOT oomphlib_FOUND)

@@ -2,7 +2,7 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered scripts subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(scripts C CXX Fortran)
 if(PROJECT_IS_TOP_LEVEL)
   find_package(oomphlib CONFIG REQUIRED PATHS "../install")

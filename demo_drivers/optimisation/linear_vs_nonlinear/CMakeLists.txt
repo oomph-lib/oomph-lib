@@ -11,7 +11,7 @@ endif()
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered linear_vs_nonlinear subdirectory")
 
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(linear_vs_nonlinear C CXX Fortran)
 
 if(NOT oomphlib_FOUND)
