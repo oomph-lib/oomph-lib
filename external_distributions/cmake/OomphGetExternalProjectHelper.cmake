@@ -45,7 +45,7 @@ function(oomph_get_external_project_helper)
     set(ARG_GIT_SUBMODULES_RECURSE TRUE)
   endif()
 
-  # If we should not perform a shallow clone
+  # Whether or not we should perform a shallow clone
   set(PERFORM_SHALLOW_CLONE TRUE)
   if(ARG_DISABLE_SHALLOW_CLONE)
     set(PERFORM_SHALLOW_CLONE FALSE)
