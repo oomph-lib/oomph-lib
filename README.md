@@ -259,7 +259,7 @@ sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texliv
 | `Trilinos`                       | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
 
 > [!IMPORTANT]
-> If you are an Apple user, make sure you read [OpenBLAS](#openblas).
+> If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas).
 
 To facilitate the installation of these (as well as various optional third-party libraries), we provide the option to build them as part of our overall build process. We provide a detailed description of the two-stage build process below, but strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) and we suggest that new users jump straight there.
 
