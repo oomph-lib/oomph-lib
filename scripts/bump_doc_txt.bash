@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-files_to_be_bumped="doc/doc.txt doc/the_distribution/the_distribution.txt"
+files_to_be_bumped="doc/doc.txt"
 for file in `echo $files_to_be_bumped`; do
 
     echo " " 
