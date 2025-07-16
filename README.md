@@ -475,7 +475,7 @@ Other options are used mainly when developing new code. In this case, we recomme
 We therefore recommend doing code development with the following configure options:
 
 ```bash
-cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Debug -DOOMPH_ENABLE_PARANOID=ON -DOOMPH_ENABLE_PARANOID=ON
+cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Debug -DOOMPH_ENABLE_PARANOID=ON -DOOMPH_ENABLE_RANGE_CHECKING=ON
 ```
 
 The last two flags define the C++ macros `PARANOID` and `RANGE_CHECKING` which should be used as follows:
