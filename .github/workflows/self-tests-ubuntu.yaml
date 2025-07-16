@@ -173,7 +173,12 @@ jobs:
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
+        run: |
+          # Run the tests
+          ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
+
+          # Print a test summary at the end
+          python3 .github/generate_validation_log_summary.py validation.log
         continue-on-error: true
 
       # -------------------
@@ -203,7 +208,7 @@ jobs:
           key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
 
       - name: Summarise validation.log for GitHub
-        run: python3 .github/generate_validation_log_summary.py validation.log >> $GITHUB_STEP_SUMMARY
+        run: python3 .github/generate_validation_log_summary.py validation.log --print-markdown-table >> $GITHUB_STEP_SUMMARY
 
       - name: Rename validation log file
         run: mv ./validation.log ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
