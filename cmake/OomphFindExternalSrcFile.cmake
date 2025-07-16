@@ -22,7 +22,7 @@
 #                              [TOUCH_DUMMY_FILE])
 #
 # The variable SET_FLAG will be set and made visible across the entire project.
-# As an example, this may be set to HAVE_ARPACK_SOURCES. If the REQUIRED flag
+# As an example, this may be set to HAVE_HSL_SOURCES. If the REQUIRED flag
 # specified then an error will be issued if the file couldn't be found and no
 # dummy file was provided. If the TOUCH_DUMMY_FILE flag is specified then the
 # dummy file will be "touch"-ed (i.e. it has the same effect as the "touch"
