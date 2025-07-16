@@ -54,7 +54,6 @@ OOMPHLIB_LIBRARIES = [
     "oomph_zlib",
     "oomph_hsl",
     "oomph_crbond_bessel",
-    "oomph_arpack",
     "oomph_triangle",
     "oomph_tetgen",
     "oomph_superlu_6.0.1",
