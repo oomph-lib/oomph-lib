@@ -1050,7 +1050,7 @@ mkdir RESLT
 > [!NOTE]
 > We provide a separate GitHub repository
 >
-> <div align="center"><a href="">https://github.com/oomph-lib/stand_alone_oomph-lib_driver_code</a></div>
+> <div align="center"><a   href="https://github.com/oomph-lib/stand_alone_oomph-lib_user_code">https://github.com/oomph-lib/stand_alone_oomph-lib_user_code</a></div>
 > <br>
 >
 > which contains a different driver code and a heavily annotated `CMakeLists.txt` file to explain the process in much more detail.
