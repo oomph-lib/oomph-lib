@@ -134,6 +134,7 @@
     - [Autotools](#autotools-5)
     - [CMake](#cmake-6)
 - [Dos and Don'ts](#dos-and-donts)
+- [FAQs](#faq)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
@@ -232,11 +233,15 @@ will do the trick.
 ```bash
 sudo apt install gfortran
 ```
+If you wish to use `oomph-lib`'s parallel capabilities you need a working MPI installation on your machine. We tend to use [OpenMPI](https://www.open-mpi.org/) which on Ubuntu can be installed using
+```bash
+sudo apt install openmpi-bin libopenmpi-dev
+```
 
 ### Other tools (and how to install all the prerequisites in one go)
 If you also want to build the documentation (which will give you a local copy of the `oomph-lib` webpages) you need a few other tools. On Ubuntu the following command should give you all you need:
 ```bash
-sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
+sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils openmpi-bin libopenmpi-dev
 ```
 
 
@@ -1012,6 +1017,13 @@ oomph_add_executable(
 # ------------------------------------------------------------------------------
 ```
 
+> [!NOTE]
+> In the above example we have included the header file `mesh_stuff.h` into the `SOURCES` 
+> variable. This is not strictly necessary in the sense that the code will compile 
+> even if the included header files are not listed. However, they are needed for CMake to detect
+> the executable's dependency on these files. It is therefore good practice to include them. 
+> (This behaviour is different from the Autotools which scan code for included files to detect such dependencies automatically.)
+
 Note that this directory is completely unconnected to the `oomph-lib` directory. To be able to find the `oomph-lib` installation directory, if it is not in one of the system-wide standard locations such as `/usr/local`, it must be declared somehow.
 
 This is most easily done by exporting the `oomphlib_ROOT` environment variable, as discussed [above](#option-2-specifying-a-custom-installation-location). Note that this is necessary even if `oomph-lib` is installed to its default installation directory, `install/`, in the `oomph-lib` root directory -- remember that the current directory is completely unconnected to the `oomph-lib` installation. Alternatively, you can specify the directory where `oomph-lib` is installed when configuring the current project.
@@ -1022,20 +1034,26 @@ So, assuming `oomph-lib` was installed to `/home/joe_user/oomph_lib_install` the
 # Go to stand-alone driver directory
 cd ~/mesh_gluing
 
-# Option 1: Define/export the oomphlib_ROOT variable and configure
+# Option 1: Specify the oomph-lib installation directory during
+# the configure step. Best because it's fully transparant
+cmake -G Ninja -B -Doomphlib_ROOT=/home/joe_user/oomph_lib_install
+
+# Option 2: Define/export the oomphlib_ROOT variable and configure.
+# Not quite so good. It saves you having to type the install directory
+# every time, but you may forget what you've set the variable
+# to and thus acccidentally use an old installation. 
 export oomphlib_ROOT=/home/joe_user/oomph_lib_install
 cmake -G Ninja -B build
-
-# Option 2: Specify the oomph-lib installation directory during
-# the configure step
-cmake -G Ninja -B -Doomphlib_ROOT=/home/joe_user/oomph_lib_install
 
 # Option 3: Open the CMakeLists.txt file and add the path to the
 # oomph-lib installation to the find_package(...) call by replacing
 #   find_package(oomphlib CONFIG REQUIRED)
 # with
 #   find_package(oomphlib CONFIG REQUIRED PATHS "/home/joe_cool/oomph_lib_install")
-# then configure the project
+# then configure the project. This is considered bad practice since
+# the build process will only work correctly on the present machine (or some
+# other machine where oomph-lib happens to have been installed in this 
+# specific directory)
 cmake -G Ninja -B build
 
 # Build; ninja without arguments builds both driver codes
@@ -1046,6 +1064,40 @@ ninja
 mkdir RESLT
 ./mesh_gluing
 ```
+
+Note the three options for specifying the install directory (but stick to Option 1!).
+
+Given that the install directory is quite deep, users sometimes worry if they 
+have specified the right level of that directory tree. If you've only just installed `oomph-lib` 
+it's easy to reconstruct:
+- If you've built `oomph-lib` by running `oomph_build.py` (or the corresponding `cmake` 
+  commands) in `/home/joe_cool/oomph-lib`, say, without explicitly  specifying an install 
+  directory, the relevant directory is `/home/joe_cool/oomph-lib/install`.
+- If you specified a different install directory, either by running
+  ```bash      
+  ./oomph_build.py [...] --oomph-CMAKE_INSTALL_PREFIX=/home/joe_cool/local/oomph-lib
+  ```
+  or the raw CMake equivalent
+
+  ```bash  
+  cmake -G Ninja -B build [...] -DCMAKE_INSTALL_PREFIX=/home/joe_cool/local/oomph-lib
+  ``` 
+  then this is the one you use.
+
+If you're unsure (because the installation was too long ago, say) you should check 
+that the directory you're about to specify as the install directory contains the 
+file `oomphlibConfig.cmake`. This is the file that contains the key information
+that allows CMake to work with the installed library. So doing this
+```bash
+# Check that oomphlibConfig.cmake is there
+find  /home/joe_cool/local/oomph-lib -name 'oomphlibConfig.cmake'
+```
+should find the file
+```bash
+/home/joe_cool/local/oomph-lib/lib/cmake/oomphlib/oomphlibConfig.cmake
+```
+if the file can't be found (or it appears at a different levelin the directory 
+tree the configuration will fail.
 
 > [!NOTE]
 > We provide a separate GitHub repository
@@ -1887,6 +1939,39 @@ cmake --install build
 
 - Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because it would lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose seg faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign them yourself!
 - Do (re-)build the library with `PARANOID` or `RANGE_CHECKING` enabled if you develop any new machinery or work on a new driver code. The code will run more slowly but the warnings will save you years of your life!
+
+## FAQ
+
+### When configuring my driver code CMake can't find the package configuration file
+
+If you get an error message like this
+```bash
+CMake Error at CMakeLists.txt:86 (find_package):
+  Could not find a package configuration file provided by "oomphlib" with any
+  of the following names:
+
+    oomphlibConfig.cmake
+    oomphlib-config.cmake
+
+  Add the installation prefix of "oomphlib" to CMAKE_PREFIX_PATH or set
+  "oomphlib_DIR" to a directory containing one of the above files.  If
+  "oomphlib" provides a separate development package or SDK, be sure it has
+  been installed.
+```
+when configuring your driver code then you've either specified the wrong 
+installation directory or you haven't specified one at all when you should 
+have. In the latter case you may have used the command
+```bash
+cmake -G Ninja -B build
+```
+when you should have done 
+```bash
+cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph-lib_playground/oomph_lib_installation
+```
+say. (This assumes that you've installed `oomph-lib` in 
+`/home/joe_cool/oomph-lib_playground/oomph_lib_installation`). Please consult 
+the section [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alone-project-to-oomph-lib) for detailed instructions.
+
 
 ## Additional information for developers
 
