@@ -1096,7 +1096,7 @@ should find the file
 ```bash
 /home/joe_cool/local/oomph-lib/lib/cmake/oomphlib/oomphlibConfig.cmake
 ```
-if the file can't be found (or it appears at a different levelin the directory 
+if the file can't be found (or it appears at a different level in the directory 
 tree the configuration will fail.
 
 > [!NOTE]
