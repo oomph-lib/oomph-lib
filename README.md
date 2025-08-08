@@ -1018,7 +1018,7 @@ oomph_add_executable(
 ```
 
 > [!NOTE]
-> In the above example we have included the header file `mesh_stuff.h` into the `SOURCES` 
+> In the above example we have included the header file `glued_mesh_stuff.h` into the `SOURCES` 
 > variable. This is not strictly necessary in the sense that the code will compile 
 > even if the included header files are not listed. However, they are needed for CMake to detect
 > the executable's dependency on these files. It is therefore good practice to include them. 
@@ -1071,7 +1071,7 @@ Given that the install directory is quite deep, users sometimes worry if they
 have specified the right level of that directory tree. If you've only just installed `oomph-lib` 
 it's easy to reconstruct:
 - If you've built `oomph-lib` by running `oomph_build.py` (or the corresponding `cmake` 
-  commands) in `/home/joe_cool/oomph-lib`, say, without explicitly  specifying an install 
+  commands) in `/home/joe_cool/oomph-lib`, say, without explicitly specifying an install 
   directory, the relevant directory is `/home/joe_cool/oomph-lib/install`.
 - If you specified a different install directory, either by running
   ```bash      
@@ -1090,14 +1090,14 @@ file `oomphlibConfig.cmake`. This is the file that contains the key information
 that allows CMake to work with the installed library. So doing this
 ```bash
 # Check that oomphlibConfig.cmake is there
-find  /home/joe_cool/local/oomph-lib -name 'oomphlibConfig.cmake'
+find /home/joe_cool/local/oomph-lib -name 'oomphlibConfig.cmake'
 ```
 should find the file
 ```bash
 /home/joe_cool/local/oomph-lib/lib/cmake/oomphlib/oomphlibConfig.cmake
 ```
 if the file can't be found (or it appears at a different level in the directory 
-tree the configuration will fail.
+tree) the configuration will fail.
 
 > [!NOTE]
 > We provide a separate GitHub repository
