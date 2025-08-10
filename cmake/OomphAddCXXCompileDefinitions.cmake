@@ -22,14 +22,32 @@ include_guard()
 
 # ------------------------------------------------------------------------------
 function(oomph_add_cxx_compile_definitions)
-  foreach(CXX_DEFINITION IN LISTS ARGN)
-    add_compile_definitions($<$<COMPILE_LANGUAGE:CXX>:${CXX_DEFINITION}>)
+  # Join all ARGN entries into a single string (in case the user quoted it)
+  string(REPLACE ";" " " JOINED "${ARGN}")
+
+  # Split on spaces into a list
+  separate_arguments(DEF_LIST UNIX_COMMAND "${JOINED}")
+  foreach(CXX_DEFINITION IN LISTS DEF_LIST)
+    # Strip leading -D, if found
+    string(REGEX REPLACE "^-D" "" CLEAN_DEF "${CXX_DEFINITION}")
+
+    # Apply compile definition
+    add_compile_definitions($<$<COMPILE_LANGUAGE:CXX>:${CLEAN_DEF}>)
   endforeach()
 endfunction()
 
 function(oomph_add_c_compile_definitions)
-  foreach(C_DEFINITION IN LISTS ARGN)
-    add_compile_definitions($<$<COMPILE_LANGUAGE:C>:${C_DEFINITION}>)
+  # Join all ARGN entries into a single string (in case the user quoted it)
+  string(REPLACE ";" " " JOINED "${ARGN}")
+
+  # Split on spaces into a list
+  separate_arguments(DEF_LIST UNIX_COMMAND "${JOINED}")
+  foreach(C_DEFINITION IN LISTS DEF_LIST)
+    # Strip leading -D, if found
+    string(REGEX REPLACE "^-D" "" CLEAN_DEF "${C_DEFINITION}")
+
+    # Apply compile definition
+    add_compile_definitions($<$<COMPILE_LANGUAGE:C>:${CLEAN_DEF}>)
   endforeach()
 endfunction()
 # ------------------------------------------------------------------------------
