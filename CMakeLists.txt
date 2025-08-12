@@ -103,11 +103,13 @@ oomph_option(OOMPH_ENABLE_SANITIZER_SUPPORT "Enable sanitizer support in Debug b
 # to override this setting.
 oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
 
-
 # Fine-grained control of build of external_srcs.
 # TODO: Discuss with MH; do we actually want these options anymore?
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
+
+# Extra flags for the user to provide
+oomph_option(OOMPH_EXTRA_COMPILE_DEFINES "Additional C/C++ compile defines to pass to the oomph-lib build." "")
 
 # Paths to packages that the user has installed themselves
 oomph_path_option(
@@ -257,6 +259,11 @@ endif()
 # Do we want Mumps to override SuperLU as the default solver?
 if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
   oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+endif()
+
+# If the user provided extra compile defines to use in the build
+if(OOMPH_EXTRA_COMPILE_DEFINES)
+  oomph_add_cxx_compile_definitions(${OOMPH_EXTRA_COMPILE_DEFINES})
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
