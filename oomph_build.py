@@ -2,7 +2,7 @@
 
 import os
 import json
-import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -68,7 +68,8 @@ def run_command(cmd: list[str], cwd: Path, verbose: bool):
     try:
         if not verbose:
             result = subprocess.run(
-                cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+                cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+            )
         else:
             result = subprocess.run(cmd, cwd=cwd)
     except Exception as e:
@@ -231,8 +232,8 @@ def configure_build_and_install_external_libs(
     # Construct configuration command
     print_progress(">>> Configuring third-party libraries", pad_to=60, end=end)
     config_cmd = ["cmake", "--preset", "tpl"]
-    if args.ext_extra_flags:
-        config_cmd += args.ext_extra_flags
+    if args.ext_extra_cmake_options:
+        config_cmd += args.ext_extra_cmake_options
     start_time = time.perf_counter()
     run_command(config_cmd, external_dist_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -303,8 +304,8 @@ def configure_build_and_install_oomph(
     print_progress(">>> Configuring main project",
                    pad_to=60, end="\n" if verbose else "")
     config_cmd = ["cmake", "--preset", "main"]
-    if args.oomph_extra_flags:
-        config_cmd += args.oomph_extra_flags
+    if args.oomph_extra_cmake_options:
+        config_cmd += args.oomph_extra_cmake_options
     start_time = time.perf_counter()
     run_command(config_cmd, oomph_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -488,7 +489,7 @@ def parse_args():
     ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path; used by CGAL.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
+    ext_group.add_argument("--ext-extra-cmake-options", type=str, metavar="OPTIONS", help="Additional raw CMake flags for external_distributions (e.g. --ext-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
 
     # oomph-lib flags
     oomph_group = parser.add_argument_group("oomph-lib project flags")
@@ -497,8 +498,8 @@ def parse_args():
     oomph_group.add_argument("--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS", metavar="ON/OFF", choices=["ON", "OFF"], help="Install symlinks to the oomph-lib headers instead of copying them (default: OFF).")
     oomph_group.add_argument("--oomph-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
-    oomph_group.add_argument("--oomph-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
-    oomph_group.add_argument("--oomph-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib.")
+    oomph_group.add_argument("--oomph-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib. Only valid in a Debug build.")
+    oomph_group.add_argument("--oomph-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib. Only valid in a Debug build.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_SANITIZER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable LLVM/GCC run-time sanitizers: AddressSanitizer detects out-of-bounds and use-after-free accesses, UndefinedBehaviorSanitizer traps undefined-behaviour errors, and LeakSanitizer reports unreleased heap memory (default: OFF).")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library.")
@@ -506,10 +507,28 @@ def parse_args():
     oomph_group.add_argument("--oomph-OOMPH_EXTRA_COMPILE_DEFINES", metavar="DEFINES", help="Additional C/C++ compile defines to pass to the oomph-lib build.")
 
     # Any additional flags for oomph-lib
-    oomph_group.add_argument("--oomph-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for oomph-lib (e.g. -DXYZ=VALUE).")
-
+    oomph_group.add_argument("--oomph-extra-cmake-options", type=str, metavar="OPTIONS", help="Additional raw CMake flags for oomph-lib (e.g. --oomph-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
     # fmt: on
+
+    # Parse the flags
     args = parser.parse_args()
+
+    # Helper to split the extra CMake options into a list of strings to pass to
+    # subprocess.run(...), e.g.
+    # >>> s = "-DCMAKE_C_COMPILER=\"/usr/bin/gcc\" -DCMAKE_CXX_COMPILER=\"/usr/bin/g++\""
+    # >>> split_extra_options(s)
+    # ['-DCMAKE_C_COMPILER="/usr/bin/gcc"', '-DCMAKE_CXX_COMPILER="/usr/bin/g++"']
+    def split_extra_options(option_string: str):
+        (first_option, *other_options) = option_string.split(" -D")
+        return [first_option] + [f"-D{opt}" for opt in other_options]
+
+    if args.oomph_extra_cmake_options is not None:
+        args.oomph_extra_cmake_options = split_extra_options(
+            args.oomph_extra_cmake_options)
+    if args.ext_extra_cmake_options is not None:
+        args.ext_extra_cmake_options = split_extra_options(
+            args.ext_extra_cmake_options)
+
     return args
 
 
