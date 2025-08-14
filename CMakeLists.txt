@@ -233,12 +233,13 @@ else()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
-if((OOMPH_ENABLE_PARANOID OR OOMPH_ENABLE_RANGE_CHECKING)
-   AND (NOT CMAKE_BUILD_TYPE STREQUAL "Debug"))
-  message(
-    WARNING
-      "You can only enable\n\tOOMPH_ENABLE_PARANOID\nand\n\tOOMPH_ENABLE_RANGE_CHECKING\nwhen building with\n\tCMAKE_BUILD_TYPE=\"Debug\"\nbut you're building with\n\tCMAKE_BUILD_TYPE=\"${CMAKE_BUILD_TYPE}\"\nI'm therefore going to ignore this flag..."
-  )
+if(OOMPH_ENABLE_PARANOID OR OOMPH_ENABLE_RANGE_CHECKING)
+  if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(
+      FATAL_ERROR
+        "You can only enable\n\tOOMPH_ENABLE_PARANOID\nand\n\tOOMPH_ENABLE_RANGE_CHECKING\nwhen building with\n\tCMAKE_BUILD_TYPE=\"Debug\"\nbut you're building with\n\tCMAKE_BUILD_TYPE=\"${CMAKE_BUILD_TYPE}\"\nI'm therefore going to ignore this flag..."
+    )
+  endif()
 endif()
 
 # Only set the PARANOID or RANGE_CHECKING compiler definitions if building the
