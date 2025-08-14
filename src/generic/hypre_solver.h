@@ -250,14 +250,13 @@ namespace oomph
       }
 #ifdef PARANOID
       if (HypreHelpers::Number_of_active_hypre_solvers == 0)
-      {
-        std::ostringstream error_message;
-        error_message << "What? HypreHelpers::Number_of_active_hypre_solvers = "
-                      << HypreHelpers::Number_of_active_hypre_solvers
-                      << std::endl;
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+      { 
+       // Just display the error; destructors aren't supposed to throw!
+       oomph_info
+        << "ERROR in ~HypreInterface (where we shouldn't throw!):\n"
+        << "HypreHelpers::Number_of_active_hypre_solvers = "
+        << HypreHelpers::Number_of_active_hypre_solvers
+        << std::endl; 
       }
 #endif
       HypreHelpers::Number_of_active_hypre_solvers--;

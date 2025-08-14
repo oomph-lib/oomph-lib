@@ -135,8 +135,11 @@
     - [CMake](#cmake-6)
 - [Dos and Don'ts](#dos-and-donts)
 - [FAQs](#faq)
+  - [When configuring my driver code CMake can't find the package configuration file. Now what?](#when-configuring-my-driver-code-cmake-cant-find-the-package-configuration-file)
+  - [Are there any complete worked examples of the build process?](#are-there-any-complete-worked-examples-of-the-build-process)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
+  - [How to add additional compiler macros to oomph-lib](#how-to-add-additional-compiler-macros-to-oomph-lib)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
     - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
     - [Handling non-deterministic output](#handling-non-deterministic-output)
@@ -1972,6 +1975,13 @@ say. (This assumes that you've installed `oomph-lib` in
 `/home/joe_cool/oomph-lib_playground/oomph_lib_installation`). Please consult 
 the section [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alone-project-to-oomph-lib) for detailed instructions.
 
+### Are there any complete worked examples of the build process?
+Yes, there are! The script
+```bash
+scripts/build_demo.bash
+``` 
+was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from Github, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it. 
+
 
 ## Additional information for developers
 
@@ -1991,6 +2001,29 @@ cmake -G Ninja -B build -E create_symlink
 
 With these flags, the header files in the `install` directories (usually copied from the `src` directory) are replaced by symbolic links to the original files in the `src` directory. This means that, if you build a library and are alerted to an error in a header file you don't accidentally edit a copy (that is then promptly overwritten when you reinstall the library).
 
+
+### How to add additional compiler macros to oomph-lib
+`oomph-lib` uses the compiler macros `PARANOID` and `RANGE_CHECKING` to isolate optional code that facilitate debugging; the relevant code is only compiled if the macros are defined. The same technique can be used to isolate "work in progress" code that shouldn't (yet) be used by the general public. (Of course, there's a separate question if "work in progress" code should even be committed to the repository. The answer is generally no, and code reviews should at least question the wisdom of this!). Assuming the relevant macro is called `USE_NEW_CODE`, it is possible (but strongly discouraged!) to pass this macro to the `oomph-lib` build process by configuring the library with
+```bash
+cmake -G Ninja -B build [...] -DCMAKE_CXX_FLAGS="-DUSE_NEW_CODE" 
+```
+However, this is a very bad idea because these flags do not get passed on to any stand-alone user driver codes that link against `oomph-lib`, i.e. these flags are not included in the `cmake_flags_for_oomph_lib.txt` file from which third-party projects obtain information about the `oomph-lib` installation. The flags therefore have to be specified yet again when configuring the user project. This is clearly very error prone and a recipe for disaster since inconsistent settings can lead to nasty seg faults. To avoid such problems use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
+```bash
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1" 
+```
+or use the `--oomph-OOMPH_EXTRA_COMPILE_DEFINES` flag when building `oomph-lib` using the build script:
+```bash
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1" 
+```
+Note that (i) `-D` is omitted and (ii) the macro is set to 1. You can pass multiple flags in the same quoted string, separating the definitions by spaces, e.g. 
+```bash
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1 USE_OTHER_NEW_CODE=1" 
+```
+or 
+```bash
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1 USE_OTHER_NEW_CODE=1" 
+```
+when using the build script.
 ### Creating robust `validata` for self tests
 
 It is important to make sure that the `validata` is robust. While the `scripts/fpdiff.py`
