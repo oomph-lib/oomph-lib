@@ -514,7 +514,7 @@ def parse_args():
     args = parser.parse_args()
 
     # Handy sanity checks
-    if (args.oomph_OOMPH_ENABLE_PARANOID == "ON") or (args.OOMPH_ENABLE_RANGE_CHECKING == "ON"):
+    if (args.oomph_OOMPH_ENABLE_PARANOID == "ON") or (args.oomph_OOMPH_ENABLE_RANGE_CHECKING == "ON"):
         if args.config != "Debug":
             print(bold_red(
                 "\nYou can only set '--oomph-OOMPH_ENABLE_PARANOID=ON' and '--oomph-OOMPH_ENABLE_RANGE_CHECKING=ON' "
