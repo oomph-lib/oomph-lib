@@ -519,8 +519,7 @@ def parse_args():
     # >>> split_extra_options(s)
     # ['-DCMAKE_C_COMPILER="/usr/bin/gcc"', '-DCMAKE_CXX_COMPILER="/usr/bin/g++"']
     def split_extra_options(option_string: str):
-        (first_option, *other_options) = option_string.split(" -D")
-        return [first_option] + [f"-D{opt}" for opt in other_options]
+        return shlex.split(option_string)
 
     if args.oomph_extra_cmake_options is not None:
         args.oomph_extra_cmake_options = split_extra_options(
