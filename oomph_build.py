@@ -489,7 +489,7 @@ def parse_args():
     ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path; used by CGAL.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-cmake-options", type=str, metavar="OPTIONS", help="Additional raw CMake flags for external_distributions (e.g. --ext-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
+    ext_group.add_argument("--ext-extra-cmake-options", type=shlex.split, metavar="OPTIONS", help="Additional raw CMake flags for external_distributions (e.g. --ext-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
 
     # oomph-lib flags
     oomph_group = parser.add_argument_group("oomph-lib project flags")
@@ -507,27 +507,20 @@ def parse_args():
     oomph_group.add_argument("--oomph-OOMPH_EXTRA_COMPILE_DEFINES", metavar="DEFINES", help="Additional C/C++ compile defines to pass to the oomph-lib build.")
 
     # Any additional flags for oomph-lib
-    oomph_group.add_argument("--oomph-extra-cmake-options", type=str, metavar="OPTIONS", help="Additional raw CMake flags for oomph-lib (e.g. --oomph-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
+    oomph_group.add_argument("--oomph-extra-cmake-options", type=shlex.split, metavar="OPTIONS", help="Additional raw CMake flags for oomph-lib (e.g. --oomph-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
     # fmt: on
 
     # Parse the flags
     args = parser.parse_args()
 
-    # Helper to split the extra CMake options into a list of strings to pass to
-    # subprocess.run(...), e.g.
-    # >>> s = "-DCMAKE_C_COMPILER=\"/usr/bin/gcc\" -DCMAKE_CXX_COMPILER=\"/usr/bin/g++\""
-    # >>> split_extra_options(s)
-    # ['-DCMAKE_C_COMPILER="/usr/bin/gcc"', '-DCMAKE_CXX_COMPILER="/usr/bin/g++"']
-    def split_extra_options(option_string: str):
-        return shlex.split(option_string)
-
-    if args.oomph_extra_cmake_options is not None:
-        args.oomph_extra_cmake_options = split_extra_options(
-            args.oomph_extra_cmake_options)
-    if args.ext_extra_cmake_options is not None:
-        args.ext_extra_cmake_options = split_extra_options(
-            args.ext_extra_cmake_options)
-
+    # Handy sanity checks
+    if (args.oomph_OOMPH_ENABLE_PARANOID == "ON") or (args.OOMPH_ENABLE_RANGE_CHECKING == "ON"):
+        if args.config != "Debug":
+            print(bold_red(
+                "\nYou can only set '--oomph-OOMPH_ENABLE_PARANOID=ON' and '--oomph-OOMPH_ENABLE_RANGE_CHECKING=ON' "
+                f"when '--config' is set to 'Debug' or 'RelWithDebInfo'; you're building with '--config={args.config}'."
+            ), file=sys.stderr)
+            sys.exit(1)
     return args
 
 
