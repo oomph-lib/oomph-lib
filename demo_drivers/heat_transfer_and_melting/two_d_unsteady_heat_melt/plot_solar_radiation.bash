@@ -35,8 +35,8 @@ else
 
     rm -f soln_for_cone.vtu
     rm -f coarse_soln_for_cone.vtu
-    ln -s soln`echo $step`.vtu soln_for_cone.vtu
-    ln -s coarse_soln`echo $step`.vtu coarse_soln_for_cone.vtu
+    ln -sf soln`echo $step`.vtu soln_for_cone.vtu
+    ln -sf coarse_soln`echo $step`.vtu coarse_soln_for_cone.vtu
 fi
 
 

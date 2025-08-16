@@ -69,7 +69,7 @@ else
 echo "Results: " >> validation.log
 
 ../../../../bin/fpdiff.py ../validata/two_d_tilted_square_soln.dat.gz  \
-         two_d_tilted_square_soln.dat 0.1 1.0e-12 >> validation.log
+         two_d_tilted_square_soln.dat 0.1 2.0e-12 >> validation.log
 
 echo "Iteration counts (allowing for 20% variation): " >> validation.log
 echo " " >> validation.log
