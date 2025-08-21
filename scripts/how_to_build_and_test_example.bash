@@ -17,24 +17,24 @@ set -o nounset
 
 # clone repos?
 oomphlib_branch="cmake-beta"
-clone_oomphlib=0
-clone_stand_alone_code=0
+clone_oomphlib=1
+clone_stand_alone_code=1
 
 # What do we demonstrate?
 demo_default_cmake=1
-demo_default_script=1
-demo_non_default_install_cmake=1
-demo_non_default_install_script=1
-demo_developer_naughty_cmake=1
-demo_developer_proper_cmake=1
-demo_developer_script=1
+demo_default_script=0
+demo_non_default_install_cmake=0
+demo_non_default_install_script=0
+demo_developer_naughty_cmake=0
+demo_developer_proper_cmake=0
+demo_developer_script=0
 
 # Back to the roots!
 playground_home_dir=`pwd`
 
 # If installing libraries outside oomph-lib, this is where we put them:
-tpl_install_dir=$playground_home_dir/tpl_installation
-oomph_lib_install_dir=$playground_home_dir/oomph_lib_installation
+non_default_tpl_install_dir=$playground_home_dir/tpl_installation
+non_default_oomph_lib_install_dir=$playground_home_dir/oomph_lib_installation
 
 
 
@@ -62,7 +62,7 @@ cleanup()
 # Clone oomph-lib?
 cd $playground_home_dir
 if [ $clone_oomphlib == 1 ]; then
-    git clone https://github.com/oomph-lib/oomph-lib.git
+    git clone git@github.com:MatthiasHeilManchester/oomph-lib.git # hierher https://github.com/oomph-lib/oomph-lib.git
     cd oomph-lib
     echo " "
     echo "NOTE: I'm switching oomph-lib to branch  " $oomphlib_branch
@@ -128,7 +128,7 @@ if [ $demo_default_cmake == 1 ]; then
     # Configure and generate the build system. -G specifies the build
     # system generator; -B specifies the build directory (here "build").
     # The final argument specifies the location of the third-party
-    # libraries (built in the  previous step; the command shown here
+    # libraries (built in the previous step; the command shown here
     # assumes that the third party libraries were installed in the
     # default location external_distributions/install. Update this if
     # you installed them somewhere else).
@@ -160,7 +160,7 @@ if [ $demo_default_cmake == 1 ]; then
         exit 1
     fi
     
-    # Check it out
+    # Test it
     cd demo_drivers/poisson/one_d_poisson
     rm -rf build
     cmake -G Ninja -B build
@@ -218,7 +218,7 @@ if [ $demo_default_script == 1 ]; then
         exit 1
     fi
     
-    # Check it out
+    # Test it
     cd demo_drivers/poisson/one_d_poisson
     rm -rf build
     cmake -G Ninja -B build
@@ -249,7 +249,7 @@ fi
 
 
 ###########################################################
-# Installation in specified diretory; raw cmake
+# Installation in specified directory; raw cmake
 ###########################################################
 if [ $demo_non_default_install_cmake == 1 ]; then
         
@@ -257,8 +257,8 @@ if [ $demo_non_default_install_cmake == 1 ]; then
     cleanup
     
     # Wipe existing installations
-    rm -rf $tpl_install_dir
-    rm -rf $oomph_lib_install_dir
+    rm -rf $non_default_tpl_install_dir
+    rm -rf $non_default_oomph_lib_install_dir
 
     cd $playground_home_dir/oomph-lib
 
@@ -270,7 +270,7 @@ if [ $demo_non_default_install_cmake == 1 ]; then
     cd external_distributions
     
     # Configure the third party library build
-    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$tpl_install_dir
+    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$non_default_tpl_install_dir
     
     # Build and install them (this takes a while). Note that no separate
     # install step is required here.
@@ -285,11 +285,9 @@ if [ $demo_non_default_install_cmake == 1 ]; then
     # Configure and generate the build system. -G specifies the build
     # system generator; -B specifies the build directory (here "build").
     # The final argument specifies the location of the third-party
-    # libraries (built in the  previous step); the command shown here
-    # assumes that the third party libraries were installed in the
-    # default location external_distributions/install. Update this if
-    # you installed them somewhere else).
-    cmake -G Ninja -B build $(cat $tpl_install_dir/cmake_flags_for_oomph_lib.txt) -DCMAKE_INSTALL_PREFIX=$oomph_lib_install_dir
+    # libraries (built in the previous step); get configuration details
+    # for third-party libraries from their non-default location
+    cmake -G Ninja -B build $(cat $non_default_tpl_install_dir/cmake_flags_for_oomph_lib.txt) -DCMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir
     
     # Build the oomph-lib libraries (i.e. compile the sources
     # and turn them into libraries); specify the directory
@@ -302,7 +300,7 @@ if [ $demo_non_default_install_cmake == 1 ]; then
     cmake --install build
     
     # Where have we installed oomph-lib?
-    oomph_lib_install_dir=$oomph_lib_install_dir
+    oomph_lib_install_dir=$non_default_oomph_lib_install_dir
     
     # check if it's likely to be correct, i.e. does it contain the oomphlibConfig.cmake file?
     legal=`find $oomph_lib_install_dir -name "oomphlibConfig.cmake" | wc -l`
@@ -317,7 +315,7 @@ if [ $demo_non_default_install_cmake == 1 ]; then
         exit 1
     fi
     
-    # Check it out. Note that we now need to specify where oomph-lib was installed;
+    # Test it. Note that we now need to specify where oomph-lib was installed;
     # It's not in the default oomph-lib location!
     cd demo_drivers/poisson/one_d_poisson
     rm -rf build
@@ -347,7 +345,7 @@ fi
 
 
 ###########################################################
-# Installation in specified diretory; script
+# Installation in specified directory; script
 ###########################################################
 if [ $demo_non_default_install_script == 1 ]; then
     
@@ -356,15 +354,15 @@ if [ $demo_non_default_install_script == 1 ]; then
     cleanup
     
     # Wipe existing installations
-    rm -rf $tpl_install_dir
-    rm -rf $oomph_lib_install_dir
+    rm -rf $non_default_tpl_install_dir
+    rm -rf $non_default_oomph_lib_install_dir
 
     # Install tpl and oomph-lib using script
     cd $playground_home_dir/oomph-lib
-    ./oomph_build.py --ext-CMAKE_INSTALL_PREFIX=$tpl_install_dir  --oomph-CMAKE_INSTALL_PREFIX=$oomph_lib_install_dir 
+    ./oomph_build.py --ext-CMAKE_INSTALL_PREFIX=$non_default_tpl_install_dir  --oomph-CMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir 
     
     # Where have we installed oomph-lib?
-    oomph_lib_install_dir=$oomph_lib_install_dir
+    oomph_lib_install_dir=$non_default_oomph_lib_install_dir
     
     # check if it's likely to be correct, i.e. does it contain the oomphlibConfig.cmake file?
     legal=`find $oomph_lib_install_dir -name "oomphlibConfig.cmake" | wc -l`
@@ -379,7 +377,7 @@ if [ $demo_non_default_install_script == 1 ]; then
         exit 1
     fi
     
-    # Check it out. Note that we now need to specify where oomph-lib was installed;
+    # Test it. Note that we now need to specify where oomph-lib was installed;
     # It's not in the default oomph-lib location!
     cd demo_drivers/poisson/one_d_poisson
     rm -rf build
@@ -408,7 +406,7 @@ fi
 
 
 ###########################################################
-# Installation in specified diretory; raw cmake; developer
+# Installation in specified directory; raw cmake; developer
 # settings. Brute forcing a compiler flag into everything!
 ###########################################################
 if [ $demo_developer_naughty_cmake == 1 ]; then
@@ -417,8 +415,8 @@ if [ $demo_developer_naughty_cmake == 1 ]; then
     cleanup
     
     # Wipe existing installations
-    rm -rf $tpl_install_dir
-    rm -rf $oomph_lib_install_dir
+    rm -rf $non_default_tpl_install_dir
+    rm -rf $non_default_oomph_lib_install_dir
 
     cd $playground_home_dir/oomph-lib
 
@@ -431,7 +429,7 @@ if [ $demo_developer_naughty_cmake == 1 ]; then
     
     # Configure the third party library build
     # Need to specify mpi here too!
-    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$tpl_install_dir \
+    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$non_default_tpl_install_dir \
           -DOOMPH_ENABLE_MPI=ON 
     
     # Build and install them (this takes a while). Note that no separate
@@ -446,18 +444,14 @@ if [ $demo_developer_naughty_cmake == 1 ]; then
     
     # Configure and generate the build system. -G specifies the build
     # system generator; -B specifies the build directory (here "build").
-    # The final argument specifies the location of the third-party
-    # libraries (built in the  previous step); the command shown here
-    # assumes that the third party libraries were installed in the
-    # default location external_distributions/install. Update this if
-    # you installed them somewhere else).
-    # MPI use comes across from third party libraries.
+    # Get configuration details for third-party libraries from their
+    # non-default location. MPI use comes across from third party libraries.
     # We're brute forcing compiler flags into the oomph-lib compilation
     # but doing it this way (with the -DCMAKE_CXX_FLAGS flag) they're not
     # passed through to any downstream codes (user drivers, say), so have
     # to be redefined there to avoid the potential for nasty crashes.
-    cmake -G Ninja -B build $(cat $tpl_install_dir/cmake_flags_for_oomph_lib.txt) \
-          -DCMAKE_INSTALL_PREFIX=$oomph_lib_install_dir \
+    cmake -G Ninja -B build $(cat $non_default_tpl_install_dir/cmake_flags_for_oomph_lib.txt) \
+          -DCMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir \
           -DCMAKE_BUILD_TYPE=Debug \
           -DOOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON \
           -DOOMPH_ENABLE_PARANOID=ON \
@@ -475,7 +469,7 @@ if [ $demo_developer_naughty_cmake == 1 ]; then
     cmake --install build
     
     # Where have we installed oomph-lib?
-    oomph_lib_install_dir=$oomph_lib_install_dir
+    oomph_lib_install_dir=$non_default_oomph_lib_install_dir
     
     # check if it's likely to be correct, i.e. does it contain the oomphlibConfig.cmake file?
     legal=`find $oomph_lib_install_dir -name "oomphlibConfig.cmake" | wc -l`
@@ -490,7 +484,7 @@ if [ $demo_developer_naughty_cmake == 1 ]; then
         exit 1
     fi
     
-    # Check it out. Note that we now need to specify where oomph-lib was installed;
+    # Test it. Note that we now need to specify where oomph-lib was installed;
     # It's not in the default oomph-lib location!
     # Note that the additional c++ compiler flags have to be-defined here; they
     # don't come across from oomph-lib!
@@ -539,7 +533,7 @@ fi
 
 
 ###########################################################
-# Installation in specified diretory; raw cmake; developer
+# Installation in specified directory; raw cmake; developer
 # settings. Proper handling of compiler flag for oomph-lib
 # gets passed through to downstream stand-alone driver codes
 ###########################################################
@@ -549,8 +543,8 @@ if [ $demo_developer_proper_cmake == 1 ]; then
     cleanup
     
     # Wipe existing installations
-    rm -rf $tpl_install_dir
-    rm -rf $oomph_lib_install_dir
+    rm -rf $non_default_tpl_install_dir
+    rm -rf $non_default_oomph_lib_install_dir
 
     cd $playground_home_dir/oomph-lib
 
@@ -563,7 +557,7 @@ if [ $demo_developer_proper_cmake == 1 ]; then
     
     # Configure the third party library build.
     # Need to specify mpi here!
-    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$tpl_install_dir \
+    cmake -G Ninja -B build -DCMAKE_INSTALL_PREFIX=$non_default_tpl_install_dir \
           -DOOMPH_ENABLE_MPI=ON 
     
     # Build and install them (this takes a while). Note that no separate
@@ -578,14 +572,11 @@ if [ $demo_developer_proper_cmake == 1 ]; then
     
     # Configure and generate the build system. -G specifies the build
     # system generator; -B specifies the build directory (here "build").
-    # The final argument specifies the location of the third-party
-    # libraries (built in the  previous step); the command shown here
-    # assumes that the third party libraries were installed in the
-    # default location external_distributions/install. Update this if
-    # you installed them somewhere else)
+    # Get configuration details for third-party libraries from their
+    # non-default location
     # MPI use comes across from third party libraries
-    cmake -G Ninja -B build $(cat $tpl_install_dir/cmake_flags_for_oomph_lib.txt) \
-          -DCMAKE_INSTALL_PREFIX=$oomph_lib_install_dir \
+    cmake -G Ninja -B build $(cat $non_default_tpl_install_dir/cmake_flags_for_oomph_lib.txt) \
+          -DCMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir \
           -DCMAKE_BUILD_TYPE=Debug \
           -DOOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON \
           -DOOMPH_ENABLE_PARANOID=ON \
@@ -611,7 +602,7 @@ if [ $demo_developer_proper_cmake == 1 ]; then
     cmake --install build
     
     # Where have we installed oomph-lib?
-    oomph_lib_install_dir=$oomph_lib_install_dir
+    oomph_lib_install_dir=$non_default_oomph_lib_install_dir
     
     # check if it's likely to be correct, i.e. does it contain the oomphlibConfig.cmake file?
     legal=`find $oomph_lib_install_dir -name "oomphlibConfig.cmake" | wc -l`
@@ -626,7 +617,7 @@ if [ $demo_developer_proper_cmake == 1 ]; then
         exit 1
     fi
     
-    # Check it out. Note that we now need to specify where oomph-lib was installed;
+    # Test it. Note that we now need to specify where oomph-lib was installed;
     # It's not in the default oomph-lib location!
     cd demo_drivers/poisson/one_d_poisson
     rm -rf build
@@ -705,13 +696,13 @@ if [ $demo_developer_script == 1 ]; then
     cleanup
     
     # Wipe existing installations
-    rm -rf $tpl_install_dir
-    rm -rf $oomph_lib_install_dir
+    rm -rf $non_default_tpl_install_dir
+    rm -rf $non_default_oomph_lib_install_dir
 
     # Install tpl and oomph-lib using script
     cd $playground_home_dir/oomph-lib
-    ./oomph_build.py --ext-CMAKE_INSTALL_PREFIX=$tpl_install_dir \
-                     --oomph-CMAKE_INSTALL_PREFIX=$oomph_lib_install_dir \
+    ./oomph_build.py --ext-CMAKE_INSTALL_PREFIX=$non_default_tpl_install_dir \
+                     --oomph-CMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir \
                      --OOMPH_ENABLE_MPI=ON \
                      --oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON \
                      --oomph-OOMPH_EXTRA_COMPILE_DEFINES="OOMPH_SPECIAL_FLAG=1 OOMPH_3_5_BRICK_FOR_MESHING_ONLY_NO_INTEGRATION=1"
@@ -719,7 +710,7 @@ if [ $demo_developer_script == 1 ]; then
 
     
     # Where have we installed oomph-lib?
-    oomph_lib_install_dir=$oomph_lib_install_dir
+    oomph_lib_install_dir=$non_default_oomph_lib_install_dir
     
     # check if it's likely to be correct, i.e. does it contain the oomphlibConfig.cmake file?
     legal=`find $oomph_lib_install_dir -name "oomphlibConfig.cmake" | wc -l`
@@ -734,7 +725,7 @@ if [ $demo_developer_script == 1 ]; then
         exit 1
     fi
     
-    # Check it out. Note that we now need to specify where oomph-lib was installed;
+    # Test it. Note that we now need to specify where oomph-lib was installed;
     # It's not in the default oomph-lib location!
     echo "serial self-test:"
     cd demo_drivers/poisson/one_d_poisson

@@ -139,7 +139,7 @@
   - [Are there any complete worked examples of the build process?](#are-there-any-complete-worked-examples-of-the-build-process)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
-  - [How to add additional compiler macros to oomph-lib](#how-to-add-additional-compiler-macros-to-oomph-lib)
+  - [How to add additional compiler macros to `oomph-lib`](#how-to-add-additional-compiler-macros-to-oomph-lib)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
     - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
     - [Handling non-deterministic output](#handling-non-deterministic-output)
@@ -1978,9 +1978,9 @@ the section [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alon
 ### Are there any complete worked examples of the build process?
 Yes, there are! The script
 ```bash
-scripts/build_demo.bash
+scripts/how_to_build_and_test_example.bash
 ``` 
-was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from Github, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it. 
+was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from GitHub, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it. 
 
 
 ## Additional information for developers
@@ -2010,7 +2010,7 @@ As mentioned before, we strongly recommend building `oomph-lib` with the `PARANO
 ```bash
 cmake -G Ninja -B build [...] -DCMAKE_CXX_FLAGS="-DUSE_NEW_CODE" 
 ```
-However, this is a very bad idea because these flags do not get passed on to any stand-alone user driver codes that link against `oomph-lib`, i.e. these flags are not included in the `cmake_flags_for_oomph_lib.txt` file from which third-party projects obtain information about the `oomph-lib` installation. The flags therefore have to be specified yet again when configuring the user project. This is clearly very error prone and a recipe for disaster since inconsistent settings can lead to nasty seg faults. To avoid such problems use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
+However, this is a very bad idea because these flags do not get passed on to any stand-alone user driver codes that link against `oomph-lib`, i.e. these flags are not included in the `cmake_flags_for_oomph_lib.txt` file from which third-party projects obtain information about the `oomph-lib` installation. The flags therefore have to be specified yet again when configuring the user project. This is clearly very error-prone and a recipe for disaster since inconsistent settings can lead to nasty segmentation faults. To avoid such problems use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
 ```bash
 cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1" 
 ```
