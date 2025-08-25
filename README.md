@@ -1174,6 +1174,17 @@ will replicate the `g++` command shown above (but also link the code against `oo
 > [!NOTE]
 > Given that most compilers pass macros via the `-D` option, you could also add the flag `-DREFINEABLE` to the `CXX_OPTIONS` and omit the `CXX_DEFINITIONS`. It will achieve the same thing but may upset the CMake purists.
 
+In the above example we've hard-coded the use of the `REFINEABLE` macro into the `CMakeLists.txt` file, so it will be applied for every build of that executable. What if you want to control its use from the command line when configuring your project? The temptation is to use the `-DCMAKE_CXX_FLAGS` command line option for CMake, as in
+```bash
+# Note: don't do this!
+cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DCMAKE_CXX_FLAGS="-DREFINEABLE"
+```
+However, this will overwrite all the C++ compiler flags from the `oomph-lib` build (e.g. paranoia, range checking, debug vs. release mode, etc.). This is extremely dangerous and should be avoided. The proper way to handle this is to put the logic into the `CMakeLists.txt` file:
+```bash
+
+```
+
+
 #### Customising targets using native CMake commands; hashed target names
 
 If you are comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file using native CMake commands. When doing this it is important to realise that the `NAME` specified in the call to `oomph_add_executable(...)` is not the name used by CMake itself. (The reason is technical: we create a modified, hashed version of the name which includes the path relative to the `demo_drivers` directory to avoid clashes between demo driver codes).
