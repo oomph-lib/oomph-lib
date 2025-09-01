@@ -139,7 +139,7 @@
   - [Are there any complete worked examples of the build process?](#are-there-any-complete-worked-examples-of-the-build-process)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
-  - [How to add additional compiler macros to `oomph-lib`](#how-to-add-additional-compiler-macros-to-oomph-lib)
+  - [How to add additional compiler macros to `oomph-lib` (and to stand-alone driver codes)](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
     - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
     - [Handling non-deterministic output](#handling-non-deterministic-output)
@@ -551,7 +551,7 @@ The `oomph_build.py` script supports several command-line options to customise i
 python3 oomph_build.py --help
 ```
 
-Below is a comprehensive list of the options and their purposes:
+Below is a list of the options and their purpose:
 
 - **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will build the documentation (using Doxygen and LaTeX) as part of the build process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
 
@@ -1951,8 +1951,9 @@ cmake --install build
 
 ## Dos and Don'ts
 
-- Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because it would lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose seg faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign them yourself!
+- Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because this could lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose segmentation faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign them yourself!
 - Do (re-)build the library with `PARANOID` or `RANGE_CHECKING` enabled if you develop any new machinery or work on a new driver code. The code will run more slowly but the warnings will save you years of your life!
+- Do not use the `-DCMAKE_CXX_FLAGS` flag during the CMake configure stage to pass C++ compiler macros to the build process. This applies to the `oomph-lib` build and to the configuration of your own stand-alone projects. If you use this flag in the latter, you will overwrite flags that were defined when configuring `oomph-lib`, with potentially disastrous consequences. Please refer to [this section](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes) for instructions on how to pass compiler macros to the `oomph-lib` build and [this repository](https://github.com/oomph-lib/stand_alone_oomph-lib_user_code) for an illustration how to do this for stand-alone driver codes.
 
 ## FAQ
 
@@ -1993,12 +1994,19 @@ scripts/how_to_build_and_test_example.bash
 ``` 
 was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from GitHub, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it. 
 
+### I'm used to the Autotools-based version of `oomph-lib`; what happened to the `user_src` directory?
+When rewriting the build system to CMake, we retained the `user_drivers` directory to allow users to build their own code within the overall `oomph-lib` framework (but outside the `demo_drivers` directory; it doesn't belong there). The `user_src` directory was initially provided as test-bed within which users could develop their own libraries. The change to GitHub and CMake makes this unnecessary: if you want to provide your own library within the overall `oomph-lib` framework, simply create a fork of `oomph-lib` on GitHub, clone this onto your computer and create a new branch, within which you can create a new library, placing the code in a new directory, `src/joe_cools_new_library`, say. See the section [Adding your own library](#adding-a-new-library)
+for instructions. If it all works and is likely to be useful for others, send us a pull request and we'll consider including it into `oomph-lib`'s development branch.
+
+### I'm used to the Autotools-based version of `oomph-lib`; what happened to the `bin` directory?
+We renamed it to `scripts` because... Ahem; can't remember.
+
 
 ## Additional information for developers
 
 ### Use symbolic links for header files
 
-Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py`
+Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py` 
 
 ```bash
 ./oomph_build.py [...] --oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON
@@ -2014,30 +2022,31 @@ With these flags, the header files in the `install` directories (usually copied 
 
 ### Paranoia and range checking are deemed to be incompatible with Release mode
 
-As mentioned before, we strongly recommend building `oomph-lib` with the `PARANOID` and `RANGE_CHECKING` flags enabled when developing new code. These compiler macros activate a large number of internal sanity checks that help you trap errors. The (hopefully) helpful messages that are issued when an error is encountered should facilitate debugging the new code. However, since the sanity checks add to the runtime, our build machinery does not allow the flags to be enabled when `oomph-lib` is built in `Release` mode (which is the default setting, if not specified explicitly). Note that using range checking and paranoia without having compiled the code in `Debug` mode (which adds the `-g` flag to the compiler) is unlikely to be helpful anyway. The executable may tell you that a function was called with illegal arguments, say, but without being able to backtrack where this function was called from this information is unlikely to be helpful! 
+As mentioned before, we strongly recommend building `oomph-lib` with the `PARANOID` and `RANGE_CHECKING` flags when developing new code. (Recall that these are enabled with `-DOOMPH_ENABLE_PARANOID=ON` and `-DOOMPH_ENABLE_RANGE_CHECKING=ON` when configuring the `oomph-lib` build with CMake). These compiler macros activate a large number of internal sanity checks that help you trap errors. The (hopefully) helpful messages that are issued when an error is encountered should facilitate debugging the new code. However, since the sanity checks add to the runtime, our build machinery does not allow the flags to be enabled when `oomph-lib` is built in `Release` mode (which is the default setting, if the mode is not specified explicitly). Note that using range checking and paranoia without having compiled the code in `Debug` mode (which adds the `-g` flag to the compiler) is unlikely to be helpful anyway. The executable may tell you that a function was called with illegal arguments, say, but without being able to backtrack where this function was called from this information is unlikely to be helpful! 
 
-### How to add additional compiler macros to oomph-lib
-`oomph-lib` uses the compiler macros `PARANOID` and `RANGE_CHECKING` to isolate optional code that facilitate debugging; the relevant code is only compiled if the macros are defined. The same technique can be used to isolate "work in progress" code that shouldn't (yet) be used by the general public. (Of course, there's a separate question if "work in progress" code should even be committed to the repository. The answer is generally no, and code reviews should at least question the wisdom of this!). Assuming the relevant macro is called `USE_NEW_CODE`, it is possible (but strongly discouraged!) to pass this macro to the `oomph-lib` build process by configuring the library with
+### How to add additional compiler macros to oomph-lib (and to stand-alone driver codes)
+`oomph-lib` uses the compiler macros `PARANOID` and `RANGE_CHECKING` to isolate optional code that facilitate debugging; the relevant code is only compiled if the macros are defined. The same technique can be used to isolate "work in progress" code that shouldn't (yet) be used by the general public. (Of course, there's a separate question if "work in progress" code should even be committed to the repository. The answer is generally no, and code reviews should at least question the wisdom of this!). Assuming the relevant macro is called `USE_NEW_CODE`, use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
 ```bash
-cmake -G Ninja -B build [...] -DCMAKE_CXX_FLAGS="-DUSE_NEW_CODE" 
-```
-However, this is a very bad idea because these flags do not get passed on to any stand-alone user driver codes that link against `oomph-lib`, i.e. these flags are not included in the `cmake_flags_for_oomph_lib.txt` file from which third-party projects obtain information about the `oomph-lib` installation. The flags therefore have to be specified yet again when configuring the user project. This is clearly very error-prone and a recipe for disaster since inconsistent settings can lead to nasty segmentation faults. To avoid such problems use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
-```bash
-cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1" 
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE" 
 ```
 or use the `--oomph-OOMPH_EXTRA_COMPILE_DEFINES` flag when building `oomph-lib` using the build script:
 ```bash
-./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1" 
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE" 
 ```
-Note that (i) `-D` is omitted and (ii) the macro is set to 1. You can pass multiple flags in the same quoted string, separating the definitions by spaces, e.g. 
+Note that the `-D` is omitted. You can pass multiple flags in the same quoted string, separating the definitions by spaces, e.g. 
 ```bash
-cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1 USE_OTHER_NEW_CODE=1" 
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE" 
 ```
 or 
 ```bash
-./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE=1 USE_OTHER_NEW_CODE=1" 
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE" 
 ```
 when using the build script.
+
+
+Please refer to [this repository](https://github.com/oomph-lib/stand_alone_oomph-lib_user_code) for an illustration of how to do this for stand-alone driver codes that use `oomph-lib`. The `CMakeLists.txt` file in that repository illustrates various ways of doing this, but whatever you do, do not use the `-DCMAKE_CXX_FLAGS` flag when configuring your project.
+
+
 ### Creating robust `validata` for self tests
 
 It is important to make sure that the `validata` is robust. While the `scripts/fpdiff.py`
