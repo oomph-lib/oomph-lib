@@ -301,7 +301,7 @@ if [ $demo_non_default_install_cmake == 1 ]; then
     
     # Configure and generate the build system. -G specifies the build
     # system generator; -B specifies the build directory (here "build").
-    # get configuration details for third-party libraries from the
+    # Get configuration details for third-party libraries from the
     # cmake_flags_for_oomph_lib.txt file in their install directory.
     # Also specify non-default install directory for oomph-lib.
     cmake -G Ninja -B build $(cat $non_default_tpl_install_dir/cmake_flags_for_oomph_lib.txt) -DCMAKE_INSTALL_PREFIX=$non_default_oomph_lib_install_dir

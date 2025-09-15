@@ -1167,7 +1167,7 @@ For example
 oomph_add_executable(
   NAME one_d_poisson
   SOURCES one_d_poisson.cc
-  LIBRARIES oomph::poisson
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic
   CXX_OPTIONS -Wall -Werror
   CXX_DEFINITIONS REFINEABLE)
 ```
@@ -1184,8 +1184,32 @@ cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DC
 ```
 However, this will overwrite all the C++ compiler flags from the `oomph-lib` build (e.g. paranoia, range checking, debug vs. release mode, etc.). This is extremely dangerous and should be avoided. The proper way to handle this is to put the logic into the `CMakeLists.txt` file:
 ```bash
+[...]
 
+oomph_add_executable(
+  NAME one_d_poisson
+  SOURCES one_d_poisson.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+
+# Get hashed target name 
+oomph_get_target_name(one_d_poisson HASHED_TARGET_NAME)
+
+# Only execute this if `REFINEABLE` is set to `ON` during the 
+# configuration of the project
+if(REFINEABLE)
+    # This specifies the compile definitions on a per-target basis
+    target_compile_definitions(${HASHED_TARGET_NAME} PRIVATE REFINEABLE)
+endif()
+
+[...]
 ```
+[See below for an explanation of the hashed target name.]
+
+With the above instructions in the `CMakeLists.txt` file, we can now activate the `REFINEABLE` flag when configuring the project on the command line:
+```bash
+cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DREFINEABLE=ON
+```
+
 
 
 #### Customising targets using native CMake commands; hashed target names
@@ -2002,7 +2026,7 @@ When rewriting the build system to CMake, we retained the `user_drivers` directo
 for instructions. If it all works and is likely to be useful for others, send us a pull request and we'll consider including it into `oomph-lib`'s development branch.
 
 ### I'm used to the Autotools-based version of `oomph-lib`; what happened to the `bin` directory?
-We renamed it to `scripts` because... Ahem; can't remember.
+We renamed it to `scripts` because CMake generally assumes that a `bin` directory contains binary objects, i.e. executables.
 
 
 ## Additional information for developers
