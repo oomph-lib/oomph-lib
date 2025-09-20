@@ -1183,7 +1183,7 @@ In the above example we've hard-coded the use of the `REFINEABLE` macro into the
 cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DCMAKE_CXX_FLAGS="-DREFINEABLE"
 ```
 However, this will overwrite all the C++ compiler flags from the `oomph-lib` build (e.g. paranoia, range checking, debug vs. release mode, etc.). This is extremely dangerous and should be avoided. The proper way to handle this is to put the logic into the `CMakeLists.txt` file:
-```bash
+```cmake
 [...]
 
 oomph_add_executable(
