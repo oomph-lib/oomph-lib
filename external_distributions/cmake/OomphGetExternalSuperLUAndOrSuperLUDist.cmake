@@ -14,9 +14,15 @@ find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 # Where to clone the repos from
 set(GKLIB_GIT_URL https://github.com/KarypisLab/GKlib.git)
 set(METIS_GIT_URL https://github.com/KarypisLab/METIS.git)
-set(PARMETIS_GIT_URL https://github.com/KarypisLab/ParMETIS.git)
+set(PARMETIS_GIT_URL https://github.com/puneetmatharu/ParMETIS.git)
 set(SUPERLU_GIT_URL https://github.com/xiaoyeli/superlu.git)
 set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
+
+set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
+set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+set(PARMETIS_GIT_TAG 83bb3d4f5b2af826d0683329cad1accc8d829de2)
+set(SUPERLU_GIT_TAG v6.0.1)
+set(SUPERLU_DIST_GIT_TAG v9.1.0)
 
 # Set the default installation paths
 set(GKLIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/gklib")
@@ -62,7 +68,7 @@ if(NOT OOMPH_USE_GKLIB_FROM)
   oomph_get_external_project_helper(
     PROJECT_NAME gklib
     GIT_REPOSITORY ${GKLIB_GIT_URL}
-    GIT_TAG 8bd6bad750b2b0d90800c632cf18e8ee93ad72d7
+    GIT_TAG ${GKLIB_GIT_TAG}
     DISABLE_SHALLOW_CLONE # can't specify a hash with a shallow clone
     INSTALL_DIR "${GKLIB_INSTALL_DIR}"
     BUILD_IN_SOURCE TRUE
@@ -87,7 +93,7 @@ if(NOT OOMPH_USE_METIS_FROM)
   oomph_get_external_project_helper(
     PROJECT_NAME metis
     GIT_REPOSITORY ${METIS_GIT_URL}
-    GIT_TAG e0f1b88b8efcb24ffa0ec55eabb78fbe61e58ae7
+    GIT_TAG ${METIS_GIT_TAG}
     DISABLE_SHALLOW_CLONE # can't specify a hash with a shallow clone
     INSTALL_DIR "${METIS_INSTALL_DIR}"
     BUILD_IN_SOURCE TRUE
@@ -128,7 +134,7 @@ if (OOMPH_BUILD_SUPERLU)
   oomph_get_external_project_helper(
     PROJECT_NAME superlu
     GIT_REPOSITORY ${SUPERLU_GIT_URL}
-    GIT_TAG v6.0.1
+    GIT_TAG ${SUPERLU_GIT_TAG}
     INSTALL_DIR "${SUPERLU_INSTALL_DIR}"
     BUILD_IN_SOURCE TRUE
     LIST_SEPARATOR |
@@ -158,7 +164,7 @@ if(OOMPH_ENABLE_MPI)
     oomph_get_external_project_helper(
       PROJECT_NAME parmetis
       GIT_REPOSITORY ${PARMETIS_GIT_URL}
-      GIT_TAG 8ee6a372ca703836f593e3c450ca903f04be14df
+      GIT_TAG ${PARMETIS_GIT_TAG}
       DISABLE_SHALLOW_CLONE # can't specify a hash with a shallow clone
       INSTALL_DIR "${PARMETIS_INSTALL_DIR}"
       CONFIGURE_HANDLED_BY_BUILD TRUE
@@ -203,7 +209,7 @@ if(OOMPH_ENABLE_MPI)
   oomph_get_external_project_helper(
     PROJECT_NAME superlu_dist
     GIT_REPOSITORY ${SUPERLU_DIST_GIT_URL}
-    GIT_TAG v9.1.0
+    GIT_TAG ${SUPERLU_DIST_GIT_TAG}
     GIT_SHALLOW TRUE
     INSTALL_DIR "${SUPERLU_DIST_INSTALL_DIR}"
     BUILD_IN_SOURCE TRUE
