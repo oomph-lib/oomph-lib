@@ -77,6 +77,7 @@
   - [Compilers](#compilers)
   - [Other tools (and how to install all the prerequisites)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
 - [Building, installing and uninstalling `oomph-lib`](#building-installing-and-uninstalling-oomph-lib)
+  - [Required/optional third-party libraries](#requiredoptional-third-party-libraries)
   - [Step 1: Installing the third-party libraries](#step-1-installing-the-third-party-libraries)
   - [Step 2: Installing oomph-lib](#step-2-installing-oomph-lib)
     - [Option 1: Default installation](#option-1-default-installation)
@@ -253,7 +254,8 @@ sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texliv
 
 ## Building, installing and uninstalling `oomph-lib`
 
-`oomph-lib` relies on the following third-party libraries:
+### Required/optional third-party libraries
+`oomph-lib` relies on/works with the following third-party libraries:
 
 | Library                          | Version                                                                                                                                   |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -272,7 +274,7 @@ sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texliv
 > [!IMPORTANT]
 > If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas).
 
-To facilitate the installation of these (as well as various optional third-party libraries), we provide the option to build them as part of our overall build process. We provide a detailed description of the two-stage build process below, but strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) and we suggest that new users jump straight there.
+To facilitate the installation of the required third-party libraries (currently OpenBLAS; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process. We provide a detailed description of the two-stage process below, partly to explain the deliberate distinction between `oomph-lib` and the third-party libraries. However, **we strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) and we suggest that new users jump straight there.**
 
 For everybody still reading, the two stages are:
 
