@@ -257,27 +257,29 @@ sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texliv
 ### Required/optional third-party libraries
 `oomph-lib` relies on/works with the following third-party libraries:
 
-| Library        | required/optional | Version
-| ----           | ---  | ----- |
-| `OpenBLAS`     | **required by `oomph-lib`**       | [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
-`SuperLU`  | **required by `oomph-lib`**         | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
-| `METIS`    | **required by `oomph-lib` (via SuperLU)**  | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
-`GKlib` | **required by `oomph-lib` (via METIS)**) | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
-| `Boost` | highly recommended | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
-| `CGAL` | highly recommended | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
-| `SuperLU_DIST` | optional; requires MPI              | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
-  | `ParMETIS`   | required by SuperLU_DIST                    | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
-  | `MUMPS`    | optional                      | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
-| `HYPRE`      | optional                     | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
-| `Trilinos`   | optional                    | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
+| Library        | required/optional | `oomph_build.py` defaults (serial) | `oomph_build.py` defaults (MPI)  | Version |
+| ----           | ---               | -----                    | ---                    | ---     | 
+| `OpenBLAS`     | **required by `oomph-lib`**               | y | y |  [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
+| `SuperLU`       | **required by `oomph-lib`**               | y | y | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
+| `METIS`        | **required by `oomph-lib` (via `SuperLU`)** | y | y | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
+`GKlib`          | **required by `oomph-lib` (via `METIS`)**)  | y | y | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
+| `CGAL`         | optional, highly recommended                        | y | y | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
+| `Boost`        | required by `CGAL`                          | y | y | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
+| `SuperLU_DIST` | **required for `oomph-lib` MPI build**                   | n | y | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
+| `ParMETIS`     | **required for `oomph-lib` MPI  build (via `SuperLU_DIST`)**                  | n | y | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
+| `MUMPS`        | optional                                  | y | y | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
+| `HYPRE`        | optional                                  | y | y | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
+| `Trilinos`     | optional                                  | y | y | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
 
 
 > [!IMPORTANT]
 > If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas). Unlike the other third-party libraries listed above, we cannot install this for you.
 
-To facilitate the installation of the required third-party libraries (currently OpenBLAS; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process. We provide a detailed description of the two-stage process below, partly to explain the deliberate distinction between `oomph-lib` and the third-party libraries. However, **we strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) and we suggest that new users jump straight there.**
+To facilitate the installation of the required third-party libraries (currently `OpenBLAS` and `SuperLU`, plus the underlying libraries for the latter; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process. 
+In the following subsections of this document we provide a detailed description of the two-stage process, partly to explain the deliberate distinction between `oomph-lib` and the third-party libraries. However, **we strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) below, and we suggest that new users jump straight there.** The third and fourth columns in the above table indicate which third party libraries our script builds by default when performing a serial or an MPI-based installation. 
 
-For everybody still reading, the two stages are:
+
+For everybody still reading, the two stages of the build process are:
 
 1. [Installing the third-party libraries](#Installing-the-third-party-libraries)
 1. [Installing oomph-lib](#Installing-oomph-lib)
