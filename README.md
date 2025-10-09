@@ -219,7 +219,7 @@ will do the trick.
 ### [macOS only: OpenBLAS]
 
 > [!IMPORTANT]
-> Building OpenBLAS as part of the third-party libraries build is not currently supported on macOS. Instead, you need to install it with a package manager, e.g.
+> Building OpenBLAS as part of our third-party libraries build is not currently supported on macOS. Instead, you need to install it yourself, prior to the `oomph-lib` installation, with a package manager, e.g.
 >
 > ```bash
 > brew install openblas
@@ -257,22 +257,23 @@ sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texliv
 ### Required/optional third-party libraries
 `oomph-lib` relies on/works with the following third-party libraries:
 
-| Library                          | Version                                                                                                                                   |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `OpenBLAS` (**required**)        | [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)                                                                            |
-| `Boost` (**highly recommended**) | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
-| `CGAL` (**highly recommended**)  | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                                         |
-| `GKlib`                          | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
-| `METIS`                          | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)    |
-| `ParMETIS`                       | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) |
-| `SuperLU`                        | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1)                                                                                 |
-| `SuperLU_DIST`                   | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)                                                                            |
-| `MUMPS`                          | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
-| `HYPRE`                          | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
-| `Trilinos`                       | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
+| Library        | required/optional | Version
+| ----           | ---  | ----- |
+| `OpenBLAS`     | **required by `oomph-lib`**       | [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
+`SuperLU`  | **required by `oomph-lib`**         | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
+| `METIS`    | **required by `oomph-lib` (via SuperLU)**  | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
+`GKlib` | **required by `oomph-lib` (via METIS)**) | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
+| `Boost` | highly recommended | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
+| `CGAL` | highly recommended | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
+| `SuperLU_DIST` | optional; requires MPI              | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
+  | `ParMETIS`   | required by SuperLU_DIST                    | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
+  | `MUMPS`    | optional                      | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
+| `HYPRE`      | optional                     | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
+| `Trilinos`   | optional                    | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
+
 
 > [!IMPORTANT]
-> If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas).
+> If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas). Unlike the other third-party libraries listed above, we cannot install this for you.
 
 To facilitate the installation of the required third-party libraries (currently OpenBLAS; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process. We provide a detailed description of the two-stage process below, partly to explain the deliberate distinction between `oomph-lib` and the third-party libraries. However, **we strongly encourage users to use our `oomph_build.py` script that performs all these actions in one operation. Details are described in the section [Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) and we suggest that new users jump straight there.**
 
