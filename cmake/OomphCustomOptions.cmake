@@ -9,8 +9,8 @@
 #   oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 #
 #   oomph_path_option(
-#     FLAG OOMPH_USE_SUPERLU_FROM
-#     DOCSTRING "Path to SuperLU installation"
+#     FLAG OOMPH_USE_OPENBLAS_FROM
+#     DOCSTRING "The path to a preinstalled version of OpenBLAS."
 #     REQUIRED
 #   )
 #
@@ -42,35 +42,32 @@ function(oomph_path_option)
 
   # Redefine the variables in this scope without a prefix for clarity
   set(FLAG ${${PREFIX}_FLAG})
-  set(DEFAULT ${${PREFIX}_DEFAULT})
-  set(DOCSTRING ${${PREFIX}_DOCSTRING})
+  set(DEFAULT "${${PREFIX}_DEFAULT}") # defaults to empty string
+  set(DOCSTRING "${${PREFIX}_DOCSTRING}")
   set(REQUIRED ${${PREFIX}_REQUIRED})
-  set(OVERWRITE ${${PREFIX}_OVERWRITE})
 
-  # Would be weird to provide a default argument but require an input
-  if(DEFAULT AND REQUIRED)
-    message(
-      FATAL_ERROR
-        "Can't provide oomph_path_option(...) a default value and also set 'REQUIRED'!"
-    )
+  if(NOT FLAG)
+    message(FATAL_ERROR "oomph_path_option() requires FLAG <varname>.")
   endif()
 
-  # If FLAG has been set, take that as the cached value. If it hasn't been
-  # provided, take the default value. If neither have been provided and we must
-  # have a value, issue an error
-  if(${FLAG})
-    set(${FLAG} ${${FLAG}} CACHE PATH "${DOCSTRING}")
-  elseif(DEFAULT)
-    set(${FLAG} ${DEFAULT} CACHE PATH "${DOCSTRING}")
-  elseif(REQUIRED)
-    message(
-      FATAL_ERROR
-        "Argument '${FLAG}' is required but you did not specify a value! Set it using -D${FLAG}=\"...\" at the commandline."
-    )
+  # Create a cache entry only if none exists yet (so it shows in ccmake)
+  if(NOT DEFINED CACHE{${FLAG}})
+    if("${${FLAG}}" STREQUAL "")
+      set(${FLAG} "${DEFAULT}" CACHE PATH "${DOCSTRING}")
+    else()
+      set(${FLAG} "${${FLAG}}" CACHE PATH "${DOCSTRING}")
+    endif()
   endif()
 
-  # Update the list of commandline flags that we take but remember to wipe
-  # duplicates so we don't keep appending the same variable again and again
+  # If the path variable is required, make sure it's a non-empty string
+  if(REQUIRED AND ("${${FLAG}}" STREQUAL ""))
+    message(
+      FATAL_ERROR
+        "Argument '${FLAG}' is required but you did not specify a non-empty value! "
+        "Set it using -D${FLAG}=\"...\" at the commandline.")
+  endif()
+
+  # Track config vars (deduped)
   set(OOMPH_CONFIG_VARS ${OOMPH_CONFIG_VARS} ${FLAG})
   list(REMOVE_DUPLICATES OOMPH_CONFIG_VARS)
   set(OOMPH_CONFIG_VARS ${OOMPH_CONFIG_VARS} CACHE INTERNAL

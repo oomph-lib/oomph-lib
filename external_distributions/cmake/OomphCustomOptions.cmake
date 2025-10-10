@@ -11,6 +11,7 @@
 #   oomph_path_option(
 #     FLAG OOMPH_USE_OPENBLAS_FROM
 #     DOCSTRING "The path to a preinstalled version of OpenBLAS."
+#     REQUIRED
 #   )
 #
 # =============================================================================
@@ -31,7 +32,7 @@ endfunction()
 # ------------------------------------------------------------------------------
 function(oomph_path_option)
   set(PREFIX ARG)
-  set(FLAGS IS_REQUIRED OVERWRITE)
+  set(FLAGS REQUIRED)
   set(SINGLE_VALUE_ARGS FLAG DEFAULT DOCSTRING)
   set(MULTI_VALUE_ARGS)
 
@@ -41,39 +42,32 @@ function(oomph_path_option)
 
   # Redefine the variables in this scope without a prefix for clarity
   set(FLAG ${${PREFIX}_FLAG})
-  set(DEFAULT ${${PREFIX}_DEFAULT})
-  set(DOCSTRING ${${PREFIX}_DOCSTRING})
-  set(IS_REQUIRED ${${PREFIX}_IS_REQUIRED})
-  set(OVERWRITE ${${PREFIX}_OVERWRITE})
+  set(DEFAULT "${${PREFIX}_DEFAULT}") # defaults to empty string
+  set(DOCSTRING "${${PREFIX}_DOCSTRING}")
+  set(REQUIRED ${${PREFIX}_REQUIRED})
 
-  # Would be weird to provide a default argument but require an input
-  if(DEFAULT AND IS_REQUIRED)
+  if(NOT FLAG)
+    message(FATAL_ERROR "oomph_path_option() requires FLAG <varname>.")
+  endif()
+
+  # Create a cache entry only if none exists yet (so it shows in ccmake)
+  if(NOT DEFINED CACHE{${FLAG}})
+    if("${${FLAG}}" STREQUAL "")
+      set(${FLAG} "${DEFAULT}" CACHE PATH "${DOCSTRING}")
+    else()
+      set(${FLAG} "${${FLAG}}" CACHE PATH "${DOCSTRING}")
+    endif()
+  endif()
+
+  # If the path variable is required, make sure it's a non-empty string
+  if(REQUIRED AND ("${${FLAG}}" STREQUAL ""))
     message(
       FATAL_ERROR
-        "Can't provide oomph_path_option(...) a default value and also set 'IS_REQUIRED'!"
-    )
+        "Argument '${FLAG}' is required but you did not specify a non-empty value! "
+        "Set it using -D${FLAG}=\"...\" at the commandline.")
   endif()
 
-  # Forceably overwrite the cache variable everytime the configure step is run?
-  set(EXTRA_FLAGS)
-  if(OVERWRITE)
-    set(EXTRA_FLAGS FORCE)
-  endif()
-
-  # Create a cache
-  if(${FLAG})
-    set(${FLAG} ${${FLAG}} CACHE PATH "${DOCSTRING}")
-  elseif(DEFAULT)
-    set(${FLAG} ${DEFAULT} CACHE PATH "${DOCSTRING}")
-  elseif(IS_REQUIRED)
-    message(
-      FATAL_ERROR
-        "Argument '${FLAG}' is required but you did not specify a value! Set it using -D${FLAG}=\"...\" at the commandline."
-    )
-  endif()
-
-  # Update the list of commandline flags that we take but remember to wipe
-  # duplicates so we don't keep appending the same variable again and again
+  # Track config vars (deduped)
   set(OOMPH_CONFIG_VARS ${OOMPH_CONFIG_VARS} ${FLAG})
   list(REMOVE_DUPLICATES OOMPH_CONFIG_VARS)
   set(OOMPH_CONFIG_VARS ${OOMPH_CONFIG_VARS} CACHE INTERNAL
