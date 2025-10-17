@@ -67,7 +67,7 @@ set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
-include(OomphOptions)
+include(OomphCustomOptions)
 
 # Boolean options
 oomph_option(OOMPH_ENABLE_MPI "Build third-party libraries with MPI support?" OFF)
