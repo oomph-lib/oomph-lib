@@ -63,7 +63,7 @@ If you cannot obtain a recent enough version of CMake via your favourite package
 
 ## Library versions
 
-The table below lists the version of the third party libraries that work with(and/or are required by) `oomph-lib` and indicates which ones we can install for you via CMake. By default, we build "everything we can"; see below for how to customise the build process and select a serial or an MPI build. If you wish to provide your own version of these libraries, make sure it is the right version.
+`oomph-lib` depends on and works with a number of third-party libraries. In the table below we list these libraries and the versions that we can install for you. By default, we build "everything we can"; see further below for how to customise the build process and how to select a serial or an MPI build. If you wish to provide your own version of these libraries, make sure you provide the right version.
 
 
 | Library        | Required/optional | Built by default (serial build)? | Built by default (MPI build)?  | Version |
@@ -98,7 +98,7 @@ Note that we do not need an install step; this is because we only build/install 
 
 ## Build options
 
-The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG_1>=<VALUE_1>`. For examples on how to do this, see [Extended example](#extended-example).
+The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG>=<VALUE>`. For examples on how to do this, see [Extended example](#extended-example).
 
 Option                                   | Description                                               | Default
 -----------------------------------------|-----------------------------------------------------------|----------------------------------
@@ -125,7 +125,7 @@ The arguments to the `OOMPH_USE_<LIBRARY>_FROM` flags must be a folder containin
 >>> brew --prefix boost
 /opt/homebrew/opt/boost
 
->>> ls -1 /opt/homebrew/opt/boost@1.87/
+>>> ls -1 /opt/homebrew/opt/boost
 include/
 lib/
 share/
@@ -137,7 +137,7 @@ sbom.spdx.json
 To use this installation of Boost in the build of the third-party libraries, you would call `cmake` like so
 
 ```bash
->>> cmake -G Ninja -DOOMPH_USE_BOOST_FROM=/opt/homebrew/opt/boost@1.87/ -B build
+>>> cmake -G Ninja -DOOMPH_USE_BOOST_FROM=/opt/homebrew/opt/boost -B build
 ```
 
 or, more simply
