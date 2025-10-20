@@ -63,21 +63,23 @@ If you cannot obtain a recent enough version of CMake via your favourite package
 
 ## Library versions
 
-The table below contains the version of each library that you can install with this repository. If you wish to provide your own version of OpenBLAS or Boost, make sure it is the right version.
+`oomph-lib` depends on and works with a number of third-party libraries. In the table below we list these libraries and the versions that we can install for you. By default, we build "everything we can"; see further below for how to customise the build process and how to select a serial or an MPI build. If you wish to provide your own version of these libraries, make sure you provide the right version.
 
-| Library                          | Version                                                                                                                                   |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `OpenBLAS` (**required**)        | [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)                                                                            |
-| `Boost` (**highly recommended**) | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
-| `CGAL` (**highly recommended**)  | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                                         |
-| `GKlib`                          | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
-| `METIS`                          | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)    |
-| `ParMETIS`                       | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) |
-| `SuperLU`                        | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1)                                                                                 |
-| `SuperLU_DIST`                   | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)                                                                            |
-| `MUMPS`                          | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
-| `HYPRE`                          | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
-| `Trilinos`                       | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
+
+| Library        | Required/optional | Built by default (serial build)? | Built by default (MPI build)?  | Version |
+| ----           | ---               | -----                    | ---                    | ---     | 
+| `OpenBLAS`     | required by `oomph-lib`              | Yes (though not on macOS; see below) | Yes (though not on macOS; see below) |  [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
+| `SuperLU`       | required by `oomph-lib`               | Yes | Yes | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
+| `METIS`        | required by `oomph-lib` (via `SuperLU`) | Yes | Yes | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
+`GKlib`          | required by `oomph-lib` (via `METIS`)  | Yes | Yes | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
+| `SuperLU_DIST` | required for `oomph-lib` MPI build                   | No | Yes | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
+| `ParMETIS`     | required for `oomph-lib` MPI build (via `SuperLU_DIST`)                  | No | Yes | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
+| `CGAL`         | optional, highly recommended                        | Yes | Yes | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
+| `Boost`        | required by `CGAL`                          | Yes | Yes | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
+| `MUMPS`        | optional                                  | Yes | Yes | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
+| `HYPRE`        | optional                                  | Yes | Yes | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
+| `Trilinos`     | optional                                  | Yes | Yes | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
+
 
 ## Example
 
@@ -87,12 +89,16 @@ To build all libraries without MPI support, simply run
 >>> cmake -G Ninja -B build
 >>> cmake --build build
 ```
-
+To build all libraries with MPI support (assuming your computer has MPI installed, of course), do
+```bash
+>>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -B build
+>>> cmake --build build
+```
 Note that we do not need an install step; this is because we only build/install the third-party libraries in this project, which are installed at build-time.
 
 ## Build options
 
-The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG_1>=<VALUE_1>`. For examples on how to do this, see [Extended example](#extended-example).
+The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG>=<VALUE>`. For examples on how to do this, see [Extended example](#extended-example).
 
 Option                                   | Description                                               | Default
 -----------------------------------------|-----------------------------------------------------------|----------------------------------
@@ -119,7 +125,7 @@ The arguments to the `OOMPH_USE_<LIBRARY>_FROM` flags must be a folder containin
 >>> brew --prefix boost
 /opt/homebrew/opt/boost
 
->>> ls -1 /opt/homebrew/opt/boost@1.87/
+>>> ls -1 /opt/homebrew/opt/boost
 include/
 lib/
 share/
@@ -131,7 +137,7 @@ sbom.spdx.json
 To use this installation of Boost in the build of the third-party libraries, you would call `cmake` like so
 
 ```bash
->>> cmake -G Ninja -DOOMPH_USE_BOOST_FROM=/opt/homebrew/opt/boost@1.87/ -B build
+>>> cmake -G Ninja -DOOMPH_USE_BOOST_FROM=/opt/homebrew/opt/boost -B build
 ```
 
 or, more simply
@@ -149,7 +155,7 @@ or, more simply
 >>> cmake --build build
 ```
 
-**Example 2:** To enable MPI support and only build CGAL and OpenBLAS with any testing whatsoever, run
+**Example 2:** To enable MPI support and only build CGAL and OpenBLAS with all available testing, run
 
 ```bash
 >>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -DOOMPH_BUILD_CGAL=ON -DOOMPH_BUILD_OPENBLAS=ON -DOOMPH_BUILD_MUMPS=OFF -DOOMPH_BUILD_HYPRE=OFF -DOOMPH_BUILD_TRILINOS=OFF -DOOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON -B build
