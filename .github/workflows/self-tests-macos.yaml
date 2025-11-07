@@ -116,8 +116,8 @@ jobs:
         with:
           path: |
             external_distributions/install
-            external_distributions/build/cmake_flags_for_oomph_lib.txt
-            external_distributions/build/cmake_flags_for_oomph_lib.json
+            external_distributions/install/cmake_flags_for_oomph_lib.txt
+            external_distributions/install/cmake_flags_for_oomph_lib.json
           key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
       - name: Configure, build and install third-party libraries
@@ -147,6 +147,14 @@ jobs:
           name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
           path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}/
 
+      - name: Wipe third-party libraries build directory
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Size of third-party build folder: $(du -sh external_distributions/build | cut -f1)"
+          echo "Wiping..."
+          rm -rf external_distributions/build
+        continue-on-error: true
+
       # -------------------
       # BUILD MAIN PROJECT:
       # -------------------
@@ -157,6 +165,13 @@ jobs:
             --oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
             --no-build-tpl \
             --verbose
+
+      - name: Wipe main library build directory
+        run: |
+          echo "Size of main build folder: $(du -sh build | cut -f1)"
+          echo "Wiping..."
+          rm -rf build
+        continue-on-error: true
 
       # -------------------
       # DEMO DRIVERS:
@@ -181,6 +196,13 @@ jobs:
           python3 .github/generate_validation_log_summary.py validation.log
         continue-on-error: true
 
+      - name: Clean up after self-tests
+        run: |
+          echo "Size of demo drivers output folder: $(du -sh demo_drivers/build | cut -f1)"
+          echo "Wiping..."
+          rm -rf demo_drivers/build
+        continue-on-error: true
+
       # -------------------
       # UPLOAD STUFF:
       # -------------------
@@ -203,8 +225,8 @@ jobs:
         with:
           path: |
             external_distributions/install
-            external_distributions/build/cmake_flags_for_oomph_lib.txt
-            external_distributions/build/cmake_flags_for_oomph_lib.json
+            external_distributions/install/cmake_flags_for_oomph_lib.txt
+            external_distributions/install/cmake_flags_for_oomph_lib.json
           key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
 
       - name: Summarise validation.log for GitHub
