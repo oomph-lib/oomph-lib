@@ -24,20 +24,21 @@
 // LIC//
 // LIC//====================================================================
 // Driver for 2D moving block
-#ifndef OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_CC
-#define OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_CC
+#ifndef OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_HEADER
+#define OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
+#error __FILE__ should only be included from quad_from_triangle_mesh.h.
+#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
 
 // The mesh
-#include "quad_from_triangle_mesh.template.h"
 
 using namespace std;
 using namespace oomph;
 
-
-/// /////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -205,7 +206,6 @@ namespace oomph
       el_vector_pt[1] = el1_pt;
       el_vector_pt[2] = el2_pt;
 
-
       // Create the first node in each quad element and store in Node_pt.
       // These correspond to the nodes of the simplex triangle stored in
       // Tmp_mesh_pt. If they have already been set up then we do nothing:
@@ -268,12 +268,10 @@ namespace oomph
           el_vector_pt[j]->node_pt(corner_0) = qmesh_node_pt;
         }
 
-
         // Set global coordinate
         el_vector_pt[j]->node_pt(corner_0)->x(0) = triangle_vertex[j][0];
         el_vector_pt[j]->node_pt(corner_0)->x(1) = triangle_vertex[j][1];
       }
-
 
       // Create the edges of the scaffold element and check to see if
       // they've been set up yet or not. If they haven't:
@@ -335,7 +333,6 @@ namespace oomph
         // Last node along edge 2 is the first node of element 0
         edge2_vector_pt[nnode_edge - 1] = el_vector_pt[0]->node_pt(0);
       }
-
 
 #ifdef PARANOID
       // If any of the edges have been set up, make sure that that the endpoints
@@ -424,7 +421,6 @@ namespace oomph
         } // for (unsigned k=0;k<2;k++)
       } // for (unsigned j=0;j<3;j++)
 
-
       // The upper right node is always the centroid. Note: The 'corner_3' node
       // lies within each of the three quad elements so we simply share the
       // pointer to it with each element:
@@ -444,7 +440,6 @@ namespace oomph
 
       // Quad 2
       el2_pt->node_pt(corner_3) = el0_pt->node_pt(corner_3);
-
 
       // Set the nodal positions of the dummy element to emulate the FIRST
       // quad element (this allows for simple linear interpolation later):
@@ -468,7 +463,6 @@ namespace oomph
       // Top-right corner
       dummy_element.node_pt(3)->x(0) = centroid[0];
       dummy_element.node_pt(3)->x(1) = centroid[1];
-
 
       // Set up all of the nodes in the first quad element (Q0):
       //--------------------------------------------------------
@@ -617,7 +611,6 @@ namespace oomph
         el0_pt->node_pt(j)->x(1) = x[1];
       }
 
-
       // Set the nodal positions of the dummy element to now emulate the
       // SECOND quad element:
       //------------------------------------------------------------------
@@ -639,7 +632,6 @@ namespace oomph
         0.5 * (triangle_vertex[0][0] + triangle_vertex[1][0]);
       dummy_element.node_pt(2)->x(1) =
         0.5 * (triangle_vertex[0][1] + triangle_vertex[1][1]);
-
 
       // Set up all of the nodes in the second quad element (Q1):
       //--------------------------------------------------------
@@ -787,7 +779,6 @@ namespace oomph
         el1_pt->node_pt(j)->x(1) = x[1];
       }
 
-
       // We now need to loop over nodes corner_2 to (corner_3-1) and copy the
       // given information from Q0. We do not need to set up the (corner_3)'th
       // node since it coincides with the centroid which has already been set up
@@ -799,7 +790,6 @@ namespace oomph
         el1_pt->node_pt(j) =
           el0_pt->node_pt(corner_1 + (j - corner_2) * nnode_1d);
       }
-
 
       // Set the nodal positions of the dummy element to now emulate the
       // THIRD quad element:
@@ -822,7 +812,6 @@ namespace oomph
         0.5 * (triangle_vertex[1][0] + triangle_vertex[2][0]);
       dummy_element.node_pt(2)->x(1) =
         0.5 * (triangle_vertex[1][1] + triangle_vertex[2][1]);
-
 
       // Set up all of the nodes in the third quad element (Q2):
       //--------------------------------------------------------
@@ -1019,11 +1008,9 @@ namespace oomph
     }
   }
 
-
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
   //======================================================================
   /// Adapt problem based on specified elemental error estimates
@@ -1044,4 +1031,4 @@ namespace oomph
   } // End of adapt
 } // End of namespace oomph
 
-#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_CC
+#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_HEADER

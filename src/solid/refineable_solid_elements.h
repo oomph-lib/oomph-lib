@@ -31,9 +31,9 @@
 
 // oomph-lib headers
 #include "solid_elements.h"
-#include "../generic/refineable_quad_element.h"
-#include "../generic/refineable_brick_element.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/refineable_brick_element.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {

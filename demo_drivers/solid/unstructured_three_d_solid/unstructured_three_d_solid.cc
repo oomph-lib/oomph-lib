@@ -73,9 +73,9 @@ public:
 };
 
 
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -349,7 +349,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solid solution
  //-----------------------
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -358,7 +358,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
     
  // Output traction
  //----------------
- sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned n=Solid_traction_boundary_id.size();

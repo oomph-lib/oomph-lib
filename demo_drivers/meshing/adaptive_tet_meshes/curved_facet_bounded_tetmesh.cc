@@ -53,9 +53,9 @@ using namespace oomph;
 
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -75,9 +75,9 @@ namespace Global_Parameters
 
 }
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -639,7 +639,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc mesh quality (Ratio of max. edge length to min. height,
  /// so if it's very large it's BAAAAAD)
- sprintf(filename,"%s/mesh_quality%i.dat",
+ snprintf(filename,sizeof(filename),"%s/mesh_quality%i.dat",
          doc_info.directory().c_str(),
          doc_info.number()); 
  ofstream quality_file;
@@ -650,7 +650,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Output elements adjacent to outer boundary
  //-------------------------------------------
- sprintf(filename,"%s/elements_next_to_outer_boundary%i.dat",
+ snprintf(filename,sizeof(filename),"%s/elements_next_to_outer_boundary%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -672,7 +672,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundary coordinates on outer boundary
  //-----------------------------------------------
- sprintf(filename,"%s/boundary_coordinates_outer_boundary%i.dat",
+ snprintf(filename,sizeof(filename),"%s/boundary_coordinates_outer_boundary%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -688,7 +688,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  //-----------------------------------------------
  unsigned n_b=Bulk_mesh_pt->nboundary();
  oomph_info << "number of boundaries in bulk mesh: " << n_b << std::endl;
- sprintf(filename,"%s/boundary_coordinates%i.dat",
+ snprintf(filename,sizeof(filename),"%s/boundary_coordinates%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -705,7 +705,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_boundaries(some_file);
@@ -715,7 +715,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output volumes and areas
  //-------------------------
  std::ofstream volumes_and_areas_file;
- sprintf(filename,"%s/volumes%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/volumes%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  volumes_and_areas_file.open(filename);
 
@@ -723,7 +723,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements in torus region
  //-------------------------------------
  double volume_in_torus_region=0.0;
- sprintf(filename,"%s/soln_in_torus_region%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/soln_in_torus_region%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned region_id=Torus_region_id;
@@ -742,7 +742,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements above disk
  //--------------------------------
  double volume_in_above_disk_region=0.0;
- sprintf(filename,"%s/soln_in_above_disk_region%i.dat",
+ snprintf(filename,sizeof(filename),"%s/soln_in_above_disk_region%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -763,7 +763,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements below disk
  //--------------------------------
  double volume_in_below_disk_region=0.0;
- sprintf(filename,"%s/soln_in_below_disk_region%i.dat",
+ snprintf(filename,sizeof(filename),"%s/soln_in_below_disk_region%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -783,7 +783,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements in region 0
  //--------------------------------- 
  double volume_in_region0=0.0;
- sprintf(filename,"%s/soln_in_zero_region%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/soln_in_zero_region%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  region_id=0;
@@ -823,7 +823,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Attach face elements to boundary of torus
  //------------------------------------------
- sprintf(filename,"%s/face_elements_on_boundary_of_torus%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_boundary_of_torus%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -862,7 +862,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Attach face elements to part of disk inside torus
  //--------------------------------------------------
- sprintf(filename,"%s/face_elements_on_disk_in_torus%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_disk_in_torus%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -903,7 +903,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Attach face elements to part of disk outside torus
  //--------------------------------------------------
- sprintf(filename,"%s/face_elements_on_disk_outside_torus%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_disk_outside_torus%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -948,7 +948,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Attach face elements to free-standing disk
  //-------------------------------------------
- sprintf(filename,"%s/face_elements_on_free_standing_disk%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_free_standing_disk%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -988,7 +988,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Attach face elements to disk surrounded by layers: above
  //---------------------------------------------------------
- sprintf(filename,"%s/face_elements_on_disk_upper_layer%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_disk_upper_layer%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1028,7 +1028,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Attach face elements to disk surrounded by layers: below
  //---------------------------------------------------------
- sprintf(filename,"%s/face_elements_on_disk_lower_layer%i.dat",
+ snprintf(filename,sizeof(filename),"%s/face_elements_on_disk_lower_layer%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1084,7 +1084,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) Bulk_mesh_pt->output(some_file,nplot);
@@ -1092,7 +1092,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution showing element outlines
  //-----------------------------------------
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) Bulk_mesh_pt->output(some_file,2);
@@ -1101,7 +1101,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Get norm of solution
  //---------------------
- sprintf(filename,"%s/norm%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/norm%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  double norm_soln=0.0;
@@ -1207,6 +1207,7 @@ int main(int argc, char* argv[])
     }
   }
 
+  MPI_Helpers::finalize();
 }
 
 

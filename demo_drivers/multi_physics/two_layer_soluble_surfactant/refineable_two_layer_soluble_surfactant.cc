@@ -499,7 +499,7 @@ public:
        nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     } // End of loop over horizontal elements
-   this->Boundary_coordinate_exists[4] = true;
+   this->set_boundary_coordinate_exists(4);
    
    // Set up the boundary element information
    this->setup_boundary_element_info();
@@ -632,9 +632,9 @@ public:
 
 
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D surfactant transport problem on rectangular domain, discretised 
@@ -1813,7 +1813,7 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n_element = Bulk_mesh_pt->nelement();
@@ -1824,7 +1824,7 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
  some_file.close();
 
  //Output the interface
- sprintf(filename,"%s/int%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/int%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 

@@ -1,0 +1,45 @@
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
+list(APPEND CMAKE_MESSAGE_INDENT " ")
+message(VERBOSE
+        "Entered mesh_from_inline_triangle_internal_boundaries subdirectory")
+
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
+project(mesh_from_inline_triangle_internal_boundaries C CXX Fortran)
+
+if(NOT oomphlib_FOUND)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
+endif()
+
+include(CTest)
+
+oomph_add_executable(
+  NAME mesh_from_inline_triangle_internal_boundaries
+  SOURCES mesh_from_inline_triangle_internal_boundaries.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+
+oomph_add_executable(
+  NAME mesh_from_inline_triangle_internal_boundaries_extra
+  SOURCES mesh_from_inline_triangle_internal_boundaries_extra.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+
+# ---------------------------------- TESTING ----------------------------------
+
+oomph_add_test(
+  TEST_NAME meshing.mesh_from_inline_triangle_internal_boundaries
+  DEPENDS_ON mesh_from_inline_triangle_internal_boundaries
+             mesh_from_inline_triangle_internal_boundaries_extra
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata)
+
+message(VERBOSE
+        "Leaving mesh_from_inline_triangle_internal_boundaries subdirectory")
+# ------------------------------------------------------------------------------

@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SINGLE_LAYER_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_SINGLE_LAYER_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_SINGLE_LAYER_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_SINGLE_LAYER_SPINE_MESH_TEMPLATE_HEADER
 
-#include "single_layer_spine_mesh.template.h"
-#include "rectangular_quadmesh.template.cc"
+#ifndef OOMPH_SINGLE_LAYER_SPINE_MESH_HEADER
+#error __FILE__ should only be included from single_layer_spine_mesh.h.
+#endif // OOMPH_SINGLE_LAYER_SPINE_MESH_HEADER
 
+#include "rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -67,7 +69,6 @@ namespace oomph
     build_single_layer_mesh(time_stepper_pt);
   }
 
-
   //===========================================================================
   /// Constuctor for spine 2D mesh: Pass number of elements in x-direction,
   /// number of elements in y-direction, axial length and height of layer,
@@ -97,14 +98,12 @@ namespace oomph
     // Mesh can only be built with spine elements
     MeshChecker::assert_geometric_element<SpineFiniteElement, ELEMENT>(2);
 
-
     // We've called the "generic" constructor for the RectangularQuadMesh
     // which doesn't do much...
 
     // Now build the mesh:
     build_single_layer_mesh(time_stepper_pt);
   }
-
 
   //===========================================================================
   /// Helper function that actually builds the single-layer spine mesh
@@ -140,7 +139,6 @@ namespace oomph
       Spine_pt.reserve((n_p - 1) * n_x + 1);
     }
 
-
     // FIRST SPINE
     //-----------
 
@@ -149,7 +147,6 @@ namespace oomph
     // Assign the new spine with unit length
     Spine* new_spine_pt = new Spine(1.0);
     Spine_pt.push_back(new_spine_pt);
-
 
     // Get pointer to node
     SpineNode* nod_pt = element_node_pt(0, 0);
@@ -178,7 +175,6 @@ namespace oomph
         nod_pt->spine_mesh_pt() = this;
       }
     }
-
 
     // LOOP OVER OTHER SPINES
     //----------------------
@@ -228,7 +224,6 @@ namespace oomph
         }
       }
     }
-
 
     // Last spine needs special treatment for periodic meshes
     // because it's the same as the first one...

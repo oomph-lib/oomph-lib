@@ -26,13 +26,13 @@
 #ifndef OOMPH_ODE_ELEMENTS_H
 #define OOMPH_ODE_ELEMENTS_H
 
-#include "../generic/oomph_definitions.h"
-#include "../generic/oomph_utilities.h"
+#include "generic/oomph_definitions.h"
+#include "generic/oomph_utilities.h"
 
-#include "../generic/matrices.h"
-#include "../generic/Vector.h"
-#include "../generic/elements.h"
-#include "../generic/timesteppers.h"
+#include "generic/matrices.h"
+#include "generic/Vector.h"
+#include "generic/elements.h"
+#include "generic/timesteppers.h"
 
 namespace oomph
 {

@@ -28,9 +28,9 @@
 #define OOMPH_FULL_CIRCLE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -98,7 +98,6 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const FullCircleDomain&) = delete;
 
-
     /// Destructor: Empty; cleanup done in base class
     ~FullCircleDomain() {}
 
@@ -144,10 +143,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Vector representation of the  imacro-th macro element
@@ -276,7 +274,6 @@ namespace oomph
             break;
         }
 
-
         break;
 
       // Macro element 2:Right
@@ -365,7 +362,6 @@ namespace oomph
 
         break;
 
-
         // Macro element 4: Left
       case 4:
 
@@ -409,7 +405,6 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
         }
         break;
-
 
       default:
         // Error

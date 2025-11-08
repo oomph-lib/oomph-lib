@@ -1,8 +1,10 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the second argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=3
@@ -10,7 +12,7 @@ NUM_TESTS=3
 
 # Doc what we're using to run tests on two processors
 echo " " 
-echo "Running mpi tests with mpi run command: " $MPI_RUN_COMMAND
+echo "Running mpi tests with mpi run command: '$MPI_RUN_COMMAND'" 
 echo " " 
 
 # Setup validation directory
@@ -51,12 +53,12 @@ cat RESLT/soln0_on_proc0.dat RESLT/soln0_on_proc1.dat \
 cat RESLT/soln1_on_proc0.dat RESLT/soln1_on_proc1.dat \
     > adaptive_cavity_CR_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/adaptive_cavity_TH_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_cavity_TH_results.dat.gz  \
          adaptive_cavity_TH_results.dat >> validation.log
-../../../../../bin/fpdiff.py ../validata/adaptive_cavity_CR_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_cavity_CR_results.dat.gz  \
          adaptive_cavity_CR_results.dat >> validation.log
 fi
 
@@ -91,10 +93,10 @@ cat RESLT_LOAD_BALANCE/soln0_on_proc0.dat RESLT_LOAD_BALANCE/soln0_on_proc1.dat 
     > adaptive_cavity_load_balance_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/adaptive_cavity_load_balance_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_cavity_load_balance_results.dat.gz  \
          adaptive_cavity_load_balance_results.dat >> validation.log
 fi
 
@@ -104,7 +106,7 @@ mv RESLT_LOAD_BALANCE RESLT_adaptive_driven_cavity_load_balance
 #----------------------------------------------------------------------
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -118,7 +120,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

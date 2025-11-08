@@ -25,7 +25,8 @@
 //LIC//====================================================================
 #ifndef OOMPH_COMMON_YOUNG_LAPLACE_STUFF_DOC
 #define OOMPH_COMMON_YOUNG_LAPLACE_STUFF_DOC
-#include <assert.h>
+
+#include <cassert>
 
 //===== start_of_namespace========================================
 /// Namespace for "global" problem parameters

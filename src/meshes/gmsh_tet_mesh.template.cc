@@ -24,12 +24,12 @@
 // LIC//
 // LIC//====================================================================
 
-#ifndef OOMPH_GMSH_TET_MESH_TEMPLATE_CC
-#define OOMPH_GMSH_TET_MESH_TEMPLATE_CC
+#ifndef OOMPH_GMSH_TET_MESH_TEMPLATE_HEADER
+#define OOMPH_GMSH_TET_MESH_TEMPLATE_HEADER
 
-
-#include "gmsh_tet_mesh.template.h"
-
+#ifndef OOMPH_GMSH_TET_MESH_HEADER
+#error __FILE__ should only be included from gmsh_tet_mesh.h.
+#endif // OOMPH_GMSH_TET_MESH_HEADER
 
 namespace oomph
 {
@@ -41,9 +41,9 @@ namespace oomph
   {
     double t_start = 0.0;
 
-    //###################################
+    // ###################################
     t_start = TimingHelpers::timer();
-    //###################################
+    // ###################################
 
     // Get refinement targets
     Vector<double> target_size(elem_error.size());
@@ -72,11 +72,11 @@ namespace oomph
     oomph_info << "Max/min element size in original mesh: " << orig_max_size
                << " " << orig_min_size << std::endl;
 
-    //##################################################################
+    // ##################################################################
     oomph_info
       << "adapt: Time for getting volume targets                      : "
       << TimingHelpers::timer() - t_start << " sec " << std::endl;
-    //##################################################################
+    // ##################################################################
 
     // Should we bother to adapt?
     if ((Nrefined > 0) || (Nunrefined > this->max_keep_unrefined()) ||
@@ -87,10 +87,8 @@ namespace oomph
         oomph_info << "Mesh regeneration triggered by edge ratio criterion\n";
       }
 
-
       // Are we dealing with a solid mesh?
       SolidMesh* solid_mesh_pt = dynamic_cast<SolidMesh*>(this);
-
 
       // If the mesh is a solid mesh then do the mapping based on the
       // Eulerian coordinates
@@ -155,7 +153,6 @@ namespace oomph
       dy /= double(ny);
       dz /= double(nz);
 
-
       // Size transfer via hard disk -- yikes...
       std::string target_size_file_name =
         this->Gmsh_parameters_pt->target_size_file_name();
@@ -167,7 +164,6 @@ namespace oomph
                        << min_and_max_coordinates[2].first << " " << std::endl;
       target_size_file << dx << " " << dy << " " << dz << std::endl;
       target_size_file << nx + 1 << " " << ny + 1 << " " << nz + 1 << std::endl;
-
 
       // Doc target areas
       int counter =
@@ -186,7 +182,6 @@ namespace oomph
                           << ", K=" << nz + 1 << std::endl;
         this->Gmsh_parameters_pt->counter_for_filename_gmsh_size_transfer()++;
       }
-
 
       Vector<double> x(3);
       for (unsigned i = 0; i <= nx; i++)
@@ -225,7 +220,6 @@ namespace oomph
             // Do something here...
 
 #endif
-
 
 #ifdef PARANOID
             if (geom_obj_pt == 0)
@@ -302,9 +296,9 @@ namespace oomph
       /* new_mesh_pt->output_paraview(vtu_file,nplot); */
       /* vtu_file.close(); */
 
-      //###################################
+      // ###################################
       t_start = TimingHelpers::timer();
-      //###################################
+      // ###################################
 
       ProjectionProblem<ELEMENT>* project_problem_pt = 0;
 
@@ -321,9 +315,9 @@ namespace oomph
           << "adapt: Time for project soln onto new mesh                : "
           << TimingHelpers::timer() - t_start << " sec " << std::endl;
       }
-      //###################################
+      // ###################################
       t_start = TimingHelpers::timer();
-      //###################################
+      // ###################################
 
       // Flush the old mesh
       unsigned nnod = nnode();
@@ -439,7 +433,6 @@ namespace oomph
 
       } // End of case when more than one region
 
-
       // Flush the mesh
       new_mesh_pt->flush_element_and_node_storage();
 
@@ -447,12 +440,11 @@ namespace oomph
       delete new_mesh_pt;
       delete project_problem_pt;
 
-      //##################################################################
+      // ##################################################################
       oomph_info
         << "adapt: Time for moving nodes etc. to actual mesh          : "
         << TimingHelpers::timer() - t_start << " sec " << std::endl;
-      //##################################################################
-
+      // ##################################################################
 
       // Solid mesh?
       if (solid_mesh_pt != 0)
@@ -485,6 +477,5 @@ namespace oomph
     }
   }
 } // namespace oomph
-
 
 #endif

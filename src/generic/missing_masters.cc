@@ -28,7 +28,6 @@
 
 // oomph-lib header
 #include "missing_masters.h"
-#include "missing_masters.template.cc"
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"
@@ -998,16 +997,16 @@ namespace oomph
           //         n_ext_haloed_el << "..." << std::endl;
           //         // Say also exists in external storage
           //         send_unsigneds.push_back(1234);
-          //#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+          // #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
           //         Flat_packed_unsigneds_string.push_back("Haloed element also
           //         found externally");
-          //#endif
+          // #endif
           //         // Say what the index is
           //         send_unsigneds.push_back(external_haloed_el_index);
-          //#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+          // #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
           //         Flat_packed_unsigneds_string.push_back("Index of existing
           //         internal haloed element");
-          //#endif
+          // #endif
           //         oomph_info << "sent external_haloed_el_index = " <<
           //         external_haloed_el_index << std::endl;
           //
@@ -1018,10 +1017,10 @@ namespace oomph
           //         with proc " << iproc << "..." << std::endl;
           //         // Say doesn't exists in external storage
           //         send_unsigneds.push_back(0);
-          //#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+          // #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
           //         Flat_packed_unsigneds_string.push_back("Haloed element not
           //         also found externally");
-          //#endif
+          // #endif
           //        }
         }
         else

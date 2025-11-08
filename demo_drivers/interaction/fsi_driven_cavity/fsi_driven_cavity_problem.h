@@ -40,9 +40,9 @@ using namespace oomph;
 
 
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 //====start_of_underformed_wall============================================
@@ -511,14 +511,14 @@ void FSIDrivenCavityProblem<ELEMENT>:: doc_solution(DocInfo& doc_info,
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);

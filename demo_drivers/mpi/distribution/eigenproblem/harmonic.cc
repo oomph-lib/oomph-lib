@@ -416,7 +416,7 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(const unsigned& label)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i_on_proc%i.dat",label,
+ snprintf(filename, sizeof(filename), "soln%i_on_proc%i.dat",label,
          this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -514,7 +514,7 @@ solve(const unsigned& label)
  this->doc_solution(label);
 
  char filename[100];
- sprintf(filename,"eigenvalues%i_on_proc%i.dat",label,
+ snprintf(filename, sizeof(filename), "eigenvalues%i_on_proc%i.dat",label,
          this->communicator_pt()->my_rank());
  
  //Open an output file for the sorted eigenvalues
@@ -533,9 +533,9 @@ solve(const unsigned& label)
 }
  
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main==================================================

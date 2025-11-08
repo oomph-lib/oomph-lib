@@ -1,3 +1,0 @@
-SUBDIRS = \
-periodic_load
-

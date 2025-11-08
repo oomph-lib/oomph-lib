@@ -269,9 +269,9 @@ namespace oomph
 } //End of namespace extension
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -1406,7 +1406,7 @@ doc_solution(const std::string& comment)
      !CommandLineArgs::command_line_flag_has_been_set
      ("--validation") )
   {
-   sprintf(filename,"%s/restart%i.dat",
+   snprintf(filename, sizeof(filename), "%s/restart%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    ofstream dump_file;
@@ -1432,7 +1432,7 @@ doc_solution(const std::string& comment)
 
    
    // Actual solution
-   sprintf(filename,"%s/soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    some_file.open(filename);
@@ -1443,7 +1443,7 @@ doc_solution(const std::string& comment)
    
 
    // Actual solution on the free surface
-   sprintf(filename,"%s/free_surface_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/free_surface_soln%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    some_file.open(filename);
@@ -1457,7 +1457,7 @@ doc_solution(const std::string& comment)
    
 
    // Output free surface
-   sprintf(filename,"%s/free_surface%i.dat",
+   snprintf(filename, sizeof(filename), "%s/free_surface%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    some_file.open(filename);
@@ -1475,7 +1475,7 @@ doc_solution(const std::string& comment)
 
    // Coarse solution (mesh)
    unsigned npts_coarse=2;
-   sprintf(filename,"%s/coarse_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    some_file.open(filename);
@@ -1485,7 +1485,7 @@ doc_solution(const std::string& comment)
    some_file.close();
 
    // Doc body force
-   sprintf(filename,"%s/body_force%i.dat",
+   snprintf(filename, sizeof(filename), "%s/body_force%i.dat",
            Problem_Parameter::Doc_info_soln.directory().c_str(),
            Problem_Parameter::Doc_info_soln.number());
    some_file.open(filename);
@@ -1515,7 +1515,7 @@ doc_solution(const std::string& comment)
 
 
  // Output boundaries
- sprintf(filename,"%s/boundaries%i.dat",
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",
          Problem_Parameter::Doc_info_soln.directory().c_str(),
          Problem_Parameter::Doc_info_soln.number());
  some_file.open(filename);

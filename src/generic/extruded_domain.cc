@@ -56,7 +56,6 @@ namespace oomph
     }
   } // End of ExtrudedDomain
 
-
   //=================================================================
   /// Constructor
   //=================================================================
@@ -100,7 +99,7 @@ namespace oomph
       unsigned n_pts=20;
 
       // Create the file name
-      sprintf(filename,"RESLT/extruded_element%i.dat",i);
+      snprintf(filename, sizeof(filename), "RESLT/extruded_element%i.dat",i);
 
       // Open a file with the created filename
       some_file.open(filename);
@@ -115,7 +114,6 @@ namespace oomph
     */
   } // End of ExtrudedDomain
 
-
   //=================================================================
   /// Number of macro elements in domain
   //=================================================================
@@ -125,7 +123,6 @@ namespace oomph
     return Macro_element_pt.size();
   } // End of nmacro_element
 
-
   //=================================================================
   /// Access to i-th extruded macro element
   //=================================================================
@@ -134,7 +131,6 @@ namespace oomph
     // Return a pointer to the i-th macro element in storage
     return dynamic_cast<ExtrudedMacroElement*>(Macro_element_pt[i]);
   } // End of macro_element_pt
-
 
   //=================================================================
   /// Vector representation of the i_macro-th macro element

@@ -277,9 +277,9 @@ namespace oomph
 
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //==start_of_namespace==============================
@@ -999,7 +999,7 @@ void TwoLayerInterfaceProblem<ELEMENT>::doc_solution(const std::string& comment)
  const unsigned npts = 5;
  
  // Open solution output file
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
  some_file.open(filename);
@@ -1011,7 +1011,7 @@ void TwoLayerInterfaceProblem<ELEMENT>::doc_solution(const std::string& comment)
  some_file.close();
 
  // Open interface solution output file
- sprintf(filename,"%s/interface_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/interface_soln%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
  some_file.open(filename);
@@ -1109,7 +1109,7 @@ int main(int argc, char **argv)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Problem_Parameter::Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Problem_Parameter::Doc_info.directory().c_str());
  Problem_Parameter::Trace_file.open(filename);
 
  // Initialise trace file

@@ -26,6 +26,8 @@
 // Driver for doubly adaptive 2D unsteady heat problem in moving domain
 // with restart and load balancing and pruning all in one code
 
+#include <cassert>
+
 //Generic routines
 #include "generic.h"
 
@@ -116,9 +118,9 @@ protected:
 
 }; // end of MyEllipse
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_GlobalParameters==============================
@@ -210,9 +212,9 @@ time)))-Y)),2.0))*Alpha*NY;
 } // end of GlobalParameters
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class=========================================
@@ -740,7 +742,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart()
 
  // Open restart file from stem
  char filename[100];
- sprintf(filename,"%s_on_proc%i.dat",GlobalParameters::Restart_file.c_str(),
+ snprintf(filename, sizeof(filename), "%s_on_proc%i.dat",GlobalParameters::Restart_file.c_str(),
          this->communicator_pt()->my_rank());
  restart_file_pt= new ifstream(filename,ios_base::in);
  if (restart_file_pt!=0)
@@ -786,7 +788,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::write_trace_file_header()
  if (communicator_pt()->my_rank()==0)
   {
    char filename[100];   
-   sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
    Trace_file.open(filename);
    
    Trace_file << "VARIABLES=\"time t\","
@@ -849,7 +851,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -878,7 +880,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,time_pt()->time(),
@@ -903,7 +905,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
  //----------
  double error,norm;
 
- sprintf(filename,"%s/error%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
@@ -968,7 +970,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
    
    // Plot wall posn
    //---------------
-   sprintf(filename,"%s/Wall%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/Wall%i.dat",Doc_info.directory().c_str(),
            Doc_info.number());
    some_file.open(filename);
    
@@ -984,7 +986,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
 
 
  // Write restart file
- sprintf(filename,"%s/restart%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  some_file.precision(20); 
@@ -1224,9 +1226,9 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 } // end of restart
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main=====================================================
@@ -1281,18 +1283,18 @@ int main(int argc, char* argv[])
      if(!CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
       {
        //First run
-       sprintf(doc_info_directory,"RESLT_load_balance_first_for_restart");
+       snprintf(doc_info_directory, sizeof(doc_info_directory), "RESLT_load_balance_first_for_restart");
       }
      else
       {
        //Restarting
        //cout << GlobalParameters::Restart_file.c_str() << endl;
        char filename[100];
-       sprintf(filename,"%s",GlobalParameters::Restart_file.c_str());
+       snprintf(filename, sizeof(filename), "%s",GlobalParameters::Restart_file.c_str());
        char* step;
        step = strtok(filename,"/");
        step = strtok(NULL,"/");
-       sprintf(doc_info_directory,"RESLT_load_balance_first_restarted_from_step_%s",step);
+       snprintf(doc_info_directory, sizeof(doc_info_directory), "RESLT_load_balance_first_restarted_from_step_%s",step);
        //cout << doc_info_directory << endl;
        //exit(1);
       }
@@ -1303,23 +1305,23 @@ int main(int argc, char* argv[])
      if(!CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
       {
        //First run
-       sprintf(doc_info_directory,"RESLT_prune_first_for_restart");
+       snprintf(doc_info_directory, sizeof(doc_info_directory), "RESLT_prune_first_for_restart");
       }
      else
       {
        //Restarting
        char filename[100];
-       sprintf(filename,"%s",GlobalParameters::Restart_file.c_str());
+       snprintf(filename, sizeof(filename), "%s",GlobalParameters::Restart_file.c_str());
        char* step;
        step = strtok(filename,"/");
        step = strtok(NULL,"/");
-       sprintf(doc_info_directory,"RESLT_prune_first_restarted_from_step_%s",step);
+       snprintf(doc_info_directory, sizeof(doc_info_directory), "RESLT_prune_first_restarted_from_step_%s",step);
       }
     }
   }
  else
   {
-   sprintf(doc_info_directory,"RESLT");
+   snprintf(doc_info_directory, sizeof(doc_info_directory), "RESLT");
   }
  
  // Set doc_info directory
@@ -1331,7 +1333,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"%s/OUTPUT.%i",
+ snprintf(filename, sizeof(filename), "%s/OUTPUT.%i",
          problem.doc_info().directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
@@ -1387,7 +1389,7 @@ int main(int argc, char* argv[])
    // Write partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"%s/partitioning.dat",problem.doc_info().directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/partitioning.dat",problem.doc_info().directory().c_str());
    output_file.open(filename);
    unsigned n=element_partition.size();
    output_file << element_partition.size() << std::endl;
@@ -1449,7 +1451,7 @@ int main(int argc, char* argv[])
    // Write used partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"%s/partitioning.dat",problem.doc_info().directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/partitioning.dat",problem.doc_info().directory().c_str());
    output_file.open(filename);
    unsigned n_used=used_element_partition.size();
    output_file << n_used << std::endl;

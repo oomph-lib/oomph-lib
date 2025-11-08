@@ -24,6 +24,7 @@
 // LIC//
 // LIC//====================================================================
 
+#include <cmath>
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
@@ -46,9 +47,10 @@
 #include "partitioning.h"
 #include "spines.h"
 
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.template.cc"
 
+#ifdef OOMPH_HAS_MUMPS
+#include "mumps_solver.h"
+#endif
 
 namespace oomph
 {
@@ -145,11 +147,18 @@ namespace oomph
 
     // By default no submeshes:
     Sub_mesh_pt.resize(0);
+
     // No timesteppers
     Time_stepper_pt.resize(0);
 
     // Set the linear solvers, eigensolver and assembly handler
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+    Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
+#else
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+#endif
+
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 
     Eigen_solver_pt = Default_eigen_solver_pt = new LAPACK_QZ;
@@ -3861,12 +3870,16 @@ namespace oomph
       {
         // Get the pointer to the element
         GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
+
         // Find number of dofs in the element
         unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
+
         // Set up an array
         Vector<double> element_residuals(n_element_dofs);
+
         // Fill the array
         assembly_handler_pt->get_residuals(elem_pt, element_residuals);
+
         // Now loop over the dofs and assign values to global Vector
         for (unsigned l = 0; l < n_element_dofs; l++)
         {
@@ -13196,13 +13209,14 @@ namespace oomph
       //    //---------------------------------------------------------
       //    std::ofstream some_file;
       //    char filename[100];
-      //    sprintf(filename,"read_mesh%i_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename), "read_mesh%i_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    some_file.open(filename);
       //    mesh_pt(m)->output(some_file);
       //    some_file.close();
 
-      //    sprintf(filename,"read_mesh%i_with_haloes_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename),
+      //    "read_mesh%i_with_haloes_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    mesh_pt(m)->enable_output_of_halo_elements();
       //    some_file.open(filename);
@@ -13211,7 +13225,8 @@ namespace oomph
       //    some_file.close();
       //    oomph_info << "Doced mesh " << m << " before reading\n";
 
-      //    sprintf(filename,"read_nodes_mesh%i_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename),
+      //    "read_nodes_mesh%i_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    some_file.open(filename);
       //    unsigned nnod=mesh_pt(m)->nnode();

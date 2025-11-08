@@ -1,3 +1,0 @@
-SUBDIRS = \
-sphere_scattering
-

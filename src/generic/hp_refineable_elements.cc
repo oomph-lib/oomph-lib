@@ -29,13 +29,13 @@
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"
 #include "hp_refineable_elements.h"
-//#include "shape.h"
+// #include "shape.h"
 
 namespace oomph
 {
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   //       1D PRefineableQElements
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
@@ -1201,9 +1201,9 @@ namespace oomph
     RefineableQElement<1>::check_integrity(max_error);
   }
 
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   //       2D PRefineableQElements
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
@@ -2819,7 +2819,7 @@ namespace oomph
       /// /BENFLAG:
       // std::cout << "Checking that all the nodes have this as their update
       // element..." << std::endl;
-      /// /std::cout << "this = " << this << std::endl;
+      // std::cout << "this = " << this << std::endl;
       // for(unsigned j=0; j<this->nnode(); j++)
       // {
       //  //std::cout << this->node_pt(j) << ":   [" << this->node_pt(j)->x(0)
@@ -4768,9 +4768,9 @@ namespace oomph
     } // End of case where this interface is to be mortared
   }
 
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   //       3D PRefineableQElements
-  /// /////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>

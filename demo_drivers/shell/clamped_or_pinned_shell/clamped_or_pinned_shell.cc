@@ -444,7 +444,7 @@ void ShellProblem<ELEMENT>::solve(string& dir_name)
  doc_info.set_directory(dir_name);
 
   //Open an output trace file
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  ofstream trace_file(filename);
  trace_file << "VARIABLES=\"p_e_x_t\",\"R_1\",\"R_2\"" << std::endl;
  trace_file << "ZONE" << std::endl;
@@ -467,7 +467,7 @@ void ShellProblem<ELEMENT>::solve(string& dir_name)
    
    
    //Output the tube shape 
-   sprintf(filename,"%s/shell%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/shell%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    for (unsigned e=0;e<Nshell;e++)
@@ -477,7 +477,7 @@ void ShellProblem<ELEMENT>::solve(string& dir_name)
    some_file.close();
 
    //Output the Lagrange multipliers
-   sprintf(filename,"%s/lagrange_multiplier%i.dat",
+   snprintf(filename, sizeof(filename), "%s/lagrange_multiplier%i.dat",
            doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);

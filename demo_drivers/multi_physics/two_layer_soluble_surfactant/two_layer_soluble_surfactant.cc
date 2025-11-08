@@ -249,9 +249,9 @@ namespace Global_Physical_Variables
 
 } //end of oomph namespace
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D surfactant transport problem on rectangular domain, discretised 
@@ -1115,7 +1115,7 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n_element = Bulk_mesh_pt->nelement();
@@ -1126,7 +1126,7 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
  some_file.close();
 
  //Output the interface
- sprintf(filename,"%s/int%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/int%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 

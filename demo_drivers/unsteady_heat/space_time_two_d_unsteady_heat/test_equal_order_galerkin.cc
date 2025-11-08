@@ -40,9 +40,9 @@ using namespace oomph;
 
 using namespace std;
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //======start_of_GlobalParameters==========================================
 /// Global parameters for the problem
@@ -98,9 +98,9 @@ namespace GlobalParameters
   /// ---------------------------Miscellaneous-----------------------------
 } // End of GlobalParameters
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //======start_of_SinSolution===============================================
 /// Namespace for forced exact solution for UnsteadyHeat equation
@@ -158,9 +158,9 @@ namespace SinSolution
   } // End of get_source
 } // End of SinSolution
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //======start_of_UnsteadyHeatProblem========================================
 /// UnsteadyHeat problem
@@ -896,7 +896,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   if (GlobalParameters::Apply_time_periodic_boundary_conditions)
   {
     // Output the (numerically) approximated solution
-    sprintf(filename,"%s/soln%s%i.dat",
+    snprintf(filename, sizeof(filename), "%s/soln%s%i.dat",
             GlobalParameters::Doc_info.directory().c_str(),
             filename_suffix.c_str(),
             GlobalParameters::Doc_info.number());
@@ -905,7 +905,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   else
   {
     // Output the (numerically) approximated solution
-    sprintf(filename,"%s/soln_ic%i.dat",
+    snprintf(filename, sizeof(filename), "%s/soln_ic%i.dat",
             GlobalParameters::Doc_info.directory().c_str(),
             GlobalParameters::Doc_info.number());
   }
@@ -923,7 +923,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   // Output exact solution
   //----------------------
   // Output the exact solution
-  sprintf(filename,"%s/exact_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 
@@ -949,7 +949,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   double norm=0.0, error=0.0;
 
   // Output the error
-  sprintf(filename,"%s/error%s%i.dat",
+  snprintf(filename, sizeof(filename), "%s/error%s%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           filename_suffix.c_str(),
           GlobalParameters::Doc_info.number());
@@ -984,9 +984,9 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   GlobalParameters::Doc_info.number()++;
 } // End of doc_solution
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //======start_of_main=====================================================
 /// Driver code for unsteady heat equation
@@ -1102,4 +1102,9 @@ int main(int argc, char *argv[])
   oomph_info << "\n3D space-time simulation complete!"
              << "\nTotal time for simulation [sec]: "
              << TimingHelpers::timer()-timer_s << "\n" << std::endl;
+
+#ifdef OOMPH_HAS_MPI
+  // Finalise MPI
+  MPI_Helpers::finalize();
+#endif
 } // End of main

@@ -23,12 +23,15 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_BACKWARD_STEP_MESH_TEMPLATE_CC
-#define OOMPH_BACKWARD_STEP_MESH_TEMPLATE_CC
+#ifndef OOMPH_BACKWARD_STEP_MESH_TEMPLATE_HEADER
+#define OOMPH_BACKWARD_STEP_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_BACKWARD_STEP_MESH_HEADER
+#error __FILE__ should only be included from backward_step_mesh.h.
+#endif // OOMPH_BACKWARD_STEP_MESH_HEADER
 
 #include <set>
 #include <map>
-#include "backward_step_mesh.template.h"
 
 namespace oomph
 {
@@ -77,7 +80,6 @@ namespace oomph
         }
       }
     }
-
 
     // By default nobody's claiming the nodes; also store old
     // boundary ids
@@ -159,7 +161,6 @@ namespace oomph
         this->add_boundary_node(2, el_pt->node_pt(jnod));
       }
     }
-
 
     // Kill redundant elements
     this->Element_pt.clear();

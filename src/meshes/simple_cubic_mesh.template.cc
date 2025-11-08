@@ -23,11 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SIMPLE_CUBIC_MESH_TEMPLATE_CC
-#define OOMPH_SIMPLE_CUBIC_MESH_TEMPLATE_CC
+#ifndef OOMPH_SIMPLE_CUBIC_MESH_TEMPLATE_HEADER
+#define OOMPH_SIMPLE_CUBIC_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_SIMPLE_CUBIC_MESH_HEADER
+#error __FILE__ should only be included from simple_cubic_mesh.h.
+#endif // OOMPH_SIMPLE_CUBIC_MESH_HEADER
 
 // OOMPH-LIB Header
-#include "simple_cubic_mesh.template.h"
 
 namespace oomph
 {
@@ -208,7 +211,6 @@ namespace oomph
       }
     }
 
-
     //---------------------------------------------------------------------
 
     // Loop over the other node columns in the z direction
@@ -327,7 +329,6 @@ namespace oomph
         }
       }
     }
-
 
     //----------------------------------------------------------------------
 
@@ -761,7 +762,6 @@ namespace oomph
       }
     }
 
-
     // ALL CENTRAL ELEMENT ROWS (WE ARE STILL IN THE LAYER z=0)
     //------------------------
 
@@ -828,7 +828,6 @@ namespace oomph
           // Get the fractional position of the node
           finite_element_pt(element_num)
             ->local_fraction_of_node(local_node_num, s_fraction);
-
 
           // Set the position of the node
           Node_pt[node_count]->x(0) = Xmin + el_length[0] * s_fraction[0];
@@ -1021,7 +1020,6 @@ namespace oomph
 
       } // End of loop over elements in row
 
-
       // Do final element in row
 
       // Allocate memory for element
@@ -1089,7 +1087,6 @@ namespace oomph
         // Get the fractional position of the node
         finite_element_pt(element_num)
           ->local_fraction_of_node(local_node_num, s_fraction);
-
 
         // Set the position of the node
         Node_pt[node_count]->x(0) = Xmax;
@@ -1181,16 +1178,12 @@ namespace oomph
           node_count++;
         } // End of loop over rows of nodes in the element
 
-
       } // End of the 3dimension loop
-
 
     } // End of loop over rows of elements
 
-
     // FINAL ELEMENT ROW (IN THE z=0 LAYER)
     //=================
-
 
     // FIRST ELEMENT IN UPPER ROW (upper left corner)
     //----------------------------------------------
@@ -1451,12 +1444,10 @@ namespace oomph
         // Add the node to the boundary 3
         add_boundary_node(3, Node_pt[node_count]);
 
-
         // Increment the node number
         node_count++;
       }
     }
-
 
     // Now loop over the rest of the elements in the row, apart from the last
     // (first plane z = 0)
@@ -1543,7 +1534,6 @@ namespace oomph
         // Increment the node number
         node_count++;
       }
-
 
       // Jump in the third dimension
 
@@ -1634,7 +1624,6 @@ namespace oomph
 
     } // End of loop over central elements in row
 
-
     // FINAL ELEMENT IN ROW (upper right corner) IN LAYER z = 0
     //--------------------------------------------------------
 
@@ -1711,7 +1700,6 @@ namespace oomph
       add_boundary_node(0, Node_pt[node_count]);
       add_boundary_node(2, Node_pt[node_count]);
 
-
       // Increment the node number
       node_count++;
 
@@ -1747,7 +1735,6 @@ namespace oomph
       // Add the node to the boundaries 0 nd 3
       add_boundary_node(0, Node_pt[node_count]);
       add_boundary_node(3, Node_pt[node_count]);
-
 
       // Increment the node number
       node_count++;
@@ -1925,12 +1912,10 @@ namespace oomph
 
     // END OF THE FIRST LAYER
 
-
     //----------------------------------------------------------------------------------------------------------------------------
     // ***************************************NOW WE MAKE ALL THE INTREMEDIATE
     // LAYERS**********************************************
     //----------------------------------------------------------------------------------------------------------------------------
-
 
     for (unsigned k = 1; k < (Nz - 1); k++) // good loop for the diferent layers
     // for(unsigned k=1;k<Nz;k++)  // bad loop for testing the hole mesh but the
@@ -1952,7 +1937,6 @@ namespace oomph
               ->node_pt(l2 + n_p * l1 + n_p * n_p * (n_p - 1));
         }
       }
-
 
       // Loop over the other node columns in the z direction
 
@@ -2068,7 +2052,6 @@ namespace oomph
             Node_pt[node_count]->x(2) =
               Zmin + el_length[2] * (k + s_fraction[2]);
 
-
             // No boundary
 
             // Increment the node number
@@ -2076,7 +2059,6 @@ namespace oomph
           }
         }
       }
-
 
       //----------------------------------------------------------------------
 
@@ -2186,7 +2168,6 @@ namespace oomph
       // MY FINAL ELEMENT IN FIRST ROW (right corner)
       //-----------------------------------------------
 
-
       // Allocate memory for new element
       element_num = Nx - 1 + k * Nx * Ny;
       Element_pt[element_num] = new ELEMENT;
@@ -2201,7 +2182,6 @@ namespace oomph
               ->node_pt(l2 + n_p * l1 + (n_p - 1) * n_p * n_p);
         }
       }
-
 
       // Loop over the other node columns in the z direction
       for (unsigned l3 = 1; l3 < n_p; l3++)
@@ -2324,7 +2304,6 @@ namespace oomph
           finite_element_pt(element_num)
             ->local_fraction_of_node(local_node_num, s_fraction);
 
-
           // Set the position of the node
           Node_pt[node_count]->x(0) = Xmax;
           Node_pt[node_count]->x(1) = Ymin + el_length[1] * s_fraction[1];
@@ -2337,7 +2316,6 @@ namespace oomph
           node_count++;
         }
       }
-
 
       // ALL CENTRAL ELEMENT ROWS
       //------------------------
@@ -2500,7 +2478,6 @@ namespace oomph
                 finite_element_pt(element_num)
                   ->local_fraction_of_node(local_node_num, s_fraction);
 
-
                 // Set the position of the node
                 Node_pt[node_count]->x(0) =
                   Xmin + el_length[0] * (j + s_fraction[0]);
@@ -2508,7 +2485,6 @@ namespace oomph
                   Ymin + el_length[1] * (i + s_fraction[1]);
                 Node_pt[node_count]->x(2) =
                   Zmin + el_length[2] * (k + s_fraction[2]);
-
 
                 // No boundaries
                 // Increment the node number
@@ -2518,7 +2494,6 @@ namespace oomph
           }
 
         } // End of loop over elements in row
-
 
         // Do final element in row
 
@@ -2537,7 +2512,6 @@ namespace oomph
                 ->node_pt(l2 + n_p * l1 + (n_p - 1) * n_p * n_p);
           }
         }
-
 
         // We go to the third dimension
         for (unsigned l3 = 1; l3 < n_p; l3++)
@@ -2622,16 +2596,12 @@ namespace oomph
             node_count++;
           } // End of loop over rows of nodes in the element
 
-
         } // End of the 3dimension loop
-
 
       } // End of loop over rows of elements
 
-
       // FINAL ELEMENT ROW (IN INTERMIDIATE  LAYERS)
       //=================
-
 
       // FIRST ELEMENT IN UPPER ROW (upper left corner)
       //----------------------------------------------
@@ -2786,7 +2756,6 @@ namespace oomph
         }
       }
 
-
       // Now loop over the rest of the elements in the row, apart from the last
       for (unsigned j = 1; j < (Nx - 1); j++)
       {
@@ -2902,7 +2871,6 @@ namespace oomph
 
       } // End of loop over central elements in row
 
-
       // FINAL ELEMENT IN ROW (upper right corner)
       //-----------------------------------------
 
@@ -2923,7 +2891,6 @@ namespace oomph
       }
 
       // We jump to the third dimension
-
 
       for (unsigned l3 = 1; l3 < n_p; l3++)
       {
@@ -2960,7 +2927,6 @@ namespace oomph
             // Get the fractional position of the node
             finite_element_pt(element_num)
               ->local_fraction_of_node(local_node_num, s_fraction);
-
 
             // Set the position of the node
             Node_pt[node_count]->x(0) =
@@ -3072,14 +3038,12 @@ namespace oomph
 
     } // End loop of the elements layer
 
-
     // END OF THE INTERMEDIATE LAYERS
 
     // ----------------------------------------------------------------------------------
     //  ****************BEGINNING OF THE LAST
     //  LAYER**************************************
     // ----------------------------------------------------------------------------------
-
 
     // FIRST ELEMENT OF THE UPPER LAYER
     //----------------------------------
@@ -3097,7 +3061,6 @@ namespace oomph
             ->node_pt(l2 + n_p * l1 + n_p * n_p * (n_p - 1));
       }
     }
-
 
     // Loop over the other node columns in the z direction but the last
 
@@ -3118,7 +3081,6 @@ namespace oomph
       // Get the fractional position of the node
       finite_element_pt(element_num)
         ->local_fraction_of_node(local_node_num, s_fraction);
-
 
       // Set the position of the node
       Node_pt[node_count]->x(0) = Xmin;
@@ -3149,7 +3111,6 @@ namespace oomph
         // Get the fractional position of the node
         finite_element_pt(element_num)
           ->local_fraction_of_node(local_node_num, s_fraction);
-
 
         // Set the position of the node
         Node_pt[node_count]->x(0) = Xmin + el_length[0] * s_fraction[0];
@@ -3449,7 +3410,6 @@ namespace oomph
         }
       }
 
-
       // Top nodes
 
       // First node is same as neighbouring element
@@ -3529,10 +3489,8 @@ namespace oomph
       }
     } // End loop of first row of elements
 
-
     // MY FINAL ELEMENT IN THE FIRST ROW OF THE UPPER LAYER (right corner)
     //--------------------------------------------------------------------
-
 
     // Allocate memory for new element
     element_num = Nx - 1 + (Nz - 1) * Nx * Ny;
@@ -3548,7 +3506,6 @@ namespace oomph
             ->node_pt(l2 + n_p * l1 + (n_p - 1) * n_p * n_p);
       }
     }
-
 
     // Loop over the other node columns in the z direction but the last
     for (unsigned l3 = 1; l3 < (n_p - 1); l3++)
@@ -3815,11 +3772,9 @@ namespace oomph
       add_boundary_node(2, Node_pt[node_count]);
       add_boundary_node(5, Node_pt[node_count]);
 
-
       // Increment the node number
       node_count++;
     }
-
 
     // ALL CENTRAL ELEMENT ROWS OF THE TOP  LAYER
     //------------------------------------------
@@ -3997,7 +3952,6 @@ namespace oomph
         }
       }
 
-
       // Now loop over the rest of the elements in the row, apart from the last
       for (unsigned j = 1; j < (Nx - 1); j++)
       {
@@ -4055,7 +4009,6 @@ namespace oomph
               // Get the fractional position of the node
               finite_element_pt(element_num)
                 ->local_fraction_of_node(local_node_num, s_fraction);
-
 
               // Set the position of the node
               Node_pt[node_count]->x(0) =
@@ -4125,9 +4078,7 @@ namespace oomph
           }
         }
 
-
       } // End of loop over elements in row
-
 
       // Do final element in row
 
@@ -4146,7 +4097,6 @@ namespace oomph
               ->node_pt(l2 + n_p * l1 + (n_p - 1) * n_p * n_p);
         }
       }
-
 
       // We go to the third dimension but we do not reach the top
       for (unsigned l3 = 1; l3 < (n_p - 1); l3++)
@@ -4230,7 +4180,6 @@ namespace oomph
           node_count++;
         } // End of loop over rows of nodes in the element
 
-
       } // End of the 3dimension loop
 
       // Now the top nodes
@@ -4313,13 +4262,10 @@ namespace oomph
         node_count++;
       } // End of loop over rows of nodes in the element
 
-
     } // End of loop over rows of elements
-
 
     // FINAL ELEMENT ROW (IN TOP  LAYER)
     //===========================================
-
 
     // FIRST ELEMENT IN UPPER ROW (upper left corner)
     //----------------------------------------------
@@ -4609,7 +4555,6 @@ namespace oomph
       node_count++;
     }
 
-
     // Now loop over the rest of the elements in the row, apart from the last
     for (unsigned j = 1; j < (Nx - 1); j++)
     {
@@ -4810,9 +4755,7 @@ namespace oomph
         node_count++;
       }
 
-
     } // End of loop over central elements in row
-
 
     // LAST ELEMENT (Really!!)
     //-----------------------------------------
@@ -4911,7 +4854,6 @@ namespace oomph
         // Add the node to the boundary 2
         add_boundary_node(2, Node_pt[node_count]);
 
-
         // Increment the node number
         node_count++;
 
@@ -4985,9 +4927,7 @@ namespace oomph
       node_count++;
     }
 
-
     // Now the top nodes
-
 
     // The first row is copied from the lower element
     for (unsigned l2 = 0; l2 < n_p; l2++)
@@ -5098,7 +5038,6 @@ namespace oomph
       add_boundary_node(3, Node_pt[node_count]);
       add_boundary_node(5, Node_pt[node_count]);
 
-
       // Increment the node number
       node_count++;
     }
@@ -5131,12 +5070,10 @@ namespace oomph
     // Increment the node number
     node_count++;
 
-
     // Setup lookup scheme that establishes which elements are located
     // on the mesh boundaries
     setup_boundary_element_info();
   }
-
 
 } // namespace oomph
 

@@ -696,7 +696,7 @@ namespace oomph
       }
 
       // We need boundary coordinates!
-      if (!Boundary_coordinate_exists[b])
+      if (!boundary_coordinate_exists(b))
       {
         reason << "-- no boundary coordinates were set up\n";
         do_it = false;
@@ -939,7 +939,8 @@ namespace oomph
         some_element_is_inverted = true;
         char filename[100];
         std::ofstream some_file;
-        sprintf(filename, "overly_distorted_element%i.dat", count);
+        snprintf(
+          filename, sizeof(filename), "overly_distorted_element%i.dat", count);
         some_file.open(filename);
         unsigned nnod_1d = el_pt->nnode_1d();
         el_pt->output(some_file, nnod_1d);
@@ -961,7 +962,10 @@ namespace oomph
         }
 
         // Plot
-        sprintf(filename, "orig_overly_distorted_element%i.dat", count);
+        snprintf(filename,
+                 sizeof(filename),
+                 "orig_overly_distorted_element%i.dat",
+                 count);
         some_file.open(filename);
         el_pt->output(some_file, nnod_1d);
         some_file.close();
@@ -1003,9 +1007,9 @@ namespace oomph
   }
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
 
 } // namespace oomph

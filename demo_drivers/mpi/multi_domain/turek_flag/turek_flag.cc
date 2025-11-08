@@ -357,9 +357,9 @@ namespace Global_Parameters
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -825,13 +825,6 @@ TurekProblem(const double &length,
       }
     } // done automatic application of no-slip
   } // end of FSI setup
-
- // Use SuperLU_dist as the solver
- linear_solver_pt() = new SuperLUSolver;
- static_cast<SuperLUSolver*>(linear_solver_pt())
-  ->set_solver_type(SuperLUSolver::Distributed);
- static_cast<SuperLUSolver*>(linear_solver_pt())
-  ->use_distributed_solve_in_superlu_dist();
 
  // Assign equation numbers
  cout << assign_eqn_numbers() << std::endl; 
@@ -1340,14 +1333,14 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
  unsigned n_plot = 5; 
 
  // Output solid solution
- sprintf(filename,"%s/solid_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
  some_file.close();
  
  // Output fluid solution
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  fluid_mesh_pt()->output(some_file,n_plot);
@@ -1355,7 +1348,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
 
 
 //Output the traction
- sprintf(filename,"%s/traction%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
 // Loop over the traction meshes
@@ -1450,7 +1443,7 @@ int main(int argc, char* argv[])
  ofstream trace_file; 
  char filename[100];
  doc_info.set_directory("RESLT_TUREK");
- sprintf(filename,"%s/trace_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/trace_on_proc%i.dat",doc_info.directory().c_str(),
          problem.communicator_pt()->my_rank());
  trace_file.open(filename);
  
@@ -1496,7 +1489,7 @@ int main(int argc, char* argv[])
    Vector<unsigned> in_element_partition(n_partition,0);
 
    // Get partition from file
-   sprintf(filename,"turek_flag_partition.dat");
+   snprintf(filename, sizeof(filename), "turek_flag_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_partition;e++)

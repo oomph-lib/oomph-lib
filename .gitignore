@@ -17,6 +17,9 @@
 # Unignore all directories
 !*/
 # ---------------------------------------------------------------------
+# Unignore Dockerfiles
+!Dockerfile
+
 # Compiled files
 *.d
 *.slo
@@ -60,18 +63,29 @@ tags
 TAGS
 .tags
 
-# Build files
+# Automake build files
 Makefile
 Makefile.in
 *.deps/
 .libs/
 make_check_output
 
+# CMake build files
+CMakeFiles/
+Testing/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+DartConfiguration.tcl
+
 # Other version control systems
 .svn/
 
 # Callgrind output
 callgrind.out.*
+
+# CMake (track CMakePresets.json but not CMakeUserPresets.json)
+CMakeUserPresets.json
 
 ########################################
 # Oomph-lib specific generated files
@@ -95,18 +109,11 @@ doc/preconditioners/lgr_navier_stokes/lgr_navier_stokes_old.txt
 doc/preconditioners/lgr_navier_stokes/lgr_navier_stokes_old2.txt
 *.swo
 
-# User drivers should go in your own version control I guess
-user_drivers/
+# Ignore everything under user_drivers/
+user_drivers/*
 
-# private OOMPH-LIB directory configure lists are automatically generated.
-config/configure.ac_scripts/private.dir_list
-config/configure.ac_scripts/private_user_drivers.dir_list
-config/configure.ac_scripts/private_user_src.dir_list
-config/configure.ac_scripts/makefile_list
-config/configure.ac_scripts/new_makefile_list
-
-# So is the automake init command
-config/configure.ac_scripts/automake_init_command_file
+# ..but NOT joe_cool
+!user_drivers/joe_cool/
 
 # Demo drivers log output
 Validation/
@@ -114,40 +121,13 @@ validation.log
 validate_sh_timing_generated_by_make_check.dat
 
 # Build crap
-config/configure.ac_scripts/user_drivers.dir_list
-config/configure.ac_scripts/user_drivers.dir_list.backup
-config/configure_options/current
-make_check_output
-aclocal.m4
-autogen_fresh.dat
 build/
-autom4te.cache/*
-autom4te.cache/
-configure.scan
-config.guess
-config.h
-config.h.in
-config.log
-config.status*
-config.sub
-configure
-depcomp
-install-sh
-libtool
-ltmain.sh
-missing
-old_symbolic_links.txt
-oomph-lib-config.h
-stamp-h1
-config.cache
-doc/the_distribution/joe_cool_makefile.am
-doc/the_distribution/linked_make_file.am
-compile
 src/generic/mumps_module.mod
 
+# Installation
+**/install/
+
 # Some binaries/scripts that are generated
-external_distributions/hypre/build_script.bash
-external_distributions/trilinos/build_script.bash
 bin/txt2h.sh
 
 # Hypre/Trilinos build files
@@ -155,7 +135,6 @@ external_distributions/hypre/hypre-*
 external_distributions/hypre/hypre_default_installation/
 external_distributions/trilinos/trilinos-*
 external_distributions/trilinos/trilinos_default_installation/
-
 
 # boost:
 external_distributions/boost/boost_1_65_1/
@@ -180,7 +159,6 @@ external_distributions/mumps_and_scalapack/mumps/
 external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation/
 external_distributions/mumps_and_scalapack/scalapack/
 external_distributions/mumps_and_scalapack/scalapack_installer.tgz
-
 
 # hsl files which are automatically generated.
 external_src/oomph_hsl/frontal.f
@@ -277,13 +255,11 @@ src/space_time/space_time_unsteady_heat/galerkin_equal_order/space_time_unsteady
 src/space_time/space_time_unsteady_heat/galerkin_petrov_equal_order/space_time_unsteady_heat_equal_order_galerkin_petrov.h
 src/space_time/space_time_unsteady_heat/galerkin_petrov_mixed_order/space_time_unsteady_heat_mixed_order_galerkin_petrov.h
 
-src/meshes/*mesh.h
 src/meshes/meshes.h
 src/meshes/mesh_clean.aux
 src/meshes/mesh_instructions.aux
 src/meshes/mesh_names.aux
 
-user_src/jack_cool/jack_cool.h
 
 # Auto-generated config header
 oomph-lib-config.h
@@ -316,3 +292,4 @@ $RECYCLE.BIN/
 *.[Cc]ache
 # but keep track of *directories* ending in .cache
 !?*.[Cc]ache/
+

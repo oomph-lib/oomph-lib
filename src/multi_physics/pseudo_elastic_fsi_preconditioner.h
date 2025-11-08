@@ -27,13 +27,13 @@
 #define OOMPH_PSEUDO_ELASTIC_FSI_PRECONDITIONER
 
 // includes
-#include "../generic/problem.h"
-#include "../generic/block_preconditioner.h"
-#include "../generic/preconditioner.h"
-#include "../generic/SuperLU_preconditioner.h"
-#include "../generic/matrix_vector_product.h"
+#include "generic/problem.h"
+#include "generic/block_preconditioner.h"
+#include "generic/preconditioner.h"
+#include "generic/SuperLU_preconditioner.h"
+#include "generic/matrix_vector_product.h"
 #include "../navier_stokes/navier_stokes_preconditioners.h"
-#include "../generic/general_purpose_block_preconditioners.h"
+#include "generic/general_purpose_block_preconditioners.h"
 #include "pseudo_elastic_preconditioner.h"
 
 namespace oomph
@@ -44,7 +44,7 @@ namespace oomph
   /// Note:
   /// NavierStokesSchurComplementPreconditioner is applied to the Navier Stokes
   /// subsidiary system.
-  /// Default solid preconditioner is SuperLUPreconditioner.
+  /// Default solid preconditioner is ExactPreconditioner.
   /// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements
   /// The method get_dof_types_for_unknowns() must be implemented such that
   /// DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange
@@ -81,7 +81,8 @@ namespace oomph
       Pseudo_elastic_preconditioner_pt = new PseudoElasticPreconditioner();
 
       // using Schur complement preconditioner for NS
-      Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
+      Navier_stokes_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Navier_stokes_schur_complement_preconditioner_pt =
         new NavierStokesSchurComplementPreconditioner(problem_pt);
 
@@ -89,7 +90,8 @@ namespace oomph
       Using_default_solid_preconditioner = true;
 
       // default super lu
-      Solid_preconditioner_pt = new SuperLUPreconditioner;
+      Solid_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // create the matrix vector product operatrs
       Solid_fluid_matvec_pt = new MatrixVectorProduct;
@@ -195,7 +197,7 @@ namespace oomph
       Use_navier_stokes_schur_complement_preconditioner = true;
     }
 
-    /// Call to use the SuperLUPreconditioner is used for the
+    /// Call to use the ExactPreconditioner is used for the
     /// Navier Stokes subsidiary system.
     void disable_navier_stokes_schur_complement_preconditioner()
     {
@@ -249,7 +251,7 @@ namespace oomph
     unsigned Dim;
 
     /// If true the Navier Stokes Schur complement preconditioner
-    /// is used. Otherwise SuperLUPreconditioner is used for the
+    /// is used. Otherwise ExactPreconditioner is used for the
     /// Navier Stokes subsidiary system.
     bool Use_navier_stokes_schur_complement_preconditioner;
 

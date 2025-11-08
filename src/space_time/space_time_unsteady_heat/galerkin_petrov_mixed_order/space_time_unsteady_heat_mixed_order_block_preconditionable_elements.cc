@@ -26,9 +26,9 @@
 // Non-inline functions for BlockPrecSpaceTimeUnsteadyHeat elements
 #include "space_time_unsteady_heat_mixed_order_block_preconditionable_elements.h"
 
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -104,7 +104,6 @@ namespace oomph
     } // for (unsigned i=NNODE_1D*NNODE_1D; i<n_node; i++)
   } // End of get_dof_numbers_for_unknowns
 
-
   //=====start_of_setup=========================================================
   /// The setup function...
   //============================================================================
@@ -177,7 +176,6 @@ namespace oomph
       } // if (local_eqn_number>=0)
     } // for (unsigned i=NNODE_1D*NNODE_1D; i<n_node; i++)
   } // End of get_dof_numbers_for_unknowns
-
 
   //====================================================================
   // Force build of templates

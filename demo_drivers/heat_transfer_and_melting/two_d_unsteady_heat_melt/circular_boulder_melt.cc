@@ -53,9 +53,9 @@ using namespace oomph;
 using namespace MathematicalConstants;
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
 
 //======start_of_ProblemParameters=====================
 /// Namespace for problem parameters
@@ -240,9 +240,9 @@ Y*cos(2.0*X*0.3141592653589793E1))*Ny;
 } // end of ExactSolution
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class=========================================
@@ -304,7 +304,7 @@ public:
    // Output flux with melt
    ofstream some_file;
    char filename[100];
-   sprintf(filename,"flux_with_melt_before.dat");
+   snprintf(filename, sizeof(filename), "flux_with_melt_before.dat");
    some_file.open(filename);
    unsigned nel=Left_surface_melt_mesh_pt->nelement();
    for (unsigned e=0;e<nel;e++)
@@ -357,7 +357,7 @@ public:
    // Output flux with melt
    ofstream some_file;
    char filename[100];
-   sprintf(filename,"flux_with_melt_after.dat");
+   snprintf(filename, sizeof(filename), "flux_with_melt_after.dat");
    some_file.open(filename);
    unsigned nel=Left_surface_melt_mesh_pt->nelement();
    for (unsigned e=0;e<nel;e++)
@@ -1112,7 +1112,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  npts=5;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -1120,7 +1120,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
@@ -1128,7 +1128,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  
  
  // Output contact elements
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_contact_mesh_pt->nelement();
@@ -1140,7 +1140,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output flux with melt
- sprintf(filename,"%s/flux_with_melt%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/flux_with_melt%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nel=Left_surface_melt_mesh_pt->nelement();
@@ -1153,7 +1153,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  
  
  // Output exact solution
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(
@@ -1162,7 +1162,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output exact position of melting line
- sprintf(filename,"%s/exact_height%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_height%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nplot=100;
@@ -1176,7 +1176,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output exact solution
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(
@@ -1185,7 +1185,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output exact position of melting line
- sprintf(filename,"%s/exact_height%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_height%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nplot=100;
@@ -1200,7 +1200,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
 
 
  // Output penetrator
- sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n=100;
@@ -1209,7 +1209,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
  
  // Output Number of Newton iterations in form that can be visualised
  // as vector in paraview
- sprintf(filename,"%s/newton_iter%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/newton_iter%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;
@@ -1227,9 +1227,9 @@ void MeltContactProblem<ELEMENT>::doc_solution()
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 

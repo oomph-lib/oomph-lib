@@ -44,9 +44,9 @@
 
 namespace oomph
 {
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
@@ -116,7 +116,8 @@ namespace oomph
     Mumps_struc_pt->ICNTL(4) = 2;
 
     // Write matrix
-    // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
+    // snprintf(Mumps_struc_pt->write_problem,
+    // sizeof(Mumps_struc_pt->write_problem), "/work/e173/e173/mheil/matrix");
 
     // Assembled matrix (rather than element-by_element)
     Mumps_struc_pt->ICNTL(5) = 0;
@@ -232,6 +233,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -257,6 +259,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
 #endif
 
@@ -603,6 +606,7 @@ namespace oomph
     double t_start = TimingHelpers::timer();
 
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -628,6 +632,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
     // Initialised?
     if (!Mumps_is_initialised)
@@ -743,12 +748,14 @@ namespace oomph
       tmp_rhs[j] = Mumps_struc_pt->rhs[j];
     }
 
+#ifdef OOMPH_HAS_MPI
     // Broadcast the result which is only held on root
     MPI_Bcast(&tmp_rhs[0],
               ndof,
               MPI_DOUBLE,
               0,
               this->distribution_pt()->communicator_pt()->mpi_comm());
+#endif
 
     // If the result vector is distributed, re-distribute the
     // non-distributed tmp_rhs vector to match
@@ -801,6 +808,7 @@ namespace oomph
                           DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
@@ -828,6 +836,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -969,6 +978,7 @@ namespace oomph
   void MumpsSolver::solve(Problem* const& problem_pt, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (problem_pt->communicator_pt()->mpi_comm() != MPI_COMM_WORLD)
@@ -993,6 +1003,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -1080,6 +1091,7 @@ namespace oomph
   void MumpsSolver::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -1104,6 +1116,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Store starting time for solve

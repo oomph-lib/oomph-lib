@@ -460,13 +460,13 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 
 
  // Output solution, bulk elements followed by surface elements
- /*sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ /*snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();*/
  //Change the file name and output surface in separate file
- sprintf(filename,"%s/surface%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/surface%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Surface_mesh_pt->output(some_file,npts);
@@ -511,7 +511,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::unsteady_run(const unsigned& nstep)
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  Trace_file << "VARIABLES=\"time\",";

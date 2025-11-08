@@ -80,9 +80,9 @@ namespace TestSoln
 }
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -426,7 +426,7 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  build_global_mesh();
 
  char filename[100];
- sprintf(filename, "RESLT/trace.dat");
+ snprintf(filename, sizeof(filename),  "RESLT/trace.dat");
  Trace_file.open(filename);
 
  oomph_info << "Number of equations: "
@@ -547,7 +547,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  // Number of plot points
  unsigned npts = 5;
  
- sprintf(filename,"RESLT/soln%i-%f.dat",Doc_info.number(),Element_area);
+ snprintf(filename, sizeof(filename), "RESLT/soln%i-%f.dat",Doc_info.number(),Element_area);
  some_file.open(filename);
  this->My_mesh_pt->output(some_file,npts); 
  some_file << "TEXT X = 22, Y = 92, CS=FRAME T = \"" 
@@ -556,7 +556,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  
  // Output boundaries
  //------------------
- sprintf(filename,"RESLT/boundaries%i-%f.dat",Doc_info.number(),Element_area);
+ snprintf(filename, sizeof(filename), "RESLT/boundaries%i-%f.dat",Doc_info.number(),Element_area);
  some_file.open(filename);
  My_mesh_pt->output_boundaries(some_file);
  some_file.close();
@@ -564,7 +564,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
 
  // Output along radial boundary
  // ----------------------------
- sprintf(filename,"RESLT/radial_soln%i-%f.dat",Doc_info.number(),Element_area);
+ snprintf(filename, sizeof(filename), "RESLT/radial_soln%i-%f.dat",Doc_info.number(),Element_area);
  some_file.open(filename);
  for(unsigned b = Inner_boundary2; b <= Inner_boundary5; b++)
   {
@@ -601,7 +601,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
    for (unsigned r = 0; r < n_region; r++)
     {
      //Attempt to output elements in different regions
-     sprintf(filename,"RESLT/region%i%i-%f.dat",r,Doc_info.number(),
+     snprintf(filename, sizeof(filename), "RESLT/region%i%i-%f.dat",r,Doc_info.number(),
        Element_area);
      some_file.open(filename);
      unsigned nel = My_mesh_pt->nregion_element(r);
@@ -617,7 +617,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  double bubble_volume = 0;
  if (n_region > 1)
   {
-   sprintf(filename,"RESLT/bubble_volume%i.dat",Doc_info.number());
+   snprintf(filename, sizeof(filename), "RESLT/bubble_volume%i.dat",Doc_info.number());
    some_file.open(filename);
    unsigned n_inner_el;
    unsigned n_bubble_regions = Bubble_regions.size();
@@ -644,7 +644,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  //---------------------------------------------------
  //double error,norm,dummy_error,zero_norm;
  double dummy_error,zero_norm;
- sprintf(filename,"RESLT/error%i-%f.dat",Doc_info.number(),Element_area);
+ snprintf(filename, sizeof(filename), "RESLT/error%i-%f.dat",Doc_info.number(),Element_area);
  some_file.open(filename);
  
  My_mesh_pt->compute_error(some_file,TestSoln::zero,

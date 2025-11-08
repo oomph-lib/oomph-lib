@@ -98,9 +98,9 @@ public:
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -290,7 +290,7 @@ void CompressedSquareProblem<ELEMENT>::doc_solution(const bool& incompress)
  unsigned n_plot = 5; 
 
  // Output shape of and stress in deformed body
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,n_plot);
@@ -305,7 +305,7 @@ void CompressedSquareProblem<ELEMENT>::doc_solution(const bool& incompress)
 
  // Output exact solution for linear elasticity
  // -------------------------------------------
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nelem=mesh_pt()->nelement(); 
@@ -382,12 +382,12 @@ void CompressedSquareProblem<ELEMENT>::run_it(const int& i_case,
 
  // Set output directory
  char dirname[100];   
- sprintf(dirname,"RESLT%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT%i",i_case);
  Doc_info.set_directory(dirname);
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
 
 

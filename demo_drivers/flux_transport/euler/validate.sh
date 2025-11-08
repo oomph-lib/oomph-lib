@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -36,18 +36,18 @@ cat RESLT_1D/sod_100_time0.2.dat > 1d_sod.dat
 cat RESLT_1D/lax_100_time0.2.dat > 1d_lax.dat
 
 echo "Sod problem " >> validation.log
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/1d_sod.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/1d_sod.dat.gz \
     1d_sod.dat  0.1 3.0e-12 >> validation.log
 fi
 
 echo "Lax problem " >> validation.log
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/1d_lax.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/1d_lax.dat.gz \
     1d_lax.dat  0.1 3.0e-12 >> validation.log
 fi
 
@@ -67,10 +67,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_2D/trace_disc.dat RESLT_2D/disc_256_time0.05.dat > 2d_euler.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/2d_euler.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/2d_euler.dat.gz \
     2d_euler.dat  0.1 1.0e-12 >> validation.log
 fi
 
@@ -91,16 +91,16 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_couette/trace_disc.dat RESLT_couette/disc_64_time0.2.dat > couette.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/couette.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/couette.dat.gz \
     couette.dat  0.1 1.0e-12 >> validation.log
 fi
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -114,7 +114,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

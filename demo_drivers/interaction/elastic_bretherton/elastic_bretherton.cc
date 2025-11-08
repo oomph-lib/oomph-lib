@@ -2108,7 +2108,7 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned n_bulk=Bulk_mesh_pt->nbulk();
@@ -2148,8 +2148,8 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
  double fraction = 0.45;*/
 
  // Open trace file
- char filename[100], dumpfile[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ char filename[100], dumpfile[500];   
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  Trace_file << "VARIABLES=\"Ca\",";
@@ -2207,7 +2207,7 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
    if(step > 1)
     {
      using namespace Global_Physical_Variables;
-     sprintf(dumpfile,
+     snprintf(dumpfile, sizeof(dumpfile), 
              "%s/dump.Ca_%g.Bo_%g.Re_%g.H_%g.TW_%g_Frac_%g.Kstiff_%g.dat",
              doc_info.directory().c_str(),
              Ca,Bo,Re,H,Tube_width,

@@ -53,9 +53,9 @@ using namespace oomph;
 
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -78,9 +78,9 @@ namespace Global_Parameters
 
 }
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -597,7 +597,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc mesh quality (Ratio of max. edge length to min. height,
  /// so if it's very large it's BAAAAAD)
- sprintf(filename,"%s/mesh_quality%i.dat",
+ snprintf(filename,sizeof(filename),"%s/mesh_quality%i.dat",
          doc_info.directory().c_str(),
          doc_info.number()); 
  ofstream quality_file;
@@ -608,7 +608,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  
  // Output elements adjacent to outer boundary
  //-------------------------------------------
- sprintf(filename,"%s/elements_next_to_outer_boundary%i.dat",
+ snprintf(filename,sizeof(filename),"%s/elements_next_to_outer_boundary%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -630,7 +630,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_boundaries(some_file);
@@ -640,7 +640,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output volumes and things
  //--------------------------
  std::ofstream volume_file;
- sprintf(filename,"%s/volumes%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/volumes%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  volume_file.open(filename);
 
@@ -648,7 +648,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements in cube region
  //------------------------------------
  double volume_in_internal_region=0.0;
- sprintf(filename,"%s/soln_in_cube_region%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/soln_in_cube_region%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned region_id=Cube_region_id;
@@ -676,7 +676,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Output bulk elements in region 0
  //--------------------------------- 
  double volume_in_region0=0.0;
- sprintf(filename,"%s/soln_in_zero_region%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/soln_in_zero_region%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  region_id=0;
@@ -729,7 +729,7 @@ Exact_volume_of_internal_region;
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) 
@@ -740,7 +740,7 @@ Exact_volume_of_internal_region;
 
  // Output solution showing element outlines
  //-----------------------------------------
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) 
@@ -751,7 +751,7 @@ Exact_volume_of_internal_region;
 
  // Output solution for paraview
  //-----------------------------
- sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename), "%s/soln%i.vtu",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) 
@@ -762,7 +762,7 @@ Exact_volume_of_internal_region;
 
  // Output solution showing element outlines for paraview
  //------------------------------------------------------
- sprintf(filename,"%s/coarse_soln%i.vtu",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename), "%s/coarse_soln%i.vtu",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  if (do_bulk_output) 
@@ -774,7 +774,7 @@ Exact_volume_of_internal_region;
 
  // Get norm of solution
  //---------------------
- sprintf(filename,"%s/norm%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename), "%s/norm%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  double norm_soln=0.0;
@@ -877,6 +877,7 @@ int main(int argc, char* argv[])
     }
   }
 
+ MPI_Helpers::finalize();
 }
 
 

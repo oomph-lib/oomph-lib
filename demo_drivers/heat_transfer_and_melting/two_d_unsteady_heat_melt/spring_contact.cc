@@ -246,9 +246,9 @@ namespace GlobalFct
  }
 }
 
-/// ///////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================
@@ -304,7 +304,7 @@ int main(int argc, char **argv)
               << std::endl << std::endl;
    
    char name[100];   
-   sprintf(name,"landscape%i.dat",j);
+   snprintf(name, sizeof(name), "landscape%i.dat",j);
    std::string filename(name);
    GlobalFct::plot_it(filename);
    try
@@ -316,7 +316,7 @@ int main(int argc, char **argv)
                 << BlackBoxFDNewtonSolver::N_iter_taken++ << std::endl;
      
      char name[100];   
-     sprintf(name,"soln%i.dat",j);
+     snprintf(name, sizeof(name), "soln%i.dat",j);
      ofstream outfile;
      outfile.open(name);
      outfile <<  unknowns[0] << " " 

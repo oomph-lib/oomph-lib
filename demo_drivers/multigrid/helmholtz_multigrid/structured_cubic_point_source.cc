@@ -41,9 +41,9 @@
 using namespace std;
 using namespace oomph;
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 //================================================start_of_namespace======
 /// Namespace for the Helmholtz problem parameters
@@ -231,9 +231,9 @@ namespace GlobalParameters
  } // End of is_in_pinned_region 
 } // End of namespace
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 //======start_of_namespace================================================
 /// Returns a pointer to a smoother of the appropriate type
@@ -260,9 +260,9 @@ namespace Smoother_Factory_Function_Helper
  }
 } // End of Smoother_Factory_Function_Helper
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 //============================================start_of_problem_class======
 /// Problem class
@@ -765,7 +765,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
 
  // Output solution
  //-----------------
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -774,7 +774,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
  
  // Ouput exact solution
  //---------------------
- sprintf(filename,"%s/exact_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -783,7 +783,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
 
  // Output coarse solution
  //-----------------------
- sprintf(filename,"%s/coarse_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -792,7 +792,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
 
  // Compute error
  //--------------
- sprintf(filename,"%s/error%i.dat",
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
