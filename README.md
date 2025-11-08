@@ -21,7 +21,6 @@
         <th>Test platform</th>
         <th><a href="../../tree/main"><code>main</code></a></th>
         <th><a href="../../tree/development"><code>development</code></a></th>
-        <th><a href="../../tree/cmake-beta"><code>cmake-beta</code></a></th>
     </tr>
     <tr>
         <td>Ubuntu</td>
@@ -35,13 +34,6 @@
                 <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
         </td>
-        <td>
-          <div align="center">
-              <a href="../../actions/workflows/self-tests-ubuntu.yaml">
-                  <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=cmake-beta" style="vertical-align: middle">
-              </a>
-          </div>
-        </td>
     </tr>
     <tr>
         <td>macOS</td>
@@ -54,13 +46,6 @@
             <a href="../../actions/workflows/self-tests-macos.yaml">
                 <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
-        </td>
-        <td>
-          <div align="center">
-              <a href="../../actions/workflows/self-tests-macos.yaml">
-                  <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=cmake-beta" style="vertical-align: middle">
-              </a>
-          </div>
         </td>
     </tr>
     </table>

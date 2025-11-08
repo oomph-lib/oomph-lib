@@ -135,12 +135,6 @@ else()
   message(STATUS "Number of jobs for parallel make: ${OOMPH_NUM_JOBS}")
 endif()
 
-# Where to download files from and where to install to TODO: Upload HYPRE and
-# Trilinos here
-set(OOMPH_THIRD_PARTY_TAR_FILE_URL
-    "https://github.com/puneetmatharu/oomph-lib/releases/download/v3.0.0.pre-alpha"
-)
-
 # ----------------------------------[ MPI ]------------------------------------
 
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
