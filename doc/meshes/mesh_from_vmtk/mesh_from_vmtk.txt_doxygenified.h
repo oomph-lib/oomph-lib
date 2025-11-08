@@ -621,7 +621,7 @@ iliac.xda
 
 \c oomph-lib provides a conversion code 
 \code 
-bin/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+scripts/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 \endcode
 
 which uses the VMTK output mesh in "*.xda" format to generate a file 
@@ -760,5 +760,5 @@ are:
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

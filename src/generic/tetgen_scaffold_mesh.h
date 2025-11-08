@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,8 +30,12 @@
 #include "Telements.h"
 
 // Include the data structure from tetgen
-//#include "../../external_src/oomph_tetgen/tetgen.h"
+
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6/tetgen.h"
+#else
 #include "oomph_tetgen/tetgen.h"
+#endif
 
 namespace oomph
 {

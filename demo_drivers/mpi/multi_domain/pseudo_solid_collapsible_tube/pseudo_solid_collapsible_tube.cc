@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -158,14 +158,11 @@ namespace LSC_Preconditioner_Helper
  {
   HyprePreconditioner* hypre_preconditioner_pt
    = new HyprePreconditioner;
-  hypre_preconditioner_pt->set_amg_iterations(2);
-  hypre_preconditioner_pt->amg_using_simple_smoothing();
-  hypre_preconditioner_pt->amg_simple_smoother() = 0;
-  hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
-  hypre_preconditioner_pt->amg_strength() = 0.25;
-  hypre_preconditioner_pt->amg_coarsening() = 6;
-  hypre_preconditioner_pt->amg_damping() = 0.5;
-  hypre_preconditioner_pt->disable_doc_time();
+
+  // Use default Navier Stokes settings
+  Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+   static_cast<HyprePreconditioner*>(hypre_preconditioner_pt));
+
   return hypre_preconditioner_pt;
  }
 }
@@ -193,9 +190,9 @@ namespace Real_Solid_Preconditioner_Helper
 
 #endif
 
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -256,7 +253,7 @@ public:
        nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     }
-   this->Boundary_coordinate_exists[4]=true;
+   this->set_boundary_coordinate_exists(4);
    set_lagrangian_nodal_coordinates();
   }
 
@@ -300,9 +297,9 @@ public:
 };
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -336,9 +333,9 @@ public:
 };
  
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //===================================================================
@@ -429,9 +426,9 @@ namespace Global_Parameters
 } //end_of_namespace
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //===============start_of_problem_class===============================
@@ -911,7 +908,8 @@ PseudoElasticCollapsibleChannelProblem()
  Multi_domain_functions::Doc_boundary_coordinate_file.close();
 
  // Setup equation numbering scheme
- std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
+
 }
 
 
@@ -1648,7 +1646,7 @@ set_pseudo_elastic_fsi_solver()
   prec_pt->set_solid_preconditioner(solid_prec_pt);
 
 #ifdef OOMPH_HAS_HYPRE
-
+  
   solid_prec_pt->set_subsidiary_preconditioner_function
    (Real_Solid_Preconditioner_Helper::get_preconditioner);
 
@@ -1664,7 +1662,7 @@ set_pseudo_elastic_fsi_solver()
    f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 
 #ifdef OOMPH_HAS_HYPRE
-
+  
   f_prec_pt->set_subsidiary_preconditioner_function
    (LSC_Preconditioner_Helper::set_hypre_preconditioner);
 
@@ -1673,7 +1671,7 @@ set_pseudo_elastic_fsi_solver()
   ns_prec_pt->set_f_preconditioner(f_prec_pt);
   
 #ifdef OOMPH_HAS_HYPRE
-
+  
   // ns pressure poisson
   HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
   p_prec_pt->set_amg_iterations(2);
@@ -1693,9 +1691,9 @@ set_pseudo_elastic_fsi_solver()
   linear_solver_pt() = solver_pt;
  }
  
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1708,7 +1706,7 @@ int main(int argc, char* argv[])
                                                                 
 #ifdef OOMPH_HAS_MPI                                                    
    MPI_Helpers::init(argc,argv);                                          
-#endif         
+#endif
 
  // Switch off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
@@ -1728,10 +1726,10 @@ int main(int argc, char* argv[])
  std::ofstream output_stream;
  char filename[1000];
 #ifdef OOMPH_HAS_MPI
- sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/OUTPUT.%i",doc_info.directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
 #else
- sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),0);
+ snprintf(filename, sizeof(filename), "%s/OUTPUT.%i",doc_info.directory().c_str(),0);
 #endif
 
  output_stream.open(filename);
@@ -1842,10 +1840,10 @@ PseudoElasticCollapsibleChannelProblem
  // Steady run
  problem.steady_run(doc_info);
 
- // Unteady run
+ // Unsteady run
  problem.unsteady_run(doc_info);
 
-                                                         
+                                
 #ifdef OOMPH_HAS_MPI                                                    
  MPI_Helpers::finalize();
 #endif         

@@ -1,5 +1,5 @@
-\hypertarget{classoomph_1_1DocInfo}{}\doxysection{oomph\+::Doc\+Info Class Reference}
-\label{classoomph_1_1DocInfo}\index{oomph::DocInfo@{oomph::DocInfo}}
+\doxysection{oomph\+::Doc\+Info Class Reference}
+\hypertarget{classoomph_1_1DocInfo}{}\label{classoomph_1_1DocInfo}\index{oomph::DocInfo@{oomph::DocInfo}}
 
 
 Information for documentation of results\+: Directory and file number to enable output in the form RESLT/filename11.\+dat, say. Documentation can be switched on and off.  
@@ -9,61 +9,61 @@ Information for documentation of results\+: Directory and file number to enable 
 
 {\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1DocInfo_ad6e3252144b9a6e1a1b93a6b8ea51111}{Doc\+Info}} ()
-\begin{DoxyCompactList}\small\item\em Constructor. Default settings\+: Current directory, step `0', label=\char`\"{}\char`\"{}, full documentation enabled and output directory is required to exist when \mbox{\hyperlink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory()}} is called. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1}{Doc\+Info}} (const std\+::string \&\mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}})
+\begin{DoxyCompactList}\small\item\em Constructor. Default settings\+: Current directory, step `0', label="{}"{}, full documentation enabled and output directory is required to exist when \doxylink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory()} is called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1}{Doc\+Info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}})
 \begin{DoxyCompactList}\small\item\em Constructor with specific directory. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}} () const
+std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory}} (const std\+::string \&\mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}})
-\begin{DoxyCompactList}\small\item\em Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, throw and \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376}{enable\+\_\+doc}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}{directory}})
+\begin{DoxyCompactList}\small\item\em Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, throw and \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376}{enable\+\_\+doc}} ()
 \begin{DoxyCompactList}\small\item\em Enable documentation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338}{disable\+\_\+doc}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338}{disable\+\_\+doc}} ()
 \begin{DoxyCompactList}\small\item\em Disable documentation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}{is\+\_\+doc\+\_\+enabled}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}{is\+\_\+doc\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Are we documenting? \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1DocInfo_af27224b25da5b758442753f0947e62d4}{number}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1DocInfo_a9d9ce638a7834bbd4961779af426bf13}{number}} ()
 \begin{DoxyCompactList}\small\item\em Number used (e.\+g.) for labeling output files. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874}{number}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874}{number}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Number used (e.\+g.) for labeling output files. Const version. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093}{number\+\_\+as\+\_\+string}} () const
+std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093}{number\+\_\+as\+\_\+string}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Get number as a string (useful to completely avoid C-\/strings). \end{DoxyCompactList}\item 
-std\+::string \& \mbox{\hyperlink{classoomph_1_1DocInfo_a77320f779fab3075b36321aea72dc466}{label}} ()
+std\+::string \& \mbox{\hyperlink{classoomph_1_1DocInfo_a0ed2b6a12c476044ceb77a0d450ba43f}{label}} ()
 \begin{DoxyCompactList}\small\item\em String used (e.\+g.) for labeling output files. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2}{label}} () const
+std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2}{label}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em String used (e.\+g.) for labeling output files. Const version. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433}{enable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433}{enable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist}} ()
 \begin{DoxyCompactList}\small\item\em Call to throw an error if directory does not exist. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471}{disable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471}{disable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist}} ()
 \begin{DoxyCompactList}\small\item\em Call to issue a warning if the directory does not exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_a9538155b259c6b8f491b1cd49f9f055e}{Directory}}
 \begin{DoxyCompactList}\small\item\em Directory name. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098}{Doc\+\_\+flag}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098}{Doc\+\_\+flag}}
 \begin{DoxyCompactList}\small\item\em Doc or don\textquotesingle{}t? \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75}{Number}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75}{Number}}
 \begin{DoxyCompactList}\small\item\em Number to label output file, say. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1DocInfo_ad2bbc402589152ebb55c448a6272f469}{Label}}
 \begin{DoxyCompactList}\small\item\em String to label output file, say. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c}{Directory\+\_\+must\+\_\+exist}}
-\begin{DoxyCompactList}\small\item\em Boolean flag to decide response if an output directory doesn\textquotesingle{}t exist\+: If true, we terminate code execution by throwing an \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}} rather than just issuing a warning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c}{Directory\+\_\+must\+\_\+exist}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to decide response if an output directory doesn\textquotesingle{}t exist\+: If true, we terminate code execution by throwing an \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error} rather than just issuing a warning. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Information for documentation of results\+: Directory and file number to enable output in the form RESLT/filename11.\+dat, say. Documentation can be switched on and off. 
 
-Definition at line 498 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00508}{508}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1DocInfo_ad6e3252144b9a6e1a1b93a6b8ea51111}\label{classoomph_1_1DocInfo_ad6e3252144b9a6e1a1b93a6b8ea51111}} 
+\Hypertarget{classoomph_1_1DocInfo_ad6e3252144b9a6e1a1b93a6b8ea51111}\label{classoomph_1_1DocInfo_ad6e3252144b9a6e1a1b93a6b8ea51111} 
 \index{oomph::DocInfo@{oomph::DocInfo}!DocInfo@{DocInfo}}
 \index{DocInfo@{DocInfo}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{DocInfo()}{DocInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -71,17 +71,17 @@ Definition at line 498 of file oomph\+\_\+utilities.\+h.
 
 
 
-Constructor. Default settings\+: Current directory, step `0', label=\char`\"{}\char`\"{}, full documentation enabled and output directory is required to exist when \mbox{\hyperlink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory()}} is called. 
+Constructor. Default settings\+: Current directory, step `0', label="{}"{}, full documentation enabled and output directory is required to exist when \doxylink{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}{set\+\_\+directory()} is called. 
 
 
 
-Definition at line 504 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00514}{514}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1}\label{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1}} 
+\Hypertarget{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1}\label{classoomph_1_1DocInfo_ac3cf3fea5013b3505b59b9f3e15872f1} 
 \index{oomph::DocInfo@{oomph::DocInfo}!DocInfo@{DocInfo}}
 \index{DocInfo@{DocInfo}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{DocInfo()}{DocInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Doc\+Info\+::\+Doc\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{directory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Doc\+Info\+::\+Doc\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{directory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -89,12 +89,12 @@ Constructor with specific directory.
 
 
 
-Definition at line 514 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{524}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}\label{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}} 
+\Hypertarget{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a}\label{classoomph_1_1DocInfo_a85d58bcfce0a7b7cae461624e6fcd08a} 
 \index{oomph::DocInfo@{oomph::DocInfo}!directory@{directory}}
 \index{directory@{directory}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{directory()}{directory()}}
@@ -106,17 +106,21 @@ Output directory.
 
 
 
-Definition at line 524 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00534}{534}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+Solid\+Helpers\+::doc\+\_\+2\+D\+\_\+principal\+\_\+stress(), oomph\+::\+Z2\+Error\+Estimator\+::doc\+\_\+flux(), oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::doc\+\_\+solution(), oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::doc\+\_\+solution(), oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution(), oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Refineable\+Mesh\+Base\+::p\+\_\+refine\+\_\+uniformly(), oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Refineable\+Mesh\+Base\+::refine\+\_\+uniformly(), oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::refine\+\_\+uniformly(), and oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00607}{Directory}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338}\label{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338}} 
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8h_source_l00517}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00548}{oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l01245}{oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{solid__elements_8h_source_l02379}{oomph\+::\+Solid\+Helpers\+::doc\+\_\+2\+D\+\_\+principal\+\_\+stress()}}, \mbox{\hyperlink{error__estimator_8cc_source_l01803}{oomph\+::\+Z2\+Error\+Estimator\+::doc\+\_\+flux()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{mesh_8cc_source_l06470}{oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00478}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{biharmonic__problem_8cc_source_l00341}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{biharmonic__problem_8cc_source_l00810}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00990}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{octree_8cc_source_l05894}{oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{quadtree_8cc_source_l01318}{oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00533}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00294}{oomph\+::\+Refineable\+Mesh\+Base\+::p\+\_\+refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8cc_source_l00974}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}, \mbox{\hyperlink{mesh_8cc_source_l05621}{oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00271}{oomph\+::\+Refineable\+Mesh\+Base\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00598}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::refine\+\_\+uniformly()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l01656}{oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338}\label{classoomph_1_1DocInfo_a666a20817ab9c396b225d8652bc0a338} 
 \index{oomph::DocInfo@{oomph::DocInfo}!disable\_doc@{disable\_doc}}
 \index{disable\_doc@{disable\_doc}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{disable\_doc()}{disable\_doc()}}
-{\footnotesize\ttfamily void oomph\+::\+Doc\+Info\+::disable\+\_\+doc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Info\+::disable\+\_\+doc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -124,17 +128,21 @@ Disable documentation.
 
 
 
-Definition at line 542 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00552}{552}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Problem\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Mesh\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes(), oomph\+::\+Problem\+::distribute(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+Problem\+::doc\+\_\+errors(), oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Refineable\+Mesh\+Base\+::p\+\_\+refine\+\_\+uniformly(), oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly(), oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly\+\_\+and\+\_\+prune(), oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+Problem\+::read(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity(), oomph\+::\+Refineable\+Mesh\+Base\+::refine\+\_\+uniformly(), oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::refine\+\_\+uniformly(), oomph\+::\+Problem\+::refine\+\_\+uniformly(), oomph\+::\+Problem\+::refine\+\_\+uniformly\+\_\+and\+\_\+prune(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), oomph\+::\+Problem\+::self\+\_\+test(), and oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00610}{Doc\+\_\+flag}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471}\label{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471}} 
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00305}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00517}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{mesh_8h_source_l01720}{oomph\+::\+Mesh\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00699}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::classify\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+nodes()}}, \mbox{\hyperlink{problem_8cc_source_l00425}{oomph\+::\+Problem\+::distribute()}}, \mbox{\hyperlink{problem_8cc_source_l00445}{oomph\+::\+Problem\+::distribute()}}, \mbox{\hyperlink{mesh_8h_source_l01653}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{error__estimator_8h_source_l00056}{oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{error__estimator_8h_source_l00296}{oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{problem_8h_source_l01402}{oomph\+::\+Problem\+::load\+\_\+balance()}}, \mbox{\hyperlink{problem_8h_source_l01423}{oomph\+::\+Problem\+::load\+\_\+balance()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00112}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l03949}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00533}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{problem_8h_source_l02842}{oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00294}{oomph\+::\+Refineable\+Mesh\+Base\+::p\+\_\+refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02853}{oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02765}{oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02785}{oomph\+::\+Problem\+::p\+\_\+refine\+\_\+uniformly\+\_\+and\+\_\+prune()}}, \mbox{\hyperlink{problem_8h_source_l02272}{oomph\+::\+Problem\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes()}}, \mbox{\hyperlink{mesh_8h_source_l01675}{oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes()}}, \mbox{\hyperlink{problem_8cc_source_l12327}{oomph\+::\+Problem\+::read()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l02434}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}, \mbox{\hyperlink{problem_8h_source_l02745}{oomph\+::\+Problem\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00271}{oomph\+::\+Refineable\+Mesh\+Base\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00598}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02756}{oomph\+::\+Problem\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02680}{oomph\+::\+Problem\+::refine\+\_\+uniformly()}}, \mbox{\hyperlink{problem_8h_source_l02700}{oomph\+::\+Problem\+::refine\+\_\+uniformly\+\_\+and\+\_\+prune()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l01176}{oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471}\label{classoomph_1_1DocInfo_a7915567faf97d45702173ed2ee3ab471} 
 \index{oomph::DocInfo@{oomph::DocInfo}!disable\_error\_if\_directory\_does\_not\_exist@{disable\_error\_if\_directory\_does\_not\_exist}}
 \index{disable\_error\_if\_directory\_does\_not\_exist@{disable\_error\_if\_directory\_does\_not\_exist}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{disable\_error\_if\_directory\_does\_not\_exist()}{disable\_error\_if\_directory\_does\_not\_exist()}}
-{\footnotesize\ttfamily void oomph\+::\+Doc\+Info\+::disable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Info\+::disable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -142,13 +150,17 @@ Call to issue a warning if the directory does not exists.
 
 
 
-Definition at line 590 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00600}{600}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376}\label{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376}} 
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00622}{Directory\+\_\+must\+\_\+exist}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376}\label{classoomph_1_1DocInfo_a1a7842518e86de0f08d8dc130bee9376} 
 \index{oomph::DocInfo@{oomph::DocInfo}!enable\_doc@{enable\_doc}}
 \index{enable\_doc@{enable\_doc}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{enable\_doc()}{enable\_doc()}}
-{\footnotesize\ttfamily void oomph\+::\+Doc\+Info\+::enable\+\_\+doc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Info\+::enable\+\_\+doc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -156,13 +168,17 @@ Enable documentation.
 
 
 
-Definition at line 536 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00546}{546}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433}\label{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433}} 
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00610}{Doc\+\_\+flag}}.
+
+\Hypertarget{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433}\label{classoomph_1_1DocInfo_aaf51ae312c8e7726ddf1888f37f44433} 
 \index{oomph::DocInfo@{oomph::DocInfo}!enable\_error\_if\_directory\_does\_not\_exist@{enable\_error\_if\_directory\_does\_not\_exist}}
 \index{enable\_error\_if\_directory\_does\_not\_exist@{enable\_error\_if\_directory\_does\_not\_exist}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{enable\_error\_if\_directory\_does\_not\_exist()}{enable\_error\_if\_directory\_does\_not\_exist()}}
-{\footnotesize\ttfamily void oomph\+::\+Doc\+Info\+::enable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Info\+::enable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -170,13 +186,17 @@ Call to throw an error if directory does not exist.
 
 
 
-Definition at line 584 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00594}{594}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}\label{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}} 
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00622}{Directory\+\_\+must\+\_\+exist}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b}\label{classoomph_1_1DocInfo_a2ce90cf54f24b4ab523c624031fbb76b} 
 \index{oomph::DocInfo@{oomph::DocInfo}!is\_doc\_enabled@{is\_doc\_enabled}}
 \index{is\_doc\_enabled@{is\_doc\_enabled}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{is\_doc\_enabled()}{is\_doc\_enabled()}}
-{\footnotesize\ttfamily bool oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -184,17 +204,21 @@ Are we documenting?
 
 
 
-Definition at line 548 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00558}{558}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+Problem\+::doc\+\_\+errors(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Dummy\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh(), oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), and oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00610}{Doc\+\_\+flag}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a77320f779fab3075b36321aea72dc466}\label{classoomph_1_1DocInfo_a77320f779fab3075b36321aea72dc466}} 
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00305}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00548}{oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l01245}{oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{tree_8cc_source_l00432}{oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{problem_8cc_source_l14852}{oomph\+::\+Problem\+::doc\+\_\+errors()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00946}{oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{error__estimator_8h_source_l00560}{oomph\+::\+Dummy\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{octree_8cc_source_l05894}{oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{quadtree_8cc_source_l01318}{oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l03949}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{problem_8cc_source_l00974}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}, \mbox{\hyperlink{mesh_8cc_source_l05621}{oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l01656}{oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a0ed2b6a12c476044ceb77a0d450ba43f}\label{classoomph_1_1DocInfo_a0ed2b6a12c476044ceb77a0d450ba43f} 
 \index{oomph::DocInfo@{oomph::DocInfo}!label@{label}}
 \index{label@{label}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{label()}{label()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily std\+::string\& oomph\+::\+Doc\+Info\+::label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::string \& oomph\+::\+Doc\+Info\+::label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -202,13 +226,17 @@ String used (e.\+g.) for labeling output files.
 
 
 
-Definition at line 572 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00582}{582}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by oomph\+::\+Problem\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::doc\+\_\+solution(), and oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00616}{Label}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2}\label{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2}} 
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l16481}{oomph\+::\+Problem\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{mesh_8cc_source_l06470}{oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution()}}, \mbox{\hyperlink{biharmonic__problem_8cc_source_l00810}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l01656}{oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+to\+\_\+quadratic\+\_\+surface()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2}\label{classoomph_1_1DocInfo_a1814ba7e28fadb03a8a5387103ec38a2} 
 \index{oomph::DocInfo@{oomph::DocInfo}!label@{label}}
 \index{label@{label}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{label()}{label()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -220,13 +248,17 @@ String used (e.\+g.) for labeling output files. Const version.
 
 
 
-Definition at line 578 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00588}{588}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_af27224b25da5b758442753f0947e62d4}\label{classoomph_1_1DocInfo_af27224b25da5b758442753f0947e62d4}} 
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00616}{Label}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a9d9ce638a7834bbd4961779af426bf13}\label{classoomph_1_1DocInfo_a9d9ce638a7834bbd4961779af426bf13} 
 \index{oomph::DocInfo@{oomph::DocInfo}!number@{number}}
 \index{number@{number}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{number()}{number()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned\& oomph\+::\+Doc\+Info\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Doc\+Info\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -234,21 +266,21 @@ Number used (e.\+g.) for labeling output files.
 
 
 
-Definition at line 554 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00564}{564}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-References oomph\+::\+Global\+\_\+unsigned\+::\+Number.
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00613}{Number}}.
 
 
 
-Referenced by oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh(), oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes(), oomph\+::\+Problem\+::distribute(), oomph\+::\+Mesh\+::distribute(), oomph\+::\+Solid\+Helpers\+::doc\+\_\+2\+D\+\_\+principal\+\_\+stress(), oomph\+::\+Z2\+Error\+Estimator\+::doc\+\_\+flux(), oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::doc\+\_\+solution(), oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution(), oomph\+::\+Problem\+::load\+\_\+balance(), oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh(), oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh(), and oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes().
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00548}{oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l01245}{oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{problem_8cc_source_l00500}{oomph\+::\+Problem\+::distribute()}}, \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{solid__elements_8h_source_l02379}{oomph\+::\+Solid\+Helpers\+::doc\+\_\+2\+D\+\_\+principal\+\_\+stress()}}, \mbox{\hyperlink{error__estimator_8cc_source_l01803}{oomph\+::\+Z2\+Error\+Estimator\+::doc\+\_\+flux()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{mesh_8cc_source_l06470}{oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00478}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{biharmonic__problem_8cc_source_l00341}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00990}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{problem_8cc_source_l17268}{oomph\+::\+Problem\+::load\+\_\+balance()}}, \mbox{\hyperlink{octree_8cc_source_l05894}{oomph\+::\+Oc\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{quadtree_8cc_source_l01318}{oomph\+::\+Quad\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{problem_8cc_source_l00974}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}, and \mbox{\hyperlink{mesh_8cc_source_l05621}{oomph\+::\+Mesh\+::prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874}\label{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874}} 
+\Hypertarget{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874}\label{classoomph_1_1DocInfo_a2a09b3c3e22fd874570ffc97b0610874} 
 \index{oomph::DocInfo@{oomph::DocInfo}!number@{number}}
 \index{number@{number}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{number()}{number()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Doc\+Info\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Doc\+Info\+::number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -256,13 +288,13 @@ Number used (e.\+g.) for labeling output files. Const version.
 
 
 
-Definition at line 560 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00570}{570}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-References oomph\+::\+Global\+\_\+unsigned\+::\+Number.
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00613}{Number}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093}\label{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093}} 
+\Hypertarget{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093}\label{classoomph_1_1DocInfo_acb66c97dad89c6e9fb6334e9ac530093} 
 \index{oomph::DocInfo@{oomph::DocInfo}!number\_as\_string@{number\_as\_string}}
 \index{number\_as\_string@{number\_as\_string}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{number\_as\_string()}{number\_as\_string()}}
@@ -274,34 +306,34 @@ Get number as a string (useful to completely avoid C-\/strings).
 
 
 
-Definition at line 566 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00576}{576}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-References oomph\+::\+Global\+\_\+unsigned\+::\+Number, and oomph\+::\+String\+Conversion\+::to\+\_\+string().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00613}{Number}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}\label{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}} 
+\Hypertarget{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65}\label{classoomph_1_1DocInfo_a9800cf1d178162d521588e6e336a6e65} 
 \index{oomph::DocInfo@{oomph::DocInfo}!set\_directory@{set\_directory}}
 \index{set\_directory@{set\_directory}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{set\_directory()}{set\_directory()}}
-{\footnotesize\ttfamily void oomph\+::\+Doc\+Info\+::set\+\_\+directory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{directory }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Info\+::set\+\_\+directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{directory }\end{DoxyParamCaption})}
 
 
 
-Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, throw and \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. 
+Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, throw and \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}. 
 
-Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, die by throwing and \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. 
+Set output directory (we try to open a file in it to see if the directory exists -- if it doesn\textquotesingle{}t we\textquotesingle{}ll issue a warning -- or, if directory\+\_\+must\+\_\+exist()==true, die by throwing and \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}. 
 
-Definition at line 298 of file oomph\+\_\+utilities.\+cc.
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00306}{306}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
 
 
 
-References Directory, Directory\+\_\+must\+\_\+exist, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00607}{Directory}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00622}{Directory\+\_\+must\+\_\+exist}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a9538155b259c6b8f491b1cd49f9f055e}\label{classoomph_1_1DocInfo_a9538155b259c6b8f491b1cd49f9f055e}} 
+\Hypertarget{classoomph_1_1DocInfo_a9538155b259c6b8f491b1cd49f9f055e}\label{classoomph_1_1DocInfo_a9538155b259c6b8f491b1cd49f9f055e} 
 \index{oomph::DocInfo@{oomph::DocInfo}!Directory@{Directory}}
 \index{Directory@{Directory}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{Directory}{Directory}}
@@ -313,35 +345,35 @@ Directory name.
 
 
 
-Definition at line 597 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00607}{607}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by set\+\_\+directory().
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00534}{directory()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00306}{set\+\_\+directory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c}\label{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c}} 
+\Hypertarget{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c}\label{classoomph_1_1DocInfo_a3ff79aa3d627c27a94404607952d768c} 
 \index{oomph::DocInfo@{oomph::DocInfo}!Directory\_must\_exist@{Directory\_must\_exist}}
 \index{Directory\_must\_exist@{Directory\_must\_exist}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{Directory\_must\_exist}{Directory\_must\_exist}}
-{\footnotesize\ttfamily bool oomph\+::\+Doc\+Info\+::\+Directory\+\_\+must\+\_\+exist\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Doc\+Info\+::\+Directory\+\_\+must\+\_\+exist\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Boolean flag to decide response if an output directory doesn\textquotesingle{}t exist\+: If true, we terminate code execution by throwing an \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}} rather than just issuing a warning. 
+Boolean flag to decide response if an output directory doesn\textquotesingle{}t exist\+: If true, we terminate code execution by throwing an \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error} rather than just issuing a warning. 
 
 
 
-Definition at line 612 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00622}{622}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
 
 
-Referenced by set\+\_\+directory().
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00600}{disable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00594}{enable\+\_\+error\+\_\+if\+\_\+directory\+\_\+does\+\_\+not\+\_\+exist()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00306}{set\+\_\+directory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098}\label{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098}} 
+\Hypertarget{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098}\label{classoomph_1_1DocInfo_a23ed6ad5b2eab46c918155b79c03e098} 
 \index{oomph::DocInfo@{oomph::DocInfo}!Doc\_flag@{Doc\_flag}}
 \index{Doc\_flag@{Doc\_flag}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{Doc\_flag}{Doc\_flag}}
-{\footnotesize\ttfamily bool oomph\+::\+Doc\+Info\+::\+Doc\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Doc\+Info\+::\+Doc\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -349,9 +381,13 @@ Doc or don\textquotesingle{}t?
 
 
 
-Definition at line 600 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00610}{610}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_ad2bbc402589152ebb55c448a6272f469}\label{classoomph_1_1DocInfo_ad2bbc402589152ebb55c448a6272f469}} 
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00552}{disable\+\_\+doc()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00546}{enable\+\_\+doc()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00558}{is\+\_\+doc\+\_\+enabled()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_ad2bbc402589152ebb55c448a6272f469}\label{classoomph_1_1DocInfo_ad2bbc402589152ebb55c448a6272f469} 
 \index{oomph::DocInfo@{oomph::DocInfo}!Label@{Label}}
 \index{Label@{Label}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{Label}{Label}}
@@ -363,13 +399,17 @@ String to label output file, say.
 
 
 
-Definition at line 606 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00616}{616}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75}\label{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75}} 
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00582}{label()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00588}{label()}}.
+
+\Hypertarget{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75}\label{classoomph_1_1DocInfo_a184ec7b9fb261d77014f5203c8dbef75} 
 \index{oomph::DocInfo@{oomph::DocInfo}!Number@{Number}}
 \index{Number@{Number}!oomph::DocInfo@{oomph::DocInfo}}
 \doxysubsubsection{\texorpdfstring{Number}{Number}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Doc\+Info\+::\+Number\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Doc\+Info\+::\+Number\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -377,7 +417,11 @@ Number to label output file, say.
 
 
 
-Definition at line 603 of file oomph\+\_\+utilities.\+h.
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00613}{613}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00564}{number()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00570}{number()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00576}{number\+\_\+as\+\_\+string()}}.
 
 
 

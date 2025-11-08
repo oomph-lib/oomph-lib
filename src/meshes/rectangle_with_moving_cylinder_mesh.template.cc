@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,15 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-// Add in the header file
-#include "rectangle_with_moving_cylinder_mesh.template.h"
+#ifndef OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
+#define OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_HEADER
+#error __FILE__ should only be included from rectangle_with_moving_cylinder_mesh.h.
+#endif // OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_HEADER
 
 // PML mesh helpers
-#include "../generic/pml_meshes.h"
+#include "generic/pml_meshes.h"
 
 // Namespace extension
 namespace oomph
@@ -895,9 +899,9 @@ namespace oomph
     }
   } // End of macro_element_boundary
 
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
   //=============================================================================
   /// Domain-based mesh for rectangular mesh with circular hole
@@ -1379,9 +1383,9 @@ namespace oomph
 #endif
   } // End of RectangleWithHoleAndAnnularRegionMesh
 
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
   //=============================================================================
   /// Constructor. Pass pointer to geometric object that
@@ -1490,7 +1494,6 @@ namespace oomph
       }
     }
 
-
     // Left mesh
     double l_left = -0.5 * length_of_central_box - x_left;
     unsigned n_left =
@@ -1535,7 +1538,6 @@ namespace oomph
         l_bottom,
         time_stepper_pt);
     all_temp_mesh_pt.push_back(surrounding_bottom_mesh_pt);
-
 
     // Remove nodes from right and left boundaries (1 and 3)
     for (unsigned ibound_rm = 1; ibound_rm <= 3; ibound_rm += 2)
@@ -1589,7 +1591,6 @@ namespace oomph
                                   time_stepper_pt);
     all_temp_mesh_pt.push_back(surrounding_bottom_left_mesh_pt);
 
-
     // Copy all elements across
     unsigned n_mesh = all_temp_mesh_pt.size();
     unsigned nel = 0;
@@ -1636,7 +1637,6 @@ namespace oomph
     // Setup boundaries:
     //==================
     this->set_nboundary(5);
-
 
     Vector<Mesh*> pml_mesh_pt;
 
@@ -1771,3 +1771,4 @@ namespace oomph
     Central_mesh_pt->flush_element_and_node_storage();
   } // End of RefineableQuadMeshWithMovingCylinder
 } // namespace oomph
+#endif

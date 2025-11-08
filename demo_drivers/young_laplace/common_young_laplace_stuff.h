@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,8 @@
 //LIC//====================================================================
 #ifndef OOMPH_COMMON_YOUNG_LAPLACE_STUFF_DOC
 #define OOMPH_COMMON_YOUNG_LAPLACE_STUFF_DOC
-#include <assert.h>
+
+#include <cassert>
 
 //===== start_of_namespace========================================
 /// Namespace for "global" problem parameters

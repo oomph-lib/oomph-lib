@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -52,9 +52,9 @@ using namespace oomph;
 using namespace std;
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 //===== start_of_namespace=============================================
 /// Namespace for the Helmholtz problem parameters
@@ -230,9 +230,9 @@ TestPMLMapping* Test_pml_mapping_pt = new TestPMLMapping;
 } // end of namespace
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 //========= start_of_problem_class=====================================
 /// Problem class to demonstrate use of perfectly matched layers
@@ -649,7 +649,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Compute/output the radiated power
  //----------------------------------
- sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/power%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
 
@@ -668,7 +668,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -676,14 +676,14 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 // Output exact solution
 //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,GlobalParameters::get_exact_u);
  some_file.close();
 
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,GlobalParameters::get_exact_u,
@@ -696,7 +696,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output PML layers
  //-----------------
- sprintf(filename,"%s/pml_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/pml_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  PML_right_mesh_pt->output(some_file,npts);
@@ -721,7 +721,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // unsigned nstep=40;
  // for (unsigned i=0;i<nstep;i++)
  //  {
- //   sprintf(filename,"%s/helmholtz_animation%i_frame%i.dat",
+ //   snprintf(filename, sizeof(filename), "%s/helmholtz_animation%i_frame%i.dat",
  //           doc_info.directory().c_str(),
  //           doc_info.number(),i);
  //   some_file.open(filename);

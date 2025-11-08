@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -26,11 +26,10 @@
 #ifndef OOMPH_CHANNEL_WITH_LEAFLET_DOMAIN_HEADER
 #define OOMPH_CHANNEL_WITH_LEAFLET_DOMAIN_HEADER
 
-
 // Generic includes
-#include "../generic/geom_objects.h"
-#include "../generic/domain.h"
-#include "../generic/macro_element.h"
+#include "generic/geom_objects.h"
+#include "generic/domain.h"
+#include "generic/macro_element.h"
 
 namespace oomph
 {
@@ -245,7 +244,6 @@ namespace oomph
                           const Vector<double>& zeta,
                           Vector<double>& r);
 
-
     /// Length of the domain to the right of the leaflet
     double Lright;
 
@@ -277,7 +275,6 @@ namespace oomph
     /// Pointer to leaflet
     GeomObject* Leaflet_pt;
   };
-
 
   //===================================================================
   /// Parametrisation of macro element boundaries
@@ -402,12 +399,11 @@ namespace oomph
   }
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
   // Helper functions for region I (lower left region)
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
   //=====================================================================
   /// Helper function for eastern boundary in lower left region
@@ -451,7 +447,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for western boundary in lower left region
   //=====================================================================
@@ -494,7 +489,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for northern boundary in lower left region
   //=====================================================================
@@ -516,7 +510,6 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
-
 
   //=====================================================================
   /// Helper function for southern boundary in lower left region
@@ -541,12 +534,11 @@ namespace oomph
   }
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
   // Helper functions for region II (lower right region)
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
   //=====================================================================
   /// Helper function for eastern boundary in lower right region
@@ -590,7 +582,6 @@ namespace oomph
     r[0] = r_vert[0] + s * (r_wall[0] - r_vert[0]);
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
-
 
   //=====================================================================
   /// Helper function for western boundary in lower right region
@@ -636,7 +627,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for northern boundary in lower right region
   //=====================================================================
@@ -658,7 +648,6 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
-
 
   //=====================================================================
   /// Helper function for southern boundary in lower right region
@@ -683,12 +672,11 @@ namespace oomph
   }
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
   // Helper functions for region III (upper left region)
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
   //=====================================================================
   /// Describe the line between the boundary north of the domain (at x=X_0)
@@ -710,7 +698,6 @@ namespace oomph
     r[0] = r_join[0] + zeta[0] * (X_0 - r_join[0]);
     r[1] = r_join[1] + zeta[0] * (Htot - r_join[1]);
   }
-
 
   //=====================================================================
   /// Helper function for eastern boundary in upper left region
@@ -756,7 +743,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for western boundary in upper left region
   //=====================================================================
@@ -801,7 +787,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for northern boundary in upper left region
   //=====================================================================
@@ -823,7 +808,6 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
-
 
   //=====================================================================
   /// Helper function for southern boundary in upper left region
@@ -848,12 +832,11 @@ namespace oomph
   }
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
   // Helper functions for region IV (upper right region)
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
   //=====================================================================
   /// Helper function for eastern boundary in upper right region
@@ -899,7 +882,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for western boundary in upper right region
   //=====================================================================
@@ -944,7 +926,6 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
   }
 
-
   //=====================================================================
   /// Helper function for northern boundary in upper right region
   //=====================================================================
@@ -966,7 +947,6 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
-
 
   //=====================================================================
   /// Helper function for southern boundary in upper right region
@@ -990,8 +970,6 @@ namespace oomph
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
 
-
 } // namespace oomph
-
 
 #endif

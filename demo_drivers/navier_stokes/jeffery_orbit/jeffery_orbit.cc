@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -131,9 +131,9 @@ namespace Jeffery_Solution
  }
 }
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //===================start_of_general_ellipse=================================
@@ -180,9 +180,9 @@ public:
 //end_of_general_ellipse
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -1121,13 +1121,13 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
  // Output solution and projection files
  if(!project)
   {
-   sprintf(filename,"%s/soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",
            this->Doc_info.directory().c_str(),
            this->Doc_info.number());
   }
  else
   {
-   sprintf(filename,"%s/proj%i.dat",
+   snprintf(filename, sizeof(filename), "%s/proj%i.dat",
            this->Doc_info.directory().c_str(),
            this->Doc_info.number()-1);
   }
@@ -1155,7 +1155,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
  if(project) return;
 
  //Output the boundary only if not projecting
- sprintf(filename,"%s/int%i.dat",
+ snprintf(filename, sizeof(filename), "%s/int%i.dat",
          this->Doc_info.directory().c_str(),
          this->Doc_info.number());
  some_file.open(filename);

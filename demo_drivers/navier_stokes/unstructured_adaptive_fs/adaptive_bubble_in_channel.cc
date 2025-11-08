@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -358,9 +358,9 @@ namespace oomph
 
 
 
-/// //////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 
 
 //==start_of_namespace==============================
@@ -411,9 +411,9 @@ namespace oomph
 
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 
@@ -1160,7 +1160,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
  
  ofstream some_file;
  char filename[100];
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
 
@@ -1197,7 +1197,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 
 
  // Output boundaries
- sprintf(filename,"%s/boundaries%i.dat",
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
  some_file.open(filename);

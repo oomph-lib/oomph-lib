@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,9 @@
 // Non-inline functions for SpaceTimeUnsteadyHeatMixedOrder elements
 #include "discontinuous_galerkin_space_time_unsteady_heat_mixed_order_elements.h"
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -235,7 +235,6 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of fill_in_generic_residual_contribution_ust_heat
 
-
   //======================================================================
   /// Compute norm of FE solution
   //======================================================================
@@ -282,7 +281,6 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of compute_norm
 
-
   //======================================================================
   /// Self-test: Return 0 for OK
   //======================================================================
@@ -312,7 +310,6 @@ namespace oomph
       return 1;
     }
   } // End of self_test
-
 
   //======================================================================
   /// Output function:
@@ -353,7 +350,6 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   } // End of output
 
-
   //======================================================================
   /// C-style output function:
   ///   x,t,u   or    x,y,t,u
@@ -392,7 +388,6 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   } // End of output
-
 
   //======================================================================
   /// Output exact solution at a given number of plot points:
@@ -449,7 +444,6 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   } // End of output_fct
-
 
   //======================================================================
   /// Output exact solution at a given number of plot points:
@@ -513,7 +507,6 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   } // End of output_fct
-
 
   //======================================================================
   /// Validate against exact solution
@@ -597,7 +590,6 @@ namespace oomph
       error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * W;
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of compute_error
-
 
   //======================================================================
   /// Validate against exact solution at time t.
@@ -719,7 +711,6 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, n_plot);
   } // End of compute_error
-
 
   //======================================================================
   /// Output function:
@@ -843,7 +834,6 @@ namespace oomph
              << "</UnstructuredGrid>\n"
              << "</VTKFile>";
   } // End of output_element_paraview
-
 
   //====================================================================
   // Force build of templates

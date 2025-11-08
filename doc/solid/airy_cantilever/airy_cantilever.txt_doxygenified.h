@@ -354,8 +354,8 @@ trace file.
       a \c SolidMesh. It's easy: Simply follow the steps used to 
       create a refineable \c SolidMesh from the 
       \c RefineableRectangularQuadMesh, in 
-      <A HREF="../../../../src/meshes/rectangular_quadmesh.template.h">
-       src/meshes/rectangular_quadmesh.template.h</A>. 
+      <A HREF="../../../../src/meshes/rectangular_quadmesh.h">
+       src/meshes/rectangular_quadmesh.h</A>. 
       Instead of inheriting the mesh from the \c RefineableRectangularQuadMesh
       and the \c SolidMesh classes, inherit from the non-refineable 
       \c RectangularQuadMesh and the \c SolidMesh.]
@@ -441,5 +441,5 @@ demo_drivers/solid/airy_cantilever/airy_cantilever.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

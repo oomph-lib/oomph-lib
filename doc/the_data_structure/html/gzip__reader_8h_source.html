@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: gzip_reader.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">gzip_reader.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="gzip__reader_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifndef OOMPH_GZIP_READER_HEADER</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define OOMPH_GZIP_READER_HEADER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;oomph_zlib/zlib.h&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  /************************************************************************************</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">   * @brief</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">   ************************************************************************************/</span></div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structoomph_1_1Packet.html">   42</a></span>  <span class="keyword">struct </span><a class="code hl_struct" href="structoomph_1_1Packet.html">Packet</a></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structoomph_1_1Packet.html#a8bcdec2f9b29d01ed1b67242d0892a23">   44</a></span>    std::string <a class="code hl_variable" href="structoomph_1_1Packet.html#a8bcdec2f9b29d01ed1b67242d0892a23">data</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structoomph_1_1Packet.html#a80a4e511d6b85cde7d7156af2dd8603c">   45</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structoomph_1_1Packet.html#a80a4e511d6b85cde7d7156af2dd8603c">found</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  };</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  /************************************************************************************</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * @brief</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">   * @tparam _CharT</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">   * @tparam _Traits</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">   ************************************************************************************/</span></div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classoomph_1_1GZipReader.html">   54</a></span>  <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1GZipReader.html">GZipReader</a></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="classoomph_1_1GZipReader.html#a5838b6b6ac48087ec45a59d8260ec30b">GZipReader</a>();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="classoomph_1_1GZipReader.html#a5838b6b6ac48087ec45a59d8260ec30b">GZipReader</a>(<span class="keyword">const</span> std::string&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">chunk_size</a> = 256);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="classoomph_1_1GZipReader.html#ab387d3f0842633c369dd4512cad07f5d">~GZipReader</a>();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GZipReader.html#a3501ba01a945d401932e80fa1b66e81c">open</a>(<span class="keyword">const</span> std::string&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1GZipReader.html#a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf">close</a>();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classoomph_1_1GZipReader.html#a66588e2446b09abb9c2b430843c0f745">is_open</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_struct" href="structoomph_1_1Packet.html">Packet</a> <a class="code hl_function" href="classoomph_1_1GZipReader.html#a65ebc1426d85174ca673dab76bc53255">getline</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    std::vector&lt;std::string&gt; <a class="code hl_function" href="classoomph_1_1GZipReader.html#a19ade96e79403b1162b63607fac5cb39">read_all</a>();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classoomph_1_1GZipReader.html#a05353e27cad21f589af6c84331604e6e">   67</a></span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">gzFile</a> <a class="code hl_variable" href="classoomph_1_1GZipReader.html#a05353e27cad21f589af6c84331604e6e">Gzip_file</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classoomph_1_1GZipReader.html#afd5ba93fa067e76483051fd234010b8b">   68</a></span>    <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="classoomph_1_1GZipReader.html#afd5ba93fa067e76483051fd234010b8b">Chunk_size</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  };</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>} <span class="comment">// namespace oomph</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html"><div class="ttname"><a href="classoomph_1_1GZipReader.html">oomph::GZipReader</a></div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00054">gzip_reader.h:55</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a05353e27cad21f589af6c84331604e6e"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a05353e27cad21f589af6c84331604e6e">oomph::GZipReader::Gzip_file</a></div><div class="ttdeci">gzFile Gzip_file</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00067">gzip_reader.h:67</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a19ade96e79403b1162b63607fac5cb39"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a19ade96e79403b1162b63607fac5cb39">oomph::GZipReader::read_all</a></div><div class="ttdeci">std::vector&lt; std::string &gt; read_all()</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00180">gzip_reader.cc:180</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a3501ba01a945d401932e80fa1b66e81c"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a3501ba01a945d401932e80fa1b66e81c">oomph::GZipReader::open</a></div><div class="ttdeci">void open(const std::string &amp;filename)</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00078">gzip_reader.cc:78</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a5838b6b6ac48087ec45a59d8260ec30b"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a5838b6b6ac48087ec45a59d8260ec30b">oomph::GZipReader::GZipReader</a></div><div class="ttdeci">GZipReader()</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00041">gzip_reader.cc:41</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a65ebc1426d85174ca673dab76bc53255"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a65ebc1426d85174ca673dab76bc53255">oomph::GZipReader::getline</a></div><div class="ttdeci">Packet getline()</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00119">gzip_reader.cc:119</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a66588e2446b09abb9c2b430843c0f745"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a66588e2446b09abb9c2b430843c0f745">oomph::GZipReader::is_open</a></div><div class="ttdeci">bool is_open() const</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00103">gzip_reader.cc:103</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf"><div class="ttname"><a href="classoomph_1_1GZipReader.html#a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf">oomph::GZipReader::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00087">gzip_reader.cc:87</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_ab387d3f0842633c369dd4512cad07f5d"><div class="ttname"><a href="classoomph_1_1GZipReader.html#ab387d3f0842633c369dd4512cad07f5d">oomph::GZipReader::~GZipReader</a></div><div class="ttdeci">~GZipReader()</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8cc_source.html#l00065">gzip_reader.cc:65</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GZipReader_html_afd5ba93fa067e76483051fd234010b8b"><div class="ttname"><a href="classoomph_1_1GZipReader.html#afd5ba93fa067e76483051fd234010b8b">oomph::GZipReader::Chunk_size</a></div><div class="ttdeci">unsigned Chunk_size</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00068">gzip_reader.h:68</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TAdvectionDiffusionReactionElement_html"><div class="ttname"><a href="classoomph_1_1TAdvectionDiffusionReactionElement.html">oomph::TAdvectionDiffusionReactionElement</a></div><div class="ttdoc">TAdvectionDiffusionReactionElement&lt;NREAGENT,DIM,NNODE_1D&gt; elements are isoparametric triangular DIM-d...</div><div class="ttdef"><b>Definition</b> <a href="Tadvection__diffusion__reaction__elements_8h_source.html#l00062">Tadvection_diffusion_reaction_elements.h:66</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
+<div class="ttc" id="astructoomph_1_1Packet_html"><div class="ttname"><a href="structoomph_1_1Packet.html">oomph::Packet</a></div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00042">gzip_reader.h:43</a></div></div>
+<div class="ttc" id="astructoomph_1_1Packet_html_a80a4e511d6b85cde7d7156af2dd8603c"><div class="ttname"><a href="structoomph_1_1Packet.html#a80a4e511d6b85cde7d7156af2dd8603c">oomph::Packet::found</a></div><div class="ttdeci">bool found</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00045">gzip_reader.h:45</a></div></div>
+<div class="ttc" id="astructoomph_1_1Packet_html_a8bcdec2f9b29d01ed1b67242d0892a23"><div class="ttname"><a href="structoomph_1_1Packet.html#a8bcdec2f9b29d01ed1b67242d0892a23">oomph::Packet::data</a></div><div class="ttdeci">std::string data</div><div class="ttdef"><b>Definition</b> <a href="gzip__reader_8h_source.html#l00044">gzip_reader.h:44</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Nov 8 2025 15:12:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

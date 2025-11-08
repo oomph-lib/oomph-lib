@@ -32,148 +32,47 @@ GNU Lesser General Public License
 </a>
 for more details.
 
-<br>
-<br>
+
 
 Your use or distribution of \c oomph-lib or any derivative code
 implies that you  agree to this License.
-
 <br>
 <br>
-Copyright (C) 2006-2024 by
-<a href="http://www.maths.man.ac.uk/~mheil">Matthias Heil</a>
-and <a href="http://www.maths.man.ac.uk/~ahazel">Andrew L. Hazel</a>.
+Copyright (C) 2006-2025 by
+<a href="https://www.matthias-heil.co.uk/new_webpage/index.html">Matthias Heil</a>
+and <a href="https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/">Andrew L. Hazel</a>.
 
 <HR>
 
-
-<H2>Licencing details for SuperLU</H2>
-The \c oomph-lib distribution includes the double precision versions
-of the sparse direct linear solver SuperLU (version 3.0 of the
-serial version and version 2.0 of the distributed memory parallel
-version). Full details of the
-<A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A>
-licence may be found at
-<CENTER>
-<A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">
-http://crd.lbl.gov/~xiaoye/SuperLU</A>
-</CENTER>
-
-
-<HR>
-
-<H2>Licencing details for METIS</H2>
-The \c oomph-lib distribution includes version 4.0 of
-George Karypis'
-<A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A>
-mesh partitioning library. Full details of the
-<A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A>
-licence may be found at
-<CENTER>
-<A HREF="http://www-users.cs.umn.edu/~karypis/metis/">
-http://www-users.cs.umn.edu/~karypis/metis/
-</A>
-</CENTER>
-
-
-<HR>
-
-<H2>Licencing details for BLAS/LAPACK</H2>
-The \c oomph-lib distribution includes the entire BLAS library
-and a few functions from LAPACK.
-Full licencing details for the
-<A HREF="http://www.netlib.org/blas/">BLAS library</A>
-may be found at
-<CENTER>
-<A HREF="http://www.netlib.org/blas/">
-http://www.netlib.org/blas/
-</A>
-</CENTER>
-Full licencing details for the
-<A HREF="http://www.netlib.org/lapack/">LIBRARY library</A>
-may be found at
-<CENTER>
-<A HREF="http://www.netlib.org/lapack/">
-http://www.netlib.org/lapack/
-</A>
-</CENTER>
+<H2>Licencing details for third-party libraries</H2>
+<TT>oomph-lib</TT> provides the option to install various
+third-party libraries as part of its overall build process.
+These are:
+<ul>
+<li><a href="https://github.com/OpenMathLib/OpenBLAS">OpenBLAS</a></li>
+<li><a href="https://github.com/boostorg/boost">Boost</a></li>
+<li><a href="https://github.com/CGAL/cgal/">CGAL</a></li>
+<li><a href="https://github.com/hypre-space/hypre/">HYPRE</a></li>
+<li><a href="https://mumps-solver.org/index.php">MUMPS</a> (built via
+a fork of the <a href="https://github.com/scivision/mumps">Scivision
+MUMPS via CMake</a> project)
+<li><a href="https://github.com/KarypisLab/GKlib">GKlib</a></li>
+<li><a href="https://github.com/KarypisLab/METIS">METIS</A>
+<li><a href="https://github.com/KarypisLab/ParMETIS">ParMETIS</a></li>
+<li><a href="https://github.com/xiaoyeli/superlu">SuperLU</a></li>
+<li><a href="https://github.com/xiaoyeli/superlu_dist">SuperLU_dist</a></li>
+<li><a href="https://github.com/trilinos/Trilinos/">Trilinos</a></li>
+</ul>
 
 
 
-
-<HR>
-
-<H2>Licencing details for GMP</H2>
-The \c oomph-lib distribution includes version 6.1.2 of
-the GNU Multiple Precision Arithmetic Library (GMP),
-  <a href="https://gmplib.org">https://gmplib.org</a>
-which is released under the
-<a href="https://www.gnu.org/licenses/lgpl.html">GNU LGPL v3</a>
-and <a href="https://www.gnu.org/licenses/gpl-2.0.html">GNU GPL
-v2</a> licences.
-Full details of the licence may be found at
-<CENTER>
-<a href="https://gmplib.org">https://gmplib.org</a>
-</CENTER>
-
-
-
-
-<HR>
-
-<H2>Licencing details for MPFR</H2>
-The \c oomph-lib distribution includes version 3.1.6 of
-the GNU MPFR Library
-  <a href="http://www.mpfr.org/">http://www.mpfr.org/</a>
-which is released under the
-<a href="http://www.gnu.org/copyleft/lesser.html">GNU
-Lesser General Public License</a> (GNU Lesser GPL).
-
-Full details of the licence may be found at
-<CENTER>
-<a href="http://www.mpfr.org/">http://www.mpfr.org/</a>
-</CENTER>
-
-<HR>
-
-<H2>Licencing details for Boost</H2>
-The \c oomph-lib distribution includes version 1.65.1 of
-the Boost Library
-  <a href="http://www.boost.org/">http://www.boost.org/</a>
-which is released under the <a href="http://www.boost.org/LICENSE_1_0.txt">
-Boost Software Licence Version 1.0</a>.
-
-Full details of the licence may be found at
-<CENTER>
-<a href="http://www.boost.org/users/license.html">http://www.boost.org/users/license.html</a>
-</CENTER>
-
-
-
-<HR>
-
-<H2>Licencing details for CGAL</H2>
-The \c oomph-lib distribution includes version 4.11 of
-CGAL The Computational Geometry Algorithms Library
-  <a href="https://www.cgal.org/">https://www.cgal.org/</a>
-which is released under the distributed under a dual license scheme,
-that is under the <a href="https://www.gnu.org/copyleft/gpl.html">GPL</a>/
-<a href="https://www.gnu.org/copyleft/lesser.html">LGPL</a>
-open source license, as well as under commercial licenses.
-
-Full details of the licence may be found at
-<CENTER>
-<a href="https://doc.cgal.org/latest/Manual/preliminaries.html#licenseIssues">https://doc.cgal.org/latest/Manual/preliminaries.html#licenseIssues</a>
-</CENTER>
-
-
-
-
-<HR>
+Our build scripts download the relevant source automatically from
+the relevant GitHub repositories where the libraries' licencing
+information can be found.
 
 <hr>
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

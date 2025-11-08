@@ -800,5 +800,5 @@ demo_drivers/navier_stokes/single_layer_free_surface/elastic_single_layer.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

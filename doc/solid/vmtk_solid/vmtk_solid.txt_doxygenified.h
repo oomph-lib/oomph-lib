@@ -149,5 +149,5 @@ demo_drivers/solid/vmtk_solid/vmtk_solid.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

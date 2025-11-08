@@ -27,12 +27,11 @@ our private svn repository (revisions 1 to 207) which preceded its
 public counterpart.
 .
 
-
-</center>
-
 The remainder of this document covers the following issues:
 
 - \ref interface_changes
+- \ref two_point_zero_to_three_point_zero
+  - \ref new_functionality_three_point_zero
 - \ref one_point_zero_to_two_point_zero
   - \ref new_functionality_two_point_zero
 - \ref zero_point_nine_to_one_point_zero 
@@ -150,6 +149,25 @@ problems after upgrading to a new version.
 
 <HR>
 
+\subsection two_point_zero_to_three_point_zero Changes between version 2.0 and 3.0.*
+
+\subsubsection new_functionality_three_point_zero Major new functionality/changes
+
+- Moved to C++17 standard
+  \n\n
+- Completely re-implemented the build machinery which is now based on CMake.
+  - the equivalent of the old <code>autogen.sh</code> script
+    is <code>oomph_build.py</code>
+  - renamed the <code>bin</code> directory <code>scripts</code>
+  - moved the <code>self_test</code> directory into <code>demo_drivers</code>
+  - changed the way the template instantiation in the
+    <code>meshes</code> directory is done: <code>*.template.h</code>
+    becomes <code>*.h</code>.
+  - third-party libraries are now pulled in from their GitHub
+    repositories.
+  .
+.
+\n\n
 
 \subsection one_point_zero_to_two_point_zero Changes between version 1.0 and 2.0.*
 
@@ -268,11 +286,11 @@ problems after upgrading to a new version.
 - Basic implementation of discontinuous Galerkin methods for general
   flux transport problems.\n\n
 - Many new detailed tutorials explaining:\n\n
-  - How to use \t oomph-lib in parallel and how to (optionally) distribute 
+  - How to use \c oomph-lib in parallel and how to (optionally) distribute 
     problems over multiple processors and to perform load balancing when
     performing spatially-adaptive, distributed simulations. 
     \n\n
-  - How to use oomph-lib's block preconditioning framework. 
+  - How to use \c oomph-lib's block preconditioning framework. 
     \n\n
   - How to solve large-displacement fluid-structure interaction
     problems, based the coupling of full nonlinear 2D/3D elasticity 
@@ -386,7 +404,7 @@ extensive list of example codes</a> to see what else is available.
   in a <a href="../../interaction/vmtk_fsi/html/index.html">
   separate tutorial.</a>
   \n\n
-- Significantly extended oomph-lib's bifurcation tracking routines
+- Significantly extended \c oomph-lib's bifurcation tracking routines
   (no tutorials yet, though).
   \n\n
 - Provided general framework and driver codes for discontinuous

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,9 +45,9 @@
 using namespace std;
 using namespace oomph;
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -414,77 +414,77 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output displacement field
  //--------------------------
- sprintf(filename,"%s/soln_bulk%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_bulk%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_right%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_right%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_right_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_top%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_top%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_top_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_left%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_left%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_left_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_bottom%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_bottom%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_bottom_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_top_right%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_top_right%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_top_right_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_top_left%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_top_left%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_top_left_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_bottom_right%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln_pml_bottom_right%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_bottom_right_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
- sprintf(filename,"%s/soln_pml_bottom_left%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_pml_bottom_left%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  PML_bottom_left_mesh_pt->output(some_file,n_plot);
  some_file.close();
 
  // Output runtime (wall clock time) in s in a file
- sprintf(filename,"%s/wall_clock_time%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/wall_clock_time%i.dat",Doc_info.directory().c_str(),
          Doc_info.number()); 
  some_file.open(filename);
  some_file << Global_Parameters::T_end-Global_Parameters::T_start << std::endl;
  some_file.close();
 
  // Output number of degrees of freedom in a file
- sprintf(filename,"%s/ndof%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ndof%i.dat",Doc_info.directory().c_str(),
          Doc_info.number()); 
  some_file.open(filename);
  some_file << this->ndof() << std::endl;
  some_file.close();
 
  // Output norm of solution 
- sprintf(filename,"%s/elast_soln_norm%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/elast_soln_norm%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());   
  some_file.open(filename);   
  double norm_soln=0.0;

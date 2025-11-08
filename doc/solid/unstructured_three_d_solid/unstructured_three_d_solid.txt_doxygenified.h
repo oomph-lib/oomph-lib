@@ -399,5 +399,5 @@ demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

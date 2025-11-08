@@ -904,5 +904,5 @@ demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

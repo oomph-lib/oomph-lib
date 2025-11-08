@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -104,9 +104,9 @@ private:
 
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -165,9 +165,9 @@ namespace Global_Physical_Variables
 
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -474,7 +474,7 @@ void OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -503,7 +503,7 @@ void OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,npts,time_pt()->time(),
@@ -513,7 +513,7 @@ void OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,
@@ -531,7 +531,7 @@ void OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 
  // Plot wall posn
  //---------------
- sprintf(filename,"%s/Wall%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/Wall%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  
@@ -612,8 +612,8 @@ void OscEllipseProblem<ELEMENT,TIMESTEPPER>::unsteady_run(DocInfo& doc_info)
 } // end of unsteady_run
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main=================================================

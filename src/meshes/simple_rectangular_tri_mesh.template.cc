@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,17 +23,18 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SIMPLE_RECTANGULAR_TRIMESH_TEMPLATE_CC
-#define OOMPH_SIMPLE_RECTANGULAR_TRIMESH_TEMPLATE_CC
+#ifndef OOMPH_SIMPLE_RECTANGULAR_TRI_MESH_TEMPLATE_HEADER
+#define OOMPH_SIMPLE_RECTANGULAR_TRI_MESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_SIMPLE_RECTANGULAR_TRI_MESH_HEADER
+#error __FILE__ should only be included from simple_rectangular_tri_mesh.h.
+#endif // OOMPH_SIMPLE_RECTANGULAR_TRI_MESH_HEADER
 
 #include <algorithm>
 
-#include "../generic/Telements.h"
+#include "generic/Telements.h"
 
 // Simple 2D triangle mesh class
-#include "simple_rectangular_tri_mesh.template.h"
-
 
 namespace oomph
 {
@@ -68,7 +69,7 @@ namespace oomph
     this->set_nboundary(4);
 
     // Allocate the store for the elements
-    unsigned n_element = (Nx) * (Ny)*2;
+    unsigned n_element = (Nx) * (Ny) * 2;
     Element_pt.resize(n_element, 0);
 
     // Create first element
@@ -120,7 +121,6 @@ namespace oomph
     double xstep = Lx / (Nx);
     double ystep = Ly / (Ny);
 
-
     // FIRST NODE (lower left corner)
     //-------------------------------
 
@@ -163,7 +163,6 @@ namespace oomph
 
           Element_pt[element_count + 1] = new ELEMENT;
 
-
           // Allocate memory for nodes in the current box
           //--------------------------------------------
           // If node on LHS of domain, allocate the top left corner node
@@ -186,7 +185,6 @@ namespace oomph
                                            ->construct_node(1, time_stepper_pt);
 
           // Bottom left corner node is already allocated
-
 
           // Set the pointers from the elements
           //----------------------------------
@@ -236,7 +234,6 @@ namespace oomph
         node_count++;
       }
     }
-
 
     if (additional_nnode == 3)
     {
@@ -397,7 +394,6 @@ namespace oomph
     }
     // End of extra nodes for 6 noded trianglur elements
 
-
     if (additional_nnode == 7)
     {
       // Reset element counter to allow looping over existing elements
@@ -464,7 +460,6 @@ namespace oomph
         }
       }
 
-
       // Next stage: bottom-middle-right node (node 6 in lower tri.el.)
       // and top-middle-right node (node 5 in upper tri.el.)
 
@@ -522,7 +517,6 @@ namespace oomph
         }
       }
 
-
       // Next stage of additional node implementation involes node 4 on lower
       // tri. el. and node 3 on upper tri. el.
 
@@ -577,7 +571,6 @@ namespace oomph
           node_count++;
         }
       }
-
 
       // Next stage of additional node implementation involes node 3 on lower
       // tri. el. and node 4 on upper tri. el.
@@ -634,7 +627,6 @@ namespace oomph
         }
       }
 
-
       // Next is the lower tri. el. totally internal node with local number 9
       element_count = 0;
       // Note: both i,j counters reduced by 1
@@ -663,7 +655,6 @@ namespace oomph
           node_count++;
         }
       }
-
 
       // Next is the bottom hyp. node -
       // lower tri. el. number 7, upper tri. el. number 8
@@ -697,7 +688,6 @@ namespace oomph
         }
       }
 
-
       // Next is the upper hyp. node -
       // lower tri. el. number 8, upper tri. el. number 7
       element_count = 0;
@@ -729,7 +719,6 @@ namespace oomph
           node_count++;
         }
       }
-
 
       // Next is the upper tri. el. totally internal node with local number 9
       element_count = 0;

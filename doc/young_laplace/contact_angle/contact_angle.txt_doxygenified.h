@@ -579,5 +579,5 @@ not at all) as \f$ \gamma \to 0. \f$
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

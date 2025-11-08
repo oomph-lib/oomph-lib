@@ -486,5 +486,5 @@ demo_drivers/solid/disk_oscillation/disk_oscillation.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

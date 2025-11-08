@@ -476,5 +476,5 @@ demo_drivers/navier_stokes/static_cap/static_single_layer.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

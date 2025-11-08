@@ -323,14 +323,14 @@ phase, the user need only run their executable under MPI on multiple processes.
 \section sources Source files for this tutorial
 - The source files for this tutorial are located in the directory:\n\n
 <CENTER>
-<A HREF="../../../../self_test/mpi/generic_mpi/">
-self_test/mpi/generic_mpi
+<A HREF="../../../../demo_drivers/self_test/mpi/generic_mpi/">
+demo_drivers/self_test/mpi/generic_mpi
 </A>
 </CENTER>\n
 - The driver code is: \n\n
 <CENTER>
-<A HREF="../../../../self_test/mpi/generic_mpi/generic_mpi_test.cc">
-self_test/mpi/generic_mpi/generic_mpi_test.cc
+<A HREF="../../../../demo_drivers/self_test/mpi/generic_mpi/generic_mpi_test.cc">
+demo_drivers/self_test/mpi/generic_mpi/generic_mpi_test.cc
 </A>
 </CENTER>
 
@@ -338,5 +338,5 @@ self_test/mpi/generic_mpi/generic_mpi_test.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

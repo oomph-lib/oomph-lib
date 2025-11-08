@@ -308,7 +308,7 @@ additional difficulties in refineable problems and we shall demonstrate
    // Doc error and return of the square of the L2 error
    //---------------------------------------------------
    double error,norm;
-   sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -409,5 +409,5 @@ demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

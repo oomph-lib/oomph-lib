@@ -1,0 +1,198 @@
+\doxysection{tube\+\_\+mesh.\+h}
+\hypertarget{tube__mesh_8h_source}{}\label{tube__mesh_8h_source}\index{tube\_mesh.h@{tube\_mesh.h}}
+\mbox{\hyperlink{tube__mesh_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_TUBE\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00027}00027\ \textcolor{preprocessor}{\#define\ OOMPH\_TUBE\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00029}00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}generic/refineable\_brick\_mesh.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}generic/macro\_element.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ "{}generic/domain.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}generic/algebraic\_elements.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}generic/brick\_mesh.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}generic/macro\_element\_node\_update\_element.h"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00037}00037\ \textcolor{comment}{//\ Include\ the\ headers\ file\ for\ domain}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00038}00038\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tube__domain_8h}{tube\_domain.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00040}00040\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00042}00042\ \ \ \textcolor{comment}{//====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00043}00043\ \textcolor{comment}{\ \ ///\ 3D\ tube\ mesh\ class.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00044}00044\ \textcolor{comment}{\ \ ///\ The\ domain\ is\ specified\ by\ the\ GeomObject\ that\ identifies}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00045}00045\ \textcolor{comment}{\ \ ///\ the\ entire\ volume.\ Non-\/refineable\ base\ version!}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00046}00046\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00047}00047\ \textcolor{comment}{\ \ ///\ The\ mesh\ boundaries\ are\ numbered\ as\ follows:}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00048}00048\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 0:\ "{}Inflow"{}\ cross\ section;\ located\ along\ the}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00049}00049\ \textcolor{comment}{\ \ ///\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ line\ parametrised\ by\ \(\backslash\)f\$\ \(\backslash\)xi\_0\ =\ \ \(\backslash\)xi\_0\string^\{lo\}\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00050}00050\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 1:\ The\ outer\ wall,\ represetned\ by\ \(\backslash\)f\$\(\backslash\)xi\_2\ =\ 1\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00051}00051\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 2:\ The\ out\ flow,\ represented\ by\ \(\backslash\)f\$\(\backslash\)xi\_0\ =\ \(\backslash\)xi\_0\string^\{hi\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00052}00052\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00053}00053\ \textcolor{comment}{}\ \ \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00054}00054\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00055}\mbox{\hyperlink{classoomph_1_1TubeMesh}{00055}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ BrickMeshBase}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00056}00056\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00057}00057\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ pointer\ to\ geometric\ object\ that}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ \ ///\ specifies\ the\ volume,\ start\ and\ end\ coordinates\ for\ the\ centreline}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ \ ///\ on\ the\ geometric\ object.\ Values\ of\ theta\ at\ which\ dividing\ lines}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ \ ///\ are\ to\ be\ placed,\ fractions\ of\ the\ radius\ for\ the\ central\ box}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ \ ///\ at\ the\ dividing\ lines,\ the\ number\ of\ layers}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ \ ///\ and\ the\ timestepper.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ \ ///\ Timestepper\ defaults\ to\ Steady\ dummy\ timestepper.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00065}00065\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh}}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{GeomObject}}*\ wall\_pt,}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{centreline\_limits}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{theta\_positions}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{radius\_box}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nlayer}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper);}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00071}00071\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ \ ///\ Destructor:\ empty}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00073}\mbox{\hyperlink{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}{00073}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}{\string~TubeMesh}}()}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00074}00074\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00075}00075\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00077}00077\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ GeomObject\ representing\ wall}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00079}\mbox{\hyperlink{classoomph_1_1TubeMesh_aed076003bfd280bd2949c0e74885f34c}{00079}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{GeomObject}}*\&\ \mbox{\hyperlink{classoomph_1_1TubeMesh_aed076003bfd280bd2949c0e74885f34c}{volume\_pt}}()}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00080}00080\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00081}00081\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2}{Volume\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00083}00083\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ domain}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00085}\mbox{\hyperlink{classoomph_1_1TubeMesh_a7cc74f03a77148a57557cc90f315358d}{00085}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TubeDomain}{TubeDomain}}*\ \mbox{\hyperlink{classoomph_1_1TubeMesh_a7cc74f03a77148a57557cc90f315358d}{domain\_pt}}()}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00086}00086\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00087}00087\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00089}00089\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00090}00090\ \textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ underlying\ domain}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00091}\mbox{\hyperlink{classoomph_1_1TubeMesh_ac2094b74a3c489cddb9e1ebe3ec34358}{00091}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TubeDomain}{TubeDomain}}*\ \mbox{\hyperlink{classoomph_1_1TubeMesh_ac2094b74a3c489cddb9e1ebe3ec34358}{domain\_pt}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00092}00092\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00093}00093\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00096}00096\ \ \ \textcolor{keyword}{protected}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00097}00097\ \textcolor{comment}{\ \ \ \ ///\ Pointer\ to\ domain}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00098}\mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{00098}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TubeDomain}{TubeDomain}}*\ \mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00099}00099\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ \ ///\ Pointer\ to\ the\ geometric\ object\ that\ represents\ the\ curved\ wall}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00101}\mbox{\hyperlink{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2}{00101}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2}{Volume\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00102}00102\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00104}00104\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00105}00105\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00106}00106\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00107}00107\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00108}00108\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00109}00109\ \ \ \textcolor{comment}{//=============================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00110}00110\ \textcolor{comment}{\ \ ///\ Adaptative\ version\ of\ the\ TubeMesh\ base\ mesh.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00111}00111\ \textcolor{comment}{\ \ ///\ The\ domain\ is\ specified\ by\ the\ GeomObject\ that\ identifies}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00112}00112\ \textcolor{comment}{\ \ ///\ the\ entire\ volume}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00113}00113\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00114}00114\ \textcolor{comment}{\ \ ///\ The\ mesh\ boundaries\ are\ numbered\ as\ follows:}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00115}00115\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 0:\ "{}Inflow"{}\ cross\ section;\ located\ along\ the}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00116}00116\ \textcolor{comment}{\ \ ///\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ line\ parametrised\ by\ \(\backslash\)f\$\ \(\backslash\)xi\_0\ =\ \ \(\backslash\)xi\_0\string^\{lo\}\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00117}00117\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 1:\ The\ outer\ wall,\ represetned\ by\ \(\backslash\)f\$\(\backslash\)xi\_2\ =\ 1\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00118}00118\ \textcolor{comment}{\ \ ///\ -\/\ Boundary\ 2:\ The\ out\ flow,\ represented\ by\ \(\backslash\)f\$\(\backslash\)xi\_0\ =\ \(\backslash\)xi\_0\string^\{hi\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00119}00119\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00120}00120\ \textcolor{comment}{}\ \ \textcolor{comment}{//=============================================================}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00121}00121\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00122}\mbox{\hyperlink{classoomph_1_1RefineableTubeMesh}{00122}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1RefineableTubeMesh}{RefineableTubeMesh}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh}}<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ RefineableBrickMesh<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00125}00125\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00126}00126\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ \ ///\ Constructor\ for\ adaptive\ deformable\ quarter\ tube\ mesh\ class.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00128}00128\ \textcolor{comment}{\ \ \ \ ///\ Pass\ pointer\ to\ geometric\ object\ that}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00129}00129\ \textcolor{comment}{\ \ \ \ ///\ specifies\ the\ volume,\ start\ and\ end\ coordinates\ for\ the\ centreline}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ \ ///\ on\ the\ geometric\ object.\ Values\ of\ theta\ at\ which\ dividing\ lines}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ \ ///\ are\ to\ be\ placed,\ fractions\ of\ the\ radius\ for\ the\ central\ box}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00132}00132\ \textcolor{comment}{\ \ \ \ ///\ at\ the\ dividing\ lines,\ the\ number\ of\ layers}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ \ ///\ and\ the\ timestepper.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ \ ///\ Timestepper\ defaults\ to\ Steady\ dummy\ timestepper.}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00135}\mbox{\hyperlink{classoomph_1_1RefineableTubeMesh_a0b8e2307c2d4594196f78a6278d9bbf7}{00135}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTubeMesh_a0b8e2307c2d4594196f78a6278d9bbf7}{RefineableTubeMesh}}(}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00136}00136\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{GeomObject}}*\ wall\_pt,}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00137}00137\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{centreline\_limits}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00138}00138\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{theta\_positions}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00139}00139\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{radius\_box}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00140}00140\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nlayer}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00141}00141\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00142}00142\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh}}<\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}>(wall\_pt,}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{centreline\_limits}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{theta\_positions}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{radius\_box}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nlayer}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00148}00148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00149}00149\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements\ and\ set\ macro\ element\ pointer}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00150}00150\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ielem}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ielem\ <\ TubeMesh<ELEMENT>::nelement}}();\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ielem}}++)}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00151}00151\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{RefineableQElement<3>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh<ELEMENT>::element\_pt}}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ielem}}))}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{set\_macro\_elem\_pt}}(this-\/>\mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\_pt}}-\/>macro\_element\_pt(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ielem}}));}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00155}00155\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00157}00157\ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ Octree\ forest:\ Turn\ elements\ into\ individual\ octrees}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00158}00158\ \ \ \ \ \ \ \textcolor{comment}{//\ and\ plant\ in\ forest}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00159}00159\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector<TreeRoot*>}}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{trees\_pt}};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00160}00160\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{iel}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{iel\ <\ TubeMesh<ELEMENT>::nelement}}();\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{iel}}++)}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00161}00161\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{el\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TubeMesh}{TubeMesh<ELEMENT>::finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{iel}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}*\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ref\_el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{el\_pt}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OcTreeRoot}}*\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{octree\_root\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OcTreeRoot}}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ref\_el\_pt}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{trees\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{octree\_root\_pt}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00166}00166\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00167}00167\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Forest\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OcTreeForest}}(\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{trees\_pt}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00169}00169\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00170}00170\ \ \ \ \ \ \ \textcolor{comment}{//\ Run\ self\ test}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00171}00171\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{success\_flag}}\ =}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OcTreeForest}}*\textcolor{keyword}{>}(this-\/>\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Forest\_pt}})-\/>self\_test();}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00173}00173\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{success\_flag}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00174}00174\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Successfully\ built\ octree\ forest\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00176}00176\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00177}00177\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00178}00178\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OomphLibError}}(\textcolor{stringliteral}{"{}Trouble\ in\ building\ octree\ forest\ "{}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00182}00182\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00183}00183\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00184}00184\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00185}00185\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00186}00186\ \textcolor{comment}{\ \ \ \ ///\ Destructor:\ empty}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00187}\mbox{\hyperlink{classoomph_1_1RefineableTubeMesh_a743f3d17c3d5f0abe88ee1a7bda0b149}{00187}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1RefineableTubeMesh_a743f3d17c3d5f0abe88ee1a7bda0b149}{\string~RefineableTubeMesh}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00188}00188\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00190}00190\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00191}00191\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tube__mesh_8template_8cc}{tube\_mesh.template.cc}}"{}}}
+\DoxyCodeLine{\Hypertarget{tube__mesh_8h_source_l00192}00192\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

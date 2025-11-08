@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -369,7 +369,7 @@ doc_solution(DocInfo &doc_info)
  const unsigned npts = 5;
 
  // Open solution output file
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
 
@@ -394,7 +394,7 @@ doc_solution(DocInfo &doc_info)
  // Output solution to file in paraview format
  string file_name="soln"+StringConversion::to_string(doc_info.number())
   +".vtu";
- sprintf(filename,"%s/%s",doc_info.directory().c_str(),file_name.c_str());
+ snprintf(filename, sizeof(filename), "%s/%s",doc_info.directory().c_str(),file_name.c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output_paraview(some_file,npts);
  some_file.close();
@@ -432,7 +432,7 @@ unsteady_run(const double &t_max, const double &dt)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Initialise trace file
@@ -453,7 +453,7 @@ unsteady_run(const double &t_max, const double &dt)
  // Open pvd file -- a wrapper for all the different
  // vtu output files plus information about continuous time
  // to facilitate animations in paraview
- sprintf(filename,"%s/soln.pvd",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/soln.pvd",doc_info.directory().c_str());
  Global_Physical_Variables::Pvd_file.open(filename);
  ParaviewHelper::write_pvd_header(Global_Physical_Variables::Pvd_file);
 
@@ -486,9 +486,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

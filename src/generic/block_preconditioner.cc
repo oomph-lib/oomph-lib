@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -348,7 +348,7 @@ namespace oomph
       //
       // Thus Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]
       //
-      /// /////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////
       //
       // How to do this: First we create a 2D vector which has the corresponds
       // to the fine dof types in the master preconditioner but starting from
@@ -804,9 +804,9 @@ namespace oomph
 #endif
 
 
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
     // start of master block preconditioner only operations
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 #ifdef OOMPH_HAS_MPI
     unsigned* nreq_sparse = new unsigned[nproc]();
     unsigned* nreq_sparse_for_proc = new unsigned[nproc]();
@@ -1009,8 +1009,7 @@ namespace oomph
           if (nreq_sparse[p] == 0)
           {
             MPI_Request req1;
-            MPI_Isend(
-              &zero, 1, MPI_UNSIGNED, p, 31, comm_pt()->mpi_comm(), &req1);
+            MPI_Isend(&zero, 1, MPI_INT, p, 31, comm_pt()->mpi_comm(), &req1);
             send_requests_sparse.push_back(req1);
           }
 
@@ -1634,9 +1633,9 @@ namespace oomph
       }
     }
 
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
     // end of master block preconditioner only operations
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
     // compute the number of rows in each block
 

@@ -1,18 +1,20 @@
+\chapter{Existing (structured) meshes}
+\hypertarget{index}{}\label{index}\index{Existing (structured) meshes@{Existing (structured) meshes}}
 This document provides a brief description of the various structured meshes that are distributed with the library. Most of these meshes were developed for specific example codes but we expect them to be useful in other problems too. Many of the meshes exist in many different variants, usually constructed by multiple inheritance. When meshes are relatively trivial variations of each other, e.\+g. a basic mesh and its refineable equivalent, we only list the mesh once. The detailed documentation for the mesh (obtained by following the link) contains the full inheritance diagram, showing the mesh\textquotesingle{}s own base classes and any meshes that are derived from it. For each mesh, we provide a link to a fully-\/documented example problem that illustrates its use.
 
 We stress that the {\bfseries{key feature of any given mesh}} is {\bfseries{its topology}}, rather than the specific shape for which it was originally developed. For instance, {\ttfamily oomph-\/lib} does not provide a mesh for the discretisation of an annular domain with quadrilateral elements. However, such a mesh is trivial to construct by deriving it from, e.\+g., the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} (a mesh that discretises a rectangular domain), and then adjusting its nodal positions. Consult the example in the \href{../../../quick_guide/html/index.html\#distorted_mesh}{\texttt{ (Not-\/\+So-\/)Quick-\/\+Guide}} for details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_conventions}{}\doxysection{Reminder\+: General conventions to facilitate the re-\/use of meshes}\label{index_conventions}
-Since mesh generation tends to be most tedious part of any numerical simulation, {\ttfamily oomph-\/lib\textquotesingle{}s} overall data structure, described in detail \href{../../../the_data_structure/html/index.html}{\texttt{ elsewhere, }} aims to facilitate the re-\/use of meshes in many different applications. For this purpose most specific {\ttfamily Finite\+Elements} in {\ttfamily oomph-\/lib} are derived by multiple inheritance, combining a \char`\"{}geometric\char`\"{} {\ttfamily Finite\+Element} (e.\+g. a line/quadrilateral/brick-\/shaped element from the {\ttfamily QElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$} family) with an equations class (such as {\ttfamily Poisson\+Equations$<$\+DIM$>$}) that implements the weak form of a specific PDE. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral nine-\/node Poisson element, {\ttfamily QPoisson\+Element$<$2,3$>$}, is derived from the {\ttfamily Poisson\+Equations$<$2$>$} equations class and the {\ttfamily QElement$<$2,3$>$} geometric {\ttfamily Finite\+Element}.
+\hypertarget{index_conventions}{}\doxysection{\texorpdfstring{Reminder\+: General conventions to facilitate the re-\/use of meshes}{Reminder: General conventions to facilitate the re-use of meshes}}\label{index_conventions}
+Since mesh generation tends to be most tedious part of any numerical simulation, {\ttfamily oomph-\/lib\textquotesingle{}s} overall data structure, described in detail \href{../../../the_data_structure/html/index.html}{\texttt{ elsewhere, }} aims to facilitate the re-\/use of meshes in many different applications. For this purpose most specific {\ttfamily Finite\+Elements} in {\ttfamily oomph-\/lib} are derived by multiple inheritance, combining a "{}geometric"{} {\ttfamily Finite\+Element} (e.\+g. a line/quadrilateral/brick-\/shaped element from the {\ttfamily QElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$} family) with an equations class (such as {\ttfamily Poisson\+Equations\texorpdfstring{$<$}{<}DIM\texorpdfstring{$>$}{>}}) that implements the weak form of a specific PDE. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral nine-\/node Poisson element, {\ttfamily QPoisson\+Element$<$2,3$>$}, is derived from the {\ttfamily Poisson\+Equations$<$2$>$} equations class and the {\ttfamily QElement$<$2,3$>$} geometric {\ttfamily Finite\+Element}.
 
 The mesh generation process is mainly concerned with the geometric properties of the mesh\textquotesingle{}s constituent {\ttfamily Finite\+Elements} (their topology, number of nodes, etc.) which are defined by the geometric {\ttfamily Finite\+Element}. This makes it possible to use a mesh that was originally developed for the solution of a Poisson equation with a {\ttfamily QPoisson\+Element$<$2,\+NNODE\+\_\+1\+D$>$}, say, for the solution of an advection-\/diffusion problem with a {\ttfamily QAdvction\+Diffusion\+Element$<$2,\+NNODE\+\_\+1\+D$>$} since both elements are derived from the same geometric {\ttfamily Finite\+Element}. Only two aspects of the mesh generation process require information that is not provided by the geometric {\ttfamily Finite\+Element\+:} 
 \begin{DoxyItemize}
 \item {\bfseries{The number of values to be stored at the various nodes in the mesh\+:}} For instance, if a mesh that is designed for quadrilateral elements from the {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$} family of geometric elements is used to solve a (scalar) Poisson equation with nine-\/noded elements, each {\ttfamily Node} has to store a single value. However, if the same mesh is used for the solution of the 2D Navier-\/\+Stokes equations with a nine-\/node quadrilateral elements of type {\ttfamily QTaylor\+Hood\+Element$<$2$>$}, nodes located at the elements\textquotesingle{} four vertices have to store three values (two velocity components and one pressure) whereas nodes located at the elements\textquotesingle{} interior and on their edges only have to store two values (the two velocity components). ~\newline
 ~\newline
 
-\item {\bfseries{The number of \char`\"{}history values\char`\"{} required by the timestepping procedure (if any)\+:}} For instance, if the mesh is used for the solution of a Poisson problem, no \char`\"{}history\char`\"{} values are required. If the same mesh is used for the solution of an unsteady heat problem, the number of history values required is determined by the {\ttfamily Time\+Stepper} used to approximate the time-\/derivative of the nodal values.
+\item {\bfseries{The number of "{}history values"{} required by the timestepping procedure (if any)\+:}} For instance, if the mesh is used for the solution of a Poisson problem, no "{}history"{} values are required. If the same mesh is used for the solution of an unsteady heat problem, the number of history values required is determined by the {\ttfamily Time\+Stepper} used to approximate the time-\/derivative of the nodal values.
 \end{DoxyItemize}The meshes used in our example codes (and all the meshes listed below) have a common structure that allows the required information to be become available to the mesh constructor\+:
 \begin{DoxyEnumerate}
 \item All meshes are templated by the element type, {\ttfamily ELEMENT}.~\newline
@@ -21,7 +23,7 @@ The mesh generation process is mainly concerned with the geometric properties of
 \item The final argument of all mesh constructors is a pointer to a {\ttfamily Time\+Stepper}. We provide a default for this argument -- a pointer to the {\ttfamily Steady$<$0$>$} timestepper, defined (as static member data) in the {\ttfamily Mesh} base class.
 \end{DoxyEnumerate}The availability of the template parameter allows the mesh generator to build elements of the required type. {\ttfamily Nodes} are generally built by the {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} function whose arguments are the {\ttfamily Node\textquotesingle{}s} local node number within the current element, and a pointer to the timestepper. These arguments provide all the information that is required to build {\ttfamily Nodes} with the right number of values (as required by the element) and history values (as required by the {\ttfamily Time\+Stepper}). When the function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} is called, it creates the new {\ttfamily Node}, stores a pointer to the newly created {\ttfamily Node} in the {\ttfamily Finite\+Element\textquotesingle{}s} own lookup scheme, and returns that pointer. This allows the pointer to the newly created {\ttfamily Node} to be stored in the {\ttfamily Mesh\textquotesingle{}s} own lookup scheme for its constituent {\ttfamily Nodes}. The \href{../../../quick_guide/html/index.html\#mesh}{\texttt{ (Not-\/\+So-\/)Quick-\/\+Guide}} contains a section that explains how to write simple meshes. \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_faq}{}\doxysection{Mesh FAQ}\label{index_faq}
+\hypertarget{index_faq}{}\doxysection{\texorpdfstring{Mesh FAQ}{Mesh FAQ}}\label{index_faq}
 When using a mesh that was originally developed for a different application, it is sometimes necessary establish the node/element/boundary numbering scheme employed by the mesh writer. While we generally assume that the mesh writer will have carefully documented his/her code, here is what to do if he/she hasn\textquotesingle{}t\+: ~\newline
 ~\newline
 
@@ -46,12 +48,12 @@ When using a mesh that was originally developed for a different application, it 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_mesh_list}{}\doxysection{Mesh list}\label{index_mesh_list}
+\hypertarget{index_mesh_list}{}\doxysection{\texorpdfstring{Mesh list}{Mesh list}}\label{index_mesh_list}
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
 {\bfseries{Mesh}}  &{\bfseries{Representative Mesh plot}}   \\\cline{1-2}
-\href{classoomph_1_1OneDMesh.html}{\texttt{ {\bfseries{ One\+DMesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1OneDMesh.html}{\texttt{ {\bfseries{ {\ttfamily One\+DMesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -67,7 +69,7 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{one_d_mesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1SimpleRectangularQuadMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1SimpleRectangularQuadMesh.html}{\texttt{ {\bfseries{ {\ttfamily Simple\+Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -82,7 +84,7 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_quadmesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ {\ttfamily Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -99,11 +101,11 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_quadmesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1TwoDAnnularMesh.html}{\texttt{ {\bfseries{ Two\+DAnnular\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1TwoDAnnularMesh.html}{\texttt{ {\bfseries{ {\ttfamily Two\+DAnnular\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This is a \char`\"{}wrapped around\char`\"{} version of {\ttfamily Rectangular\+Quad\+Mesh} discussed above. It can either be used as a complete annulus (in which case periodicity is enforced) or a gap can appear in the annulus.
+\item This is a "{}wrapped around"{} version of {\ttfamily Rectangular\+Quad\+Mesh} discussed above. It can either be used as a complete annulus (in which case periodicity is enforced) or a gap can appear in the annulus.
 \item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
@@ -115,8 +117,9 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{annular_meshes}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\label{_channel_with_leaflet}%
- \href{classoomph_1_1ChannelWithLeafletMesh.html}{\texttt{ {\bfseries{ Channel\+With\+Leaflet\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\label{index_channel_with_leaflet}%
+\Hypertarget{index_channel_with_leaflet}%
+ \href{classoomph_1_1ChannelWithLeafletMesh.html}{\texttt{ {\bfseries{ {\ttfamily Channel\+With\+Leaflet\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -135,7 +138,7 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{channel_with_leaflet_mesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1SimpleRectangularTriMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Tri\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1SimpleRectangularTriMesh.html}{\texttt{ {\bfseries{ {\ttfamily Simple\+Rectangular\+Tri\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -144,13 +147,13 @@ When using a mesh that was originally developed for a different application, it 
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item This mesh is used in the self-\/test code \href{../../../../self_test/poisson/convergence_tests/t_convergence_2d.cc}{\texttt{ {\ttfamily t\+\_\+convergence\+\_\+2d.\+cc} }}
+\item This mesh is used in the self-\/test code \href{../../../../demo_drivers/self_test/poisson/convergence_tests/t_convergence_2d.cc}{\texttt{ {\ttfamily t\+\_\+convergence\+\_\+2d.\+cc} }}
 \end{DoxyItemize}& 
 \begin{DoxyImageNoCaption}
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_trimesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1FishMesh.html}{\texttt{ {\bfseries{ Fish\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\href{classoomph_1_1FishMesh.html}{\texttt{ {\bfseries{ {\ttfamily Fish\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -162,7 +165,7 @@ When using a mesh that was originally developed for a different application, it 
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item The refineable variant of this mesh is used in the driver code for \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ the adaptive solution of the 2D Poisson equation in a fish-\/shaped domain. }}
+\item The refineable variant of this mesh is used in the driver code for \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ the adaptive solution of the 2D Poisson equation in a fish-\/shaped domain.}}
 \end{DoxyItemize}& 
 \begin{DoxyImageNoCaption}
   \mbox{\includegraphics[width=0.75\textwidth]{fish_mesh}}
@@ -173,8 +176,9 @@ When using a mesh that was originally developed for a different application, it 
 ~\newline
  \end{center} 
 
-\begin{center} \label{_collapsible_channel}%
- \href{classoomph_1_1CollapsibleChannelMesh.html}{\texttt{ {\bfseries{ Collapsible\+Channel\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \label{index_collapsible_channel}%
+\Hypertarget{index_collapsible_channel}%
+ \href{classoomph_1_1CollapsibleChannelMesh.html}{\texttt{ {\bfseries{ {\ttfamily Collapsible\+Channel\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -198,13 +202,13 @@ When using a mesh that was originally developed for a different application, it 
 
 \begin{center} \end{center} 
 
-\begin{center} \href{classoomph_1_1CylinderWithFlagMesh.html}{\texttt{ {\bfseries{ Cylinder\+With\+Flag\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1CylinderWithFlagMesh.html}{\texttt{ {\bfseries{ {\ttfamily Cylinder\+With\+Flag\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This {\ttfamily Mesh} was mainly developed for the solution of Turek \& Hron\textquotesingle{}s FSI benchmark problems. The curvilinear boundaries of the cylinder and the \char`\"{}flag\char`\"{} are represented by {\ttfamily Geom\+Objects}.
+\item This {\ttfamily Mesh} was mainly developed for the solution of Turek \& Hron\textquotesingle{}s FSI benchmark problems. The curvilinear boundaries of the cylinder and the "{}flag"{} are represented by {\ttfamily Geom\+Objects}.
 \item A refineable version of the mesh exists.
-\item The node-\/update in response to changes in the shape of the \char`\"{}flag\char`\"{} can be performed by a version based on an {\ttfamily Algebraic\+Mesh} or using a {\ttfamily Domain/\+Macro\+Element} -\/ based node update.
+\item The node-\/update in response to changes in the shape of the "{}flag"{} can be performed by a version based on an {\ttfamily Algebraic\+Mesh} or using a {\ttfamily Domain/\+Macro\+Element} -\/ based node update.
 \item The bulk elements have to be derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
@@ -220,7 +224,7 @@ When using a mesh that was originally developed for a different application, it 
 
 \begin{center} \end{center} 
 
-\begin{center} \href{classoomph_1_1BrethertonSpineMesh.html}{\texttt{ {\bfseries{ Bretherton\+Spine\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1BrethertonSpineMesh.html}{\texttt{ {\bfseries{ {\ttfamily Bretherton\+Spine\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -241,7 +245,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1QuarterCircleSectorMesh.html}{\texttt{ {\bfseries{ Quarter\+Circle\+Sector\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1QuarterCircleSectorMesh.html}{\texttt{ {\bfseries{ {\ttfamily Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -266,7 +270,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1SimpleCubicMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1SimpleCubicMesh.html}{\texttt{ {\bfseries{ {\ttfamily Simple\+Cubic\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -275,7 +279,7 @@ When using a mesh that was originally developed for a different application, it 
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item This mesh is used in the self-\/test code \href{../../../../self_test/poisson/convergence_tests/q_convergence_3d.cc}{\texttt{ {\ttfamily q\+\_\+convergence\+\_\+3d.\+cc} }}
+\item This mesh is used in the self-\/test code \href{../../../../demo_drivers/self_test/poisson/convergence_tests/q_convergence_3d.cc}{\texttt{ {\ttfamily q\+\_\+convergence\+\_\+3d.\+cc} }}
 \end{DoxyItemize}\end{center} 
 
 \begin{center}  
@@ -287,7 +291,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1SimpleCubicTetMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Tet\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1SimpleCubicTetMesh.html}{\texttt{ {\bfseries{ {\ttfamily Simple\+Cubic\+Tet\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -296,7 +300,7 @@ When using a mesh that was originally developed for a different application, it 
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item This mesh is used in the self-\/test code \href{../../../../self_test/poisson/convergence_tests/t_convergence_3d.cc}{\texttt{ {\ttfamily t\+\_\+convergence\+\_\+3d.\+cc} }}
+\item This mesh is used in the self-\/test code \href{../../../../demo_drivers/self_test/poisson/convergence_tests/t_convergence_3d.cc}{\texttt{ {\ttfamily t\+\_\+convergence\+\_\+3d.\+cc} }}
 \end{DoxyItemize}\end{center} 
 
 \begin{center}  
@@ -308,7 +312,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1QuarterTubeMesh.html}{\texttt{ {\bfseries{ Quarter\+Tube\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1QuarterTubeMesh.html}{\texttt{ {\bfseries{ {\ttfamily Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -333,7 +337,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1TubeMesh.html}{\texttt{ {\bfseries{ Tube\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1TubeMesh.html}{\texttt{ {\bfseries{ {\ttfamily Tube\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -356,7 +360,7 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1EighthSphereMesh.html}{\texttt{ {\bfseries{ Eighth\+Sphere\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1EighthSphereMesh.html}{\texttt{ {\bfseries{ {\ttfamily Eighth\+Sphere\+Mesh\texorpdfstring{$<$}{<}ELEMENT\texorpdfstring{$>$}{>}} }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
@@ -379,5 +383,5 @@ When using a mesh that was originally developed for a different application, it 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
-A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,130 @@
+\doxysection{annular\+\_\+mesh.\+template.\+cc}
+\hypertarget{annular__mesh_8template_8cc_source}{}\label{annular__mesh_8template_8cc_source}\index{annular\_mesh.template.cc@{annular\_mesh.template.cc}}
+\mbox{\hyperlink{annular__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_ANNULAR\_MESH\_TEMPLATE\_HEADER}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00027}00027\ \textcolor{preprocessor}{\#define\ OOMPH\_ANNULAR\_MESH\_TEMPLATE\_HEADER}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_ANNULAR\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00030}00030\ \textcolor{preprocessor}{\#error\ \_\_FILE\_\_\ should\ only\ be\ included\ from\ annular\_mesh.h.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00031}00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ OOMPH\_ANNULAR\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00033}00033\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00034}00034\ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00035}00035\ \ \ \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00036}00036\ \textcolor{comment}{\ \ ///\ Helper\ function\ to\ Wrap\ mesh\ into\ annular\ shape}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00037}00037\ \textcolor{comment}{}\ \ \textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00038}00038\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00039}\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{00039}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{TwoDAnnularMesh<ELEMENT>::wrap\_into\_annular\_shape}}(}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ a,}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ h,}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{azimuthal\_fraction}},}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{phi}})}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00044}00044\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ hole}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Ellipse}{Ellipse}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{ellipse}}(a,\ a);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ Set\ all\ the\ initial\ positions\ of\ the\ nodes}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ xi(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{base}}(2);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ N(2);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{n\_node}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}++)}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00055}00055\ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00056}00056\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00058}00058\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ angle\ of\ the\ node\ -\/-\/\ rotate\ such\ that\ jump\ in\ angle}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00059}00059\ \ \ \ \ \ \ \textcolor{comment}{//\ appears\ at\ periodic\ boundary.\ Shrink\ domain\ slightly}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00060}00060\ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ angle\ unique}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00061}00061\ \ \ \ \ \ \ xi[0]\ =\ (1.0\ -\/\ 1.0e-\/10)\ *\ (-\/\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{azimuthal\_fraction}}\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0))\ *\ 2.0\ *}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a61ae4ddbc59fbd0797ebb671e48c8d6d}{MathematicalConstants::Pi}}\ +}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a61ae4ddbc59fbd0797ebb671e48c8d6d}{MathematicalConstants::Pi}}\ -\/}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1.0\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{azimuthal\_fraction}})\ *\ 2.0\ *\ \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a61ae4ddbc59fbd0797ebb671e48c8d6d}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00066}00066\ \ \ \ \ \ \ \textcolor{comment}{//\ Rotate}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00067}00067\ \ \ \ \ \ \ xi[0]\ +=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{phi}};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00069}00069\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ node's\ fraction\ in\ the\ radial\ direction}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00070}00070\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ w\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00072}00072\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ position\ on\ the\ ellipse\ base}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00073}00073\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ellipse}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a0e8b458bf2047}{position}}(xi,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00075}00075\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ unit\ normal,\ if\ it\ were\ a\ circle\ ,\ by\ normalising\ the\ base}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00076}00076\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[0]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[1]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[1]);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00077}00077\ \ \ \ \ \ \ N[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[0]\ /\ norm;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00078}00078\ \ \ \ \ \ \ N[1]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[1]\ /\ norm;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00080}00080\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ circular\ film\ from\ the\ ellipse}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00081}00081\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[0]\ +\ w\ *\ (h\ +\ a\ -\/\ norm)\ *\ N[0];}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00082}00082\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{base}}[1]\ +\ w\ *\ (h\ +\ a\ -\/\ norm)\ *\ N[1];}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00084}00084\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ boundary\ coordinates}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00085}00085\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{xi\_bound}}(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00087}00087\ \ \ \ \ \ \ \textcolor{comment}{//\ Polar\ angle\ for\ boundary\ coordinate\ on\ boundary\ 0}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00088}00088\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>is\_on\_boundary(0))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00089}00089\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00090}00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{atan2}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00091}00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>set\_coordinates\_on\_boundary(0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00092}00092\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00094}00094\ \ \ \ \ \ \ \textcolor{comment}{//\ Radius\ for\ boundary\ coordinate\ on\ boundary\ 1}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00095}00095\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>is\_on\_boundary(1))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00096}00096\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{pow}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0),\ 2)\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pow}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1),\ 2));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00098}00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>set\_coordinates\_on\_boundary(1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00099}00099\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00101}00101\ \ \ \ \ \ \ \textcolor{comment}{//\ Polar\ angle\ for\ boundary\ coordinate\ on\ boundary\ 2}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00102}00102\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>is\_on\_boundary(2))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00103}00103\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00104}00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{atan2}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>set\_coordinates\_on\_boundary(2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00106}00106\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00108}00108\ \ \ \ \ \ \ \textcolor{comment}{//\ Radius\ for\ boundary\ coordinate\ on\ boundary\ 3}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00109}00109\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>is\_on\_boundary(3))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00110}00110\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{pow}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(0),\ 2)\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pow}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(1),\ 2));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00112}00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>set\_coordinates\_on\_boundary(3,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{xi\_bound}});}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00113}00113\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00116}00116\ \ \ \ \ this-\/>set\_boundary\_coordinate\_exists(0);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00117}00117\ \ \ \ \ this-\/>set\_boundary\_coordinate\_exists(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00118}00118\ \ \ \ \ this-\/>set\_boundary\_coordinate\_exists(2);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00119}00119\ \ \ \ \ this-\/>set\_boundary\_coordinate\_exists(3);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00120}00120\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00122}00122\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00124}00124\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

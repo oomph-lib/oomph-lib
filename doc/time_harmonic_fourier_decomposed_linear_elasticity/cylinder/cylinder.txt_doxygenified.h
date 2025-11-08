@@ -507,5 +507,5 @@ demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinde
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

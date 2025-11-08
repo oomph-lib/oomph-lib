@@ -581,7 +581,7 @@ rebuild the global mesh.
 <HR>
 <HR>
 
-\section beforeadapt Actions after the mesh adaptation
+\section beforeadapt2 Actions after the mesh adaptation
 Once the mesh has been adapted, we (re-)create the prescribed 
 traction elements and rebuild the global mesh. 
 We also have to pass the pointers to prescribed traction function
@@ -718,5 +718,5 @@ demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

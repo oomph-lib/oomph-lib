@@ -163,8 +163,7 @@ member, the pointer to the source function.
 \skipline public:
 \until end of problem class
 
-[See the discussion of the 
-<A HREF="../../../poisson/one_d_poisson/html/index.html">
+[See the discussion of the <A HREF="../../../poisson/one_d_poisson/html/index.html">
 1D Poisson problem</A> for a more detailed discussion of the
 function type PoissonEquations<2>::PoissonSourceFctPt.]
 
@@ -222,7 +221,7 @@ values of \f$ \alpha \f$ and \f$ \tan \Phi \f$.
 
 
 [See the discussion of the  
-<A HREF="../../../poisson//one_d_poisson/html/index.html">
+<A HREF="../../../poisson/one_d_poisson/html/index.html">
 1D Poisson problem</A> for a more detailed discussion of the
 pure virtual functions  \c Problem::actions_before_newton_solve() and 
  \c Problem::actions_after_newton_solve().]
@@ -318,7 +317,7 @@ To avoid the constant re-compilation of the mesh sources,
 all \c oomph-lib mesh objects are contained in two
 separate source files. In the case of the \c SimpleRectangularMesh,
 the class definition and function prototypes are contained in 
-the small auxiliary header file \c simple_rectangular_quadmesh.template.h,
+the small auxiliary header file \c simple_rectangular_quadmesh.h,
 while the actual function definitions are contained in 
 \c simple_rectangular_quadmesh.template.cc. These are the only
 sources that the mesh-writer has to provide. The header file
@@ -455,5 +454,5 @@ demo_drivers/poisson/two_d_poisson/two_d_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -357,9 +357,9 @@ namespace Global_Parameters
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -1022,14 +1022,14 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
  unsigned n_plot = 5; 
 
  // Output solid solution
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
  some_file.close();
  
  // Output fluid solution
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  fluid_mesh_pt()->output(some_file,n_plot);
@@ -1037,7 +1037,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
 
 
 //Output the traction
- sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
 // Loop over the traction meshes

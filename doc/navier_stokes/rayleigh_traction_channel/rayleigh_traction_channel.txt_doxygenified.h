@@ -452,5 +452,5 @@ demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.c
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

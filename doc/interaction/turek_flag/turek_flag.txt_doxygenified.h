@@ -339,7 +339,7 @@ overview of the main steps in the \c Problem construction:
 <HR>
 
 
-\section parameters The global parameters
+\section parameters2 The global parameters
 
 As usual, We use a namespace to define the (many) global parameters,
 using default assignments for the FSI1 test case.
@@ -708,5 +708,5 @@ demo_drivers/interaction/turek_flag/turek_flag.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

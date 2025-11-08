@@ -558,5 +558,5 @@ demo_drivers/interaction/pseudo_solid_fsi_channel_with_leaflet/fsi_channel_with_
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

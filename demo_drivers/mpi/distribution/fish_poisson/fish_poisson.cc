@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -184,7 +184,7 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -263,7 +263,7 @@ void solve_with_incremental_adaptation()
      // Get the partition to be used from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition,0);
-     sprintf(filename,"fish_incremental_partition.dat");
+     snprintf(filename, sizeof(filename), "fish_incremental_partition.dat");
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -417,7 +417,7 @@ void solve_with_fully_automatic_adaptation()
  // Get the partition to be used from file
  unsigned n_partition=problem.mesh_pt()->nelement();
  Vector<unsigned> element_partition(n_partition,0);
- sprintf(filename,"fish_fully_automatic_partition.dat");
+ snprintf(filename, sizeof(filename), "fish_fully_automatic_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_partition;e++)
@@ -491,7 +491,7 @@ void solve_with_selected_refinement_pattern()
  // Get the partition to be used from file
  unsigned n_partition=problem.mesh_pt()->nelement();
  Vector<unsigned> element_partition(n_partition,0);
- sprintf(filename,"fish_selective_partition.dat");
+ snprintf(filename, sizeof(filename), "fish_selective_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_partition;e++)

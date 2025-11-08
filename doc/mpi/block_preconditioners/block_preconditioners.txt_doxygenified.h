@@ -2646,5 +2646,5 @@ demo_drivers/mpi/solvers/fsi_channel_with_leaflet.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

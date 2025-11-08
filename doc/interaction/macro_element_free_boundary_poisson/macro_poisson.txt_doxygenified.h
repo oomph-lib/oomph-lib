@@ -572,5 +572,5 @@ demo_drivers/interaction/free_boundary_poisson/macro_element_free_boundary_poiss
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -1,6 +1,6 @@
-\hypertarget{adaptive__bubble__in__channel_8cc}{}\doxysection{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc File Reference}
-\label{adaptive__bubble__in__channel_8cc}\index{adaptive\_bubble\_in\_channel.cc@{adaptive\_bubble\_in\_channel.cc}}
-\doxysubsection*{Classes}
+\doxysection{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc File Reference}
+\hypertarget{adaptive__bubble__in__channel_8cc}{}\label{adaptive__bubble__in__channel_8cc}\index{adaptive\_bubble\_in\_channel.cc@{adaptive\_bubble\_in\_channel.cc}}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement}{oomph\+::\+My\+Taylor\+Hood\+Element}}
@@ -10,20 +10,20 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01MyTaylorHoodElement_01_4}{
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01MyTaylorHoodElement_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ My\+Taylor\+Hood\+Element $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classBubbleInChannelProblem}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$}}
-\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////// //////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Namespaces}
+\begin{DoxyCompactList}\small\item\em Problem class to simulate inviscid bubble propagating along 2D channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \item 
- \mbox{\hyperlink{namespaceProblem__Parameter}{Problem\+\_\+\+Parameter}}
-\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+namespace \mbox{\hyperlink{namespaceProblem__Parameter}{Problem\+\_\+\+Parameter}}
+\begin{DoxyCompactList}\small\item\em Namespace for Problem Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+int \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \begin{DoxyCompactList}\small\item\em Driver code for moving bubble problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 Doc\+Info \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}}
@@ -36,13 +36,13 @@ double \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f8
 \begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Problem\+\_\+\+Parameter\+::\+Radius}} = 0.\+25
 \begin{DoxyCompactList}\small\item\em Initial radius of bubble. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Problem\+\_\+\+Parameter\+::\+Volume}} = -\/Mathematical\+Constants\+::\+Pi$\ast$Radius$\ast$Radius
+double \mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Problem\+\_\+\+Parameter\+::\+Volume}} = -\/Mathematical\+Constants\+::\+Pi\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}
 \begin{DoxyCompactList}\small\item\em Volume of the bubble (negative because it\textquotesingle{}s outside the fluid!) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a}{Problem\+\_\+\+Parameter\+::\+Inflow\+\_\+veloc\+\_\+magnitude}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b}{Problem\+\_\+\+Parameter\+::\+Length}} = 3.\+0
 \begin{DoxyCompactList}\small\item\em Length of the channel. \end{DoxyCompactList}\item 
-Constitutive\+Law $\ast$ \mbox{\hyperlink{namespaceProblem__Parameter_a810f05c8d3e3331aed75643557d1057c}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceProblem__Parameter_a810f05c8d3e3331aed75643557d1057c}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
 \begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\item 
 ofstream \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
@@ -51,11 +51,11 @@ ofstream \mbox{\hyperlink{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\Hypertarget{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
 \index{adaptive\_bubble\_in\_channel.cc@{adaptive\_bubble\_in\_channel.cc}!main@{main}}
 \index{main@{main}!adaptive\_bubble\_in\_channel.cc@{adaptive\_bubble\_in\_channel.cc}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
 
 
 
@@ -63,9 +63,9 @@ Driver code for moving bubble problem.
 
 
 
-Definition at line 1272 of file adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{1272}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
 
 
 
-References Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup(), Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt, Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution(), Problem\+\_\+\+Parameter\+::\+Inflow\+\_\+veloc\+\_\+magnitude, Problem\+\_\+\+Parameter\+::\+Norm\+\_\+file, Problem\+\_\+\+Parameter\+::\+Nu, and Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file.
+References \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01003}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00398}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01156}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00392}{Problem\+\_\+\+Parameter\+::\+Inflow\+\_\+veloc\+\_\+magnitude}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00407}{Problem\+\_\+\+Parameter\+::\+Norm\+\_\+file}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00381}{Problem\+\_\+\+Parameter\+::\+Nu}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00401}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}.
 

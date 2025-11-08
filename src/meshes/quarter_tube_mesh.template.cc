@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_QUARTER_TUBE_MESH_TEMPLATE_CC
-#define OOMPH_QUARTER_TUBE_MESH_TEMPLATE_CC
+#ifndef OOMPH_QUARTER_TUBE_MESH_TEMPLATE_HEADER
+#define OOMPH_QUARTER_TUBE_MESH_TEMPLATE_HEADER
 
-#include "quarter_tube_mesh.template.h"
-
+#ifndef OOMPH_QUARTER_TUBE_MESH_HEADER
+#error __FILE__ should only be included from quarter_tube_mesh.h.
+#endif // OOMPH_QUARTER_TUBE_MESH_HEADER
 
 namespace oomph
 {
@@ -59,7 +60,7 @@ namespace oomph
     set_nboundary(5);
 
     // We have only bothered to parametrise boundary 3
-    Boundary_coordinate_exists[3] = true;
+    set_boundary_coordinate_exists(3);
 
     // Allocate the store for the elements
     unsigned nelem = 3 * nlayer;
@@ -79,7 +80,6 @@ namespace oomph
       (n_p * n_p + (n_p - 1) * n_p + (n_p - 1) * (n_p - 1)) *
       (1 + nlayer * (n_p - 1));
     Node_pt.resize(nnodes_total);
-
 
     Vector<double> s(3);
     Vector<double> r(3);
@@ -144,7 +144,6 @@ namespace oomph
           // Macro element 0: Central box
           //-----------------------------
         case 0:
-
 
           // Loop over rows in z/s_2-direction
           for (unsigned i2 = 0; i2 < n_p; i2++)
@@ -243,13 +242,11 @@ namespace oomph
             }
           }
 
-
           break;
 
           // Macro element 1: Lower right box
           //---------------------------------
         case 1:
-
 
           // Loop over rows in z/s_2-direction
           for (unsigned i2 = 0; i2 < n_p; i2++)
@@ -279,7 +276,6 @@ namespace oomph
                   unsigned i2_neigh = n_p - 1;
                   unsigned jnod_local_neigh =
                     i0_neigh + i1_neigh * n_p + i2_neigh * n_p * n_p;
-
 
                   // Check:
                   for (unsigned i = 0; i < 3; i++)
@@ -320,7 +316,6 @@ namespace oomph
                     unsigned i2_neigh = i2;
                     unsigned jnod_local_neigh =
                       i0_neigh + i1_neigh * n_p + i2_neigh * n_p * n_p;
-
 
                     // Check:
                     for (unsigned i = 0; i < 3; i++)
@@ -383,7 +378,6 @@ namespace oomph
                     this->convert_to_boundary_node(Node_pt[node_count]);
                     add_boundary_node(3, Node_pt[node_count]);
 
-
                     // Get axial boundary coordinate
                     zeta[0] = Xi_lo[0] +
                               (double(ilayer) + double(i2) / double(n_p - 1)) *
@@ -404,7 +398,6 @@ namespace oomph
           }
 
           break;
-
 
           // Macro element 2: Top left box
           //--------------------------------
@@ -505,7 +498,6 @@ namespace oomph
                       finite_element_pt(ielem_neigh)->node_pt(jnod_local_neigh);
                   }
 
-
                   // Duplicate node: kill and set pointer to central element
                   if ((i1 == 0) && (i0 != n_p - 1))
                   {
@@ -573,13 +565,11 @@ namespace oomph
                       add_boundary_node(1, Node_pt[node_count]);
                     }
 
-
                     // Tube wall: Boundary 3
                     if (i1 == n_p - 1)
                     {
                       this->convert_to_boundary_node(Node_pt[node_count]);
                       add_boundary_node(3, Node_pt[node_count]);
-
 
                       // Get axial boundary coordinate
                       zeta[0] =
@@ -624,12 +614,11 @@ namespace oomph
     setup_boundary_element_info();
   }
 
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
   // Algebraic-mesh-version of RefineableQuarterTubeMesh
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //======================================================================
   /// Setup algebraic node update data, based on 3 regions, each
@@ -1041,7 +1030,6 @@ namespace oomph
     node_pt->x(t, 2) = (r_br[2] + r_tl[2]) * 0.5;
   }
 
-
   //====================================================================
   /// Algebraic update function: Update in lower-right region according
   /// to wall shape at time level t (t=0: present; t>0: previous)
@@ -1278,7 +1266,6 @@ namespace oomph
     node_pt->x(t, 2) = r_top[2] + rho_1 * (r_wall[2] - r_top[2]);
   }
 
-
   //======================================================================
   /// Update algebraic update function for nodes in region defined by
   /// region_id.
@@ -1331,7 +1318,6 @@ namespace oomph
     // Local coordinate in this wall element.
     ref_value[3] = s_br[0];
     ref_value[4] = s_br[1];
-
 
     // Update reference to wall point in upper left corner
     //----------------------------------------------------
@@ -1394,7 +1380,6 @@ namespace oomph
                                   geom_object_pt, // vector of geom objects
                                   ref_value); // vector of ref. vals
   }
-
 
 } // namespace oomph
 #endif

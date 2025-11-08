@@ -733,5 +733,5 @@ demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

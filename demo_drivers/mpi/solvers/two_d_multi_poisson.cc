@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -440,7 +440,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 #endif
 
  
- sprintf(filename,"%s/iterative_solver_convergence.dat",
+ snprintf(filename, sizeof(filename), "%s/iterative_solver_convergence.dat",
          doc_info.directory().c_str());
  some_file.open(filename);
  some_file << "Number of linear solver iterations: " 
@@ -450,7 +450,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -458,7 +458,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //---------------------- 
- sprintf(filename,"%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,npts,TanhSolnForMultiPoisson::get_exact_u); 
@@ -468,7 +468,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm;
- sprintf(filename,"%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForMultiPoisson::get_exact_u,
@@ -570,7 +570,7 @@ int main(int argc, char* argv[])
    // Read in partitioning from disk
    std::ifstream input_file;
    char filename[100];
-   sprintf(filename,"multi_poisson_partition.dat");
+   snprintf(filename, sizeof(filename), "multi_poisson_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)
@@ -598,7 +598,7 @@ int main(int argc, char* argv[])
    // Write partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"out_multi_poisson_partition.dat");
+   snprintf(filename, sizeof(filename), "out_multi_poisson_partition.dat");
    output_file.open(filename);
    for (unsigned e=0;e<n_element;e++)
     {

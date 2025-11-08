@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -31,9 +31,9 @@
 
 // oomph-lib headers
 #include "linear_elasticity_elements.h"
-#include "../generic/refineable_quad_element.h"
-#include "../generic/refineable_brick_element.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/refineable_brick_element.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {
@@ -182,9 +182,9 @@ namespace oomph
   };
 
 
-  /// ///////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
 
   //========================================================================
   /// Class for refineable QLinearElasticityElement elements

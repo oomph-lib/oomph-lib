@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,8 @@
 //LIC// 
 //LIC//====================================================================
 //Driver for refineable Young Laplace problem
+
+#include <cassert>
 
 //Generic routines
 #include "generic.h"
@@ -436,7 +438,7 @@ void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  ofstream some_file;
  char filename[100];
  //YoungLaplaceEquations::Output_meniscus_and_spines=false;
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -451,20 +453,20 @@ void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
   {
    
    ofstream tangent_file;
-   sprintf(filename,"%s/tangent_to_contact_line%i.dat",
+   snprintf(filename, sizeof(filename), "%s/tangent_to_contact_line%i.dat",
            doc_info.directory().c_str(),
            doc_info.number());
    tangent_file.open(filename);
 
    ofstream normal_file;
-   sprintf(filename,"%s/normal_to_contact_line%i.dat",
+   snprintf(filename, sizeof(filename), "%s/normal_to_contact_line%i.dat",
            doc_info.directory().c_str(),
            doc_info.number());
    normal_file.open(filename);
    
 
    ofstream contact_angle_file;
-   sprintf(filename,"%s/contact_angle%i.dat",
+   snprintf(filename, sizeof(filename), "%s/contact_angle%i.dat",
            doc_info.directory().c_str(),
            doc_info.number());
    contact_angle_file.open(filename);
@@ -556,7 +558,7 @@ void run_it(const string& output_directory)
  
  // Open a trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Write kappa, exact kappa if exists and height values

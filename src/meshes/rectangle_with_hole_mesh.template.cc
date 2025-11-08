@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_RECTANGLE_WITH_HOLE_MESH_CC
-#define OOMPH_RECTANGLE_WITH_HOLE_MESH_CC
+#ifndef OOMPH_RECTANGLE_WITH_HOLE_MESH_TEMPLATE_HEADER
+#define OOMPH_RECTANGLE_WITH_HOLE_MESH_TEMPLATE_HEADER
 
-#include "../generic/Qelements.h"
-#include "rectangle_with_hole_mesh.template.h"
+#ifndef OOMPH_RECTANGLE_WITH_HOLE_MESH_HEADER
+#error __FILE__ should only be included from rectangle_with_hole_mesh.h.
+#endif // OOMPH_RECTANGLE_WITH_HOLE_MESH_HEADER
 
+#include "generic/Qelements.h"
 
 namespace oomph
 {

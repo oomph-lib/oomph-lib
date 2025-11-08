@@ -170,5 +170,5 @@ demo_drivers/navier_stokes/bretherton/bretherton.cc</A>
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

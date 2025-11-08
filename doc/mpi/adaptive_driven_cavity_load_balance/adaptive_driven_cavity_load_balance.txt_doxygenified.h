@@ -317,5 +317,5 @@ demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

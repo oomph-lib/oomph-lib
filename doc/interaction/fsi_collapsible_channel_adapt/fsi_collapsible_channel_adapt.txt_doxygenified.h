@@ -113,10 +113,10 @@ would be completely irrelevant for his/her problem.
 
 For instance, the full interface to the
 constructor of the \c OneDLagrangianMesh, defined in
-<A HREF="../../../../src/meshes/one_d_lagrangian_mesh.template.h">
-one_d_lagrangian_mesh.template.h</A> is given by
+<A HREF="../../../../src/meshes/one_d_lagrangian_mesh.h">
+one_d_lagrangian_mesh.h</A> is given by
 
-\dontinclude one_d_lagrangian_mesh.template.h
+\dontinclude one_d_lagrangian_mesh.h
 \skipline Constructor:
 \until &Mesh::Default_TimeStepper);
 
@@ -299,7 +299,7 @@ is derived by multiple inheritance from the non-refineable
 base class. The constructor calls the constructors of both underlying
 meshes and then sets up the \c QuadTreeForest: 
 
-\dontinclude collapsible_channel_mesh.template.h
+\dontinclude collapsible_channel_mesh.h
 \skipline start_of_refineable_algebraic
 \until }
 
@@ -529,5 +529,5 @@ demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel_adapt.c
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -1,5 +1,5 @@
-\hypertarget{classoomph_1_1VolumeConstraintElement}{}\doxysection{oomph\+::Volume\+Constraint\+Element Class Reference}
-\label{classoomph_1_1VolumeConstraintElement}\index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
+\doxysection{oomph\+::Volume\+Constraint\+Element Class Reference}
+\hypertarget{classoomph_1_1VolumeConstraintElement}{}\label{classoomph_1_1VolumeConstraintElement}\index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 
 
 A class that is used to implement the constraint that the fluid volume in a region bounded by associated Face\+Elements (attached, e.\+g., to the mesh boundaries that enclose a bubble) must take a specific value. This Generalised\+Element is used only to store the desired volume and a pointer to the (usually pressure) freedom that must be traded for the volume constraint.  
@@ -15,96 +15,96 @@ Inheritance diagram for oomph\+::Volume\+Constraint\+Element\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{classoomph_1_1VolumeConstraintElement}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660}{Volume\+Constraint\+Element}} (double $\ast$prescribed\+\_\+volume\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to target volume. \char`\"{}\+Pressure\char`\"{} value that \char`\"{}traded\char`\"{} for the volume contraint is created internally (as a Data item with a single pressure value) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9}{Volume\+Constraint\+Element}} (double $\ast$prescribed\+\_\+volume\+\_\+pt, Data $\ast$\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a60d17437a54648747c956b7a7067c592}{p\+\_\+traded\+\_\+data\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}{index\+\_\+of\+\_\+traded\+\_\+pressure}})
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to target volume, pointer to Data item whose value specified by index\+\_\+of\+\_\+traded\+\_\+pressure represents the \char`\"{}\+Pressure\char`\"{} value that \char`\"{}traded\char`\"{} for the volume contraint. The Data is stored as external Data for this element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb}{$\sim$\+Volume\+Constraint\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660}{Volume\+Constraint\+Element}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{prescribed\+\_\+volume\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to target volume. "{}\+Pressure"{} value that "{}traded"{} for the volume contraint is created internally (as a Data item with a single pressure value) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9}{Volume\+Constraint\+Element}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{prescribed\+\_\+volume\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ae466c2f4387ec806e0a0329bd74e60b7}{p\+\_\+traded\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}{index\+\_\+of\+\_\+traded\+\_\+pressure}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to target volume, pointer to Data item whose value specified by index\+\_\+of\+\_\+traded\+\_\+pressure represents the "{}\+Pressure"{} value that "{}traded"{} for the volume contraint. The Data is stored as external Data for this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb}{\texorpdfstring{$\sim$}{\string~}\+Volume\+Constraint\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
-Data $\ast$ \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a60d17437a54648747c956b7a7067c592}{p\+\_\+traded\+\_\+data\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ae466c2f4387ec806e0a0329bd74e60b7}{p\+\_\+traded\+\_\+data\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to Data that contains the traded pressure. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974}{p\+\_\+traded}} ()
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974}{p\+\_\+traded}} ()
 \begin{DoxyCompactList}\small\item\em Return the traded pressure value. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}{index\+\_\+of\+\_\+traded\+\_\+pressure}} ()
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}{index\+\_\+of\+\_\+traded\+\_\+pressure}} ()
 \begin{DoxyCompactList}\small\item\em Return the index of Data object at which the traded pressure is stored. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals for the volume constraint. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{jacobian}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals and jacobian for the volume constraint. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{mass\+\_\+matrix}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals, jacobian and mass matrix for the volume constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Member Functions}
+\doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d}{ptraded\+\_\+local\+\_\+eqn}} ()
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d}{ptraded\+\_\+local\+\_\+eqn}} ()
 \begin{DoxyCompactList}\small\item\em The local eqn number for the traded pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint}} (Vector$<$ double $>$ \&residuals)
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}})
 \begin{DoxyCompactList}\small\item\em Fill in the residuals for the volume constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f}{Prescribed\+\_\+volume\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f}{Prescribed\+\_\+volume\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the desired value of the volume. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}
 \begin{DoxyCompactList}\small\item\em The Data that contains the traded pressure is stored as external or internal Data for the element. What is its index in these containers? \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{bool}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em The Data that contains the traded pressure is stored as external or internal Data for the element. Which one? \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}
 \begin{DoxyCompactList}\small\item\em Index of the value in traded pressure data that corresponds to the traded pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 A class that is used to implement the constraint that the fluid volume in a region bounded by associated Face\+Elements (attached, e.\+g., to the mesh boundaries that enclose a bubble) must take a specific value. This Generalised\+Element is used only to store the desired volume and a pointer to the (usually pressure) freedom that must be traded for the volume constraint. 
 
-Definition at line 65 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00065}{65}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660}\label{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660}\label{classoomph_1_1VolumeConstraintElement_a641eea5633b1ddd2d9f79e5731947660} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!VolumeConstraintElement@{VolumeConstraintElement}}
 \index{VolumeConstraintElement@{VolumeConstraintElement}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{VolumeConstraintElement()}{VolumeConstraintElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}\item[{double $\ast$}]{prescribed\+\_\+volume\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \texorpdfstring{$\ast$}{*}}]{prescribed\+\_\+volume\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
-Constructor\+: Pass pointer to target volume. \char`\"{}\+Pressure\char`\"{} value that \char`\"{}traded\char`\"{} for the volume contraint is created internally (as a Data item with a single pressure value) 
+Constructor\+: Pass pointer to target volume. "{}\+Pressure"{} value that "{}traded"{} for the volume contraint is created internally (as a Data item with a single pressure value) 
 
 
 
-Definition at line 60 of file constrained\+\_\+volume\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00060}{60}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
 
 
 
-References External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure, Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value, Prescribed\+\_\+volume\+\_\+pt, and Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data.
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00074}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00069}{Prescribed\+\_\+volume\+\_\+pt}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00078}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9}\label{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9}\label{classoomph_1_1VolumeConstraintElement_adc0fc16f4fc708fb09d70cb791a6c6b9} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!VolumeConstraintElement@{VolumeConstraintElement}}
 \index{VolumeConstraintElement@{VolumeConstraintElement}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{VolumeConstraintElement()}{VolumeConstraintElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}\item[{double $\ast$}]{prescribed\+\_\+volume\+\_\+pt,  }\item[{Data $\ast$}]{p\+\_\+traded\+\_\+data\+\_\+pt,  }\item[{const unsigned \&}]{index\+\_\+of\+\_\+traded\+\_\+pressure }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \texorpdfstring{$\ast$}{*}}]{prescribed\+\_\+volume\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Data}} \texorpdfstring{$\ast$}{*}}]{p\+\_\+traded\+\_\+data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{index\+\_\+of\+\_\+traded\+\_\+pressure }\end{DoxyParamCaption})}
 
 
 
-Constructor\+: Pass pointer to target volume, pointer to Data item whose value specified by index\+\_\+of\+\_\+traded\+\_\+pressure represents the \char`\"{}\+Pressure\char`\"{} value that \char`\"{}traded\char`\"{} for the volume contraint. The Data is stored as external Data for this element. 
+Constructor\+: Pass pointer to target volume, pointer to Data item whose value specified by index\+\_\+of\+\_\+traded\+\_\+pressure represents the "{}\+Pressure"{} value that "{}traded"{} for the volume contraint. The Data is stored as external Data for this element. 
 
 
 
-Definition at line 83 of file constrained\+\_\+volume\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{83}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
 
 
 
-References External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure, index\+\_\+of\+\_\+traded\+\_\+pressure(), Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value, p\+\_\+traded\+\_\+data\+\_\+pt(), Prescribed\+\_\+volume\+\_\+pt, and Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data.
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00074}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00145}{index\+\_\+of\+\_\+traded\+\_\+pressure()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00124}{p\+\_\+traded\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00069}{Prescribed\+\_\+volume\+\_\+pt}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00078}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb}\label{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb}} 
-\index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!````~VolumeConstraintElement@{$\sim$VolumeConstraintElement}}
-\index{````~VolumeConstraintElement@{$\sim$VolumeConstraintElement}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
-\doxysubsubsection{\texorpdfstring{$\sim$VolumeConstraintElement()}{~VolumeConstraintElement()}}
-{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::$\sim$\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb}\label{classoomph_1_1VolumeConstraintElement_a160b5edcca9ce59bbd6afe90c3729bbb} 
+\index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!````~VolumeConstraintElement@{\texorpdfstring{$\sim$}{\string~}VolumeConstraintElement}}
+\index{````~VolumeConstraintElement@{\texorpdfstring{$\sim$}{\string~}VolumeConstraintElement}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}VolumeConstraintElement()}{\string~VolumeConstraintElement()}}
+{\footnotesize\ttfamily oomph\+::\+Volume\+Constraint\+Element\+::\texorpdfstring{$\sim$}{\string~}\+Volume\+Constraint\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -112,16 +112,16 @@ Empty destructor.
 
 
 
-Definition at line 121 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00121}{121}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28}\label{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28}\label{classoomph_1_1VolumeConstraintElement_a725474b173e3887f5f7e025acf768b28} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily void oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -129,17 +129,17 @@ Fill in the residuals and jacobian for the volume constraint.
 
 
 
-Definition at line 159 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00159}{159}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint().
+References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61}\label{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61}\label{classoomph_1_1VolumeConstraintElement_af2a5a59f7fa5f2570d2d490f3610de61} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
 \index{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
-{\footnotesize\ttfamily void oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -147,17 +147,17 @@ Fill in the residuals, jacobian and mass matrix for the volume constraint.
 
 
 
-Definition at line 169 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00169}{169}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint().
+References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52}\label{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52}\label{classoomph_1_1VolumeConstraintElement_a15162ac88c571496cc4f9ab5afa51c52} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily void oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -165,17 +165,17 @@ Fill in the residuals for the volume constraint.
 
 
 
-Definition at line 152 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00152}{152}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint().
+References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e}\label{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e}\label{classoomph_1_1VolumeConstraintElement_a1139fafaca2b784c0561457606cc307e} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint@{fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint}}
 \index{fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint@{fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint()}{fill\_in\_generic\_contribution\_to\_residuals\_volume\_constraint()}}
-{\footnotesize\ttfamily void oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} oomph\+::\+Volume\+Constraint\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -183,21 +183,21 @@ Fill in the residuals for the volume constraint.
 
 
 
-Definition at line 37 of file constrained\+\_\+volume\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00037}{37}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
 
 
 
-References Prescribed\+\_\+volume\+\_\+pt, and ptraded\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00069}{Prescribed\+\_\+volume\+\_\+pt}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00085}{ptraded\+\_\+local\+\_\+eqn()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00159}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00169}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00152}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}\label{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426}\label{classoomph_1_1VolumeConstraintElement_ada831157effca052df0fae723c21c426} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!index\_of\_traded\_pressure@{index\_of\_traded\_pressure}}
 \index{index\_of\_traded\_pressure@{index\_of\_traded\_pressure}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{index\_of\_traded\_pressure()}{index\_of\_traded\_pressure()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Volume\+Constraint\+Element\+::index\+\_\+of\+\_\+traded\+\_\+pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} oomph\+::\+Volume\+Constraint\+Element\+::index\+\_\+of\+\_\+traded\+\_\+pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -205,21 +205,21 @@ Return the index of Data object at which the traded pressure is stored.
 
 
 
-Definition at line 145 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00145}{145}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value.
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}.
 
 
 
-Referenced by oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00261}{oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974}\label{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974}\label{classoomph_1_1VolumeConstraintElement_aab138c0a3af1e72089d5bed31a633974} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!p\_traded@{p\_traded}}
 \index{p\_traded@{p\_traded}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{p\_traded()}{p\_traded()}}
-{\footnotesize\ttfamily double oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -227,17 +227,17 @@ Return the traded pressure value.
 
 
 
-Definition at line 139 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00139}{139}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value, and p\+\_\+traded\+\_\+data\+\_\+pt().
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00124}{p\+\_\+traded\+\_\+data\+\_\+pt()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a60d17437a54648747c956b7a7067c592}\label{classoomph_1_1VolumeConstraintElement_a60d17437a54648747c956b7a7067c592}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_ae466c2f4387ec806e0a0329bd74e60b7}\label{classoomph_1_1VolumeConstraintElement_ae466c2f4387ec806e0a0329bd74e60b7} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!p\_traded\_data\_pt@{p\_traded\_data\_pt}}
 \index{p\_traded\_data\_pt@{p\_traded\_data\_pt}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{p\_traded\_data\_pt()}{p\_traded\_data\_pt()}}
-{\footnotesize\ttfamily Data$\ast$ oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Data}} \texorpdfstring{$\ast$}{*} oomph\+::\+Volume\+Constraint\+Element\+::p\+\_\+traded\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -245,21 +245,21 @@ Access to Data that contains the traded pressure.
 
 
 
-Definition at line 124 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00124}{124}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure, and Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data.
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00074}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00078}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}.
 
 
 
-Referenced by p\+\_\+traded(), oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00139}{p\+\_\+traded()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00261}{oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::set\+\_\+volume\+\_\+constraint\+\_\+element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d}\label{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d}\label{classoomph_1_1VolumeConstraintElement_ad0dedf705ccfb713848ad960bf1b901d} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!ptraded\_local\_eqn@{ptraded\_local\_eqn}}
 \index{ptraded\_local\_eqn@{ptraded\_local\_eqn}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{ptraded\_local\_eqn()}{ptraded\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Volume\+Constraint\+Element\+::ptraded\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} oomph\+::\+Volume\+Constraint\+Element\+::ptraded\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -267,24 +267,24 @@ The local eqn number for the traded pressure.
 
 
 
-Definition at line 85 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-References External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure, Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value, and Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data.
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00074}{External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00078}{Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3}\label{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3}\label{classoomph_1_1VolumeConstraintElement_a51d3b504e02842219a50f043e8cd81f3} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!External\_or\_internal\_data\_index\_of\_traded\_pressure@{External\_or\_internal\_data\_index\_of\_traded\_pressure}}
 \index{External\_or\_internal\_data\_index\_of\_traded\_pressure@{External\_or\_internal\_data\_index\_of\_traded\_pressure}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{External\_or\_internal\_data\_index\_of\_traded\_pressure}{External\_or\_internal\_data\_index\_of\_traded\_pressure}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Volume\+Constraint\+Element\+::\+External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} oomph\+::\+Volume\+Constraint\+Element\+::\+External\+\_\+or\+\_\+internal\+\_\+data\+\_\+index\+\_\+of\+\_\+traded\+\_\+pressure\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -292,17 +292,17 @@ The Data that contains the traded pressure is stored as external or internal Dat
 
 
 
-Definition at line 74 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00074}{74}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-Referenced by p\+\_\+traded\+\_\+data\+\_\+pt(), ptraded\+\_\+local\+\_\+eqn(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00124}{p\+\_\+traded\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00085}{ptraded\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00060}{Volume\+Constraint\+Element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745}\label{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745}\label{classoomph_1_1VolumeConstraintElement_a4f2dd24f0ae52cc665daab425bf94745} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!Index\_of\_traded\_pressure\_value@{Index\_of\_traded\_pressure\_value}}
 \index{Index\_of\_traded\_pressure\_value@{Index\_of\_traded\_pressure\_value}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{Index\_of\_traded\_pressure\_value}{Index\_of\_traded\_pressure\_value}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Volume\+Constraint\+Element\+::\+Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} oomph\+::\+Volume\+Constraint\+Element\+::\+Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -310,17 +310,17 @@ Index of the value in traded pressure data that corresponds to the traded pressu
 
 
 
-Definition at line 82 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00082}{82}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-Referenced by index\+\_\+of\+\_\+traded\+\_\+pressure(), p\+\_\+traded(), ptraded\+\_\+local\+\_\+eqn(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00145}{index\+\_\+of\+\_\+traded\+\_\+pressure()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00139}{p\+\_\+traded()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00085}{ptraded\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00060}{Volume\+Constraint\+Element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f}\label{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f}\label{classoomph_1_1VolumeConstraintElement_ae109f08c27d29b0749b46285703cb16f} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!Prescribed\_volume\_pt@{Prescribed\_volume\_pt}}
 \index{Prescribed\_volume\_pt@{Prescribed\_volume\_pt}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{Prescribed\_volume\_pt}{Prescribed\_volume\_pt}}
-{\footnotesize\ttfamily double$\ast$ oomph\+::\+Volume\+Constraint\+Element\+::\+Prescribed\+\_\+volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Volume\+Constraint\+Element\+::\+Prescribed\+\_\+volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -328,17 +328,17 @@ Pointer to the desired value of the volume.
 
 
 
-Definition at line 69 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00069}{69}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+volume\+\_\+constraint()}}, \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00060}{Volume\+Constraint\+Element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28}\label{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28}} 
+\Hypertarget{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28}\label{classoomph_1_1VolumeConstraintElement_ac4275cd18ae758b71ba4191aa2ff9a28} 
 \index{oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}!Traded\_pressure\_stored\_as\_internal\_data@{Traded\_pressure\_stored\_as\_internal\_data}}
 \index{Traded\_pressure\_stored\_as\_internal\_data@{Traded\_pressure\_stored\_as\_internal\_data}!oomph::VolumeConstraintElement@{oomph::VolumeConstraintElement}}
 \doxysubsubsection{\texorpdfstring{Traded\_pressure\_stored\_as\_internal\_data}{Traded\_pressure\_stored\_as\_internal\_data}}
-{\footnotesize\ttfamily bool oomph\+::\+Volume\+Constraint\+Element\+::\+Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{bool}} oomph\+::\+Volume\+Constraint\+Element\+::\+Traded\+\_\+pressure\+\_\+stored\+\_\+as\+\_\+internal\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -346,11 +346,11 @@ The Data that contains the traded pressure is stored as external or internal Dat
 
 
 
-Definition at line 78 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00078}{78}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
-Referenced by p\+\_\+traded\+\_\+data\+\_\+pt(), ptraded\+\_\+local\+\_\+eqn(), and Volume\+Constraint\+Element().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00124}{p\+\_\+traded\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00085}{ptraded\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00060}{Volume\+Constraint\+Element()}}, and \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00083}{Volume\+Constraint\+Element()}}.
 
 
 

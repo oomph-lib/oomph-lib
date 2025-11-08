@@ -425,5 +425,5 @@ demo_drivers/navier_stokes/osc_ellipse/osc_quarter_ellipse.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -569,5 +569,5 @@ demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

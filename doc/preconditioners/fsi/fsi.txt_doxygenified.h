@@ -408,5 +408,5 @@ demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -8,9 +8,9 @@ inclusion within \c oomph-lib.
 <HR>
 <HR>
 
-\section setup Setting up the documentation
+\section setup Setup 
 
-\subsection makefiles Makefiles
+\subsection dirs_and_cmake Create the directory and update the CMakeLists.txt files
 
 -# Within an appropriate subdirectory of the \c doc directory,
    create a directory for your documentation, e.g.
@@ -18,9 +18,7 @@ inclusion within \c oomph-lib.
    cd doc/axisym_navier_stokes/
    mkdir spin_up
    \endcode
--# Add this new directory to the parent directory's \c Makefile.am
--# Add the entry \c doc/axisym_navier_stokes/spin_up to the file \c
-   config/configure. \c ac_scripts/doc.\c dir_list
+-# Add this new directory to the parent directory's \c CMakeLists.txt file
 -# Create a new \c *.\c txt file with the same name as the
    newly-created directory, e.g.
    \code
@@ -30,21 +28,24 @@ inclusion within \c oomph-lib.
    generated. 
 -# From an existing documentation directory, copy across the following
    files into the newly created directory:
-   - \c Makefile.am
+   - \c CMakeLists.txt
    - \c Doxyfile
--# In \c Makefile.am after \c "docfile =", add the stem of the \c *.\c
-   txt file created in step 4, e.g.
-   \code
-   docfile = spin_up
-   \endcode
+-# In \c CMakeLIsts.txt update
+   - the name of the directory in the two messages at the start and
+     end of the file
+   - the name of the directory in the \c project command
+   - the name of the directory in the \c DOCFILE variable in the
+     \c oomph_generate-doc_from command.
+   .
 -# In \c Doxyfile update the (relative) path to the demo-driver directory. Two
    entries must be updated, one following \c "INPUT" and the other
    following \c "EXAMPLE_PATH". To find these, search for
    \c "../..".
--# Return to \c oomph-lib's top-level directory and re-run
-   \c autogen.\c sh:
+-# Return to \c oomph-lib's doc directory and re-configure:
    \code
-   ./autogen.sh 
+   cd doc
+   cmake -G Ninja -B build
+   cmake --build build
    \endcode
 
 \subsection figures_setup Figures
@@ -213,38 +214,27 @@ say.
   omitted in the \c LaTeX version, enclose this section within \c
   \c \\htmlonly and \c \\endhtmlonly tags. CAREFUL: With recent
   version of doxygen, this has caused problems with certain commands
-  not being interpreted correctly. Best not to use this... The
-  following item is a work-around:
-- Add the variable \c suppress_latex_in_this_directory to the
-  Makefile.am and set it to 1 to bypass the generation of latex-based
-  documentation for a specific directory (which may contain difficult
-  to render tables etc. and therefore cause latex to hang...). Here's
-  an example of a Makefile.am from the directory
-  \c doc/order_of_action_functions:
-  \include Makefile.am 
-- To tell \c doxygen that a certain section of the source file is only
-  to be included in the \c LaTeX version of the documentation and
-  omitted in the \c html version, enclose this section within \c
-  \c \\latexonly and \c \\endlatexonly tags.
+  not being interpreted correctly. Best not to use this... 
 .
 <HR>
 
 \section generate Generating the documentation
 
-Once the source file has been written, simply type \c make in the
-documentation directory to build the \c html and \c LaTeX versions,
+Once the source file has been written, simply type
+<code>cmake --build build</code> in the top level
+doc directory to build the \c html and \c LaTeX versions,
 e.g.
 \code
-cd doc/axisym_navier_stokes/spin_up
-make
+cd doc
+cmake --build build
 \endcode
 Two subdirectories, \c html and \c latex, are now created containing
 the two versions of the documentation. A \c *.\c pdf file of the
-\c LaTeX version is also placed in the current directory.
+\c LaTeX version is also placed in the directory.
 
 <hr>
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

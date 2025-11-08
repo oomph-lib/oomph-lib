@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -27,18 +27,18 @@
 #define OOMPH_PSEUDO_ELASTIC_SUBSIDIARY_PRECONDITIONER
 
 // includes
-#include "../generic/problem.h"
-#include "../generic/block_preconditioner.h"
-#include "../generic/preconditioner.h"
-#include "../generic/SuperLU_preconditioner.h"
-#include "../generic/matrix_vector_product.h"
-#include "../generic/general_purpose_preconditioners.h"
-#include "../generic/general_purpose_block_preconditioners.h"
+#include "generic/problem.h"
+#include "generic/block_preconditioner.h"
+#include "generic/preconditioner.h"
+#include "generic/SuperLU_preconditioner.h"
+#include "generic/matrix_vector_product.h"
+#include "generic/general_purpose_preconditioners.h"
+#include "generic/general_purpose_block_preconditioners.h"
 #ifdef OOMPH_HAS_HYPRE
-#include "../generic/hypre_solver.h"
+#include "generic/hypre_solver.h"
 #endif
 #ifdef OOMPH_HAS_TRILINOS
-#include "../generic/trilinos_solver.h"
+#include "generic/trilinos_solver.h"
 #endif
 namespace oomph
 {
@@ -74,9 +74,9 @@ namespace oomph
   } // namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
 
 
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
 
 
   //=============================================================================
@@ -104,7 +104,7 @@ namespace oomph
 
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -200,7 +200,7 @@ namespace oomph
     }
 
     /// By default the Lagrange multiplier subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_lagrange_multiplier_subsidiary_preconditioner(
@@ -210,7 +210,7 @@ namespace oomph
     }
 
     /// By default the elastic subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_elastic_subsidiary_preconditioner(
@@ -276,9 +276,9 @@ namespace oomph
     Mesh* Lagrange_multiplier_mesh_pt;
   };
 
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
 
 
   //=============================================================================
@@ -307,7 +307,7 @@ namespace oomph
 
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -398,7 +398,7 @@ namespace oomph
     }
 
     /// By default the Lagrange multiplier subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_lagrange_multiplier_subsidiary_preconditioner(
@@ -408,7 +408,7 @@ namespace oomph
     }
 
     /// By default the elastic subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_elastic_subsidiary_preconditioner(
@@ -475,9 +475,9 @@ namespace oomph
   };
 
 
-  /// /////////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
 
 
   //=============================================================================
@@ -564,9 +564,9 @@ namespace oomph
   }; // end of PseudoElasticPreconditionerSubsidiaryPreconditionerOld
 
 
-  /// /////////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
 
 
   //=============================================================================
@@ -586,7 +586,7 @@ namespace oomph
   {
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -686,9 +686,9 @@ namespace oomph
   };
 
 
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
 
 
   // /*

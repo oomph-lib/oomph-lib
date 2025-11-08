@@ -46,20 +46,6 @@ any additional issues are discussed in the accompanying tutorials.
 
 \subsection installation How to build/install oomph-lib with MPI support
 
-- To compile \c oomph-lib with MPI support you must specify the configure flag
-  \n\n
-  \code
-  --enable-MPI
-  \endcode
-  \n
-  If you use \c oomph-lib's <code>autogen.sh</code> script to build
-  the library you should add this line to the
-  <code>config/configure_options/current</code> file.
-  You should also ensure that appropriate parallel compilers are specified by 
-  the \c CXX, \c CC, \c F77 and \c LD flags. For instance, if you use 
-  <a href="http://www.lam-mpi.org/">LAM</a>, 
-  you should use \c CXX=mpic++, \c CC=mpicc, \c F77=mpif77 and \c LD=mpif77.
-  \n\n
 - When \c oomph-lib is built with MPI support, the macro \c
   OOMPH_HAS_MPI is defined. It is used to isolate parallel 
   sections of code to ensure that the
@@ -168,10 +154,11 @@ any additional issues are discussed in the accompanying tutorials.
   is parallelised. We recommend using \c oomph-lib's  wrapper to the 
   parallel Krylov subspace solvers from the
   <a href="http://trilinos.sandia.gov/">
-  Trilinos </a> library (see 
-  <a href="../../../the_distribution/html/index.html#external_dist"> 
-  the \c oomph-lib installation page</a> for details on how to install
-  this) instead. The interfaces are identical to those
+  Trilinos </a> library instead. Trilinos can be installed
+  automatically by our build machinery; see
+  <a href="https://github.com/oomph-lib/oomph-lib"><code>oomph-lib</code>'s
+  GitHub page </a>
+  for details. The interfaces are identical to those
   used to call these solvers in serial; see 
   <a href="../../../linear_solvers/html/index.html"> the linear solver
   tutorial</a> for details.
@@ -180,42 +167,6 @@ any additional issues are discussed in the accompanying tutorials.
   parallelised and can be used in the same way as in a serial code.
 
 
-
-<HR>
-
-\subsection self_tests How to include parallel demo codes into the self-tests
-
-- The configure flag \c --with-mpi-self-tests includes 
-  \c oomph-lib's parallel demo driver codes into the self-tests 
-  executed when \c make \c check is run. The self-tests
-  require the executable to be run on two processors and the command 
-  that spawns a two-processor parallel job on the target
-  machine must be specified as an argument to the configure flag. 
-  For example, under <a href="http://www.lam-mpi.org/">LAM</a>
-  \n\n
-  \code
-  --with-mpi-self-tests="mpirun -np 2"
-  \endcode
-  \n
-  Some self-tests are performed with a greater number of processors.
-  To perform these tests as part of the \c make \c test procedure,
-  add the configure flag  \c --with-mpi-self-tests-variablenp
-  to the configure options. Its argument has to specify how to spawn
-  an mpi job on an arbitrary number of processors, using the
-  placeholder \c OOMPHNP for the number of processors. E.g. 
-  \n\n
-  \code
-  --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
-  \endcode
-  \n
-  It is easiest to add the appropriate lines to the
-  <code>config/configure_options/current</code> file before
-  building/installing \c oomph-lib with <code>autogen.sh</code>.
-  \n\n
-  \b NOTE: When using LAM, make sure your MPI demons are started
-  before running the parallel self-tests, e.g. by using the \c lamboot 
-  command, otherwise the self-tests will fail. 
-.
 
 
 <HR>
@@ -799,5 +750,5 @@ within any of the \c xterm sessions where a crash has taken place.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

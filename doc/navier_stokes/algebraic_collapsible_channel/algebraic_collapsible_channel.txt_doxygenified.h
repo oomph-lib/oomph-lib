@@ -543,5 +543,5 @@ demo_drivers/navier_stokes/collapsible_channel/collapsible_channel_algebraic.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -1,17 +1,17 @@
-\hypertarget{classCoatedSphereProblem}{}\doxysection{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$ Class Template Reference}
-\label{classCoatedSphereProblem}\index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
+\doxysection{Coated\+Sphere\+Problem\texorpdfstring{$<$}{<} ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classCoatedSphereProblem}{}\label{classCoatedSphereProblem}\index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 
 
 Coated sphere FSI.  
 
 
-Inheritance diagram for Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
+Inheritance diagram for Coated\+Sphere\+Problem\texorpdfstring{$<$}{<} ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.225383cm]{classCoatedSphereProblem}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}{Coated\+Sphere\+Problem}} ()
@@ -38,7 +38,7 @@ void \mbox{\hyperlink{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4
 \begin{DoxyCompactList}\small\item\em Recompute gamma integral before checking Newton residuals. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Member Functions}
+\doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}{create\+\_\+fsi\+\_\+traction\+\_\+elements}} ()
@@ -59,22 +59,22 @@ void \mbox{\hyperlink{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3
 \begin{DoxyCompactList}\small\item\em Create DtN elements on outer boundary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8}{create\+\_\+solid\+\_\+traction\+\_\+elements}} ()
 \begin{DoxyCompactList}\small\item\em Create solid traction elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}{delete\+\_\+face\+\_\+elements}} (Mesh $\ast$const \&boundary\+\_\+mesh\+\_\+pt)
+void \mbox{\hyperlink{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}{delete\+\_\+face\+\_\+elements}} (Mesh \texorpdfstring{$\ast$}{*}const \&boundary\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Delete (face) elements in specified mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392}{complete\+\_\+problem\+\_\+setup}} ()
 \begin{DoxyCompactList}\small\item\em Complete problem setup\+: Apply boundary conditions and set physical properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Two\+DAnnular\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}{Solid\+\_\+mesh\+\_\+pt}}
+Two\+DAnnular\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}{Solid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}{FSI\+\_\+traction\+\_\+mesh\+\_\+pt}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}{FSI\+\_\+traction\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to mesh of FSI traction elements. \end{DoxyCompactList}\item 
-Two\+DAnnular\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}{Helmholtz\+\_\+mesh\+\_\+pt}}
+Two\+DAnnular\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}{Helmholtz\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Helmholtz mesh. \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}{Helmholtz\+\_\+fsi\+\_\+flux\+\_\+mesh\+\_\+pt}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}{Helmholtz\+\_\+fsi\+\_\+flux\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to mesh of Helmholtz FSI flux elements. \end{DoxyCompactList}\item 
-Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}{Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt}}
+Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}{Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to mesh containing the DtN elements. \end{DoxyCompactList}\item 
 ofstream \mbox{\hyperlink{classCoatedSphereProblem_a79847476b26744153c0359041a52a270}{Trace\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
@@ -98,35 +98,34 @@ unsigned \mbox{\hyperlink{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8
 \begin{DoxyCompactList}\small\item\em Boundary ID of upper boundary in Helmholtz mesh. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19}{HH\+\_\+lower\+\_\+symmetry\+\_\+boundary\+\_\+id}}
 \begin{DoxyCompactList}\small\item\em Boundary ID of lower boundary in Helmholtz mesh. \end{DoxyCompactList}\item 
-Refineable\+Triangle\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648}{Solid\+\_\+mesh\+\_\+pt}}
+Refineable\+Triangle\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648}{Solid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
-Triangle\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e}{Solid\+\_\+mesh\+\_\+pt}}
+Triangle\+Mesh$<$ ELASTICITY\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e}{Solid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}{Solid\+\_\+traction\+\_\+mesh\+\_\+pt}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}{Solid\+\_\+traction\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to mesh of solid traction elements. \end{DoxyCompactList}\item 
-Refineable\+Triangle\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad}{Helmholtz\+\_\+mesh\+\_\+pt}}
+Refineable\+Triangle\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad}{Helmholtz\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Helmholtz mesh. \end{DoxyCompactList}\item 
-Triangle\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24}{Helmholtz\+\_\+mesh\+\_\+pt}}
+Triangle\+Mesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24}{Helmholtz\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Helmholtz mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELASTICITY\+\_\+\+ELEMENT, class HELMHOLTZ\+\_\+\+ELEMENT$>$\newline
 class Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$}
-
 Coated sphere FSI. 
 
-Definition at line 126 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00126}{126}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}\label{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}} 
+\Hypertarget{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}\label{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!CoatedSphereProblem@{CoatedSphereProblem}}
 \index{CoatedSphereProblem@{CoatedSphereProblem}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{CoatedSphereProblem()}{CoatedSphereProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}}
+\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\mbox{\hyperlink{classCoatedSphereProblem}{\+::\+Coated\+Sphere\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -134,18 +133,18 @@ Constructor\+:
 
 
 
-Definition at line 188 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00188}{188}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Directory, Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier, Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber, Global\+\_\+\+Parameters\+::\+H\+\_\+coating, Global\+\_\+\+Parameters\+::\+K\+\_\+squared, Global\+\_\+\+Parameters\+::\+Nu(), Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq(), Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius, and Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement().
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00113}{Global\+\_\+\+Parameters\+::\+Directory}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00116}{Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00076}{Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00073}{Global\+\_\+\+Parameters\+::\+H\+\_\+coating}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00064}{Global\+\_\+\+Parameters\+::\+K\+\_\+squared}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\+\_\+\+Parameters\+::\+Nu()}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq()}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00067}{Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius}}, and \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00098}{Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement()}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}\label{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}} 
+\Hypertarget{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}\label{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!CoatedSphereProblem@{CoatedSphereProblem}}
 \index{CoatedSphereProblem@{CoatedSphereProblem}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{CoatedSphereProblem()}{CoatedSphereProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\mbox{\hyperlink{classCoatedSphereProblem}{\+::\+Coated\+Sphere\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -154,12 +153,12 @@ Constructor\+:
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classCoatedSphereProblem_a77906dadd8ceb1d1d3182f298a0ca2d2}\label{classCoatedSphereProblem_a77906dadd8ceb1d1d3182f298a0ca2d2}} 
+\Hypertarget{classCoatedSphereProblem_a77906dadd8ceb1d1d3182f298a0ca2d2}\label{classCoatedSphereProblem_a77906dadd8ceb1d1d3182f298a0ca2d2} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
 \index{actions\_after\_adapt@{actions\_after\_adapt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -167,9 +166,9 @@ Actions after adapt\+: Rebuild the face meshes.
 
 Actions after adapt\+: Rebuild the meshes of face elements. 
 
-Definition at line 842 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00842}{842}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}\label{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}} 
+\Hypertarget{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}\label{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -182,9 +181,9 @@ Update function (empty)
 
 
 
-Definition at line 138 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00138}{138}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}\label{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}} 
+\Hypertarget{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}\label{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -197,14 +196,14 @@ Update function (empty)
 
 
 
-Definition at line 192 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00192}{192}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a0cd5d4eea9d34eefd829f7539c41c998}\label{classCoatedSphereProblem_a0cd5d4eea9d34eefd829f7539c41c998}} 
+\Hypertarget{classCoatedSphereProblem_a0cd5d4eea9d34eefd829f7539c41c998}\label{classCoatedSphereProblem_a0cd5d4eea9d34eefd829f7539c41c998} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
 \index{actions\_before\_adapt@{actions\_before\_adapt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -212,9 +211,9 @@ Actions before adapt\+: Wipe the face meshes.
 
 Actions before adapt\+: Wipe the meshes face elements. 
 
-Definition at line 816 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00816}{816}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}\label{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}} 
+\Hypertarget{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}\label{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -227,9 +226,13 @@ Recompute gamma integral before checking Newton residuals.
 
 
 
-Definition at line 141 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00141}{141}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}\label{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}} 
+
+
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00176}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}\label{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -242,9 +245,13 @@ Recompute gamma integral before checking Newton residuals.
 
 
 
-Definition at line 201 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00201}{201}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}\label{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}} 
+
+
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00176}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}\label{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -257,9 +264,9 @@ Update function (empty)
 
 
 
-Definition at line 135 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00135}{135}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}\label{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}} 
+\Hypertarget{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}\label{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -272,14 +279,14 @@ Update function (empty)
 
 
 
-Definition at line 189 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00189}{189}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392}\label{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392}} 
+\Hypertarget{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392}\label{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!complete\_problem\_setup@{complete\_problem\_setup}}
 \index{complete\_problem\_setup@{complete\_problem\_setup}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{complete\_problem\_setup()}{complete\_problem\_setup()}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -287,18 +294,18 @@ Complete problem setup\+: Apply boundary conditions and set physical properties.
 
 
 
-Definition at line 877 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00877}{877}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+E(), Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber, Global\+\_\+\+Parameters\+::\+K\+\_\+squared, Global\+\_\+\+Parameters\+::\+Nu(), and Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq().
+References \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\+\_\+\+Parameters\+::\+E()}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00076}{Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00064}{Global\+\_\+\+Parameters\+::\+K\+\_\+squared}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\+\_\+\+Parameters\+::\+Nu()}}, and \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq()}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}\label{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}} 
+\Hypertarget{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}\label{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}}
 \index{create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_fsi\_traction\_elements()}{create\_fsi\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -306,13 +313,13 @@ Create FSI traction elements.
 
 Create fsi traction elements. 
 
-Definition at line 505 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00505}{505}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::Q.
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00070}{Global\+\_\+\+Parameters\+::Q}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}\label{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}} 
+\Hypertarget{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}\label{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}}
 \index{create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_fsi\_traction\_elements()}{create\_fsi\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -323,12 +330,12 @@ void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELA
 
 Create FSI traction elements. 
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}\label{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}} 
+\Hypertarget{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}\label{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_helmholtz\_DtN\_elements@{create\_helmholtz\_DtN\_elements}}
 \index{create\_helmholtz\_DtN\_elements@{create\_helmholtz\_DtN\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_helmholtz\_DtN\_elements()}{create\_helmholtz\_DtN\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -336,9 +343,9 @@ Create DtN elements on outer boundary.
 
 Create BC elements on outer boundary. 
 
-Definition at line 421 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00421}{421}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}\label{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}} 
+\Hypertarget{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}\label{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_helmholtz\_DtN\_elements@{create\_helmholtz\_DtN\_elements}}
 \index{create\_helmholtz\_DtN\_elements@{create\_helmholtz\_DtN\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_helmholtz\_DtN\_elements()}{create\_helmholtz\_DtN\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -349,12 +356,12 @@ void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELA
 
 Create DtN elements on outer boundary. 
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}\label{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}} 
+\Hypertarget{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}\label{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_helmholtz\_fsi\_flux\_elements@{create\_helmholtz\_fsi\_flux\_elements}}
 \index{create\_helmholtz\_fsi\_flux\_elements@{create\_helmholtz\_fsi\_flux\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_helmholtz\_fsi\_flux\_elements()}{create\_helmholtz\_fsi\_flux\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+fsi\+\_\+flux\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+fsi\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -362,9 +369,9 @@ Create Helmholtz FSI flux elements.
 
 Create Helmholtz fsi flux elements. 
 
-Definition at line 549 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00549}{549}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}\label{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}} 
+\Hypertarget{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}\label{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_helmholtz\_fsi\_flux\_elements@{create\_helmholtz\_fsi\_flux\_elements}}
 \index{create\_helmholtz\_fsi\_flux\_elements@{create\_helmholtz\_fsi\_flux\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_helmholtz\_fsi\_flux\_elements()}{create\_helmholtz\_fsi\_flux\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -375,12 +382,12 @@ void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELA
 
 Create Helmholtz FSI flux elements. 
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8}\label{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8}} 
+\Hypertarget{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8}\label{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!create\_solid\_traction\_elements@{create\_solid\_traction\_elements}}
 \index{create\_solid\_traction\_elements@{create\_solid\_traction\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_solid\_traction\_elements()}{create\_solid\_traction\_elements()}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+solid\+\_\+traction\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+solid\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -388,18 +395,18 @@ Create solid traction elements.
 
 
 
-Definition at line 1185 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l01185}{1185}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::pressure\+\_\+load().
+References \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00155}{Global\+\_\+\+Parameters\+::pressure\+\_\+load()}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}\label{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}} 
+\Hypertarget{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}\label{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!delete\_face\_elements@{delete\_face\_elements}}
 \index{delete\_face\_elements@{delete\_face\_elements}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{delete\_face\_elements()}{delete\_face\_elements()}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::delete\+\_\+face\+\_\+elements (\begin{DoxyParamCaption}\item[{Mesh $\ast$const \&}]{boundary\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::delete\+\_\+face\+\_\+elements (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{boundary\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -407,9 +414,9 @@ Delete (face) elements in specified mesh.
 
 Delete face elements and wipe the mesh. 
 
-Definition at line 991 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00991}{991}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}\label{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}} 
+\Hypertarget{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}\label{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -422,17 +429,17 @@ Doc the solution.
 
 
 
-Definition at line 592 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00592}{592}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio, Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber, Global\+\_\+\+Parameters\+::\+K\+\_\+squared, Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq(), Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius, and Global\+\_\+\+Parameters\+::Q.
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00085}{Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00076}{Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00064}{Global\+\_\+\+Parameters\+::\+K\+\_\+squared}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq()}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00067}{Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius}}, and \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00070}{Global\+\_\+\+Parameters\+::Q}}.
 
 
 
-Referenced by main().
+Referenced by \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00687}{main()}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}\label{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}} 
+\Hypertarget{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}\label{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -443,12 +450,12 @@ void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELA
 
 Doc the solution. 
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}\label{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}} 
+\Hypertarget{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}\label{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!setup\_interaction@{setup\_interaction}}
 \index{setup\_interaction@{setup\_interaction}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{setup\_interaction()}{setup\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::setup\+\_\+interaction\hspace{0.3cm}{\ttfamily [private]}}
+void \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::setup\+\_\+interaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -456,9 +463,9 @@ Setup interaction.
 
 Setup interaction between two fields. 
 
-Definition at line 462 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00462}{462}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}\label{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}} 
+\Hypertarget{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}\label{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!setup\_interaction@{setup\_interaction}}
 \index{setup\_interaction@{setup\_interaction}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{setup\_interaction()}{setup\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -472,12 +479,12 @@ Setup interaction.
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}\label{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}} 
+\Hypertarget{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}\label{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!FSI\_traction\_mesh\_pt@{FSI\_traction\_mesh\_pt}}
 \index{FSI\_traction\_mesh\_pt@{FSI\_traction\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{FSI\_traction\_mesh\_pt}{FSI\_traction\_mesh\_pt}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Mesh $\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::FSI\+\_\+traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+FSI\+\_\+traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -485,14 +492,14 @@ Pointer to mesh of FSI traction elements.
 
 
 
-Definition at line 167 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00167}{167}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}\label{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}} 
+\Hypertarget{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}\label{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Helmholtz\_DtN\_mesh\_pt@{Helmholtz\_DtN\_mesh\_pt}}
 \index{Helmholtz\_DtN\_mesh\_pt@{Helmholtz\_DtN\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Helmholtz\_DtN\_mesh\_pt}{Helmholtz\_DtN\_mesh\_pt}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+\+Dt\+N\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -500,14 +507,18 @@ Pointer to mesh containing the DtN elements.
 
 
 
-Definition at line 176 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00176}{176}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}\label{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}} 
+
+
+Referenced by \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00141}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}.
+
+\Hypertarget{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}\label{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Helmholtz\_fsi\_flux\_mesh\_pt@{Helmholtz\_fsi\_flux\_mesh\_pt}}
 \index{Helmholtz\_fsi\_flux\_mesh\_pt@{Helmholtz\_fsi\_flux\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Helmholtz\_fsi\_flux\_mesh\_pt}{Helmholtz\_fsi\_flux\_mesh\_pt}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Mesh $\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Helmholtz\+\_\+fsi\+\_\+flux\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+fsi\+\_\+flux\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -515,14 +526,14 @@ Pointer to mesh of Helmholtz FSI flux elements.
 
 
 
-Definition at line 173 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00173}{173}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}\label{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}} 
+\Hypertarget{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}\label{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}}
 \index{Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Helmholtz\_mesh\_pt}{Helmholtz\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Two\+DAnnular\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Two\+DAnnular\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -530,14 +541,14 @@ Pointer to Helmholtz mesh.
 
 
 
-Definition at line 170 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00170}{170}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad}\label{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad}} 
+\Hypertarget{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad}\label{classCoatedSphereProblem_a5f7a85c289bde4728679f8939f4283ad} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}}
 \index{Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Helmholtz\_mesh\_pt}{Helmholtz\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Refineable\+Triangle\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Refineable\+Triangle\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -545,14 +556,14 @@ Pointer to Helmholtz mesh.
 
 
 
-Definition at line 284 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00284}{284}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24}\label{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24}} 
+\Hypertarget{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24}\label{classCoatedSphereProblem_aabab389170891d6387c3cd9a7aa92f24} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}}
 \index{Helmholtz\_mesh\_pt@{Helmholtz\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Helmholtz\_mesh\_pt}{Helmholtz\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Triangle\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Triangle\+Mesh$<$HELMHOLTZ\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -560,14 +571,14 @@ Pointer to Helmholtz mesh.
 
 
 
-Definition at line 289 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00289}{289}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a2d8f60f068d2e9442a9f096843ffb098}\label{classCoatedSphereProblem_a2d8f60f068d2e9442a9f096843ffb098}} 
+\Hypertarget{classCoatedSphereProblem_a2d8f60f068d2e9442a9f096843ffb098}\label{classCoatedSphereProblem_a2d8f60f068d2e9442a9f096843ffb098} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!HH\_inner\_boundary\_id@{HH\_inner\_boundary\_id}}
 \index{HH\_inner\_boundary\_id@{HH\_inner\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HH\_inner\_boundary\_id}{HH\_inner\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::HH\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+HH\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -575,14 +586,14 @@ Boundary ID of inner boundary in Helmholtz mesh.
 
 
 
-Definition at line 254 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00254}{254}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19}\label{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19}} 
+\Hypertarget{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19}\label{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!HH\_lower\_symmetry\_boundary\_id@{HH\_lower\_symmetry\_boundary\_id}}
 \index{HH\_lower\_symmetry\_boundary\_id@{HH\_lower\_symmetry\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HH\_lower\_symmetry\_boundary\_id}{HH\_lower\_symmetry\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::HH\+\_\+lower\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+HH\+\_\+lower\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -590,14 +601,14 @@ Boundary ID of lower boundary in Helmholtz mesh.
 
 
 
-Definition at line 260 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00260}{260}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a7462cad0a109f08ee2dcff2b45bff9bc}\label{classCoatedSphereProblem_a7462cad0a109f08ee2dcff2b45bff9bc}} 
+\Hypertarget{classCoatedSphereProblem_a7462cad0a109f08ee2dcff2b45bff9bc}\label{classCoatedSphereProblem_a7462cad0a109f08ee2dcff2b45bff9bc} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!HH\_outer\_boundary\_id@{HH\_outer\_boundary\_id}}
 \index{HH\_outer\_boundary\_id@{HH\_outer\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HH\_outer\_boundary\_id}{HH\_outer\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::HH\+\_\+outer\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+HH\+\_\+outer\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -605,14 +616,14 @@ Boundary ID of outer boundary in Helmholtz mesh.
 
 
 
-Definition at line 251 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00251}{251}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8fc3b}\label{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8fc3b}} 
+\Hypertarget{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8fc3b}\label{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8fc3b} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!HH\_upper\_symmetry\_boundary\_id@{HH\_upper\_symmetry\_boundary\_id}}
 \index{HH\_upper\_symmetry\_boundary\_id@{HH\_upper\_symmetry\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HH\_upper\_symmetry\_boundary\_id}{HH\_upper\_symmetry\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::HH\+\_\+upper\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+HH\+\_\+upper\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -620,14 +631,14 @@ Boundary ID of upper boundary in Helmholtz mesh.
 
 
 
-Definition at line 257 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00257}{257}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_ac5b9684155899ef6c43d73c1dbffc076}\label{classCoatedSphereProblem_ac5b9684155899ef6c43d73c1dbffc076}} 
+\Hypertarget{classCoatedSphereProblem_ac5b9684155899ef6c43d73c1dbffc076}\label{classCoatedSphereProblem_ac5b9684155899ef6c43d73c1dbffc076} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Lower\_inner\_boundary\_id@{Lower\_inner\_boundary\_id}}
 \index{Lower\_inner\_boundary\_id@{Lower\_inner\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lower\_inner\_boundary\_id}{Lower\_inner\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Lower\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Lower\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -635,14 +646,14 @@ Boundary ID of lower inner boundary.
 
 
 
-Definition at line 242 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00242}{242}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a9bfac78ea8fcd9d1fc4844e9db66c0d1}\label{classCoatedSphereProblem_a9bfac78ea8fcd9d1fc4844e9db66c0d1}} 
+\Hypertarget{classCoatedSphereProblem_a9bfac78ea8fcd9d1fc4844e9db66c0d1}\label{classCoatedSphereProblem_a9bfac78ea8fcd9d1fc4844e9db66c0d1} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Lower\_symmetry\_boundary\_id@{Lower\_symmetry\_boundary\_id}}
 \index{Lower\_symmetry\_boundary\_id@{Lower\_symmetry\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lower\_symmetry\_boundary\_id}{Lower\_symmetry\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Lower\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Lower\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -650,14 +661,14 @@ Boundary ID of lower symmetry boundary.
 
 
 
-Definition at line 236 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00236}{236}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_abf88cdcfd5fe2e91dde565ef0801ed47}\label{classCoatedSphereProblem_abf88cdcfd5fe2e91dde565ef0801ed47}} 
+\Hypertarget{classCoatedSphereProblem_abf88cdcfd5fe2e91dde565ef0801ed47}\label{classCoatedSphereProblem_abf88cdcfd5fe2e91dde565ef0801ed47} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Outer\_boundary\_id@{Outer\_boundary\_id}}
 \index{Outer\_boundary\_id@{Outer\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Outer\_boundary\_id}{Outer\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Outer\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -665,14 +676,14 @@ Boundary ID of outer boundary.
 
 
 
-Definition at line 245 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00245}{245}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a4eeb21412dc4a62d33c03048286fb4b6}\label{classCoatedSphereProblem_a4eeb21412dc4a62d33c03048286fb4b6}} 
+\Hypertarget{classCoatedSphereProblem_a4eeb21412dc4a62d33c03048286fb4b6}\label{classCoatedSphereProblem_a4eeb21412dc4a62d33c03048286fb4b6} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Rib\_divider\_boundary\_id@{Rib\_divider\_boundary\_id}}
 \index{Rib\_divider\_boundary\_id@{Rib\_divider\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Rib\_divider\_boundary\_id}{Rib\_divider\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Rib\+\_\+divider\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Rib\+\_\+divider\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -680,14 +691,14 @@ Boundary ID of rib divider.
 
 
 
-Definition at line 248 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00248}{248}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}\label{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}} 
+\Hypertarget{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}\label{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
 \index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Two\+DAnnular\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Two\+DAnnular\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -695,14 +706,14 @@ Pointer to solid mesh.
 
 
 
-Definition at line 164 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00164}{164}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648}\label{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648}} 
+\Hypertarget{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648}\label{classCoatedSphereProblem_a0239a4320d1a34e632a81599d908b648} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
 \index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Refineable\+Triangle\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Refineable\+Triangle\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -710,14 +721,14 @@ Pointer to solid mesh.
 
 
 
-Definition at line 265 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00265}{265}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e}\label{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e}} 
+\Hypertarget{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e}\label{classCoatedSphereProblem_a6a1c655fb048aee98669b78024b59e8e} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
 \index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Triangle\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Triangle\+Mesh$<$ELASTICITY\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -725,14 +736,14 @@ Pointer to solid mesh.
 
 
 
-Definition at line 270 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00270}{270}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}\label{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}} 
+\Hypertarget{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}\label{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Solid\_traction\_mesh\_pt@{Solid\_traction\_mesh\_pt}}
 \index{Solid\_traction\_mesh\_pt@{Solid\_traction\_mesh\_pt}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Solid\_traction\_mesh\_pt}{Solid\_traction\_mesh\_pt}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-Mesh$\ast$ \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Solid\+\_\+traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -740,14 +751,14 @@ Pointer to mesh of solid traction elements.
 
 
 
-Definition at line 276 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00276}{276}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_a79847476b26744153c0359041a52a270}\label{classCoatedSphereProblem_a79847476b26744153c0359041a52a270}} 
+\Hypertarget{classCoatedSphereProblem_a79847476b26744153c0359041a52a270}\label{classCoatedSphereProblem_a79847476b26744153c0359041a52a270} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Trace\_file@{Trace\_file}}
 \index{Trace\_file@{Trace\_file}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-ofstream \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+ofstream \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -755,14 +766,14 @@ Trace file.
 
 
 
-Definition at line 179 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00179}{179}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_abdd54d39d9757a4da7d2eb56bab1c392}\label{classCoatedSphereProblem_abdd54d39d9757a4da7d2eb56bab1c392}} 
+\Hypertarget{classCoatedSphereProblem_abdd54d39d9757a4da7d2eb56bab1c392}\label{classCoatedSphereProblem_abdd54d39d9757a4da7d2eb56bab1c392} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Upper\_inner\_boundary\_id@{Upper\_inner\_boundary\_id}}
 \index{Upper\_inner\_boundary\_id@{Upper\_inner\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Upper\_inner\_boundary\_id}{Upper\_inner\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Upper\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Upper\+\_\+inner\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -770,14 +781,14 @@ Boundary ID of upper inner boundary.
 
 
 
-Definition at line 239 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00239}{239}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
-\mbox{\Hypertarget{classCoatedSphereProblem_add071e3a8d3159b181b31559ca233408}\label{classCoatedSphereProblem_add071e3a8d3159b181b31559ca233408}} 
+\Hypertarget{classCoatedSphereProblem_add071e3a8d3159b181b31559ca233408}\label{classCoatedSphereProblem_add071e3a8d3159b181b31559ca233408} 
 \index{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}!Upper\_symmetry\_boundary\_id@{Upper\_symmetry\_boundary\_id}}
 \index{Upper\_symmetry\_boundary\_id@{Upper\_symmetry\_boundary\_id}!CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$@{CoatedSphereProblem$<$ ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Upper\_symmetry\_boundary\_id}{Upper\_symmetry\_boundary\_id}}
 {\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::Upper\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+unsigned \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem}}$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Upper\+\_\+symmetry\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -785,7 +796,7 @@ Boundary ID of upper symmetry boundary.
 
 
 
-Definition at line 233 of file unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00233}{233}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 

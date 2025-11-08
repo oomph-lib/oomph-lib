@@ -262,5 +262,5 @@ problem's list of sub meshes, before reassigning the equation numbers.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -1,30 +1,30 @@
-\hypertarget{classRefineableBin}{}\doxysection{Refineable\+Bin Class Reference}
-\label{classRefineableBin}\index{RefineableBin@{RefineableBin}}
+\doxysection{Refineable\+Bin Class Reference}
+\hypertarget{classRefineableBin}{}\label{classRefineableBin}\index{RefineableBin@{RefineableBin}}
 
 
-\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} class. Contains sample points and is embedded in a \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. May itself be represented by a \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} to make it recursive.  
+\doxylink{classRefineableBin}{Refineable\+Bin} class. Contains sample points and is embedded in a \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. May itself be represented by a \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} to make it recursive.  
 
 
 
 
 {\ttfamily \#include $<$sample\+\_\+point\+\_\+container.\+h$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c}{Refineable\+Bin}} (\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$bin\+\_\+array\+\_\+pt, const unsigned \&bin\+\_\+index\+\_\+in\+\_\+bin\+\_\+array)
-\begin{DoxyCompactList}\small\item\em Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c}{Refineable\+Bin}} (\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*}bin\+\_\+array\+\_\+pt, const unsigned \&bin\+\_\+index\+\_\+in\+\_\+bin\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classRefineableBin_af73c1ba8667757ad9be26b01eb8dfcd3}{Refineable\+Bin}} (const \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} \&data)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableBin_aa924b5b7d9ed5dacddb672a5ea2ea829}{operator=}} (const \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4}{$\sim$\+Refineable\+Bin}} ()
+\mbox{\hyperlink{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Bin}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBin_a73cb9b1ac53b5337f2bb2476e2084bb9}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively}} () const
 \begin{DoxyCompactList}\small\item\em Compute total number of sample points recursively. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableBin_a55737725c556d80d6695549550b52df5}{add\+\_\+sample\+\_\+point}} (\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} $\ast$new\+\_\+sample\+\_\+point\+\_\+pt, const Vector$<$ double $>$ \&zeta\+\_\+coordinates)
-\begin{DoxyCompactList}\small\item\em Add a new sample point to \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableBin_a92d871f784877d48ae46d363419b5e52}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+void \mbox{\hyperlink{classRefineableBin_a55737725c556d80d6695549550b52df5}{add\+\_\+sample\+\_\+point}} (\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*}new\+\_\+sample\+\_\+point\+\_\+pt, const Vector$<$ double $>$ \&zeta\+\_\+coordinates)
+\begin{DoxyCompactList}\small\item\em Add a new sample point to \doxylink{classRefineableBin}{Refineable\+Bin}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBin_a92d871f784877d48ae46d363419b5e52}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object \texorpdfstring{$\ast$}{*}\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableBin_a52d935cc69527220005ecee7cfb2b5e8}{output}} (std\+::ofstream \&outfile, const bool \&don\+\_\+t\+\_\+recurse=false)
 \begin{DoxyCompactList}\small\item\em Output bin; x,\mbox{[}y,\mbox{[}z\mbox{]}\mbox{]},n\+\_\+sample\+\_\+points. \end{DoxyCompactList}\item 
@@ -34,49 +34,49 @@ void \mbox{\hyperlink{classRefineableBin_a71ceb55788e4d4f39986c138349a22f7}{outp
 \begin{DoxyCompactList}\small\item\em Output bin vertices (allowing display of bins as zones). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBin_a377f1b457facf99566aab772af7260db}{nsample\+\_\+points\+\_\+in\+\_\+bin}} ()
 \begin{DoxyCompactList}\small\item\em Number of sample points stored in bin. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions}
+\doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classRefineableBin_ac23bc68c6082f3d5a1cf3f5e8538a9b2}{make\+\_\+sub\+\_\+bin\+\_\+array}} (const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&min\+\_\+and\+\_\+max\+\_\+coordinates)
+void \mbox{\hyperlink{classRefineableBin_a39cc753a17e800ef388c4cb1352ff0cf}{make\+\_\+sub\+\_\+bin\+\_\+array}} (const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&min\+\_\+and\+\_\+max\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Method for building a new subbin\+\_\+array (called when the Bin size is greater than the Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-\/bin-\/array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableBin_a6e434ec90024cbc5590d0eb5a5aba11e}{get\+\_\+bin\+\_\+boundaries}} (Vector$<$ std\+::pair$<$ double, double $>$$>$ \&min\+\_\+and\+\_\+max\+\_\+coordinates)
-\begin{DoxyCompactList}\small\item\em Boundaries of bin in each coordinate direction. $\ast$.first = min; $\ast$.second = max. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
+void \mbox{\hyperlink{classRefineableBin_a495380328c638a224ca8c13b1b38d952}{get\+\_\+bin\+\_\+boundaries}} (Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&min\+\_\+and\+\_\+max\+\_\+coordinates)
+\begin{DoxyCompactList}\small\item\em Boundaries of bin in each coordinate direction. \texorpdfstring{$\ast$}{*}.first = min; \texorpdfstring{$\ast$}{*}.second = max. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Vector$<$ \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba}{Sample\+\_\+point\+\_\+pt}}
+Vector$<$ \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba}{Sample\+\_\+point\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Container of Sample\+Points. Pointer to vector because it\textquotesingle{}s shorter than an empty vector! (Not all Refineable\+Bins have sample points -- the ones that are subdivided don\textquotesingle{}t!) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$ \mbox{\hyperlink{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7}{Sub\+\_\+bin\+\_\+array\+\_\+pt}}
+\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7}{Sub\+\_\+bin\+\_\+array\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to a possible sub-\/\+Bin\+Array. Null by default. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$ \mbox{\hyperlink{classRefineableBin_ad79b9df93c7be0cd54933f182037db20}{Bin\+\_\+array\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to the bin array which \char`\"{}owns\char`\"{} this \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBin_ad79b9df93c7be0cd54933f182037db20}{Bin\+\_\+array\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the bin array which "{}owns"{} this \doxylink{classRefineableBin}{Refineable\+Bin}. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBin_a7714484b072bdc7466d3d24024588f1f}{Bin\+\_\+index\+\_\+in\+\_\+bin\+\_\+array}}
 \begin{DoxyCompactList}\small\item\em Index of bin in its bin array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} class. Contains sample points and is embedded in a \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. May itself be represented by a \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} to make it recursive. 
+\doxylink{classRefineableBin}{Refineable\+Bin} class. Contains sample points and is embedded in a \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. May itself be represented by a \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} to make it recursive. 
 
-Definition at line 106 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00106}{106}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c}\label{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c}} 
+\Hypertarget{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c}\label{classRefineableBin_ab840fa275927998ba2f51ec7ef46235c} 
 \index{RefineableBin@{RefineableBin}!RefineableBin@{RefineableBin}}
 \index{RefineableBin@{RefineableBin}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{RefineableBin()}{RefineableBin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Refineable\+Bin\+::\+Refineable\+Bin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$}]{bin\+\_\+array\+\_\+pt,  }\item[{const unsigned \&}]{bin\+\_\+index\+\_\+in\+\_\+bin\+\_\+array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Refineable\+Bin\+::\+Refineable\+Bin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*}}]{bin\+\_\+array\+\_\+pt,  }\item[{const unsigned \&}]{bin\+\_\+index\+\_\+in\+\_\+bin\+\_\+array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. 
+Constructor. Pass pointer to bin array that contains this bin and the index of the newly created bin in that \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. 
 
 
 
-Definition at line 112 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00112}{112}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
-\mbox{\Hypertarget{classRefineableBin_af73c1ba8667757ad9be26b01eb8dfcd3}\label{classRefineableBin_af73c1ba8667757ad9be26b01eb8dfcd3}} 
+\Hypertarget{classRefineableBin_af73c1ba8667757ad9be26b01eb8dfcd3}\label{classRefineableBin_af73c1ba8667757ad9be26b01eb8dfcd3} 
 \index{RefineableBin@{RefineableBin}!RefineableBin@{RefineableBin}}
 \index{RefineableBin@{RefineableBin}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{RefineableBin()}{RefineableBin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -86,62 +86,60 @@ Definition at line 112 of file sample\+\_\+point\+\_\+container.\+h.
 
 Broken copy constructor. 
 
-\mbox{\Hypertarget{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4}\label{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4}} 
-\index{RefineableBin@{RefineableBin}!````~RefineableBin@{$\sim$RefineableBin}}
-\index{````~RefineableBin@{$\sim$RefineableBin}!RefineableBin@{RefineableBin}}
-\doxysubsubsection{\texorpdfstring{$\sim$RefineableBin()}{~RefineableBin()}}
-{\footnotesize\ttfamily Refineable\+Bin\+::$\sim$\+Refineable\+Bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4}\label{classRefineableBin_a844cf253cd0a1c9a348bc93e0d96fda4} 
+\index{RefineableBin@{RefineableBin}!````~RefineableBin@{\texorpdfstring{$\sim$}{\string~}RefineableBin}}
+\index{````~RefineableBin@{\texorpdfstring{$\sim$}{\string~}RefineableBin}!RefineableBin@{RefineableBin}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableBin()}{\string~RefineableBin()}}
+{\footnotesize\ttfamily Refineable\+Bin\+::\texorpdfstring{$\sim$}{\string~}\+Refineable\+Bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Destructor. 
 
-/////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////// Destructor 
 
-Definition at line 42 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00042}{42}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classRefineableBin_a55737725c556d80d6695549550b52df5}\label{classRefineableBin_a55737725c556d80d6695549550b52df5}} 
+\Hypertarget{classRefineableBin_a55737725c556d80d6695549550b52df5}\label{classRefineableBin_a55737725c556d80d6695549550b52df5} 
 \index{RefineableBin@{RefineableBin}!add\_sample\_point@{add\_sample\_point}}
 \index{add\_sample\_point@{add\_sample\_point}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{add\_sample\_point()}{add\_sample\_point()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+::add\+\_\+sample\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} $\ast$}]{new\+\_\+sample\+\_\+point\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{zeta\+\_\+coordinates }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Refineable\+Bin\+::add\+\_\+sample\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+sample\+\_\+point\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{zeta\+\_\+coordinates }\end{DoxyParamCaption})}
 
 
 
-Add a new sample point to \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}. 
+Add a new sample point to \doxylink{classRefineableBin}{Refineable\+Bin}. 
 
-Add a Sample\+Point$\ast$ to a \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} object. 
+Add a Sample\+Point\texorpdfstring{$\ast$}{*} to a \doxylink{classRefineableBin}{Refineable\+Bin} object. 
 
-Definition at line 392 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00392}{392}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
-\mbox{\Hypertarget{classRefineableBin_a6e434ec90024cbc5590d0eb5a5aba11e}\label{classRefineableBin_a6e434ec90024cbc5590d0eb5a5aba11e}} 
+\Hypertarget{classRefineableBin_a495380328c638a224ca8c13b1b38d952}\label{classRefineableBin_a495380328c638a224ca8c13b1b38d952} 
 \index{RefineableBin@{RefineableBin}!get\_bin\_boundaries@{get\_bin\_boundaries}}
 \index{get\_bin\_boundaries@{get\_bin\_boundaries}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{get\_bin\_boundaries()}{get\_bin\_boundaries()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Refineable\+Bin\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Boundaries of bin in each coordinate direction. $\ast$.first = min; $\ast$.second = max. 
+Boundaries of bin in each coordinate direction. \texorpdfstring{$\ast$}{*}.first = min; \texorpdfstring{$\ast$}{*}.second = max. 
 
 
 
-Definition at line 603 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00603}{603}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
-\mbox{\Hypertarget{classRefineableBin_a92d871f784877d48ae46d363419b5e52}\label{classRefineableBin_a92d871f784877d48ae46d363419b5e52}} 
+\Hypertarget{classRefineableBin_a92d871f784877d48ae46d363419b5e52}\label{classRefineableBin_a92d871f784877d48ae46d363419b5e52} 
 \index{RefineableBin@{RefineableBin}!locate\_zeta@{locate\_zeta}}
 \index{locate\_zeta@{locate\_zeta}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{locate\_zeta()}{locate\_zeta()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+::locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Geom\+Object $\ast$\&}]{sub\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Refineable\+Bin\+::locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Geom\+Object \texorpdfstring{$\ast$}{*}\&}]{sub\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})}
 
 
 
@@ -149,27 +147,27 @@ Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it 
 
 
 
-Definition at line 438 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00438}{438}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
 
 
-References Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta, i, s, Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points, and Sample\+Point\+Container\+::\+Visited\+\_\+sample\+\_\+points\+\_\+file.
+References \mbox{\hyperlink{sample__point__container_8h_source_l00339}{Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{elements_8h_source_l03152}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00343}{Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00335}{Sample\+Point\+Container\+::\+Visited\+\_\+sample\+\_\+points\+\_\+file}}.
 
-\mbox{\Hypertarget{classRefineableBin_ac23bc68c6082f3d5a1cf3f5e8538a9b2}\label{classRefineableBin_ac23bc68c6082f3d5a1cf3f5e8538a9b2}} 
+\Hypertarget{classRefineableBin_a39cc753a17e800ef388c4cb1352ff0cf}\label{classRefineableBin_a39cc753a17e800ef388c4cb1352ff0cf} 
 \index{RefineableBin@{RefineableBin}!make\_sub\_bin\_array@{make\_sub\_bin\_array}}
 \index{make\_sub\_bin\_array@{make\_sub\_bin\_array}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{make\_sub\_bin\_array()}{make\_sub\_bin\_array()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+::make\+\_\+sub\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}\item[{const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Refineable\+Bin\+::make\+\_\+sub\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}\item[{const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Method for building a new subbin\+\_\+array (called when the Bin size is greater than the Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin (and the Bin is recursive). Pass in the extremal coordinates of the bin which is being subdivided. Redistributes all existing sample points to newly made sub-\/bin-\/array and empties its own storage. Pass Max./min. coordinates of new bin array for efficiency. 
 
-Function called for making a sub bin array in a given \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}. Pass the vector of min and max coordinates of the NEW bin array. 
+Function called for making a sub bin array in a given \doxylink{classRefineableBin}{Refineable\+Bin}. Pass the vector of min and max coordinates of the NEW bin array. 
 
-Definition at line 91 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00091}{91}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
-\mbox{\Hypertarget{classRefineableBin_a377f1b457facf99566aab772af7260db}\label{classRefineableBin_a377f1b457facf99566aab772af7260db}} 
+\Hypertarget{classRefineableBin_a377f1b457facf99566aab772af7260db}\label{classRefineableBin_a377f1b457facf99566aab772af7260db} 
 \index{RefineableBin@{RefineableBin}!nsample\_points\_in\_bin@{nsample\_points\_in\_bin}}
 \index{nsample\_points\_in\_bin@{nsample\_points\_in\_bin}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{nsample\_points\_in\_bin()}{nsample\_points\_in\_bin()}}
@@ -181,13 +179,13 @@ Number of sample points stored in bin.
 
 
 
-Definition at line 155 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00155}{155}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
 
 
-References Sample\+\_\+point\+\_\+pt.
+References \mbox{\hyperlink{sample__point__container_8h_source_l00171}{Sample\+\_\+point\+\_\+pt}}.
 
-\mbox{\Hypertarget{classRefineableBin_aa924b5b7d9ed5dacddb672a5ea2ea829}\label{classRefineableBin_aa924b5b7d9ed5dacddb672a5ea2ea829}} 
+\Hypertarget{classRefineableBin_aa924b5b7d9ed5dacddb672a5ea2ea829}\label{classRefineableBin_aa924b5b7d9ed5dacddb672a5ea2ea829} 
 \index{RefineableBin@{RefineableBin}!operator=@{operator=}}
 \index{operator=@{operator=}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
@@ -197,7 +195,7 @@ References Sample\+\_\+point\+\_\+pt.
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classRefineableBin_a52d935cc69527220005ecee7cfb2b5e8}\label{classRefineableBin_a52d935cc69527220005ecee7cfb2b5e8}} 
+\Hypertarget{classRefineableBin_a52d935cc69527220005ecee7cfb2b5e8}\label{classRefineableBin_a52d935cc69527220005ecee7cfb2b5e8} 
 \index{RefineableBin@{RefineableBin}!output@{output}}
 \index{output@{output}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
@@ -209,13 +207,13 @@ Output bin; x,\mbox{[}y,\mbox{[}z\mbox{]}\mbox{]},n\+\_\+sample\+\_\+points.
 
 
 
-Definition at line 181 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00181}{181}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
 
 
-References oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
 
-\mbox{\Hypertarget{classRefineableBin_a71ceb55788e4d4f39986c138349a22f7}\label{classRefineableBin_a71ceb55788e4d4f39986c138349a22f7}} 
+\Hypertarget{classRefineableBin_a71ceb55788e4d4f39986c138349a22f7}\label{classRefineableBin_a71ceb55788e4d4f39986c138349a22f7} 
 \index{RefineableBin@{RefineableBin}!output\_bin\_vertices@{output\_bin\_vertices}}
 \index{output\_bin\_vertices@{output\_bin\_vertices}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{output\_bin\_vertices()}{output\_bin\_vertices()}}
@@ -227,13 +225,13 @@ Output bin vertices (allowing display of bins as zones).
 
 Output bin; x,\mbox{[}y,\mbox{[}z\mbox{]}\mbox{]}. 
 
-Definition at line 291 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00291}{291}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
 
 
 
-References oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
 
-\mbox{\Hypertarget{classRefineableBin_a0c3428cc5e30d0a29c13e2ce8eb3076f}\label{classRefineableBin_a0c3428cc5e30d0a29c13e2ce8eb3076f}} 
+\Hypertarget{classRefineableBin_a0c3428cc5e30d0a29c13e2ce8eb3076f}\label{classRefineableBin_a0c3428cc5e30d0a29c13e2ce8eb3076f} 
 \index{RefineableBin@{RefineableBin}!output\_bins@{output\_bins}}
 \index{output\_bins@{output\_bins}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{output\_bins()}{output\_bins()}}
@@ -243,7 +241,7 @@ References oomph\+::oomph\+\_\+info.
 
 Output bin vertices (allowing display of bins as zones). 
 
-\mbox{\Hypertarget{classRefineableBin_a73cb9b1ac53b5337f2bb2476e2084bb9}\label{classRefineableBin_a73cb9b1ac53b5337f2bb2476e2084bb9}} 
+\Hypertarget{classRefineableBin_a73cb9b1ac53b5337f2bb2476e2084bb9}\label{classRefineableBin_a73cb9b1ac53b5337f2bb2476e2084bb9} 
 \index{RefineableBin@{RefineableBin}!total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}}
 \index{total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{total\_number\_of\_sample\_points\_computed\_recursively()}{total\_number\_of\_sample\_points\_computed\_recursively()}}
@@ -255,26 +253,30 @@ Compute total number of sample points recursively.
 
 
 
-Definition at line 65 of file sample\+\_\+point\+\_\+container.\+cc.
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00065}{65}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classRefineableBin_ad79b9df93c7be0cd54933f182037db20}\label{classRefineableBin_ad79b9df93c7be0cd54933f182037db20}} 
+\Hypertarget{classRefineableBin_ad79b9df93c7be0cd54933f182037db20}\label{classRefineableBin_ad79b9df93c7be0cd54933f182037db20} 
 \index{RefineableBin@{RefineableBin}!Bin\_array\_pt@{Bin\_array\_pt}}
 \index{Bin\_array\_pt@{Bin\_array\_pt}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{Bin\_array\_pt}{Bin\_array\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}$\ast$ Refineable\+Bin\+::\+Bin\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}\texorpdfstring{$\ast$}{*} Refineable\+Bin\+::\+Bin\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Pointer to the bin array which \char`\"{}owns\char`\"{} this \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}. 
+Pointer to the bin array which "{}owns"{} this \doxylink{classRefineableBin}{Refineable\+Bin}. 
 
 
 
-Definition at line 177 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00177}{177}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
-\mbox{\Hypertarget{classRefineableBin_a7714484b072bdc7466d3d24024588f1f}\label{classRefineableBin_a7714484b072bdc7466d3d24024588f1f}} 
+\Hypertarget{classRefineableBin_a7714484b072bdc7466d3d24024588f1f}\label{classRefineableBin_a7714484b072bdc7466d3d24024588f1f} 
 \index{RefineableBin@{RefineableBin}!Bin\_index\_in\_bin\_array@{Bin\_index\_in\_bin\_array}}
 \index{Bin\_index\_in\_bin\_array@{Bin\_index\_in\_bin\_array}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{Bin\_index\_in\_bin\_array}{Bin\_index\_in\_bin\_array}}
@@ -286,13 +288,13 @@ Index of bin in its bin array.
 
 
 
-Definition at line 180 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00180}{180}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
-\mbox{\Hypertarget{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba}\label{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba}} 
+\Hypertarget{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba}\label{classRefineableBin_a9d0241fb089b4bb2e50e0ab435ebd6ba} 
 \index{RefineableBin@{RefineableBin}!Sample\_point\_pt@{Sample\_point\_pt}}
 \index{Sample\_point\_pt@{Sample\_point\_pt}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{Sample\_point\_pt}{Sample\_point\_pt}}
-{\footnotesize\ttfamily Vector$<$\mbox{\hyperlink{classSamplePoint}{Sample\+Point}}$\ast$$>$$\ast$ Refineable\+Bin\+::\+Sample\+\_\+point\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Vector$<$\mbox{\hyperlink{classSamplePoint}{Sample\+Point}}\texorpdfstring{$\ast$}{*}$>$\texorpdfstring{$\ast$}{*} Refineable\+Bin\+::\+Sample\+\_\+point\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -300,17 +302,17 @@ Container of Sample\+Points. Pointer to vector because it\textquotesingle{}s sho
 
 
 
-Definition at line 171 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00171}{171}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
 
 
-Referenced by nsample\+\_\+points\+\_\+in\+\_\+bin().
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00155}{nsample\+\_\+points\+\_\+in\+\_\+bin()}}.
 
-\mbox{\Hypertarget{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7}\label{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7}} 
+\Hypertarget{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7}\label{classRefineableBin_a6ef2b185fee14608f5adc423b266e1f7} 
 \index{RefineableBin@{RefineableBin}!Sub\_bin\_array\_pt@{Sub\_bin\_array\_pt}}
 \index{Sub\_bin\_array\_pt@{Sub\_bin\_array\_pt}!RefineableBin@{RefineableBin}}
 \doxysubsubsection{\texorpdfstring{Sub\_bin\_array\_pt}{Sub\_bin\_array\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}$\ast$ Refineable\+Bin\+::\+Sub\+\_\+bin\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}\texorpdfstring{$\ast$}{*} Refineable\+Bin\+::\+Sub\+\_\+bin\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -318,7 +320,7 @@ Pointer to a possible sub-\/\+Bin\+Array. Null by default.
 
 
 
-Definition at line 174 of file sample\+\_\+point\+\_\+container.\+h.
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00174}{174}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
 
 
 

@@ -797,5 +797,5 @@ demo_drivers/interaction/unstructured_fsi/unstructured_two_d_fsi.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

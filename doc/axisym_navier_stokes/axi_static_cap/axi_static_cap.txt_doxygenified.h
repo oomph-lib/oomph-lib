@@ -124,5 +124,5 @@ demo_drivers/axisym_navier_stokes/axi_static_cap/axi_static_cap.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

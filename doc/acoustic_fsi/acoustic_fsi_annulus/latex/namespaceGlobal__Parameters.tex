@@ -1,11 +1,11 @@
-\hypertarget{namespaceGlobal__Parameters}{}\doxysection{Global\+\_\+\+Parameters Namespace Reference}
-\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
+\doxysection{Global\+\_\+\+Parameters Namespace Reference}
+\hypertarget{namespaceGlobal__Parameters}{}\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
 
 
-/////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////  
+Global variables.  
 
 
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 Time\+Harmonic\+Isotropic\+Elasticity\+Tensor \mbox{\hyperlink{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}{E}} (\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
@@ -14,21 +14,21 @@ void \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da23
 \begin{DoxyCompactList}\small\item\em Function to update dependent parameter values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}{solid\+\_\+boundary\+\_\+displacement}} (const Vector$<$ double $>$ \&x, Vector$<$ std\+::complex$<$ double $>$ $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Displacement field on inner boundary of solid. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a116765fbd117ec6199c9399af801d510}{Hankel\+H1}} (const double \&k, const double \&x)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ad51a5fa9fa94f9d54ef26565b53a0e35}{Hankel\+H1}} (const double \&k, const double \&x)
 \begin{DoxyCompactList}\small\item\em Interface to Hankel function in maple style. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a12dd327bc592b36ffd4abbab5018146f}{axisym\+\_\+coefficient}} ()
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a32b00967338a5749a740dfe1a62e5704}{axisym\+\_\+coefficient}} ()
 \begin{DoxyCompactList}\small\item\em Coefficient in front of Hankel function for axisymmetric solution of Helmholtz potential. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35}{exact\+\_\+axisym\+\_\+potential}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Exact solution for Helmholtz potential for axisymmetric solution. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a79131fd1bf3eb1ab080c21c2d98a92d5}{exact\+\_\+axisym\+\_\+radiated\+\_\+power}} ()
 \begin{DoxyCompactList}\small\item\em Exact radiated power for axisymmetric solution. \end{DoxyCompactList}\item 
-Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a461bb148c1f6494672520bdf8045483f}{Omega\+\_\+sq}} (2, 0.\+0)
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a6f21d3c91ece278639ffed9e777abeba}{Omega\+\_\+sq}} (2, 0.\+0)
 \begin{DoxyCompactList}\small\item\em Square of non-\/dim frequency for the two regions -- dependent variable! \end{DoxyCompactList}\item 
-Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a3ad42a80620a3847cf0d1b187e2ed2ec}{Density\+\_\+ratio}} (2, 0.\+1)
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a33c5912506e903b037b9cd23ee16c3b2}{Density\+\_\+ratio}} (2, 0.\+1)
 \begin{DoxyCompactList}\small\item\em Density ratio for the two regions\+: solid to fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{pressure\+\_\+load}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Pressure load (real and imag part) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{K\+\_\+squared}} =10.\+0
@@ -47,13 +47,13 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4
 \begin{DoxyCompactList}\small\item\em Non-\/dim square of frequency for solid -- dependent variable! \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787}{N}} =0
 \begin{DoxyCompactList}\small\item\em Azimuthal wavenumber for imposed displacement of coating on inner boundary. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}} =\char`\"{}RESLT\char`\"{}
+string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}} ="{}RESLT"{}
 \begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{El\+\_\+multiplier}} =1
 \begin{DoxyCompactList}\small\item\em Multiplier for number of elements. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_ae16eb10039cab2098b02ec7dff946277}{ABC\+\_\+order}} =3
 \begin{DoxyCompactList}\small\item\em Order of absorbing/appproximate boundary condition. \end{DoxyCompactList}\item 
-Vector$<$ Time\+Harmonic\+Isotropic\+Elasticity\+Tensor $\ast$ $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{E\+\_\+pt}}
+Vector$<$ Time\+Harmonic\+Isotropic\+Elasticity\+Tensor \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{E\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em The elasticity tensors for the two regions. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}} = 0.\+1
 \begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\item 
@@ -62,16 +62,14 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9f
 
 
 \doxysubsection{Detailed Description}
-/////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
-
-Global variables 
+Global variables. 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a12dd327bc592b36ffd4abbab5018146f}\label{namespaceGlobal__Parameters_a12dd327bc592b36ffd4abbab5018146f}} 
+\Hypertarget{namespaceGlobal__Parameters_a32b00967338a5749a740dfe1a62e5704}\label{namespaceGlobal__Parameters_a32b00967338a5749a740dfe1a62e5704} 
 \index{Global\_Parameters@{Global\_Parameters}!axisym\_coefficient@{axisym\_coefficient}}
 \index{axisym\_coefficient@{axisym\_coefficient}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{axisym\_coefficient()}{axisym\_coefficient()}}
-{\footnotesize\ttfamily std\+::complex$<$double$>$ Global\+\_\+\+Parameters\+::axisym\+\_\+coefficient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::complex$<$ double $>$ Global\+\_\+\+Parameters\+::axisym\+\_\+coefficient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -79,27 +77,27 @@ Coefficient in front of Hankel function for axisymmetric solution of Helmholtz p
 
 
 
-Definition at line 133 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{135}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References H\+\_\+coating, Hankel\+H1(), K\+\_\+squared, Nu, and Q.
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00063}{H\+\_\+coating}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00109}{Hankel\+H1()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00054}{K\+\_\+squared}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00066}{Nu}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00060}{Q}}.
 
 
 
-Referenced by exact\+\_\+axisym\+\_\+potential(), and exact\+\_\+axisym\+\_\+radiated\+\_\+power().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00197}{exact\+\_\+axisym\+\_\+potential()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00207}{exact\+\_\+axisym\+\_\+radiated\+\_\+power()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a3ad42a80620a3847cf0d1b187e2ed2ec}\label{namespaceGlobal__Parameters_a3ad42a80620a3847cf0d1b187e2ed2ec}} 
+\Hypertarget{namespaceGlobal__Parameters_a33c5912506e903b037b9cd23ee16c3b2}\label{namespaceGlobal__Parameters_a33c5912506e903b037b9cd23ee16c3b2} 
 \index{Global\_Parameters@{Global\_Parameters}!Density\_ratio@{Density\_ratio}}
 \index{Density\_ratio@{Density\_ratio}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Density\_ratio()}{Density\_ratio()}}
-{\footnotesize\ttfamily Vector$<$double$>$ Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio (\begin{DoxyParamCaption}\item[{2}]{,  }\item[{0.}]{1 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Vector$<$ double $>$ Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio (\begin{DoxyParamCaption}\item[{2}]{,  }\item[{0.}]{1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Density ratio for the two regions\+: solid to fluid. 
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}\label{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}} 
+\Hypertarget{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}\label{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6} 
 \index{Global\_Parameters@{Global\_Parameters}!E@{E}}
 \index{E@{E}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{E()}{E()}}
@@ -111,9 +109,9 @@ The elasticity tensor for the solid.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35}\label{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35}} 
+\Hypertarget{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35}\label{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35} 
 \index{Global\_Parameters@{Global\_Parameters}!exact\_axisym\_potential@{exact\_axisym\_potential}}
 \index{exact\_axisym\_potential@{exact\_axisym\_potential}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{exact\_axisym\_potential()}{exact\_axisym\_potential()}}
@@ -125,17 +123,17 @@ Exact solution for Helmholtz potential for axisymmetric solution.
 
 
 
-Definition at line 195 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00197}{197}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References axisym\+\_\+coefficient(), Hankel\+H1(), and K\+\_\+squared.
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00109}{Hankel\+H1()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00054}{K\+\_\+squared}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a79131fd1bf3eb1ab080c21c2d98a92d5}\label{namespaceGlobal__Parameters_a79131fd1bf3eb1ab080c21c2d98a92d5}} 
+\Hypertarget{namespaceGlobal__Parameters_a79131fd1bf3eb1ab080c21c2d98a92d5}\label{namespaceGlobal__Parameters_a79131fd1bf3eb1ab080c21c2d98a92d5} 
 \index{Global\_Parameters@{Global\_Parameters}!exact\_axisym\_radiated\_power@{exact\_axisym\_radiated\_power}}
 \index{exact\_axisym\_radiated\_power@{exact\_axisym\_radiated\_power}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{exact\_axisym\_radiated\_power()}{exact\_axisym\_radiated\_power()}}
@@ -147,21 +145,21 @@ Exact radiated power for axisymmetric solution.
 
 
 
-Definition at line 205 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00207}{207}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References axisym\+\_\+coefficient(), and K\+\_\+squared.
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00054}{K\+\_\+squared}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a116765fbd117ec6199c9399af801d510}\label{namespaceGlobal__Parameters_a116765fbd117ec6199c9399af801d510}} 
+\Hypertarget{namespaceGlobal__Parameters_ad51a5fa9fa94f9d54ef26565b53a0e35}\label{namespaceGlobal__Parameters_ad51a5fa9fa94f9d54ef26565b53a0e35} 
 \index{Global\_Parameters@{Global\_Parameters}!HankelH1@{HankelH1}}
 \index{HankelH1@{HankelH1}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{HankelH1()}{HankelH1()}}
-{\footnotesize\ttfamily std\+::complex$<$double$>$ Global\+\_\+\+Parameters\+::\+Hankel\+H1 (\begin{DoxyParamCaption}\item[{const double \&}]{k,  }\item[{const double \&}]{x }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::complex$<$ double $>$ Global\+\_\+\+Parameters\+::\+Hankel\+H1 (\begin{DoxyParamCaption}\item[{const double \&}]{k,  }\item[{const double \&}]{x }\end{DoxyParamCaption})}
 
 
 
@@ -169,27 +167,27 @@ Interface to Hankel function in maple style.
 
 
 
-Definition at line 107 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00109}{109}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by axisym\+\_\+coefficient(), and exact\+\_\+axisym\+\_\+potential().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00197}{exact\+\_\+axisym\+\_\+potential()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a461bb148c1f6494672520bdf8045483f}\label{namespaceGlobal__Parameters_a461bb148c1f6494672520bdf8045483f}} 
+\Hypertarget{namespaceGlobal__Parameters_a6f21d3c91ece278639ffed9e777abeba}\label{namespaceGlobal__Parameters_a6f21d3c91ece278639ffed9e777abeba} 
 \index{Global\_Parameters@{Global\_Parameters}!Omega\_sq@{Omega\_sq}}
 \index{Omega\_sq@{Omega\_sq}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Omega\_sq()}{Omega\_sq()}}
-{\footnotesize\ttfamily Vector$<$double$>$ Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq (\begin{DoxyParamCaption}\item[{2}]{,  }\item[{0.}]{0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Vector$<$ double $>$ Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq (\begin{DoxyParamCaption}\item[{2}]{,  }\item[{0.}]{0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Square of non-\/dim frequency for the two regions -- dependent variable! 
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}\label{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}} 
+\Hypertarget{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}\label{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f} 
 \index{Global\_Parameters@{Global\_Parameters}!pressure\_load@{pressure\_load}}
 \index{pressure\_load@{pressure\_load}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{pressure\_load()}{pressure\_load()}}
-{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::pressure\+\_\+load (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{n,  }\item[{Vector$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::pressure\+\_\+load (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{n,  }\item[{Vector$<$ std\+::complex$<$ double $>$ $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -197,17 +195,17 @@ Pressure load (real and imag part)
 
 
 
-Definition at line 151 of file unstructured\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00151}{151}} of file \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source}{unstructured\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Alpha, and P.
+References \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00148}{Alpha}}, and \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00145}{P}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+solid\+\_\+traction\+\_\+elements().
+Referenced by \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00867}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+solid\+\_\+traction\+\_\+elements()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}\label{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}} 
+\Hypertarget{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}\label{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b} 
 \index{Global\_Parameters@{Global\_Parameters}!solid\_boundary\_displacement@{solid\_boundary\_displacement}}
 \index{solid\_boundary\_displacement@{solid\_boundary\_displacement}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{solid\_boundary\_displacement()}{solid\_boundary\_displacement()}}
@@ -219,17 +217,17 @@ Displacement field on inner boundary of solid.
 
 
 
-Definition at line 86 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00088}{88}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References N.
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00085}{N}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}\label{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}} 
+\Hypertarget{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}\label{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7} 
 \index{Global\_Parameters@{Global\_Parameters}!update\_parameter\_values@{update\_parameter\_values}}
 \index{update\_parameter\_values@{update\_parameter\_values}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{update\_parameter\_values()}{update\_parameter\_values()}}
@@ -241,24 +239,24 @@ Function to update dependent parameter values.
 
 
 
-Definition at line 76 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00078}{78}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Density\+\_\+ratio, Omega\+\_\+sq, and Q.
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00072}{Density\+\_\+ratio}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00075}{Omega\+\_\+sq}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00060}{Q}}.
 
 
 
-Referenced by main().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}.
 
 
 
 \doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{namespaceGlobal__Parameters_ae16eb10039cab2098b02ec7dff946277}\label{namespaceGlobal__Parameters_ae16eb10039cab2098b02ec7dff946277}} 
+\Hypertarget{namespaceGlobal__Parameters_ae16eb10039cab2098b02ec7dff946277}\label{namespaceGlobal__Parameters_ae16eb10039cab2098b02ec7dff946277} 
 \index{Global\_Parameters@{Global\_Parameters}!ABC\_order@{ABC\_order}}
 \index{ABC\_order@{ABC\_order}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{ABC\_order}{ABC\_order}}
-{\footnotesize\ttfamily unsigned Global\+\_\+\+Parameters\+::\+ABC\+\_\+order =3}
+{\footnotesize\ttfamily unsigned Global\+\_\+\+Parameters\+::\+ABC\+\_\+order =3\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -266,17 +264,17 @@ Order of absorbing/appproximate boundary condition.
 
 
 
-Definition at line 117 of file unstructured\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00117}{117}} of file \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source}{unstructured\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+ABC\+\_\+elements().
+Referenced by \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01021}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+ABC\+\_\+elements()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}\label{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}} 
+\Hypertarget{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}\label{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731} 
 \index{Global\_Parameters@{Global\_Parameters}!Alpha@{Alpha}}
 \index{Alpha@{Alpha}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
-{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Alpha =200.\+0}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Alpha =200.\+0\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -284,13 +282,13 @@ Peakiness parameter for pressure load.
 
 
 
-Definition at line 148 of file unstructured\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00148}{148}} of file \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source}{unstructured\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by main(), and pressure\+\_\+load().
+Referenced by \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01256}{main()}}, and \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00151}{pressure\+\_\+load()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}\label{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}} 
+\Hypertarget{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}\label{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679} 
 \index{Global\_Parameters@{Global\_Parameters}!Density\_ratio@{Density\_ratio}}
 \index{Density\_ratio@{Density\_ratio}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Density\_ratio}{Density\_ratio}}
@@ -302,17 +300,17 @@ Density ratio\+: solid to fluid.
 
 
 
-Definition at line 70 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00072}{72}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution(), main(), and update\+\_\+parameter\+\_\+values().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01256}{main()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00078}{update\+\_\+parameter\+\_\+values()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}\label{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}} 
+\Hypertarget{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}\label{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76} 
 \index{Global\_Parameters@{Global\_Parameters}!Directory@{Directory}}
 \index{Directory@{Directory}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Directory}{Directory}}
-{\footnotesize\ttfamily string Global\+\_\+\+Parameters\+::\+Directory =\char`\"{}RESLT\char`\"{}}
+{\footnotesize\ttfamily string Global\+\_\+\+Parameters\+::\+Directory ="{}RESLT"{}}
 
 
 
@@ -320,17 +318,17 @@ Output directory.
 
 
 
-Definition at line 101 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00103}{103}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem(), and main().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}\label{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}} 
+\Hypertarget{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}\label{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7} 
 \index{Global\_Parameters@{Global\_Parameters}!E\_pt@{E\_pt}}
 \index{E\_pt@{E\_pt}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{E\_pt}{E\_pt}}
-{\footnotesize\ttfamily Vector$<$Time\+Harmonic\+Isotropic\+Elasticity\+Tensor$\ast$$>$ Global\+\_\+\+Parameters\+::\+E\+\_\+pt}
+{\footnotesize\ttfamily Vector$<$Time\+Harmonic\+Isotropic\+Elasticity\+Tensor\texorpdfstring{$\ast$}{*}$>$ Global\+\_\+\+Parameters\+::\+E\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -338,13 +336,13 @@ The elasticity tensors for the two regions.
 
 
 
-Definition at line 135 of file unstructured\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00135}{135}} of file \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source}{unstructured\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup(), and main().
+Referenced by \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00770}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01256}{main()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}\label{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}} 
+\Hypertarget{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}\label{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1} 
 \index{Global\_Parameters@{Global\_Parameters}!El\_multiplier@{El\_multiplier}}
 \index{El\_multiplier@{El\_multiplier}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{El\_multiplier}{El\_multiplier}}
@@ -356,13 +354,13 @@ Multiplier for number of elements.
 
 
 
-Definition at line 104 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00106}{106}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem(), and main().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}\label{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}} 
+\Hypertarget{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}\label{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819} 
 \index{Global\_Parameters@{Global\_Parameters}!H\_coating@{H\_coating}}
 \index{H\_coating@{H\_coating}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{H\_coating}{H\_coating}}
@@ -374,13 +372,13 @@ Non-\/dim thickness of elastic coating.
 
 
 
-Definition at line 61 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00063}{63}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by axisym\+\_\+coefficient(), and Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}\label{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}} 
+\Hypertarget{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}\label{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29} 
 \index{Global\_Parameters@{Global\_Parameters}!K\_squared@{K\_squared}}
 \index{K\_squared@{K\_squared}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{K\_squared}{K\_squared}}
@@ -392,13 +390,13 @@ Square of wavenumber for the Helmholtz equation.
 
 
 
-Definition at line 52 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00054}{54}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by axisym\+\_\+coefficient(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution(), exact\+\_\+axisym\+\_\+potential(), and exact\+\_\+axisym\+\_\+radiated\+\_\+power().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00197}{exact\+\_\+axisym\+\_\+potential()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00207}{exact\+\_\+axisym\+\_\+radiated\+\_\+power()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787}\label{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787}} 
+\Hypertarget{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787}\label{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787} 
 \index{Global\_Parameters@{Global\_Parameters}!N@{N}}
 \index{N@{N}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{N}{N}}
@@ -410,13 +408,13 @@ Azimuthal wavenumber for imposed displacement of coating on inner boundary.
 
 
 
-Definition at line 83 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00085}{85}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by main(), and solid\+\_\+boundary\+\_\+displacement().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00088}{solid\+\_\+boundary\+\_\+displacement()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}} 
+\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661} 
 \index{Global\_Parameters@{Global\_Parameters}!Nu@{Nu}}
 \index{Nu@{Nu}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Nu}{Nu}}
@@ -428,13 +426,13 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line 64 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00066}{66}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by axisym\+\_\+coefficient(), and main().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, and \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01256}{main()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}\label{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}} 
+\Hypertarget{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}\label{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324} 
 \index{Global\_Parameters@{Global\_Parameters}!Omega\_sq@{Omega\_sq}}
 \index{Omega\_sq@{Omega\_sq}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Omega\_sq}{Omega\_sq}}
@@ -446,13 +444,13 @@ Non-\/dim square of frequency for solid -- dependent variable!
 
 
 
-Definition at line 73 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00075}{75}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution(), and update\+\_\+parameter\+\_\+values().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}, \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00770}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00078}{update\+\_\+parameter\+\_\+values()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}\label{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}} 
+\Hypertarget{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}\label{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900} 
 \index{Global\_Parameters@{Global\_Parameters}!Outer\_radius@{Outer\_radius}}
 \index{Outer\_radius@{Outer\_radius}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Outer\_radius}{Outer\_radius}}
@@ -464,17 +462,17 @@ Radius of outer boundary of Helmholtz domain.
 
 
 
-Definition at line 55 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00057}{57}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+ABC\+\_\+elements(), and main().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00311}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::\+Coated\+Disk\+Problem()}}, \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l01021}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+helmholtz\+\_\+\+ABC\+\_\+elements()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}\label{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}} 
+\Hypertarget{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}\label{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731} 
 \index{Global\_Parameters@{Global\_Parameters}!P@{P}}
 \index{P@{P}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{P}{P}}
-{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::P = 0.\+1}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::P = 0.\+1\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -482,13 +480,13 @@ Uniform pressure.
 
 
 
-Definition at line 145 of file unstructured\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00145}{145}} of file \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source}{unstructured\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by pressure\+\_\+load().
+Referenced by \mbox{\hyperlink{unstructured__acoustic__fsi_8cc_source_l00151}{pressure\+\_\+load()}}.
 
-\mbox{\Hypertarget{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}\label{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}} 
+\Hypertarget{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}\label{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1} 
 \index{Global\_Parameters@{Global\_Parameters}!Q@{Q}}
 \index{Q@{Q}!Global\_Parameters@{Global\_Parameters}}
 \doxysubsubsection{\texorpdfstring{Q}{Q}}
@@ -500,9 +498,9 @@ FSI parameter.
 
 
 
-Definition at line 58 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00060}{60}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-Referenced by axisym\+\_\+coefficient(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements(), Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution(), main(), and update\+\_\+parameter\+\_\+values().
+Referenced by \mbox{\hyperlink{acoustic__fsi_8cc_source_l00135}{axisym\+\_\+coefficient()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00577}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00729}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00847}{main()}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00078}{update\+\_\+parameter\+\_\+values()}}.
 

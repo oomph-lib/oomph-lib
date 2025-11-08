@@ -1,8 +1,8 @@
-\hypertarget{classoomph_1_1PMLMeshBase}{}\doxysection{oomph\+::PMLMesh\+Base Class Reference}
-\label{classoomph_1_1PMLMeshBase}\index{oomph::PMLMeshBase@{oomph::PMLMeshBase}}
+\doxysection{oomph\+::PMLMesh\+Base Class Reference}
+\hypertarget{classoomph_1_1PMLMeshBase}{}\label{classoomph_1_1PMLMeshBase}\index{oomph::PMLMeshBase@{oomph::PMLMeshBase}}
 
 
-/////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////  
+PML mesh base class. Contains a pure virtual locate\+\_\+zeta function to be uploaded in \doxylink{classoomph_1_1PMLQuadMesh}{PMLQuad\+Mesh} and PMLBrick\+Mesh (once the code for it has been written)  
 
 
 
@@ -15,28 +15,26 @@ Inheritance diagram for oomph\+::PMLMesh\+Base\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{classoomph_1_1PMLMeshBase}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{pml\+\_\+locate\+\_\+zeta}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&el\+\_\+pt)=0
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{pml\+\_\+locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\+\_\+pt}})=0
 \begin{DoxyCompactList}\small\item\em Pure virtual function to provide an optimised version of the locate\+\_\+zeta function for PML meshes. As the PML meshes are rectangular (in 2D, or rectangular prisms in 3D) the location of a point in the mesh is simpler than in a more complex mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-/////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////// 
+PML mesh base class. Contains a pure virtual locate\+\_\+zeta function to be uploaded in \doxylink{classoomph_1_1PMLQuadMesh}{PMLQuad\+Mesh} and PMLBrick\+Mesh (once the code for it has been written) 
 
-PML mesh base class. Contains a pure virtual locate\+\_\+zeta function to be uploaded in \mbox{\hyperlink{classoomph_1_1PMLQuadMesh}{PMLQuad\+Mesh}} and PMLBrick\+Mesh (once the code for it has been written) 
-
-Definition at line 170 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00169}{169}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}\label{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}} 
+\Hypertarget{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}\label{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995} 
 \index{oomph::PMLMeshBase@{oomph::PMLMeshBase}!pml\_locate\_zeta@{pml\_locate\_zeta}}
 \index{pml\_locate\_zeta@{pml\_locate\_zeta}!oomph::PMLMeshBase@{oomph::PMLMeshBase}}
 \doxysubsubsection{\texorpdfstring{pml\_locate\_zeta()}{pml\_locate\_zeta()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+PMLMesh\+Base\+::pml\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&}]{el\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+PMLMesh\+Base\+::pml\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\&}]{el\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 

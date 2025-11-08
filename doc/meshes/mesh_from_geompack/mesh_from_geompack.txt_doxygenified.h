@@ -118,7 +118,7 @@ output from <A HREF="http://members.shaw.ca/bjoe/">
 \c Geompack++ </A>  to generate an \c oomph-lib Mesh containing 
 \c QElement<2,2> four-node quadrilateral elements. The relevant interface is:
 
-\dontinclude geompack_mesh.template.h
+\dontinclude geompack_mesh.h
 \skipline start_of_geompackquadmesh_class
 \until Default_TimeStepper
  
@@ -176,5 +176,5 @@ demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

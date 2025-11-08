@@ -417,5 +417,5 @@ demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

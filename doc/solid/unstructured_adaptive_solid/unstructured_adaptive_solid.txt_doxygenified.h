@@ -167,7 +167,7 @@ specify the target errors and element sizes.
 <HR>
 <HR>
 
-\section adapt_after Actions after adaptation
+\section adapt_after2 Actions after adaptation
 
  The function \c actions_after_adapt() first builds the traction
  elements adjacent to the left-hand boundary (boundary 0) and rebuilds
@@ -262,5 +262,5 @@ demo_drivers/solid/unstructured_solid/unstructured_adaptive_solid.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

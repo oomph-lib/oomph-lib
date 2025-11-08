@@ -1233,5 +1233,5 @@ demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

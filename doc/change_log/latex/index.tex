@@ -1,4 +1,6 @@
-This document provides an overview of the major changes between different \char`\"{}official\char`\"{} releases of {\ttfamily oomph-\/lib}.
+\chapter{Change log}
+\hypertarget{index}{}\label{index}\index{Change log@{Change log}}
+This document provides an overview of the major changes between different "{}official"{} releases of {\ttfamily oomph-\/lib}.
 
 {\ttfamily oomph-\/lib} is hosted on and distributed via its Git\+Hub page \begin{center} \href{https://github.com/oomph-lib/oomph-lib}{\texttt{ https\+://github.\+com/oomph-\/lib/oomph-\/lib}} \end{center}  ~\newline
  from where a complete log of all changes is available. The move to Git\+Hub was accompanied by a version bump to 2.\+0.
@@ -9,41 +11,41 @@ This Git\+Hub repository was preceded by two subversion-\/based repositories and
 ~\newline
 
 \item The file \href{../final_svn_log.txt}{\texttt{ final\+\_\+svn\+\_\+log.\+txt}} contains the complete log of our private svn repository (revisions 1 to 207) which preceded its public counterpart.
-\end{DoxyItemize}
-
-The remainder of this document covers the following issues\+:
+\end{DoxyItemize}The remainder of this document covers the following issues\+:
 
 
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_interface_changes}{Policy on interface changes}}
-\item \mbox{\hyperlink{index_one_point_zero_to_two_point_zero}{Changes between version 1.\+0 and 2.\+0.$\ast$}}
+\item \doxysectlink{index_interface_changes}{Policy on interface changes}{1}
+\item \doxysectlink{index_two_point_zero_to_three_point_zero}{Changes between version 2.\+0 and 3.\+0.\texorpdfstring{$\ast$}{*}}{2}
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_new_functionality_two_point_zero}{Major new functionality/changes}}
+\item \doxysectlink{index_new_functionality_three_point_zero}{Major new functionality/changes}{3}
 \end{DoxyItemize}
-\item \mbox{\hyperlink{index_zero_point_nine_to_one_point_zero}{Changes between version 0.\+9 and 1.\+0.$\ast$}}
+\item \doxysectlink{index_one_point_zero_to_two_point_zero}{Changes between version 1.\+0 and 2.\+0.\texorpdfstring{$\ast$}{*}}{2}
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_new_functionality_one_point_zero}{Major new functionality}}
+\item \doxysectlink{index_new_functionality_two_point_zero}{Major new functionality/changes}{3}
 \end{DoxyItemize}
-\item \mbox{\hyperlink{index_zero_point_eight_five_to_zero_point_nine}{Changes between version 0.\+85 and 0.\+9}}
+\item \doxysectlink{index_zero_point_nine_to_one_point_zero}{Changes between version 0.\+9 and 1.\+0.\texorpdfstring{$\ast$}{*}}{2}
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_new_functionality_zero_point_nine}{Major new functionality}}
-\item \mbox{\hyperlink{index_major_interface_changes_zero_point_nine}{Major interface changes}}
+\item \doxysectlink{index_new_functionality_one_point_zero}{Major new functionality}{3}
 \end{DoxyItemize}
+\item \doxysectlink{index_zero_point_eight_five_to_zero_point_nine}{Changes between version 0.\+85 and 0.\+9}{2}
+\begin{DoxyItemize}
+\item \doxysectlink{index_new_functionality_zero_point_nine}{Major new functionality}{3}
+\item \doxysectlink{index_major_interface_changes_zero_point_nine}{Major interface changes}{3}
 \end{DoxyItemize}
+\item \doxysectlink{index_zero_point_eight_to_zero_point_five}{Changes between version 0.\+8 and 0.\+85}{2}
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_zero_point_eight_to_zero_point_five}{Changes between version 0.\+8 and 0.\+85}}
-\begin{DoxyItemize}
-\item \mbox{\hyperlink{index_new_functionality_zero_point_five}{Major new functionality}}
-\item \mbox{\hyperlink{index_major_interface_changes_zero_point_five}{Major interface changes}}
+\item \doxysectlink{index_new_functionality_zero_point_five}{Major new functionality}{3}
+\item \doxysectlink{index_major_interface_changes_zero_point_five}{Major interface changes}{3}
 \end{DoxyItemize}
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_interface_changes}{}\doxysection{Policy on interface changes}\label{index_interface_changes}
+\hypertarget{index_interface_changes}{}\doxysection{\texorpdfstring{Policy on interface changes}{Policy on interface changes}}\label{index_interface_changes}
 We obviously try to avoid interface changes as much as possible as they may force users to adjust their code when upgrading to a new version. We will only change interfaces (names of objects and/or member functions, or the number or order of their arguments) if
 \begin{DoxyEnumerate}
 \item The previously chosen name turned out to be too ambiguous. For instance, the change from 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Problem::actions\_before\_solve() }
+\DoxyCodeLine{Problem::actions\_before\_solve()\ }
 
 \end{DoxyCode}
  to 
@@ -51,7 +53,7 @@ We obviously try to avoid interface changes as much as possible as they may forc
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve()}
 
 \end{DoxyCode}
- became necessary because of the addition of further nonlinear (but non-\/\+Newton) solvers (e.\+g. the segregated FSI solver). Since such solvers may call the Newton solver themselves, a more fine-\/grained control over what we mean by \char`\"{}solving\char`\"{} was required. ~\newline
+ became necessary because of the addition of further nonlinear (but non-\/\+Newton) solvers (e.\+g. the segregated FSI solver). Since such solvers may call the Newton solver themselves, a more fine-\/grained control over what we mean by "{}solving"{} was required. ~\newline
 ~\newline
 
 \item The previously chosen name violated our own \href{../../coding_conventions/html/index.html}{\texttt{ coding conventions.}} For instance, 
@@ -65,20 +67,20 @@ We obviously try to avoid interface changes as much as possible as they may forc
 \DoxyCodeLine{FiniteElement::nnodal\_position\_type()}
 
 \end{DoxyCode}
- because we do not want underscores after the leading \char`\"{}n\char`\"{} in an access function that returns the number of certain objects. ~\newline
+ because we do not want underscores after the leading "{}n"{} in an access function that returns the number of certain objects. ~\newline
 ~\newline
 
 \item The order of the function arguments violated our own coding conventions. For instance, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::get\_x(Vector<double>\& s, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,...) }
+\DoxyCodeLine{FiniteElement::get\_x(Vector<double>\&\ s,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,...)\ }
 
 \end{DoxyCode}
  had to be changed to 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::get\_x(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, Vector<double>\& s,...) }
+\DoxyCodeLine{FiniteElement::get\_x(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,\ Vector<double>\&\ s,...)\ }
 
 \end{DoxyCode}
- because the discrete \char`\"{}time\char`\"{} argument always comes first. ~\newline
+ because the discrete "{}time"{} argument always comes first. ~\newline
 ~\newline
 
 \end{DoxyEnumerate}Changes to function or object names are easy to detect because the compiler will not find the old version when linking against a new version of the library, encouraging the user to consult this list to (hopefully) find the appropriate replacement.
@@ -89,24 +91,24 @@ Here is an example of a function in which the order of the two unsigned argument
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Function of two unsigned arguments whose order has changed}}
-\DoxyCodeLine{\textcolor{comment}{// since the previous release}}
-\DoxyCodeLine{\textcolor{keywordtype}{void} SomeClass::some\_function(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i)}
+\DoxyCodeLine{\textcolor{comment}{//\ Function\ of\ two\ unsigned\ arguments\ whose\ order\ has\ changed}}
+\DoxyCodeLine{\textcolor{comment}{//\ since\ the\ previous\ release}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ SomeClass::some\_function(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ i)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
-\DoxyCodeLine{  [...]}
+\DoxyCodeLine{\ \ [...]}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{ \#ifdef WARN\_ABOUT\_SUBTLY\_CHANGED\_OOMPH\_INTERFACES}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \#ifdef\ WARN\_ABOUT\_SUBTLY\_CHANGED\_OOMPH\_INTERFACES}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Throw an oomph-\/lib warning to alert the user to the change}}
-\DoxyCodeLine{   \textcolor{comment}{// in the order of the arguments}}
-\DoxyCodeLine{   OomphLibWarning(\textcolor{stringliteral}{"{}Warning: Order of interfaces has changed"{}},}
-\DoxyCodeLine{                   \textcolor{stringliteral}{"{}SomeClass::some\_function(...)"{}},}
-\DoxyCodeLine{                   OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Throw\ an\ oomph-\/lib\ warning\ to\ alert\ the\ user\ to\ the\ change}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ in\ the\ order\ of\ the\ arguments}}
+\DoxyCodeLine{\ \ \ OomphLibWarning(\textcolor{stringliteral}{"{}Warning:\ Order\ of\ interfaces\ has\ changed"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}SomeClass::some\_function(...)"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \#endif}}
 \DoxyCodeLine{}
-\DoxyCodeLine{  [...]}
+\DoxyCodeLine{\ \ [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
 
@@ -116,8 +118,25 @@ Here is an example of a function in which the order of the two unsigned argument
 Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT\+\_\+\+SUBTLY\+\_\+\+CHANGED\+\_\+\+OOMPH\+\_\+\+INTERFACES} if you encounter problems after upgrading to a new version.
 
 \DoxyHorRuler{0}
-\hypertarget{index_one_point_zero_to_two_point_zero}{}\doxysubsection{Changes between version 1.\+0 and 2.\+0.$\ast$}\label{index_one_point_zero_to_two_point_zero}
-\hypertarget{index_new_functionality_two_point_zero}{}\doxysubsubsection{Major new functionality/changes}\label{index_new_functionality_two_point_zero}
+\hypertarget{index_two_point_zero_to_three_point_zero}{}\doxysubsection{\texorpdfstring{Changes between version 2.\+0 and 3.\+0.\texorpdfstring{$\ast$}{*}}{Changes between version 2.0 and 3.0.*}}\label{index_two_point_zero_to_three_point_zero}
+\hypertarget{index_new_functionality_three_point_zero}{}\doxysubsubsection{\texorpdfstring{Major new functionality/changes}{Major new functionality/changes}}\label{index_new_functionality_three_point_zero}
+
+\begin{DoxyItemize}
+\item Moved to C++17 standard ~\newline
+~\newline
+
+\item Completely re-\/implemented the build machinery which is now based on CMake.
+\begin{DoxyItemize}
+\item the equivalent of the old {\ttfamily autogen.\+sh} script is {\ttfamily oomph\+\_\+build.\+py}
+\item renamed the {\ttfamily bin} directory {\ttfamily scripts}
+\item moved the {\ttfamily self\+\_\+test} directory into {\ttfamily demo\+\_\+drivers}
+\item changed the way the template instantiation in the {\ttfamily meshes} directory is done\+: {\ttfamily \texorpdfstring{$\ast$}{*}.template.\+h} becomes {\ttfamily \texorpdfstring{$\ast$}{*}.h}.
+\item third-\/party libraries are now pulled in from their Git\+Hub repositories.
+\end{DoxyItemize}
+\end{DoxyItemize}~\newline
+~\newline
+ \hypertarget{index_one_point_zero_to_two_point_zero}{}\doxysubsection{\texorpdfstring{Changes between version 1.\+0 and 2.\+0.\texorpdfstring{$\ast$}{*}}{Changes between version 1.0 and 2.0.*}}\label{index_one_point_zero_to_two_point_zero}
+\hypertarget{index_new_functionality_two_point_zero}{}\doxysubsubsection{\texorpdfstring{Major new functionality/changes}{Major new functionality/changes}}\label{index_new_functionality_two_point_zero}
 
 \begin{DoxyItemize}
 \item Moved to C++11 standard and now use automatic formatting of code in the {\ttfamily src} directory, using {\ttfamily clang-\/format}. ~\newline
@@ -126,7 +145,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \item Upgraded all python scripts to python3. ~\newline
 ~\newline
 
-\item Included {\ttfamily CGAL}, {\ttfamily GMG}, {\ttfamily MPFR} and {\ttfamily Boost} into the third-\/party libraries that are shipped and automatically installed with {\ttfamily oomph-\/lib}. Existing installations can be used instead (via suitable flags in the configure options), but {\ttfamily oomph-\/lib} is only guaranteed to work with the versions provided. This functionality does not work on mac\+OS so mac\+OS users must add the {\ttfamily --enable-\/suppress-\/cgal-\/build} flag to their configuration options to ensure that this doesn\textquotesingle{}t break their build. ~\newline
+\item Included {\ttfamily CGAL}, {\ttfamily GMG}, {\ttfamily MPFR} and {\ttfamily Boost} into the third-\/party libraries that are shipped and automatically installed with {\ttfamily oomph-\/lib}. Existing installations can be used instead (via suitable flags in the configure options), but {\ttfamily oomph-\/lib} is only guaranteed to work with the versions provided. This functionality does not work on mac\+OS so mac\+OS users must add the {\ttfamily -\/-\/enable-\/suppress-\/cgal-\/build} flag to their configuration options to ensure that this doesn\textquotesingle{}t break their build. ~\newline
 ~\newline
  They are used for more efficient implementations of {\ttfamily locate\+\_\+zeta(...)} functionality. ~\newline
 ~\newline
@@ -149,15 +168,15 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \item Provided functionality to impose periodicity for three-\/dimensional brick meshes. ~\newline
 ~\newline
 
-\item Provided machinery to create three-\/dimensional meshes based on the \char`\"{}extrusion\char`\"{} of a two-\/dimensional mesh; takes time-\/dependent macro-\/element behaviour into account. ~\newline
+\item Provided machinery to create three-\/dimensional meshes based on the "{}extrusion"{} of a two-\/dimensional mesh; takes time-\/dependent macro-\/element behaviour into account. ~\newline
 ~\newline
 
 \item Implemented a Krylov-\/subspace solver for the solution of single-\/equation-\/augmented linear systems ({\ttfamily Augmented\+GMRES} ).
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
-\hypertarget{index_zero_point_nine_to_one_point_zero}{}\doxysubsection{Changes between version 0.\+9 and 1.\+0.$\ast$}\label{index_zero_point_nine_to_one_point_zero}
-\hypertarget{index_new_functionality_one_point_zero}{}\doxysubsubsection{Major new functionality}\label{index_new_functionality_one_point_zero}
+\hypertarget{index_zero_point_nine_to_one_point_zero}{}\doxysubsection{\texorpdfstring{Changes between version 0.\+9 and 1.\+0.\texorpdfstring{$\ast$}{*}}{Changes between version 0.9 and 1.0.*}}\label{index_zero_point_nine_to_one_point_zero}
+\hypertarget{index_new_functionality_one_point_zero}{}\doxysubsubsection{\texorpdfstring{Major new functionality}{Major new functionality}}\label{index_new_functionality_one_point_zero}
 
 \begin{DoxyItemize}
 \item Provided the capability to solve the Helmholtz equation (with various ways of implementing the Sommerfeld radiation condition), the time-\/harmonic equations of linear elasticity, and the interaction between these two systems of equations in time-\/harmonic acoustic fluid structure interaction problems. All equations are implemented in cartesian and cylindrical polar coordinates (in the latter case, using an azimuthal Fourier decomposition for the solution). ~\newline
@@ -190,7 +209,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \item Provided machinery to output paraview (vtu and vtp) files directly (implemented for selected elements; broken virtual functions in base classes provide instructions what to do for others). ~\newline
 ~\newline
 
-\item Provided machinery to establish what the equations/unknowns in a fully-\/built problem represent. Calling {\ttfamily Problem\+::describe\+\_\+dofs()} trawls recursively through the oomph-\/lib object hierarchy to describe what each degree of freedom represents (from the Problem\textquotesingle{}s, Meshes\textquotesingle{} and Nodes\textquotesingle{} point of view). Very useful for debugging (e.\+g. \char`\"{}\+Why are all the entries in the n-\/th row/column in the Jacobian     zero?\char`\"{} or \char`\"{}\+The n-\/th residual is enormous -\/-\/ which equation does it    correspond to?\char`\"{}, etc.) ~\newline
+\item Provided machinery to establish what the equations/unknowns in a fully-\/built problem represent. Calling {\ttfamily Problem\+::describe\+\_\+dofs()} trawls recursively through the oomph-\/lib object hierarchy to describe what each degree of freedom represents (from the Problem\textquotesingle{}s, Meshes\textquotesingle{} and Nodes\textquotesingle{} point of view). Very useful for debugging (e.\+g. "{}\+Why are all the entries in the n-\/th row/column in the Jacobian     zero?"{} or "{}\+The n-\/th residual is enormous -\/-\/ which equation does it    correspond to?"{}, etc.) ~\newline
 ~\newline
 
 \item Provided machinery for hp adaptivity and p-\/type spectral elements with mortar constraints in 2D and 3D.~\newline
@@ -206,10 +225,10 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \begin{DoxyItemize}
-\item How to use \textbackslash{}t oomph-\/lib in parallel and how to (optionally) distribute problems over multiple processors and to perform load balancing when performing spatially-\/adaptive, distributed simulations. ~\newline
+\item How to use {\ttfamily oomph-\/lib} in parallel and how to (optionally) distribute problems over multiple processors and to perform load balancing when performing spatially-\/adaptive, distributed simulations. ~\newline
 ~\newline
 
-\item How to use oomph-\/lib\textquotesingle{}s block preconditioning framework. ~\newline
+\item How to use {\ttfamily oomph-\/lib\textquotesingle{}s} block preconditioning framework. ~\newline
 ~\newline
 
 \item How to solve large-\/displacement fluid-\/structure interaction problems, based the coupling of full nonlinear 2D/3D elasticity and the Navier-\/\+Stokes equations, incl. the use of preconditioners and spatial adaptivity. ~\newline
@@ -238,8 +257,8 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \end{DoxyItemize}
 \end{DoxyItemize}Have a look through the \href{../../example_code_list/html/index.html}{\texttt{ extensive list of example codes}} to see what else is available. . ~\newline
-\hypertarget{index_zero_point_eight_five_to_zero_point_nine}{}\doxysubsection{Changes between version 0.\+85 and 0.\+9}\label{index_zero_point_eight_five_to_zero_point_nine}
-\hypertarget{index_new_functionality_zero_point_nine}{}\doxysubsubsection{Major new functionality}\label{index_new_functionality_zero_point_nine}
+\hypertarget{index_zero_point_eight_five_to_zero_point_nine}{}\doxysubsection{\texorpdfstring{Changes between version 0.\+85 and 0.\+9}{Changes between version 0.85 and 0.9}}\label{index_zero_point_eight_five_to_zero_point_nine}
+\hypertarget{index_new_functionality_zero_point_nine}{}\doxysubsubsection{\texorpdfstring{Major new functionality}{Major new functionality}}\label{index_new_functionality_zero_point_nine}
 
 \begin{DoxyItemize}
 \item Significantly extended {\ttfamily oomph-\/lib\textquotesingle{}s} parallel processing capabilities. The library\textquotesingle{}s solver and (block) preconditioning framework is now fully parallelised; the parallel assembly of the Jacobian and residual vector has been optimised, and problems can be now distributed by domain decomposition techniques. \href{../../mpi/general_mpi/html/index.html}{\texttt{ A new tutorial}} and various \href{../../example_code_list/html/index.html\#parallel}{\texttt{ new demo driver codes}} demo driver codes provide an overview of these capabilities. ~\newline
@@ -259,11 +278,9 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ Finite Reynolds number flow through an elastic iliac bifurcation.}}
-\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
-\begin{DoxyItemize}
 \item Extended FSI capabilities so that such problems can be solved on unstructured meshes. We provide new tutorials that demonstrate this capability for \href{../../interaction/unstructured_fsi/html/index.html}{\texttt{ 2D}} and \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ 3D}} problems. ~\newline
 ~\newline
 
@@ -288,7 +305,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \item Provided a new mechanism that allows multiple {\ttfamily Face\+Elements} to be attached to same node, while providing the ability to distinguish between different Lagrange multipliers stored at the same node. This is discussed in a \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ separate tutorial.}} ~\newline
 ~\newline
 
-\item Significantly extended oomph-\/lib\textquotesingle{}s bifurcation tracking routines (no tutorials yet, though). ~\newline
+\item Significantly extended {\ttfamily oomph-\/lib\textquotesingle{}s} bifurcation tracking routines (no tutorials yet, though). ~\newline
 ~\newline
 
 \item Provided general framework and driver codes for discontinuous Galerkin methods and explicit timesteppers (no tutorials yet, though). ~\newline
@@ -297,12 +314,12 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
-\hypertarget{index_major_interface_changes_zero_point_nine}{}\doxysubsubsection{Major interface changes}\label{index_major_interface_changes_zero_point_nine}
+\hypertarget{index_major_interface_changes_zero_point_nine}{}\doxysubsubsection{\texorpdfstring{Major interface changes}{Major interface changes}}\label{index_major_interface_changes_zero_point_nine}
 
 \begin{DoxyItemize}
 \item 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{SolidFiniteElement::add\_jacobian\_for\_solid\_ic() }
+\DoxyCodeLine{SolidFiniteElement::add\_jacobian\_for\_solid\_ic()\ }
 
 \end{DoxyCode}
  becomes 
@@ -347,25 +364,25 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \item Added integration point arguments to all get\+\_\+source-\/type functions in elements to allow for overloading in multi-\/domain calculations. For example, ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{                                               \textcolor{keyword}{const} Vector<double> \&s,}
-\DoxyCodeLine{                                               \textcolor{keyword}{const} Vector<double> \&x,}
-\DoxyCodeLine{                                               Vector<double> \&result)}
+\DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&result)}
 
 \end{DoxyCode}
  ~\newline
 ~\newline
  has been changed to ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
-\DoxyCodeLine{                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
-\DoxyCodeLine{                                               \textcolor{keyword}{const} Vector<double> \&s,}
-\DoxyCodeLine{                                               \textcolor{keyword}{const} Vector<double> \&x,}
-\DoxyCodeLine{                                               Vector<double> \&result)}
+\DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&result)}
 
 \end{DoxyCode}
  ~\newline
@@ -411,34 +428,34 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \item In {\ttfamily Navier\+Stokes\+LSCPreconditioner} ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_f\_preconditioner(Preconditioner\& new\_f\_preconditioner)}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ set\_f\_preconditioner(Preconditioner\&\ new\_f\_preconditioner)}
 
 \end{DoxyCode}
  and ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_p\_preconditioner(Preconditioner\& new\_f\_preconditioner)}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ set\_p\_preconditioner(Preconditioner\&\ new\_f\_preconditioner)}
 
 \end{DoxyCode}
  ~\newline
 ~\newline
  were changed to ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_f\_preconditioner(Preconditioner* new\_f\_preconditioner\_pt)}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ set\_f\_preconditioner(Preconditioner*\ new\_f\_preconditioner\_pt)}
 
 \end{DoxyCode}
  ~\newline
 ~\newline
  and ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_p\_preconditioner(Preconditioner* new\_f\_preconditioner\_pt)}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ set\_p\_preconditioner(Preconditioner*\ new\_f\_preconditioner\_pt)}
 
 \end{DoxyCode}
  ~\newline
@@ -474,7 +491,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \DoxyCodeLine{demo\_drivers/poisson/one\_d\_poisson/validata/one\_d\_poisson\_results.dat.gz}
 
 \end{DoxyCode}
- If this is not found, we\textquotesingle{}ll assume that there\textquotesingle{}s no validata anywhere. In that case, \char`\"{}make check\char`\"{} will still compile and run the demo drivers but not use fpdiff.\+py to compare them against the validata. The behaviour is thus similar to what\textquotesingle{}s done if we don\textquotesingle{}t have python. We therefore modified the \char`\"{}no\+\_\+python\char`\"{} argument that used to be passed to all validate.\+sh scripts to suppress the execution of fpdiff.\+py and replaced it by \char`\"{}no\+\_\+fpdiff\char`\"{}. As a result all validate.\+sh scripts had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE ADDING THEM TO THE DISTRIBUTION! ~\newline
+ If this is not found, we\textquotesingle{}ll assume that there\textquotesingle{}s no validata anywhere. In that case, "{}make check"{} will still compile and run the demo drivers but not use fpdiff.\+py to compare them against the validata. The behaviour is thus similar to what\textquotesingle{}s done if we don\textquotesingle{}t have python. We therefore modified the "{}no\+\_\+python"{} argument that used to be passed to all validate.\+sh scripts to suppress the execution of fpdiff.\+py and replaced it by "{}no\+\_\+fpdiff"{}. As a result all validate.\+sh scripts had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE ADDING THEM TO THE DISTRIBUTION! ~\newline
 ~\newline
  To reflect the fact that the fpdiff-\/ing can now be suppressed for multiple reasons, we renamed 
 \begin{DoxyCode}{0}
@@ -500,8 +517,8 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_zero_point_eight_to_zero_point_five}{}\doxysubsection{Changes between version 0.\+8 and 0.\+85}\label{index_zero_point_eight_to_zero_point_five}
-\hypertarget{index_new_functionality_zero_point_five}{}\doxysubsubsection{Major new functionality}\label{index_new_functionality_zero_point_five}
+\hypertarget{index_zero_point_eight_to_zero_point_five}{}\doxysubsection{\texorpdfstring{Changes between version 0.\+8 and 0.\+85}{Changes between version 0.8 and 0.85}}\label{index_zero_point_eight_to_zero_point_five}
+\hypertarget{index_new_functionality_zero_point_five}{}\doxysubsubsection{\texorpdfstring{Major new functionality}{Major new functionality}}\label{index_new_functionality_zero_point_five}
 
 \begin{DoxyItemize}
 \item Added a variety of iterative linear solvers and general-\/purpose preconditioners. ~\newline
@@ -518,11 +535,9 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../preconditioners/fsi/html/index.html}{\texttt{ Using {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner.}}
-\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
-\begin{DoxyItemize}
 \item Provided segregated solver capabilities for fluid-\/structure interaction. ~\newline
 ~\newline
 
@@ -530,7 +545,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \begin{DoxyItemize}
-\item \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem of flow past a \char`\"{}flag\char`\"{}.}} ~\newline
+\item \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem of flow past a "{}flag"{}.}} ~\newline
 ~\newline
 
 \item \href{../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ Flow in a channel with an elastic leaflet.}} ~\newline
@@ -540,12 +555,10 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../preconditioners/fsi/html/index.html}{\texttt{ Using {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner.}}
-\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
-\begin{DoxyItemize}
-\item MPI capability is now fully integrated into the library (rather than being kept in a separate mpi directory/sub-\/library) but not yet complete (or documented). Segments of code that involve MPI calls are surrounded by {\ttfamily \#ifdef} {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} {\ttfamily }\mbox{[}...\mbox{]} {\ttfamily \#endif}. They are only compiled if the {\ttfamily --enable-\/\+MPI} flag is specified at the configure stage. ~\newline
+\item MPI capability is now fully integrated into the library (rather than being kept in a separate mpi directory/sub-\/library) but not yet complete (or documented). Segments of code that involve MPI calls are surrounded by {\ttfamily \#ifdef} {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} {\ttfamily }\mbox{[}...\mbox{]} {\ttfamily \#endif}. They are only compiled if the {\ttfamily -\/-\/enable-\/\+MPI} flag is specified at the configure stage. ~\newline
  ~\newline
 ~\newline
 
@@ -554,12 +567,12 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \item {\ttfamily oomph-\/lib\textquotesingle{}s} build script, {\ttfamily autogen}.{\ttfamily sh} now allows for parallel compilation. This can lead to considerable speedups on multicore processors that are now widely available. To build {\ttfamily oomph-\/lib} in parallel, using up four threads run {\ttfamily autogen}.{\ttfamily sh} as follows 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{./autogen.sh -\/-\/jobs=4 }
+\DoxyCodeLine{./autogen.sh\ -\/-\/jobs=4\ }
 
 \end{DoxyCode}
  or (if you are re-\/building) 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{./autogen.sh -\/-\/jobs=4 -\/-\/rebuild}
+\DoxyCodeLine{./autogen.sh\ -\/-\/jobs=4\ -\/-\/rebuild}
 
 \end{DoxyCode}
  ~\newline
@@ -575,7 +588,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
-\hypertarget{index_major_interface_changes_zero_point_five}{}\doxysubsubsection{Major interface changes}\label{index_major_interface_changes_zero_point_five}
+\hypertarget{index_major_interface_changes_zero_point_five}{}\doxysubsubsection{\texorpdfstring{Major interface changes}{Major interface changes}}\label{index_major_interface_changes_zero_point_five}
 
 \begin{DoxyItemize}
 \item {\ttfamily Problem\+::actions\+\_\+before\+\_\+solve()} becomes {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} ~\newline
@@ -593,11 +606,11 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 \item {\ttfamily Refineable\+QCrouzeix\+Raviart\+Element$<$\+DIM$>$} becomes {\ttfamily Refineable\+QCrouzeix\+Raviart\+Element$<$\+DIM$>$} ~\newline
 ~\newline
 
-\item Fixed various violations of our naming conventions; see \mbox{\hyperlink{index_interface_changes}{Policy on interface changes}}. ~\newline
+\item Fixed various violations of our naming conventions; see \doxysectlink{index_interface_changes}{Policy on interface changes}{1}. ~\newline
 ~\newline
 
 \item Changed the interface of to the {\ttfamily Face\+Elements} so that the faces are represented by an integer {\ttfamily face\+\_\+index}, rather than the combination {\ttfamily s\+\_\+fixed\+\_\+index} and {\ttfamily s\+\_\+limit} which was not sufficiently general.
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
-A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

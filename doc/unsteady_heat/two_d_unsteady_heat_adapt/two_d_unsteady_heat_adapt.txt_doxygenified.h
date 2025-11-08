@@ -580,5 +580,5 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/two_d_unsteady_heat_adapt.c
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

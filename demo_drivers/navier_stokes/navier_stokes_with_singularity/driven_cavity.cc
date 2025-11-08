@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -37,9 +37,9 @@ using namespace std;
 
 using namespace oomph;
 
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 
 //===============================================================
@@ -148,9 +148,9 @@ void compute_error(std::ostream &outfile,
 
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 
@@ -746,9 +746,9 @@ namespace Global_Parameters
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1518,14 +1518,14 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=10; // 100; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Navier_stokes_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output coarse solution 
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned npts_coarse=2;
@@ -1535,7 +1535,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output perturbation solution 
  //-----------------------------
- sprintf(filename,"%s/perturbation_soln_two_term%i.dat",
+ snprintf(filename, sizeof(filename), "%s/perturbation_soln_two_term%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  PerturbationSolution::N_terms_for_plot=2;
@@ -1547,7 +1547,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output perturbation solution 
  //-----------------------------
- sprintf(filename,"%s/perturbation_soln_one_term%i.dat",
+ snprintf(filename, sizeof(filename), "%s/perturbation_soln_one_term%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1560,7 +1560,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output first-order perturbation solution (Stokes)
  //--------------------------------------------------
- sprintf(filename,"%s/first_order_perturbation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/first_order_perturbation%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1573,7 +1573,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output second-order perturbation solution (Stokes)
  //--------------------------------------------------
- sprintf(filename,"%s/second_order_perturbation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/second_order_perturbation%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1585,11 +1585,11 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Do line plots
- sprintf(filename,"%s/line_plot%i.dat",
+ snprintf(filename, sizeof(filename), "%s/line_plot%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- sprintf(filename,"%s/second_order_perturbation_line_plot%i.dat",
+ snprintf(filename, sizeof(filename), "%s/second_order_perturbation_line_plot%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file2.open(filename);
@@ -1657,7 +1657,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_couette_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_couette_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Navier_stokes_mesh_pt->output_fct(some_file,npts,
@@ -1669,7 +1669,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //  // Doc error
 //  //----------
 //  double error,norm;
-//  sprintf(filename,"%s/couette_error%i.dat",
+//  snprintf(filename, sizeof(filename), "%s/couette_error%i.dat",
 //          doc_info.directory().c_str(),
 //          doc_info.number());
 //  some_file.open(filename);
@@ -1686,7 +1686,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  //----------
  double error=0.0;
  double norm=0.0;
- sprintf(filename,"%s/couette_error_with_pressure%i.dat",
+ snprintf(filename, sizeof(filename), "%s/couette_error_with_pressure%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1711,7 +1711,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  error=0.0;
  norm=0.0;
- sprintf(filename,"%s/couette_error_with_pressure%i.dat",
+ snprintf(filename, sizeof(filename), "%s/couette_error_with_pressure%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1741,9 +1741,9 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1862,8 +1862,12 @@ int main(int argc, char **argv)
  
  // Step number
  doc_info.number()++;
- 
 
+#ifdef OOMPH_HAS_MPI
+
+ MPI_Helpers::finalize();
+ 
+#endif
 } // end_of_main
 
 

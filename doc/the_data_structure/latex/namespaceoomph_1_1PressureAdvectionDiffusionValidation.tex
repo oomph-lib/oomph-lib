@@ -1,41 +1,39 @@
-\hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation}{}\doxysection{oomph\+::Pressure\+Advection\+Diffusion\+Validation Namespace Reference}
-\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation}\index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
+\doxysection{oomph\+::Pressure\+Advection\+Diffusion\+Validation Namespace Reference}
+\hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation}{}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation}\index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 
 
-//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+Namespace for exact solution for pressure advection diffusion problem.  
 
 
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}{wind\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&wind)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}{wind\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&wind)
 \begin{DoxyCompactList}\small\item\em Wind. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&u)
-\begin{DoxyCompactList}\small\item\em Exact solution as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}{get\+\_\+exact\+\_\+u}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&u)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}{get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}{get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}{source\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x\+\_\+vect)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}{source\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x\+\_\+vect}})
 \begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3}{Flag}} = 0
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3}{Flag}} = 0
 \begin{DoxyCompactList}\small\item\em Flag for solution. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5}{Peclet}} = 0.\+0
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5}{Peclet}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Peclet number -- overwrite with actual Reynolds number. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
-
-Namespace for exact solution for pressure advection diffusion problem 
+Namespace for exact solution for pressure advection diffusion problem. 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!get\_exact\_u@{get\_exact\_u}}
 \index{get\_exact\_u@{get\_exact\_u}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{double \&}]{u }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{u }\end{DoxyParamCaption})}
 
 
 
@@ -43,39 +41,39 @@ Exact solution as a scalar.
 
 
 
-Definition at line 79 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00079}{79}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-References Flag, and Peclet.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!get\_exact\_u@{get\_exact\_u}}
 \index{get\_exact\_u@{get\_exact\_u}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{u }\end{DoxyParamCaption})}
 
 
 
-Exact solution as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+Exact solution as a \doxylink{classoomph_1_1Vector}{Vector}. 
 
 
 
-Definition at line 63 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00063}{63}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-References Flag, Peclet, and wind\+\_\+function().
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00048}{wind\+\_\+function()}}.
 
 
 
-Referenced by oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution().
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00478}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!source\_function@{source\_function}}
 \index{source\_function@{source\_function}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{source\_function()}{source\_function()}}
-{\footnotesize\ttfamily double oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::source\+\_\+function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x\+\_\+vect }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::source\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x\+\_\+vect }\end{DoxyParamCaption})}
 
 
 
@@ -83,21 +81,21 @@ Source function required to make the solution above an exact solution.
 
 
 
-Definition at line 93 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00093}{93}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-References Flag, and Peclet.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{Peclet}}.
 
 
 
-Referenced by oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate().
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00365}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!wind\_function@{wind\_function}}
 \index{wind\_function@{wind\_function}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{wind\_function()}{wind\_function()}}
-{\footnotesize\ttfamily void oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::wind\+\_\+function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{wind }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::wind\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{wind }\end{DoxyParamCaption})}
 
 
 
@@ -105,24 +103,24 @@ Wind.
 
 
 
-Definition at line 48 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00048}{48}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-References Flag.
+References \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{Flag}}.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), and oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs().
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00063}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00257}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs()}}.
 
 
 
 \doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aa0684ebcce5057df03bfcdecdc3e70f3} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!Flag@{Flag}}
 \index{Flag@{Flag}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{Flag}{Flag}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::\+Flag = 0}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::\+Flag = 0}
 
 
 
@@ -130,17 +128,17 @@ Flag for solution.
 
 
 
-Definition at line 42 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00042}{42}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), source\+\_\+function(), oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate(), and wind\+\_\+function().
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00079}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00063}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00093}{source\+\_\+function()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00365}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00048}{wind\+\_\+function()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5}} 
+\Hypertarget{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5}\label{namespaceoomph_1_1PressureAdvectionDiffusionValidation_aec6b0be7e95a7eba69e8aefe0921a5e5} 
 \index{oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}!Peclet@{Peclet}}
 \index{Peclet@{Peclet}!oomph::PressureAdvectionDiffusionValidation@{oomph::PressureAdvectionDiffusionValidation}}
 \doxysubsubsection{\texorpdfstring{Peclet}{Peclet}}
-{\footnotesize\ttfamily double oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::\+Peclet = 0.\+0}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::\+Peclet = 0.\+0}
 
 
 
@@ -148,9 +146,9 @@ Peclet number -- overwrite with actual Reynolds number.
 
 
 
-Definition at line 45 of file navier\+\_\+stokes\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00045}{45}} of file \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source}{navier\+\_\+stokes\+\_\+preconditioners.\+cc}}.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), source\+\_\+function(), and oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate().
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00079}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00063}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00093}{source\+\_\+function()}}, and \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00365}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::validate()}}.
 

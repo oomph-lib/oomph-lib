@@ -11,8 +11,13 @@ We also welcome contributions to the library itself, in the form
 of
 - Additional demo codes/tutorials
 - Code that provides additional functionality to the library. 
-. 
-The \c oomph-lib developers can be contacted at
+.
+Please consult the library's <a
+href="https://github.com/oomph-lib/oomph-lib">GitHub repository</a>
+for details on how to submit bug fixes (or at least bug reports) and
+how to contribute.
+
+The \c oomph-lib developers can be contacted directly
 <CENTER> 
 
 \htmlonly
@@ -20,17 +25,12 @@ The \c oomph-lib developers can be contacted at
 \endhtmlonly
 </CENTER> 
 
-or via snail mail to:
-
-
-
+or, if you really want, via snail mail to:
 
 <tt>
 Matthias Heil and Andrew Hazel
 \n
-School of Mathematics
-\n
-Oxford Road
+Department of Mathematics
 \n
 University of Manchester
 \n
@@ -49,5 +49,5 @@ UK
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

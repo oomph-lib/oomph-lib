@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -106,9 +106,9 @@ namespace Global_Physical_Variables
  
 } // end of namespace
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// AdvectionDiffusion problem on rectangular domain, discretised 
@@ -307,7 +307,7 @@ void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::doc_solution()
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);

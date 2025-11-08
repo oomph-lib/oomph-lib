@@ -2,7 +2,7 @@
 
 # Get the OOMPH-LIB root directory from a makefile
 #-------------------------------------------------
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 # The base directory
 #-------------------
@@ -45,6 +45,12 @@ fi
 # Which code do you want to run?
 #-------------------------------
 code_stem=(unstructured_two_d_helmholtz structured_cubic_point_source)
+
+# Build the codes
+#----------------
+for code in ${code_stem[@]}; do
+    make $code
+done
 
 # Jump in to the validation directory
 #------------------------------------
@@ -124,14 +130,6 @@ trace_file="/trace.dat"
 # Threshold for number of iterations in comparison of convergence histories:
 #---------------------------------------------------------------------------
 threshold_n_its=3
-
-# The address of the bash script to compare file lengths
-#-------------------------------------------------------
-compare_length="../../../../bin/compare_file_length_with_tolerance.bash"
-
-# The address of the bash script to compare file data
-#----------------------------------------------------
-compare_data="../../../../bin/fpdiff.py"
 
 # Run the program with the specified properties
 #----------------------------------------------
@@ -252,13 +250,15 @@ for code in ${code_stem[@]}; do
 
     # Check trace.dat and conv.dat
     #-----------------------------
-    if test "$1" = "no_fpdiff"; then
+    if test "$2" = "no_fpdiff"; then
         echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
     else
-        ./$compare_data ../$store$trace_filename $result_dir$trace_file >>validation.log
+        $OOMPH_ROOT_DIR/scripts/fpdiff.py ../$store$trace_filename \
+            $result_dir$trace_file >>validation.log
 
         # Compare number of iterations against reference data and append
-        ./$compare_length $result_dir$conv_file ../$store$conv_filename $threshold_n_its >>validation.log
+        $OOMPH_ROOT_DIR/scripts/compare_file_length_with_tolerance.bash \
+            $result_dir$conv_file ../$store$conv_filename $threshold_n_its >>validation.log
     fi
 
     # Move the result directory into storage
@@ -272,7 +272,7 @@ done
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >>../../../../validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 # Now jump back to the base directory
 #------------------------------------
@@ -285,7 +285,7 @@ cd $base_dir
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

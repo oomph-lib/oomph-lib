@@ -672,5 +672,5 @@ demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

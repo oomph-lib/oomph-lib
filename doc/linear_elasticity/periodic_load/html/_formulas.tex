@@ -1,0 +1,267 @@
+\documentclass{article}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+
+\pagestyle{empty}
+\begin{document}
+$ V $
+\pagebreak
+
+$ {\bf F}^* $
+\pagebreak
+
+$ {\bf t}^* $
+\pagebreak
+
+$ A_{\rm tract} $
+\pagebreak
+
+$ A_{\rm displ} $
+\pagebreak
+
+$ \partial V = A_{\rm tract} \cup  A_{\rm displ} $
+\pagebreak
+
+$ {\bf u}^*\left( x_i^*,t^* \right) $
+\pagebreak
+
+$ x_i^* $
+\pagebreak
+
+$ t^* $
+\pagebreak
+
+$ \rho $
+\pagebreak
+
+\[
+\frac{\partial \tau_{ij}^*}{\partial x_j^*} + \rho F_i^*
+=
+\rho \frac{\partial^2 u_i^*}{\partial t^{2*}},
+\]
+\pagebreak
+
+$ \tau_{ij}^* $
+\pagebreak
+
+\[
+\tau_{ij}^* = E_{ijkl}^* \ e_{kl},
+\]
+\pagebreak
+
+$ e_{kl} $
+\pagebreak
+
+\[
+e_{ij} = \frac{1}{2} 
+\left( \frac{\partial u_i^*}{\partial x_j^*}+
+       \frac{\partial u_j^*}{\partial x_i^*}\right).
+\]
+\pagebreak
+
+$ E_{ijkl} $
+\pagebreak
+
+\[
+E_{ijkl}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \delta_{ij}
+ \delta_{kl} + \delta_{ik} \delta_{jl} \right),
+\]
+\pagebreak
+
+$ E $
+\pagebreak
+
+$ \nu $
+\pagebreak
+
+$ \delta_{ij} $
+\pagebreak
+
+\[
+\tau_{ij}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k^*}{\partial x_k^*} + 
+\frac{1}{2}\left(\frac{\partial u_i^*}{\partial x_j^*}+
+\frac{\partial u_j^*}{\partial x_i^*} \right) \right).
+\]
+\pagebreak
+
+$ {\cal L} $
+\pagebreak
+
+$ {\cal T} $
+\pagebreak
+
+\[
+\tau_{ij}^* = E \, \tau_{ij}, \qquad
+x_i^* = {\cal L}\, x_i, \qquad
+u_i^* = {\cal L}\, u_i,
+\]
+\pagebreak
+
+\[
+t^* = {\cal T}\, t, \qquad
+F_i^* = \frac{E}{\rho \cal L} \, F_i. \qquad
+\]
+\pagebreak
+
+\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i
+=
+\Lambda^2  \frac{\partial^2 u_i}{\partial t^2},
+\ \ \ \ \ \ \ \ \ \ (1)
+\]
+\pagebreak
+
+\[
+\tau_{ij} = \frac{1}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k}{\partial x_k} + 
+\frac{1}{2} \left(\frac{\partial u_i}{\partial x_j}+
+\frac{\partial u_j}{\partial x_i} \right) \right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\]
+\pagebreak
+
+\[
+\Lambda = \frac{{\cal L} \sqrt{\frac{\rho}{E}} }{\cal T},
+\]
+\pagebreak
+
+$ {\cal L} \sqrt{\frac{\rho}{E}} $
+\pagebreak
+
+\[
+u_i = u_i^{[\rm prescribed]} \ \ \ \ \ \ \mbox{on $A_{\mathrm{displ}}$},
+
+\]
+\pagebreak
+
+\[
+t_i = \tau_{ij} n_j \ \ \ \ \ \ \mbox{on $A_{\mathrm{tract}},$}
+\]
+\pagebreak
+
+$ n_j $
+\pagebreak
+
+\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i = 0.
+\]
+\pagebreak
+
+\[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2\quad [\mbox{and }3],
+\]
+\pagebreak
+
+$ N^{(E)} $
+\pagebreak
+
+$ X^{(E)}_{ij} $
+\pagebreak
+
+$ i $
+\pagebreak
+
+$ j $
+\pagebreak
+
+$ \psi_j $
+\pagebreak
+
+$ u_1, $
+\pagebreak
+
+$ u_2, $
+\pagebreak
+
+$ u_3 $
+\pagebreak
+
+\[
+u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,2\quad [\mbox{and }3],
+\]
+\pagebreak
+
+$  U^{(E)}_{ij} $
+\pagebreak
+
+\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (3)
+\]
+\pagebreak
+
+$ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} $
+\pagebreak
+
+\[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (4)
+\]
+\pagebreak
+
+\[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (5)
+\]
+\pagebreak
+
+$ x_1 = 0 $
+\pagebreak
+
+$ x_1 = L_x $
+\pagebreak
+
+\[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\]
+\pagebreak
+
+$ L_y \to \infty $
+\pagebreak
+
+\[
+u_1^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\cos{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]
+\pagebreak
+
+\[
+u_2^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\sin{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]
+\pagebreak
+
+$ L_x = 1 $
+\pagebreak
+
+$ L_y=2 $
+\pagebreak
+
+$ {\bf u} = {\bf u}^{[\mathrm{exact}]} $
+\pagebreak
+
+\end{document}

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_TWO_LAYER_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_TWO_LAYER_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_TWO_LAYER_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_TWO_LAYER_SPINE_MESH_TEMPLATE_HEADER
 
-#include "two_layer_spine_mesh.template.h"
-#include "rectangular_quadmesh.template.cc"
+#ifndef OOMPH_TWO_LAYER_SPINE_MESH_HEADER
+#error __FILE__ should only be included from two_layer_spine_mesh.h.
+#endif // OOMPH_TWO_LAYER_SPINE_MESH_HEADER
 
+#include "rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -78,7 +80,6 @@ namespace oomph
     // Now build the mesh:
     build_two_layer_mesh(time_stepper_pt);
   }
-
 
   //===========================================================================
   /// Constuctor for spine 2D mesh: Pass number of elements in x-direction,
@@ -135,7 +136,6 @@ namespace oomph
     // Now build the mesh:
     build_two_layer_mesh(time_stepper_pt);
   }
-
 
   //===========================================================================
   /// Constuctor for spine 2D mesh: Pass number of elements in x-direction,
@@ -201,7 +201,6 @@ namespace oomph
       build_two_layer_mesh(time_stepper_pt);
     }
   }
-
 
   //==================================================================
   /// The spacing function for the x co-ordinate, which is the
@@ -329,8 +328,8 @@ namespace oomph
           nod_pt->get_coordinates_on_boundary(3, b_coord);
           // Indicate that the boundary coordinates are to be set on the
           // new boundaries
-          this->Boundary_coordinate_exists[4] = true;
-          this->Boundary_coordinate_exists[5] = true;
+          this->set_boundary_coordinate_exists(4);
+          this->set_boundary_coordinate_exists(5);
         }
 
         // Now remove the node from the boundary
@@ -343,7 +342,7 @@ namespace oomph
         {
           this->add_boundary_node(4, nod_pt);
           // Add the boundary coordinate if it has been set up
-          if (this->Boundary_coordinate_exists[4])
+          if (this->boundary_coordinate_exists(4))
           {
             nod_pt->set_coordinates_on_boundary(4, b_coord);
           }
@@ -353,7 +352,7 @@ namespace oomph
         {
           this->add_boundary_node(5, nod_pt);
           // Add the boundary coordinate if it has been set up
-          if (this->Boundary_coordinate_exists[5])
+          if (this->boundary_coordinate_exists(5))
           {
             nod_pt->set_coordinates_on_boundary(5, b_coord);
           }
@@ -376,14 +375,14 @@ namespace oomph
         {
           b_coord.resize(nod_pt->ncoordinates_on_boundary(2));
           nod_pt->get_coordinates_on_boundary(2, b_coord);
-          this->Boundary_coordinate_exists[3] = true;
+          this->set_boundary_coordinate_exists(3);
         }
 
         // Now remove the node from the boundary 2
         nod_pt->remove_from_boundary(2);
         // and add to boundary 3
         this->add_boundary_node(3, nod_pt);
-        if (this->Boundary_coordinate_exists[3])
+        if (this->boundary_coordinate_exists(3))
         {
           nod_pt->set_coordinates_on_boundary(3, b_coord);
         }
@@ -412,7 +411,7 @@ namespace oomph
           {
             b_coord.resize(nod_pt->ncoordinates_on_boundary(1));
             nod_pt->get_coordinates_on_boundary(1, b_coord);
-            this->Boundary_coordinate_exists[2] = true;
+            this->set_boundary_coordinate_exists(2);
           }
 
           // Now remove the node from the boundary 1 if above interace
@@ -423,7 +422,7 @@ namespace oomph
           // Always add to boundary 2
           this->add_boundary_node(2, nod_pt);
           // Add the boundary coordinate if it has been set up
-          if (this->Boundary_coordinate_exists[2])
+          if (this->boundary_coordinate_exists(2))
           {
             nod_pt->set_coordinates_on_boundary(2, b_coord);
           }
@@ -446,11 +445,10 @@ namespace oomph
     // Read out number of linear points in the element
     unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
-
     // Add the nodes on the interface to the boundary 6
     // Storage for boundary coordinates (x-coordinate)
     b_coord.resize(1);
-    this->Boundary_coordinate_exists[6];
+    this->set_boundary_coordinate_exists(6);
     // Starting index of the nodes
     unsigned n_start = 0;
     for (unsigned e = 0; e < this->Nx; e++)
@@ -482,7 +480,6 @@ namespace oomph
     {
       Spine_pt.reserve((n_p - 1) * this->Nx + 1);
     }
-
 
     // FIRST SPINE
     //-----------
@@ -544,7 +541,6 @@ namespace oomph
         nod_pt->node_update_fct_id() = 1;
       }
     }
-
 
     // LOOP OVER OTHER SPINES
     //----------------------
@@ -621,7 +617,6 @@ namespace oomph
       }
     }
 
-
     // Last spine needs special treatment for periodic meshes
     // because it's the same as the first one...
     if (this->Xperiodic)
@@ -667,79 +662,77 @@ namespace oomph
       }
     }
 
-
     // Assign the 1D Line elements
     //---------------------------
 
     // Get the present number of elements
     /*unsigned long element_count = Element_pt.size();
 
-    //Loop over the horizontal elements
-    for(unsigned i=0;i<this->Nx;i++)
-     {
-     //Construct a new 1D line element on the face on which the local
-     //coordinate 1 is fixed at its max. value (1) -- Face 2
-      FiniteElement *interface_element_element_pt =
-       new INTERFACE_ELEMENT(finite_element_pt(this->Nx*(Ny1-1)+i),2);
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<this->Nx;i++)
+  {
+  //Construct a new 1D line element on the face on which the local
+  //coordinate 1 is fixed at its max. value (1) -- Face 2
+   FiniteElement *interface_element_element_pt =
+    new INTERFACE_ELEMENT(finite_element_pt(this->Nx*(Ny1-1)+i),2);
 
-      //Push it back onto the stack
-      Element_pt.push_back(interface_element_element_pt);
+   //Push it back onto the stack
+   Element_pt.push_back(interface_element_element_pt);
 
-      //Push it back onto the stack of interface elements
-      Interface_element_pt.push_back(interface_element_element_pt);
+   //Push it back onto the stack of interface elements
+   Interface_element_pt.push_back(interface_element_element_pt);
 
-      element_count++;
-      }*/
+   element_count++;
+   }*/
 
     // Setup the boundary information
     this->setup_boundary_element_info();
   }
-
 
   //======================================================================
   /// Reorder the elements, so we loop over them vertically first
   /// (advantageous in "wide" domains if a frontal solver is used).
   //======================================================================
   /*template <class ELEMENT, >
-  void TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::element_reorder()
+void TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::element_reorder()
+{
+
+ unsigned Nx = this->Nx;
+ //Find out how many elements there are
+ unsigned long Nelement = nelement();
+ //Find out how many fluid elements there are
+ unsigned long Nfluid = Nx*(Ny1+Ny2);
+ //Create a dummy array of elements
+ Vector<FiniteElement *> dummy;
+
+ //Loop over the elements in horizontal order
+ for(unsigned long j=0;j<Nx;j++)
   {
-
-   unsigned Nx = this->Nx;
-   //Find out how many elements there are
-   unsigned long Nelement = nelement();
-   //Find out how many fluid elements there are
-   unsigned long Nfluid = Nx*(Ny1+Ny2);
-   //Create a dummy array of elements
-   Vector<FiniteElement *> dummy;
-
-   //Loop over the elements in horizontal order
-   for(unsigned long j=0;j<Nx;j++)
+   //Loop over the elements in lower layer vertically
+   for(unsigned long i=0;i<Ny1;i++)
     {
-     //Loop over the elements in lower layer vertically
-     for(unsigned long i=0;i<Ny1;i++)
-      {
-       //Push back onto the new stack
-       dummy.push_back(finite_element_pt(Nx*i + j));
-      }
-
-     //Push back the line element onto the stack
-     dummy.push_back(finite_element_pt(Nfluid+j));
-
-     //Loop over the elements in upper layer vertically
-     for(unsigned long i=Ny1;i<(Ny1+Ny2);i++)
-      {
-       //Push back onto the new stack
-       dummy.push_back(finite_element_pt(Nx*i + j));
-      }
+     //Push back onto the new stack
+     dummy.push_back(finite_element_pt(Nx*i + j));
     }
 
-   //Now copy the reordered elements into the element_pt
-   for(unsigned long e=0;e<Nelement;e++)
-    {
-     Element_pt[e] = dummy[e];
-    }
+   //Push back the line element onto the stack
+   dummy.push_back(finite_element_pt(Nfluid+j));
 
-    }*/
+   //Loop over the elements in upper layer vertically
+   for(unsigned long i=Ny1;i<(Ny1+Ny2);i++)
+    {
+     //Push back onto the new stack
+     dummy.push_back(finite_element_pt(Nx*i + j));
+    }
+  }
+
+ //Now copy the reordered elements into the element_pt
+ for(unsigned long e=0;e<Nelement;e++)
+  {
+   Element_pt[e] = dummy[e];
+  }
+
+  }*/
 
 } // namespace oomph
 #endif

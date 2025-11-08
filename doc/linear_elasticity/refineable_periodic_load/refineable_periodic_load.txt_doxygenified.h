@@ -269,5 +269,5 @@ demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

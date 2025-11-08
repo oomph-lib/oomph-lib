@@ -236,5 +236,5 @@ demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

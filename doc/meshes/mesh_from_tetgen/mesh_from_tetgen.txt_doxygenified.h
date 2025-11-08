@@ -189,7 +189,7 @@ to generate an unstructured \c oomph-lib Mesh containing
 elements from the \c TElement<3,NNODE_1D> family of the tetrahedral
 elements. The relevant interface is:
 
-\dontinclude tetgen_mesh.template.h
+\dontinclude tetgen_mesh.h
 \skipline start of Tetgen
 \until Default_TimeStepper
 
@@ -314,5 +314,5 @@ demo_drivers/meshing/mesh_from_tetgen/mesh_from_tetgen_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

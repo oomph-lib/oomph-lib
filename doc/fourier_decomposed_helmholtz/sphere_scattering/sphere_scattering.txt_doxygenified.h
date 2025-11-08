@@ -620,5 +620,5 @@ code</a> already contains a namespace \c PlanarWave with several
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

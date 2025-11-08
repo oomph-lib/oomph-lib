@@ -369,5 +369,5 @@ demo_drivers/interaction/unstructured_adaptive_fsi/unstructured_adaptive_2d_fsi.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

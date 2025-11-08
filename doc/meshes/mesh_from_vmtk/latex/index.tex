@@ -1,3 +1,5 @@
+\chapter{Linking VMTK with oomph-\/lib}
+\hypertarget{index}{}\label{index}\index{Linking VMTK with oomph-\/lib@{Linking VMTK with oomph-\/lib}}
 The \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit}} is a collection of libraries and tools for the 3D reconstruction, geometric analysis, mesh generation and surface data analysis for image-\/based modelling of blood vessels.
 
 This tutorial demonstrates how to open your dataset in VMTK; navigate around a 3D volume; reconstruct the 3D surface of a vascular segment from CT or MR images; process a surface model to generate a mesh; and how to extract the surface mesh. Finally, we demonstrate how to use {\ttfamily oomph-\/lib\textquotesingle{}s} conversion code {\ttfamily create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh} to generate fluid and solid meshes that allow the simulation of physiological fluid-\/structure interaction problems in which the (assumed constant thickness) vessel wall deforms in response to the fluid traction.
@@ -25,11 +27,11 @@ This tutorial does {\bfseries{not}} provide any guidance on this aspect. We simp
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_vmtk}{}\doxysection{Using VMTK\+: From the MR/\+CT images to the fluid mesh}\label{index_vmtk}
-\hypertarget{index_voi}{}\doxysubsection{Volume of interest}\label{index_voi}
+\hypertarget{index_vmtk}{}\doxysection{\texorpdfstring{Using VMTK\+: From the MR/\+CT images to the fluid mesh}{Using VMTK: From the MR/CT images to the fluid mesh}}\label{index_vmtk}
+\hypertarget{index_voi}{}\doxysubsection{\texorpdfstring{Volume of interest}{Volume of interest}}\label{index_voi}
 VMTK is capable of reading DICOM directories (which contain the files with .dcm extension). You can open your dataset in VMTK and navigate around the 3D volume with\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtkimagereader -\/f dicom -\/d dicom\_directory -\/-\/pipe vmtkimageviewer}
+\DoxyCodeLine{vmtkimagereader\ -\/f\ dicom\ -\/d\ dicom\_directory\ -\/-\/pipe\ vmtkimageviewer}
 
 \end{DoxyCode}
 
@@ -59,15 +61,15 @@ You can extract a volume of interest (VOI) from a dataset with \+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{ vmtkimagereader -\/f dicom -\/d dicom\_directory -\/-\/pipe \(\backslash\)}
-\DoxyCodeLine{vmtkimagevoiselector -\/ofile image\_volume\_voi.vti}
+\DoxyCodeLine{\ vmtkimagereader\ -\/f\ dicom\ -\/d\ dicom\_directory\ -\/-\/pipe\ \(\backslash\)}
+\DoxyCodeLine{vmtkimagevoiselector\ -\/ofile\ image\_volume\_voi.vti}
 
 \end{DoxyCode}
 
 
 where the argument to the {\ttfamily -\/ofile} option specifies the output file name.
 
-When the render window pops up, pressing {\ttfamily i} will activate the \char`\"{}interactor\char`\"{}\+: a yellowish cube will appear that is used to select the VOI.
+When the render window pops up, pressing {\ttfamily i} will activate the "{}interactor"{}\+: a yellowish cube will appear that is used to select the VOI.
 
  
 \begin{DoxyImageNoCaption}
@@ -99,12 +101,12 @@ You can quit by pressing {\ttfamily q} or {\ttfamily e}, or you can define anoth
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_surface}{}\doxysubsection{The 3\+D surface reconstruction of a vascular segment}\label{index_surface}
-VMTK is capable of generating an image based surface model from a {\ttfamily vti} file (obtained using the procedure explained in the section \mbox{\hyperlink{index_voi}{Volume of interest}} above), using the Level Set method and can then extract the surface model using a Marching Cubes algorithm.
+\hypertarget{index_surface}{}\doxysubsection{\texorpdfstring{The 3\+D surface reconstruction of a vascular segment}{The 3D surface reconstruction of a vascular segment}}\label{index_surface}
+VMTK is capable of generating an image based surface model from a {\ttfamily vti} file (obtained using the procedure explained in the section \doxysectlink{index_voi}{Volume of interest}{2} above), using the Level Set method and can then extract the surface model using a Marching Cubes algorithm.
 
 First, enter\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtklevelsetsegmentation -\/ifile image\_volume\_voi.vti -\/ofile level\_sets.vti}
+\DoxyCodeLine{vmtklevelsetsegmentation\ -\/ifile\ image\_volume\_voi.vti\ -\/ofile\ level\_sets.vti}
 
 \end{DoxyCode}
 
@@ -121,19 +123,19 @@ A message will appear on your terminal\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please choose initialization type: (0: colliding fronts; 1: fast}
-\DoxyCodeLine{marching; 2: threshold; 3: isosurface)}
+\DoxyCodeLine{Please\ choose\ initialization\ type:\ (0:\ colliding\ fronts;\ 1:\ fast}
+\DoxyCodeLine{marching;\ 2:\ threshold;\ 3:\ isosurface)}
 
 \end{DoxyCode}
 
 
-This lets you choose the initialization method used to create the model of the blood vessel. In this tutorial, we will only demonstrate the {\ttfamily colliding} {\ttfamily fronts} method. In this method two seeds are placed on the image. Two fronts are then propagated from the seeds (one front from each) with their speeds proportional to the image intensity. The region where the two fronts cross (or collide), defines the \char`\"{}deformable model\char`\"{} -- the initial representation of the vessel volume. For further information on this and the other initialization methods, please refer to VMTK\textquotesingle{}s \href{http://www.vmtk.org}{\texttt{ tutorial page}}.
+This lets you choose the initialization method used to create the model of the blood vessel. In this tutorial, we will only demonstrate the {\ttfamily colliding} {\ttfamily fronts} method. In this method two seeds are placed on the image. Two fronts are then propagated from the seeds (one front from each) with their speeds proportional to the image intensity. The region where the two fronts cross (or collide), defines the "{}deformable model"{} -- the initial representation of the vessel volume. For further information on this and the other initialization methods, please refer to VMTK\textquotesingle{}s \href{http://www.vmtk.org}{\texttt{ tutorial page}}.
 
 Now, enter {\ttfamily 0} to initialise with {\ttfamily colliding} {\ttfamily fronts}.
 
 A message will then appear on the terminal\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input lower threshold (\textcolor{charliteral}{'i'} to activate image, \textcolor{charliteral}{'n'} \textcolor{keywordflow}{for} none):}
+\DoxyCodeLine{Please\ input\ lower\ threshold\ (\textcolor{charliteral}{'i'}\ to\ activate\ image,\ \textcolor{charliteral}{'n'}\ \textcolor{keywordflow}{for}\ none):}
 
 \end{DoxyCode}
 
@@ -144,7 +146,7 @@ For our example there is no need for thresholds. Therefore enter {\ttfamily n}.
 
 The next message is\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input upper threshold (\textcolor{charliteral}{'i'} to activate image, \textcolor{charliteral}{'n'} \textcolor{keywordflow}{for} none):}
+\DoxyCodeLine{Please\ input\ upper\ threshold\ (\textcolor{charliteral}{'i'}\ to\ activate\ image,\ \textcolor{charliteral}{'n'}\ \textcolor{keywordflow}{for}\ none):}
 
 \end{DoxyCode}
 
@@ -153,12 +155,12 @@ We repeat the same steps as for the lower threshold.
 
 Next, this message appears\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please place two seeds (click on the image \textcolor{keywordflow}{while} pressing Ctrl).}
+\DoxyCodeLine{Please\ place\ two\ seeds\ (click\ on\ the\ image\ \textcolor{keywordflow}{while}\ pressing\ Ctrl).}
 
 \end{DoxyCode}
 
 
-The render window is now activated. Place the two seeds, one at each of the two ends of a branch. (The geometry of the entire bifurcation is created by \char`\"{}merging\char`\"{} the surfaces of individual branches.) Interact with the image planes to find where you want to place your first seed. When satisfied, left-\/click on the image while pressing {\ttfamily Ctrl}. A red sphere will then appear.
+The render window is now activated. Place the two seeds, one at each of the two ends of a branch. (The geometry of the entire bifurcation is created by "{}merging"{} the surfaces of individual branches.) Interact with the image planes to find where you want to place your first seed. When satisfied, left-\/click on the image while pressing {\ttfamily Ctrl}. A red sphere will then appear.
 
  
 \begin{DoxyImageNoCaption}
@@ -186,20 +188,20 @@ Press {\ttfamily q} or {\ttfamily e} to proceed.
 
 Next, you will be prompted with\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Accept initialization? (y/n):}
+\DoxyCodeLine{Accept\ initialization?\ (y/n):}
 
 \end{DoxyCode}
 
 
 If you are not satisfied with your initialisation, enter {\ttfamily n} to perform it once again, otherwise enter {\ttfamily y}.
 
-Now press {\ttfamily q} or {\ttfamily e} again (in fact, you should do this whenever the system appears to be frozen and the message \char`\"{}\+Displaying\char`\"{} is shown on the terminal.).
+Now press {\ttfamily q} or {\ttfamily e} again (in fact, you should do this whenever the system appears to be frozen and the message "{}\+Displaying"{} is shown on the terminal.).
 
 You are now prompted if you want to initialise another branch\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Initialize another branch? (y/n): }
+\DoxyCodeLine{Initialize\ another\ branch?\ (y/n):\ }
 
 \end{DoxyCode}
 
@@ -210,9 +212,9 @@ The following message will now appear\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input parameters (type \textcolor{keywordflow}{return} to accept current values, \textcolor{charliteral}{'e'} to}
-\DoxyCodeLine{end, \textcolor{charliteral}{'q'} to quit):}
-\DoxyCodeLine{ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) }
+\DoxyCodeLine{Please\ input\ parameters\ (type\ \textcolor{keywordflow}{return}\ to\ accept\ current\ values,\ \textcolor{charliteral}{'e'}\ to}
+\DoxyCodeLine{end,\ \textcolor{charliteral}{'q'}\ to\ quit):}
+\DoxyCodeLine{\ NumberOfIterations(0)\ [PropagationScaling(1.0)\ CurvatureScaling(0.0)\ }
 \DoxyCodeLine{AdvectionScaling(0.0)]:}
 
 \end{DoxyCode}
@@ -232,7 +234,7 @@ Based on our limited experience, we recommended that propagation and curvature s
 
 Therefore, enter\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{300 0 0 1}
+\DoxyCodeLine{300\ 0\ 0\ 1}
 
 \end{DoxyCode}
 
@@ -249,7 +251,7 @@ To quit the render window press {\ttfamily q} or {\ttfamily e} as usual.
 
 You will then be asked\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Accept result? (y/n)}
+\DoxyCodeLine{Accept\ result?\ (y/n)}
 
 \end{DoxyCode}
 
@@ -260,9 +262,9 @@ Let us assume we are not satisfied, therefore enter {\ttfamily n}. You will then
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input parameters (type \textcolor{keywordflow}{return} to accept current values, \textcolor{charliteral}{'e'} to}
-\DoxyCodeLine{end, \textcolor{charliteral}{'q'} to quit):}
-\DoxyCodeLine{ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) }
+\DoxyCodeLine{Please\ input\ parameters\ (type\ \textcolor{keywordflow}{return}\ to\ accept\ current\ values,\ \textcolor{charliteral}{'e'}\ to}
+\DoxyCodeLine{end,\ \textcolor{charliteral}{'q'}\ to\ quit):}
+\DoxyCodeLine{\ NumberOfIterations(0)\ [PropagationScaling(1.0)\ CurvatureScaling(0.0)\ }
 \DoxyCodeLine{AdvectionScaling(0.0)]:}
 
 \end{DoxyCode}
@@ -270,7 +272,7 @@ Let us assume we are not satisfied, therefore enter {\ttfamily n}. You will then
 
 Try again with a bigger curvature scaling\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{300 0 0.5 1}
+\DoxyCodeLine{300\ 0\ 0.5\ 1}
 
 \end{DoxyCode}
 
@@ -287,7 +289,7 @@ To quit the render window press {\ttfamily q} or {\ttfamily e} as usual.
 
 You will then be asked once again\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Accept result? (y/n)}
+\DoxyCodeLine{Accept\ result?\ (y/n)}
 
 \end{DoxyCode}
 
@@ -296,7 +298,7 @@ Assuming we are now satisfied, we enter {\ttfamily y} .
 
 Next, we receive the prompt\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Merge branch? (y/n)}
+\DoxyCodeLine{Merge\ branch?\ (y/n)}
 
 \end{DoxyCode}
 
@@ -307,7 +309,7 @@ The render window will activate, showing you the merged result. To quit the rend
 
 Then you will be prompted with\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Segment another branch? (y/n)}
+\DoxyCodeLine{Segment\ another\ branch?\ (y/n)}
 
 \end{DoxyCode}
 
@@ -316,8 +318,8 @@ If you want to segment another branch enter {\ttfamily y}, otherwise enter {\ttf
 
 Let\textquotesingle{}s segment another branch and enter {\ttfamily y}. You will go back to \+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please choose initialization type: (0: colliding fronts; 1: fast}
-\DoxyCodeLine{marching; 2: threshold; 3: isosurface)}
+\DoxyCodeLine{Please\ choose\ initialization\ type:\ (0:\ colliding\ fronts;\ 1:\ fast}
+\DoxyCodeLine{marching;\ 2:\ threshold;\ 3:\ isosurface)}
 
 \end{DoxyCode}
 
@@ -365,14 +367,14 @@ Continue until you have segmented all branches. In our case, we have three branc
 Now you have a file named {\ttfamily level\+\_\+sets.\+vti} which contains an image. The zero level of this image is the surface you generated. Now we ~\newline
  extract a polygonal surface from it with \+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtkmarchingcubes -\/ifile level\_sets.vti -\/ofile model.vtp}
+\DoxyCodeLine{vmtkmarchingcubes\ -\/ifile\ level\_sets.vti\ -\/ofile\ model.vtp}
 
 \end{DoxyCode}
 
 
 The final surface model is {\ttfamily model.\+vtp} which you can display with \+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtksurfacereader -\/ifile model.vtp -\/-\/pipe vmtksurfaceviewer}
+\DoxyCodeLine{vmtksurfacereader\ -\/ifile\ model.vtp\ -\/-\/pipe\ vmtksurfaceviewer}
 
 \end{DoxyCode}
 
@@ -393,28 +395,28 @@ We note that you can add further branches to the {\ttfamily level\+\_\+sets.\+vt
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{ vmtklevelsetsegmentation -\/ifile image\_volume\_voi.vti -\/levelsetsfile \(\backslash\)}
-\DoxyCodeLine{level\_sets.vti -\/ofile level\_sets2.vti}
+\DoxyCodeLine{\ vmtklevelsetsegmentation\ -\/ifile\ image\_volume\_voi.vti\ -\/levelsetsfile\ \(\backslash\)}
+\DoxyCodeLine{level\_sets.vti\ -\/ofile\ level\_sets2.vti}
 
 \end{DoxyCode}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_smooth}{}\doxysubsection{Smoothing the surface}\label{index_smooth}
+\hypertarget{index_smooth}{}\doxysubsection{\texorpdfstring{Smoothing the surface}{Smoothing the surface}}\label{index_smooth}
 At this point, we have our surface model and we want to generate a computational mesh. In most cases, the surface model has bumpy surfaces, especially if the image quality is not high and if we didn\textquotesingle{}t use the curvature term in the level set evolution. Artificial bumps in the surface can result in spurious flow features and will affect the wall shear stress distribution, so one may want to increase surface smoothness before building the mesh.
 
 You can do this in VMTK with \+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{ vmtksurfacesmoothing -\/ifile model.vtp -\/passband 0.1 -\/iterations 30 \(\backslash\)}
-\DoxyCodeLine{-\/ofile model\_sm.vtp}
+\DoxyCodeLine{\ vmtksurfacesmoothing\ -\/ifile\ model.vtp\ -\/passband\ 0.1\ -\/iterations\ 30\ \(\backslash\)}
+\DoxyCodeLine{-\/ofile\ model\_sm.vtp}
 
 \end{DoxyCode}
 
 
 There are two parameters controlling the amount of smoothing\+: passband, which is the cut-\/off spatial frequency of the low pass filter, and iterations, which is the number of smoothing passes.
 
-For typical vessels, a passband of 0.\+1 and a number of iteration of 30 should be OK. For example, for the surface model obtained in the section \mbox{\hyperlink{index_surface}{The 3D surface reconstruction of a vascular segment}} above, the resulting surface is\+:
+For typical vessels, a passband of 0.\+1 and a number of iteration of 30 should be OK. For example, for the surface model obtained in the section \doxysectlink{index_surface}{The 3D surface reconstruction of a vascular segment}{2} above, the resulting surface is\+:
 
  
 \begin{DoxyImageNoCaption}
@@ -424,7 +426,7 @@ For typical vessels, a passband of 0.\+1 and a number of iteration of 30 should 
 
 Remember that we can display the surfaces with \+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtksurfacereader -\/ifile model\_sm.vtp -\/-\/pipe vmtksurfaceviewer}
+\DoxyCodeLine{vmtksurfacereader\ -\/ifile\ model\_sm.vtp\ -\/-\/pipe\ vmtksurfaceviewer}
 
 \end{DoxyCode}
 
@@ -447,17 +449,17 @@ If you want more smoothing, you can increase the passband and/or the number of i
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_clip}{}\doxysubsection{Clipping the endcaps}\label{index_clip}
+\hypertarget{index_clip}{}\doxysubsection{\texorpdfstring{Clipping the endcaps}{Clipping the endcaps}}\label{index_clip}
 Once we have created our smooth model, the next step is to open the inlets and outlets, as they are normally closed with a blobby appearance. We proceed by clipping the blobby endcaps with\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtksurfaceclipper -\/ifile model\_sm.vtp -\/ofile model\_cl.vtp}
+\DoxyCodeLine{vmtksurfaceclipper\ -\/ifile\ model\_sm.vtp\ -\/ofile\ model\_cl.vtp}
 
 \end{DoxyCode}
 
 
-When the render window pops up, pressing {\ttfamily i} will activate the \char`\"{}interactor\char`\"{}. A cube will appear (as in {\ttfamily vmtkimagevoiselector} in the section \mbox{\hyperlink{index_voi}{Volume of interest}}). Position the cube in such a way that the portion of the surface you want to clip lies inside the cube.
+When the render window pops up, pressing {\ttfamily i} will activate the "{}interactor"{}. A cube will appear (as in {\ttfamily vmtkimagevoiselector} in the section \doxysectlink{index_voi}{Volume of interest}{2}). Position the cube in such a way that the portion of the surface you want to clip lies inside the cube.
 
  
 \begin{DoxyImageNoCaption}
@@ -487,15 +489,15 @@ Note that it is possible to clip the endcaps automatically with VMTK. For more i
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_add_extensions}{}\doxysubsection{Adding flow extensions}\label{index_add_extensions}
+\hypertarget{index_add_extensions}{}\doxysubsection{\texorpdfstring{Adding flow extensions}{Adding flow extensions}}\label{index_add_extensions}
 VMTK provides the option to generate cylindrical extensions to the inlet and outlet cross-\/sections. These are typically used to ensure that in the numerical simulation, the boundary conditions are applied at a reasonable distance from the region of interest and do not have a strong effect on the flow field. Exactly what sort of boundary conditions to apply and where to apply them is, of course, a non-\/trivial problem. Nonetheless, the appropriate VMTK command to add the cylindrical extensions is\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtksurfacereader -\/ifile model\_cl.vtp -\/-\/pipe vmtkcenterlines \(\backslash\)}
-\DoxyCodeLine{-\/seedselector openprofiles -\/-\/pipe vmtkflowextensions -\/adaptivelength 1 \(\backslash\)}
-\DoxyCodeLine{-\/extensionratio 8 -\/normalestimationratio 1 -\/interactive 0 -\/-\/pipe \(\backslash\)}
-\DoxyCodeLine{vmtksurfacewriter -\/ofile model\_ex.vtp}
+\DoxyCodeLine{vmtksurfacereader\ -\/ifile\ model\_cl.vtp\ -\/-\/pipe\ vmtkcenterlines\ \(\backslash\)}
+\DoxyCodeLine{-\/seedselector\ openprofiles\ -\/-\/pipe\ vmtkflowextensions\ -\/adaptivelength\ 1\ \(\backslash\)}
+\DoxyCodeLine{-\/extensionratio\ 8\ -\/normalestimationratio\ 1\ -\/interactive\ 0\ -\/-\/pipe\ \(\backslash\)}
+\DoxyCodeLine{vmtksurfacewriter\ -\/ofile\ model\_ex.vtp}
 
 \end{DoxyCode}
 
@@ -520,28 +522,28 @@ When the render window pops up, before pressing {\ttfamily q}, make sure you not
 
 A message will appear on your terminal\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input list of inlet profile ids:}
+\DoxyCodeLine{Please\ input\ list\ of\ inlet\ profile\ ids:}
 
 \end{DoxyCode}
 
 
 Enter the list of ids with a space between them. In our example enter {\ttfamily 0} . Next you will receive\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please input list of outlet profile ids:}
+\DoxyCodeLine{Please\ input\ list\ of\ outlet\ profile\ ids:}
 
 \end{DoxyCode}
 
 
 Enter the list of ids with a space separating them. In our example enter\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{1 2}
+\DoxyCodeLine{1\ 2}
 
 \end{DoxyCode}
 
 
 You can display the resulting surface using\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtksurfacereader -\/ifile model\_ex.vtp -\/-\/pipe vmtksurfaceviewer}
+\DoxyCodeLine{vmtksurfacereader\ -\/ifile\ model\_ex.vtp\ -\/-\/pipe\ vmtksurfaceviewer}
 
 \end{DoxyCode}
 
@@ -556,10 +558,10 @@ The result is\+:
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_vmtk_mesh}{}\doxysubsection{The mesh generation}\label{index_vmtk_mesh}
+\hypertarget{index_vmtk_mesh}{}\doxysubsection{\texorpdfstring{The mesh generation}{The mesh generation}}\label{index_vmtk_mesh}
 Finally, we can generate our mesh using the command line\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{vmtkmeshgenerator -\/ifile model\_ex.vtp -\/ofile mesh.vtu -\/edgelength 0.5}
+\DoxyCodeLine{vmtkmeshgenerator\ -\/ifile\ model\_ex.vtp\ -\/ofile\ mesh.vtu\ -\/edgelength\ 0.5}
 
 \end{DoxyCode}
 
@@ -568,12 +570,12 @@ where the edgelength parameter expresses the nominal edge length of a surface tr
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_oomph_mesh}{}\doxysection{Creating an oomph-\/lib mesh based on output files generated by VMTK}\label{index_oomph_mesh}
-VMTK exports the mesh for different solvers. The one we chose is the \char`\"{}.\+xda\char`\"{} format (of \href{http://libmesh.sourceforge.net/}{\texttt{ Lib\+Mesh}}). To export the mesh in this format enter\+:
+ \hypertarget{index_oomph_mesh}{}\doxysection{\texorpdfstring{Creating an oomph-\/lib mesh based on output files generated by VMTK}{Creating an oomph-lib mesh based on output files generated by VMTK}}\label{index_oomph_mesh}
+VMTK exports the mesh for different solvers. The one we chose is the "{}.\+xda"{} format (of \href{http://libmesh.sourceforge.net/}{\texttt{ Lib\+Mesh}}). To export the mesh in this format enter\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{ vmtkmeshwriter -\/ifile mesh.vtu -\/entityidsarray CellEntityIds -\/ofile \(\backslash\)}
+\DoxyCodeLine{\ vmtkmeshwriter\ -\/ifile\ mesh.vtu\ -\/entityidsarray\ CellEntityIds\ -\/ofile\ \(\backslash\)}
 \DoxyCodeLine{iliac.xda}
 
 \end{DoxyCode}
@@ -581,49 +583,49 @@ VMTK exports the mesh for different solvers. The one we chose is the \char`\"{}.
 
 {\ttfamily oomph-\/lib} provides a conversion code 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{bin/\mbox{\hyperlink{create__fluid__and__solid__surface__mesh__from__fluid__xda__mesh_8cc_acaf73fcb31e5c25107e81bf28bb52d4c}{create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh}}}
+\DoxyCodeLine{scripts/\mbox{\hyperlink{create__fluid__and__solid__surface__mesh__from__fluid__xda__mesh_8cc_acaf73fcb31e5c25107e81bf28bb52d4c}{create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh}}}
 
 \end{DoxyCode}
 
 
-which uses the VMTK output mesh in \char`\"{}$\ast$.\+xda\char`\"{} format to generate a file \char`\"{}fluid\+\_\+$\ast$.\+poly\char`\"{} that can be used to generate the fluid mesh using the open-\/source mesh generator \href{http://wias-berlin.de/software/tetgen//}{\texttt{ Tet\+Gen}}.
+which uses the VMTK output mesh in "{}\texorpdfstring{$\ast$}{*}.\+xda"{} format to generate a file "{}fluid\+\_\+\texorpdfstring{$\ast$}{*}.\+poly"{} that can be used to generate the fluid mesh using the open-\/source mesh generator \href{http://wias-berlin.de/software/tetgen//}{\texttt{ Tet\+Gen}}.
 
 When executing the conversion code you will be prompted with\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Please enter the file name without the file extension \textcolor{stringliteral}{'.xda'}:}
+\DoxyCodeLine{Please\ enter\ the\ file\ name\ without\ the\ file\ extension\ \textcolor{stringliteral}{'.xda'}:}
 
 \end{DoxyCode}
 
 
 In our example, enter {\ttfamily iliac} .
 
-To facilitate the simulation of physiological fluid-\/structure interaction problems in which the vessel walls deform elastically in response to the fluid traction, the conversion code also generates a file \char`\"{}solid\+\_\+$\ast$.\+poly\char`\"{} that can be used to to generate a mesh for the 3D vessel wall which is assumed to be of constant thickness.
+To facilitate the simulation of physiological fluid-\/structure interaction problems in which the vessel walls deform elastically in response to the fluid traction, the conversion code also generates a file "{}solid\+\_\+\texorpdfstring{$\ast$}{*}.\+poly"{} that can be used to to generate a mesh for the 3D vessel wall which is assumed to be of constant thickness.
 
 The conversion code therefore requests the wall thickness\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Enter the (uniform) wall thickness}
+\DoxyCodeLine{Enter\ the\ (uniform)\ wall\ thickness}
 
 \end{DoxyCode}
 
 
-As explained in \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}}, the consistent generation of surface coordinates in FSI problems requires that all faces with the same boundary ID should be co-\/planar. For this reason the conversion code provides the option to assign a distinct boundary ID to each surface triangle on the fluid-\/structure interaction boundary and ensures the IDs are consistent for the fluid and the solid meshes. (The \char`\"{}$\ast$.\+poly\char`\"{} files generated by the conversion code list the relation between the old and boundary IDs at the end.)
+As explained in \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}}, the consistent generation of surface coordinates in FSI problems requires that all faces with the same boundary ID should be co-\/planar. For this reason the conversion code provides the option to assign a distinct boundary ID to each surface triangle on the fluid-\/structure interaction boundary and ensures the IDs are consistent for the fluid and the solid meshes. (The "{}\texorpdfstring{$\ast$}{*}.\+poly"{} files generated by the conversion code list the relation between the old and boundary IDs at the end.)
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Do you want to create a separate ID \textcolor{keywordflow}{for each} planar facet}
-\DoxyCodeLine{on the fluid-\/structure interaction boundary?}
-\DoxyCodeLine{Enter y or n: }
+\DoxyCodeLine{Do\ you\ want\ to\ create\ a\ separate\ ID\ \textcolor{keywordflow}{for\ each}\ planar\ facet}
+\DoxyCodeLine{on\ the\ fluid-\/structure\ interaction\ boundary?}
+\DoxyCodeLine{Enter\ y\ or\ n:\ }
 
 \end{DoxyCode}
 
 
-For single-\/physics problem, however, it is much easier to assign a single boundary ID to each \char`\"{}physical\char`\"{} surface ({\itshape  i.\+e. } inlet, outlet, vessel boundary). Assuming that we are solving such a single-\/physics problem we enter {\ttfamily n}. Two files are now generated \+: {\ttfamily fluid\+\_\+iliac.\+poly} which contains the fluid domain and {\ttfamily solid\+\_\+iliac.\+poly} containing the solid one.
+For single-\/physics problem, however, it is much easier to assign a single boundary ID to each "{}physical"{} surface ({\itshape  i.\+e. } inlet, outlet, vessel boundary). Assuming that we are solving such a single-\/physics problem we enter {\ttfamily n}. Two files are now generated \+: {\ttfamily fluid\+\_\+iliac.\+poly} which contains the fluid domain and {\ttfamily solid\+\_\+iliac.\+poly} containing the solid one.
 
 \href{http://wias-berlin.de/software/tetgen//tetview.html}{\texttt{ Tetgen\textquotesingle{}s}} mesh viewer {\ttfamily tetview} can now be used to display the surface meshes\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{tetview fluid\_iliac.poly}
+\DoxyCodeLine{tetview\ fluid\_iliac.poly}
 
 \end{DoxyCode}
  displays the fluid surface mesh with its four boundaries
@@ -640,7 +642,7 @@ For single-\/physics problem, however, it is much easier to assign a single boun
 
 While 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{tetview fluid\_iliac.poly}
+\DoxyCodeLine{tetview\ fluid\_iliac.poly}
 
 \end{DoxyCode}
  displays the solid surface mesh (for a wall thickness of 2mm)\+:
@@ -676,7 +678,7 @@ If multiple boundary IDs are requested, the surface meshes are\+:
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_comm_and_ex}{}\doxysection{Comments and Exercises}\label{index_comm_and_ex}
+\hypertarget{index_comm_and_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_and_ex}
 
 \begin{DoxyItemize}
 \item In its current form, the conversion code \begin{center} \href{../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc}{\texttt{ demo\+\_\+drivers/interaction/create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh.\+cc}} \end{center}  is restricted to bifurcation-\/like geometries, and makes certain assumptions about the enumeration of the boundaries. Furthermore, it can only deal with constant thickness vessel walls\+: the outer surface of the blood vessel is assumed to be parallel to the FSI interface, with the wall thickness being measured in the direction normal to that interface. This simplistic construction can easily create overlapping elements if the apex of the bifurcation is highly curved and/or if a large wall thickness is requested. If this happens tetgen will be unable to generate the solid mesh. It should be easy to modify the code to deal with such cases, however. \href{../../../contact/html/index.html}{\texttt{ Get in touch}} if you need help with this (and feel free to share any improvements with us).
@@ -686,11 +688,9 @@ If multiple boundary IDs are requested, the surface meshes are\+:
 \item \href{../../../navier_stokes/vmtk_fluid/html/index.html}{\texttt{ Steady finite-\/\+Reynolds number flow through the (rigid) arterial bifurcation -- a pure fluid-\/mechanics mechanics problem.}}
 \item \href{../../../interaction/vmtk_fsi/html/index.html}{\texttt{ Steady finite-\/\+Reynolds-\/number flow through an elastic arterial bifurcation -- a fluid-\/structure interaction problem.}}
 \end{DoxyItemize}
-\end{DoxyItemize}
-\begin{DoxyItemize}
 \item To facilitate experimentation with the methodology we distribute the ~\newline
  {\ttfamily xda} file that was used to create the meshes in the above examples. It is available at\+: \begin{center} \href{../../../../demo_drivers/interaction/vmtk_fsi/iliac.xda}{\texttt{ demo\+\_\+drivers/interaction/vmtk\+\_\+fsi/iliac.\+xda}} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
-A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

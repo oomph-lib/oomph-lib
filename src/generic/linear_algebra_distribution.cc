@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -388,7 +388,7 @@ namespace oomph
         }
       }
 
-      /// /////////////////////////////
+      ////////////////////////////////
 
       // Check that all in distributions are built.
       for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++)
@@ -404,7 +404,7 @@ namespace oomph
         }
       }
 
-      /// /////////////////////////////
+      ////////////////////////////////
 
       // Check that all communicators to concatenate are the same
       // by comparing all communicators against the first one.
@@ -428,7 +428,7 @@ namespace oomph
         }
       }
 
-      /// /////////////////////////////
+      ////////////////////////////////
 
       // Ensure that all distributions are either distributed or not.
       // This is because we use the distributed() function from the first
@@ -451,7 +451,7 @@ namespace oomph
         }
       }
 
-      /// /////////////////////////////
+      ////////////////////////////////
 
       // Check that the out distribution is not built.
       if (out_distribution.built())

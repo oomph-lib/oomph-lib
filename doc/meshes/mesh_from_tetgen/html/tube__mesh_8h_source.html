@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: tube_mesh.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6c67e72d2f29709d1e2582429aa24112.html">meshes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">tube_mesh.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="tube__mesh_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifndef OOMPH_TUBE_MESH_HEADER</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define OOMPH_TUBE_MESH_HEADER</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// Headers</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;generic/refineable_brick_mesh.h&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;generic/macro_element.h&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;generic/domain.h&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;generic/algebraic_elements.h&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;generic/brick_mesh.h&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;generic/macro_element_node_update_element.h&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// Include the headers file for domain</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="tube__domain_8h.html">tube_domain.h</a>&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  /// 3D tube mesh class.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  /// The domain is specified by the GeomObject that identifies</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  /// the entire volume. Non-refineable base version!</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  /// The mesh boundaries are numbered as follows:</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  /// - Boundary 0: &quot;Inflow&quot; cross section; located along the</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  /// - Boundary 1: The outer wall, represetned by \f$\xi_2 = 1\f$.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  /// - Boundary 2: The out flow, represented by \f$\xi_0 = \xi_0^{hi}\f$.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span>  <span class="comment">//====================================================================</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="};">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html">   55</a></span>  <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> BrickMeshBase</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    /// Constructor: Pass pointer to geometric object that</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    /// specifies the volume, start and end coordinates for the centreline</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    /// on the geometric object. Values of theta at which dividing lines</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    /// are to be placed, fractions of the radius for the central box</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    /// at the dividing lines, the number of layers</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    /// and the timestepper.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    /// Timestepper defaults to Steady dummy timestepper.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh</a>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">GeomObject</a>* wall_pt,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>             <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">centreline_limits</a>,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>             <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">theta_positions</a>,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>             <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">radius_box</a>,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>             <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">nlayer</a>,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>             <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">TimeStepper</a>* <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a> = &amp;Mesh::Default_TimeStepper);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">    /// Destructor: empty</span></div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#af77e5d5022c77c3bf7340387258b2d51">   73</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classoomph_1_1TubeMesh.html#af77e5d5022c77c3bf7340387258b2d51">~TubeMesh</a>()</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <span class="keyword">delete</span> <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    /// Access function to GeomObject representing wall</span></div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#aed076003bfd280bd2949c0e74885f34c">   79</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">GeomObject</a>*&amp; <a class="code hl_function" href="classoomph_1_1TubeMesh.html#aed076003bfd280bd2949c0e74885f34c">volume_pt</a>()</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <span class="keywordflow">return</span> <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">Volume_pt</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /// Access function to domain</span></div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#a7cc74f03a77148a57557cc90f315358d">   85</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="code hl_function" href="classoomph_1_1TubeMesh.html#a7cc74f03a77148a57557cc90f315358d">domain_pt</a>()</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      <span class="keywordflow">return</span> <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">    /// Access function to underlying domain</span></div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#ac2094b74a3c489cddb9e1ebe3ec34358">   91</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="code hl_function" href="classoomph_1_1TubeMesh.html#ac2094b74a3c489cddb9e1ebe3ec34358">domain_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      <span class="keywordflow">return</span> <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /// Pointer to domain</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">   98</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TubeDomain.html">TubeDomain</a>* <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">    /// Pointer to the geometric object that represents the curved wall</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">  101</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">GeomObject</a>* <a class="code hl_variable" href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">Volume_pt</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  };</div>
+</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment"></span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">  ////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">  ////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">  ////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="comment">//=============================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">  /// Adaptative version of the TubeMesh base mesh.</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">  /// The domain is specified by the GeomObject that identifies</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">  /// the entire volume</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">  /// The mesh boundaries are numbered as follows:</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">  /// - Boundary 0: &quot;Inflow&quot; cross section; located along the</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">  ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$.</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">  /// - Boundary 1: The outer wall, represetned by \f$\xi_2 = 1\f$.</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">  /// - Boundary 2: The out flow, represented by \f$\xi_0 = \xi_0^{hi}\f$.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment"></span>  <span class="comment">//=============================================================</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="};">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableTubeMesh.html">  122</a></span>  <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1RefineableTubeMesh.html">RefineableTubeMesh</a> : <span class="keyword">public</span> <a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh</a>&lt;ELEMENT&gt;,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                             <span class="keyword">public</span> RefineableBrickMesh&lt;ELEMENT&gt;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">    /// Constructor for adaptive deformable quarter tube mesh class.</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">    /// Pass pointer to geometric object that</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    /// specifies the volume, start and end coordinates for the centreline</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">    /// on the geometric object. Values of theta at which dividing lines</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">    /// are to be placed, fractions of the radius for the central box</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">    /// at the dividing lines, the number of layers</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">    /// and the timestepper.</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">    /// Timestepper defaults to Steady dummy timestepper.</span></div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableTubeMesh.html#a0b8e2307c2d4594196f78a6278d9bbf7">  135</a></span><span class="comment"></span>    <a class="code hl_function" href="classoomph_1_1RefineableTubeMesh.html#a0b8e2307c2d4594196f78a6278d9bbf7">RefineableTubeMesh</a>(</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>      <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">GeomObject</a>* wall_pt,</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">centreline_limits</a>,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">theta_positions</a>,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">radius_box</a>,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">nlayer</a>,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">TimeStepper</a>* <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a> = &amp;Mesh::Default_TimeStepper)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      : <a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh</a>&lt;<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ELEMENT</a>&gt;(wall_pt,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                          <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">centreline_limits</a>,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                          <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">theta_positions</a>,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                          <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">radius_box</a>,</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                          <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">nlayer</a>,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                          <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>      <span class="comment">// Loop over all elements and set macro element pointer</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ielem</a> = 0; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ielem &lt; TubeMesh&lt;ELEMENT&gt;::nelement</a>(); <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ielem</a>++)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classoomph_1_1TetgenMesh.html">RefineableQElement&lt;3&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>          <a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh&lt;ELEMENT&gt;::element_pt</a>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ielem</a>))</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>          -&gt;<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">set_macro_elem_pt</a>(this-&gt;<a class="code hl_variable" href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">Domain_pt</a>-&gt;macro_element_pt(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ielem</a>));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      <span class="comment">// Setup Octree forest: Turn elements into individual octrees</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>      <span class="comment">// and plant in forest</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>      <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Vector&lt;TreeRoot*&gt;</a> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">trees_pt</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">iel</a> = 0; <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">iel &lt; TubeMesh&lt;ELEMENT&gt;::nelement</a>(); <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">iel</a>++)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>      {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">FiniteElement</a>* <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">el_pt</a> = <a class="code hl_class" href="classoomph_1_1TubeMesh.html">TubeMesh&lt;ELEMENT&gt;::finite_element_pt</a>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">iel</a>);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ELEMENT</a>* <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ref_el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">el_pt</a>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OcTreeRoot</a>* <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">octree_root_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OcTreeRoot</a>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">ref_el_pt</a>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">trees_pt</a>.push_back(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">octree_root_pt</a>);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>      }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      this-&gt;<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Forest_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OcTreeForest</a>(<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">trees_pt</a>);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      <span class="comment">// Run self test</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>      <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">success_flag</a> =</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OcTreeForest</a>*<span class="keyword">&gt;</span>(this-&gt;<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">Forest_pt</a>)-&gt;self_test();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classoomph_1_1TetgenMesh.html">success_flag</a> == 0)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;Successfully built octree forest &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">throw</span> <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OomphLibError</a>(<span class="stringliteral">&quot;Trouble in building octree forest &quot;</span>,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                            <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OOMPH_CURRENT_FUNCTION</a>,</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                            <a class="code hl_class" href="classoomph_1_1TetgenMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>      }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment"></span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">    /// Destructor: empty</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classoomph_1_1RefineableTubeMesh.html#a743f3d17c3d5f0abe88ee1a7bda0b149">  187</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classoomph_1_1RefineableTubeMesh.html#a743f3d17c3d5f0abe88ee1a7bda0b149">~RefineableTubeMesh</a>() {}</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  };</div>
+</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>} <span class="comment">// namespace oomph</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">#include &quot;<a class="code" href="tube__mesh_8template_8cc.html">tube_mesh.template.cc</a>&quot;</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassoomph_1_1RefineableTubeMesh_html"><div class="ttname"><a href="classoomph_1_1RefineableTubeMesh.html">oomph::RefineableTubeMesh</a></div><div class="ttdoc">Adaptative version of the TubeMesh base mesh. The domain is specified by the GeomObject that identifi...</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00122">tube_mesh.h:125</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableTubeMesh_html_a0b8e2307c2d4594196f78a6278d9bbf7"><div class="ttname"><a href="classoomph_1_1RefineableTubeMesh.html#a0b8e2307c2d4594196f78a6278d9bbf7">oomph::RefineableTubeMesh::RefineableTubeMesh</a></div><div class="ttdeci">RefineableTubeMesh(GeomObject *wall_pt, const Vector&lt; double &gt; &amp;centreline_limits, const Vector&lt; double &gt; &amp;theta_positions, const Vector&lt; double &gt; &amp;radius_box, const unsigned &amp;nlayer, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor for adaptive deformable quarter tube mesh class. Pass pointer to geometric object that sp...</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00135">tube_mesh.h:135</a></div></div>
+<div class="ttc" id="aclassoomph_1_1RefineableTubeMesh_html_a743f3d17c3d5f0abe88ee1a7bda0b149"><div class="ttname"><a href="classoomph_1_1RefineableTubeMesh.html#a743f3d17c3d5f0abe88ee1a7bda0b149">oomph::RefineableTubeMesh::~RefineableTubeMesh</a></div><div class="ttdeci">virtual ~RefineableTubeMesh()</div><div class="ttdoc">Destructor: empty.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00187">tube_mesh.h:187</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TetgenMesh_html"><div class="ttname"><a href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh</a></div><div class="ttdoc">Unstructured tet mesh based on output from Tetgen: http://wias-berlin.de/software/tetgen/.</div><div class="ttdef"><b>Definition</b> <a href="tetgen__mesh_8h_source.html#l00050">tetgen_mesh.h:51</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeDomain_html"><div class="ttname"><a href="classoomph_1_1TubeDomain.html">oomph::TubeDomain</a></div><div class="ttdoc">Tube as a domain. The entire domain must be defined by a GeomObject with the following convention: ze...</div><div class="ttdef"><b>Definition</b> <a href="tube__domain_8h_source.html#l00069">tube_domain.h:70</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html"><div class="ttname"><a href="classoomph_1_1TubeMesh.html">oomph::TubeMesh</a></div><div class="ttdoc">3D tube mesh class. The domain is specified by the GeomObject that identifies the entire volume....</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00055">tube_mesh.h:56</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_a3b89c07eff15d0eb9d5fe9e0c93f8ec2"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#a3b89c07eff15d0eb9d5fe9e0c93f8ec2">oomph::TubeMesh::Volume_pt</a></div><div class="ttdeci">GeomObject * Volume_pt</div><div class="ttdoc">Pointer to the geometric object that represents the curved wall.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00101">tube_mesh.h:101</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_a7cc74f03a77148a57557cc90f315358d"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#a7cc74f03a77148a57557cc90f315358d">oomph::TubeMesh::domain_pt</a></div><div class="ttdeci">TubeDomain * domain_pt()</div><div class="ttdoc">Access function to domain.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00085">tube_mesh.h:85</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_aa40f91e3d55b4ab61304d0b8eca3859f"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#aa40f91e3d55b4ab61304d0b8eca3859f">oomph::TubeMesh::Domain_pt</a></div><div class="ttdeci">TubeDomain * Domain_pt</div><div class="ttdoc">Pointer to domain.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00098">tube_mesh.h:98</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_ac2094b74a3c489cddb9e1ebe3ec34358"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#ac2094b74a3c489cddb9e1ebe3ec34358">oomph::TubeMesh::domain_pt</a></div><div class="ttdeci">TubeDomain * domain_pt() const</div><div class="ttdoc">Access function to underlying domain.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00091">tube_mesh.h:91</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_aed076003bfd280bd2949c0e74885f34c"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#aed076003bfd280bd2949c0e74885f34c">oomph::TubeMesh::volume_pt</a></div><div class="ttdeci">GeomObject *&amp; volume_pt()</div><div class="ttdoc">Access function to GeomObject representing wall.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00079">tube_mesh.h:79</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TubeMesh_html_af77e5d5022c77c3bf7340387258b2d51"><div class="ttname"><a href="classoomph_1_1TubeMesh.html#af77e5d5022c77c3bf7340387258b2d51">oomph::TubeMesh::~TubeMesh</a></div><div class="ttdeci">virtual ~TubeMesh()</div><div class="ttdoc">Destructor: empty.</div><div class="ttdef"><b>Definition</b> <a href="tube__mesh_8h_source.html#l00073">tube_mesh.h:73</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition</b> <a href="annular__domain_8h_source.html#l00034">annular_domain.h:35</a></div></div>
+<div class="ttc" id="atube__domain_8h_html"><div class="ttname"><a href="tube__domain_8h.html">tube_domain.h</a></div></div>
+<div class="ttc" id="atube__mesh_8template_8cc_html"><div class="ttname"><a href="tube__mesh_8template_8cc.html">tube_mesh.template.cc</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Nov 8 2025 15:14:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

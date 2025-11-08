@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -126,9 +126,9 @@ private:
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -475,7 +475,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output shape of deformed body
  //------------------------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -483,7 +483,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output Lagrange multipliers
  //----------------------------
- sprintf(filename,"%s/lagr%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/lagr%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
 
@@ -560,7 +560,7 @@ int main(int argc, char* argv[])
 
  // Get the partition from file
  Vector<unsigned> element_partition(n_partition);
- sprintf(filename,"presc_displ_lagr_mult_partition.dat");
+ snprintf(filename, sizeof(filename), "presc_displ_lagr_mult_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_partition;e++)

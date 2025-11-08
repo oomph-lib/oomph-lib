@@ -651,5 +651,5 @@ only be improved by increasing the size of the computational domain.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

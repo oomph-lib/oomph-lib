@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -33,10 +33,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat > 3d_conv.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/3d_conv.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/3d_conv.dat.gz   \
     3d_conv.dat 0.1 1.0e-10  >> validation.log
 fi
 
@@ -60,10 +60,10 @@ cat RESLT/soln0.dat  > 3d_multi_conv.dat
 
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/3d_multi_conv.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/3d_multi_conv.dat.gz   \
     3d_multi_conv.dat 0.1 1.0e-10  >> validation.log
 fi
 
@@ -71,7 +71,7 @@ mv RESLT RESLT_3d_multi_conv
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -86,7 +86,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

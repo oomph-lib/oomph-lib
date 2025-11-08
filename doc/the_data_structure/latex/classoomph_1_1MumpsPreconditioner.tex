@@ -1,0 +1,315 @@
+\doxysection{oomph\+::Mumps\+Preconditioner Class Reference}
+\hypertarget{classoomph_1_1MumpsPreconditioner}{}\label{classoomph_1_1MumpsPreconditioner}\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+
+
+An interface to allow Mumps to be used as an (exact) \doxylink{classoomph_1_1Preconditioner}{Preconditioner}.  
+
+
+
+
+{\ttfamily \#include $<$mumps\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Mumps\+Preconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1MumpsPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a8b0765f81cda6b4ae7bf838c772a7c5c}{Mumps\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a6a6e572ef67b42c39d8caec548d1d1e0}{\texorpdfstring{$\sim$}{\string~}\+Mumps\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_ad1ac10549c38f269dcb1045b9f12274e}{Mumps\+Preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner}{Mumps\+Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a4ad033679d203cdd019429d856483835}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner}{Mumps\+Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a0c6e77943ba7ab4f3e51cddc937af099}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or \doxylink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a9fd4ff39efdfb0fe4170d8231cfe47b5}{preconditioner\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Function applies Mumps to vector r for (exact) preconditioning, this requires a call to setup(...) first. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a6446ca4fc06bc72412e4beb9b93b8b4d}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up memory -- forward the call to the version in Mumps in its \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} incarnation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a97049f03654c47ea018f685670d187f2}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of timings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_aba2c7f24b787eea660ca007a7d286093}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable the documentation of timings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_a7bd8801e4395ccb88fe1f4296e77e9ab}{Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_ab6e58c82c3cc4f4e44434a7d92d8e776}{Preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a63fefcfb21ae1c2a3b4232d2dfbb6340}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ab60952a82cc1b6b91fff5924eaa62c0e}{\texorpdfstring{$\sim$}{\string~}\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1e469ffc87f31f6f2eebbe5ccf03d78b}{preconditioner\+\_\+solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ac2c0f7f39eccd814e72cc5813ec864e0}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner\+: store the matrix pointer and the communicator pointer then call preconditioner specific \doxylink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Compatability layer for old preconditioners where problem pointers were needed. The problem pointer is only used to get a communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_aad84467ec9243138945c4d5bbca8fa6c}{enable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Set up the block preconditioner quietly! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a221f120f734fd3ca851db42b8defb53d}{disable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Be verbose in the block preconditioner setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get function for matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_af459b7333c4c64435fd8fa933535901f}{set\+\_\+matrix\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get function for comm pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a306f5a52f493816fcfda2dc9b2ee1dbf}{set\+\_\+comm\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a9202e15534f063a8e21a8a60623eac9f}{setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the time to setup the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1183f65956ef8a5b332a1246f418e907}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. There\textquotesingle{}s an assumption here that the block preconditioner will be in CR form but since that assumption is hard coded all over \doxylink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner} we\textquotesingle{}re safe. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a61a462f4266c22050b4ab9ab441c77a6}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. Version for coarsening dof-\/types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner_a47124b689f4bdc064df026068bb59303}{Solver}}
+\begin{DoxyCompactList}\small\item\em the Mumps solver emplyed by this preconditioner \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ad191d6be6caf8875700f54c939ec33e6}{Silent\+\_\+preconditioner\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether or not the build should be done silently. \end{DoxyCompactList}\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a2a6b2f6cd34495167ea766b47f055a7d}{Stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the output stream -- defaults to std\+::cout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An interface to allow Mumps to be used as an (exact) \doxylink{classoomph_1_1Preconditioner}{Preconditioner}. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00358}{358}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a8b0765f81cda6b4ae7bf838c772a7c5c}\label{classoomph_1_1MumpsPreconditioner_a8b0765f81cda6b4ae7bf838c772a7c5c} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!MumpsPreconditioner@{MumpsPreconditioner}}
+\index{MumpsPreconditioner@{MumpsPreconditioner}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{MumpsPreconditioner()}{MumpsPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Preconditioner\+::\+Mumps\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00362}{362}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00139}{oomph\+::\+Mumps\+Solver\+::disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{linear__solver_8h_source_l00118}{oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a6a6e572ef67b42c39d8caec548d1d1e0}\label{classoomph_1_1MumpsPreconditioner_a6a6e572ef67b42c39d8caec548d1d1e0} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!````~MumpsPreconditioner@{\texorpdfstring{$\sim$}{\string~}MumpsPreconditioner}}
+\index{````~MumpsPreconditioner@{\texorpdfstring{$\sim$}{\string~}MumpsPreconditioner}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MumpsPreconditioner()}{\string~MumpsPreconditioner()}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Preconditioner\+::\texorpdfstring{$\sim$}{\string~}\+Mumps\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00369}{369}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_ad1ac10549c38f269dcb1045b9f12274e}\label{classoomph_1_1MumpsPreconditioner_ad1ac10549c38f269dcb1045b9f12274e} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!MumpsPreconditioner@{MumpsPreconditioner}}
+\index{MumpsPreconditioner@{MumpsPreconditioner}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{MumpsPreconditioner()}{MumpsPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Preconditioner\+::\+Mumps\+Preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner}{Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a6446ca4fc06bc72412e4beb9b93b8b4d}\label{classoomph_1_1MumpsPreconditioner_a6446ca4fc06bc72412e4beb9b93b8b4d} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Clean up memory -- forward the call to the version in Mumps in its \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} incarnation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00416}{416}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00792}{oomph\+::\+Mumps\+Solver\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_aba2c7f24b787eea660ca007a7d286093}\label{classoomph_1_1MumpsPreconditioner_aba2c7f24b787eea660ca007a7d286093} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
+\index{disable\_doc\_time@{disable\_doc\_time}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_time()}{disable\_doc\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::disable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable the documentation of timings. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00429}{429}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00118}{oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a97049f03654c47ea018f685670d187f2}\label{classoomph_1_1MumpsPreconditioner_a97049f03654c47ea018f685670d187f2} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
+\index{enable\_doc\_time@{enable\_doc\_time}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_time()}{enable\_doc\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::enable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of timings. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00423}{423}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00112}{oomph\+::\+Linear\+Solver\+::enable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a4ad033679d203cdd019429d856483835}\label{classoomph_1_1MumpsPreconditioner_a4ad033679d203cdd019429d856483835} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsPreconditioner}{Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a9fd4ff39efdfb0fe4170d8231cfe47b5}\label{classoomph_1_1MumpsPreconditioner_a9fd4ff39efdfb0fe4170d8231cfe47b5} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function applies Mumps to vector r for (exact) preconditioning, this requires a call to setup(...) first. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00408}{408}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{oomph\+::\+Mumps\+Solver\+::resolve()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a0c6e77943ba7ab4f3e51cddc937af099}\label{classoomph_1_1MumpsPreconditioner_a0c6e77943ba7ab4f3e51cddc937af099} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or \doxylink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00382}{382}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00436}{Solver}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MumpsPreconditioner_a47124b689f4bdc064df026068bb59303}\label{classoomph_1_1MumpsPreconditioner_a47124b689f4bdc064df026068bb59303} 
+\index{oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}!Solver@{Solver}}
+\index{Solver@{Solver}!oomph::MumpsPreconditioner@{oomph::MumpsPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Solver}{Solver}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} oomph\+::\+Mumps\+Preconditioner\+::\+Solver\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the Mumps solver emplyed by this preconditioner 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00436}{436}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00416}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00429}{disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00423}{enable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00362}{Mumps\+Preconditioner()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00408}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00382}{setup()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mumps__solver_8h}{mumps\+\_\+solver.\+h}}\end{DoxyCompactItemize}

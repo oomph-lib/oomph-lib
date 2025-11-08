@@ -12,7 +12,7 @@ the documentation of \c oomph-lib's classes: clicking on the
 hyperlinks associated with a class takes you directly to a 
 detailed description of its inheritance structure and
 its members.
- 
+
 <ul>
 
 <li><a href="../../the_data_structure/html/classes.html"> Class index </a></li>
@@ -1923,5 +1923,5 @@ structure which separates:
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

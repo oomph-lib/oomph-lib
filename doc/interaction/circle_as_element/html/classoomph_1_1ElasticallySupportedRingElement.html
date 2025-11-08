@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ElasticallySupportedRingElement Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html">ElasticallySupportedRingElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1ElasticallySupportedRingElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ElasticallySupportedRingElement Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1GeneralCircle.html" title="GeneralCircle in 2D space.">GeneralCircle</a> "upgraded" to a GeneralisedElement: Circular ring whose position is given by.  
+ <a href="classoomph_1_1ElasticallySupportedRingElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ElasticallySupportedRingElement:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ElasticallySupportedRingElement.png" usemap="#oomph::ElasticallySupportedRingElement_map" alt=""/>
+  <map id="oomph::ElasticallySupportedRingElement_map" name="oomph::ElasticallySupportedRingElement_map">
+<area href="classoomph_1_1GeneralCircle.html" title="GeneralCircle in 2D space." alt="oomph::GeneralCircle" shape="rect" coords="249,56,488,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7e68f18d76acb6297405ca2a38b64898" id="r_a7e68f18d76acb6297405ca2a38b64898"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a7e68f18d76acb6297405ca2a38b64898">ElasticallySupportedRingElement</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="classoomph_1_1GeneralCircle.html#a7149f657c7770fa6312179d3f10da5a9">x_c</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="classoomph_1_1GeneralCircle.html#ae7a8968f7a75a9c9f01df387382db953">y_c</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">r</a>)</td></tr>
+<tr class="memdesc:a7e68f18d76acb6297405ca2a38b64898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Build ring from doubles that describe the geometry: x and y positions of centre and the radius. Initialise stiffness to 1.0. By default, no load is set.  <br /></td></tr>
+<tr class="separator:a7e68f18d76acb6297405ca2a38b64898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3fd2a41155a9d34ab0f43aa8a5deab" id="r_a2b3fd2a41155a9d34ab0f43aa8a5deab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a2b3fd2a41155a9d34ab0f43aa8a5deab">~ElasticallySupportedRingElement</a> ()</td></tr>
+<tr class="memdesc:a2b3fd2a41155a9d34ab0f43aa8a5deab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor:  <br /></td></tr>
+<tr class="separator:a2b3fd2a41155a9d34ab0f43aa8a5deab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1c967080f2a4e6143bcffdcdbc1d735" id="r_ac1c967080f2a4e6143bcffdcdbc1d735"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#ac1c967080f2a4e6143bcffdcdbc1d735">set_load_pt</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Data</a> *<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">load_pt</a>)</td></tr>
+<tr class="memdesc:ac1c967080f2a4e6143bcffdcdbc1d735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pointer to Data object that specifies the "load" on the <a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html" title="GeneralCircle &quot;upgraded&quot; to a GeneralisedElement: Circular ring whose position is given by.">ElasticallySupportedRingElement</a>.  <br /></td></tr>
+<tr class="separator:ac1c967080f2a4e6143bcffdcdbc1d735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a636b98cd51286298efff1e89cd2c1c4f" id="r_a636b98cd51286298efff1e89cd2c1c4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a636b98cd51286298efff1e89cd2c1c4f">load</a> ()</td></tr>
+<tr class="memdesc:a636b98cd51286298efff1e89cd2c1c4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Load" acting on the ring  <br /></td></tr>
+<tr class="separator:a636b98cd51286298efff1e89cd2c1c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af78beb926542b46abbdd3345af8f2e9a" id="r_af78beb926542b46abbdd3345af8f2e9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#af78beb926542b46abbdd3345af8f2e9a">k_stiff</a> ()</td></tr>
+<tr class="memdesc:af78beb926542b46abbdd3345af8f2e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the spring stiffness.  <br /></td></tr>
+<tr class="separator:af78beb926542b46abbdd3345af8f2e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acddd4ff64f173aa2d6c4e651c1c9c319" id="r_acddd4ff64f173aa2d6c4e651c1c9c319"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#acddd4ff64f173aa2d6c4e651c1c9c319">pin_yc</a> ()</td></tr>
+<tr class="memdesc:acddd4ff64f173aa2d6c4e651c1c9c319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin the vertical displacement.  <br /></td></tr>
+<tr class="separator:acddd4ff64f173aa2d6c4e651c1c9c319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad70712dca329430d09d1a905c1362478" id="r_ad70712dca329430d09d1a905c1362478"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#ad70712dca329430d09d1a905c1362478">unpin_yc</a> ()</td></tr>
+<tr class="memdesc:ad70712dca329430d09d1a905c1362478"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpin the vertical displacement.  <br /></td></tr>
+<tr class="separator:ad70712dca329430d09d1a905c1362478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8bf518168d68e8b016e474e76037a49" id="r_ad8bf518168d68e8b016e474e76037a49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#ad8bf518168d68e8b016e474e76037a49">get_residuals</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">residuals</a>)</td></tr>
+<tr class="memdesc:ad8bf518168d68e8b016e474e76037a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual vector (wrapper)  <br /></td></tr>
+<tr class="separator:ad8bf518168d68e8b016e474e76037a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2418f706f5b17a64a5b01b72ccb3b95d" id="r_a2418f706f5b17a64a5b01b72ccb3b95d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a2418f706f5b17a64a5b01b72ccb3b95d">get_jacobian</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">residuals</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">DenseMatrix</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">jacobian</a>)</td></tr>
+<tr class="memdesc:a2418f706f5b17a64a5b01b72ccb3b95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual Vector and element Jacobian matrix (wrapper)  <br /></td></tr>
+<tr class="separator:a2418f706f5b17a64a5b01b72ccb3b95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1GeneralCircle"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1GeneralCircle')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1GeneralCircle.html">oomph::GeneralCircle</a></td></tr>
+<tr class="memitem:aa4847492eeebdc2033c82734d7bcf2f2 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_aa4847492eeebdc2033c82734d7bcf2f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#aa4847492eeebdc2033c82734d7bcf2f2">GeneralCircle</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="classoomph_1_1GeneralCircle.html#a7149f657c7770fa6312179d3f10da5a9">x_c</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="classoomph_1_1GeneralCircle.html#ae7a8968f7a75a9c9f01df387382db953">y_c</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">r</a>)</td></tr>
+<tr class="memdesc:aa4847492eeebdc2033c82734d7bcf2f2 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass x and y-coords of centre and radius (all pinned)  <br /></td></tr>
+<tr class="separator:aa4847492eeebdc2033c82734d7bcf2f2 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdcca2cddb52a51abc693c7d7ba6b173 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_afdcca2cddb52a51abc693c7d7ba6b173"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#afdcca2cddb52a51abc693c7d7ba6b173">GeneralCircle</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Data</a> *<a class="el" href="classoomph_1_1GeneralCircle.html#adf90890d68bd66550926e2611f634470">geom_data_pt</a>)</td></tr>
+<tr class="memdesc:afdcca2cddb52a51abc693c7d7ba6b173 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative constructor: Pass x and y-coords of centre and radius (all as part of Data)  <br /></td></tr>
+<tr class="separator:afdcca2cddb52a51abc693c7d7ba6b173 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba230f7d22d7b116603115952ca50b0 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_a4ba230f7d22d7b116603115952ca50b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a4ba230f7d22d7b116603115952ca50b0">~GeneralCircle</a> ()</td></tr>
+<tr class="memdesc:a4ba230f7d22d7b116603115952ca50b0 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Clean up if necessary.  <br /></td></tr>
+<tr class="separator:a4ba230f7d22d7b116603115952ca50b0 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc120835b4f0c69e7dce7e839db63d1d inherit pub_methods_classoomph_1_1GeneralCircle" id="r_acc120835b4f0c69e7dce7e839db63d1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#acc120835b4f0c69e7dce7e839db63d1d">position</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">zeta</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">r</a>) <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a></td></tr>
+<tr class="memdesc:acc120835b4f0c69e7dce7e839db63d1d inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Vector at Lagrangian coordinate zeta.  <br /></td></tr>
+<tr class="separator:acc120835b4f0c69e7dce7e839db63d1d inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f7f58a7131f80a245007ff0da73f74 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_a94f7f58a7131f80a245007ff0da73f74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a94f7f58a7131f80a245007ff0da73f74">position</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a> &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">t</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">zeta</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">r</a>) <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a></td></tr>
+<tr class="memdesc:a94f7f58a7131f80a245007ff0da73f74 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Vector at Lagrangian coordinate zeta at time level t (t=0: present; t&gt;0: previous level). Steady object, so we simply forward the call to the steady version.  <br /></td></tr>
+<tr class="separator:a94f7f58a7131f80a245007ff0da73f74 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7149f657c7770fa6312179d3f10da5a9 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_a7149f657c7770fa6312179d3f10da5a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a7149f657c7770fa6312179d3f10da5a9">x_c</a> ()</td></tr>
+<tr class="memdesc:a7149f657c7770fa6312179d3f10da5a9 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to x-coordinate of centre of circle.  <br /></td></tr>
+<tr class="separator:a7149f657c7770fa6312179d3f10da5a9 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7a8968f7a75a9c9f01df387382db953 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_ae7a8968f7a75a9c9f01df387382db953"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#ae7a8968f7a75a9c9f01df387382db953">y_c</a> ()</td></tr>
+<tr class="memdesc:ae7a8968f7a75a9c9f01df387382db953 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to y-coordinate of centre of circle.  <br /></td></tr>
+<tr class="separator:ae7a8968f7a75a9c9f01df387382db953 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101fe4789526ebb17796de8219cb4c35 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_a101fe4789526ebb17796de8219cb4c35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a101fe4789526ebb17796de8219cb4c35">R</a> ()</td></tr>
+<tr class="memdesc:a101fe4789526ebb17796de8219cb4c35 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to radius of circle.  <br /></td></tr>
+<tr class="separator:a101fe4789526ebb17796de8219cb4c35 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd69f069bb8042ba972b89940ec1808 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_a7cd69f069bb8042ba972b89940ec1808"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a7cd69f069bb8042ba972b89940ec1808">ngeom_data</a> () <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a></td></tr>
+<tr class="memdesc:a7cd69f069bb8042ba972b89940ec1808 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of Data does the shape of the object depend on?  <br /></td></tr>
+<tr class="separator:a7cd69f069bb8042ba972b89940ec1808 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf90890d68bd66550926e2611f634470 inherit pub_methods_classoomph_1_1GeneralCircle" id="r_adf90890d68bd66550926e2611f634470"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#adf90890d68bd66550926e2611f634470">geom_data_pt</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a> &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">j</a>)</td></tr>
+<tr class="memdesc:adf90890d68bd66550926e2611f634470 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the j-th Data item that the object's shape depends on.  <br /></td></tr>
+<tr class="separator:adf90890d68bd66550926e2611f634470 inherit pub_methods_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6d763f2ce0c930e7a2201e995290f169" id="r_a6d763f2ce0c930e7a2201e995290f169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a6d763f2ce0c930e7a2201e995290f169">fill_in_generic_residual_contribution</a> (<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">residuals</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">DenseMatrix</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;<a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">jacobian</a>, <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">flag</a>)</td></tr>
+<tr class="memdesc:a6d763f2ce0c930e7a2201e995290f169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1)  <br /></td></tr>
+<tr class="separator:a6d763f2ce0c930e7a2201e995290f169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab6036a4f4e1434a2d068f6584f7c46e6" id="r_ab6036a4f4e1434a2d068f6584f7c46e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#ab6036a4f4e1434a2d068f6584f7c46e6">K_stiff</a></td></tr>
+<tr class="memdesc:ab6036a4f4e1434a2d068f6584f7c46e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiffness of the ring's "elastic" support.  <br /></td></tr>
+<tr class="separator:ab6036a4f4e1434a2d068f6584f7c46e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a800f0a57477dc63df13aaea5c99a5f30" id="r_a800f0a57477dc63df13aaea5c99a5f30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a800f0a57477dc63df13aaea5c99a5f30">External_load_index</a></td></tr>
+<tr class="memdesc:a800f0a57477dc63df13aaea5c99a5f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the location of the load Data in the element's array of external data.  <br /></td></tr>
+<tr class="separator:a800f0a57477dc63df13aaea5c99a5f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6804e3aa5b62db4848416b2b69e89fe7" id="r_a6804e3aa5b62db4848416b2b69e89fe7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a6804e3aa5b62db4848416b2b69e89fe7">Internal_geometric_data_index</a></td></tr>
+<tr class="memdesc:a6804e3aa5b62db4848416b2b69e89fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the location of the geometric Data in the element's array of internal data.  <br /></td></tr>
+<tr class="separator:a6804e3aa5b62db4848416b2b69e89fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98151ae912af71c1a78ddae80c4fbb04" id="r_a98151ae912af71c1a78ddae80c4fbb04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html#a98151ae912af71c1a78ddae80c4fbb04">Load_data_has_been_set</a></td></tr>
+<tr class="memdesc:a98151ae912af71c1a78ddae80c4fbb04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate that load data has been set.  <br /></td></tr>
+<tr class="separator:a98151ae912af71c1a78ddae80c4fbb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1GeneralCircle"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1GeneralCircle')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1GeneralCircle.html">oomph::GeneralCircle</a></td></tr>
+<tr class="memitem:a4a707f37b32d447dbe965177e442aa76 inherit pro_attribs_classoomph_1_1GeneralCircle" id="r_a4a707f37b32d447dbe965177e442aa76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a4a707f37b32d447dbe965177e442aa76">Geom_data_pt</a></td></tr>
+<tr class="memdesc:a4a707f37b32d447dbe965177e442aa76 inherit pro_attribs_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to Data items that affects the object's shape.  <br /></td></tr>
+<tr class="separator:a4a707f37b32d447dbe965177e442aa76 inherit pro_attribs_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6772cb425079b3afd2479663ddb0cb81 inherit pro_attribs_classoomph_1_1GeneralCircle" id="r_a6772cb425079b3afd2479663ddb0cb81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralCircle.html#a6772cb425079b3afd2479663ddb0cb81">Must_clean_up</a></td></tr>
+<tr class="memdesc:a6772cb425079b3afd2479663ddb0cb81 inherit pro_attribs_classoomph_1_1GeneralCircle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do I need to clean up?  <br /></td></tr>
+<tr class="separator:a6772cb425079b3afd2479663ddb0cb81 inherit pro_attribs_classoomph_1_1GeneralCircle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classoomph_1_1GeneralCircle.html" title="GeneralCircle in 2D space.">GeneralCircle</a> "upgraded" to a GeneralisedElement: Circular ring whose position is given by. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = X_c + R \cos(\zeta)  \]" src="form_23.png" width="99" height="14"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = Y_c + R \sin(\zeta)  \]" src="form_24.png" width="93" height="14"/>
+</p>
+<p> The ring's vertical position <img class="formulaInl" alt="$ Y_c $" src="form_15.png" width="13" height="13"/> is determined by "pseudo elasticity": </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ 0 = f_{load} - Y_c \ k_{stiff} \]" src="form_25.png" width="110" height="14"/>
+</p>
+<p> This simulates the case where the centre of the ring is mounted on an elastic spring of stiffness <img class="formulaInl" alt="$ k_{stiff} $" src="form_10.png" width="30" height="14"/> and loaded by the force <img class="formulaInl" alt="$ f_{load}. $" src="form_26.png" width="28" height="13"/> The "load" is specified by the Data object <code><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a" title="Demonstrate how to solve 2D Poisson problem in deformable fish-shaped domain with mesh adaptation.">load_pt()</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00053">53</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7e68f18d76acb6297405ca2a38b64898" name="a7e68f18d76acb6297405ca2a38b64898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e68f18d76acb6297405ca2a38b64898">&#9670;&#160;</a></span>ElasticallySupportedRingElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ElasticallySupportedRingElement::ElasticallySupportedRingElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>x_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>y_c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">const</a> <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Build ring from doubles that describe the geometry: x and y positions of centre and the radius. Initialise stiffness to 1.0. By default, no load is set. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00062">62</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, <a class="el" href="circle_8h_source.html#l00224">oomph::GeneralCircle::Geom_data_pt</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00264">Internal_geometric_data_index</a>, and <a class="el" href="circle_8h_source.html#l00227">oomph::GeneralCircle::Must_clean_up</a>.</p>
+
+</div>
+</div>
+<a id="a2b3fd2a41155a9d34ab0f43aa8a5deab" name="a2b3fd2a41155a9d34ab0f43aa8a5deab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3fd2a41155a9d34ab0f43aa8a5deab">&#9670;&#160;</a></span>~ElasticallySupportedRingElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">virtual</a> oomph::ElasticallySupportedRingElement::~ElasticallySupportedRingElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00086">86</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6d763f2ce0c930e7a2201e995290f169" name="a6d763f2ce0c930e7a2201e995290f169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d763f2ce0c930e7a2201e995290f169">&#9670;&#160;</a></span>fill_in_generic_residual_contribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::fill_in_generic_residual_contribution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">DenseMatrix</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a>&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">195</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00260">External_load_index</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00264">Internal_geometric_data_index</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00256">K_stiff</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00126">load()</a>, and <a class="el" href="circle_8h_source.html#l00208">oomph::GeneralCircle::y_c()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00177">get_jacobian()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00165">get_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a2418f706f5b17a64a5b01b72ccb3b95d" name="a2418f706f5b17a64a5b01b72ccb3b95d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2418f706f5b17a64a5b01b72ccb3b95d">&#9670;&#160;</a></span>get_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::get_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">DenseMatrix</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual Vector and element Jacobian matrix (wrapper) </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00177">177</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>.</p>
+
+</div>
+</div>
+<a id="ad8bf518168d68e8b016e474e76037a49" name="ad8bf518168d68e8b016e474e76037a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8bf518168d68e8b016e474e76037a49">&#9670;&#160;</a></span>get_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::get_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Vector</a>&lt; <a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual vector (wrapper) </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00165">165</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>.</p>
+
+</div>
+</div>
+<a id="af78beb926542b46abbdd3345af8f2e9a" name="af78beb926542b46abbdd3345af8f2e9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78beb926542b46abbdd3345af8f2e9a">&#9670;&#160;</a></span>k_stiff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> &amp; oomph::ElasticallySupportedRingElement::k_stiff </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the spring stiffness. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00142">142</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="circle__as__generalised__element_8h_source.html#l00256">K_stiff</a>.</p>
+
+</div>
+</div>
+<a id="a636b98cd51286298efff1e89cd2c1c4f" name="a636b98cd51286298efff1e89cd2c1c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a636b98cd51286298efff1e89cd2c1c4f">&#9670;&#160;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> oomph::ElasticallySupportedRingElement::load </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Load" acting on the ring </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00126">126</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00260">External_load_index</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00267">Load_data_has_been_set</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>.</p>
+
+</div>
+</div>
+<a id="acddd4ff64f173aa2d6c4e651c1c9c319" name="acddd4ff64f173aa2d6c4e651c1c9c319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acddd4ff64f173aa2d6c4e651c1c9c319">&#9670;&#160;</a></span>pin_yc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::pin_yc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pin the vertical displacement. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00146">146</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00264">Internal_geometric_data_index</a>.</p>
+
+</div>
+</div>
+<a id="ac1c967080f2a4e6143bcffdcdbc1d735" name="ac1c967080f2a4e6143bcffdcdbc1d735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1c967080f2a4e6143bcffdcdbc1d735">&#9670;&#160;</a></span>set_load_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::set_load_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">Data</a> *&#160;</td>
+          <td class="paramname"><em>load_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set pointer to Data object that specifies the "load" on the <a class="el" href="classoomph_1_1ElasticallySupportedRingElement.html" title="GeneralCircle &quot;upgraded&quot; to a GeneralisedElement: Circular ring whose position is given by.">ElasticallySupportedRingElement</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00096">96</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00260">External_load_index</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00267">Load_data_has_been_set</a>.</p>
+
+</div>
+</div>
+<a id="ad70712dca329430d09d1a905c1362478" name="ad70712dca329430d09d1a905c1362478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad70712dca329430d09d1a905c1362478">&#9670;&#160;</a></span>unpin_yc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">void</a> oomph::ElasticallySupportedRingElement::unpin_yc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unpin the vertical displacement. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00155">155</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="algebraic__free__boundary__poisson_8cc_source.html#l00460">demo_fish_poisson()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00264">Internal_geometric_data_index</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a800f0a57477dc63df13aaea5c99a5f30" name="a800f0a57477dc63df13aaea5c99a5f30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a800f0a57477dc63df13aaea5c99a5f30">&#9670;&#160;</a></span>External_load_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a> oomph::ElasticallySupportedRingElement::External_load_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of the location of the load Data in the element's array of external data. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00260">260</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00126">load()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00096">set_load_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a6804e3aa5b62db4848416b2b69e89fe7" name="a6804e3aa5b62db4848416b2b69e89fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6804e3aa5b62db4848416b2b69e89fe7">&#9670;&#160;</a></span>Internal_geometric_data_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">unsigned</a> oomph::ElasticallySupportedRingElement::Internal_geometric_data_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of the location of the geometric Data in the element's array of internal data. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00264">264</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00062">ElasticallySupportedRingElement()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>, <a class="el" href="circle__as__generalised__element_8h_source.html#l00146">pin_yc()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00155">unpin_yc()</a>.</p>
+
+</div>
+</div>
+<a id="ab6036a4f4e1434a2d068f6584f7c46e6" name="ab6036a4f4e1434a2d068f6584f7c46e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6036a4f4e1434a2d068f6584f7c46e6">&#9670;&#160;</a></span>K_stiff</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">double</a> oomph::ElasticallySupportedRingElement::K_stiff</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stiffness of the ring's "elastic" support. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00256">256</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00195">fill_in_generic_residual_contribution()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00142">k_stiff()</a>.</p>
+
+</div>
+</div>
+<a id="a98151ae912af71c1a78ddae80c4fbb04" name="a98151ae912af71c1a78ddae80c4fbb04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98151ae912af71c1a78ddae80c4fbb04">&#9670;&#160;</a></span>Load_data_has_been_set</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="algebraic__free__boundary__poisson_8cc.html#abb923e967929c29b3a4fa1693604952a">bool</a> oomph::ElasticallySupportedRingElement::Load_data_has_been_set</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to indicate that load data has been set. </p>
+
+<p class="definition">Definition at line <a class="el" href="circle__as__generalised__element_8h_source.html#l00267">267</a> of file <a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circle__as__generalised__element_8h_source.html#l00126">load()</a>, and <a class="el" href="circle__as__generalised__element_8h_source.html#l00096">set_load_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="circle__as__generalised__element_8h_source.html">circle_as_generalised_element.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Nov 8 2025 15:09:32
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

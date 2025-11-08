@@ -1,0 +1,1114 @@
+\doxysection{tetgen\+\_\+mesh.\+template.\+cc}
+\hypertarget{tetgen__mesh_8template_8cc_source}{}\label{tetgen__mesh_8template_8cc_source}\index{tetgen\_mesh.template.cc@{tetgen\_mesh.template.cc}}
+\mbox{\hyperlink{tetgen__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_TETGEN\_MESH\_TEMPLATE\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00027}00027\ \textcolor{preprocessor}{\#define\ OOMPH\_TETGEN\_MESH\_TEMPLATE\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_TETGEN\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00030}00030\ \textcolor{preprocessor}{\#error\ \_\_FILE\_\_\ should\ only\ be\ included\ from\ tetgen\_mesh.h.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00031}00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ OOMPH\_TETGEN\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}generic/Telements.h"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}generic/map\_matrix.h"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00038}00038\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00039}00039\ \{\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00040}00040\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00041}00041\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00042}00042\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00043}00043\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00044}00044\ \ \ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00045}00045\ \textcolor{comment}{\ \ ///\ Build\ unstructured\ tet\ mesh\ based\ on\ output\ from\ scaffold}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00046}00046\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00047}00047\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00048}\mbox{\hyperlink{classoomph_1_1TetgenMesh_a3b0d214cb14243f7ecc2c82e6641930b}{00048}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a3b0d214cb14243f7ecc2c82e6641930b}{TetgenMesh<ELEMENT>::build\_from\_scaffold}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}},}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\_attributes}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00050}00050\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ Mesh\ can\ only\ be\ built\ with\ 3D\ Telements.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00052}00052\ \ \ \ \ MeshChecker::assert\_geometric\_element<TElementGeometricBase,\ ELEMENT>(3);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ Create\ space\ for\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nelem}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nelem}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Create\ space\ for\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nnode\_scaffold}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nnode\_scaffold}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Set\ number\ of\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>nboundary();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00064}00064\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{set\_nboundary}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00065}00065\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Boundary\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00066}00066\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Face\_index\_at\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00068}00068\ \ \ \ \ \textcolor{comment}{//\ If\ we\ have\ different\ regions,\ then\ resize\ the\ region}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00069}00069\ \ \ \ \ \textcolor{comment}{//\ information}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\_attributes}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00071}00071\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00072}00072\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Boundary\_region\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00073}00073\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Face\_index\_region\_at\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Build\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nelem}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00079}00079\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Element\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{e}}]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{ELEMENT}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00082}00082\ \ \ \ \ \textcolor{comment}{//\ Number\ of\ nodes\ per\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00083}00083\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nnod\_el}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>finite\_element\_pt(0)-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00085}00085\ \ \ \ \ \textcolor{comment}{//\ Setup\ map\ to\ check\ the\ (pseudo-\/)global\ node\ number}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00086}00086\ \ \ \ \ \textcolor{comment}{//\ Nodes\ whose\ number\ is\ zero\ haven't\ been\ copied\ across}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00087}00087\ \ \ \ \ \textcolor{comment}{//\ into\ the\ mesh\ yet.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00088}00088\ \ \ \ \ std::map<Node*,\ unsigned>\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{global\_number}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00089}00089\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00091}00091\ \ \ \ \ \textcolor{comment}{//\ Map\ of\ element\ attribute\ pairs}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00092}00092\ \ \ \ \ std::map<double,\ Vector<FiniteElement*>>\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{element\_attribute\_map}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ in\ scaffold\ mesh,\ visit\ their\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nelem}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00097}00097\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00098}00098\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nnod\_el}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00099}00099\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00101}00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{scaffold\_node\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>finite\_element\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ (pseudo-\/)global\ node\ number\ in\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (It's\ zero\ [=default]\ if\ not\ visited\ this\ one\ yet)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j\_global}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_number}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{scaffold\_node\_pt}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Haven't\ done\ this\ one\ yet}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j\_global}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00109}00109\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ set\ of\ mesh\ boundaries\ that\ this}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ scaffold\ node\ occupies;\ NULL\ if\ the\ node\ is\ not\ on\ any\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{boundaries\_pt}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{scaffold\_node\_pt}}-\/>get\_boundaries\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundaries\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Is\ it\ on\ boundaries?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundaries\_pt}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ new\ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>construct\_boundary\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Give\ it\ a\ number\ (not\ necessarily\ the\ global\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ number\ in\ the\ scaffold\ mesh\ -\/-\/\ we\ just\ need\ something}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ track...)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}++;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_number}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{scaffold\_node\_pt}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{global\_count}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::set<unsigned>::iterator\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundaries\_pt}}-\/>begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundaries\_pt}}-\/>end();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{it}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{add\_boundary\_node}}(*\mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ new\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>construct\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Give\ it\ a\ number\ (not\ necessarily\ the\ global\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ number\ in\ the\ scaffold\ mesh\ -\/-\/\ we\ just\ need\ something}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ track...)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}++;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_number}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{scaffold\_node\_pt}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{global\_count}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ new\ node,\ created\ using\ the\ NEW\ element's\ construct\_node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ function\ into\ global\ storage,\ using\ the\ same\ global}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ node\ number\ that\ we've\ just\ associated\ with\ the}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ corresponding\ node\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}\ -\/\ 1]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Assign\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}\ -\/\ 1]-\/>x(0)\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{scaffold\_node\_pt}}-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}\ -\/\ 1]-\/>x(1)\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{scaffold\_node\_pt}}-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{global\_count}}\ -\/\ 1]-\/>x(2)\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{scaffold\_node\_pt}}-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00159}00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ one\ has\ already\ been\ done:\ Copy\ across}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00162}00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j\_global}}\ -\/\ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00164}00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00165}00165\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00167}00167\ \ \ \ \ \ \ \textcolor{comment}{//\ Store\ the\ attributes\ in\ the\ map}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00168}00168\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\_attributes}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00169}00169\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00170}00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{element\_attribute\_map}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>element\_attribute(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})].push\_back(}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00172}00172\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00175}00175\ \ \ \ \ \textcolor{comment}{//\ Now\ let's\ construct\ lists}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00176}00176\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ number\ of\ attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00177}00177\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\_attributes}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00179}00179\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_attribute}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{element\_attribute\_map}}.size();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00180}00180\ \ \ \ \ \ \ \textcolor{comment}{//\ There\ are\ n\_attribute\ different\ regions}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00181}00181\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Region\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_attribute}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00182}00182\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Region\_attribute}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_attribute}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00183}00183\ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ vectors\ in\ the\ map\ over\ to\ our\ internal\ storage}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00184}00184\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00185}00185\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::map<\textcolor{keywordtype}{double},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector<FiniteElement*>}}>\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{::iterator}}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{element\_attribute\_map}}.begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{element\_attribute\_map}}.end();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{it}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00189}00189\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00190}00190\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Region\_attribute}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{count}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}-\/>first;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00191}00191\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{count}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}-\/>second;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00192}00192\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{count}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00193}00193\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00194}00194\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00196}00196\ \ \ \ \ \textcolor{comment}{//\ At\ this\ point\ we've\ created\ all\ the\ elements\ and}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00197}00197\ \ \ \ \ \textcolor{comment}{//\ created\ their\ vertex\ nodes.\ Now\ we\ need\ to\ create}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ the\ additional\ (midside\ and\ internal)\ nodes!}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00199}00199\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{boundary\_id}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00201}00201\ \ \ \ \ \textcolor{comment}{//\ Get\ number\ of\ nodes\ along\ element\ edge\ and\ dimension\ of\ element\ (3)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00202}00202\ \ \ \ \ \textcolor{comment}{//\ from\ first\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00203}00203\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(0)-\/>nnode\_1d();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ At\ the\ moment\ we're\ only\ able\ to\ deal\ with\ nnode\_1d=2\ or\ 3.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ !=\ 2)\ \&\&\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ !=\ 3))}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00207}00207\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00208}00208\ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00209}00209\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}Mesh\ generation\ from\ tetgen\ currently\ only\ works\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00210}00210\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}for\ nnode\_1d\ =\ 2\ or\ 3.\ You're\ trying\ to\ use\ it\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00211}00211\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}for\ nnode\_1d="{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00213}00213\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00214}00214\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}.str(),\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ Spatial\ dimension\ of\ element\ =\ number\ of\ local\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00218}00218\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{dim}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(0)-\/>dim();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00220}00220\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ the\ local\ coordinate\ of\ the\ new\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00221}00221\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{s}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dim}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00223}00223\ \ \ \ \ \textcolor{comment}{//\ Get\ number\ of\ nodes\ in\ the\ element\ from\ first\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(0)-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ each\ global\ edge\ of\ the\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00227}00227\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_global\_edge}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>nglobal\_edge();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00228}00228\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector<Vector<Node*>}}>\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nodes\_on\_global\_edge}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_global\_edge}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00230}00230\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ each\ global\ face\ of\ the\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00231}00231\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_global\_face}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>nglobal\_face();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00232}00232\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector<Vector<Node*>}}>\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nodes\_on\_global\_face}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_global\_face}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00234}00234\ \ \ \ \ \textcolor{comment}{//\ Map\ storing\ the\ mid-\/side\ of\ an\ edge;\ edge\ identified\ by}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ pointers\ to\ vertex\ nodes\ in\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00236}00236\ \ \ \ \ \textcolor{comment}{//\ MapMatrix<Node*,Node*>\ central\_edge\_node\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00237}00237\ \ \ \ \ \textcolor{comment}{//\ Node*\ edge\_node1\_pt=0;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00238}00238\ \ \ \ \ \textcolor{comment}{//\ Node*\ edge\_node2\_pt=0;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00240}00240\ \ \ \ \ \textcolor{comment}{//\ Map\ storing\ the\ mid\ point\ of\ a\ face;\ face\ identified\ by}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00241}00241\ \ \ \ \ \textcolor{comment}{//\ set\ of\ pointers\ to\ vertex\ nodes\ in\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00242}00242\ \ \ \ \ \textcolor{comment}{//\ std::map<std::set<Node*>,Node*>\ central\_face\_node\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00243}00243\ \ \ \ \ \textcolor{comment}{//\ std::set<Node*>\ face\_nodes\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ Mapping\ of\ Tetgen\ faces\ to\ face\ nodes\ in\ the\ enriched\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00246}00246\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_map}}[4]\ =\ \{1,\ 0,\ 2,\ 3\};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00248}00248\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ the\ faces\ shared\ by\ the\ edges}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00249}00249\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faces\_on\_edge}}[6][2]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00250}00250\ \ \ \ \ \ \ \{0,\ 1\},\ \{0,\ 2\},\ \{1,\ 2\},\ \{0,\ 3\},\ \{2,\ 3\},\ \{1,\ 3\}\};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00252}00252\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00253}00253\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{nelem}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00254}00254\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00255}00255\ \ \ \ \ \ \ \textcolor{comment}{//\ Cache\ pointers\ to\ the\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00256}00256\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{FiniteElement}}*\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00257}00257\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{FiniteElement}}*\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{tmp\_elem\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>finite\_element\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00259}00259\ \ \ \ \ \ \ \textcolor{comment}{//\ The\ number\ of\ edge\ nodes\ is\ 4\ +\ 6*(n\_node1d-\/2)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00260}00260\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge\_node}}\ =\ 4\ +\ 6\ *\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ -\/\ 2);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00262}00262\ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ loop\ over\ the\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00263}00263\ \ \ \ \ \ \ \textcolor{comment}{//\ assuming\ that\ the\ numbering\ scheme\ is\ the\ same\ as\ the\ triangles}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00264}00264\ \ \ \ \ \ \ \textcolor{comment}{//\ which\ puts\ edge\ nodes\ in\ ascending\ order.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00265}00265\ \ \ \ \ \ \ \textcolor{comment}{//\ We\ don't\ have\ any\ higher\ than\ quadratic\ at\ the\ moment,\ so\ it's}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00266}00266\ \ \ \ \ \ \ \textcolor{comment}{//\ a\ bit\ academic\ really.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00268}00268\ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ bother\ if\ we\ actually\ have\ some\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00269}00269\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge\_node}}\ >\ 4)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00270}00270\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ from\ node\ number\ 4}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ edges}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ <\ 6;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00276}00276\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ global\ edge\ index}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_index}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>edge\_index(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ the\ intersection\ of\ the\ appropriate\ faces\ to\ determine}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ whether\ the\ boundaries\ on\ which\ an\ edge\ lies}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{edge\_boundaries}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ <\ 2;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_boundary\_id}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>face\_boundary(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faces\_on\_edge}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}][\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_boundary\_id}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_boundaries}}.insert(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_boundary\_id}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ nodes\ on\ the\ edge\ have\ not\ been\ allocated,\ construct\ them}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_edge}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_index}}].\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{size}}()\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ loop\ over\ the\ nodes\ on\ the\ edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j2}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j2}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ -\/\ 2;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j2}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ the\ new\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ edge\ is\ on\ a\ boundary,\ determined\ from\ the}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ scaffold\ mesh,\ construct\ a\ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ use\ of\ the\ scaffold\ mesh's\ edge\_boundary\ data\ structure}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ensures\ that\ a\ boundary\ node\ is\ created,\ even\ if\ the\ faces\ of}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ current\ element\ do\ not\ lie\ on\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>edge\_boundary(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_index}})\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>construct\_boundary\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ boundaries\ in\ the\ set,}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ remembering\ to\ subtract\ one\ to\ get\ to\ the\ oomph-\/lib\ numbering}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ scheme}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::set<unsigned>::iterator\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_boundaries}}.begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_boundaries}}.end();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{it}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{add\_boundary\_node}}((*\mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}})\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ construct\ a\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>construct\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ local\ coordinates\ of\ the\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>local\_coordinate\_of\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ exiting\ and}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{dim}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}-\/>x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{tmp\_elem\_pt}}-\/>interpolated\_x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ newly\ created\ node\ to\ the\ global\ node\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ the\ edge\ index}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_edge}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{edge\_index}}].push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ the\ local\ node\ number}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ end\ of\ loop\ over\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ just\ set\ the\ pointers\ (orientation\ assumed\ the\ same)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j2}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j2}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node\_1d}}\ -\/\ 2;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j2}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_edge}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{edge\_index}}][\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j2}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ It\ is\ possible\ that\ the\ edge\ may\ be\ on\ additional\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ through\ another\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So\ add\ again\ (note\ that\ this\ function\ will\ not\ add\ to}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ boundaries\ twice)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::set<unsigned>::iterator\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_boundaries}}.begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{edge\_boundaries}}.end();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{it}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{add\_boundary\_node}}((*\mbox{\hyperlink{classoomph_1_1TetgenMesh}{it}})\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}));}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00364}00364\ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ edges}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Deal\ with\ enriched\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_node}}\ ==\ 15)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00368}00368\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ loop\ over\ the\ faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ <\ 4;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ boundary\ id\ of\ the\ face\ (need\ to\ map\ between\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ numbers\ and\ the\ face)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>face\_boundary(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_map}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ global\ face\ index\ (need\ to\ map\ between\ node\ numbers\ and}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ face)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_index}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>face\_index(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_map}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ nodes\ on\ the\ face\ have\ not\ been\ allocated}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_face}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{face\_index}}].\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{size}}()\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ the\ new\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ face\ is\ on\ a\ boundary,\ construct\ a\ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>construct\_boundary\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{add\_boundary\_node}}(boundary\_id\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ construct\ a\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>construct\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ local\ coordinates\ of\ the\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>local\_coordinate\_of\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ exiting\ and}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{dim}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}-\/>x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{tmp\_elem\_pt}}-\/>interpolated\_x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ newly\ created\ node\ to\ the\ global\ node\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ the\ face\ index}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_face}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{face\_index}}].push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ the\ local\ node\ number}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ just\ set\ the\ single\ node\ from\ the\ face\ element}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>node\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{nodes\_on\_global\_face}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{face\_index}}][0];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ end\ of\ loop\ over\ faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Construct\ the\ element's\ central\ node,\ which\ is\ not\ on\ a\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{finite\_element\_pt}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}})-\/>construct\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Node\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ local\ coordinates\ of\ the\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}}-\/>local\_coordinate\_of\_node(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ existing}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{dim}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{new\_node\_pt}}-\/>x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{tmp\_elem\_pt}}-\/>interpolated\_x(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00441}00441\ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ enriched\ case}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00443}00443\ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ case\ for\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00445}00445\ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ loop\ over\ the\ faces\ to\ setup\ the\ information\ about\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00446}00446\ \ \ \ \ \ \ \textcolor{comment}{//\ adjacent\ to\ the\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00447}00447\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}}\ <\ 4;\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{j}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00448}00448\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00449}00449\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ boundary\ id\ of\ the\ face}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00450}00450\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>face\_boundary(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}},\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00452}00452\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00453}00453\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Boundary\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ -\/\ 1].push\_back(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Need\ to\ put\ a\ shift\ in\ here\ because\ of\ an\ inconsistent\ naming}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convention\ between\ tetgen\ and\ our\ faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tetgen\ Face\ 0\ is\ our\ Face\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tetgen\ Face\ 1\ is\ our\ Face\ 2}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tetgen\ Face\ 2\ is\ our\ Face\ 1}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tetgen\ Face\ 3\ is\ our\ Face\ 0}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Face\_index\_at\_boundary}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ -\/\ 1].push\_back(3\ -\/\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ using\ regions\ set\ up\ the\ boundary\ information}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\_attributes}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Element\ adjacent\ to\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Boundary\_region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ -\/\ 1]}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>element\_attribute(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}))]}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{push\_back}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{elem\_pt}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Need\ to\ put\ a\ shift\ in\ here\ because\ of\ an\ inconsistent\ naming}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convention\ between\ triangle\ and\ face\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Face\_index\_region\_at\_boundary}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\_id}}\ -\/\ 1]}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\_mesh\_pt}}-\/>element\_attribute(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{e}}))]}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{push\_back}}(3\ -\/\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{j}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00478}00478\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00479}00479\ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00480}00480\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00481}00481\ \ \ \ \ \ \ \textcolor{comment}{//\ Lookup\ scheme\ has\ now\ been\ setup}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00482}00482\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Lookup\_for\_elements\_next\_boundary\_is\_setup}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00484}00484\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ /*}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00485}00485\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00486}00486\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ //For\ standard\ quadratic\ elements\ all\ nodes\ are\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00487}00487\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ unsigned\ n\_vertex\_and\_edge\_node\ =\ n\_node;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00488}00488\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ //If\ we\ have\ enriched\ elements,\ there\ are\ only\ 10\ vertex\ and\ edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00489}00489\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ nodes\ if(n\_node==15)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00490}00490\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00491}00491\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //There\ are\ only\ 10\ vertex\ and\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00492}00492\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ n\_vertex\_and\_edge\_node\ =\ 10;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00493}00493\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00495}00495\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ //\ Loop\ over\ the\ new\ (edge)\ nodes\ in\ the\ element\ and\ create\ them.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00496}00496\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ for(unsigned\ j=4;j<n\_vertex\_and\_edge\_node;j++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00497}00497\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00499}00499\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ Figure\ out\ edge\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00500}00500\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ switch(j)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00501}00501\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00503}00503\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 4\ is\ between\ nodes\ 0\ and\ 1}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00504}00504\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 4:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00506}00506\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00507}00507\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00508}00508\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00510}00510\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 5\ is\ between\ nodes\ 0\ and\ 2}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00511}00511\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 5:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00512}00512\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00513}00513\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00514}00514\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00515}00515\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00517}00517\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 6\ is\ between\ nodes\ 0\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00518}00518\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 6:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00520}00520\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00521}00521\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00522}00522\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00524}00524\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 7\ is\ between\ nodes\ 1\ and\ 2}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00525}00525\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 7:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00527}00527\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00528}00528\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00529}00529\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00531}00531\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 8\ is\ between\ nodes\ 2\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00532}00532\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 8:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00533}00533\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00534}00534\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00535}00535\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00536}00536\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00538}00538\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Node\ 9\ is\ between\ nodes\ 1\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00539}00539\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ case\ 9:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00541}00541\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node1\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00542}00542\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ edge\_node2\_pt=Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00543}00543\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00544}00544\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00545}00545\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00547}00547\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //Error}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00548}00548\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ default:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00550}00550\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ throw\ OomphLibError("{}More\ than\ ten\ edge\ nodes\ in\ Tet\ Element"{},}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00551}00551\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00552}00552\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00553}00553\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00555}00555\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ Do\ we\ need\ a\ boundary\ node?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00556}00556\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ bool\ need\_boundary\_node=false;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00558}00558\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ hierher\ At\ some\ point\ fine\ tune\ via\ intersection\ of\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00559}00559\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ sets\ if}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00560}00560\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ (edge\_node1\_pt-\/>is\_on\_boundary()\&\&edge\_node2\_pt-\/>is\_on\_boundary())}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00561}00561\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00562}00562\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ need\_boundary\_node=true;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00563}00563\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00565}00565\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ Do\ we\ need\ a\ new\ node?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00566}00566\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (central\_edge\_node\_pt(edge\_node1\_pt,edge\_node2\_pt)==0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00567}00567\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00568}00568\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ Node*\ new\_node\_pt=0;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00569}00569\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00570}00570\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Create\ new\ \ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00571}00571\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (need\_boundary\_node)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00572}00572\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00573}00573\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ new\_node\_pt=finite\_element\_pt(e)-\/>}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00574}00574\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ construct\_boundary\_node(j,time\_stepper\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00575}00575\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00576}00576\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Create\ new\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00577}00577\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00578}00578\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00579}00579\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ new\_node\_pt=finite\_element\_pt(e)-\/>}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00580}00580\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ construct\_node(j,time\_stepper\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00581}00581\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00582}00582\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ Node\_pt.push\_back(new\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00583}00583\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00584}00584\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Now\ indicate\ existence\ of\ newly\ created\ mideside\ node\ in\ map}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00585}00585\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ central\_edge\_node\_pt(edge\_node1\_pt,edge\_node2\_pt)=new\_node\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00586}00586\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ central\_edge\_node\_pt(edge\_node2\_pt,edge\_node1\_pt)=new\_node\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00588}00588\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ What\ are\ the\ node's\ local\ coordinates?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00589}00589\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ finite\_element\_pt(e)-\/>local\_coordinate\_of\_node(j,s);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00591}00591\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ existing}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00592}00592\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ and\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00593}00593\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ for(unsigned\ i=0;i<dim;i++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00594}00594\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00595}00595\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ new\_node\_pt-\/>x(i)=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00596}00596\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>interpolated\_x(s,i);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00597}00597\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00598}00598\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00599}00599\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00600}00600\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00601}00601\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Set\ pointer\ to\ the\ existing\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00602}00602\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ finite\_element\_pt(e)-\/>node\_pt(j)=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00603}00603\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ central\_edge\_node\_pt(edge\_node1\_pt,edge\_node2\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00604}00604\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00606}00606\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}\ //\ end\ of\ loop\ over\ new\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00607}00607\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00608}00608\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ //Need\ to\ sort\ out\ the\ face\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00609}00609\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ if(n\_node==15)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00610}00610\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00611}00611\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ Loop\ over\ the\ new\ (face)\ nodes\ in\ the\ element\ and\ create\ them.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00612}00612\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for(unsigned\ j=10;j<14;j++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00613}00613\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00614}00614\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //Empty\ the\ set\ of\ face\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00615}00615\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ face\_nodes\_pt.clear();}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00616}00616\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Figure\ out\ face\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00617}00617\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ switch(j)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00618}00618\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00620}00620\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Node\ 10\ is\ between\ nodes\ 0\ and\ 1\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00621}00621\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ case\ 10:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00622}00622\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00623}00623\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00624}00624\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00625}00625\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00626}00626\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00627}00627\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00628}00628\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Node\ 11\ is\ between\ nodes\ 0\ and\ 1\ and\ 2}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00629}00629\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ case\ 11:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00630}00630\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00631}00631\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00632}00632\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00633}00633\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00634}00634\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00635}00635\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00636}00636\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Node\ 12\ is\ between\ nodes\ 0\ and\ 2\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00637}00637\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ case\ 12:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00638}00638\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00639}00639\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(0));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00640}00640\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00641}00641\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00642}00642\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00644}00644\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Node\ 13\ is\ between\ nodes\ 1\ and\ 2\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00645}00645\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ case\ 13:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00646}00646\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00647}00647\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(1));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00648}00648\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(2));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00649}00649\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ face\_nodes\_pt.insert(Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>node\_pt(3));}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00650}00650\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00651}00651\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00652}00652\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //Error}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00653}00653\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ default:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00654}00654\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00655}00655\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ throw\ OomphLibError("{}More\ than\ four\ face\ nodes\ in\ Tet\ Element"{},}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00656}00656\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00657}00657\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00658}00658\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00659}00659\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00660}00660\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Do\ we\ need\ a\ boundary\ node?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00661}00661\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ bool\ need\_boundary\_node=false;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00663}00663\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //Work\ it\ out\ from\ the\ face\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00664}00664\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ boundary\_id\ =\ Tmp\_mesh\_pt-\/>face\_boundary(e,face\_map[j-\/10]);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00665}00665\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //If\ it's\ non-\/zero\ then\ we\ do\ need\ to\ create\ a\ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00666}00666\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if(boundary\_id!=0)\ \{need\_boundary\_node=true;\}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00668}00668\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Do\ we\ need\ a\ new\ node?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00669}00669\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (central\_face\_node\_pt[face\_nodes\_pt]==0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00670}00670\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00671}00671\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ Node*\ new\_node\_pt=0;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00673}00673\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Create\ a\ new\ \ boundary\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00674}00674\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (need\_boundary\_node)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00675}00675\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00676}00676\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ new\_node\_pt=finite\_element\_pt(e)-\/>}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00677}00677\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ construct\_boundary\_node(j,time\_stepper\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00678}00678\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ //Add\ it\ to\ the\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00679}00679\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ add\_boundary\_node(boundary\_id-\/1,new\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00680}00680\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00681}00681\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Create\ new\ normal\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00682}00682\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00683}00683\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00684}00684\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ new\_node\_pt=finite\_element\_pt(e)-\/>}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00685}00685\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ construct\_node(j,time\_stepper\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00686}00686\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00687}00687\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ Node\_pt.push\_back(new\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00688}00688\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00689}00689\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Now\ indicate\ existence\ of\ newly\ created\ mideside\ node\ in\ map}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00690}00690\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ central\_face\_node\_pt[face\_nodes\_pt]=new\_node\_pt;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00691}00691\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00692}00692\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ What\ are\ the\ node's\ local\ coordinates?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00693}00693\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ finite\_element\_pt(e)-\/>local\_coordinate\_of\_node(j,s);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00694}00694\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00695}00695\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ existing}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00696}00696\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ //\ and\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00697}00697\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ for(unsigned\ i=0;i<dim;i++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00698}00698\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00699}00699\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ new\_node\_pt-\/>x(i)=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00700}00700\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>interpolated\_x(s,i);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00701}00701\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00702}00702\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00703}00703\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00704}00704\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00705}00705\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ //\ Set\ pointer\ to\ the\ existing\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00706}00706\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ finite\_element\_pt(e)-\/>node\_pt(j)=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00707}00707\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ central\_face\_node\_pt[face\_nodes\_pt];}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00708}00708\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00709}00709\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}\ //End\ of\ loop\ over\ face\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00710}00710\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00711}00711\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //Construct\ the\ element's\ central\ node,\ which\ is\ not\ on\ a\ boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00712}00712\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00713}00713\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ Node*\ new\_node\_pt=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00714}00714\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ finite\_element\_pt(e)-\/>construct\_node(14,time\_stepper\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00715}00715\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ Node\_pt.push\_back(new\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00716}00716\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00717}00717\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ //\ What\ are\ the\ node's\ local\ coordinates?}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00718}00718\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ finite\_element\_pt(e)-\/>local\_coordinate\_of\_node(14,s);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00719}00719\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ //\ Find\ the\ coordinates\ of\ the\ new\ node\ from\ the\ existing}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00720}00720\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ //\ and\ fully-\/functional\ element\ in\ the\ scaffold\ mesh}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00721}00721\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ for(unsigned\ i=0;i<dim;i++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00722}00722\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00723}00723\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ new\_node\_pt-\/>x(i)=}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00724}00724\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ Tmp\_mesh\_pt-\/>finite\_element\_pt(e)-\/>interpolated\_x(s,i);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00725}00725\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00726}00726\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00727}00727\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}\ //End\ of\ enriched\ case}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00728}00728\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00729}00729\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \}\ //end\ of\ loop\ over\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00730}00730\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00731}00731\ \ \ \ \ \ \ \textcolor{comment}{//\ //Boundary\ conditions}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00732}00732\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00733}00733\ \ \ \ \ \ \ \textcolor{comment}{//\ //\ Matrix\ map\ to\ check\ if\ a\ node\ has\ already\ been\ added\ to}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00734}00734\ \ \ \ \ \ \ \textcolor{comment}{//\ //\ the\ boundary\ number\ b}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00735}00735\ \ \ \ \ \ \ \textcolor{comment}{//\ MapMatrixMixed<Node*,unsigned,bool>\ bound\_node\_done;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00736}00736\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00737}00737\ \ \ \ \ \ \ \textcolor{comment}{//\ //\ Loop\ over\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00738}00738\ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (unsigned\ e=0;e<nelem;e++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00739}00739\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00740}00740\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ //\ Loop\ over\ new\ local\ nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00741}00741\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ for(unsigned\ j=4;j<n\_node;j++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00742}00742\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00743}00743\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ Pointer\ to\ the\ element's\ local\ node}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00744}00744\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Node*\ loc\_node\_pt=finite\_element\_pt(e)-\/>node\_pt(j);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00745}00745\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00746}00746\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ This\ will\ have\ to\ be\ changed\ for\ higher-\/order\ elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00747}00747\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //=======================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00748}00748\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00749}00749\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ \ These\ are\ the\ face\ nodes\ on\ the\ element's\ face\ 0:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00750}00750\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (\ (j==4)\ ||\ (j==5)\ ||\ (j==7)\ )}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00751}00751\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00752}00752\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ boundary\_id=Tmp\_mesh\_pt-\/>face\_boundary(e,0);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00753}00753\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (boundary\_id!=0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00754}00754\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00755}00755\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (!bound\_node\_done(loc\_node\_pt,boundary\_id-\/1))}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00756}00756\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00757}00757\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ add\_boundary\_node(boundary\_id-\/1,loc\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00758}00758\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ bound\_node\_done(loc\_node\_pt,boundary\_id-\/1)=true;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00759}00759\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00760}00760\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00761}00761\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00762}00762\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00763}00763\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ These\ are\ the\ face\ nodes\ on\ the\ element's\ face\ 1:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00764}00764\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (\ (j==4)\ ||\ (j==6)\ ||\ (j==9)\ )}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00765}00765\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00766}00766\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ boundary\_id=Tmp\_mesh\_pt-\/>face\_boundary(e,1);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00767}00767\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (boundary\_id!=0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00768}00768\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00769}00769\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (!bound\_node\_done(loc\_node\_pt,boundary\_id-\/1))}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00770}00770\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00771}00771\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ add\_boundary\_node(boundary\_id-\/1,loc\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00772}00772\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ bound\_node\_done(loc\_node\_pt,boundary\_id-\/1)=true;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00773}00773\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00774}00774\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00775}00775\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00776}00776\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00777}00777\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ These\ are\ the\ face\ nodes\ on\ the\ element's\ face\ 2:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00778}00778\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (\ (j==5)\ ||\ (j==6)\ ||\ (j==8)\ )}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00779}00779\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00780}00780\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ boundary\_id=Tmp\_mesh\_pt-\/>face\_boundary(e,2);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00781}00781\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (boundary\_id!=0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00782}00782\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00783}00783\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (!bound\_node\_done(loc\_node\_pt,boundary\_id-\/1))}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00784}00784\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00785}00785\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ add\_boundary\_node(boundary\_id-\/1,loc\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00786}00786\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ bound\_node\_done(loc\_node\_pt,boundary\_id-\/1)=true;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00787}00787\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00788}00788\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00789}00789\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00791}00791\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //\ These\ are\ the\ face\ nodes\ on\ the\ element's\ face\ 3:}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00792}00792\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ \ (\ (j==7)\ ||\ (j==8)\ ||\ (j==9)\ )}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00793}00793\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00794}00794\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ boundary\_id=Tmp\_mesh\_pt-\/>face\_boundary(e,3);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00795}00795\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (boundary\_id!=0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00796}00796\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00797}00797\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (!bound\_node\_done(loc\_node\_pt,boundary\_id-\/1))}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00798}00798\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00799}00799\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ add\_boundary\_node(boundary\_id-\/1,loc\_node\_pt);}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00800}00800\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ bound\_node\_done(loc\_node\_pt,boundary\_id-\/1)=true;}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00801}00801\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00802}00802\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00803}00803\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00804}00804\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00805}00805\ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}\ //end\ for\ j}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00806}00806\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00807}00807\ \ \ \ \ \ \ \textcolor{comment}{//\ */}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00809}00809\ \ \ \ \ \}\ \textcolor{comment}{//\ end\ for\ e}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00810}00810\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00811}00811\ \ \ \}\ \textcolor{comment}{//\ end\ function}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00812}00812\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00813}00813\ \ \ \textcolor{comment}{//=====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00814}00814\ \textcolor{comment}{\ \ ///\ Helper\ function\ to\ set\ up\ the\ reverse\ look\ up\ scheme\ for\ facets.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00815}00815\ \textcolor{comment}{\ \ ///\ This\ is\ used\ to\ set\ up\ boundary\ coordinates.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00816}00816\ \textcolor{comment}{}\ \ \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00817}00817\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00818}\mbox{\hyperlink{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}{00818}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}{TetgenMesh<ELEMENT>::setup\_reverse\_lookup\_schemes\_for\_faceted\_surface}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00819}00819\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{TetMeshFacetedSurface}}*\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faceted\_surface\_pt}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00820}00820\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00821}00821\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ reverse\ lookup\ scheme\ for\ a\ given\ faceted\ surface}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00822}00822\ \ \ \ \ \textcolor{comment}{//\ Assumption\ is\ that\ there\ there\ is\ one\ boundary\ ID\ per\ facet.}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00823}00823\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faceted\_surface\_pt}}-\/>nfacet();}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00824}00824\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_facet}};\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00825}00825\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00826}00826\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faceted\_surface\_pt}}-\/>one\_based\_facet\_boundary\_id(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00827}00827\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00828}00828\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00829}00829\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tet\_mesh\_faceted\_surface\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}\ -\/\ 1]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{faceted\_surface\_pt}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00830}00830\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tet\_mesh\_facet\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}\ -\/\ 1]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{faceted\_surface\_pt}}-\/>facet\_pt(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00831}00831\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00832}00832\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00833}00833\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00834}00834\ \ \ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00835}00835\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}Boundary\ IDs\ have\ to\ be\ one-\/based.\ Yours\ is\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00836}00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00837}00837\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{OomphLibError}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{error\_message}}.str(),}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00839}00839\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00840}00840\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00841}00841\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00842}00842\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00844}00844\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00845}00845\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00846}00846\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00847}00847\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00848}00848\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00849}00849\ \ \ \textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00850}00850\ \textcolor{comment}{\ \ ///\ Transfer\ tetgenio\ data\ from\ the\ input\ to\ the\ output}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00851}00851\ \textcolor{comment}{\ \ ///\ The\ output\ is\ assumed\ to\ have\ been\ constructed\ and\ "{}empty"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00852}00852\ \textcolor{comment}{}\ \ \textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00853}00853\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00854}\mbox{\hyperlink{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4}{00854}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4}{TetgenMesh<ELEMENT>::deep\_copy\_of\_tetgenio}}(\mbox{\hyperlink{classoomph_1_1TetgenMesh}{tetgenio}}*\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}},}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00855}00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{tetgenio}}*\&\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00856}00856\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00857}00857\ \ \ \ \ \textcolor{comment}{//\ Copy\ data\ values}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00858}00858\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>firstnumber\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>firstnumber;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00859}00859\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>mesh\_dim\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>mesh\_dim;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00860}00860\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>useindex\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>useindex;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00861}00861\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00862}00862\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00863}00863\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpoints\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofpoints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00864}00864\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpointattributes\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofpointattributes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00865}00865\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpointmtrs\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofpointmtrs;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00866}00866\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00867}00867\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpoints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00868}00868\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00869}00869\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00870}00870\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ 3];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00871}00871\ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ values}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00872}00872\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ 3);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00873}00873\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00874}00874\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>pointlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00875}00875\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00876}00876\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00877}00877\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ are\ point\ markers\ copy\ as\ well}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00878}00878\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>pointmarkerlist\ !=\ (\textcolor{keywordtype}{int}*)\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{NULL}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00879}00879\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00880}00880\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointmarkerlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_point}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00881}00881\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_point}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00882}00882\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointmarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>pointmarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00884}00884\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00885}00885\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00886}00886\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00887}00887\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_attr}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpointattributes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00888}00888\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_attr}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00889}00889\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00890}00890\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointattributelist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_attr}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00891}00891\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_attr}});\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00892}00892\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00893}00893\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointattributelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>pointattributelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00894}00894\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00895}00895\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00896}00896\ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ point\ case}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00897}00897\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00898}00898\ \ \ \ \ \textcolor{comment}{//\ Now\ add\ in\ metric\ tensors\ (if\ there\ are\ any)}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00899}00899\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point\_mtr}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofpointmtrs;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00900}00900\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point\_mtr}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00901}00901\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00902}00902\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointmtrlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_point\_mtr}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00903}00903\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_point}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_point\_mtr}});\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00904}00904\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00905}00905\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>pointmtrlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>pointmtrlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00906}00906\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00907}00907\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00908}00908\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00909}00909\ \ \ \ \ \textcolor{comment}{//\ Next\ tetrahedrons}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00910}00910\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftetrahedra\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberoftetrahedra;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00911}00911\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofcorners\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofcorners;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00912}00912\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftetrahedronattributes\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00913}00913\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberoftetrahedronattributes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00914}00914\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00915}00915\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftetrahedra;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00916}00916\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_corner}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofcorners;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00917}00917\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00918}00918\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00919}00919\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_corner}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00920}00920\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_corner}});\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00921}00921\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00922}00922\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>tetrahedronlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00923}00923\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00924}00924\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00925}00925\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ in\ the\ volume\ constriants}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00926}00926\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>tetrahedronvolumelist\ !=\ (\textcolor{keywordtype}{double}*)\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{NULL}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00927}00927\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00928}00928\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronvolumelist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tetra}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00929}00929\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tetra}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00930}00930\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00931}00931\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronvolumelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00932}00932\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>tetrahedronvolumelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00933}00933\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00934}00934\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00935}00935\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00936}00936\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ in\ the\ attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00937}00937\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra\_attr}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftetrahedronattributes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00938}00938\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra\_attr}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00939}00939\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00940}00940\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronattributelist\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00941}00941\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tetra\_attr}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00942}00942\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tetra\_attr}});\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00943}00943\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00944}00944\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>tetrahedronattributelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00945}00945\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>tetrahedronattributelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00946}00946\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00947}00947\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00948}00948\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00949}00949\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ in\ the\ neighbour\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00950}00950\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>neighborlist\ !=\ (\textcolor{keywordtype}{int}*)\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{NULL}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00951}00951\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00952}00952\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>neighborlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ 4];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00953}00953\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tetra}}\ *\ 4);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00954}00954\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00955}00955\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>neighborlist\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>neighborlist;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00956}00956\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00957}00957\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00958}00958\ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ tetrahedron\ section}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00959}00959\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00960}00960\ \ \ \ \ \textcolor{comment}{//\ Now\ arrange\ the\ facet\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00961}00961\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoffacets\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberoffacets;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00962}00962\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoffacets;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00963}00963\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00964}00964\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00965}00965\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetlist\ =\ \textcolor{keyword}{new}\ tetgenio::facet[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_facet}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00966}00966\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_facet}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00967}00967\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00968}00968\ \ \ \ \ \ \ \ \ tetgenio::facet*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_f\_pt}}\ =\ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>facetlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00969}00969\ \ \ \ \ \ \ \ \ tetgenio::facet*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}\ =\ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00970}00970\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00971}00971\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ polygons\ and\ holes\ from\ the\ facets}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00972}00972\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>numberofpolygons\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_f\_pt}}-\/>numberofpolygons;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00973}00973\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00974}00974\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ polygons}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00975}00975\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_poly}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>numberofpolygons;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00976}00976\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_poly}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00977}00977\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00978}00978\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>polygonlist\ =\ \textcolor{keyword}{new}\ tetgenio::polygon[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_poly}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00979}00979\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{p}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{p}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_poly}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{p}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00980}00980\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00981}00981\ \ \ \ \ \ \ \ \ \ \ \ \ tetgenio::polygon*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_p\_pt}}\ =\ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>polygonlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{p}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00982}00982\ \ \ \ \ \ \ \ \ \ \ \ \ tetgenio::polygon*\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_p\_pt}}\ =\ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_f\_pt}}-\/>polygonlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{p}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00983}00983\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ out\ how\ many\ vertices\ each\ polygon\ has}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00984}00984\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_p\_pt}}-\/>numberofvertices\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_p\_pt}}-\/>numberofvertices;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00985}00985\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ copy\ of\ the\ vertices}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00986}00986\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_vertex}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_p\_pt}}-\/>numberofvertices;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00987}00987\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_vertex}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00988}00988\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00989}00989\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_p\_pt}}-\/>vertexlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_vertex}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00990}00990\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{v}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{v}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_vertex}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{v}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00991}00991\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00992}00992\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_p\_pt}}-\/>vertexlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{v}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_p\_pt}}-\/>vertexlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{v}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00993}00993\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00994}00994\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00995}00995\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00996}00996\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00997}00997\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00998}00998\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Hole\ information}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l00999}00999\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>numberofholes\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_f\_pt}}-\/>numberofholes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01000}01000\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_f\_pt}}-\/>numberofholes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01001}01001\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01002}01002\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01003}01003\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{OomphLibError}}(\textcolor{stringliteral}{"{}Don't\ know\ how\ to\ handle\ holes\ yet\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01004}01004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01005}01005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01006}01006\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01007}01007\ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ end\ of\ loop\ over\ facets}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01008}01008\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01009}01009\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ facetmarkers\ if\ there\ are\ any}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01010}01010\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>facetmarkerlist\ !=\ (\textcolor{keywordtype}{int}*)\mbox{\hyperlink{classoomph_1_1TetgenMesh}{NULL}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01011}01011\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01012}01012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetmarkerlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_facet}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01013}01013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_facet}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01014}01014\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01015}01015\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetmarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>facetmarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01016}01016\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01017}01017\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01018}01018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01019}01019\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01020}01020\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ holes}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01021}01021\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofholes\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofholes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01022}01022\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofholes;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01023}01023\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01024}01024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01025}01025\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>holelist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ *\ 3];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01026}01026\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_hole}}\ *\ 3);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01027}01027\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01028}01028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>holelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>holelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01029}01029\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01030}01030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01031}01031\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01032}01032\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ regions}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01033}01033\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofregions\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofregions;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01034}01034\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_region}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofregions;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01035}01035\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_region}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01036}01036\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01037}01037\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>regionlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_region}}\ *\ 5];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01038}01038\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_region}}\ *\ 5);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01039}01039\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01040}01040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>regionlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>regionlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01041}01041\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01042}01042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01043}01043\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01044}01044\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ facet\ constraints}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01045}01045\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoffacetconstraints\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberoffacetconstraints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01046}01046\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet\_const}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoffacetconstraints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01047}01047\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet\_const}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01048}01048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01049}01049\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetconstraintlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet\_const}}\ *\ 2];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01050}01050\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_facet\_const}}\ *\ 2);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01051}01051\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01052}01052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>facetconstraintlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>facetconstraintlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01053}01053\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01054}01054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01055}01055\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01056}01056\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ segment\ constraints}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01057}01057\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofsegmentconstraints\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01058}01058\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofsegmentconstraints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01059}01059\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_seg\_const}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofsegmentconstraints;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01060}01060\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_seg\_const}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01061}01061\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01062}01062\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>segmentconstraintlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_seg\_const}}\ *\ 2];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01063}01063\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_seg\_const}}\ *\ 2);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01064}01064\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01065}01065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>segmentconstraintlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01066}01066\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>segmentconstraintlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01067}01067\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01068}01068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01069}01069\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01070}01070\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ face\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01071}01071\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftrifaces\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberoftrifaces;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01072}01072\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tri\_face}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberoftrifaces;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01073}01073\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tri\_face}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01074}01074\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01075}01075\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>trifacelist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tri\_face}}\ *\ 3];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01076}01076\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_tri\_face}}\ *\ 3);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01077}01077\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01078}01078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>trifacelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>trifacelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01079}01079\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01080}01080\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01081}01081\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>trifacemarkerlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tri\_face}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01082}01082\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_tri\_face}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01083}01083\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01084}01084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>trifacemarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>trifacemarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01085}01085\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01086}01086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01087}01087\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01088}01088\ \ \ \ \ \textcolor{comment}{//\ Now\ the\ edge\ list}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01089}01089\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofedges\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>numberofedges;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01090}01090\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge}}\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>numberofedges;}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01091}01091\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01092}01092\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01093}01093\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>edgelist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge}}\ *\ 2];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01094}01094\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{n\_edge}}\ *\ 2);\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01095}01095\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01096}01096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>edgelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>edgelist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01097}01097\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01098}01098\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01099}01099\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>edgemarkerlist\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_edge}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01100}01100\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n\_edge}};\ ++\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}})}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01101}01101\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01102}01102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{output\_pt}}-\/>edgemarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}]\ =\ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{input\_pt}}-\/>edgemarkerlist[\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{n}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01103}01103\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01104}01104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01105}01105\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01106}01106\ }
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01107}01107\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{tetgen__mesh_8template_8cc_source_l01108}01108\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

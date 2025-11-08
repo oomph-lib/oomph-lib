@@ -403,5 +403,5 @@ demo_drivers/navier_stokes/turek_flag_non_fsi/turek_flag_non_fsi.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

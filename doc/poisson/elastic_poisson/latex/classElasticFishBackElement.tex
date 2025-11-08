@@ -1,0 +1,241 @@
+\doxysection{Elastic\+Fish\+Back\+Element Class Reference}
+\hypertarget{classElasticFishBackElement}{}\label{classElasticFishBackElement}\index{ElasticFishBackElement@{ElasticFishBackElement}}
+
+
+Fish back as a Generalised\+Element\+: Circular ring whose position is given by.  
+
+
+Inheritance diagram for Elastic\+Fish\+Back\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classElasticFishBackElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticFishBackElement_a0411850f03db9f6eeb10562be778dacb}{Elastic\+Fish\+Back\+Element}} (\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{x\+\_\+c}}, \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{y\+\_\+c}}, \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Build ring from doubles that describe the geometry\+: x and y positions of centre and the radius. Initialise stiffness to 1.\+0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{virtual}} \mbox{\hyperlink{classElasticFishBackElement_a3889028a8375ef126ec207f73ca18adc}{\texorpdfstring{$\sim$}{\string~}\+Elastic\+Fish\+Back\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classElasticFishBackElement_ad17c67eedbb356708e93fe6d70e8afd4}{k\+\_\+stiff}} ()
+\begin{DoxyCompactList}\small\item\em "{}\+Stiffness"{} of the ring \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classElasticFishBackElement_a2cfaf3e1fd80d84705adc77cdc7bb4bc}{load}} ()
+\begin{DoxyCompactList}\small\item\em "{}\+Load"{} acting on the ring \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classElasticFishBackElement_aed5858c2ae86823017713d0894cc4052}{get\+\_\+residuals}} (\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}})
+\begin{DoxyCompactList}\small\item\em Compute element residual vector (wrapper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classElasticFishBackElement_a48729984910b86d7210ed218bcb821bd}{get\+\_\+jacobian}} (\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}, \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}})
+\begin{DoxyCompactList}\small\item\em Compute element residual Vector and element Jacobian matrix (wrapper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classElasticFishBackElement_a14397b102dbefc87a7e8f6a6782ec730}{set\+\_\+load\+\_\+pt}} (\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set pointer to Data object that specifies the "{}load"{} on the fish back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classElasticFishBackElement_a03865180362294a36322523ff2a880ad}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}, \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}}, \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{flag}})
+\begin{DoxyCompactList}\small\item\em Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \mbox{\hyperlink{classElasticFishBackElement_abb0ba4fd55ef0c0b48634eded475e5c7}{K\+\_\+stiff}}
+\begin{DoxyCompactList}\small\item\em Stiffness of the ring\textquotesingle{}s "{}elastic"{} support. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{classElasticFishBackElement_a721b1c81283045f36467355e77b90fea}{External\+\_\+load\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em External index of the load object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fish back as a Generalised\+Element\+: Circular ring whose position is given by. 
+
+\[ x = X_c + R \cos(\xi)  \] \[ y = Y_c + R \sin(\xi)  \] The ring\textquotesingle{}s vertical position $ Y_c $ is determined by "{}pseudo elasticity"{}\+: \[ 0 = Y_c \ k_{stiff} - f_{load} \] This simulates the case where the centre of the ring is mounted on an elastic spring of stiffness $ k_{stiff} $ and loaded by the force $ f_{load}. $ The "{}load"{} is specified by the Data object {\ttfamily \doxylink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\+\_\+pt()}}. 
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00085}{85}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticFishBackElement_a0411850f03db9f6eeb10562be778dacb}\label{classElasticFishBackElement_a0411850f03db9f6eeb10562be778dacb} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!ElasticFishBackElement@{ElasticFishBackElement}}
+\index{ElasticFishBackElement@{ElasticFishBackElement}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{ElasticFishBackElement()}{ElasticFishBackElement()}}
+{\footnotesize\ttfamily Elastic\+Fish\+Back\+Element\+::\+Elastic\+Fish\+Back\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{x\+\_\+c,  }\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{y\+\_\+c,  }\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Build ring from doubles that describe the geometry\+: x and y positions of centre and the radius. Initialise stiffness to 1.\+0. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00093}{93}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+\Hypertarget{classElasticFishBackElement_a3889028a8375ef126ec207f73ca18adc}\label{classElasticFishBackElement_a3889028a8375ef126ec207f73ca18adc} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!````~ElasticFishBackElement@{\texorpdfstring{$\sim$}{\string~}ElasticFishBackElement}}
+\index{````~ElasticFishBackElement@{\texorpdfstring{$\sim$}{\string~}ElasticFishBackElement}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ElasticFishBackElement()}{\string~ElasticFishBackElement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{virtual}} Elastic\+Fish\+Back\+Element\+::\texorpdfstring{$\sim$}{\string~}\+Elastic\+Fish\+Back\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00115}{115}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classElasticFishBackElement_a03865180362294a36322523ff2a880ad}\label{classElasticFishBackElement_a03865180362294a36322523ff2a880ad} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!fill\_in\_generic\_residual\_contribution@{fill\_in\_generic\_residual\_contribution}}
+\index{fill\_in\_generic\_residual\_contribution@{fill\_in\_generic\_residual\_contribution}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution()}{fill\_in\_generic\_residual\_contribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Elastic\+Fish\+Back\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}}}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00183}{183}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00217}{K\+\_\+stiff}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00126}{load()}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00142}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00129}{get\+\_\+residuals()}}.
+
+\Hypertarget{classElasticFishBackElement_a48729984910b86d7210ed218bcb821bd}\label{classElasticFishBackElement_a48729984910b86d7210ed218bcb821bd} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Elastic\+Fish\+Back\+Element\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute element residual Vector and element Jacobian matrix (wrapper) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00142}{142}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00183}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classElasticFishBackElement_aed5858c2ae86823017713d0894cc4052}\label{classElasticFishBackElement_aed5858c2ae86823017713d0894cc4052} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Elastic\+Fish\+Back\+Element\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute element residual vector (wrapper) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00129}{129}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00183}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classElasticFishBackElement_ad17c67eedbb356708e93fe6d70e8afd4}\label{classElasticFishBackElement_ad17c67eedbb356708e93fe6d70e8afd4} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!k\_stiff@{k\_stiff}}
+\index{k\_stiff@{k\_stiff}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{k\_stiff()}{k\_stiff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& Elastic\+Fish\+Back\+Element\+::k\+\_\+stiff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+"{}\+Stiffness"{} of the ring 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00123}{123}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00217}{K\+\_\+stiff}}.
+
+\Hypertarget{classElasticFishBackElement_a2cfaf3e1fd80d84705adc77cdc7bb4bc}\label{classElasticFishBackElement_a2cfaf3e1fd80d84705adc77cdc7bb4bc} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!load@{load}}
+\index{load@{load}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& Elastic\+Fish\+Back\+Element\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+"{}\+Load"{} acting on the ring 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00126}{126}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00183}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classElasticFishBackElement_a14397b102dbefc87a7e8f6a6782ec730}\label{classElasticFishBackElement_a14397b102dbefc87a7e8f6a6782ec730} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!set\_load\_pt@{set\_load\_pt}}
+\index{set\_load\_pt@{set\_load\_pt}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{set\_load\_pt()}{set\_load\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Elastic\+Fish\+Back\+Element\+::set\+\_\+load\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*}}]{load\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set pointer to Data object that specifies the "{}load"{} on the fish back. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00155}{155}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00220}{External\+\_\+load\+\_\+index}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classElasticFishBackElement_a721b1c81283045f36467355e77b90fea}\label{classElasticFishBackElement_a721b1c81283045f36467355e77b90fea} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!External\_load\_index@{External\_load\_index}}
+\index{External\_load\_index@{External\_load\_index}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{External\_load\_index}{External\_load\_index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} Elastic\+Fish\+Back\+Element\+::\+External\+\_\+load\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+External index of the load object. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00220}{220}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00155}{set\+\_\+load\+\_\+pt()}}.
+
+\Hypertarget{classElasticFishBackElement_abb0ba4fd55ef0c0b48634eded475e5c7}\label{classElasticFishBackElement_abb0ba4fd55ef0c0b48634eded475e5c7} 
+\index{ElasticFishBackElement@{ElasticFishBackElement}!K\_stiff@{K\_stiff}}
+\index{K\_stiff@{K\_stiff}!ElasticFishBackElement@{ElasticFishBackElement}}
+\doxysubsubsection{\texorpdfstring{K\_stiff}{K\_stiff}}
+{\footnotesize\ttfamily \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} Elastic\+Fish\+Back\+Element\+::\+K\+\_\+stiff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stiffness of the ring\textquotesingle{}s "{}elastic"{} support. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00217}{217}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00183}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00123}{k\+\_\+stiff()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__poisson_8cc}{elastic\+\_\+poisson.\+cc}}\end{DoxyCompactItemize}

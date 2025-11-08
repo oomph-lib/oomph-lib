@@ -289,5 +289,5 @@ demo_drivers/poisson/two_d_poisson_flux_bc2/two_d_poisson_flux_bc2.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

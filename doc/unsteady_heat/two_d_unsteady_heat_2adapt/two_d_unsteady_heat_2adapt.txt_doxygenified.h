@@ -6,8 +6,8 @@ This is the final and most complex problem in our series of
 demo codes for the unsteady heat equation. We re-visit the
 moving domain problem considered in the 
 <A HREF="../../two_d_unsteady_heat_ALE/html/index.html"> previous
-example </A> and solve it with a \e combination of spatial and
-temporal adaptivity. 
+example </A> and solve it with a \e combination of spatial
+and temporal adaptivity. 
  
 <CENTER>
 <TABLE>
@@ -332,5 +332,5 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

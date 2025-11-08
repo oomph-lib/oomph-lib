@@ -427,5 +427,5 @@ demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

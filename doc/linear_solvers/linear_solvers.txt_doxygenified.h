@@ -245,14 +245,7 @@ a single iteration -- useful for code development.
 linear solvers and preconditioners. We stress that these solvers are 
 not necessarily implemented as \c oomph-lib \c IterativeLinearSolvers 
 since their interfaces for the specification of preconditioners, etc
-may differ from those employed by \c oomph-lib. Furthermore,
-unlike \c SuperLUSolver these solvers are not
-distributed as part of \c oomph-lib so you have to build/install them
-separately before installing \c oomph-lib (\c oomph-lib's build 
-machinery can do this for you if you wish;
-see <a href="../../the_distribution/html/index.html#external_dist">
-installation instructions</a> for details). Once this is done, they may
-be used like any other linear solver.
+may differ from those employed by \c oomph-lib.
 
 <HR>
 
@@ -467,5 +460,5 @@ framework. Separate documentation is available for these:
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

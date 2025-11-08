@@ -1,71 +1,77 @@
-\hypertarget{classoomph_1_1NicosConstitutiveEquation}{}\doxysection{oomph\+::Nicos\+Constitutive\+Equation$<$ DIM $>$ Class Template Reference}
-\label{classoomph_1_1NicosConstitutiveEquation}\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
+\doxysection{oomph\+::Nicos\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1NicosConstitutiveEquation}{}\label{classoomph_1_1NicosConstitutiveEquation}\index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 
 
-A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining an arbitrary shear-\/thinning fluid.  
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining an arbitrary shear-\/thinning fluid.  
 
 
 
 
 {\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
 
-Inheritance diagram for oomph\+::Nicos\+Constitutive\+Equation$<$ DIM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Nicos\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1NicosConstitutiveEquation}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}{Nicos\+Constitutive\+Equation}} (double $\ast$mu\+\_\+inf\+\_\+pt, double $\ast$mu\+\_\+0\+\_\+pt, double $\ast$alpha\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}{Nicos\+Constitutive\+Equation}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mu\+\_\+inf\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mu\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}alpha\+\_\+pt)
 \item 
-double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}{viscosity}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}{viscosity}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
 \begin{DoxyCompactList}\small\item\em Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}{dviscosity\+\_\+dinvariant}} (const double \&second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}{dviscosity\+\_\+dinvariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
 \begin{DoxyCompactList}\small\item\em Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}}
 \begin{DoxyCompactItemize}
 \item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}{Mu\+\_\+inf\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a4b84eb3626aaed2f77f6dc96258f7e01}{Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_af85f107604d04e8fdaf03e8274c485e6}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}{Mu\+\_\+inf\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em high shear rate viscosity \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}{Mu\+\_\+0\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}{Mu\+\_\+0\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em zero shear rate viscosity \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}{Alpha\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}{Alpha\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em parameter that controls the steepness of the curve \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned DIM$>$\newline
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
 class oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$}
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining an arbitrary shear-\/thinning fluid. 
 
-A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining an arbitrary shear-\/thinning fluid. 
-
-Definition at line 1091 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01091}{1091}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}\label{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29}\label{classoomph_1_1NicosConstitutiveEquation_a5fcbd52036d1d075ce4e9a0515276a29} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!NicosConstitutiveEquation@{NicosConstitutiveEquation}}
 \index{NicosConstitutiveEquation@{NicosConstitutiveEquation}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{NicosConstitutiveEquation()}{NicosConstitutiveEquation()}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{Nicos\+Constitutive\+Equation}} (\begin{DoxyParamCaption}\item[{double $\ast$}]{mu\+\_\+inf\+\_\+pt,  }\item[{double $\ast$}]{mu\+\_\+0\+\_\+pt,  }\item[{double $\ast$}]{alpha\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Nicos\+Constitutive\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{mu\+\_\+inf\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{mu\+\_\+0\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{alpha\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 1106 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01106}{1106}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}\label{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3}\label{classoomph_1_1NicosConstitutiveEquation_a470905abb0522dd441e1e32fbaabb9c3} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
 \index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -77,18 +83,18 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquati
 
 
 
-Definition at line 1123 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01123}{1123}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01102}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}\label{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05}\label{classoomph_1_1NicosConstitutiveEquation_a69afbe7d614474de9441a4ad3805ea05} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
 \index{viscosity@{viscosity}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::viscosity (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::viscosity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -100,21 +106,21 @@ Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquati
 
 
 
-Definition at line 1116 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01116}{1116}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt, and oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Mu\+\_\+inf\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01102}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01096}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::\+Mu\+\_\+inf\+\_\+pt}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}\label{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95}\label{classoomph_1_1NicosConstitutiveEquation_aa9b410ec3ce0abdc60a86b13da0f7e95} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
 \index{Alpha\_pt@{Alpha\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -122,18 +128,18 @@ parameter that controls the steepness of the curve
 
 
 
-Definition at line 1102 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01102}{1102}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant(), and oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01123}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01116}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}\label{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac}\label{classoomph_1_1NicosConstitutiveEquation_a47ddb3294d11f24f639796b1d8e60eac} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Mu\_0\_pt@{Mu\_0\_pt}}
 \index{Mu\_0\_pt@{Mu\_0\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Mu\_0\_pt}{Mu\_0\_pt}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::Mu\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mu\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -141,14 +147,14 @@ zero shear rate viscosity
 
 
 
-Definition at line 1099 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01099}{1099}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}\label{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}} 
+\Hypertarget{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468}\label{classoomph_1_1NicosConstitutiveEquation_ab74dee7f73e8b290c4ba251f72d17468} 
 \index{oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}!Mu\_inf\_pt@{Mu\_inf\_pt}}
 \index{Mu\_inf\_pt@{Mu\_inf\_pt}!oomph::NicosConstitutiveEquation$<$ DIM $>$@{oomph::NicosConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Mu\_inf\_pt}{Mu\_inf\_pt}}
-{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ DIM $>$\+::Mu\+\_\+inf\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NicosConstitutiveEquation}{oomph\+::\+Nicos\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mu\+\_\+inf\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -156,11 +162,11 @@ high shear rate viscosity
 
 
 
-Definition at line 1096 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01096}{1096}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01116}{oomph\+::\+Nicos\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 
 

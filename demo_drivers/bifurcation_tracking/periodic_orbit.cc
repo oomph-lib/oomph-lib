@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -561,7 +561,7 @@ void ABCProblem<ELEMENT,TIMESTEPPER>::solve()
 
    dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(
     assembly_handler_pt())->set_previous_dofs_to_current_dofs();
-   sprintf(filename,"orbit%g_%g.dat",Global_Physical_Variables::P[0],
+   snprintf(filename, sizeof(filename), "orbit%g_%g.dat",Global_Physical_Variables::P[0],
            1.0/this->dof(this->ndof()-1));
    std::ofstream crap(filename);
    dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(assembly_handler_pt())

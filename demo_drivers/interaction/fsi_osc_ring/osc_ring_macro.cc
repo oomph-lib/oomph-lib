@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -46,9 +46,9 @@ using namespace MathematicalConstants;
 
   
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
   
 
 //==================================================
@@ -68,9 +68,9 @@ namespace Global_Physical_Variables
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //====================================================================
@@ -498,7 +498,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution on fluid mesh
  //-------------------------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  //some_file.precision(20);
  some_file.open(filename);
@@ -513,7 +513,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Plot wall posn
  //---------------
- sprintf(filename,"%s/Wall%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/Wall%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  
@@ -531,7 +531,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Doc Sarah's asymptotic solution 
  //--------------------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  fluid_mesh_pt()->output_fct(some_file,npts,
@@ -654,7 +654,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   }
 
  // Output fluid solution on coarse mesh
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  nelem=coarse_mesh_pt->nelement();
@@ -666,7 +666,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  some_file.close();
 
  // Write restart file
- sprintf(filename,"%s/restart%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  dump_it(some_file,doc_info);
@@ -734,7 +734,7 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Max. number of adaptations per solve
@@ -905,9 +905,9 @@ void OscRingNStProblem<ELEMENT>::write_trace_file_header()
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 

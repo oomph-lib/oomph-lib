@@ -153,7 +153,7 @@ usually contains the following steps:
   generic implementation of this process, mesh constructors 
   use an argument-free constructor to
   create the elements. Thus, element constructors must not
-  have any arguments. (See the section `\ref new_mesh', below, for an 
+  have any arguments. (See the section \ref new_mesh , below, for an 
   illustration of this process.) If an element requires any global parameters
   (such as pointers to physical parameters, function pointers 
   to source functions, etc.), these parameters should be passed to the
@@ -1545,5 +1545,5 @@ moving domain</A> for further details.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

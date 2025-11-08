@@ -387,5 +387,5 @@ demo_drivers/navier_stokes/inclined_plane/inclined_plane.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

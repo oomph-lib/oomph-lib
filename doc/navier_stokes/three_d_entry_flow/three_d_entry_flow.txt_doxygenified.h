@@ -373,5 +373,5 @@ demo_drivers/navier_stokes/three_d_entry_flow/three_d_entry_flow.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

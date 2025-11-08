@@ -1,0 +1,92 @@
+\doxysection{fpdiff.\+h}
+\hypertarget{fpdiff_8h_source}{}\label{fpdiff_8h_source}\index{fpdiff.h@{fpdiff.h}}
+\mbox{\hyperlink{fpdiff_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2022\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_FPDIFF\_HEADER}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00027}00027\ \textcolor{preprocessor}{\#define\ OOMPH\_FPDIFF\_HEADER}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00034}00034\ \textcolor{comment}{//\ Config\ header}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00035}00035\ \textcolor{preprocessor}{\#ifdef\ HAVE\_CONFIG\_H}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <oomph-\/lib-\/config.h>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00037}00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00039}00039\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00041}00041\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00042}00042\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00043}00043\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00044}00044\ \textcolor{comment}{\ \ \ *\ @param\ filename}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00045}00045\ \textcolor{comment}{\ \ \ *\ @return\ std::vector<std::string>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00046}00046\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00047}00047\ \ \ std::vector<std::string>\ \mbox{\hyperlink{namespaceoomph_a46bbe9246d18deaa334e40e0ad55419e}{gzip\_load}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00049}00049\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00050}00050\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ *\ @param\ filename1}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ *\ @param\ filename2}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ *\ @param\ outstream}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ @param\ relative\_error:\ max\ relative\ difference\ in\ percent.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ @param\ small:\ a\ small\ number\ -\/-\/\ essentially\ round-\/off\ error.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ @param\ details\_stream}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ @return\ true}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *\ @return\ false}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00061}00061\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{fpdiff}}(\textcolor{keyword}{const}\ std::string\&\ filename1,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ filename2,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ostream\&\ outstream,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ relative\_error\ =\ 1.0e-\/01,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ small\ =\ 1.0e-\/14);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00067}00067\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *\ @param\ filename1}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *\ @param\ filename2}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *\ @param\ outstream}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *\ @param\ relative\_error:\ max\ relative\ difference\ in\ percent.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ @param\ small:\ a\ small\ number\ -\/-\/\ essentially\ round-\/off\ error.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ @param\ details\_stream}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *\ @return\ true}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ @return\ false}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00079}00079\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{fpdiff}}(\textcolor{keyword}{const}\ std::string\&\ filename1,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ filename2,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ log\_file,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ relative\_error\ =\ 1.0e-\/01,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ small\ =\ 1.0e-\/14);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00084}00084\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8h_source_l00086}00086\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

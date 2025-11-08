@@ -27,5 +27,10 @@
 This is the page which displays search results; it does not have a pdf version.
 
 \endlatexonly
-**/
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+\*/
 

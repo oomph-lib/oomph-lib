@@ -299,8 +299,8 @@ The implementation of the node update functions is straightforward
 and can be found in the source files
 <CENTER>
 <A HREF="
-../../../../src/meshes/channel_with_leaflet_mesh.template.h">
-src/meshes/channel_with_leaflet_mesh.template.h
+../../../../src/meshes/channel_with_leaflet_mesh.h">
+src/meshes/channel_with_leaflet_mesh.h
 </A>
 </CENTER>\n
 and 
@@ -381,5 +381,5 @@ demo_drivers/navier_stokes/channel_with_leaflet/channel_with_leaflet.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

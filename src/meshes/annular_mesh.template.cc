@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,10 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_ANNULAR_MESH_TEMPLATE_CC
-#define OOMPH_ANNULAR_MESH_TEMPLATE_CC
+#ifndef OOMPH_ANNULAR_MESH_TEMPLATE_HEADER
+#define OOMPH_ANNULAR_MESH_TEMPLATE_HEADER
 
-#include "annular_mesh.template.h"
+#ifndef OOMPH_ANNULAR_MESH_HEADER
+#error __FILE__ should only be included from annular_mesh.h.
+#endif // OOMPH_ANNULAR_MESH_HEADER
 
 namespace oomph
 {
@@ -111,14 +113,12 @@ namespace oomph
       }
     }
 
-    this->Boundary_coordinate_exists[0] = true;
-    this->Boundary_coordinate_exists[1] = true;
-    this->Boundary_coordinate_exists[2] = true;
-    this->Boundary_coordinate_exists[3] = true;
+    this->set_boundary_coordinate_exists(0);
+    this->set_boundary_coordinate_exists(1);
+    this->set_boundary_coordinate_exists(2);
+    this->set_boundary_coordinate_exists(3);
   }
 
-
 } // namespace oomph
-
 
 #endif

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -101,9 +101,9 @@ namespace Global_Physical_Variables
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -657,7 +657,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
 //Open trace file
  char filename[100];
- sprintf(filename,"RESLT/trace.dat");
+ snprintf(filename, sizeof(filename), "RESLT/trace.dat");
  Trace_file.open(filename);
  Trace_file << "VARIABLES=";
  Trace_file << "\"Ca\",\t \"Bo\", \t \"Alpha\",  \t \"m\", \t \"p<sub>bubble</sub>\", \t \"r<sub>h_top</sub>\", \t \"r<sub>d_top</sub>\", \t \"r<sub>h_middle</sub>\", \t \"r<sub>d_bottom</sub>\", \t \"r<sub>h_bottom</sub>\",\t \"lambda\"  ";
@@ -851,7 +851,7 @@ void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  mesh_pt()->node_update();
   
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
  unsigned n_bulk = mesh_pt()->nbulk();
@@ -877,7 +877,7 @@ int main(int argc,char *argv[])
 
  // Set output directory
  char name_dir[20];
- sprintf(name_dir,"RESLT");
+ snprintf(name_dir, sizeof(name_dir), "RESLT");
  
  doc_info.set_directory(name_dir);
  doc_info.number()=0;

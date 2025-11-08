@@ -658,7 +658,7 @@ solid mechanics:
 \skipline Loop over the shape functions to assemble contributions
 \until End of loop over shape functions 
 
-\section surface Surface Transport Implementation
+\section surface2 Surface Transport Implementation
 
 The recommended strategy for implementing surface transport equations
 is to inherit from the appropriate \c FluidInterfaceElement, 
@@ -707,5 +707,5 @@ Thus, the surface divergence term is
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

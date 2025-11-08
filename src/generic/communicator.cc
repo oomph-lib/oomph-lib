@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -38,9 +38,9 @@ namespace oomph
 {
 #ifdef OOMPH_HAS_MPI
 
-  //=============================================================================
+  //=========================================================================
   /// A broadcast function for DenseMatrix<double>
-  //=============================================================================
+  //=========================================================================
   void OomphCommunicator::broadcast(const int& source, DenseMatrix<double>& x)
   {
     // Get number of entries on processor source (where the matrix exists)
@@ -59,8 +59,8 @@ namespace oomph
     }
 
     // Broadcast to everybody how many entries to expect
-    MPI_Bcast(&nrow, 1, MPI_UNSIGNED_LONG, source, this->mpi_comm());
-    MPI_Bcast(&ncol, 1, MPI_UNSIGNED_LONG, source, this->mpi_comm());
+    MPI_Bcast(&nrow, 1, MPI_UNSIGNED, source, this->mpi_comm());
+    MPI_Bcast(&ncol, 1, MPI_UNSIGNED, source, this->mpi_comm());
 
     if (ncol != 0 && nrow != 0)
     {

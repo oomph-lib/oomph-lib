@@ -103,5 +103,5 @@ delete el_pt->hijack_internal_value(0,0);
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

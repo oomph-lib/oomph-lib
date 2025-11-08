@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,9 @@
 #define OOMPH_QUARTER_TUBE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -313,10 +313,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Vector representation of the  imacro-th macro element
@@ -338,7 +337,6 @@ namespace oomph
       "QuarterTubeDomain::macro_element_boundary(...)",
       OOMPH_EXCEPTION_LOCATION);
 #endif
-
 
     unsigned ilayer = unsigned(imacro / 3);
 
@@ -387,7 +385,6 @@ namespace oomph
 
         break;
 
-
         // Macro element 1: Bottom right
       case 1:
 
@@ -426,7 +423,6 @@ namespace oomph
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
         }
-
 
         break;
 
@@ -481,7 +477,6 @@ namespace oomph
     }
   }
 
-
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -512,7 +507,6 @@ namespace oomph
 
     // f[2]=r_top[2];
   }
-
 
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
@@ -559,7 +553,6 @@ namespace oomph
     // f[2]=r_top[2];
   }
 
-
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -590,7 +583,6 @@ namespace oomph
     f[2] = x[0] + rho * (r_bottom[2] - x[0]);
     // f[2]=r_bottom[2];
   }
-
 
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
@@ -634,7 +626,6 @@ namespace oomph
     // f[2]=r_bottom[2];
   }
 
-
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -654,7 +645,6 @@ namespace oomph
     Vector<double> r_bottom(3);
     Wall_pt->position(t, x, r_bottom);
 
-
     // Wall coordinates along top edge of wall
     x[0] = Xi_lo[0] + (Xi_hi[0] - Xi_lo[0]) *
                         axial_spacing_fct(double(i_layer) / double(Nlayer));
@@ -673,7 +663,6 @@ namespace oomph
     f[2] = x[0] + rho * (r_top[2] - x[0]);
     // f[2]=r_top[2];
   }
-
 
   //=======================================================================
   /// Boundary of central box macro element in layer i_layer
@@ -694,7 +683,6 @@ namespace oomph
     Vector<double> r_bottom(3);
     Wall_pt->position(t, x, r_bottom);
 
-
     // Wall coordinates along top edge of wall
     x[0] = Xi_lo[0] + (Xi_hi[0] - Xi_lo[0]) *
                         axial_spacing_fct(double(1 + i_layer) / double(Nlayer));
@@ -714,9 +702,7 @@ namespace oomph
     // f[2]=r_top[2];
   }
 
-
-  //#####################################################################
-
+  // #####################################################################
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -729,7 +715,6 @@ namespace oomph
   {
     r_centr_R(t, zeta, i_layer, f);
   }
-
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -751,7 +736,6 @@ namespace oomph
     // Get position vector on wall
     Wall_pt->position(t, x, f);
   }
-
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -784,7 +768,6 @@ namespace oomph
     // f[2]=r_bottom[2];
   }
 
-
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -806,14 +789,12 @@ namespace oomph
     Vector<double> r_div(3);
     Wall_pt->position(t, x, r_div);
 
-
     // Position vector to corner of central box
     Vector<double> zeta_central(2);
     Vector<double> r_central(3);
     zeta_central[0] = 1.0;
     zeta_central[1] = zeta[1];
     r_centr_R(t, zeta_central, i_layer, r_central);
-
 
     // Straight line across
     f[0] = r_central[0] +
@@ -823,7 +804,6 @@ namespace oomph
     f[2] = r_central[2] +
            (r_div[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[0]));
   }
-
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -851,7 +831,6 @@ namespace oomph
     zeta_central[1] = -1.0;
     r_centr_R(t, zeta_central, i_layer, r_central);
 
-
     // Straight line across
     f[0] = r_central[0] +
            (r_wall[0] - r_central[0]) * s_squashed(0.5 * (1.0 + zeta[0]));
@@ -860,7 +839,6 @@ namespace oomph
     f[2] = r_central[2] +
            (r_wall[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[0]));
   }
-
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -888,7 +866,6 @@ namespace oomph
     zeta_central[1] = 1.0;
     r_centr_R(t, zeta_central, i_layer, r_central);
 
-
     // Straight line across
     f[0] = r_central[0] +
            (r_wall[0] - r_central[0]) * s_squashed(0.5 * (1.0 + zeta[0]));
@@ -898,9 +875,7 @@ namespace oomph
            (r_wall[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[0]));
   }
 
-
-  //#####################################################################
-
+  // #####################################################################
 
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
@@ -933,7 +908,6 @@ namespace oomph
     // f[2]=r_top[2];
   }
 
-
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -950,7 +924,6 @@ namespace oomph
     r_bot_right_U(t, zeta_br, i_layer, f);
   }
 
-
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -962,7 +935,6 @@ namespace oomph
   {
     r_centr_U(t, zeta, i_layer, f);
   }
-
 
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
@@ -986,7 +958,6 @@ namespace oomph
     Wall_pt->position(t, x, f);
   }
 
-
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -1003,11 +974,9 @@ namespace oomph
     x[1] = Xi_hi[1] +
            (Xi_lo[1] - Xi_hi[1]) * (1.0 - Fract_mid) * 0.5 * (1.0 + zeta[0]);
 
-
     // Get position vector to wall
     Vector<double> r_wall(3);
     Wall_pt->position(t, x, r_wall);
-
 
     // Get position vector on central box
     Vector<double> zeta_central(2);
@@ -1025,7 +994,6 @@ namespace oomph
            (r_wall[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[1]));
   }
 
-
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -1042,11 +1010,9 @@ namespace oomph
     x[1] = Xi_hi[1] +
            (Xi_lo[1] - Xi_hi[1]) * (1.0 - Fract_mid) * 0.5 * (1.0 + zeta[0]);
 
-
     // Get position vector to wall
     Vector<double> r_wall(3);
     Wall_pt->position(t, x, r_wall);
-
 
     // Get position vector on central box
     Vector<double> zeta_central(2);
@@ -1063,7 +1029,6 @@ namespace oomph
     f[2] = r_central[2] +
            (r_wall[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[1]));
   }
-
 
 } // namespace oomph
 

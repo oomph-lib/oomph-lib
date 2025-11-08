@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -236,7 +236,7 @@ void ElasticBeamProblem::parameter_study()
     } 
    
    // Document the solution
-   sprintf(filename,"RESLT/beam%i.dat",i);
+   snprintf(filename, sizeof(filename), "RESLT/beam%i.dat",i);
    file.open(filename);
    mesh_pt()->output(file,5);
    file.close();

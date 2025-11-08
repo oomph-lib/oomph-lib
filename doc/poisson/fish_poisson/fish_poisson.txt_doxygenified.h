@@ -441,5 +441,5 @@ demo_drivers/poisson/fish_poisson/fish_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

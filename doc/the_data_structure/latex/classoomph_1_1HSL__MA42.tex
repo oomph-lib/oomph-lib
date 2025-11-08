@@ -1,5 +1,5 @@
-\hypertarget{classoomph_1_1HSL__MA42}{}\doxysection{oomph\+::HSL\+\_\+\+MA42 Class Reference}
-\label{classoomph_1_1HSL__MA42}\index{oomph::HSL\_MA42@{oomph::HSL\_MA42}}
+\doxysection{oomph\+::HSL\+\_\+\+MA42 Class Reference}
+\hypertarget{classoomph_1_1HSL__MA42}{}\label{classoomph_1_1HSL__MA42}\index{oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 
 
 Linear solver class that provides a wrapper to the frontal solver MA42 from the \href{http://www.hsl.rl.ac.uk/}{\texttt{ HSL library;}} see \href{http://www.hsl.rl.ac.uk/}{\texttt{ http\+://www.\+hsl.\+rl.\+ac.\+uk/.}}  
@@ -15,105 +15,195 @@ Inheritance diagram for oomph\+::HSL\+\_\+\+MA42\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{classoomph_1_1HSL__MA42}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1HSL__MA42_adb51ab900d877ac6721745c1b6a9c76d}{HSL\+\_\+\+MA42}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: By default suppress verbose output (stats), don\textquotesingle{}t reorder elements and don\textquotesingle{}t use direct access files. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b}{$\sim$\+HSL\+\_\+\+MA42}} ()
+\mbox{\hyperlink{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b}{\texorpdfstring{$\sim$}{\string~}\+HSL\+\_\+\+MA42}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clean up the allocated memory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40}{HSL\+\_\+\+MA42}} (const \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40}{HSL\+\_\+\+MA42}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}{clean\+\_\+up\+\_\+memory}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up memory. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}{disable\+\_\+resolve}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}{disable\+\_\+resolve}} ()
 \begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \doxylink{classoomph_1_1Vector}{Vector} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
 \begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
 \begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system Call the broken base-\/class version. If you want this, please implement it. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
 \begin{DoxyCompactList}\small\item\em Return the solution to the linear system Ax = result, where A is the most recently factorised jacobian matrix of the problem problem\+\_\+pt. The solution is returned in the result vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347}{reorder\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347}{reorder\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function to reorder the elements based on Sloan\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a}{enable\+\_\+doc\+\_\+stats}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a}{enable\+\_\+doc\+\_\+stats}} ()
 \begin{DoxyCompactList}\small\item\em Enable documentation of statistics. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2}{disable\+\_\+doc\+\_\+stats}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2}{disable\+\_\+doc\+\_\+stats}} ()
 \begin{DoxyCompactList}\small\item\em Disable documentation of statistics. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78}{enable\+\_\+reordering}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78}{enable\+\_\+reordering}} ()
 \begin{DoxyCompactList}\small\item\em Enable reordering using Sloan\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089}{disable\+\_\+reordering}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089}{disable\+\_\+reordering}} ()
 \begin{DoxyCompactList}\small\item\em Disable reordering. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e}{enable\+\_\+direct\+\_\+access\+\_\+files}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e}{enable\+\_\+direct\+\_\+access\+\_\+files}} ()
 \begin{DoxyCompactList}\small\item\em Enable use of direct access files. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681}{disable\+\_\+direct\+\_\+access\+\_\+files}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681}{disable\+\_\+direct\+\_\+access\+\_\+files}} ()
 \begin{DoxyCompactList}\small\item\em Disable use of direct access files. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_add0eb83857efab7558a8d3b11c6d3ade}{lenbuf\+\_\+factor0}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_aad96a67da8c327d1e18165c4ba4f3491}{lenbuf\+\_\+factor0}} ()
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}0\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6223b48d49fe262c95e2766ed6f4d2cd}{lenbuf\+\_\+factor1}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a36ae794a1db654ca3d6954dc7c9d263a}{lenbuf\+\_\+factor1}} ()
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}1\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_af60a52ae246af72f38882bf77c324c13}{lenbuf\+\_\+factor2}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a3b60fc3bf2e8ba6c9103020556225336}{lenbuf\+\_\+factor2}} ()
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}2\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a15a7272fbf8ae4e75f781f90a768ee12}{front\+\_\+factor}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a08dbf917a3eec866c17393e804bc0549}{front\+\_\+factor}} ()
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for front size; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a2db42e5a60a0405753658132e8927fc0}{lenfle\+\_\+factor}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HSL__MA42_a39571efbdb60e0d8608a0ae602041d75}{lenfle\+\_\+factor}} ()
 \begin{DoxyCompactList}\small\item\em Factor to increase the size of the direct access files; see MA42 documentation for details. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Member Functions}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a}{solve\+\_\+for\+\_\+one\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Special solver for problems with 1 dof (MA42 can\textquotesingle{}t handle this case so \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve()}} forwards the \char`\"{}solve\char`\"{} to this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e998c0e32140bc56d4}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the Jacobian matrix and residual vector (needs to be overloaded for each solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8}{Doc\+\_\+stats}}
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a}{solve\+\_\+for\+\_\+one\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Special solver for problems with 1 dof (MA42 can\textquotesingle{}t handle this case so \doxylink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve()} forwards the "{}solve"{} to this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8}{Doc\+\_\+stats}}
 \begin{DoxyCompactList}\small\item\em Doc the solver stats or stay quiet? \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f}{Reorder\+\_\+flag}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f}{Reorder\+\_\+flag}}
 \begin{DoxyCompactList}\small\item\em Reorder elements with Sloan\textquotesingle{}s algorithm? \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70}{Use\+\_\+direct\+\_\+access\+\_\+files}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70}{Use\+\_\+direct\+\_\+access\+\_\+files}}
 \begin{DoxyCompactList}\small\item\em Use direct access files? \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19}{Lenbuf\+\_\+factor0}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19}{Lenbuf\+\_\+factor0}}
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}0\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6}{Lenbuf\+\_\+factor1}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6}{Lenbuf\+\_\+factor1}}
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}1\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9}{Lenbuf\+\_\+factor2}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9}{Lenbuf\+\_\+factor2}}
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for lenbuf\mbox{[}2\mbox{]}; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb}{Front\+\_\+factor}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb}{Front\+\_\+factor}}
 \begin{DoxyCompactList}\small\item\em Factor to increase storage for front size; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585}{Lenfle\+\_\+factor}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585}{Lenfle\+\_\+factor}}
 \begin{DoxyCompactList}\small\item\em Factor to increase size of direct access files; see MA42 documentation for details. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}{Icntl}} \mbox{[}8\mbox{]}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}{Icntl}} \mbox{[}8\mbox{]}
 \begin{DoxyCompactList}\small\item\em Control flag for MA42; see MA42 documentation for details. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}{Isave}} \mbox{[}45\mbox{]}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}{Isave}} \mbox{[}45\mbox{]}
 \begin{DoxyCompactList}\small\item\em Control flag for MA42; see MA42 documentation for details. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}{Info}} \mbox{[}23\mbox{]}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}{Info}} \mbox{[}23\mbox{]}
 \begin{DoxyCompactList}\small\item\em Control flag for MA42; see MA42 documentation for details. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}{W}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}{W}}
 \begin{DoxyCompactList}\small\item\em Workspace storage for MA42. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}{Lw}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}{Lw}}
 \begin{DoxyCompactList}\small\item\em Size of the workspace array, W. \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}{IW}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}{IW}}
 \begin{DoxyCompactList}\small\item\em Integer workspace storage for MA42. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}{Liw}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}{Liw}}
 \begin{DoxyCompactList}\small\item\em Size of the integer workspace array. \end{DoxyCompactList}\item 
-unsigned long \mbox{\hyperlink{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce}{N\+\_\+dof}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce}{N\+\_\+dof}}
 \begin{DoxyCompactList}\small\item\em Size of the linear system. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Linear solver class that provides a wrapper to the frontal solver MA42 from the \href{http://www.hsl.rl.ac.uk/}{\texttt{ HSL library;}} see \href{http://www.hsl.rl.ac.uk/}{\texttt{ http\+://www.\+hsl.\+rl.\+ac.\+uk/.}} 
 
-Definition at line 55 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00055}{55}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_adb51ab900d877ac6721745c1b6a9c76d}\label{classoomph_1_1HSL__MA42_adb51ab900d877ac6721745c1b6a9c76d}} 
+\Hypertarget{classoomph_1_1HSL__MA42_adb51ab900d877ac6721745c1b6a9c76d}\label{classoomph_1_1HSL__MA42_adb51ab900d877ac6721745c1b6a9c76d} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!HSL\_MA42@{HSL\_MA42}}
 \index{HSL\_MA42@{HSL\_MA42}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{HSL\_MA42()}{HSL\_MA42()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -125,17 +215,17 @@ Constructor\+: By default suppress verbose output (stats), don\textquotesingle{}
 
 
 
-Definition at line 119 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00119}{119}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Doc\+\_\+stats, Front\+\_\+factor, Lenbuf\+\_\+factor0, Lenbuf\+\_\+factor1, Lenbuf\+\_\+factor2, Lenfle\+\_\+factor, Reorder\+\_\+flag, and Use\+\_\+direct\+\_\+access\+\_\+files.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00064}{Doc\+\_\+stats}}, \mbox{\hyperlink{frontal__solver_8h_source_l00086}{Front\+\_\+factor}}, \mbox{\hyperlink{frontal__solver_8h_source_l00074}{Lenbuf\+\_\+factor0}}, \mbox{\hyperlink{frontal__solver_8h_source_l00078}{Lenbuf\+\_\+factor1}}, \mbox{\hyperlink{frontal__solver_8h_source_l00082}{Lenbuf\+\_\+factor2}}, \mbox{\hyperlink{frontal__solver_8h_source_l00090}{Lenfle\+\_\+factor}}, \mbox{\hyperlink{frontal__solver_8h_source_l00067}{Reorder\+\_\+flag}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00070}{Use\+\_\+direct\+\_\+access\+\_\+files}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b}\label{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b}} 
-\index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!````~HSL\_MA42@{$\sim$HSL\_MA42}}
-\index{````~HSL\_MA42@{$\sim$HSL\_MA42}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
-\doxysubsubsection{\texorpdfstring{$\sim$HSL\_MA42()}{~HSL\_MA42()}}
-{\footnotesize\ttfamily oomph\+::\+HSL\+\_\+\+MA42\+::$\sim$\+HSL\+\_\+\+MA42 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\Hypertarget{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b}\label{classoomph_1_1HSL__MA42_a0987633afd0b7856dbedadab6ff8e41b} 
+\index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!````~HSL\_MA42@{\texorpdfstring{$\sim$}{\string~}HSL\_MA42}}
+\index{````~HSL\_MA42@{\texorpdfstring{$\sim$}{\string~}HSL\_MA42}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HSL\_MA42()}{\string~HSL\_MA42()}}
+{\footnotesize\ttfamily oomph\+::\+HSL\+\_\+\+MA42\+::\texorpdfstring{$\sim$}{\string~}\+HSL\+\_\+\+MA42 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -143,17 +233,17 @@ Destructor, clean up the allocated memory.
 
 
 
-Definition at line 134 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00134}{134}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40}\label{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40}\label{classoomph_1_1HSL__MA42_a8e6e72d921fff8e15418dbc3482e4f40} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!HSL\_MA42@{HSL\_MA42}}
 \index{HSL\_MA42@{HSL\_MA42}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{HSL\_MA42()}{HSL\_MA42()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+HSL\+\_\+\+MA42\+::\+HSL\+\_\+\+MA42 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+HSL\+\_\+\+MA42\+::\+HSL\+\_\+\+MA42 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -162,11 +252,11 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}\label{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0}\label{classoomph_1_1HSL__MA42_a81487397ec92afb883f0a95beb99aff0} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -178,21 +268,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 146 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00146}{146}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References IW, Liw, Lw, and W.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00108}{IW}}, \mbox{\hyperlink{frontal__solver_8h_source_l00111}{Liw}}, \mbox{\hyperlink{frontal__solver_8h_source_l00105}{Lw}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00102}{W}}.
 
 
 
-Referenced by disable\+\_\+resolve(), and $\sim$\+HSL\+\_\+\+MA42().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00163}{disable\+\_\+resolve()}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00134}{\texorpdfstring{$\sim$}{\string~}\+HSL\+\_\+\+MA42()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681}\label{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681}\label{classoomph_1_1HSL__MA42_a3a097433f26487e9d741b999beb03681} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!disable\_direct\_access\_files@{disable\_direct\_access\_files}}
 \index{disable\_direct\_access\_files@{disable\_direct\_access\_files}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{disable\_direct\_access\_files()}{disable\_direct\_access\_files()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+direct\+\_\+access\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+direct\+\_\+access\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -200,17 +290,17 @@ Disable use of direct access files.
 
 
 
-Definition at line 237 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00237}{237}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+direct\+\_\+access\+\_\+files.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00070}{Use\+\_\+direct\+\_\+access\+\_\+files}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2}\label{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2}} 
+\Hypertarget{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2}\label{classoomph_1_1HSL__MA42_aeb9ed583870a140508c8eb77ceecf3b2} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!disable\_doc\_stats@{disable\_doc\_stats}}
 \index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -218,17 +308,17 @@ Disable documentation of statistics.
 
 
 
-Definition at line 213 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00213}{213}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Doc\+\_\+stats.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00064}{Doc\+\_\+stats}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089}\label{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089}\label{classoomph_1_1HSL__MA42_a9fa85bebbf456888d454ffb8b8783089} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!disable\_reordering@{disable\_reordering}}
 \index{disable\_reordering@{disable\_reordering}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{disable\_reordering()}{disable\_reordering()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+reordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+reordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -236,17 +326,17 @@ Disable reordering.
 
 
 
-Definition at line 225 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00225}{225}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Reorder\+\_\+flag.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00067}{Reorder\+\_\+flag}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}\label{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9}\label{classoomph_1_1HSL__MA42_a8419d983544da158f96ab305549a94a9} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!disable\_resolve@{disable\_resolve}}
 \index{disable\_resolve@{disable\_resolve}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -258,17 +348,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 163 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00163}{163}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+References \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00146}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e}\label{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e}\label{classoomph_1_1HSL__MA42_a89c5b22abcd421441ae6c6bc51a6a45e} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!enable\_direct\_access\_files@{enable\_direct\_access\_files}}
 \index{enable\_direct\_access\_files@{enable\_direct\_access\_files}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{enable\_direct\_access\_files()}{enable\_direct\_access\_files()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+direct\+\_\+access\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+direct\+\_\+access\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -276,17 +366,17 @@ Enable use of direct access files.
 
 
 
-Definition at line 231 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00231}{231}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+direct\+\_\+access\+\_\+files.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00070}{Use\+\_\+direct\+\_\+access\+\_\+files}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a}\label{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a}\label{classoomph_1_1HSL__MA42_a52f7aec686418a4210ab8bd010eb332a} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!enable\_doc\_stats@{enable\_doc\_stats}}
 \index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -294,17 +384,17 @@ Enable documentation of statistics.
 
 
 
-Definition at line 207 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00207}{207}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Doc\+\_\+stats.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00064}{Doc\+\_\+stats}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78}\label{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78}\label{classoomph_1_1HSL__MA42_a889fe388a889c71316e26a15ed3e3d78} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!enable\_reordering@{enable\_reordering}}
 \index{enable\_reordering@{enable\_reordering}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{enable\_reordering()}{enable\_reordering()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+reordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::enable\+\_\+reordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -312,17 +402,17 @@ Enable reordering using Sloan\textquotesingle{}s algorithm.
 
 
 
-Definition at line 219 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00219}{219}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Reorder\+\_\+flag.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00067}{Reorder\+\_\+flag}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a15a7272fbf8ae4e75f781f90a768ee12}\label{classoomph_1_1HSL__MA42_a15a7272fbf8ae4e75f781f90a768ee12}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a08dbf917a3eec866c17393e804bc0549}\label{classoomph_1_1HSL__MA42_a08dbf917a3eec866c17393e804bc0549} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!front\_factor@{front\_factor}}
 \index{front\_factor@{front\_factor}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{front\_factor()}{front\_factor()}}
-{\footnotesize\ttfamily double\& oomph\+::\+HSL\+\_\+\+MA42\+::front\+\_\+factor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+HSL\+\_\+\+MA42\+::front\+\_\+factor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -330,17 +420,17 @@ Factor to increase storage for front size; see MA42 documentation for details.
 
 
 
-Definition at line 265 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00265}{265}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Front\+\_\+factor.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00086}{Front\+\_\+factor}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_add0eb83857efab7558a8d3b11c6d3ade}\label{classoomph_1_1HSL__MA42_add0eb83857efab7558a8d3b11c6d3ade}} 
+\Hypertarget{classoomph_1_1HSL__MA42_aad96a67da8c327d1e18165c4ba4f3491}\label{classoomph_1_1HSL__MA42_aad96a67da8c327d1e18165c4ba4f3491} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!lenbuf\_factor0@{lenbuf\_factor0}}
 \index{lenbuf\_factor0@{lenbuf\_factor0}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{lenbuf\_factor0()}{lenbuf\_factor0()}}
-{\footnotesize\ttfamily double\& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -348,17 +438,17 @@ Factor to increase storage for lenbuf\mbox{[}0\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 244 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00244}{244}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Lenbuf\+\_\+factor0.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00074}{Lenbuf\+\_\+factor0}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a6223b48d49fe262c95e2766ed6f4d2cd}\label{classoomph_1_1HSL__MA42_a6223b48d49fe262c95e2766ed6f4d2cd}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a36ae794a1db654ca3d6954dc7c9d263a}\label{classoomph_1_1HSL__MA42_a36ae794a1db654ca3d6954dc7c9d263a} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!lenbuf\_factor1@{lenbuf\_factor1}}
 \index{lenbuf\_factor1@{lenbuf\_factor1}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{lenbuf\_factor1()}{lenbuf\_factor1()}}
-{\footnotesize\ttfamily double\& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -366,17 +456,17 @@ Factor to increase storage for lenbuf\mbox{[}1\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 251 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00251}{251}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Lenbuf\+\_\+factor1.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00078}{Lenbuf\+\_\+factor1}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_af60a52ae246af72f38882bf77c324c13}\label{classoomph_1_1HSL__MA42_af60a52ae246af72f38882bf77c324c13}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a3b60fc3bf2e8ba6c9103020556225336}\label{classoomph_1_1HSL__MA42_a3b60fc3bf2e8ba6c9103020556225336} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!lenbuf\_factor2@{lenbuf\_factor2}}
 \index{lenbuf\_factor2@{lenbuf\_factor2}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{lenbuf\_factor2()}{lenbuf\_factor2()}}
-{\footnotesize\ttfamily double\& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+HSL\+\_\+\+MA42\+::lenbuf\+\_\+factor2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -384,17 +474,17 @@ Factor to increase storage for lenbuf\mbox{[}2\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 258 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00258}{258}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Lenbuf\+\_\+factor2.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00082}{Lenbuf\+\_\+factor2}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a2db42e5a60a0405753658132e8927fc0}\label{classoomph_1_1HSL__MA42_a2db42e5a60a0405753658132e8927fc0}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a39571efbdb60e0d8608a0ae602041d75}\label{classoomph_1_1HSL__MA42_a39571efbdb60e0d8608a0ae602041d75} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!lenfle\_factor@{lenfle\_factor}}
 \index{lenfle\_factor@{lenfle\_factor}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{lenfle\_factor()}{lenfle\_factor()}}
-{\footnotesize\ttfamily double\& oomph\+::\+HSL\+\_\+\+MA42\+::lenfle\+\_\+factor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+HSL\+\_\+\+MA42\+::lenfle\+\_\+factor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -402,27 +492,27 @@ Factor to increase the size of the direct access files; see MA42 documentation f
 
 
 
-Definition at line 272 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00272}{272}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References Lenfle\+\_\+factor.
+References \mbox{\hyperlink{frontal__solver_8h_source_l00090}{Lenfle\+\_\+factor}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0}\label{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0}\label{classoomph_1_1HSL__MA42_a406bbb32f4f16420fd2b6866fe0f4fd0} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347}\label{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347}\label{classoomph_1_1HSL__MA42_a6ea4a5adf63088f155b81ab650f44347} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!reorder\_elements@{reorder\_elements}}
 \index{reorder\_elements@{reorder\_elements}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{reorder\_elements()}{reorder\_elements()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::reorder\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::reorder\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -430,21 +520,21 @@ Function to reorder the elements based on Sloan\textquotesingle{}s algorithm.
 
 Function to reorder the elements according to Sloan\textquotesingle{}s algorithm. 
 
-Definition at line 969 of file frontal\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{frontal__solver_8cc_source_l00969}{969}} of file \mbox{\hyperlink{frontal__solver_8cc_source}{frontal\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), Doc\+\_\+stats, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number(), i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Assembly\+Handler\+::ndof(), oomph\+::\+Mesh\+::nelement(), and oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{problem_8h_source_l01590}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00064}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b}\label{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b}} 
+\Hypertarget{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b}\label{classoomph_1_1HSL__MA42_ad59ac679b479c977c8611065c5bea91b} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!resolve@{resolve}}
 \index{resolve@{resolve}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::resolve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -456,17 +546,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line 888 of file frontal\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{888}} of file \mbox{\hyperlink{frontal__solver_8cc_source}{frontal\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, Icntl, Info, Isave, IW, Liw, Lw, N\+\_\+dof, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), and W.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{frontal__solver_8h_source_l00093}{Icntl}}, \mbox{\hyperlink{frontal__solver_8h_source_l00099}{Info}}, \mbox{\hyperlink{frontal__solver_8h_source_l00096}{Isave}}, \mbox{\hyperlink{frontal__solver_8h_source_l00108}{IW}}, \mbox{\hyperlink{frontal__solver_8h_source_l00111}{Liw}}, \mbox{\hyperlink{frontal__solver_8h_source_l00105}{Lw}}, \mbox{\hyperlink{frontal__solver_8h_source_l00114}{N\+\_\+dof}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00102}{W}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423}\label{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423}\label{classoomph_1_1HSL__MA42_a6b070c607e2e5f6af4881428d07a6423} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!solve@{solve}}
 \index{solve@{solve}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -478,17 +568,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line 178 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00178}{178}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::solve().
+References \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}\label{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}} 
+\Hypertarget{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77}\label{classoomph_1_1HSL__MA42_ad8f7434a5b1391751ac513c7dc1acc77} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!solve@{solve}}
 \index{solve@{solve}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -500,21 +590,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line 190 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00190}{190}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::solve().
+References \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}\label{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}} 
+\Hypertarget{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}\label{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!solve@{solve}}
 \index{solve@{solve}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+Solver\+: Takes pointer to problem and returns the results \doxylink{classoomph_1_1Vector}{Vector} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \doxylink{classoomph_1_1Vector}{Vector}. 
 
 Wrapper for HSL MA42 frontal solver. 
 
@@ -522,42 +612,42 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 127 of file frontal\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{127}} of file \mbox{\hyperlink{frontal__solver_8cc_source}{frontal\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Doc\+\_\+stats, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number(), Front\+\_\+factor, oomph\+::\+Assembly\+Handler\+::get\+\_\+jacobian(), i, Icntl, Info, Isave, IW, Lenbuf\+\_\+factor0, Lenbuf\+\_\+factor1, Lenbuf\+\_\+factor2, Lenfle\+\_\+factor, Liw, Lw, oomph\+::\+Problem\+::mesh\+\_\+pt(), N\+\_\+dof, oomph\+::\+Problem\+::ndof(), oomph\+::\+Assembly\+Handler\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, reorder\+\_\+elements(), Reorder\+\_\+flag, oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), solve\+\_\+for\+\_\+one\+\_\+dof(), Use\+\_\+direct\+\_\+access\+\_\+files, and W.
+References \mbox{\hyperlink{problem_8h_source_l01590}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00064}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00086}{Front\+\_\+factor}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00102}{oomph\+::\+Assembly\+Handler\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{frontal__solver_8h_source_l00093}{Icntl}}, \mbox{\hyperlink{frontal__solver_8h_source_l00099}{Info}}, \mbox{\hyperlink{frontal__solver_8h_source_l00096}{Isave}}, \mbox{\hyperlink{frontal__solver_8h_source_l00108}{IW}}, \mbox{\hyperlink{frontal__solver_8h_source_l00074}{Lenbuf\+\_\+factor0}}, \mbox{\hyperlink{frontal__solver_8h_source_l00078}{Lenbuf\+\_\+factor1}}, \mbox{\hyperlink{frontal__solver_8h_source_l00082}{Lenbuf\+\_\+factor2}}, \mbox{\hyperlink{frontal__solver_8h_source_l00090}{Lenfle\+\_\+factor}}, \mbox{\hyperlink{frontal__solver_8h_source_l00111}{Liw}}, \mbox{\hyperlink{frontal__solver_8h_source_l00105}{Lw}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00114}{N\+\_\+dof}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00969}{reorder\+\_\+elements()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00067}{Reorder\+\_\+flag}}, \mbox{\hyperlink{problem_8h_source_l02529}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00048}{solve\+\_\+for\+\_\+one\+\_\+dof()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00070}{Use\+\_\+direct\+\_\+access\+\_\+files}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00102}{W}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a}\label{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a}\label{classoomph_1_1HSL__MA42_a79fca4aba6935fc5376cd9fa33a05f6a} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!solve\_for\_one\_dof@{solve\_for\_one\_dof}}
 \index{solve\_for\_one\_dof@{solve\_for\_one\_dof}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{solve\_for\_one\_dof()}{solve\_for\_one\_dof()}}
-{\footnotesize\ttfamily void oomph\+::\+HSL\+\_\+\+MA42\+::solve\+\_\+for\+\_\+one\+\_\+dof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+HSL\+\_\+\+MA42\+::solve\+\_\+for\+\_\+one\+\_\+dof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Special solver for problems with 1 dof (MA42 can\textquotesingle{}t handle this case so \mbox{\hyperlink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve()}} forwards the \char`\"{}solve\char`\"{} to this function. 
+Special solver for problems with 1 dof (MA42 can\textquotesingle{}t handle this case so \doxylink{classoomph_1_1HSL__MA42_ae796a6b14c13d1cdb7bf49ca3c7c5aec}{solve()} forwards the "{}solve"{} to this function. 
 
-Special solver for problems with one DOF -- \mbox{\hyperlink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42}} can\textquotesingle{}t handle that! 
+Special solver for problems with one DOF -- \doxylink{classoomph_1_1HSL__MA42}{HSL\+\_\+\+MA42} can\textquotesingle{}t handle that! 
 
-Definition at line 48 of file frontal\+\_\+solver.\+cc.
-
-
-
-References oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Assembly\+Handler\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::mesh\+\_\+pt(), N\+\_\+dof, oomph\+::\+Problem\+::ndof(), oomph\+::\+Assembly\+Handler\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), and W.
+Definition at line \mbox{\hyperlink{frontal__solver_8cc_source_l00048}{48}} of file \mbox{\hyperlink{frontal__solver_8cc_source}{frontal\+\_\+solver.\+cc}}.
 
 
 
-Referenced by solve().
+References \mbox{\hyperlink{problem_8h_source_l01590}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00102}{oomph\+::\+Assembly\+Handler\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00114}{N\+\_\+dof}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l02529}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, and \mbox{\hyperlink{frontal__solver_8h_source_l00102}{W}}.
+
+
+
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8}\label{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8}\label{classoomph_1_1HSL__MA42_a186ee3391ad233b8150ef018578bf4d8} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Doc\_stats@{Doc\_stats}}
 \index{Doc\_stats@{Doc\_stats}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
-{\footnotesize\ttfamily bool oomph\+::\+HSL\+\_\+\+MA42\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -565,17 +655,17 @@ Doc the solver stats or stay quiet?
 
 
 
-Definition at line 64 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00064}{64}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+stats(), HSL\+\_\+\+MA42(), reorder\+\_\+elements(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00213}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00207}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00969}{reorder\+\_\+elements()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb}\label{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb}} 
+\Hypertarget{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb}\label{classoomph_1_1HSL__MA42_aa685586e76b9e65184c4a2fd1866b1bb} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Front\_factor@{Front\_factor}}
 \index{Front\_factor@{Front\_factor}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Front\_factor}{Front\_factor}}
-{\footnotesize\ttfamily double oomph\+::\+HSL\+\_\+\+MA42\+::\+Front\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Front\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -583,17 +673,17 @@ Factor to increase storage for front size; see MA42 documentation for details.
 
 
 
-Definition at line 86 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00086}{86}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by front\+\_\+factor(), HSL\+\_\+\+MA42(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00265}{front\+\_\+factor()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}\label{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53}\label{classoomph_1_1HSL__MA42_a607d4df18fa90208a18fbd7073412b53} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Icntl@{Icntl}}
 \index{Icntl@{Icntl}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Icntl}{Icntl}}
-{\footnotesize\ttfamily int oomph\+::\+HSL\+\_\+\+MA42\+::\+Icntl\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Icntl\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -601,17 +691,17 @@ Control flag for MA42; see MA42 documentation for details.
 
 
 
-Definition at line 93 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00093}{93}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}\label{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}} 
+\Hypertarget{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe}\label{classoomph_1_1HSL__MA42_abc3b3ea69eb833ee2c5d81509f26a6fe} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Info@{Info}}
 \index{Info@{Info}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Info}{Info}}
-{\footnotesize\ttfamily int oomph\+::\+HSL\+\_\+\+MA42\+::\+Info\mbox{[}23\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Info\mbox{[}23\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -619,17 +709,17 @@ Control flag for MA42; see MA42 documentation for details.
 
 
 
-Definition at line 99 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00099}{99}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}\label{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc}\label{classoomph_1_1HSL__MA42_a60b94dff66e7add9183e9c6e86786cfc} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Isave@{Isave}}
 \index{Isave@{Isave}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Isave}{Isave}}
-{\footnotesize\ttfamily int oomph\+::\+HSL\+\_\+\+MA42\+::\+Isave\mbox{[}45\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Isave\mbox{[}45\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -637,17 +727,17 @@ Control flag for MA42; see MA42 documentation for details.
 
 
 
-Definition at line 96 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00096}{96}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}\label{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}} 
+\Hypertarget{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162}\label{classoomph_1_1HSL__MA42_aee49355d4011d4867ec6ed92823b4162} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!IW@{IW}}
 \index{IW@{IW}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{IW}{IW}}
-{\footnotesize\ttfamily int$\ast$ oomph\+::\+HSL\+\_\+\+MA42\+::\+IW\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}\texorpdfstring{$\ast$}{*} oomph\+::\+HSL\+\_\+\+MA42\+::\+IW\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -655,17 +745,17 @@ Integer workspace storage for MA42.
 
 
 
-Definition at line 108 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00108}{108}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19}\label{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19}} 
+\Hypertarget{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19}\label{classoomph_1_1HSL__MA42_ad75423bfeb4216b896623f1dd4238d19} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Lenbuf\_factor0@{Lenbuf\_factor0}}
 \index{Lenbuf\_factor0@{Lenbuf\_factor0}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Lenbuf\_factor0}{Lenbuf\_factor0}}
-{\footnotesize\ttfamily double oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor0\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor0\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -673,17 +763,17 @@ Factor to increase storage for lenbuf\mbox{[}0\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 74 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00074}{74}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by HSL\+\_\+\+MA42(), lenbuf\+\_\+factor0(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00244}{lenbuf\+\_\+factor0()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6}\label{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6}\label{classoomph_1_1HSL__MA42_a54b6950140ec309586c01d50dc1b86b6} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Lenbuf\_factor1@{Lenbuf\_factor1}}
 \index{Lenbuf\_factor1@{Lenbuf\_factor1}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Lenbuf\_factor1}{Lenbuf\_factor1}}
-{\footnotesize\ttfamily double oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor1\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor1\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -691,17 +781,17 @@ Factor to increase storage for lenbuf\mbox{[}1\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 78 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00078}{78}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by HSL\+\_\+\+MA42(), lenbuf\+\_\+factor1(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00251}{lenbuf\+\_\+factor1()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9}\label{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9}\label{classoomph_1_1HSL__MA42_a500112b3d3e08cae377a9775d0454ca9} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Lenbuf\_factor2@{Lenbuf\_factor2}}
 \index{Lenbuf\_factor2@{Lenbuf\_factor2}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Lenbuf\_factor2}{Lenbuf\_factor2}}
-{\footnotesize\ttfamily double oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor2\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenbuf\+\_\+factor2\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -709,17 +799,17 @@ Factor to increase storage for lenbuf\mbox{[}2\mbox{]}; see MA42 documentation f
 
 
 
-Definition at line 82 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00082}{82}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by HSL\+\_\+\+MA42(), lenbuf\+\_\+factor2(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00258}{lenbuf\+\_\+factor2()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585}\label{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585}\label{classoomph_1_1HSL__MA42_a2aace9e5575adf75ccef54b744831585} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Lenfle\_factor@{Lenfle\_factor}}
 \index{Lenfle\_factor@{Lenfle\_factor}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Lenfle\_factor}{Lenfle\_factor}}
-{\footnotesize\ttfamily double oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenfle\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Lenfle\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -727,17 +817,17 @@ Factor to increase size of direct access files; see MA42 documentation for detai
 
 
 
-Definition at line 90 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00090}{90}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by HSL\+\_\+\+MA42(), lenfle\+\_\+factor(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00272}{lenfle\+\_\+factor()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}\label{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c}\label{classoomph_1_1HSL__MA42_a6ae8fb349617e5b1dfe64bb7a822de3c} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Liw@{Liw}}
 \index{Liw@{Liw}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Liw}{Liw}}
-{\footnotesize\ttfamily int oomph\+::\+HSL\+\_\+\+MA42\+::\+Liw\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Liw\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -745,17 +835,17 @@ Size of the integer workspace array.
 
 
 
-Definition at line 111 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00111}{111}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}\label{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e}\label{classoomph_1_1HSL__MA42_a0248d831f42eaf222c4283d17bdc2f5e} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Lw@{Lw}}
 \index{Lw@{Lw}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Lw}{Lw}}
-{\footnotesize\ttfamily int oomph\+::\+HSL\+\_\+\+MA42\+::\+Lw\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Lw\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -763,17 +853,17 @@ Size of the workspace array, W.
 
 
 
-Definition at line 105 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00105}{105}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), resolve(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce}\label{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce}} 
+\Hypertarget{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce}\label{classoomph_1_1HSL__MA42_aff8698e483ecef88d1a326ebe300a7ce} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!N\_dof@{N\_dof}}
 \index{N\_dof@{N\_dof}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{N\_dof}{N\_dof}}
-{\footnotesize\ttfamily unsigned long oomph\+::\+HSL\+\_\+\+MA42\+::\+N\+\_\+dof\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+HSL\+\_\+\+MA42\+::\+N\+\_\+dof\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -781,17 +871,17 @@ Size of the linear system.
 
 
 
-Definition at line 114 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00114}{114}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by resolve(), solve(), and solve\+\_\+for\+\_\+one\+\_\+dof().
+Referenced by \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00048}{solve\+\_\+for\+\_\+one\+\_\+dof()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f}\label{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f}\label{classoomph_1_1HSL__MA42_a3ed31f1e33f586e5fe9dc87f116e588f} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Reorder\_flag@{Reorder\_flag}}
 \index{Reorder\_flag@{Reorder\_flag}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Reorder\_flag}{Reorder\_flag}}
-{\footnotesize\ttfamily bool oomph\+::\+HSL\+\_\+\+MA42\+::\+Reorder\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Reorder\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -799,17 +889,17 @@ Reorder elements with Sloan\textquotesingle{}s algorithm?
 
 
 
-Definition at line 67 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00067}{67}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+reordering(), enable\+\_\+reordering(), HSL\+\_\+\+MA42(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00225}{disable\+\_\+reordering()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00219}{enable\+\_\+reordering()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70}\label{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70}} 
+\Hypertarget{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70}\label{classoomph_1_1HSL__MA42_a2f3365a6349136a32fcb4096851f7a70} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!Use\_direct\_access\_files@{Use\_direct\_access\_files}}
 \index{Use\_direct\_access\_files@{Use\_direct\_access\_files}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{Use\_direct\_access\_files}{Use\_direct\_access\_files}}
-{\footnotesize\ttfamily bool oomph\+::\+HSL\+\_\+\+MA42\+::\+Use\+\_\+direct\+\_\+access\+\_\+files\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+HSL\+\_\+\+MA42\+::\+Use\+\_\+direct\+\_\+access\+\_\+files\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -817,17 +907,17 @@ Use direct access files?
 
 
 
-Definition at line 70 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00070}{70}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+direct\+\_\+access\+\_\+files(), enable\+\_\+direct\+\_\+access\+\_\+files(), HSL\+\_\+\+MA42(), and solve().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00237}{disable\+\_\+direct\+\_\+access\+\_\+files()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00231}{enable\+\_\+direct\+\_\+access\+\_\+files()}}, \mbox{\hyperlink{frontal__solver_8h_source_l00119}{HSL\+\_\+\+MA42()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}\label{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}} 
+\Hypertarget{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac}\label{classoomph_1_1HSL__MA42_ad12e72f377a117d7a106af587bcf4cac} 
 \index{oomph::HSL\_MA42@{oomph::HSL\_MA42}!W@{W}}
 \index{W@{W}!oomph::HSL\_MA42@{oomph::HSL\_MA42}}
 \doxysubsubsection{\texorpdfstring{W}{W}}
-{\footnotesize\ttfamily double$\ast$ oomph\+::\+HSL\+\_\+\+MA42\+::W\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+HSL\+\_\+\+MA42\+::W\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -835,11 +925,11 @@ Workspace storage for MA42.
 
 
 
-Definition at line 102 of file frontal\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{frontal__solver_8h_source_l00102}{102}} of file \mbox{\hyperlink{frontal__solver_8h_source}{frontal\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), resolve(), solve(), and solve\+\_\+for\+\_\+one\+\_\+dof().
+Referenced by \mbox{\hyperlink{frontal__solver_8h_source_l00146}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{resolve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{solve()}}, and \mbox{\hyperlink{frontal__solver_8cc_source_l00048}{solve\+\_\+for\+\_\+one\+\_\+dof()}}.
 
 
 

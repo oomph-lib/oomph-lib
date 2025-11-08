@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_FISH_MESH_TEMPLATE_CC
-#define OOMPH_FISH_MESH_TEMPLATE_CC
+#ifndef OOMPH_FISH_MESH_TEMPLATE_HEADER
+#define OOMPH_FISH_MESH_TEMPLATE_HEADER
 
-#include "fish_mesh.template.h"
-
+#ifndef OOMPH_FISH_MESH_HEADER
+#error __FILE__ should only be included from fish_mesh.h.
+#endif // OOMPH_FISH_MESH_HEADER
 
 namespace oomph
 {
@@ -54,7 +55,6 @@ namespace oomph
     build_mesh(time_stepper_pt);
   }
 
-
   //=================================================================
   /// Constructor: Pass pointer GeomObject that defines
   /// the fish's back and pointer to timestepper.
@@ -73,7 +73,6 @@ namespace oomph
     // Now build the mesh
     build_mesh(time_stepper_pt);
   }
-
 
   //============================start_build_mesh=====================
   /// Build the mesh, using the geometric object that
@@ -114,11 +113,10 @@ namespace oomph
     // Set the number of boundaries
     set_nboundary(7);
 
-
     // We will store boundary coordinates on the curvilinear boundaries
     //(boundaries  0 and 4) along the fish's belly and its back.
-    Boundary_coordinate_exists[0] = true;
-    Boundary_coordinate_exists[4] = true;
+    set_boundary_coordinate_exists(0);
+    set_boundary_coordinate_exists(4);
 
     // Allocate the storage for the elements
     unsigned nelem = 4;
@@ -138,10 +136,8 @@ namespace oomph
       (2 * (n_node_1d - 1) + 1) * (2 * (n_node_1d - 1) + 1);
     Node_pt.resize(nnodes_total);
 
-
     Vector<double> s(2), s_fraction(2);
     Vector<double> r(2);
-
 
     // Create elements and all nodes in element
     //-----------------------------------------
@@ -182,7 +178,6 @@ namespace oomph
       }
     } // end of loop over elements
 
-
     // Kill repeated nodes and replace by pointers to nodes in appropriate
     //---------------------------------------------------------------------
     // neighbour. Also add node pointers to boundary arrays.
@@ -193,7 +188,6 @@ namespace oomph
 
     // Check for error in node killing
     bool stopit = false;
-
 
     // Max tolerance for error in node killing
     double Max_tol_in_node_killing = 1.0e-12;
@@ -246,7 +240,6 @@ namespace oomph
       }
     }
 
-
     // Lower fin: Western row of nodes is duplicate from element 0
     //------------------------------------------------------------
     e = 1;
@@ -275,7 +268,6 @@ namespace oomph
           unsigned i1_neigh = i1;
           unsigned j_local_neigh = i0_neigh + i1_neigh * n_node_1d;
 
-
           // Check:
           for (unsigned i = 0; i < 2; i++)
           {
@@ -298,7 +290,6 @@ namespace oomph
           finite_element_pt(e)->node_pt(j_local) =
             finite_element_pt(e_neigh)->node_pt(j_local_neigh);
         }
-
 
         // No duplicate node: Copy across to mesh
         if (!killed)
@@ -332,7 +323,6 @@ namespace oomph
         }
       }
     }
-
 
     // Upper body: Southern row of nodes is duplicate from element 0
     //--------------------------------------------------------------
@@ -425,7 +415,6 @@ namespace oomph
       }
     }
 
-
     // Upper fin: Western/southern row of nodes is duplicate from element 2/1
     //-----------------------------------------------------------------------
     e = 3;
@@ -454,7 +443,6 @@ namespace oomph
           unsigned i1_neigh = i1;
           unsigned j_local_neigh = i0_neigh + i1_neigh * n_node_1d;
 
-
           // Check:
           for (unsigned i = 0; i < 2; i++)
           {
@@ -477,7 +465,6 @@ namespace oomph
           finite_element_pt(e)->node_pt(j_local) =
             finite_element_pt(e_neigh)->node_pt(j_local_neigh);
         }
-
 
         // First horizontal row of nodes in s_0 direction (apart from
         // first node get killed and re-directed to nodes in element 1
@@ -491,7 +478,6 @@ namespace oomph
           unsigned i1_neigh = n_node_1d - 1;
           unsigned j_local_neigh = i0_neigh + i1_neigh * n_node_1d;
 
-
           // Check:
           for (unsigned i = 0; i < 2; i++)
           {
@@ -514,7 +500,6 @@ namespace oomph
           finite_element_pt(e)->node_pt(j_local) =
             finite_element_pt(e_neigh)->node_pt(j_local_neigh);
         }
-
 
         // No duplicate node: Copy across to mesh
         if (!killed)
@@ -541,7 +526,6 @@ namespace oomph
           add_boundary_node(3, finite_element_pt(e)->node_pt(j_local));
         }
 
-
         // Vertical bit of tail: boundary 2
         if (i0 == n_node_1d - 1)
         {
@@ -563,7 +547,6 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-
     // Loop over all elements and set macro element pointer
     unsigned n_element = this->nelement();
     for (unsigned e = 0; e < n_element; e++)
@@ -578,10 +561,8 @@ namespace oomph
       el_pt->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
     }
 
-
     // Setup boundary element lookup schemes
     setup_boundary_element_info();
-
 
     // Check the boundary coordinates
 #ifdef PARANOID
@@ -648,10 +629,9 @@ namespace oomph
   }
 
 
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
   //=========start_setup_adaptivity=========================================
   ///  Setup all the information that's required for spatial adaptivity:
@@ -666,12 +646,11 @@ namespace oomph
   } // end of setup_adaptivity
 
 
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
   // AlgebraicElement fish-shaped mesh
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //======================================================================
   /// Setup algebraic update operation. Nodes are "suspended"
@@ -748,7 +727,6 @@ namespace oomph
       }
     }
 
-
     // Element 1: Lower fin
     //---------------------
     {
@@ -792,7 +770,6 @@ namespace oomph
         }
       }
     }
-
 
     // Element 2: Upper body
     //----------------------
@@ -838,7 +815,6 @@ namespace oomph
       }
     }
 
-
     // Element 3: Upper fin
     //---------------------
     {
@@ -883,7 +859,6 @@ namespace oomph
       }
     }
   }
-
 
   //======================================================================
   /// Algebraic update function: Update in (upper or lower) body
@@ -939,7 +914,6 @@ namespace oomph
     node_pt->x(t, 0) = r_sym[0] + fract_y * (r_back[0] - r_sym[0]);
     node_pt->x(t, 1) = sign * (r_sym[1] + fract_y * (r_back[1] - r_sym[1]));
   }
-
 
   //======================================================================
   /// Algebraic update function: Update in (upper or lower) fin

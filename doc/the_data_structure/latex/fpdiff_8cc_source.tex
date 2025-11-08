@@ -1,0 +1,491 @@
+\doxysection{fpdiff.\+cc}
+\hypertarget{fpdiff_8cc_source}{}\label{fpdiff_8cc_source}\index{fpdiff.cc@{fpdiff.cc}}
+\mbox{\hyperlink{fpdiff_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2022\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{fpdiff_8h}{fpdiff.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gzip__reader_8h}{gzip\_reader.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{oomph__definitions_8h}{oomph\_definitions.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <regex>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00039}00039\ \textcolor{preprocessor}{\#define\ CHUNKSIZE\ 8192}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00041}00041\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00043}00043\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00044}00044\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00045}00045\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00046}00046\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00047}\mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236}{00047}}\ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236}{TestStatus}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00048}00048\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00049}\mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a8f2f0dcc08206e70ce98a3cad349b201}{00049}}\ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a8f2f0dcc08206e70ce98a3cad349b201}{Passed}}\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a7f4f75eaf58c9d9f0b987b6d3a449b41}{Failed}}\ =\ 1}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00051}\mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a7f4f75eaf58c9d9f0b987b6d3a449b41}{00051}}\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00053}00053\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00054}00054\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00055}00055\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00056}00056\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00057}\mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{00057}}\ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{Type}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00058}00058\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00059}00059\ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26ab2ee912b91d69b435159c7c3f6df7f5f}{Number}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26a27118326006d3829667a400ad23d5d98}{String}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00061}00061\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00063}00063\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00064}00064\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00065}00065\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00066}00066\ \textcolor{comment}{\ \ \ *\ @param\ value}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ @param\ ending}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ @return\ true}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ @return\ false}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00070}00070\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00071}\mbox{\hyperlink{namespaceoomph_a171b8e2864ffbcc1dfe3b1f386ea20c7}{00071}}\ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceoomph_a171b8e2864ffbcc1dfe3b1f386ea20c7}{ends\_with}}(std::string\ \textcolor{keyword}{const}\&\ value,\ std::string\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ending}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00072}00072\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ending}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}()\ >\ value.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}())}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00074}00074\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00075}00075\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{return}\ std::equal(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ending}}.rbegin(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ending}}.rend(),\ value.rbegin());}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00078}00078\ \ \ \}\ \textcolor{comment}{//\ End\ of\ ends\_with}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00080}00080\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ @brief\ Add\ number\ copies\ of\ the\ symbol\ to\ the\ input\ string.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00082}00082\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ @param\ string}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ @param\ symbol}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00085}00085\ \textcolor{comment}{\ \ \ *\ @param\ number}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00086}00086\ \textcolor{comment}{\ \ \ *\ @return\ std::string}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00087}00087\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00088}\mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{00088}}\ \ \ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symbol}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ number)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00091}00091\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ number;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00093}00093\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00094}00094\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}}\ +=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symbol}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00096}00096\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}}\ +=\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00098}00098\ \ \ \}\ \textcolor{comment}{//\ End\ of\ modify\_string\_inplace}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00100}00100\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00102}00102\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00103}00103\ \textcolor{comment}{\ \ \ *\ @param\ str}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00104}00104\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00105}\mbox{\hyperlink{namespaceoomph_ae48e2a4afbd9c318400e14f5000fe2bc}{00105}}\ \ \ \textcolor{keyword}{inline}\ std::vector<std::string>\ \mbox{\hyperlink{namespaceoomph_ae48e2a4afbd9c318400e14f5000fe2bc}{split\_string}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00106}00106\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00107}00107\ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_stream}}\{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}}\};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00108}00108\ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{word}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00109}00109\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{words}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_stream}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{word}},\ \textcolor{charliteral}{'\ '}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00111}00111\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00112}00112\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{words}}.push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{word}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{words}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00115}00115\ \ \ \}\ \textcolor{comment}{//\ End\ of\ split\_string}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00117}00117\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00118}00118\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00119}00119\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ @param\ text}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00121}00121\ \textcolor{comment}{\ \ \ *\ @return\ std::string}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00122}00122\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00123}\mbox{\hyperlink{namespaceoomph_a7ea62943887bf64e8d42559688c6db10}{00123}}\ \ \ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceoomph_a7ea62943887bf64e8d42559688c6db10}{lower}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00124}00124\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00125}00125\ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_copy}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00126}00126\ \ \ \ \ std::transform(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_copy}}.begin(),}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_copy}}.end(),}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_copy}}.begin(),}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c)\ \{\ return\ std::tolower(c);\ \});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\_copy}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00131}00131\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00133}00133\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00134}00134\ \textcolor{comment}{\ \ \ *\ @brief\ Distinguish\ between\ a\ number\ and\ a\ string:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00135}00135\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00136}00136\ \textcolor{comment}{\ \ \ *\ Returns\ integer\ 1\ if\ the\ argument\ is\ a\ number,}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00137}00137\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\ if\ the\ argument\ is\ a\ string.}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00138}00138\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00139}00139\ \textcolor{comment}{\ \ \ *\ @param\ text}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00140}00140\ \textcolor{comment}{\ \ \ *\ @return\ true}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00141}00141\ \textcolor{comment}{\ \ \ *\ @return\ false}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00142}00142\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00143}\mbox{\hyperlink{namespaceoomph_ad63ea0fd281bfcf970f611d0a0d4d701}{00143}}\ \ \ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{Type}}\ \mbox{\hyperlink{namespaceoomph_ad63ea0fd281bfcf970f611d0a0d4d701}{get\_type}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00144}00144\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00145}00145\ \ \ \ \ std::regex\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{is\_number}}\{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00146}00146\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}(\string^[+-\/]?[0-\/9]*[.]?[0-\/9]+\$)|(\string^[+-\/]?[0-\/9]+[.]?[0-\/9]*\$)|(\string^[+-\/]?[0-\/9]?"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00147}00147\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[.]?[0-\/9]+[EeDd][+-\/][0-\/9]+\$)"{}}\};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::regex\_match(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{is\_number}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00149}00149\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00150}00150\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26ab2ee912b91d69b435159c7c3f6df7f5f}{Type::Number}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26a27118326006d3829667a400ad23d5d98}{Type::String}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00153}00153\ \ \ \}\ \textcolor{comment}{//\ End\ of\ get\_type}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00155}00155\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00156}00156\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00157}00157\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00158}00158\ \textcolor{comment}{\ \ \ *\ @param\ filename}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00159}00159\ \textcolor{comment}{\ \ \ *\ @return\ std::vector<std::string>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00160}00160\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00161}\mbox{\hyperlink{namespaceoomph_a46bbe9246d18deaa334e40e0ad55419e}{00161}}\ \ \ std::vector<std::string>\ \mbox{\hyperlink{namespaceoomph_a46bbe9246d18deaa334e40e0ad55419e}{gzip\_load}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00162}00162\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespaceoomph_a171b8e2864ffbcc1dfe3b1f386ea20c7}{ends\_with}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}},\ \textcolor{stringliteral}{"{}.gz"{}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00164}00164\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00165}00165\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}File:\(\backslash\)n\(\backslash\)t"{}}\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)nis\ not\ a\ gzip\ file!"{}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1GZipReader}{GZipReader}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}).\mbox{\hyperlink{classoomph_1_1GZipReader_a19ade96e79403b1162b63607fac5cb39}{read\_all}}();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00170}00170\ \ \ \}\ \textcolor{comment}{//\ End\ of\ gzip\_load}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00173}00173\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00174}00174\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00175}00175\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00176}00176\ \textcolor{comment}{\ \ \ *\ @param\ filename}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00177}00177\ \textcolor{comment}{\ \ \ *\ @return\ std::vector<std::string>}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00178}00178\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00179}\mbox{\hyperlink{namespaceoomph_a59cf32c51e58f7b7d05ffb75a5aa578a}{00179}}\ \ \ std::vector<std::string>\ \mbox{\hyperlink{namespaceoomph_a59cf32c51e58f7b7d05ffb75a5aa578a}{load\_file}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00180}00180\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00181}00181\ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00182}00182\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\_data}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceoomph_a171b8e2864ffbcc1dfe3b1f386ea20c7}{ends\_with}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}},\ \textcolor{stringliteral}{"{}.gz"{}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00185}00185\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00186}00186\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\_data}}\ =\ std::move(\mbox{\hyperlink{namespaceoomph_a46bbe9246d18deaa334e40e0ad55419e}{gzip\_load}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}));}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00187}00187\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00188}00188\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00189}00189\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00190}00190\ \ \ \ \ \ \ std::ifstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00191}00191\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00192}00192\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00193}00193\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\_data}}.push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00194}00194\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00195}00195\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file}}.close();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00197}00197\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\_data}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00198}00198\ \ \ \}\ \textcolor{comment}{//\ End\ of\ load\_file}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00200}00200\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00201}00201\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00202}00202\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00203}00203\ \textcolor{comment}{\ \ \ *\ @param\ filename1}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00204}00204\ \textcolor{comment}{\ \ \ *\ @param\ filename2}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00205}00205\ \textcolor{comment}{\ \ \ *\ @param\ relative\_error}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ @param\ small}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00207}00207\ \textcolor{comment}{\ \ \ *\ @param\ outstream}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00208}00208\ \textcolor{comment}{\ \ \ *\ @return\ int}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00209}00209\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00210}\mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{00210}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{fpdiff}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\_error}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00215}00215\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00216}00216\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ worst\ case\ error\ sizes}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00217}00217\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_rel\_diff}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00218}00218\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00220}00220\ \ \ \ \ \textcolor{comment}{//\ Open\ the\ files\ (if\ run\ as\ a\ script\ then\ open\ Faileds\ are\ handled\ higher}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00221}00221\ \ \ \ \ \textcolor{comment}{//\ up\ by\ catching\ the\ error,\ otherwise\ it\ is\ the\ parent\ program's\ job\ to}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00222}00222\ \ \ \ \ \textcolor{comment}{//\ handle\ the\ error\ and\ so\ we\ shouldn't\ do\ anything\ weird\ here).}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00223}00223\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file1}}\ =\ \mbox{\hyperlink{namespaceoomph_a59cf32c51e58f7b7d05ffb75a5aa578a}{load\_file}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00224}00224\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file2}}\ =\ \mbox{\hyperlink{namespaceoomph_a59cf32c51e58f7b7d05ffb75a5aa578a}{load\_file}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ number\ of\ lines\ in\ each\ file}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00227}00227\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n1}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file1}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00228}00228\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file2}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00229}00229\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_lines}}\ =\ std::min(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n1}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n2}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n1}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n2}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00232}00232\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00233}00233\ \ \ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{temp}}(std::move(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file1}}));}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00234}00234\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file1}}\ =\ std::move(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file2}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00235}00235\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file2}}\ =\ std::move(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{temp}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00236}00236\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00238}00238\ \ \ \ \ \textcolor{comment}{//\ Counter\ for\ the\ number\ of\ errors}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00239}00239\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00241}00241\ \ \ \ \ \textcolor{comment}{//\ Counter\ for\ the\ number\ of\ lines}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00242}00242\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00244}00244\ \ \ \ \ \textcolor{comment}{//\ Counter\ for\ the\ number\ of\ lines\ with\ errors}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00245}00245\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nline\_error}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00247}00247\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ lines\ in\ file1\ (the\ file\ with\ the\ most\ lines!)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line1}}\ :\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file1}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00249}00249\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00250}00250\ \ \ \ \ \ \ \textcolor{comment}{//\ Increase\ the\ counter}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00251}00251\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00253}00253\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we've\ run\ over\ the\ end\ of\ the\ file2,\ issue\ a\ warning\ and\ end\ the}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00254}00254\ \ \ \ \ \ \ \textcolor{comment}{//\ loop}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00255}00255\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ >=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_lines}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00256}00256\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00257}00257\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nWarning:\ files\ have\ different\ numbers\ of\ lines\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nResults\ are\ for\ first\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ lines\ of\ both\ files\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00261}00261\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00263}00263\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00265}00265\ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ the\ next\ line\ from\ file2}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00266}00266\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file2}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}];}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00268}00268\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ lines\ are\ the\ same,\ we're\ done}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00269}00269\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line1}}\ ==\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line2}})\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00271}00271\ \ \ \ \ \ \ \textcolor{comment}{//\ We\ need\ to\ do\ more\ work}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00273}00273\ \ \ \ \ \ \ \textcolor{comment}{//\ Split\ each\ line\ into\ its\ separate\ fields}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00274}00274\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}\ =\ \mbox{\hyperlink{namespaceoomph_ae48e2a4afbd9c318400e14f5000fe2bc}{split\_string}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line1}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00275}00275\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}\ =\ \mbox{\hyperlink{namespaceoomph_ae48e2a4afbd9c318400e14f5000fe2bc}{split\_string}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line2}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00277}00277\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ number\ of\ fields\ in\ each\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00278}00278\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field1}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00279}00279\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00281}00281\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field1}}\ !=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field2}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00282}00282\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00283}00283\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ =====>\ line\ "{}}\ <<\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ +\ 1)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}:\ different\ number\ of\ fields\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field1}}\ <<\ \textcolor{stringliteral}{"{}\ fields:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line1}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field2}}\ <<\ \textcolor{stringliteral}{"{}\ fields:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{line2}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00287}00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00289}00289\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00291}00291\ \ \ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ indicate\ whether\ there\ has\ been\ a\ problem\ in\ the\ field}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00292}00292\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{encountered\_problem}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00294}00294\ \ \ \ \ \ \ \textcolor{comment}{//\ Strings\ that\ will\ hold\ the\ output\ data}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00295}00295\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline1}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00296}00296\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00297}00297\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline3}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00299}00299\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ fields}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00300}00300\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_field1}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00301}00301\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00302}00302\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ by\ loading\ the\ fields\ into\ the\ outputlines\ (plus\ whitespace)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00303}00303\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline1}}\ +=\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ +\ \textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00304}00304\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline3}}\ +=\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ +\ \textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00306}00306\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ lengths\ of\ the\ fields}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length1}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].length();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].length();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pad\ the\ shortest\ field\ so\ the\ lengths\ are\ the\ same}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length2}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00312}00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length1}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length2}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00313}00313\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length2}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length1}});\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline1}}\ +=\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00318}00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00320}00320\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length1}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length1}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length2}});\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline3}}\ +=\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00326}00326\ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ if\ (length1\ <\ length2)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ fields\ are\ identical,\ we\ are\ fine}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ ==\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}])}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00330}00330\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Put\ spaces\ into\ the\ error\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}},\ \textcolor{stringliteral}{"{}\ "{}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00334}00334\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ type\ (numeric\ or\ string)\ of\ each\ field}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00337}00337\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{Type}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type1}}\ =\ \mbox{\hyperlink{namespaceoomph_ad63ea0fd281bfcf970f611d0a0d4d701}{get\_type}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00338}00338\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{Type}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type2}}\ =\ \mbox{\hyperlink{namespaceoomph_ad63ea0fd281bfcf970f611d0a0d4d701}{get\_type}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ data-\/types\ aren't\ the\ same\ issue\ an\ error}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type1}}\ !=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type2}})\ ||\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type1}}\ ==\ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26a27118326006d3829667a400ad23d5d98}{Type::String}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00342}00342\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symbol}}\ =\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type1}}\ !=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{type2}}\ ?\ \textcolor{stringliteral}{"{}*"{}}\ :\ \textcolor{stringliteral}{"{}\%"{}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{encountered\_problem}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Put\ the\ appropriate\ symbol\ into\ the\ error\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symbol}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00350}00350\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ strings\ to\ floating\ point\ number}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{string\_to\_double}}\ =\ [](\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})\ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::stod(}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ std::regex\_replace(\mbox{\hyperlink{namespaceoomph_a7ea62943887bf64e8d42559688c6db10}{lower}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}}),\ std::regex(\textcolor{stringliteral}{"{}d"{}}),\ \textcolor{stringliteral}{"{}e"{}}));}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00356}00356\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{string\_to\_double}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields1}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{string\_to\_double}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fields2}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00360}00360\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ both\ numbers\ are\ very\ small,\ that's\ fine}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00361}00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}})\ <=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}})\ \&\&\ (std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})\ <=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}}))}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00362}00362\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Put\ spaces\ into\ the\ error\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}},\ \textcolor{stringliteral}{"{}\ "{}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00365}00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00367}00367\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ relative\ difference\ based\ on\ the\ largest\ number}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Note\ that\ this\ "{}minimises"{}\ the\ relative\ error\ (in\ some\ sense)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ but\ means\ that\ I\ don't\ have\ to\ separately\ trap\ the\ cases}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ when\ x1,\ x2\ are\ zero}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ 100.0\ *\ (std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})\ /}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}),\ std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})));}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ relative\ error\ is\ smaller\ than\ the\ tolerance,\ that's\ fine}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (diff\ <=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\_error}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Put\ spaces\ into\ the\ error\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}},\ \textcolor{stringliteral}{"{}\ "{}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ issue\ an\ error}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{encountered\_problem}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Put\ the\ appropriate\ symbols\ into\ the\ error\ line}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{modify\_string\_inplace}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}},\ \textcolor{stringliteral}{"{}-\/"{}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{field\_length}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Record\ any\ changes\ in\ the\ worst\ case\ values}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_rel\_diff}}\ =\ std::max(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_rel\_diff}},\ diff);}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ max\_wrong\_entry\ =}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ std::max(\{max\_wrong\_entry,\ std::fabs(x1),\ std::fabs(x2)\});}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}})\ >\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}}\ =\ std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})\ >\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}}\ =\ std::fabs(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00403}00403\ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ if\ ((std::fabs(x1)\ <=\ small)\ \&\&\ (std::fabs(x2)\ <=\ small))}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00404}00404\ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ for\ (unsigned\ i\ =\ 0;\ i\ <\ n\_field1;\ i++)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00406}00406\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ has\ been\ any\ sort\ of\ error,\ print\ it}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00407}00407\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{encountered\_problem}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00408}00408\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00409}00409\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nline\_error}}++;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00410}00410\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ =====>\ line\ "{}}\ <<\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ +\ 1)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline1}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline2}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outputline3}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00414}00414\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00415}00415\ \ \ \ \ \}\ \textcolor{comment}{//\ for\ (const\ auto\&\ line1\ :\ file1)}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00416}00416\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00417}00417\ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{border}}(80,\ \textcolor{charliteral}{'*'});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00418}00418\ \ \ \ \ std::cout\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{border}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nfpdiff()\ compared\ files:"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ *\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ *\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00421}00421\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00422}00422\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00423}00423\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ In\ files\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ number\ of\ lines\ processed:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ number\ of\ lines\ containing\ errors:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nline\_error}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ number\ of\ errors:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nerr}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ largest\ relative\ error:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_rel\_diff}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ largest\ abs\ value\ of\ an\ entry\ which\ caused\ an\ error:\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_wrong\_entry}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n========================================================"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ Parameters\ used:"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ threshold\ for\ numerical\ zero\ :\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ maximum\ rel.\ difference\ [percent]\ :\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\_error}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ Legend:\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ *******\ \ means\ differences\ in\ data\ type\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}(string\ vs\ number)"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/\ \ means\ real\ data\ exceeded\ the\ relative\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}difference\ maximum"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%\%\%\%\%\%\%\ \ means\ that\ two\ strings\ are\ different"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n========================================================"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \ \ [FAILED]"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00442}00442\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Test\ failed!\(\backslash\)n"{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{border}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00443}00443\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXIT\_FAILURE}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00444}00444\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00445}00445\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00446}00446\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00447}00447\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ In\ files\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ [OK]\ for\ fpdiff.py\ parameters:\ -\/\ max.\ rel.\ error\ =\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\_error}}\ <<\ \textcolor{stringliteral}{"{}\ \%"{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ numerical\ zero\ \ =\ "{}}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00452}00452\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Test\ passed!\(\backslash\)n"{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{border}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00453}00453\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXIT\_SUCCESS}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00454}00454\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00455}00455\ \ \ \}\ \textcolor{comment}{//\ End\ of\ fpdiff}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00457}00457\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00458}00458\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00459}00459\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00460}00460\ \textcolor{comment}{\ \ \ *\ @param\ filename1:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00461}00461\ \textcolor{comment}{\ \ \ *\ @param\ filename2:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00462}00462\ \textcolor{comment}{\ \ \ *\ @param\ log\_file:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00463}00463\ \textcolor{comment}{\ \ \ *\ @param\ relative\_error:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00464}00464\ \textcolor{comment}{\ \ \ *\ @param\ small:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00465}00465\ \textcolor{comment}{\ \ \ *\ @return\ int:}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00466}00466\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00467}\mbox{\hyperlink{namespaceoomph_a103b03891c879729cbcb606f5123f6d7}{00467}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{fpdiff}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\_file}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\_error}},}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}})}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00472}00472\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00473}00473\ \ \ \ \ \textcolor{comment}{//\ File\ to\ output\ fpdiff\ output\ to}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00474}00474\ \ \ \ \ std::ofstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\_stream}}\{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\_file}}\};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00476}00476\ \ \ \ \ \textcolor{comment}{//\ Run\ test}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00477}00477\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test\_status}}\ =\ \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{fpdiff}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\_stream}});}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00479}00479\ \ \ \ \ \textcolor{comment}{//\ Close\ file}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00480}00480\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\_stream}}.close();}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00481}00481\ }
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00482}00482\ \ \ \ \ \textcolor{comment}{//\ Return\ test\ result}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00483}00483\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test\_status}};}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00484}00484\ \ \ \}\ \textcolor{comment}{//\ End\ of\ fpdiff}}
+\DoxyCodeLine{\Hypertarget{fpdiff_8cc_source_l00485}00485\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+
+\end{DoxyCode}

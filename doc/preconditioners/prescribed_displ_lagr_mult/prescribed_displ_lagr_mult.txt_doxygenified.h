@@ -621,5 +621,5 @@ demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

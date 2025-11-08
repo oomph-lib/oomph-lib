@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -25,7 +25,7 @@ cat Validation/validation.log >> ../../validation.log
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 
 

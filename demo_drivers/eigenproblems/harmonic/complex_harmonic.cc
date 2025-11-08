@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -76,12 +76,8 @@ public:
 
 //=================================================================
 /// A class for all elements that solve the eigenvalue problem
-/// \f[ 
-/// \frac{\partial w}{\partial x}  = \lambda u
-/// \f] 
-/// \f[
-/// \frac{\partial u}{\partial x} = (\lambda - \mu) w
-/// \f]
+/// \f[  \frac{\partial w}{\partial x}  = \lambda u \f]
+/// \f[ \frac{\partial u}{\partial x} = (\lambda - \mu) w \f]
 /// This class  contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //================================================================
@@ -421,7 +417,7 @@ void ComplexHarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
+ snprintf(filename, sizeof(filename), "soln%i.dat",label);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -495,7 +491,7 @@ solve(const unsigned& label)
  this->doc_solution(label);
 
  char filename[100];
- sprintf(filename,"eigenvalues%i.dat",label);
+ snprintf(filename, sizeof(filename), "eigenvalues%i.dat",label);
  
  //Open an output file for the sorted eigenvalues
  ofstream evalues(filename);
@@ -513,9 +509,9 @@ solve(const unsigned& label)
 } //end_of_solve
  
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main==================================================

@@ -1,1 +1,0 @@
-SUBDIRS = oscillating_sphere

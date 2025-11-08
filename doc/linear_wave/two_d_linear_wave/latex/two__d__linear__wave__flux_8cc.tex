@@ -1,16 +1,16 @@
-\hypertarget{two__d__linear__wave__flux_8cc}{}\doxysection{two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc File Reference}
-\label{two__d__linear__wave__flux_8cc}\index{two\_d\_linear\_wave\_flux.cc@{two\_d\_linear\_wave\_flux.cc}}
-\doxysubsection*{Classes}
+\doxysection{two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc File Reference}
+\hypertarget{two__d__linear__wave__flux_8cc}{}\label{two__d__linear__wave__flux_8cc}\index{two\_d\_linear\_wave\_flux.cc@{two\_d\_linear\_wave\_flux.cc}}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classLinearWaveProblem}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
-\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Namespaces}
+\begin{DoxyCompactList}\small\item\em Linear\+Wave problem in rectanglular domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceTanhSolnForLinearWave}{Tanh\+Soln\+For\+Linear\+Wave}}
+namespace \mbox{\hyperlink{namespaceTanhSolnForLinearWave}{Tanh\+Soln\+For\+Linear\+Wave}}
 \begin{DoxyCompactList}\small\item\em Namespace for exact solution for Linear\+Wave equation with sharp step. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{Tanh\+Soln\+For\+Linear\+Wave\+::exact\+\_\+u}} (const double \&time, const Vector$<$ double $>$ \&x)
@@ -27,26 +27,26 @@ void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_af4c104781fc753f17614bcd8ac
 \begin{DoxyCompactList}\small\item\em Gradient of exact solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5a56ef7a715cb0b6e709f928d0f10592}{Tanh\+Soln\+For\+Linear\+Wave\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary}} (const double \&time, const Vector$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Prescribed flux on a fixed y max boundary. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
+int \mbox{\hyperlink{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve Linear\+Wave problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
+\Hypertarget{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{two__d__linear__wave__flux_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
 \index{two\_d\_linear\_wave\_flux.cc@{two\_d\_linear\_wave\_flux.cc}!main@{main}}
 \index{main@{main}!two\_d\_linear\_wave\_flux.cc@{two\_d\_linear\_wave\_flux.cc}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
-///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
-
-Demonstrate how to solve Linear\+Wave problem 
-
-Definition at line 603 of file two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc.
+Demonstrate how to solve Linear\+Wave problem. 
 
 
 
-References Tanh\+Soln\+For\+Linear\+Wave\+::get\+\_\+source(), and Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run().
+Definition at line \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00603}{603}} of file \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00091}{Tanh\+Soln\+For\+Linear\+Wave\+::get\+\_\+source()}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00472}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run()}}.
 

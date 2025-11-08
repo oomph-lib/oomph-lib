@@ -1,8 +1,8 @@
-\hypertarget{classoomph_1_1SegregatableFSIProblem}{}\doxysection{oomph\+::Segregatable\+FSIProblem Class Reference}
-\label{classoomph_1_1SegregatableFSIProblem}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
+\doxysection{oomph\+::Segregatable\+FSIProblem Class Reference}
+\hypertarget{classoomph_1_1SegregatableFSIProblem}{}\label{classoomph_1_1SegregatableFSIProblem}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 
 
-////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////  
+Base class for problems that can be solved by segregated FSI solver.  
 
 
 
@@ -15,7 +15,7 @@ Inheritance diagram for oomph\+::Segregatable\+FSIProblem\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{classoomph_1_1SegregatableFSIProblem}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Types}
+\doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373}{convergence\+\_\+criteria}} \{ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change}}
@@ -28,25 +28,25 @@ enum \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831b
 , \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca}{Solid\+\_\+solve}}
  \}
 \begin{DoxyCompactList}\small\item\em Enumerated flags to indicate which solve is taking place. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aabbe220c15e7a348a28d54be805ca8d8}{Segregatable\+FSIProblem}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. Set default values for solver parameters\+: \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa}{$\sim$\+Segregatable\+FSIProblem}} ()
+virtual \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa}{\texorpdfstring{$\sim$}{\string~}\+Segregatable\+FSIProblem}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}{identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs}} (Vector$<$ Data $\ast$ $>$ \&fluid\+\_\+data\+\_\+pt, Vector$<$ Data $\ast$ $>$ \&solid\+\_\+data\+\_\+pt, Mesh $\ast$\&fluid\+\_\+mesh\+\_\+pt, Mesh $\ast$\&solid\+\_\+mesh\+\_\+pt)=0
+virtual void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}{identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs}} (Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \&fluid\+\_\+data\+\_\+pt, Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \&solid\+\_\+data\+\_\+pt, Mesh \texorpdfstring{$\ast$}{*}\&fluid\+\_\+mesh\+\_\+pt, Mesh \texorpdfstring{$\ast$}{*}\&solid\+\_\+mesh\+\_\+pt)=0
 \begin{DoxyCompactList}\small\item\em Identify the fluid and solid Data. This is a pure virtual function that MUST be implemented for every specific problem that is to be solved by the segregated solver. The two mesh pointers identify meshes that contain elements and nodes used during the fluid or solid solves respectively. Elements that feature during both phases of the segretated solution must be included in both. These pointers may be set to NULL. In this case, all elements in the global mesh (set up during the monolithic discretisation of the problem) contribute to the global Jacobian matrix and the residual vector, even if their contributions only contain zero entries. This can be costly, though the code will still compute the correct results. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}{setup\+\_\+segregated\+\_\+solver}} (const bool \&full\+\_\+setup\+\_\+of\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs=true)
 \begin{DoxyCompactList}\small\item\em Setup the segregated solver\+: Backup the pinned status of the fluid and solid dofs and allocate the internal storage based on the input provided by identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...) In addition, reset storage associated with convergence acceleration techniques. If the problem and degrees of freedom has not changed between calls to the solver then it is wasteful to call identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...) again and again. If the optional boolean flag is set to false then the storage for convergence acceleration techniques is reset, but the fluid and solid dofs are not altered. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{segregated\+\_\+solve}} ()
-\begin{DoxyCompactList}\small\item\em Segregated solver. Peform a segregated step from the present state of the system. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Segregated solver. Peform a segregated step from the present state of the system. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}{steady\+\_\+segregated\+\_\+solve}} ()
-\begin{DoxyCompactList}\small\item\em Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{unsteady\+\_\+segregated\+\_\+solve}} (const double \&dt)
-\begin{DoxyCompactList}\small\item\em Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}{unsteady\+\_\+segregated\+\_\+solve}} (const double \&dt, const bool \&shift\+\_\+values)
-\begin{DoxyCompactList}\small\item\em Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}} (const double \&tol)
 \begin{DoxyCompactList}\small\item\em Assess convergence based on max. residual of coupled system of eqns. The argument specifies the convergence tolerance. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}} ()
@@ -72,7 +72,7 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cb257e933a9b3e0ce6d
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7f0bee5113993bf9b4ce4ab846f49c0a}{disable\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}} ()
 \begin{DoxyCompactList}\small\item\em Do not use Irons and Tuck extrapolation for solid dofs. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}{get\+\_\+solid\+\_\+change}} (double \&rms\+\_\+change, double \&max\+\_\+change, double \&rms\+\_\+norm)
-\begin{DoxyCompactList}\small\item\em Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs()}} was last called. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when \doxylink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs()} was last called. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history if required. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3}{reset\+\_\+timer}} ()
@@ -83,7 +83,7 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6282056a5c22b707a1e6
 \begin{DoxyCompactList}\small\item\em Halt timer (e.\+g. before performing non-\/essential parts of the code such as documentation of the iteration\textquotesingle{}s progress) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b}{t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Total elapsed time since start of solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions}
+\doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0}{actions\+\_\+before\+\_\+segregated\+\_\+solve}} ()
@@ -102,7 +102,7 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a
 \begin{DoxyCompactList}\small\item\em Restore pinned status of solid dofs. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}{pointwise\+\_\+aitken\+\_\+extrapolate}} ()
 \begin{DoxyCompactList}\small\item\em Do pointwise Aitken extrapolation for solid. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
+\doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\+\_\+aitken\+\_\+counter}}
@@ -119,21 +119,21 @@ unsigned \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f18
 \begin{DoxyCompactList}\small\item\em Max. number of Picard iterations. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}{Doc\+\_\+max\+\_\+global\+\_\+residual}}
 \begin{DoxyCompactList}\small\item\em Doc maximum global residual during iteration? (default\+: false) \end{DoxyCompactList}\item 
-Vector$<$ Data $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\+\_\+data\+\_\+pt}}
+Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\+\_\+data\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Vector storing the Data objects associated with the fluid problem\+: Tyically the nodal and internal data of the elements in the fluid bulk mesh. \end{DoxyCompactList}\item 
 Vector$<$ std\+::vector$<$ bool $>$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\+\_\+value\+\_\+is\+\_\+pinned}}
 \begin{DoxyCompactList}\small\item\em Vector of vectors that store the pinned status of fluid Data values. \end{DoxyCompactList}\item 
-Vector$<$ Data $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\+\_\+data\+\_\+pt}}
+Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\+\_\+data\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Vector storing the Data objects associated with the solid problem\+: Typically the positional data of solid nodes and any quantities associated with displacement control, say. \end{DoxyCompactList}\item 
 Vector$<$ std\+::vector$<$ bool $>$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\+\_\+value\+\_\+is\+\_\+pinned}}
 \begin{DoxyCompactList}\small\item\em Vector of vectors that store the pinned status of solid Data values. \end{DoxyCompactList}\item 
 Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\+\_\+solid\+\_\+value}}
 \begin{DoxyCompactList}\small\item\em Vector storing the previous solid values -- used for convergence check. \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\+\_\+mesh\+\_\+pt}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Mesh containing only fluid elements -- the elements in this Mesh will be excluded from the assembly process when the solid problem is solved. \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\+\_\+mesh\+\_\+pt}}
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Mesh containing only solid elements -- the elements in this mesh will be excluded from the assembly process when the fluid problem is solved. \end{DoxyCompactList}\item 
-Vector$<$ Mesh $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\+\_\+sub\+\_\+mesh\+\_\+pt}}
+Vector$<$ Mesh \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\+\_\+sub\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Backup for the pointers to the submeshes in the original problem. \end{DoxyCompactList}\item 
 Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\+\_\+irons\+\_\+and\+\_\+tuck}}
 \begin{DoxyCompactList}\small\item\em Vector of changes in Irons and Tuck under-\/relaxation. \end{DoxyCompactList}\item 
@@ -143,7 +143,7 @@ Vector$<$ Vector$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1SegregatableFS
 \begin{DoxyCompactList}\small\item\em Vector of Vectors containing up to three previous iterates for the solid dofs; used for pointwise Aitken extrapolation. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}{Recheck\+\_\+convergence\+\_\+after\+\_\+pointwise\+\_\+aitken}}
 \begin{DoxyCompactList}\small\item\em Have we just done a pointwise Aitken step. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Member Functions}
+\doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}{extrapolate\+\_\+solid\+\_\+data}} ()
@@ -156,7 +156,7 @@ void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bf
 \begin{DoxyCompactList}\small\item\em Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a NULL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solid elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}{pin\+\_\+fluid\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Pin fluid dofs. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}{Omega\+\_\+relax}}
@@ -174,16 +174,14 @@ bool \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18d
 
 
 \doxysubsection{Detailed Description}
-////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
+Base class for problems that can be solved by segregated FSI solver. 
 
-Base class for problems that can be solved by segregated FSI solver 
-
-Definition at line 185 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00185}{185}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Member Enumeration Documentation}
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!convergence\_criteria@{convergence\_criteria}}
 \index{convergence\_criteria@{convergence\_criteria}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{convergence\_criteria}{convergence\_criteria}}
@@ -194,24 +192,24 @@ Definition at line 185 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 Enumerated flags for convergence criteria. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_absolute\_solid\_change@{Assess\_convergence\_based\_on\_absolute\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_absolute\_solid\_change@{Assess\_convergence\_based\_on\_absolute\_solid\_change}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_absolute\_solid\_change@{Assess\_convergence\_based\_on\_absolute\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_absolute\_solid\_change@{Assess\_convergence\_based\_on\_absolute\_solid\_change}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc} 
 Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_relative\_solid\_change@{Assess\_convergence\_based\_on\_relative\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_relative\_solid\_change@{Assess\_convergence\_based\_on\_relative\_solid\_change}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_relative\_solid\_change@{Assess\_convergence\_based\_on\_relative\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_relative\_solid\_change@{Assess\_convergence\_based\_on\_relative\_solid\_change}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081} 
 Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_max\_global\_residual@{Assess\_convergence\_based\_on\_max\_global\_residual}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_max\_global\_residual@{Assess\_convergence\_based\_on\_max\_global\_residual}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Assess\_convergence\_based\_on\_max\_global\_residual@{Assess\_convergence\_based\_on\_max\_global\_residual}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Assess\_convergence\_based\_on\_max\_global\_residual@{Assess\_convergence\_based\_on\_max\_global\_residual}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}\label{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd} 
 Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual&\\
 \hline
 
 \end{DoxyEnumFields}
 
 
-Definition at line 427 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00427}{427}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!solve\_type@{solve\_type}}
 \index{solve\_type@{solve\_type}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{solve\_type}{solve\_type}}
@@ -222,27 +220,27 @@ Definition at line 427 of file segregated\+\_\+fsi\+\_\+solver.\+h.
 Enumerated flags to indicate which solve is taking place. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Full\_solve@{Full\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Full\_solve@{Full\_solve}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Full\_solve@{Full\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Full\_solve@{Full\_solve}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d} 
 Full\+\_\+solve&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Fluid\_solve@{Fluid\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Fluid\_solve@{Fluid\_solve}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Fluid\_solve@{Fluid\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Fluid\_solve@{Fluid\_solve}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae} 
 Fluid\+\_\+solve&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Solid\_solve@{Solid\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solid\_solve@{Solid\_solve}}}\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Solid\_solve@{Solid\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solid\_solve@{Solid\_solve}}}\Hypertarget{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca}\label{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca} 
 Solid\+\_\+solve&\\
 \hline
 
 \end{DoxyEnumFields}
 
 
-Definition at line 436 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00436}{436}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aabbe220c15e7a348a28d54be805ca8d8}\label{classoomph_1_1SegregatableFSIProblem_aabbe220c15e7a348a28d54be805ca8d8}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aabbe220c15e7a348a28d54be805ca8d8}\label{classoomph_1_1SegregatableFSIProblem_aabbe220c15e7a348a28d54be805ca8d8} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!SegregatableFSIProblem@{SegregatableFSIProblem}}
 \index{SegregatableFSIProblem@{SegregatableFSIProblem}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{SegregatableFSIProblem()}{SegregatableFSIProblem()}}
@@ -261,17 +259,17 @@ Constructor. Set default values for solver parameters\+:
 \item Max. 50 Picard iterations 
 \end{DoxyItemize}boolean flag to indicate if timer has been halted
 
-Definition at line 209 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{209}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual, Convergence\+\_\+criterion, Convergence\+\_\+tolerance, Doc\+\_\+max\+\_\+global\+\_\+residual, Fluid\+\_\+mesh\+\_\+pt, Full\+\_\+solve, Max\+\_\+picard, Omega\+\_\+relax, Pointwise\+\_\+aitken\+\_\+start, Recheck\+\_\+convergence\+\_\+after\+\_\+pointwise\+\_\+aitken, Solid\+\_\+mesh\+\_\+pt, Solve\+\_\+type, T\+\_\+ref, T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve, Timer\+\_\+has\+\_\+been\+\_\+halted, Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation, and Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00431}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{Convergence\+\_\+criterion}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{Convergence\+\_\+tolerance}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00524}{Doc\+\_\+max\+\_\+global\+\_\+residual}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00564}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00438}{Full\+\_\+solve}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00521}{Max\+\_\+picard}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00622}{Omega\+\_\+relax}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00512}{Pointwise\+\_\+aitken\+\_\+start}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00585}{Recheck\+\_\+convergence\+\_\+after\+\_\+pointwise\+\_\+aitken}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00569}{Solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00515}{Solve\+\_\+type}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00634}{T\+\_\+ref}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00639}{T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00642}{Timer\+\_\+has\+\_\+been\+\_\+halted}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa}\label{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa}} 
-\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!````~SegregatableFSIProblem@{$\sim$SegregatableFSIProblem}}
-\index{````~SegregatableFSIProblem@{$\sim$SegregatableFSIProblem}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
-\doxysubsubsection{\texorpdfstring{$\sim$SegregatableFSIProblem()}{~SegregatableFSIProblem()}}
-{\footnotesize\ttfamily virtual oomph\+::\+Segregatable\+FSIProblem\+::$\sim$\+Segregatable\+FSIProblem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa}\label{classoomph_1_1SegregatableFSIProblem_aa3c69a4078b02d251e4532e73d5820aa} 
+\index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!````~SegregatableFSIProblem@{\texorpdfstring{$\sim$}{\string~}SegregatableFSIProblem}}
+\index{````~SegregatableFSIProblem@{\texorpdfstring{$\sim$}{\string~}SegregatableFSIProblem}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SegregatableFSIProblem()}{\string~SegregatableFSIProblem()}}
+{\footnotesize\ttfamily virtual oomph\+::\+Segregatable\+FSIProblem\+::\texorpdfstring{$\sim$}{\string~}\+Segregatable\+FSIProblem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -279,12 +277,12 @@ Empty virtual destructor.
 
 
 
-Definition at line 260 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00260}{260}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a284fb37276735a73bca0467fa2e44909}\label{classoomph_1_1SegregatableFSIProblem_a284fb37276735a73bca0467fa2e44909}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a284fb37276735a73bca0467fa2e44909}\label{classoomph_1_1SegregatableFSIProblem_a284fb37276735a73bca0467fa2e44909} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!actions\_after\_segregated\_solve@{actions\_after\_segregated\_solve}}
 \index{actions\_after\_segregated\_solve@{actions\_after\_segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_segregated\_solve()}{actions\_after\_segregated\_solve()}}
@@ -296,13 +294,13 @@ This function is called once at the end of each segregated solve.
 
 
 
-Definition at line 194 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00194}{194}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842}\label{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842}\label{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!actions\_before\_segregated\_convergence\_check@{actions\_before\_segregated\_convergence\_check}}
 \index{actions\_before\_segregated\_convergence\_check@{actions\_before\_segregated\_convergence\_check}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_segregated\_convergence\_check()}{actions\_before\_segregated\_convergence\_check()}}
@@ -314,13 +312,13 @@ This function is to be filled with actions that take place before the check for 
 
 
 
-Definition at line 198 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00198}{198}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0}\label{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0}\label{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!actions\_before\_segregated\_solve@{actions\_before\_segregated\_solve}}
 \index{actions\_before\_segregated\_solve@{actions\_before\_segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_segregated\_solve()}{actions\_before\_segregated\_solve()}}
@@ -332,13 +330,13 @@ This function is called once at the start of each segregated solve.
 
 
 
-Definition at line 190 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00190}{190}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ae10cc55b3dc502ba387695e8c010b0c1}\label{classoomph_1_1SegregatableFSIProblem_ae10cc55b3dc502ba387695e8c010b0c1}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ae10cc55b3dc502ba387695e8c010b0c1}\label{classoomph_1_1SegregatableFSIProblem_ae10cc55b3dc502ba387695e8c010b0c1} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_absolute\_solid\_change@{assess\_convergence\_based\_on\_absolute\_solid\_change}}
 \index{assess\_convergence\_based\_on\_absolute\_solid\_change@{assess\_convergence\_based\_on\_absolute\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_absolute\_solid\_change()}{assess\_convergence\_based\_on\_absolute\_solid\_change()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -350,9 +348,17 @@ Assess convergence based on max. absolute change of solid dofs. This interface h
 
 
 
-Definition at line 356 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00356}{356}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9}\label{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9}} 
+
+
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00356}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change()}}.
+
+
+
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00356}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change()}}.
+
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9}\label{classoomph_1_1SegregatableFSIProblem_aa0b531963389cf3b2ad253891931def9} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_absolute\_solid\_change@{assess\_convergence\_based\_on\_absolute\_solid\_change}}
 \index{assess\_convergence\_based\_on\_absolute\_solid\_change@{assess\_convergence\_based\_on\_absolute\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_absolute\_solid\_change()}{assess\_convergence\_based\_on\_absolute\_solid\_change()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -364,13 +370,13 @@ Assess convergence based on max. absolute change of solid dofs. The argument spe
 
 
 
-Definition at line 346 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00346}{346}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change, Convergence\+\_\+criterion, and Convergence\+\_\+tolerance.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00429}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{Convergence\+\_\+criterion}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{Convergence\+\_\+tolerance}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da}\label{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da}\label{classoomph_1_1SegregatableFSIProblem_a2fba426552e48abb7ff8a554c20953da} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_max\_global\_residual@{assess\_convergence\_based\_on\_max\_global\_residual}}
 \index{assess\_convergence\_based\_on\_max\_global\_residual@{assess\_convergence\_based\_on\_max\_global\_residual}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_max\_global\_residual()}{assess\_convergence\_based\_on\_max\_global\_residual()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -382,9 +388,17 @@ Assess convergence based on max. residuals of coupled system of eqns. This inter
 
 
 
-Definition at line 338 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00338}{338}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}\label{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}} 
+
+
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00338}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual()}}.
+
+
+
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00338}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual()}}.
+
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727}\label{classoomph_1_1SegregatableFSIProblem_a88eb2704f55c89db093cc2857490b727} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_max\_global\_residual@{assess\_convergence\_based\_on\_max\_global\_residual}}
 \index{assess\_convergence\_based\_on\_max\_global\_residual@{assess\_convergence\_based\_on\_max\_global\_residual}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_max\_global\_residual()}{assess\_convergence\_based\_on\_max\_global\_residual()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -396,13 +410,13 @@ Assess convergence based on max. residual of coupled system of eqns. The argumen
 
 
 
-Definition at line 328 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00328}{328}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual, Convergence\+\_\+criterion, and Convergence\+\_\+tolerance.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00431}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{Convergence\+\_\+criterion}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{Convergence\+\_\+tolerance}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_af95d2c3833b64d37635e2e07776cef54}\label{classoomph_1_1SegregatableFSIProblem_af95d2c3833b64d37635e2e07776cef54}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_af95d2c3833b64d37635e2e07776cef54}\label{classoomph_1_1SegregatableFSIProblem_af95d2c3833b64d37635e2e07776cef54} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_relative\_solid\_change@{assess\_convergence\_based\_on\_relative\_solid\_change}}
 \index{assess\_convergence\_based\_on\_relative\_solid\_change@{assess\_convergence\_based\_on\_relative\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_relative\_solid\_change()}{assess\_convergence\_based\_on\_relative\_solid\_change()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -414,9 +428,17 @@ Assess convergence based on max. relative change of solid dofs. This interface h
 
 
 
-Definition at line 374 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00374}{374}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52}\label{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52}} 
+
+
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00374}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change()}}.
+
+
+
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00374}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change()}}.
+
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52}\label{classoomph_1_1SegregatableFSIProblem_abec6313054e23d998b4584f2de80bc52} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!assess\_convergence\_based\_on\_relative\_solid\_change@{assess\_convergence\_based\_on\_relative\_solid\_change}}
 \index{assess\_convergence\_based\_on\_relative\_solid\_change@{assess\_convergence\_based\_on\_relative\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{assess\_convergence\_based\_on\_relative\_solid\_change()}{assess\_convergence\_based\_on\_relative\_solid\_change()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -428,13 +450,13 @@ Assess convergence based on max. relative change of solid dofs. The argument spe
 
 
 
-Definition at line 364 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00364}{364}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change, Convergence\+\_\+criterion, and Convergence\+\_\+tolerance.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00430}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{Convergence\+\_\+criterion}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{Convergence\+\_\+tolerance}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7f0bee5113993bf9b4ce4ab846f49c0a}\label{classoomph_1_1SegregatableFSIProblem_a7f0bee5113993bf9b4ce4ab846f49c0a}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7f0bee5113993bf9b4ce4ab846f49c0a}\label{classoomph_1_1SegregatableFSIProblem_a7f0bee5113993bf9b4ce4ab846f49c0a} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!disable\_irons\_and\_tuck\_extrapolation@{disable\_irons\_and\_tuck\_extrapolation}}
 \index{disable\_irons\_and\_tuck\_extrapolation@{disable\_irons\_and\_tuck\_extrapolation}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{disable\_irons\_and\_tuck\_extrapolation()}{disable\_irons\_and\_tuck\_extrapolation()}}
@@ -446,13 +468,13 @@ Do not use Irons and Tuck extrapolation for solid dofs.
 
 
 
-Definition at line 421 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00421}{421}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a34c040b6fe4860ad44bc48ddf859e9fe}\label{classoomph_1_1SegregatableFSIProblem_a34c040b6fe4860ad44bc48ddf859e9fe}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a34c040b6fe4860ad44bc48ddf859e9fe}\label{classoomph_1_1SegregatableFSIProblem_a34c040b6fe4860ad44bc48ddf859e9fe} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!disable\_pointwise\_aitken@{disable\_pointwise\_aitken}}
 \index{disable\_pointwise\_aitken@{disable\_pointwise\_aitken}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{disable\_pointwise\_aitken()}{disable\_pointwise\_aitken()}}
@@ -464,13 +486,13 @@ Disable the use of pointwise Aitken extrapolation.
 
 
 
-Definition at line 399 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00399}{399}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0cb257e933a9b3e0ce6d9f79a263851f}\label{classoomph_1_1SegregatableFSIProblem_a0cb257e933a9b3e0ce6d9f79a263851f}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0cb257e933a9b3e0ce6d9f79a263851f}\label{classoomph_1_1SegregatableFSIProblem_a0cb257e933a9b3e0ce6d9f79a263851f} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!enable\_irons\_and\_tuck\_extrapolation@{enable\_irons\_and\_tuck\_extrapolation}}
 \index{enable\_irons\_and\_tuck\_extrapolation@{enable\_irons\_and\_tuck\_extrapolation}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{enable\_irons\_and\_tuck\_extrapolation()}{enable\_irons\_and\_tuck\_extrapolation()}}
@@ -482,13 +504,13 @@ Use Irons and Tuck extrapolation for solid dofs.
 
 
 
-Definition at line 415 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00415}{415}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a3f52d9c6555b43d8ada274ec80940c13}\label{classoomph_1_1SegregatableFSIProblem_a3f52d9c6555b43d8ada274ec80940c13}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a3f52d9c6555b43d8ada274ec80940c13}\label{classoomph_1_1SegregatableFSIProblem_a3f52d9c6555b43d8ada274ec80940c13} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!enable\_pointwise\_aitken@{enable\_pointwise\_aitken}}
 \index{enable\_pointwise\_aitken@{enable\_pointwise\_aitken}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{enable\_pointwise\_aitken()}{enable\_pointwise\_aitken()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -500,13 +522,13 @@ Use pointwise Aitken extrapolation. This interface has no argument and the curre
 
 
 
-Definition at line 393 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00393}{393}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a08c87f24c9e3ea80182a4b19d3a9fa92}\label{classoomph_1_1SegregatableFSIProblem_a08c87f24c9e3ea80182a4b19d3a9fa92}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a08c87f24c9e3ea80182a4b19d3a9fa92}\label{classoomph_1_1SegregatableFSIProblem_a08c87f24c9e3ea80182a4b19d3a9fa92} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!enable\_pointwise\_aitken@{enable\_pointwise\_aitken}}
 \index{enable\_pointwise\_aitken@{enable\_pointwise\_aitken}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{enable\_pointwise\_aitken()}{enable\_pointwise\_aitken()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -518,13 +540,13 @@ Use pointwise Aitken extrapolation. The argument is used to specify the Picard i
 
 
 
-Definition at line 384 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00384}{384}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Pointwise\+\_\+aitken\+\_\+start, and Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00512}{Pointwise\+\_\+aitken\+\_\+start}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7ad67f163160a54024fb0bcd5fa531c3}\label{classoomph_1_1SegregatableFSIProblem_a7ad67f163160a54024fb0bcd5fa531c3}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7ad67f163160a54024fb0bcd5fa531c3}\label{classoomph_1_1SegregatableFSIProblem_a7ad67f163160a54024fb0bcd5fa531c3} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!enable\_under\_relaxation@{enable\_under\_relaxation}}
 \index{enable\_under\_relaxation@{enable\_under\_relaxation}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{enable\_under\_relaxation()}{enable\_under\_relaxation()}}
@@ -536,13 +558,13 @@ Use under-\/relaxation and (optionally) specify under-\/relaxation parameter. De
 
 
 
-Definition at line 409 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00409}{409}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References Omega\+\_\+relax.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00622}{Omega\+\_\+relax}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}\label{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}\label{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!extrapolate\_solid\_data@{extrapolate\_solid\_data}}
 \index{extrapolate\_solid\_data@{extrapolate\_solid\_data}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{extrapolate\_solid\_data()}{extrapolate\_solid\_data()}}
@@ -554,17 +576,17 @@ Extrapolate solid data and update fluid mesh during unsteady run.
 
 Extrapolate solid data and update fluid mesh. Extrapolation is based on previous history values and is therefore only called in time-\/dependent runs. 
 
-Definition at line 39 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00039}{39}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Fluid\+\_\+mesh\+\_\+pt, and Solid\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00564}{Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by unsteady\+\_\+segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01054}{unsteady\+\_\+segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}\label{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}\label{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!get\_solid\_change@{get\_solid\_change}}
 \index{get\_solid\_change@{get\_solid\_change}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{get\_solid\_change()}{get\_solid\_change()}}
@@ -572,21 +594,21 @@ Referenced by unsteady\+\_\+segregated\+\_\+solve().
 
 
 
-Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs()}} was last called. 
+Get rms of change in the solid dofs; the max. change of the solid dofs and the rms norm of the solid dofs themselves. Change is computed relative to the reference values stored when \doxylink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\+\_\+solid\+\_\+dofs()} was last called. 
 
 
 
-Definition at line 303 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00303}{303}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Previous\+\_\+solid\+\_\+value, and Solid\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00559}{Previous\+\_\+solid\+\_\+value}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6282056a5c22b707a1e6c939a3f73dcd}\label{classoomph_1_1SegregatableFSIProblem_a6282056a5c22b707a1e6c939a3f73dcd}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6282056a5c22b707a1e6c939a3f73dcd}\label{classoomph_1_1SegregatableFSIProblem_a6282056a5c22b707a1e6c939a3f73dcd} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!halt\_timer@{halt\_timer}}
 \index{halt\_timer@{halt\_timer}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{halt\_timer()}{halt\_timer()}}
@@ -598,21 +620,21 @@ Halt timer (e.\+g. before performing non-\/essential parts of the code such as d
 
 
 
-Definition at line 478 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00478}{478}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References T\+\_\+ref, T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve, and Timer\+\_\+has\+\_\+been\+\_\+halted.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00634}{T\+\_\+ref}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00639}{T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00642}{Timer\+\_\+has\+\_\+been\+\_\+halted}}.
 
 
 
-Referenced by t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00489}{t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}\label{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}\label{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!identify\_fluid\_and\_solid\_dofs@{identify\_fluid\_and\_solid\_dofs}}
 \index{identify\_fluid\_and\_solid\_dofs@{identify\_fluid\_and\_solid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{identify\_fluid\_and\_solid\_dofs()}{identify\_fluid\_and\_solid\_dofs()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Segregatable\+FSIProblem\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs (\begin{DoxyParamCaption}\item[{Vector$<$ Data $\ast$ $>$ \&}]{fluid\+\_\+data\+\_\+pt,  }\item[{Vector$<$ Data $\ast$ $>$ \&}]{solid\+\_\+data\+\_\+pt,  }\item[{Mesh $\ast$\&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{Mesh $\ast$\&}]{solid\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Segregatable\+FSIProblem\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs (\begin{DoxyParamCaption}\item[{Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \&}]{fluid\+\_\+data\+\_\+pt,  }\item[{Vector$<$ Data \texorpdfstring{$\ast$}{*} $>$ \&}]{solid\+\_\+data\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}\&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}\&}]{solid\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -620,9 +642,9 @@ Identify the fluid and solid Data. This is a pure virtual function that MUST be 
 
 
 
-Referenced by setup\+\_\+segregated\+\_\+solver().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}\label{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}\label{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!pin\_fluid\_dofs@{pin\_fluid\_dofs}}
 \index{pin\_fluid\_dofs@{pin\_fluid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{pin\_fluid\_dofs()}{pin\_fluid\_dofs()}}
@@ -634,17 +656,17 @@ Pin fluid dofs.
 
 Pin all fluid dofs. 
 
-Definition at line 153 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00153}{153}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Fluid\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00542}{Fluid\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}\label{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}\label{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!pin\_solid\_dofs@{pin\_solid\_dofs}}
 \index{pin\_solid\_dofs@{pin\_solid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{pin\_solid\_dofs()}{pin\_solid\_dofs()}}
@@ -656,17 +678,17 @@ Pin solid dofs.
 
 Pin all solid dofs. 
 
-Definition at line 206 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00206}{206}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Solid\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}\label{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}\label{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!pointwise\_aitken\_extrapolate@{pointwise\_aitken\_extrapolate}}
 \index{pointwise\_aitken\_extrapolate@{pointwise\_aitken\_extrapolate}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{pointwise\_aitken\_extrapolate()}{pointwise\_aitken\_extrapolate()}}
@@ -678,17 +700,17 @@ Do pointwise Aitken extrapolation for solid.
 
 Pointwise Aitken extrapolation for solid variables. 
 
-Definition at line 490 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00490}{490}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Pointwise\+\_\+aitken\+\_\+counter, Pointwise\+\_\+aitken\+\_\+solid\+\_\+value, and Solid\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00505}{Pointwise\+\_\+aitken\+\_\+counter}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00582}{Pointwise\+\_\+aitken\+\_\+solid\+\_\+value}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}\label{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}\label{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!rebuild\_monolithic\_mesh@{rebuild\_monolithic\_mesh}}
 \index{rebuild\_monolithic\_mesh@{rebuild\_monolithic\_mesh}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{rebuild\_monolithic\_mesh()}{rebuild\_monolithic\_mesh()}}
@@ -700,17 +722,17 @@ Rebuild global mesh for monolithic discretisation.
 
 Rebuild global mesh for monolithic problem. 
 
-Definition at line 87 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00087}{87}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Orig\+\_\+sub\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00572}{Orig\+\_\+sub\+\_\+mesh\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3}\label{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3}\label{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!reset\_timer@{reset\_timer}}
 \index{reset\_timer@{reset\_timer}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{reset\_timer()}{reset\_timer()}}
@@ -722,17 +744,17 @@ Reset timer.
 
 
 
-Definition at line 457 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00457}{457}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References T\+\_\+ref, T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve, and Timer\+\_\+has\+\_\+been\+\_\+halted.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00634}{T\+\_\+ref}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00639}{T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00642}{Timer\+\_\+has\+\_\+been\+\_\+halted}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a2896156c47a5a6c2e7a390057d394e10}\label{classoomph_1_1SegregatableFSIProblem_a2896156c47a5a6c2e7a390057d394e10}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a2896156c47a5a6c2e7a390057d394e10}\label{classoomph_1_1SegregatableFSIProblem_a2896156c47a5a6c2e7a390057d394e10} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!restart\_timer@{restart\_timer}}
 \index{restart\_timer@{restart\_timer}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{restart\_timer()}{restart\_timer()}}
@@ -744,17 +766,17 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Definition at line 468 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00468}{468}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References T\+\_\+ref, and Timer\+\_\+has\+\_\+been\+\_\+halted.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00634}{T\+\_\+ref}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00642}{Timer\+\_\+has\+\_\+been\+\_\+halted}}.
 
 
 
-Referenced by t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00489}{t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}\label{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}\label{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!restore\_fluid\_dofs@{restore\_fluid\_dofs}}
 \index{restore\_fluid\_dofs@{restore\_fluid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{restore\_fluid\_dofs()}{restore\_fluid\_dofs()}}
@@ -766,17 +788,17 @@ Restore pinned status of fluid dofs.
 
 Restore the pinned status of all fluid dofs. 
 
-Definition at line 176 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00176}{176}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Fluid\+\_\+data\+\_\+pt, and Fluid\+\_\+value\+\_\+is\+\_\+pinned.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00542}{Fluid\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00546}{Fluid\+\_\+value\+\_\+is\+\_\+pinned}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}\label{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}\label{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!restore\_solid\_dofs@{restore\_solid\_dofs}}
 \index{restore\_solid\_dofs@{restore\_solid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{restore\_solid\_dofs()}{restore\_solid\_dofs()}}
@@ -788,17 +810,17 @@ Restore pinned status of solid dofs.
 
 Restore the pinned status of all solid dofs. 
 
-Definition at line 229 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00229}{229}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Solid\+\_\+data\+\_\+pt, and Solid\+\_\+value\+\_\+is\+\_\+pinned.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00555}{Solid\+\_\+value\+\_\+is\+\_\+pinned}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}\label{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}\label{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!segregated\_solve@{segregated\_solve}}
 \index{segregated\_solve@{segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{segregated\_solve()}{segregated\_solve()}}
@@ -806,21 +828,21 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Segregated solver. Peform a segregated step from the present state of the system. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Segregated solver. Peform a segregated step from the present state of the system. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Definition at line 538 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
-
-
-
-References actions\+\_\+after\+\_\+segregated\+\_\+solve(), actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check(), actions\+\_\+before\+\_\+segregated\+\_\+solve(), Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change, Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual, Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change, Convergence\+\_\+criterion, Convergence\+\_\+tolerance, oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+for\+\_\+global\+\_\+residual(), oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+total(), Doc\+\_\+max\+\_\+global\+\_\+residual, oomph\+::\+Picard\+Convergence\+Data\+::essential\+\_\+cpu\+\_\+total(), Fluid\+\_\+solve, Full\+\_\+solve, get\+\_\+solid\+\_\+change(), Max\+\_\+picard, oomph\+::\+Picard\+Convergence\+Data\+::niter(), pin\+\_\+fluid\+\_\+dofs(), pin\+\_\+solid\+\_\+dofs(), Pointwise\+\_\+aitken\+\_\+counter, pointwise\+\_\+aitken\+\_\+extrapolate(), Pointwise\+\_\+aitken\+\_\+start, rebuild\+\_\+monolithic\+\_\+mesh(), Recheck\+\_\+convergence\+\_\+after\+\_\+pointwise\+\_\+aitken, reset\+\_\+timer(), restore\+\_\+fluid\+\_\+dofs(), restore\+\_\+solid\+\_\+dofs(), oomph\+::\+Picard\+Convergence\+Data\+::set\+\_\+solver\+\_\+converged(), Solid\+\_\+solve, Solve\+\_\+type, store\+\_\+solid\+\_\+dofs(), t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve(), oomph\+::\+Picard\+Convergence\+Data\+::tol\+\_\+achieved(), under\+\_\+relax\+\_\+solid(), use\+\_\+only\+\_\+fluid\+\_\+elements(), use\+\_\+only\+\_\+solid\+\_\+elements(), and Use\+\_\+pointwise\+\_\+aitken.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{538}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-Referenced by steady\+\_\+segregated\+\_\+solve(), and unsteady\+\_\+segregated\+\_\+solve().
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00194}{actions\+\_\+after\+\_\+segregated\+\_\+solve()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00198}{actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00190}{actions\+\_\+before\+\_\+segregated\+\_\+solve()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00429}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00431}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00430}{Assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{Convergence\+\_\+criterion}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{Convergence\+\_\+tolerance}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00080}{oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+for\+\_\+global\+\_\+residual()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00063}{oomph\+::\+Picard\+Convergence\+Data\+::cpu\+\_\+total()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00524}{Doc\+\_\+max\+\_\+global\+\_\+residual}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00071}{oomph\+::\+Picard\+Convergence\+Data\+::essential\+\_\+cpu\+\_\+total()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00439}{Fluid\+\_\+solve}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00438}{Full\+\_\+solve}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00303}{get\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00521}{Max\+\_\+picard}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00057}{oomph\+::\+Picard\+Convergence\+Data\+::niter()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00153}{pin\+\_\+fluid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00206}{pin\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00505}{Pointwise\+\_\+aitken\+\_\+counter}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00490}{pointwise\+\_\+aitken\+\_\+extrapolate()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00512}{Pointwise\+\_\+aitken\+\_\+start}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00087}{rebuild\+\_\+monolithic\+\_\+mesh()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00585}{Recheck\+\_\+convergence\+\_\+after\+\_\+pointwise\+\_\+aitken}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00457}{reset\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00176}{restore\+\_\+fluid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00229}{restore\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00098}{oomph\+::\+Picard\+Convergence\+Data\+::set\+\_\+solver\+\_\+converged()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00440}{Solid\+\_\+solve}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00515}{Solve\+\_\+type}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00489}{t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00086}{oomph\+::\+Picard\+Convergence\+Data\+::tol\+\_\+achieved()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00138}{use\+\_\+only\+\_\+fluid\+\_\+elements()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00115}{use\+\_\+only\+\_\+solid\+\_\+elements()}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}\label{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}} 
+
+
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00982}{steady\+\_\+segregated\+\_\+solve()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01054}{unsteady\+\_\+segregated\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}\label{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!setup\_segregated\_solver@{setup\_segregated\_solver}}
 \index{setup\_segregated\_solver@{setup\_segregated\_solver}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{setup\_segregated\_solver()}{setup\_segregated\_solver()}}
@@ -832,13 +854,13 @@ Setup the segregated solver\+: Backup the pinned status of the fluid and solid d
 
 Setup segregated solver, using the information provided by the user in his/her implementation of the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). 
 
-Definition at line 1111 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{1111}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Del\+\_\+irons\+\_\+and\+\_\+tuck, Fluid\+\_\+data\+\_\+pt, Fluid\+\_\+mesh\+\_\+pt, Fluid\+\_\+value\+\_\+is\+\_\+pinned, identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(), Omega\+\_\+relax, Orig\+\_\+sub\+\_\+mesh\+\_\+pt, Pointwise\+\_\+aitken\+\_\+counter, Pointwise\+\_\+aitken\+\_\+solid\+\_\+value, Previous\+\_\+solid\+\_\+value, R\+\_\+irons\+\_\+and\+\_\+tuck, Solid\+\_\+data\+\_\+pt, Solid\+\_\+mesh\+\_\+pt, Solid\+\_\+value\+\_\+is\+\_\+pinned, Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation, and Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00575}{Del\+\_\+irons\+\_\+and\+\_\+tuck}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00542}{Fluid\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00564}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00546}{Fluid\+\_\+value\+\_\+is\+\_\+pinned}}, \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}{identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00622}{Omega\+\_\+relax}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00572}{Orig\+\_\+sub\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00505}{Pointwise\+\_\+aitken\+\_\+counter}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00582}{Pointwise\+\_\+aitken\+\_\+solid\+\_\+value}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00559}{Previous\+\_\+solid\+\_\+value}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00578}{R\+\_\+irons\+\_\+and\+\_\+tuck}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00569}{Solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00555}{Solid\+\_\+value\+\_\+is\+\_\+pinned}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}\label{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}\label{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!steady\_segregated\_solve@{steady\_segregated\_solve}}
 \index{steady\_segregated\_solve@{steady\_segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{steady\_segregated\_solve()}{steady\_segregated\_solve()}}
@@ -846,17 +868,17 @@ References Del\+\_\+irons\+\_\+and\+\_\+tuck, Fluid\+\_\+data\+\_\+pt, Fluid\+\_
 
 
 
-Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Steady version of segregated solver. Makes all timesteppers steady before solving. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Definition at line 982 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00982}{982}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References segregated\+\_\+solve().
+References \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}\label{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}\label{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!store\_solid\_dofs@{store\_solid\_dofs}}
 \index{store\_solid\_dofs@{store\_solid\_dofs}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{store\_solid\_dofs()}{store\_solid\_dofs()}}
@@ -868,17 +890,17 @@ Store the current solid values as reference values for future convergence check.
 
 Store the current solid values as reference values for future convergence check. Also add another entry to pointwise Aitken history. 
 
-Definition at line 260 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{260}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Pointwise\+\_\+aitken\+\_\+counter, Pointwise\+\_\+aitken\+\_\+solid\+\_\+value, Previous\+\_\+solid\+\_\+value, Solid\+\_\+data\+\_\+pt, and Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00505}{Pointwise\+\_\+aitken\+\_\+counter}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00582}{Pointwise\+\_\+aitken\+\_\+solid\+\_\+value}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00559}{Previous\+\_\+solid\+\_\+value}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{Use\+\_\+pointwise\+\_\+aitken}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b}\label{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b}\label{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!t\_spent\_on\_actual\_solve@{t\_spent\_on\_actual\_solve}}
 \index{t\_spent\_on\_actual\_solve@{t\_spent\_on\_actual\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{t\_spent\_on\_actual\_solve()}{t\_spent\_on\_actual\_solve()}}
@@ -890,17 +912,17 @@ Total elapsed time since start of solve.
 
 
 
-Definition at line 489 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00489}{489}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-References halt\+\_\+timer(), restart\+\_\+timer(), and T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00478}{halt\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00468}{restart\+\_\+timer()}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00639}{T\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}\label{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}\label{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!under\_relax\_solid@{under\_relax\_solid}}
 \index{under\_relax\_solid@{under\_relax\_solid}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{under\_relax\_solid()}{under\_relax\_solid()}}
@@ -912,17 +934,17 @@ Under-\/relax the most recently computed solid variables, either by classical re
 
 Under-\/relax solid, either by classical relaxation or by Irons \& Tuck. 
 
-Definition at line 354 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{354}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Del\+\_\+irons\+\_\+and\+\_\+tuck, Omega\+\_\+relax, Previous\+\_\+solid\+\_\+value, R\+\_\+irons\+\_\+and\+\_\+tuck, Solid\+\_\+data\+\_\+pt, and Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00575}{Del\+\_\+irons\+\_\+and\+\_\+tuck}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00622}{Omega\+\_\+relax}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00559}{Previous\+\_\+solid\+\_\+value}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00578}{R\+\_\+irons\+\_\+and\+\_\+tuck}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{Solid\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}\label{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}\label{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!unsteady\_segregated\_solve@{unsteady\_segregated\_solve}}
 \index{unsteady\_segregated\_solve@{unsteady\_segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{unsteady\_segregated\_solve()}{unsteady\_segregated\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -930,13 +952,21 @@ Referenced by segregated\+\_\+solve().
 
 
 
-Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Definition at line 1042 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01042}{1042}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}\label{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}} 
+
+
+References \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01042}{unsteady\+\_\+segregated\+\_\+solve()}}.
+
+
+
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01042}{unsteady\+\_\+segregated\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}\label{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!unsteady\_segregated\_solve@{unsteady\_segregated\_solve}}
 \index{unsteady\_segregated\_solve@{unsteady\_segregated\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{unsteady\_segregated\_solve()}{unsteady\_segregated\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -944,17 +974,17 @@ Definition at line 1042 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
 
 
 
-Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data}} object that contains the vital stats of the iteration. 
+Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns \doxylink{classoomph_1_1PicardConvergenceData}{Picard\+Convergence\+Data} object that contains the vital stats of the iteration. 
 
-Definition at line 1054 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01054}{1054}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References extrapolate\+\_\+solid\+\_\+data(), and segregated\+\_\+solve().
+References \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00039}{extrapolate\+\_\+solid\+\_\+data()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}\label{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}\label{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!use\_only\_fluid\_elements@{use\_only\_fluid\_elements}}
 \index{use\_only\_fluid\_elements@{use\_only\_fluid\_elements}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{use\_only\_fluid\_elements()}{use\_only\_fluid\_elements()}}
@@ -966,17 +996,17 @@ Only include fluid elements in the Problem\textquotesingle{}s mesh. This is call
 
 
 
-Definition at line 138 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00138}{138}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Fluid\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00564}{Fluid\+\_\+mesh\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}\label{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}\label{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!use\_only\_solid\_elements@{use\_only\_solid\_elements}}
 \index{use\_only\_solid\_elements@{use\_only\_solid\_elements}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{use\_only\_solid\_elements()}{use\_only\_solid\_elements()}}
@@ -988,20 +1018,20 @@ Only include solid elements in the Problem\textquotesingle{}s mesh. This is call
 
 Only include solid elements in the Problem\textquotesingle{}s mesh. This is called before the segregated solid solve. The solid elements are identified by the user via the solid\+\_\+mesh\+\_\+pt argument in the pure virtual function identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(...). If a NULL pointer is returned by this function (i.\+e. if the user hasn\textquotesingle{}t bothered to identify the solids elements in a submesh, then no stripping of non-\/solid elements is performed. The result of the computation will be correct but it won\textquotesingle{}t be very efficient. 
 
-Definition at line 115 of file segregated\+\_\+fsi\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00115}{115}} of file \mbox{\hyperlink{segregated__fsi__solver_8cc_source}{segregated\+\_\+fsi\+\_\+solver.\+cc}}.
 
 
 
-References Solid\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00569}{Solid\+\_\+mesh\+\_\+pt}}.
 
 
 
-Referenced by segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}\label{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}\label{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Convergence\_criterion@{Convergence\_criterion}}
 \index{Convergence\_criterion@{Convergence\_criterion}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Convergence\_criterion}{Convergence\_criterion}}
@@ -1013,13 +1043,13 @@ Convergence criterion (enumerated flag)
 
 
 
-Definition at line 629 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00629}{629}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change(), assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual(), assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change(), Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00346}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00328}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00364}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}\label{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}\label{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Convergence\_tolerance@{Convergence\_tolerance}}
 \index{Convergence\_tolerance@{Convergence\_tolerance}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Convergence\_tolerance}{Convergence\_tolerance}}
@@ -1031,13 +1061,13 @@ Convergence tolerance for Picard iteration.
 
 
 
-Definition at line 518 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00518}{518}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change(), assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual(), assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change(), Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00346}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+absolute\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00328}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+max\+\_\+global\+\_\+residual()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00364}{assess\+\_\+convergence\+\_\+based\+\_\+on\+\_\+relative\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}\label{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}\label{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Del\_irons\_and\_tuck@{Del\_irons\_and\_tuck}}
 \index{Del\_irons\_and\_tuck@{Del\_irons\_and\_tuck}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Del\_irons\_and\_tuck}{Del\_irons\_and\_tuck}}
@@ -1049,13 +1079,13 @@ Vector of changes in Irons and Tuck under-\/relaxation.
 
 
 
-Definition at line 575 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00575}{575}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by setup\+\_\+segregated\+\_\+solver(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}\label{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}\label{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Doc\_max\_global\_residual@{Doc\_max\_global\_residual}}
 \index{Doc\_max\_global\_residual@{Doc\_max\_global\_residual}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Doc\_max\_global\_residual}{Doc\_max\_global\_residual}}
@@ -1067,17 +1097,17 @@ Doc maximum global residual during iteration? (default\+: false)
 
 
 
-Definition at line 524 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00524}{524}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}\label{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}\label{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Fluid\_data\_pt@{Fluid\_data\_pt}}
 \index{Fluid\_data\_pt@{Fluid\_data\_pt}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Fluid\_data\_pt}{Fluid\_data\_pt}}
-{\footnotesize\ttfamily Vector$<$Data$\ast$$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Fluid\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Vector$<$Data\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Fluid\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1085,17 +1115,17 @@ Vector storing the Data objects associated with the fluid problem\+: Tyically th
 
 
 
-Definition at line 542 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00542}{542}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by pin\+\_\+fluid\+\_\+dofs(), restore\+\_\+fluid\+\_\+dofs(), and setup\+\_\+segregated\+\_\+solver().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00153}{pin\+\_\+fluid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00176}{restore\+\_\+fluid\+\_\+dofs()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}\label{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}\label{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
 \index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}}
-{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Segregatable\+FSIProblem\+::\+Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Mesh\texorpdfstring{$\ast$}{*} oomph\+::\+Segregatable\+FSIProblem\+::\+Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1103,13 +1133,13 @@ Mesh containing only fluid elements -- the elements in this Mesh will be exclude
 
 
 
-Definition at line 564 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00564}{564}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by extrapolate\+\_\+solid\+\_\+data(), Segregatable\+FSIProblem(), setup\+\_\+segregated\+\_\+solver(), and use\+\_\+only\+\_\+fluid\+\_\+elements().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00039}{extrapolate\+\_\+solid\+\_\+data()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00138}{use\+\_\+only\+\_\+fluid\+\_\+elements()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}\label{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}\label{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Fluid\_value\_is\_pinned@{Fluid\_value\_is\_pinned}}
 \index{Fluid\_value\_is\_pinned@{Fluid\_value\_is\_pinned}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Fluid\_value\_is\_pinned}{Fluid\_value\_is\_pinned}}
@@ -1121,13 +1151,13 @@ Vector of vectors that store the pinned status of fluid Data values.
 
 
 
-Definition at line 546 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00546}{546}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by restore\+\_\+fluid\+\_\+dofs(), and setup\+\_\+segregated\+\_\+solver().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00176}{restore\+\_\+fluid\+\_\+dofs()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}\label{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}\label{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Max\_picard@{Max\_picard}}
 \index{Max\_picard@{Max\_picard}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Max\_picard}{Max\_picard}}
@@ -1139,13 +1169,13 @@ Max. number of Picard iterations.
 
 
 
-Definition at line 521 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00521}{521}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}\label{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}\label{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Omega\_relax@{Omega\_relax}}
 \index{Omega\_relax@{Omega\_relax}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Omega\_relax}{Omega\_relax}}
@@ -1157,17 +1187,17 @@ Under-\/relaxation parameter. (1.\+0\+: no under-\/relaxation; 0.\+0\+: Freeze w
 
 
 
-Definition at line 622 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00622}{622}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by enable\+\_\+under\+\_\+relaxation(), Segregatable\+FSIProblem(), setup\+\_\+segregated\+\_\+solver(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00409}{enable\+\_\+under\+\_\+relaxation()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}\label{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}\label{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Orig\_sub\_mesh\_pt@{Orig\_sub\_mesh\_pt}}
 \index{Orig\_sub\_mesh\_pt@{Orig\_sub\_mesh\_pt}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Orig\_sub\_mesh\_pt}{Orig\_sub\_mesh\_pt}}
-{\footnotesize\ttfamily Vector$<$Mesh$\ast$$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Orig\+\_\+sub\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Vector$<$Mesh\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Orig\+\_\+sub\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1175,13 +1205,13 @@ Backup for the pointers to the submeshes in the original problem.
 
 
 
-Definition at line 572 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00572}{572}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by rebuild\+\_\+monolithic\+\_\+mesh(), and setup\+\_\+segregated\+\_\+solver().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00087}{rebuild\+\_\+monolithic\+\_\+mesh()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}\label{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}\label{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Pointwise\_aitken\_counter@{Pointwise\_aitken\_counter}}
 \index{Pointwise\_aitken\_counter@{Pointwise\_aitken\_counter}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Pointwise\_aitken\_counter}{Pointwise\_aitken\_counter}}
@@ -1193,13 +1223,13 @@ Number of Aitken histories available (int because after extrapolation it\textquo
 
 
 
-Definition at line 505 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00505}{505}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by pointwise\+\_\+aitken\+\_\+extrapolate(), segregated\+\_\+solve(), setup\+\_\+segregated\+\_\+solver(), and store\+\_\+solid\+\_\+dofs().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00490}{pointwise\+\_\+aitken\+\_\+extrapolate()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}\label{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}\label{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Pointwise\_aitken\_solid\_value@{Pointwise\_aitken\_solid\_value}}
 \index{Pointwise\_aitken\_solid\_value@{Pointwise\_aitken\_solid\_value}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Pointwise\_aitken\_solid\_value}{Pointwise\_aitken\_solid\_value}}
@@ -1211,13 +1241,13 @@ Vector of Vectors containing up to three previous iterates for the solid dofs; u
 
 
 
-Definition at line 582 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00582}{582}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by pointwise\+\_\+aitken\+\_\+extrapolate(), setup\+\_\+segregated\+\_\+solver(), and store\+\_\+solid\+\_\+dofs().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00490}{pointwise\+\_\+aitken\+\_\+extrapolate()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a47bcf35aed40bbb7e1c3778b8dfad501}\label{classoomph_1_1SegregatableFSIProblem_a47bcf35aed40bbb7e1c3778b8dfad501}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a47bcf35aed40bbb7e1c3778b8dfad501}\label{classoomph_1_1SegregatableFSIProblem_a47bcf35aed40bbb7e1c3778b8dfad501} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Pointwise\_aitken\_start@{Pointwise\_aitken\_start}}
 \index{Pointwise\_aitken\_start@{Pointwise\_aitken\_start}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Pointwise\_aitken\_start}{Pointwise\_aitken\_start}}
@@ -1229,13 +1259,13 @@ Start pointwise Aitken extrpolation after specified number of Picard iterations.
 
 
 
-Definition at line 512 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00512}{512}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by enable\+\_\+pointwise\+\_\+aitken(), Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00384}{enable\+\_\+pointwise\+\_\+aitken()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}\label{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}\label{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Previous\_solid\_value@{Previous\_solid\_value}}
 \index{Previous\_solid\_value@{Previous\_solid\_value}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Previous\_solid\_value}{Previous\_solid\_value}}
@@ -1247,13 +1277,13 @@ Vector storing the previous solid values -- used for convergence check.
 
 
 
-Definition at line 559 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00559}{559}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by get\+\_\+solid\+\_\+change(), setup\+\_\+segregated\+\_\+solver(), store\+\_\+solid\+\_\+dofs(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00303}{get\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}\label{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}\label{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!R\_irons\_and\_tuck@{R\_irons\_and\_tuck}}
 \index{R\_irons\_and\_tuck@{R\_irons\_and\_tuck}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{R\_irons\_and\_tuck}{R\_irons\_and\_tuck}}
@@ -1265,13 +1295,13 @@ Irons and Tuck relaxation factor.
 
 
 
-Definition at line 578 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00578}{578}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by setup\+\_\+segregated\+\_\+solver(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}\label{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}\label{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Recheck\_convergence\_after\_pointwise\_aitken@{Recheck\_convergence\_after\_pointwise\_aitken}}
 \index{Recheck\_convergence\_after\_pointwise\_aitken@{Recheck\_convergence\_after\_pointwise\_aitken}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Recheck\_convergence\_after\_pointwise\_aitken}{Recheck\_convergence\_after\_pointwise\_aitken}}
@@ -1283,17 +1313,17 @@ Have we just done a pointwise Aitken step.
 
 
 
-Definition at line 585 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00585}{585}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}\label{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}\label{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solid\_data\_pt@{Solid\_data\_pt}}
 \index{Solid\_data\_pt@{Solid\_data\_pt}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Solid\_data\_pt}{Solid\_data\_pt}}
-{\footnotesize\ttfamily Vector$<$Data$\ast$$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Solid\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Vector$<$Data\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Segregatable\+FSIProblem\+::\+Solid\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1301,17 +1331,17 @@ Vector storing the Data objects associated with the solid problem\+: Typically t
 
 
 
-Definition at line 551 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00551}{551}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by extrapolate\+\_\+solid\+\_\+data(), get\+\_\+solid\+\_\+change(), pin\+\_\+solid\+\_\+dofs(), pointwise\+\_\+aitken\+\_\+extrapolate(), restore\+\_\+solid\+\_\+dofs(), setup\+\_\+segregated\+\_\+solver(), store\+\_\+solid\+\_\+dofs(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00039}{extrapolate\+\_\+solid\+\_\+data()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00303}{get\+\_\+solid\+\_\+change()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00206}{pin\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00490}{pointwise\+\_\+aitken\+\_\+extrapolate()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00229}{restore\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}\label{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}\label{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
 \index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}}
-{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Segregatable\+FSIProblem\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily Mesh\texorpdfstring{$\ast$}{*} oomph\+::\+Segregatable\+FSIProblem\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1319,13 +1349,13 @@ Mesh containing only solid elements -- the elements in this mesh will be exclude
 
 
 
-Definition at line 569 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00569}{569}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by Segregatable\+FSIProblem(), setup\+\_\+segregated\+\_\+solver(), and use\+\_\+only\+\_\+solid\+\_\+elements().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00115}{use\+\_\+only\+\_\+solid\+\_\+elements()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}\label{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}\label{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solid\_value\_is\_pinned@{Solid\_value\_is\_pinned}}
 \index{Solid\_value\_is\_pinned@{Solid\_value\_is\_pinned}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Solid\_value\_is\_pinned}{Solid\_value\_is\_pinned}}
@@ -1337,13 +1367,13 @@ Vector of vectors that store the pinned status of solid Data values.
 
 
 
-Definition at line 555 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00555}{555}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by restore\+\_\+solid\+\_\+dofs(), and setup\+\_\+segregated\+\_\+solver().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00229}{restore\+\_\+solid\+\_\+dofs()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}\label{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}\label{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Solve\_type@{Solve\_type}}
 \index{Solve\_type@{Solve\_type}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Solve\_type}{Solve\_type}}
@@ -1355,13 +1385,13 @@ Solve that is taking place (enumerated flag)
 
 
 
-Definition at line 515 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00515}{515}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by Segregatable\+FSIProblem(), and segregated\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a814254917e5cedc6fce1793168124beb}\label{classoomph_1_1SegregatableFSIProblem_a814254917e5cedc6fce1793168124beb}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a814254917e5cedc6fce1793168124beb}\label{classoomph_1_1SegregatableFSIProblem_a814254917e5cedc6fce1793168124beb} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!T\_ref@{T\_ref}}
 \index{T\_ref@{T\_ref}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{T\_ref}{T\_ref}}
@@ -1373,13 +1403,13 @@ Reference time for segregated solve. Can be re-\/initialised whenever total elap
 
 
 
-Definition at line 634 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00634}{634}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by halt\+\_\+timer(), reset\+\_\+timer(), restart\+\_\+timer(), and Segregatable\+FSIProblem().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00478}{halt\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00457}{reset\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00468}{restart\+\_\+timer()}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8043214c2864bd7584f40e684dcceb58}\label{classoomph_1_1SegregatableFSIProblem_a8043214c2864bd7584f40e684dcceb58}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a8043214c2864bd7584f40e684dcceb58}\label{classoomph_1_1SegregatableFSIProblem_a8043214c2864bd7584f40e684dcceb58} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!T\_spent\_on\_actual\_solve@{T\_spent\_on\_actual\_solve}}
 \index{T\_spent\_on\_actual\_solve@{T\_spent\_on\_actual\_solve}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{T\_spent\_on\_actual\_solve}{T\_spent\_on\_actual\_solve}}
@@ -1391,13 +1421,13 @@ Total elapsed time since start of solve, can be accumulated by adding bits of ti
 
 
 
-Definition at line 639 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00639}{639}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by halt\+\_\+timer(), reset\+\_\+timer(), Segregatable\+FSIProblem(), and t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00478}{halt\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00457}{reset\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00489}{t\+\_\+spent\+\_\+on\+\_\+actual\+\_\+solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18da8697ce0985d}\label{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18da8697ce0985d}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18da8697ce0985d}\label{classoomph_1_1SegregatableFSIProblem_abb20be243e501b04b18da8697ce0985d} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Timer\_has\_been\_halted@{Timer\_has\_been\_halted}}
 \index{Timer\_has\_been\_halted@{Timer\_has\_been\_halted}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Timer\_has\_been\_halted}{Timer\_has\_been\_halted}}
@@ -1409,13 +1439,13 @@ boolean flag to indicate if timer has been halted
 
 
 
-Definition at line 642 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00642}{642}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by halt\+\_\+timer(), reset\+\_\+timer(), restart\+\_\+timer(), and Segregatable\+FSIProblem().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00478}{halt\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00457}{reset\+\_\+timer()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00468}{restart\+\_\+timer()}}, and \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509}\label{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509}\label{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Use\_irons\_and\_tuck\_extrapolation@{Use\_irons\_and\_tuck\_extrapolation}}
 \index{Use\_irons\_and\_tuck\_extrapolation@{Use\_irons\_and\_tuck\_extrapolation}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Use\_irons\_and\_tuck\_extrapolation}{Use\_irons\_and\_tuck\_extrapolation}}
@@ -1427,13 +1457,13 @@ Boolean flag to indicate use of Irons and Tuck\textquotesingle{}s extrapolation 
 
 
 
-Definition at line 626 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00626}{626}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation(), enable\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation(), Segregatable\+FSIProblem(), setup\+\_\+segregated\+\_\+solver(), and under\+\_\+relax\+\_\+solid().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00421}{disable\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00415}{enable\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00354}{under\+\_\+relax\+\_\+solid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}\label{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}} 
+\Hypertarget{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}\label{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276} 
 \index{oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}!Use\_pointwise\_aitken@{Use\_pointwise\_aitken}}
 \index{Use\_pointwise\_aitken@{Use\_pointwise\_aitken}!oomph::SegregatableFSIProblem@{oomph::SegregatableFSIProblem}}
 \doxysubsubsection{\texorpdfstring{Use\_pointwise\_aitken}{Use\_pointwise\_aitken}}
@@ -1445,11 +1475,11 @@ Use pointwise Aitken extrapolation?
 
 
 
-Definition at line 508 of file segregated\+\_\+fsi\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00508}{508}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+pointwise\+\_\+aitken(), enable\+\_\+pointwise\+\_\+aitken(), Segregatable\+FSIProblem(), segregated\+\_\+solve(), setup\+\_\+segregated\+\_\+solver(), and store\+\_\+solid\+\_\+dofs().
+Referenced by \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00399}{disable\+\_\+pointwise\+\_\+aitken()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00393}{enable\+\_\+pointwise\+\_\+aitken()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00384}{enable\+\_\+pointwise\+\_\+aitken()}}, \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00209}{Segregatable\+FSIProblem()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{segregated\+\_\+solve()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l01111}{setup\+\_\+segregated\+\_\+solver()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00260}{store\+\_\+solid\+\_\+dofs()}}.
 
 
 

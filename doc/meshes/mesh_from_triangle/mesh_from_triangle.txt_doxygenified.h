@@ -223,7 +223,7 @@ output from <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">
 elements from the \c TElement<2,NNODE_1D> family of the triangular
 elements. The relevant interface is: 
 
-\dontinclude triangle_mesh.template.h
+\dontinclude triangle_mesh.h
 \skipline start_of_triangle
 \until Default_TimeStepper
 
@@ -351,5 +351,5 @@ demo_drivers/meshing/mesh_from_triangle/mesh_from_triangle_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

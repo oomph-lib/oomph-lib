@@ -364,7 +364,7 @@ the original simulation but it does not employ exactly the same timesteps.
 \image latex restart_trace.eps "Time-trace of the solution and the timestep chosen by the adaptive timestepper in the original (green) and restarted (red) simulation. " width=0.75\textwidth
 
 
-\subsubsection ex Exercise:
+\subsubsection ex2 Exercise:
 Explain why the restarted simulation uses slightly different timesteps
 and modify the \c dump_it(...) and \c restart(...) functions 
 to solve this problem. [\b Hints: <B> (i) </B> Recall that the
@@ -403,5 +403,5 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat_t_adapt/two_d_unsteady_heat_t_ada
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

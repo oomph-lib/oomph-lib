@@ -444,5 +444,5 @@ demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

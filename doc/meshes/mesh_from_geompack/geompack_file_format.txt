@@ -246,7 +246,7 @@ download it in the
   </A>. A program to convert the <A HREF="http://members.shaw.ca/bjoe/index.htm">\c Geompack
   </A>'s output file \c filename.mh2 in a file readable by <A HREF="http://www.geomview.org/">\c Geomview
   </A> is provided: 
-  <A HREF="../../../../user_drivers/mesh_from_geompack/make_geom_file.cc"> make_geom_file
+  <A HREF="../../../../demo_drivers/meshing/mesh_from_geompack/make_geom_file.cc"> make_geom_file
 </A>  
 
 <HR>
@@ -275,7 +275,7 @@ The output file that
 </CODE></A>  creates when run with \c box_hole.m2 with the 
 parameters \c tolerance= 1.0e-10,\c  n_element= 50 and 
 \c ele_type= +4 are contained in the file  
-<A HREF="../../../../user_drivers/mesh_from_geompack/box_hole.mh2">
+<A HREF="../../../../demo_drivers/meshing/mesh_from_geompack/box_hole.mh2">
 box_hole.mh2.</A>
 
 
@@ -300,7 +300,7 @@ elements. The relevant interface is:
 \skipline QuadrMesh(const
 \until Default_TimeStepper
 
-The driver code <A HREF="../../../../user_drivers/mesh_from_geompack/mesh_from_geompack_poisson.cc">mesh_from_geompack_poisson.cc</A>
+The driver code <A HREF="../../../../demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc">mesh_from_geompack_poisson.cc</A>
 demonstrates the  use of this mesh for the solution of a
 2D Poisson problem in the "rectangular domain with a hole",
 described in the previous section.
@@ -315,7 +315,7 @@ in the namespace \c CommandLineArgs
 \until }
 
 The names of these files are then passed to the mesh constructor. 
-Since the rest of the  <A HREF="../../../../user_drivers/mesh_from_geompack/mesh_from_geompack_poisson.cc">driver
+Since the rest of the  <A HREF="../../../../demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc">driver
 code </A> is identical to that in the
 <A HREF="../../../../doc/poisson/two_d_poisson/html/index.html">
 corresponding example with a structured mesh</A>, 

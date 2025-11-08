@@ -713,5 +713,5 @@ src/multi_physics/boussinesq_elements.h</A>
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -84,9 +84,9 @@ namespace Global_Physical_Variables
 
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -301,7 +301,7 @@ void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  unsigned npts=5;
  
  // Output solution 
- sprintf(filename,"%s/ring%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ring%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -339,7 +339,7 @@ void ElasticRingProblem<ELEMENT>::parameter_study(DocInfo& doc_info)
 
  //Open a trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  ofstream trace_file(filename);
  trace_file << "VARIABLES=\"p_e_x_t\",\"R_1\",\"R_2\"" << std::endl;
  trace_file << "ZONE" << std::endl;
@@ -445,9 +445,9 @@ void ElasticRingProblem<ELEMENT>::parameter_study(DocInfo& doc_info)
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=======start_of_main=================================================

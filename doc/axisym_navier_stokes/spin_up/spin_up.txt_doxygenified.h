@@ -775,5 +775,5 @@ demo_drivers/axisym_navier_stokes/spin_up/spin_up.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -205,5 +205,5 @@ demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/two_fluid_spherical_ca
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

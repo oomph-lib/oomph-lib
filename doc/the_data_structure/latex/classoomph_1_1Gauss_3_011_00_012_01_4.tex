@@ -1,59 +1,72 @@
-\hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4}{}\doxysection{oomph\+::Gauss$<$ 1, 2 $>$ Class Reference}
-\label{classoomph_1_1Gauss_3_011_00_012_01_4}\index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
+\doxysection{oomph\+::Gauss\texorpdfstring{$<$}{<} 1, 2 \texorpdfstring{$>$}{>} Class Reference}
+\hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4}{}\label{classoomph_1_1Gauss_3_011_00_012_01_4}\index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 
 
-1D Gaussian integration class. Two integration points. This integration scheme can integrate up to third-\/order polynomials exactly and is therefore a suitable \char`\"{}full\char`\"{} integration scheme for linear (two-\/node) elements in which the highest-\/order polynomial is quadratic.  
+1D Gaussian integration class. Two integration points. This integration scheme can integrate up to third-\/order polynomials exactly and is therefore a suitable "{}full"{} integration scheme for linear (two-\/node) elements in which the highest-\/order polynomial is quadratic.  
 
 
 
 
 {\ttfamily \#include $<$integral.\+h$>$}
 
-Inheritance diagram for oomph\+::Gauss$<$ 1, 2 $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Gauss\texorpdfstring{$<$}{<} 1, 2 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1Gauss_3_011_00_012_01_4}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a3600224d34344632f5207822eb5d4c34}{Gauss}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e}{Gauss}} (const \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} \&dummy)=delete
+\mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e}{Gauss}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df}{nweight}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df}{nweight}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Number of integration points of the scheme. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d}{knot}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d}{knot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8}{weight}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8}{weight}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Return weight of integration point i. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Static Private Attributes}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Integral}{oomph\+::\+Integral}}}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b}{Npts}} = 2
+\mbox{\hyperlink{classoomph_1_1Integral_a68e50805e1859191361da2be4e89b9a8}{Integral}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Integral_a2834c14eed14ab19d0ee182af599a86c}{Integral}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Integral}{Integral}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Integral_ae018673975ff5d9ecdac2052887884fd}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Integral}{Integral}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Integral_a61b5870e0953a50d0c678ef59eefe147}{\texorpdfstring{$\sim$}{\string~}\+Integral}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1Integral_a750f52bb0121c183d02822a623ec708d}{knot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return local coordinates of i-\/th intergration point. Broken virtual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b}{Npts}} = 2
 \begin{DoxyCompactList}\small\item\em Number of integration points in the scheme. \end{DoxyCompactList}\item 
-static const double \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e}{Knot}} \mbox{[}2\mbox{]}\mbox{[}1\mbox{]}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e}{Knot}} \mbox{[}2\mbox{]}\mbox{[}1\mbox{]}
 \begin{DoxyCompactList}\small\item\em Array to hold weights and knot points (defined in cc file) \end{DoxyCompactList}\item 
-static const double \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc}{Weight}} \mbox{[}2\mbox{]} = \{1.\+0, 1.\+0\}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc}{Weight}} \mbox{[}2\mbox{]} = \{1.\+0, 1.\+0\}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-1D Gaussian integration class. Two integration points. This integration scheme can integrate up to third-\/order polynomials exactly and is therefore a suitable \char`\"{}full\char`\"{} integration scheme for linear (two-\/node) elements in which the highest-\/order polynomial is quadratic. 
+1D Gaussian integration class. Two integration points. This integration scheme can integrate up to third-\/order polynomials exactly and is therefore a suitable "{}full"{} integration scheme for linear (two-\/node) elements in which the highest-\/order polynomial is quadratic. 
 
-Definition at line 158 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00158}{158}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a3600224d34344632f5207822eb5d4c34}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a3600224d34344632f5207822eb5d4c34}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a3600224d34344632f5207822eb5d4c34}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a3600224d34344632f5207822eb5d4c34} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!Gauss@{Gauss}}
 \index{Gauss@{Gauss}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Gauss()}{Gauss()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\+Gauss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -61,13 +74,13 @@ Default constructor (empty)
 
 
 
-Definition at line 168 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00168}{168}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a8d972f1559f9f0a97419ad998a611d0e} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!Gauss@{Gauss}}
 \index{Gauss@{Gauss}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Gauss()}{Gauss()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}}$<$ 1, 2 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\+Gauss (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}}$<$ 1, 2 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -76,11 +89,11 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d}\label{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d}\label{classoomph_1_1Gauss_3_011_00_012_01_4_ae9c2e2d8ea3f4f17805324b0ad0a380d} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!knot@{knot}}
 \index{knot@{knot}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{knot()}{knot()}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -92,17 +105,17 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed73
 
 
 
-Definition at line 183 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00183}{183}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df}\label{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df}\label{classoomph_1_1Gauss_3_011_00_012_01_4_ace866a6cae8c2180b97b2eea315975df} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!nweight@{nweight}}
 \index{nweight@{nweight}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{nweight()}{nweight()}}
-{\footnotesize\ttfamily unsigned \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -114,23 +127,23 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f
 
 
 
-Definition at line 177 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00177}{177}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a4f27c3c18ae99631dfd99a01a328f5b4} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}}$<$ 1, 2 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}}$<$ 1, 2 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8}\label{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8}\label{classoomph_1_1Gauss_3_011_00_012_01_4_af9d4550c69b33df7560d23b98663d1f8} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!weight@{weight}}
 \index{weight@{weight}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{weight()}{weight()}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -142,25 +155,25 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c29450
 
 
 
-Definition at line 189 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00189}{189}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a9b1181c72075e2d9adf54b7a9f823f8e} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!Knot@{Knot}}
 \index{Knot@{Knot}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Knot}{Knot}}
-{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::Knot\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\+Knot\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{= \{\{-\/0.577350269189626\},}
-\DoxyCodeLine{                                          \{0.577350269189626\}\}}
+\DoxyCodeLine{=\ \{\{-\/0.577350269189626\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.577350269189626\}\}}
 
 \end{DoxyCode}
 
@@ -169,13 +182,13 @@ Array to hold weights and knot points (defined in cc file)
 
 
 
-Definition at line 164 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00164}{164}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a48c241a8812e55bb89ebcf0f7803050b} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!Npts@{Npts}}
 \index{Npts@{Npts}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Npts}{Npts}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::Npts = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\+Npts = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -183,17 +196,17 @@ Number of integration points in the scheme.
 
 
 
-Definition at line 162 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00162}{162}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc}} 
+\Hypertarget{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc}\label{classoomph_1_1Gauss_3_011_00_012_01_4_a5123dd00cb3e7c4a1d95a7b65a553bfc} 
 \index{oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}!Weight@{Weight}}
 \index{Weight@{Weight}!oomph::Gauss$<$ 1, 2 $>$@{oomph::Gauss$<$ 1, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Weight}{Weight}}
-{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::Weight = \{1.\+0, 1.\+0\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Gauss}{oomph\+::\+Gauss}}$<$ 1, 2 $>$\+::\+Weight = \{1.\+0, 1.\+0\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 164 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00164}{164}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 

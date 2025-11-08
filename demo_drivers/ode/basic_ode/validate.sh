@@ -13,8 +13,8 @@ set -o nounset
 # of ~2 of each other.
 
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 # Set the number of tests to be checked, computed as we go along.
 NUM_TESTS=0
@@ -50,7 +50,7 @@ fixed_step_test()
         # Extract error norm (=|exact - approx|), delete header line and
         # write to a file. Then check that all norms are less than $4.
         cut -d\; -f 4 $dir/trace | sed '1d' > $dir/error_norms
-        ../../../bin/fpdiff.py $dir/error_norms zeros 0.0 $4 >> $log_file
+        $OOMPH_ROOT_DIR/scripts/fpdiff.py $dir/error_norms zeros 0.0 $4 >> $log_file
     else	
         echo "FAIL: did not run successfully" >> $log_file
         echo >> $log_file
@@ -109,7 +109,7 @@ adaptive_step_test()
         # Extract error norm (=|exact - approx|), delete header line and
         # write to a file. Then check that all norms are less than $4.
         cut -d\; -f 4 $dir/trace | sed '1d' > $dir/error_norms
-        if ../../../bin/fpsmall.py $dir/error_norms $4 > $dir/fpsmall_output; then
+        if $OOMPH_ROOT_DIR/scripts/fpsmall.py $dir/error_norms $4 > $dir/fpsmall_output; then
             nsteps="$(wc -l < $dir/trace)" # Have to use '<' or we will get
                                            # filename in the output of wc.
             if [[ $nsteps -lt "$5" ]]; then
@@ -152,7 +152,7 @@ NUM_TESTS=$(expr $NUM_TESTS + 4)
 
 
 # Append local log file to global log file
-cat $log_file >> ../../../validation.log
+cat $log_file >> $OOMPH_ROOT_DIR/validation.log
 
 
 
@@ -164,7 +164,7 @@ cat $log_file >> ../../../validation.log
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

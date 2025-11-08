@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -634,7 +634,7 @@ void ShellProblem<ELEMENT>::solve()
  
  //Open an output trace file
  char filename[100];
- sprintf(filename,"trace_on_proc%i.dat",this->communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "trace_on_proc%i.dat",this->communicator_pt()->my_rank());
  ofstream trace(filename);
 
  //Change in displacemenet
@@ -668,7 +668,7 @@ void ShellProblem<ELEMENT>::solve()
  trace.close();
  
  //Output the tube shape in the most strongly collapsed configuration
- sprintf(filename,"final_shape_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "final_shape_on_proc%i.dat",
          this->communicator_pt()->my_rank());
  ofstream file(filename);
  solid_mesh_pt()->output(file,5);
@@ -703,7 +703,7 @@ void ShellProblem<ELEMENT>::solve()
  double ds = -0.5;
 
  //Open a different trace file
- sprintf(filename,"trace_disp_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "trace_disp_on_proc%i.dat",
          this->communicator_pt()->my_rank());
  trace.open(filename);
  //Take fifteen continuation steps

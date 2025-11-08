@@ -137,5 +137,5 @@ demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

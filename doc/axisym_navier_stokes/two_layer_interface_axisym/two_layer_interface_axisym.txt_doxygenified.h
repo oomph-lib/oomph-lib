@@ -597,5 +597,5 @@ demo_drivers/axisym_navier_stokes/two_layer_interface_axisym/elastic_two_layer_i
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -165,7 +165,7 @@ as illustrated here.
 Driver codes that may be used to experiment with reduced integration
 and to assess the asymptotic convergence behaviour can be found
 in the directory
-<A HREF="../../../self_test/poisson/convergence_tests">self_test/poisson/convergence_tests/</A>
+<A HREF="../../../demo_drivers/self_test/poisson/convergence_tests">demo_drivers/self_test/poisson/convergence_tests/</A>
 <HR>
 <HR>
 
@@ -371,5 +371,5 @@ to monitor the \e actual memory usage of the code.
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

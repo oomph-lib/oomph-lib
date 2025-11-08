@@ -1,17 +1,19 @@
+\chapter{Example codes and Tutorials}
+\hypertarget{index}{}\label{index}\index{Example codes and Tutorials@{Example codes and Tutorials}}
 This document provides a complete list of the example codes that are distributed with the {\ttfamily oomph-\/lib} library. For each code we give a brief description of the problem solved and provide a link to the detailed documentation. The codes are listed in order of increasing complexity. The bullet-\/point list in the right column lists the new {\ttfamily oomph-\/lib} features that are introduced in the example. You may either work through the examples one-\/by-\/one, treating the example codes and their documentation as chapters in a self-\/study course, or use the list of topics in the right column as a quick reference to example codes that provide an introduction to a specific feature.
 
 You may also wish to consult the following documents\+:
 \begin{DoxyItemize}
-\item The \href{../../intro/html/index.html}{\texttt{ Introduction }} provides a \char`\"{}low tech\char`\"{} review of the theory of finite elements and presents a \char`\"{}top-\/down\char`\"{} discussion of the method\textquotesingle{}s implementation within {\ttfamily oomph-\/lib}.
-\item The document \href{../../the_data_structure/html/index.html}{\texttt{ The Data Structure }} provides a \char`\"{}bottom-\/up\char`\"{} discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} data structure.
-\item The \href{../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide}} provides a \char`\"{}quick\char`\"{} introduction on how to create new instances of {\ttfamily oomph-\/lib\textquotesingle{}s} fundamental objects\+: {\ttfamily Problems}, {\ttfamily Meshes}, and {\ttfamily Elements}.
+\item The \href{../../intro/html/index.html}{\texttt{ Introduction }} provides a "{}low tech"{} review of the theory of finite elements and presents a "{}top-\/down"{} discussion of the method\textquotesingle{}s implementation within {\ttfamily oomph-\/lib}.
+\item The document \href{../../the_data_structure/html/index.html}{\texttt{ The Data Structure }} provides a "{}bottom-\/up"{} discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} data structure.
+\item The \href{../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide}} provides a "{}quick"{} introduction on how to create new instances of {\ttfamily oomph-\/lib\textquotesingle{}s} fundamental objects\+: {\ttfamily Problems}, {\ttfamily Meshes}, and {\ttfamily Elements}.
 \item The \href{../../mpi/general_mpi/html/index.html}{\texttt{ tutorial discussing {\ttfamily oomph-\/lib}\textquotesingle{}s parallel processing capabilities.}}.
 \end{DoxyItemize}\begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
 \begin{center} {\bfseries{Work in progress}} \end{center} 
 
- We\textquotesingle{}re still working on the detailed documentation for many of the demo problems listed below. The fully-\/documented demo problems are accessible via the links. If you are particularly interested in a specific problem for which the detailed documentation is incomplete, let us know -- we might be able to give it a slightly higher priority. We are happy to let you have driver codes before the documentation is complete. Such codes usually need a bit of tidying to make them acceptable for \char`\"{}general release\char`\"{}, but they are fully functional. In fact, they are run on a regular basis as part of {\ttfamily  oomph-\/lib\textquotesingle{}s } self-\/test routines (activated by typing {\ttfamily  make check } in the top-\/level directory).    \\\cline{1-1}
+ We\textquotesingle{}re still working on the detailed documentation for many of the demo problems listed below. The fully-\/documented demo problems are accessible via the links. If you are particularly interested in a specific problem for which the detailed documentation is incomplete, let us know -- we might be able to give it a slightly higher priority. We are happy to let you have driver codes before the documentation is complete. Such codes usually need a bit of tidying to make them acceptable for "{}general release"{}, but they are fully functional. In fact, they are run on a regular basis as part of {\ttfamily  oomph-\/lib\textquotesingle{}s } self-\/test routines, activated with "{}$<$code$>$cd demo\+\_\+drivers; cmake -\/\+G Ninja -\/\+B build; cd build; ctest$<$/code$>$"{} .    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -46,9 +48,6 @@ You may also wish to consult the following documents\+:
 \item \href{\#beam}{\texttt{ Beam structures}}
 \item \href{\#shell}{\texttt{ Shell structures}}
 \end{DoxyItemize}
-\end{DoxyItemize}
-\end{DoxyEnumerate}
-\begin{DoxyItemize}
 \item Multi-\/physics problems\+:
 \begin{DoxyItemize}
 \item \href{\#fsi}{\texttt{ Large-\/displacement fluid-\/structure interaction problems}}
@@ -56,39 +55,26 @@ You may also wish to consult the following documents\+:
 \item \href{\#fd_acoustic_fsi}{\texttt{ Azimuthally Fourier-\/decomposed 3D acoustic fluid-\/structure interaction problems}}
 \item \href{\#multi}{\texttt{ Multi-\/physics problems}}
 \end{DoxyItemize}
-\end{DoxyItemize}
-
-
-\begin{DoxyItemize}
 \item Eigenproblems\+:
 \begin{DoxyItemize}
 \item \href{\#eigen}{\texttt{ How to formulate and solve an eigenproblem}}
 \end{DoxyItemize}
 \end{DoxyItemize}
-
-
-\begin{DoxyEnumerate}
 \item \href{\#meshes}{\texttt{ Mesh generation}}
 \begin{DoxyItemize}
 \item \href{\#available_meshes}{\texttt{ Structured meshes}}
 \item \href{\#third_party_meshes}{\texttt{ Unstructured meshes generated via input from third-\/party mesh generators}}
 \end{DoxyItemize}
-\end{DoxyEnumerate}
-\begin{DoxyEnumerate}
 \item \href{\#solvers}{\texttt{ Linear solvers and preconditioners}}
 \begin{DoxyItemize}
 \item \href{\#linear_solvers}{\texttt{ Direct and iterative linear solvers and general-\/purpose preconditioners}}
 \item \href{\#lin_alg}{\texttt{ (Distributed) linear algebra}}
 \item \href{\#specific_preconditioners}{\texttt{ Problem-\/specific preconditioners}}
 \end{DoxyItemize}
-\end{DoxyEnumerate}
-\begin{DoxyEnumerate}
 \item \href{\#visualisation}{\texttt{ Visualisation}}
 \begin{DoxyItemize}
 \item \href{\#paraview}{\texttt{ Visualising oomph-\/lib\textquotesingle{}s output files with Paraview}}
 \end{DoxyItemize}
-\end{DoxyEnumerate}
-\begin{DoxyEnumerate}
 \item \href{\#parallel}{\texttt{ Parallel driver codes}}
 \begin{DoxyItemize}
 \item \href{\#distributed}{\texttt{ Distributed problems}}
@@ -101,7 +87,8 @@ latex; please consult the html-based documentation.]
 \end{center}
 
 
-\label{_problems}%
+\label{index_problems}%
+\Hypertarget{index_problems}%
 
 
  \tabulinesep=1mm
@@ -117,7 +104,8 @@ Short description of problem.  &
  \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_poisson}%
+\multicolumn{2}{|l|}{\label{index_poisson}%
+\Hypertarget{index_poisson}%
 \doxysubsection*{Poisson problems}
 
 }\\\cline{1-2}
@@ -173,7 +161,8 @@ An alternative solution for the previous problem, using multiple meshes.  &
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_poisson_adapt}%
+\multicolumn{2}{|l|}{\label{index_poisson_adapt}%
+\Hypertarget{index_poisson_adapt}%
 \doxysubsection*{Poisson problems with adaptivity}
 
 }\\\cline{1-2}
@@ -182,16 +171,16 @@ An alternative solution for the previous problem, using multiple meshes.  &
 We solve a 2D Poisson equation in a nontrivial, fish-\/shaped domain and demonstrate {\ttfamily oomph-\/lib\textquotesingle{}s} fully-\/automatic mesh adaptation routines.  &
 \begin{DoxyItemize}
 \item How to perform automatic mesh adaptation.
-\item {\ttfamily oomph-\/lib\textquotesingle{}s} \char`\"{}black-\/box\char`\"{} adaptive Newton solver.
+\item {\ttfamily oomph-\/lib\textquotesingle{}s} "{}black-\/box"{} adaptive Newton solver.
 \item {\ttfamily The} functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()}. 
 \end{DoxyItemize}
 
 \\\cline{1-2}
 \href{../../poisson/two_d_poisson_adapt/html/index.html}{\texttt{ {\bfseries{ The 2D Poisson equation revisited -- how to create a refineable mesh }}}}
 
-We revisit an \href{../../poisson/two_d_poisson/html/index.html}{\texttt{ earlier example}} and demonstrate how easy it is to \char`\"{}upgrade\char`\"{} an existing mesh to a mesh that can be used with {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation routines.  &
+We revisit an \href{../../poisson/two_d_poisson/html/index.html}{\texttt{ earlier example}} and demonstrate how easy it is to "{}upgrade"{} an existing mesh to a mesh that can be used with {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation routines.  &
 \begin{DoxyItemize}
-\item \char`\"{}\+Upgrading\char`\"{} meshes to make them refineable.
+\item "{}\+Upgrading"{} meshes to make them refineable.
 \item General conventions\+:
 \begin{DoxyItemize}
 \item Hanging nodes -- the functions {\ttfamily Node\+::position(...)} and {\ttfamily Node\+::value(...)}. 
@@ -220,7 +209,7 @@ We revisit an \href{../../poisson/two_d_poisson_flux_bc2/html/index.html}{\textt
 \item How to apply flux boundary conditions in problems with spatial adaptivity.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item The {\ttfamily Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage()} function\+: \char`\"{}\+Emptying\char`\"{} a mesh without deleting its constituent nodes and elements (they might be shared with other meshes!).
+\item The {\ttfamily Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage()} function\+: "{}\+Emptying"{} a mesh without deleting its constituent nodes and elements (they might be shared with other meshes!).
 \end{DoxyItemize}
 \item {\bfseries{Note\+:}} There is a \href{../../mpi/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ separate tutorial}} that discusses the parallelisation of this code.
 \end{DoxyItemize}
@@ -245,7 +234,8 @@ We demonstrate {\ttfamily oomph-\/lib\textquotesingle{}s} octree-\/based 3D mesh
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_adv_diff}%
+\multicolumn{2}{|l|}{\label{index_adv_diff}%
+\Hypertarget{index_adv_diff}%
 \doxysubsection*{The advection-\/diffusion equation}
 
 }\\\cline{1-2}
@@ -254,8 +244,8 @@ We demonstrate {\ttfamily oomph-\/lib\textquotesingle{}s} octree-\/based 3D mesh
 We solve a 2D advection-\/diffusion equation and illustrate the characteristic features of solutions at large Peclet number.  &
 \begin{DoxyItemize}
 \item The adaptive discretisation of the advection diffusion equation.
-\item How to specify the \char`\"{}wind\char`\"{} and the Peclet number for the advection diffusion equation.
-\item How to document the progress of {\ttfamily oomph-\/lib\textquotesingle{}s} \char`\"{}black box\char`\"{} adaptive Newton solver. 
+\item How to specify the "{}wind"{} and the Peclet number for the advection diffusion equation.
+\item How to document the progress of {\ttfamily oomph-\/lib\textquotesingle{}s} "{}black box"{} adaptive Newton solver. 
 \end{DoxyItemize}
 
 \\\cline{1-2}
@@ -279,7 +269,8 @@ We demonstrate how to implement a stabilised Petrov-\/\+Galerkin discretisation 
 \end{DoxyItemize}
 \item Note\+: the driver code is unannotated.   
 \end{DoxyItemize}\\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_unsteady_heat}%
+\multicolumn{2}{|l|}{\label{index_unsteady_heat}%
+\Hypertarget{index_unsteady_heat}%
 \doxysubsection*{The unsteady heat equation and an introduction to time-\/stepping}
 
 }\\\cline{1-2}
@@ -290,7 +281,7 @@ We solve the 2D unsteady heat equation and demonstrate {\ttfamily oomph-\/lib\te
 \item Solving time-\/dependent problems with {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} 
 \item The functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()} and {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}.
 \item The BDF timesteppers and how to set up initial conditions for parabolic problems.
-\item Initialising the \char`\"{}previous\char`\"{} nodal positions for elements that are based on an ALE formulation.
+\item Initialising the "{}previous"{} nodal positions for elements that are based on an ALE formulation.
 \item General conventions\+:
 \begin{DoxyItemize}
 \item Providing a default {\ttfamily Steady} timestepper for all {\ttfamily Mesh} constructors.
@@ -357,7 +348,8 @@ We demonstrate the use of combined spatial and temporal adaptivity for the solut
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_wave}%
+\multicolumn{2}{|l|}{\label{index_wave}%
+\Hypertarget{index_wave}%
 \doxysubsection*{The linear wave equation}
 
 }\\\cline{1-2}
@@ -374,7 +366,8 @@ We solve a 2D wave equation and demonstrate {\ttfamily oomph-\/lib\textquotesing
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_helmholtz}%
+\multicolumn{2}{|l|}{\label{index_helmholtz}%
+\Hypertarget{index_helmholtz}%
 \doxysubsection*{The Helmholtz equation}
 
 }\\\cline{1-2}
@@ -395,7 +388,8 @@ We solve a 2D Helmholtz problem, simulating scattering of a planar wave from a c
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_fourier_decomposed_helmholtz}%
+\multicolumn{2}{|l|}{\label{index_fourier_decomposed_helmholtz}%
+\Hypertarget{index_fourier_decomposed_helmholtz}%
 \doxysubsection*{The azimuthally Fourier-\/decomposed 3D Helmholtz equation}
 
 }\\\cline{1-2}
@@ -423,7 +417,8 @@ We re-\/visit the 3D Helmholtz equation in cylindrical polar coordinates, using 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_pml_helmholtz}%
+\multicolumn{2}{|l|}{\label{index_pml_helmholtz}%
+\Hypertarget{index_pml_helmholtz}%
 \doxysubsection*{The Helmholtz equation and perfectly matched layers}
 
 }\\\cline{1-2}
@@ -434,7 +429,8 @@ We re-\/visit the 3D Helmholtz equation in cylindrical polar coordinates, using 
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_pml_fourier_decomposed_helmholtz}%
+\multicolumn{2}{|l|}{\label{index_pml_fourier_decomposed_helmholtz}%
+\Hypertarget{index_pml_fourier_decomposed_helmholtz}%
  \doxysubsection*{The azimuthally Fourier-\/decomposed 3D Helmholtz equation and perfectly matched layers (PMLs)}
 
 }\\\cline{1-2}
@@ -449,7 +445,8 @@ We consider the azimuthally Fourier-\/decomposed 3D Helmholtz equation and demon
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_young_laplace}%
+\multicolumn{2}{|l|}{\label{index_young_laplace}%
+\Hypertarget{index_young_laplace}%
 \doxysubsection*{The Young Laplace equation}
 
 }\\\cline{1-2}
@@ -481,7 +478,8 @@ We demonstrate how to apply contact angle-\/boundary conditions for the Young-\/
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_nst}%
+\multicolumn{2}{|l|}{\label{index_nst}%
+\Hypertarget{index_nst}%
 \doxysubsection*{The Navier-\/\+Stokes equations}
 
 }\\\cline{1-2}
@@ -503,7 +501,7 @@ Probably the most-\/solved problem in computational fluid dynamics\+: Steady dri
 
 We employ {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation routines to refine the mesh in the neighbourhood of the pressure singularities.  &
 \begin{DoxyItemize}
-\item Treatment of pressure degrees of freedom in Navier-\/\+Stokes simulations with adaptive mesh refinement -- pinning \char`\"{}redundant\char`\"{} pressure degrees of freedom.
+\item Treatment of pressure degrees of freedom in Navier-\/\+Stokes simulations with adaptive mesh refinement -- pinning "{}redundant"{} pressure degrees of freedom.
 \item {\bfseries{Note\+:}} There is a \href{../../mpi/adaptive_driven_cavity/html/index.html}{\texttt{ separate tutorial}} that discusses the parallelisation of this code. 
 \end{DoxyItemize}
 
@@ -567,7 +565,7 @@ We study the 2D finite-\/\+Reynolds number flow contained inside an oscillating 
 \hline
 \href{../../navier_stokes/collapsible_channel/html/index.html}{\texttt{ {\bfseries{ 2D finite-\/\+Reynolds-\/number-\/flow in a 2D channel with a moving wall }} }}
 
-This is a \char`\"{}warm-\/up\char`\"{} problem for the classical fluid-\/structure interaction problem of \href{../../interaction/fsi_collapsible_channel/html/index.html}{\texttt{ flow in a 2D collapsible channel}}. Here we compute the flow through a 2D channel in which part of one wall is replaced by a moving \char`\"{}membrane\char`\"{} whose motion is prescribed.  &
+This is a "{}warm-\/up"{} problem for the classical fluid-\/structure interaction problem of \href{../../interaction/fsi_collapsible_channel/html/index.html}{\texttt{ flow in a 2D collapsible channel}}. Here we compute the flow through a 2D channel in which part of one wall is replaced by a moving "{}membrane"{} whose motion is prescribed.  &
 \begin{DoxyItemize}
 \item The adaptive solution of the Navier-\/\+Stokes equations in a moving domain with traction boundary conditions. 
 \end{DoxyItemize}
@@ -578,7 +576,7 @@ This is a \char`\"{}warm-\/up\char`\"{} problem for the classical fluid-\/struct
 We re-\/visit the problem studied in the previous example and demonstrate an alternative node-\/update procedure, based on {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Algebraic\+Node}, {\ttfamily Algebraic\+Element} and {\ttfamily Algebraic\+Mesh} classes. Algebraic node updates will turn out to be essential for the efficient implementation of fluid-\/structure interaction problems.  &
 \begin{DoxyItemize}
 \item How to customise the node-\/update, using {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Algebraic\+Node}, {\ttfamily Algebraic\+Element} and {\ttfamily Algebraic\+Mesh} classes.
-\item Existing {\ttfamily Algebraic\+Meshes} are easy to use\+: Simply \char`\"{}upgrade\char`\"{} the required element (of type {\ttfamily ELEMENT}, say) in the templated wrapper class {\ttfamily Algebraic\+Element$<$\+ELEMENT$>$}. 
+\item Existing {\ttfamily Algebraic\+Meshes} are easy to use\+: Simply "{}upgrade"{} the required element (of type {\ttfamily ELEMENT}, say) in the templated wrapper class {\ttfamily Algebraic\+Element$<$\+ELEMENT$>$}. 
 \end{DoxyItemize}
 
 \\\cline{1-2}
@@ -597,7 +595,7 @@ We consider a variation of the problem studied in the previous example and demon
 \\\cline{1-2}
 \href{../../navier_stokes/channel_with_leaflet/html/index.html}{\texttt{ {\bfseries{ 2D finite-\/\+Reynolds-\/number-\/flow in a 2D channel that is partially obstructed by an oscillating leaflet }} }}
 
-This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ the corresponding fluid-\/structure interaction problem}} where the leaflet deforms in response to the fluid traction. Here we consider the case where the motion of the leaflet is prescribed.  &
+This is a "{}warm-\/up"{} problem for \href{../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ the corresponding fluid-\/structure interaction problem}} where the leaflet deforms in response to the fluid traction. Here we consider the case where the motion of the leaflet is prescribed.  &
 \begin{DoxyItemize}
 \item Another example illustrating the use of algebraic and {\ttfamily Macro\+Element/\+Domain-\/based} node update techniques. 
 \end{DoxyItemize}
@@ -605,7 +603,7 @@ This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/fsi_
 \\\cline{1-2}
 \href{../../navier_stokes/turek_flag_non_fsi/html/index.html}{\texttt{ {\bfseries{ Flow past a cylinder with a waving flag }} }}
 
-This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} where the flag deforms in response to the fluid traction. Here we consider the case where the motion of the flag is prescribed.  &
+This is a "{}warm-\/up"{} problem for \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} where the flag deforms in response to the fluid traction. Here we consider the case where the motion of the flag is prescribed.  &
 \begin{DoxyItemize}
 \item Another example illustrating the use of algebraic and {\ttfamily Macro\+Element/\+Domain-\/based} node update techniques. 
 \end{DoxyItemize}
@@ -619,7 +617,7 @@ This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/ture
 \hline
 \href{../../navier_stokes/unstructured_fluid/html/index.html}{\texttt{ {\bfseries{ Unstructured meshes for fluids problems }} }}
 
-This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/unstructured_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured meshes for FSI problems.  &
+This is a "{}warm-\/up"{} problem for \href{../../interaction/unstructured_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured meshes for FSI problems.  &
 \begin{DoxyItemize}
 \item How to use xfig/triangle-\/generated, unstructured meshes for flow problems. 
 \end{DoxyItemize}
@@ -627,16 +625,16 @@ This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/unst
 \\\cline{1-2}
 \href{../../navier_stokes/unstructured_three_d_fluid/html/index.html}{\texttt{ {\bfseries{ Unstructured meshes for 3D fluids problems }} }}
 
-This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured 3D meshes for FSI problems.  &
+This is a "{}warm-\/up"{} problem for \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured 3D meshes for FSI problems.  &
 \begin{DoxyItemize}
 \item How to use tetgen-\/generated, unstructured meshes for 3D flow problems.
-\item Avoiding \char`\"{}locking\char`\"{} with the {\ttfamily split\+\_\+corner\+\_\+elements} flag. 
+\item Avoiding "{}locking"{} with the {\ttfamily split\+\_\+corner\+\_\+elements} flag. 
 \end{DoxyItemize}
 
 \\\cline{1-2}
 \href{../../navier_stokes/vmtk_fluid/html/index.html}{\texttt{ {\bfseries{ Steady finite-\/\+Reynolds-\/number flow through an iliac bifurcation }} }}
 
-We show how to simulate physiological flow problems, using the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit (VMTK).}} This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ another tutorial}} in which we consider the corresponding FSI problems in which the vessel wall is elastic.  &
+We show how to simulate physiological flow problems, using the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit (VMTK).}} This is a "{}warm-\/up"{} problem for \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ another tutorial}} in which we consider the corresponding FSI problems in which the vessel wall is elastic.  &
 \begin{DoxyItemize}
 \item How to use {\ttfamily Impose\+Parallel\+Outflow\+Elements} to enforce parallel in-\/ and outflow from cross-\/sections that are not aligned with any coordinate planes. 
 \end{DoxyItemize}
@@ -660,7 +658,8 @@ We solve the classical problem of flow into a 3D curved tube.  &
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_axisym_nst}%
+\multicolumn{2}{|l|}{\label{index_axisym_nst}%
+\Hypertarget{index_axisym_nst}%
 \doxysubsection*{The axisymmetric Navier-\/\+Stokes equations}
 
 }\\\cline{1-2}
@@ -669,7 +668,7 @@ We solve the classical problem of flow into a 3D curved tube.  &
 A classical fluid mechanics problem\+: Spin-\/up of a viscous fluid. A key feature of the flow is the development of thin Ekman (boundary) layers during the early stages of the spin-\/up. We demonstrate how the use of spatial adaptivity helps to resolve these layers. At large times, the flow field approaches a rigid-\/body rotation -- this poses a subtle problem for the spatial adaptivity as its default behaviour would cause strong spatially uniform refinement.  &
 \begin{DoxyItemize}
 \item The axisymmetric Navier-\/\+Stokes equations
-\item How to prescribe a constant reference value for the normalisation of the error in spatially-\/adaptive computations in which the solution approaches a \char`\"{}trivial\char`\"{} solution. 
+\item How to prescribe a constant reference value for the normalisation of the error in spatially-\/adaptive computations in which the solution approaches a "{}trivial"{} solution. 
 \end{DoxyItemize}
 
 
@@ -679,7 +678,8 @@ A classical fluid mechanics problem\+: Spin-\/up of a viscous fluid. A key featu
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_free_surface_nst}%
+\multicolumn{2}{|l|}{\label{index_free_surface_nst}%
+\Hypertarget{index_free_surface_nst}%
 \doxysubsection*{The free-\/surface Navier-\/\+Stokes equations}
 
 }\\\cline{1-2}
@@ -692,8 +692,6 @@ A classical fluid mechanics problem\+: Spin-\/up of a viscous fluid. A key featu
 \item Free Surface and Interface Boundary Conditions
 \item Surface Transport Equations
 \end{DoxyItemize}
-\end{DoxyItemize}
-\begin{DoxyItemize}
 \item Implementation
 \begin{DoxyItemize}
 \item The Fluid\+Interface\+Element class
@@ -755,6 +753,15 @@ A classical fluid mechanics problem\+: We study the flow of a film of fluid down
 
 
 \\\cline{1-2}
+\href{../../navier_stokes/adaptive_interface/html/index.html}{\texttt{ {\bfseries{A steadily-\/rotating cylinder below a free surface in a finite box.}} }}
+
+Compute the free surface position and fluid velocity and pressure fields about a fixed, steadily-\/rotating cylinder immersed in a viscous fluid in a finite box. Uses a pseudo-\/elastic remesh strategy and spatial adaptivity in a non-\/trivial free surface problem.  &
+\begin{DoxyItemize}
+\item A validation code.
+\item Note\+: this driver code is currently undocumented.  
+\end{DoxyItemize}
+
+\\\cline{1-2}
 \end{longtabu}
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
@@ -774,15 +781,13 @@ A classical fluid mechanics problem\+: We study the propagation of an inviscid (
 
 Uses a pseudo-\/elastic remesh strategy and unstructured spatial adaptivity in a non-\/trivial free surface problem.  &
 \begin{DoxyItemize}
-\item Mesh adaptation for closed free boundaries -- what happens \char`\"{}under   the hood\char`\"{} and how to customise the default behaviour, specifically\+:
+\item Mesh adaptation for closed free boundaries -- what happens "{}under   the hood"{} and how to customise the default behaviour, specifically\+:
 \begin{DoxyItemize}
 \item Selecting the refinement and unrefinement tolerances on the free boundaries.
 \item Redistributing segments between polylines in cases when the nodes on the free surface all get convected into one region.
 \item Why you shouldn\textquotesingle{}t use {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to describe the initial shape of (initially curvilinear) free boundaries.
 \end{DoxyItemize}
-\end{DoxyItemize}
-\begin{DoxyItemize}
-\item How to impose a volume constraint onto an enclosed \char`\"{}bubble\char`\"{} in a viscous fluid.
+\item How to impose a volume constraint onto an enclosed "{}bubble"{} in a viscous fluid.
 \end{DoxyItemize}
 
 
@@ -793,11 +798,12 @@ Uses a pseudo-\/elastic remesh strategy and unstructured spatial adaptivity in a
 Uses a pseudo-\/elastic remesh strategy and unstructured spatial adaptivity in a non-\/trivial interfacial (two-\/fluid) problem.  &
 \begin{DoxyItemize}
 \item How to use regions in an unstructured two-\/fluid problem.
-\item How to impose and then remove a volume constraint onto an enclosed \char`\"{}droplet\char`\"{} in a viscous fluid.
+\item How to impose and then remove a volume constraint onto an enclosed "{}droplet"{} in a viscous fluid.
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_axi_free_surface_nst}%
+\multicolumn{2}{|l|}{\label{index_axi_free_surface_nst}%
+\Hypertarget{index_axi_free_surface_nst}%
 \doxysubsection*{The axisymmetric free-\/surface Navier-\/\+Stokes equations}
 
 
@@ -827,7 +833,8 @@ A hydrostatics problem\+: Compute the static free surface that bounds a layer of
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_solid}%
+\multicolumn{2}{|l|}{\label{index_solid}%
+\Hypertarget{index_solid}%
 \doxysubsection*{Nonlinear solid mechanics problems}
 
 }\\\cline{1-2}
@@ -846,8 +853,6 @@ In this document we discuss the theoretical background and the practical impleme
 \item Isotropic growth.
 \item Specialisation to a cartesian basis and finite element discretisation
 \end{DoxyItemize}
-\end{DoxyItemize}
-\begin{DoxyItemize}
 \item Implementation\+:
 \begin{DoxyItemize}
 \item The {\ttfamily Solid\+Node} class
@@ -855,8 +860,6 @@ In this document we discuss the theoretical background and the practical impleme
 \item The {\ttfamily Solid\+Mesh} class
 \item The {\ttfamily Solid\+Traction\+Element} class
 \end{DoxyItemize}
-\end{DoxyItemize}
-\begin{DoxyItemize}
 \item Timestepping and the generation of initial conditions for solid mechanics problems
 \end{DoxyItemize}
 
@@ -876,7 +879,7 @@ We study a classical solid mechanics problem\+: the bending of a cantilever beam
 We study the axisymmetric compression of a circular, elastic disk, loaded by an external traction. The results are compared against the predictions from small-\/displacement elasticity.  &
 \begin{DoxyItemize}
 \item How to upgrade an existing mesh to {\ttfamily Solid\+Mesh}.
-\item Why it is necessary to use \char`\"{}undeformed Macro\+Elements\char`\"{} to ensure that the numerical results converge to the correct solution under mesh refinement if the domain has curvilinear boundaries.
+\item Why it is necessary to use "{}undeformed Macro\+Elements"{} to ensure that the numerical results converge to the correct solution under mesh refinement if the domain has curvilinear boundaries.
 \item How to switch between different constitutive equations
 \item how to incorporate isotropic growth into the model. 
 \end{DoxyItemize}
@@ -925,7 +928,7 @@ We study the deformation of an asymmetric 3D cantilever beam made of incompressi
 \\\cline{1-2}
 \href{../../solid/unstructured_solid/html/index.html}{\texttt{ {\bfseries{Unstructured meshes for 2D and 3D solid mechanics problems. }} }}
 
-We demonstrate how to use unstructured meshes to solve 2D and 3D solid mechanics problems. This tutorial acts as a \char`\"{}warm-\/up\char`\"{} problem for the solution of unstructured FSI problems.  &
+We demonstrate how to use unstructured meshes to solve 2D and 3D solid mechanics problems. This tutorial acts as a "{}warm-\/up"{} problem for the solution of unstructured FSI problems.  &
 \begin{DoxyItemize}
 \item How to solve 2D and 3D solid mechanics problems on unstructured meshes.
 \item How to identify domain boundaries in xfig-\/generated unstructured meshes. 
@@ -934,7 +937,7 @@ We demonstrate how to use unstructured meshes to solve 2D and 3D solid mechanics
 \\\cline{1-2}
 \href{../../solid/unstructured_three_d_solid/html/index.html}{\texttt{ {\bfseries{Unstructured meshes for 3D solid mechanics problems. }} }}
 
-We demonstrate how to use unstructured meshes to solve 3D solid mechanics problems. This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured 3D meshes for FSI problems.  &
+We demonstrate how to use unstructured meshes to solve 3D solid mechanics problems. This is a "{}warm-\/up"{} problem for \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}} in which we demonstrate the use of unstructured 3D meshes for FSI problems.  &
 \begin{DoxyItemize}
 \item How to solve 3D solid mechanics problems on unstructured meshes. 
 \end{DoxyItemize}
@@ -942,7 +945,7 @@ We demonstrate how to use unstructured meshes to solve 3D solid mechanics proble
 \\\cline{1-2}
 \href{../../solid/vmtk_solid/html/index.html}{\texttt{ {\bfseries{Inflation of a blood vessel }} }}
 
-We show how to simulate physiological solid mechanics problems, using the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit (VMTK).}} This is a \char`\"{}warm-\/up\char`\"{} problem for \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ another tutorial}} in which we consider the corresponding FSI problems in which the vessel conveys (and is loaded by) a viscous fluid.  &
+We show how to simulate physiological solid mechanics problems, using the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit (VMTK).}} This is a "{}warm-\/up"{} problem for \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ another tutorial}} in which we consider the corresponding FSI problems in which the vessel conveys (and is loaded by) a viscous fluid.  &
 \begin{DoxyItemize}
 \item How to solve physiological solid mechanics problems. 
 \end{DoxyItemize}
@@ -978,7 +981,8 @@ We solve a classical problem in large-\/displacement elasticity and compare agai
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_linear_elasticity}%
+\multicolumn{2}{|l|}{\label{index_linear_elasticity}%
+\Hypertarget{index_linear_elasticity}%
 \doxysubsection*{Linear elasticity}
 
 }\\\cline{1-2}
@@ -1002,7 +1006,8 @@ We demonstrate how to compute the deformation of a linearly elastic strip, loade
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_axisym_linear_elasticity}%
+\multicolumn{2}{|l|}{\label{index_axisym_linear_elasticity}%
+\Hypertarget{index_axisym_linear_elasticity}%
 \doxysubsection*{Axisymmetric linear elasticity}
 
 }\\\cline{1-2}
@@ -1022,7 +1027,8 @@ In this document we discuss the theoretical background and the practical impleme
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_time_harmonic_lin_elas}%
+\multicolumn{2}{|l|}{\label{index_time_harmonic_lin_elas}%
+\Hypertarget{index_time_harmonic_lin_elas}%
 \doxysubsection*{Time-\/harmonic linear elasticity}
 
 }\\\cline{1-2}
@@ -1047,7 +1053,8 @@ We re-\/visit the solution of the equations of time-\/harmonic linear elasticity
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_gen_time_harmonic_lin_elas}%
+\multicolumn{2}{|l|}{\label{index_gen_time_harmonic_lin_elas}%
+\Hypertarget{index_gen_time_harmonic_lin_elas}%
 \doxysubsection*{Generalised time-\/harmonic linear elasticity and perfectly matched layers (PMLs)}
 
 }\\\cline{1-2}
@@ -1063,7 +1070,8 @@ In this document we discuss a generalisation of the equations of time-\/harmonic
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_fourier_decomp_lin_elas}%
+\multicolumn{2}{|l|}{\label{index_fourier_decomp_lin_elas}%
+\Hypertarget{index_fourier_decomp_lin_elas}%
 \doxysubsection*{Azimuthally Fourier-\/decomposed 3D time-\/harmonic linear elasticity}
 
 }\\\cline{1-2}
@@ -1074,7 +1082,7 @@ In this document we discuss the theoretical background and the practical impleme
 \item The time-\/harmonic equations of linear elasticity and their non-\/dimensionalisation.
 \item Fourier decomposition of general three-\/dimensional disturbances.
 \item Implementation of the equations, based on a displacement formulation.
-\item The solution of a \char`\"{}manufactured\char`\"{} test problem.
+\item The solution of a "{}manufactured"{} test problem.
 \end{DoxyItemize}
 
 \\\cline{1-2}
@@ -1092,7 +1100,8 @@ We simulate the forced, time-\/harmonic oscillations of a hollow cylinder loaded
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_beam}%
+\multicolumn{2}{|l|}{\label{index_beam}%
+\Hypertarget{index_beam}%
 \doxysubsection*{Beam structures}
 
 }\\\cline{1-2}
@@ -1116,8 +1125,8 @@ We compute the post-\/buckling deformation of a thin-\/walled elastic ring, subj
 \item How to use {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Displacement\+Control\+Element} to apply displacement control in solid mechanics problems.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item What should be stored in a {\ttfamily Generalised\+Element\textquotesingle{}s} \char`\"{}external\char`\"{} {\ttfamily Data}?
-\item What should be stored in a {\ttfamily Problem\textquotesingle{}s} \char`\"{}global\char`\"{} {\ttfamily Data}?
+\item What should be stored in a {\ttfamily Generalised\+Element\textquotesingle{}s} "{}external"{} {\ttfamily Data}?
+\item What should be stored in a {\ttfamily Problem\textquotesingle{}s} "{}global"{} {\ttfamily Data}?
 \end{DoxyItemize}
 \end{DoxyItemize}
 
@@ -1148,11 +1157,12 @@ We compute the free, small-\/amplitude oscillations of a thin-\/walled elastic r
 \item How to assign initial conditions for beam structures.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
 \end{DoxyItemize}
 \item Note\+: this driver code is currently undocumented.   
 \end{DoxyItemize}\\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_shell}%
+\multicolumn{2}{|l|}{\label{index_shell}%
+\Hypertarget{index_shell}%
 \doxysubsection*{Shell structures}
 
 }\\\cline{1-2}
@@ -1164,20 +1174,21 @@ We simulate the post-\/buckling deformation of a pressure-\/loaded, clamped, thi
 \item Using displacement control for {\ttfamily Hermite\+Shell\+Elements}.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
 \end{DoxyItemize}
 \item Note\+: this driver code is currently undocumented.   
 \end{DoxyItemize}\\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_fsi}%
+\multicolumn{2}{|l|}{\label{index_fsi}%
+\Hypertarget{index_fsi}%
 \doxysubsection*{Large-\/displacement fluid-\/structure interaction problems}
 
 }\\\cline{1-2}
 \href{../../interaction/circle_as_element/html/index.html}{\texttt{ {\bfseries{ Warm-\/up problem for free-\/boundary problems\+: How to parametrise unknown boundaries. }} }}
 
-We demonstrate how to \char`\"{}upgrade\char`\"{} a {\ttfamily Geom\+Object} to a {\ttfamily Generalised\+Element} so that it can be used to parametrise an unknown domain boundary.  &
+We demonstrate how to "{}upgrade"{} a {\ttfamily Geom\+Object} to a {\ttfamily Generalised\+Element} so that it can be used to parametrise an unknown domain boundary.  &
 \begin{DoxyItemize}
 \item How to use multiple inheritance to combine {\ttfamily Geom\+Objects} and {\ttfamily Generalised\+Elements}.
-\item How to \char`\"{}upgrade\char`\"{} a {\ttfamily Geom\+Object} to a {\ttfamily Generalised\+Element} so that it can be used to parametrise an unknown domain boundary.
+\item How to "{}upgrade"{} a {\ttfamily Geom\+Object} to a {\ttfamily Generalised\+Element} so that it can be used to parametrise an unknown domain boundary.
 \item What is a {\ttfamily Geom\+Object\textquotesingle{}s} geometric {\ttfamily Data}?
 \item What is a {\ttfamily Generalised\+Element\textquotesingle{}s} external and internal {\ttfamily Data}? 
 \end{DoxyItemize}
@@ -1203,7 +1214,7 @@ We show how to use {\ttfamily Macro\+Element\+Node\+Update\+Elements} and {\ttfa
 We demonstrate the solution of this classical fluid-\/structure interaction problem and demonstrate how easy it is to combine the two single-\/physics problems (the \href{../../beam/tensioned_string/html/index.html}{\texttt{ deformation of an elastic beam under pressure loading}} and the \href{../../navier_stokes/collapsible_channel/html/index.html}{\texttt{ flow in a 2D channel with a moving wall}}) to a fully-\/coupled fluid-\/structure interaction problem.  &
 \begin{DoxyItemize}
 \item The {\ttfamily FSIFluid\+Elements} and {\ttfamily FSIWall\+Element} base classes.
-\item Representing a discretised beam/shell structure as a \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object\+:} The {\ttfamily Mesh\+As\+Geom\+Object} class.
+\item Representing a discretised beam/shell structure as a "{}compound"{} {\ttfamily Geom\+Object\+:} The {\ttfamily Mesh\+As\+Geom\+Object} class.
 \item Using the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} to set up the fluid-\/structure interaction.
 \item The pros (convenient!) and cons (slow!) of the {\ttfamily Macro\+Element/\+Domain} -\/ based node-\/update procedures in fluid-\/structure interaction problems.
 \end{DoxyItemize}
@@ -1216,7 +1227,7 @@ We demonstrate the solution of this classical fluid-\/structure interaction prob
 
 We revisit the \href{../../interaction/fsi_collapsible_channel/html/index.html}{\texttt{ problem of flow in a collapsible channel}} to demonstrate that the sparse algebraic node update procedures first discussed in an \href{../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ earlier non-\/\+FSI example}} lead to a much more efficient code.  &
 \begin{DoxyItemize}
-\item How to \char`\"{}sparsify\char`\"{} the node update with algebraic node update procedures.
+\item How to "{}sparsify"{} the node update with algebraic node update procedures.
 \item The {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} function and its default implementation.
 \end{DoxyItemize}
 \begin{DoxyItemize}
@@ -1248,7 +1259,7 @@ We revisit the \href{../../interaction/fsi_collapsible_channel/html/index.html}{
 We revisit the \href{../../interaction/fsi_collapsible_channel/html/index.html}{\texttt{ problem of flow in a collapsible channel}} once more to demonstrate the use of segregated solvers in fluid-\/structure interaction problems.  &
 \begin{DoxyItemize}
 \item The base Segregatable\+FSIProblem class
-\item How to construct and solve a segregated problem from a (standard) \char`\"{}monolithic\char`\"{} problem
+\item How to construct and solve a segregated problem from a (standard) "{}monolithic"{} problem
 \end{DoxyItemize}
 
 \\\cline{1-2}
@@ -1274,7 +1285,7 @@ We study the flow in a 2D channel that is partially obstructed by an elastic lea
 
 We demonstrate how to discretise and solve this benchmark problem with {\ttfamily oomph-\/lib}.  &
 \begin{DoxyItemize}
-\item FSI problems with \char`\"{}proper\char`\"{} 2D solids (rather than beam or shell structures)
+\item FSI problems with "{}proper"{} 2D solids (rather than beam or shell structures)
 \item FSI problems with wall inertia.
 \item Another application of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily FSIPreconditioner}.
 \item {\bfseries{Note\+:}} There is a \href{../../mpi/turek_flag/html/index.html}{\texttt{ separate tutorial}} that discusses the parallelisation of this code and shows to modify it to allow spatial adaptivity in the fluid and solid meshes. 
@@ -1340,7 +1351,7 @@ This is a very simple fluid-\/structure interaction problem\+: We study the fini
 \item Fluid-\/structure interaction.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
 \end{DoxyItemize}
 \item Note\+: this driver code is currently undocumented.   
 \end{DoxyItemize}\\\cline{1-2}
@@ -1351,18 +1362,18 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \item Fluid-\/structure interaction.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
 \end{DoxyItemize}
 \item Note\+: this driver code is currently undocumented.   
 \end{DoxyItemize}\\\cline{1-2}
 \href{../../interaction/fsi_osc_ring/html/index.html}{\texttt{ {\bfseries{A real fluid-\/structure interaction problem\+: Finite Reynolds number flow in an oscillating elastic ring. }} }}
 
-Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We study the finite-\/\+Reynolds number internal flow generated by the motion of an oscillating elastic ring and compare the results against asymptotic predictions.  &
+Our first "{}real"{} fluid-\/structure interaction problem\+: We study the finite-\/\+Reynolds number internal flow generated by the motion of an oscillating elastic ring and compare the results against asymptotic predictions.  &
 \begin{DoxyItemize}
 \item Fluid-\/structure interaction.
 \item General conventions\+:
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
 \end{DoxyItemize}
 \item Note\+: this driver code is currently undocumented.  
 \end{DoxyItemize}
@@ -1372,7 +1383,8 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_acoustic_fsi}%
+\multicolumn{2}{|l|}{\label{index_acoustic_fsi}%
+\Hypertarget{index_acoustic_fsi}%
 \doxysubsection*{Acoustic fluid-\/structure interaction problems}
 
 }\\\cline{1-2}
@@ -1397,7 +1409,8 @@ A brief extension of the \href{../../acoustic_fsi/acoustic_fsi_annulus/html/inde
 
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_fd_acoustic_fsi}%
+\multicolumn{2}{|l|}{\label{index_fd_acoustic_fsi}%
+\Hypertarget{index_fd_acoustic_fsi}%
 \doxysubsection*{Azimuthally Fourier-\/decomposed 3D acoustic fluid-\/structure interaction problems}
 
 }\\\cline{1-2}
@@ -1426,14 +1439,16 @@ A brief extension of the \href{../../fourier_decomposed_acoustic_fsi/sphere/html
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_multi}%
+\multicolumn{2}{|l|}{\label{index_multi}%
+\Hypertarget{index_multi}%
 \doxysubsection*{Multi-\/physics problems}
 
 }\\\cline{1-2}
-\label{_bous}%
+\label{index_bous}%
+\Hypertarget{index_bous}%
  \href{../../multi_physics/b_convection/html/index.html}{\texttt{ {\bfseries{ Simple multi-\/physics problem\+: How to combine existing single-\/physics elements into new multi-\/physics elements.}} }}
 
-We demonstrate how to \char`\"{}combine\char`\"{} a {\ttfamily Crouzeix\+Raviart\+Elements} and {\ttfamily QAdvection\+Diffusion\+Elements} into a single {\ttfamily Buoyant\+Crouzeix\+Raviart\+Element} that solves the Navier--Stokes equations under the Boussinesq approximation coupled to an energy equation.  &
+We demonstrate how to "{}combine"{} a {\ttfamily Crouzeix\+Raviart\+Elements} and {\ttfamily QAdvection\+Diffusion\+Elements} into a single {\ttfamily Buoyant\+Crouzeix\+Raviart\+Element} that solves the Navier--Stokes equations under the Boussinesq approximation coupled to an energy equation.  &
 \begin{DoxyItemize}
 \item How to use multiple inheritance to combine two single-\/physics elements.
 \item How to write single-\/physics elements that can be combined into multi-\/physics elements.
@@ -1444,17 +1459,17 @@ We demonstrate how to \char`\"{}combine\char`\"{} a {\ttfamily Crouzeix\+Raviart
 \\\cline{1-2}
 \href{../../multi_physics/refine_b_convect/html/index.html}{\texttt{ {\bfseries{ Refineable multi-\/physics problem\+: How to combine existing refineable single-\/physics elements into new refineable multi-\/physics elements.}} }}
 
-We demonstrate how to \char`\"{}combine\char`\"{} a {\ttfamily Refineable\+Crouzeix\+Raviart\+Elements} and {\ttfamily Refineable\+QAdvection\+Diffusion\+Elements} into a single {\ttfamily Refineable\+Buoyant\+Crouzeix\+Raviart\+Element} that solves the Navier--Stokes equations under the Boussinesq approximation coupled to an energy equation.  &
+We demonstrate how to "{}combine"{} a {\ttfamily Refineable\+Crouzeix\+Raviart\+Elements} and {\ttfamily Refineable\+QAdvection\+Diffusion\+Elements} into a single {\ttfamily Refineable\+Buoyant\+Crouzeix\+Raviart\+Element} that solves the Navier--Stokes equations under the Boussinesq approximation coupled to an energy equation.  &
 \begin{DoxyItemize}
 \item How to use multiple inheritance to combine two refineable single-\/physics elements.
-\item How to choose the \char`\"{}\+Z2 flux\char`\"{} for multi-\/physics elements that are both derived from the {\ttfamily Element\+With\+Z2\+Error\+Estimator} class.
+\item How to choose the "{}\+Z2 flux"{} for multi-\/physics elements that are both derived from the {\ttfamily Element\+With\+Z2\+Error\+Estimator} class.
 \item {\bfseries{Note\+:}} There is a \href{../../mpi/boussinesq_convection/html/index.html}{\texttt{ separate tutorial}} that discusses the parallelisation of this code. 
 \end{DoxyItemize}
 
 \\\cline{1-2}
 \href{../../multi_physics/multi_domain_ref_b_convect/html/index.html}{\texttt{ {\bfseries{ Solving multi-\/field problems with multi-\/domain discretisations.}} }}
 
-We demonstrate an alternative approach to the solution of multi-\/field problems, in which the governing PDEs are discretised in separate meshes and interact via \char`\"{}external elements\char`\"{}.  &
+We demonstrate an alternative approach to the solution of multi-\/field problems, in which the governing PDEs are discretised in separate meshes and interact via "{}external elements"{}.  &
 \begin{DoxyItemize}
 \item How to discretise multi-\/field problems with multi-\/domain approaches.
 \item The {\ttfamily Multi\+\_\+domain\+\_\+functions} namespace.
@@ -1462,15 +1477,18 @@ We demonstrate an alternative approach to the solution of multi-\/field problems
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\label{_thermo}%
- \href{../../multi_physics/thermo/html/index.html}{\texttt{ {\bfseries{ Thermoelasticity\+: How to combine single-\/physics elements with solid  mechanics elements.}} }}
+\label{index_thermo}%
+\Hypertarget{index_thermo}%
+ \href{../../multi_physics/thermo/html/index.html}{\texttt{ {\bfseries{ Thermoelasticity\+: How to combine single-\/physics elements with solid ~\newline
+ mechanics elements.}} }}
 
-We demonstrate how to \char`\"{}combine\char`\"{} a {\ttfamily QUnsteady\+Heat\+Element} and {\ttfamily QPVDElement} into a single {\ttfamily QThermal\+PVDElement} that solves the equations governing elastic deformations coupled to uniform thermal expansion. The geometric coupling back to the heat equation is completely hidden.  &
+We demonstrate how to "{}combine"{} a {\ttfamily QUnsteady\+Heat\+Element} and {\ttfamily QPVDElement} into a single {\ttfamily QThermal\+PVDElement} that solves the equations governing elastic deformations coupled to uniform thermal expansion. The geometric coupling back to the heat equation is completely hidden.  &
 \begin{DoxyItemize}
 \item How to use multiple inheritance to combine a single-\/physics element and a solid element
 \item Note\+: this driver code is currently undocumented.   
 \end{DoxyItemize}\\\cline{1-2}
-\label{_surfactant}%
+\label{index_surfactant}%
+\Hypertarget{index_surfactant}%
  \href{../../multi_physics/rayleigh_instability_surfactant/html/index.html}{\texttt{ {\bfseries{ Surfactant Transport\+: How to add surface transport equations to free surface elements.}} }}
 
 We demonstrate how to add general surface transport equations to the {\ttfamily Fluid\+Interface\+Elements} and apply them to determine the effects of insoluble surfactant on the Rayleigh--Plateau instability.  &
@@ -1483,11 +1501,13 @@ We demonstrate how to add general surface transport equations to the {\ttfamily 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_eigen}%
+\multicolumn{2}{|l|}{\label{index_eigen}%
+\Hypertarget{index_eigen}%
 \doxysubsection*{Eigenproblems}
 
 }\\\cline{1-2}
-\label{_harmonic}%
+\label{index_harmonic}%
+\Hypertarget{index_harmonic}%
  \href{../../eigenproblems/harmonic/html/index.html}{\texttt{ {\bfseries{ How to formulate and solve an eigenproblem.}} }}
 
 We demonstrate how to write {\ttfamily QHarmonic\+Elements} that solve the eigenvalues and eigenfunctions of the one-\/dimensional Laplace operator.  &
@@ -1519,13 +1539,15 @@ We demonstrate how to write {\ttfamily QComplex\+Harmonic\+Elements} that determ
 ~\newline
 
 
-\label{_meshes}%
+\label{index_meshes}%
+\Hypertarget{index_meshes}%
 \doxysection*{Mesh generation}
 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_available_meshes}%
+\multicolumn{2}{|l|}{\label{index_available_meshes}%
+\Hypertarget{index_available_meshes}%
 \doxysubsection*{Structured meshes}
 
 }\\\cline{1-2}
@@ -1539,11 +1561,13 @@ We list {\ttfamily oomph-\/lib\textquotesingle{}s} existing structured meshes an
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_third_party_meshes}%
+\multicolumn{2}{|l|}{\label{index_third_party_meshes}%
+\Hypertarget{index_third_party_meshes}%
 \doxysubsection*{Unstructured meshes using input from third-\/party mesh generators}
 
 }\\\cline{1-2}
-{\bfseries{ \label{_third_party_meshes}%
+{\bfseries{ \label{index_third_party_meshes2}%
+\Hypertarget{index_third_party_meshes2}%
  \href{../../meshes/third_party_meshes/html/index.html}{\texttt{ Unstructured meshes generated via input from third-\/party mesh generators }}  }}
 
 We describe {\ttfamily oomph-\/lib\textquotesingle{}s} wrappers to third-\/party (unstructured) mesh generators.  &
@@ -1579,7 +1603,8 @@ We describe how to generate unstructured 2D meshes that contain internal boundar
 
 
 \\\cline{1-2}
-{\bfseries{ \label{_xfig_mesh}%
+{\bfseries{ \label{index_xfig_mesh}%
+\Hypertarget{index_xfig_mesh}%
  \href{../../meshes/mesh_from_xfig/html/index.html}{\texttt{ Mesh generation with {\ttfamily xfig} }} }}
 
 {\ttfamily oomph-\/lib\textquotesingle{}s} one-\/and-\/only GUI\+: Generating unstructured triangular meshes using \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig}} and \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ Triangle}}  &
@@ -1591,13 +1616,15 @@ We describe how to generate unstructured 2D meshes that contain internal boundar
 \end{longtabu}
 
 
-\label{_solvers}%
+\label{index_solvers}%
+\Hypertarget{index_solvers}%
 \doxysection*{Linear solvers and preconditioners}
 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_linear_solvers}%
+\multicolumn{2}{|l|}{\label{index_linear_solvers}%
+\Hypertarget{index_linear_solvers}%
 \doxysubsection*{Direct and iterative linear solvers and general-\/purpose preconditioners}
 
 }\\\cline{1-2}
@@ -1611,7 +1638,8 @@ We provide an overview of {\ttfamily oomph-\/lib\textquotesingle{}s} direct and 
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_lin_alg}%
+\multicolumn{2}{|l|}{\label{index_lin_alg}%
+\Hypertarget{index_lin_alg}%
 \doxysubsection*{(Distributed) linear algebra and oomph-\/lib\textquotesingle{}s block preconditioning framework}
 
 }\\\cline{1-2}
@@ -1642,7 +1670,8 @@ We provide an overview of {\ttfamily oomph-\/lib\textquotesingle{}s} direct and 
 \end{DoxyItemize}
 
 \\\cline{1-2}
-\multicolumn{2}{|l|}{\label{_specific_preconditioners}%
+\multicolumn{2}{|l|}{\label{index_specific_preconditioners}%
+\Hypertarget{index_specific_preconditioners}%
 \doxysubsection*{Problem-\/specific preconditioners}
 
 }\\\cline{1-2}
@@ -1682,13 +1711,15 @@ We discuss {\ttfamily oomph-\/lib}\textquotesingle{}s preconditioner for the sol
 \end{longtabu}
 
 
-\label{_visualisation}%
+\label{index_visualisation}%
+\Hypertarget{index_visualisation}%
 \doxysection*{Visualisation of the results}
 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\multicolumn{2}{|l|}{\label{_paraview}%
+\multicolumn{2}{|l|}{\label{index_paraview}%
+\Hypertarget{index_paraview}%
 \doxysubsection*{Paraview}
 
 }\\\cline{1-2}
@@ -1705,7 +1736,8 @@ We demonstrate how to use Angelo Simone\textquotesingle{}s conversion scripts th
 \end{longtabu}
 
 
-\label{_parallel}%
+\label{index_parallel}%
+\Hypertarget{index_parallel}%
 \doxysection*{Parallel driver codes}
 
 Please consult the \href{../../mpi/general_mpi/html/index.html}{\texttt{ {\bfseries{general tutorial on {\ttfamily oomph-\/lib}\textquotesingle{}s parallel processing capabilities.}}}}
@@ -1719,7 +1751,8 @@ Please consult the \href{../../mpi/general_mpi/html/index.html}{\texttt{ {\bfser
 {\bfseries{Example code}}  &{\bfseries{{\ttfamily oomph-\/lib} features/conventions illustrated by the example code}} 
 
 \\\cline{1-2}
-\label{_distributed}%
+\label{index_distributed}%
+\Hypertarget{index_distributed}%
  \href{../../mpi/adaptive_driven_cavity/html/index.html}{\texttt{ {\bfseries{ Parallel solution of the adaptive driven cavity problem}}}}
 
 We demonstrate how to distribute a straightforward single-\/physics problem.  &
@@ -1772,7 +1805,7 @@ We demonstrate how to distribute FSI problems that use algebraic update methods.
 
 We demonstrate how to distribute a problem involving refineable 2D solid and fluid meshes that interact along interface boundaries.  &
 \begin{DoxyItemize}
-\item How to \char`\"{}upgrade\char`\"{} \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} to allow spatial adaptivity in the fluid and solid meshes.
+\item How to "{}upgrade"{} \href{../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} to allow spatial adaptivity in the fluid and solid meshes.
 \item How to retain selected elements on all processors when the problem is distributed.
 \item How to implement load-\/balancing of a distributed multi-\/domain problem, with particular reference to the actions before and after load balance functions.
 \end{DoxyItemize}

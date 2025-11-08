@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,16 @@
 
 #include "linear_solver.h"
 #include "preconditioner.h"
+#ifdef OOMPH_HAS_MUMPS
+#include "mumps_solver.h"
+#endif
 
 namespace oomph
 {
   //====================================================================
   /// An interface to allow SuperLU to be used as an (exact) Preconditioner
   //====================================================================
-  class SuperLUPreconditioner : public Preconditioner
+  class SuperLUPreconditioner : public virtual Preconditioner
   {
   public:
     /// Constructor.
@@ -108,7 +111,6 @@ namespace oomph
       Solver.clean_up_memory();
     }
 
-
     /// Get the amount of memory used to store the LU factors inside SuperLU
     double get_memory_usage_for_lu_factors()
     {
@@ -144,28 +146,46 @@ namespace oomph
 
       // Now return the calculated result
       return memory_usage;
-    } // End of get_memory_usage_for_superlu
-
+    }
 
     /// Enable documentation of solver statistics
     void enable_doc_stats()
     {
       // Enable the documentation of statistics inside SuperLU
       Solver.enable_doc_stats();
-    } // End of enable_doc_stats
+    }
 
     /// Enable documentation of solver statistics
     void disable_doc_stats()
     {
       // Disable the documentation of statistics inside SuperLU
       Solver.disable_doc_stats();
-    } // End of disable_doc_stats
+    }
 
+    /// Enable documentation of solver statistics
+    void enable_doc_time()
+    {
+      // Enable the documentation of statistics inside SuperLU
+      Solver.enable_doc_time();
+    }
+
+    /// Enable documentation of solver statistics
+    void disable_doc_time()
+    {
+      // Disable the documentation of statistics inside SuperLU
+      Solver.disable_doc_time();
+    }
 
   private:
     /// the SuperLU solver emplyed by this preconditioner
     SuperLUSolver Solver;
   };
+
+
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 #endif

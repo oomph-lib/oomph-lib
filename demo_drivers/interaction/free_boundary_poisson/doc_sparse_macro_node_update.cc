@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -75,7 +75,7 @@ int main()
 
  // Output initial mesh
  unsigned count=0;
- sprintf(filename,"RESLT/soln%i.dat",count);
+ snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",count);
  some_file.open(filename);
  Fish_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -96,7 +96,7 @@ int main()
    Fish_mesh_pt->node_pt(i)->node_update();
 
    // Doc mesh
-   sprintf(filename,"RESLT/soln%i.dat",count);
+   snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",count);
    some_file.open(filename);
    Fish_mesh_pt->output(some_file,npts);
    some_file.close();

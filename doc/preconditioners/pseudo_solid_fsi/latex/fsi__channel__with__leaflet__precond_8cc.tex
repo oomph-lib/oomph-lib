@@ -1,35 +1,35 @@
-\hypertarget{fsi__channel__with__leaflet__precond_8cc}{}\doxysection{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc File Reference}
-\label{fsi__channel__with__leaflet__precond_8cc}\index{fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}}
-\doxysubsection*{Classes}
+\doxysection{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc File Reference}
+\hypertarget{fsi__channel__with__leaflet__precond_8cc}{}\label{fsi__channel__with__leaflet__precond_8cc}\index{fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$}}
-\begin{DoxyCompactList}\small\item\em Pseudo-\/\+Elastic Solid element class to overload the Block Preconditioner methods \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()}} and \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}} to differentiate between DOFs subject to Lagrange multiplier and those that are not. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pseudo-\/\+Elastic Solid element class to overload the Block Preconditioner methods \doxylink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()} and \doxylink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} to differentiate between DOFs subject to Lagrange multiplier and those that are not. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}
-\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Geom\+Object\+: Undeformed straight, vertical leaflet. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$}}
-\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Namespaces}
+\begin{DoxyCompactList}\small\item\em FSI leaflet in channel. Mesh update with pseudo-\/elasticity and solved with pseudo-\/elastic fsi preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper}}
-\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
-\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace for Navier Stokes LSC Preconditioner. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Preconditioner $\ast$ \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3191fa949eda009c481fdf4f81516535}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}} ()
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Create instance of Hypre preconditioner with settings that are appropriate for serial solution of Navier-\/\+Stokes momentum block. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\+\_\+\+Parameters\+::flux}} (const double \&t)
 \begin{DoxyCompactList}\small\item\em Flux\+: Pulsatile flow. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+int \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a84d27a1abb5d90476de43a9920dc347f}{Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+x0}} = 1.\+0
@@ -70,16 +70,16 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_af35d88426851c22dd07a69aa66d
 \begin{DoxyCompactList}\small\item\em Beam mass density. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} =0.\+1
 \begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobal__Parameters_ab29c9f716872de235c78e62bce2c4109}{Global\+\_\+\+Parameters\+::\+Dt}} = T/40.\+0
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ab29c9f716872de235c78e62bce2c4109}{Global\+\_\+\+Parameters\+::\+Dt}} = \mbox{\hyperlink{namespaceGlobal__Parameters_aeb964d25d190afd43c8317d4217f31b4}{T}}/40.\+0
 \begin{DoxyCompactList}\small\item\em Timestep for simulation\+: 40 steps per period. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\Hypertarget{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
 \index{fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}!main@{main}}
 \index{main@{main}!fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
 
 
 
@@ -87,9 +87,9 @@ Driver code.
 
 
 
-Definition at line 1068 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l01068}{1068}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Dt, Global\+\_\+\+Parameters\+::\+Re, Global\+\_\+\+Parameters\+::\+Re\+St, and Global\+\_\+\+Parameters\+::T.
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00259}{Global\+\_\+\+Parameters\+::\+Dt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00222}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00225}{Global\+\_\+\+Parameters\+::\+Re\+St}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00235}{Global\+\_\+\+Parameters\+::T}}.
 

@@ -1,0 +1,909 @@
+\doxysection{superlu\+\_\+dist.\+c}
+\hypertarget{superlu__dist_8c_source}{}\label{superlu__dist_8c_source}\index{superlu\_dist.c@{superlu\_dist.c}}
+\mbox{\hyperlink{superlu__dist_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00001}00001\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00002}00002\ \textcolor{comment}{\ \ \ Interface\ to\ distributed\ SuperLU,\ written\ by\ JWB\ and\ heavily}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00003}00003\ \textcolor{comment}{\ \ \ revised\ by\ PM\ by\ adapting\ code\ in\ the\ SuperLU\ distribution.\ The}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00004}00004\ \textcolor{comment}{\ \ \ function}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00005}00005\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ superlu\_dist\_distributed\_matrix(...)}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00006}00006\ \textcolor{comment}{\ \ \ is\ based\ on\ the\ file}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00007}00007\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXAMPLE/pddrive2.c}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00008}00008\ \textcolor{comment}{\ \ \ and\ the\ function}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00009}00009\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ superlu\_dist\_global\_matrix(...)}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00010}00010\ \textcolor{comment}{\ \ \ is\ based\ on\ the\ file}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00011}00011\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXAMPLE/pddrive2\_ABglobal.c}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00012}00012\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00013}00013\ \textcolor{comment}{\ \ \ To\ update\ this\ driver\ code\ for\ use\ with\ later\ versions\ of}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00014}00014\ \textcolor{comment}{\ \ \ SuperLU\_DIST\ look\ at\ any\ changes\ to\ the\ example\ drivers.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00015}00015\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00016}00016\ \textcolor{comment}{\ \ \ Adapted\ from\ code\ found\ in:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00017}00017\ \textcolor{comment}{\ \ \ -\/-\/\ Distributed\ SuperLU\ routine\ (version\ 9.1.0)\ -\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00018}00018\ \textcolor{comment}{\ \ \ Lawrence\ Berkeley\ National\ Lab,\ Univ.\ of\ California\ Berkeley.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00019}00019\ \textcolor{comment}{\ \ \ Nov\ 11,\ 2024}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00020}00020\ \textcolor{comment}{\ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00021}00021\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <superlu\_ddefs.h>}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ <superlu\_enum\_consts.h>}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00027}00027\ \textcolor{comment}{/*\ =================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00028}00028\ \textcolor{comment}{/*\ Struct\ for\ the\ lu\ factors\ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00029}00029\ \textcolor{comment}{/*\ =================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00030}\mbox{\hyperlink{structsuperlu__dist__data}{00030}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00032}\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{00032}}\ \ \ gridinfo\_t*\ \mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00033}\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{00033}}\ \ \ SuperMatrix*\ \mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00034}\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{00034}}\ \ \ dScalePermstruct\_t*\ \mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00035}\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{00035}}\ \ \ dLUstruct\_t*\ \mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00036}\mbox{\hyperlink{structsuperlu__dist__data_a07dd36c5d59ef09bf6938788c5939b58}{00036}}\ \ \ dSOLVEstruct\_t*\ \mbox{\hyperlink{structsuperlu__dist__data_a07dd36c5d59ef09bf6938788c5939b58}{SOLVEstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00037}\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{00037}}\ \ \ superlu\_dist\_options\_t*\ \mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00038}\mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{00038}}\ \ \ int\_t\ \mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{rowequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00039}\mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{00039}}\ \ \ int\_t\ \mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{colequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00040}\mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{00040}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{anorm}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00041}00041\ \}\ \mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00044}00044\ \textcolor{comment}{/*\ =================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00045}00045\ \textcolor{comment}{/*\ Can't\ think\ of\ any\ other\ way\ to\ store\ the\ memory\ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00046}00046\ \textcolor{comment}{/*\ stats...\ (PM)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00047}00047\ \textcolor{comment}{/*\ =================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00048}00048\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structMemoryStatisticsStorage}{MemoryStatisticsStorage}}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00050}00050\ \ \ \textcolor{comment}{//\ Storage\ for\ the\ memory\ stats}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00051}\mbox{\hyperlink{structMemoryStatisticsStorage_a0b04037c53d3b9072dda693bf3386c7d}{00051}}\ \ \ superlu\_dist\_mem\_usage\_t\ \mbox{\hyperlink{structMemoryStatisticsStorage_a0b04037c53d3b9072dda693bf3386c7d}{Memory\_usage}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00053}00053\ \ \ \textcolor{comment}{//\ Boolean}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00054}00054\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structMemoryStatisticsStorage_a89c235c0ef2e72648ecedd6857e846de}{Memory\_usage\_has\_been\_recorded}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00055}\mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{00055}}\ \}\ \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00057}00057\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00058}00058\ \textcolor{comment}{/*\ Helper\ to\ record\ memory\ usage*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00059}00059\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00060}\mbox{\hyperlink{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b}{00060}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b}{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist}}()}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00061}00061\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00062}00062\ \ \ \textcolor{comment}{//\ If\ the\ LU\ decomposition\ has\ been\ stored}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00063}00063\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a89c235c0ef2e72648ecedd6857e846de}{Memory\_usage\_has\_been\_recorded}}\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00064}00064\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}}.for\_lu;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00066}00066\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00067}00067\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00068}00068\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00070}00070\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00071}00071\ \}\ \textcolor{comment}{//\ End\ of\ get\_lu\_factor\_memory\_usage\_in\_bytes}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00073}00073\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00074}00074\ \textcolor{comment}{/*\ Helper\ to\ record\ memory\ usage*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00075}00075\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00076}\mbox{\hyperlink{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}{00076}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}{get\_total\_memory\_usage\_in\_bytes\_dist}}()}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00077}00077\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00078}00078\ \ \ \textcolor{comment}{//\ If\ the\ LU\ decomposition\ has\ been\ stored}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00079}00079\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a89c235c0ef2e72648ecedd6857e846de}{Memory\_usage\_has\_been\_recorded}}\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00080}00080\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}}.total;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00082}00082\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00083}00083\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00084}00084\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00086}00086\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00087}00087\ \}\ \textcolor{comment}{//\ End\ of\ get\_total\_memory\_usage\_in\_bytes}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00089}00089\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00090}00090\ \textcolor{comment}{/*\ Helper\ to\ record\ memory\ usage*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00091}00091\ \textcolor{comment}{/*\ =========================================================================\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00092}\mbox{\hyperlink{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}{00092}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}{get\_memory\_usage\_in\_bytes\_dist}}(\textcolor{keywordtype}{double}*\ lu\_factor\_memory,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ total\_memory)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00095}00095\ \ \ (*lu\_factor\_memory)\ =\ \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}}.for\_lu;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00096}00096\ \ \ (*total\_memory)\ =\ \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\_memory\_statistics\_storage}}.\mbox{\hyperlink{structMemoryStatisticsStorage_a7f0872fb1f9455b2046bd06702a2a8f6}{Memory\_usage}}.total;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00099}00099\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00100}00100\ \textcolor{comment}{//\ helper\ method\ -\/\ just\ calls\ the\ superlu\ method\ dCompRow\_to\_CompCol\ to\ convert}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00101}00101\ \textcolor{comment}{//\ the\ c-\/style\ vectors\ of\ a\ cr\ matrix\ to\ a\ cc\ matrix}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00102}00102\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00103}\mbox{\hyperlink{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}{00103}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}{superlu\_cr\_to\_cc}}(\textcolor{keywordtype}{int}\ nrow,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ncol,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nnz,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ cr\_values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ cr\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ cr\_start,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}**\ cc\_values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}**\ cc\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}**\ cc\_start)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00112}00112\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00113}00113\ \ \ dCompRow\_to\_CompCol(nrow,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncol,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nnz,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cr\_values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cr\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cr\_start,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cc\_values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cc\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cc\_start);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00122}00122\ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00124}00124\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00125}00125\ \textcolor{comment}{\ \ Enumeration\ to\ select\ setup,\ solve,\ or\ clean\ up.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00126}00126\ \textcolor{comment}{\ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00127}\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{00127}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00128}00128\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00129}\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}{00129}}\ \ \ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}{SETUP\_PHASE}}\ =\ 1,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00130}\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}{00130}}\ \ \ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}{SOLVE\_PHASE}}\ =\ 2,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00131}\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}{00131}}\ \ \ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}{CLEAN\_UP\_PHASE}}\ =\ 3,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00132}00132\ \}\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\_flag\_t}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00134}00134\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00135}00135\ \textcolor{comment}{\ \ \ Bridge\ to\ distributed\ SuperLU\ with\ distributed\ memory\ (version\ 2.0).}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00136}00136\ \textcolor{comment}{\ \ \ Requires\ input\ of\ system\ matrix\ in\ compressed\ row\ form.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00137}00137\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00138}00138\ \textcolor{comment}{\ \ \ Parameters:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00139}00139\ \textcolor{comment}{\ \ \ op\_flag\ \ \ \ =\ int\ specifies\ the\ operation:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00140}00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ performs\ LU\ decomposition\ for\ the\ first\ time}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00141}00141\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2,\ performs\ triangular\ solve}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00142}00142\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3,\ free\ all\ the\ storage\ in\ the\ end}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00143}00143\ \textcolor{comment}{\ \ \ -\/\ n\ =\ size\ of\ system\ (square\ matrix)}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00144}00144\ \textcolor{comment}{\ \ \ -\/\ nnz\ =\ \#\ of\ nonzero\ entries}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00145}00145\ \textcolor{comment}{\ \ \ -\/\ values\ =\ 1D\ C\ array\ of\ nonzero\ entries}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00146}00146\ \textcolor{comment}{\ \ \ -\/\ row\_index\ =\ \ 1D\ C\ array\ of\ row\ indices}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00147}00147\ \textcolor{comment}{\ \ \ -\/\ column\_start\ =\ \ 1D\ C\ array\ of\ column\ start\ indices}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00148}00148\ \textcolor{comment}{\ \ \ -\/\ b\ =\ 1D\ C\ array\ representing\ the\ rhs\ vector,\ is\ overwritten}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00149}00149\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ by\ solution.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00150}00150\ \textcolor{comment}{\ \ \ -\/\ nprow\ =\ \#\ of\ rows\ in\ process\ grid}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00151}00151\ \textcolor{comment}{\ \ \ -\/\ npcol\ =\ \#\ of\ columns\ in\ process\ grid}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00152}00152\ \textcolor{comment}{\ \ \ -\/\ doc\ =\ 0/1\ for\ doc/no\ doc}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00153}00153\ \textcolor{comment}{\ \ \ -\/\ data\ \ =\ pointer\ to\ structure\ to\ contain\ LU\ solver\ data.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00154}00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ If\ *opt\_flag\ ==\ 1,\ it\ is\ an\ output.\ Otherwise,\ it\ it\ an\ input.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00155}00155\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00156}00156\ \textcolor{comment}{\ \ \ Return\ value\ for\ *info:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00157}00157\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ =\ 0:\ successful\ exit}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00158}00158\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ >\ 0:\ if\ *info\ =\ i,\ and\ i\ is}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00159}00159\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <=\ A-\/>ncol:\ U(i,i)\ is\ exactly\ zero.\ The\ factorization\ has}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00160}00160\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ been\ completed,\ but\ the\ factor\ U\ is\ exactly\ singular,}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00161}00161\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ so\ the\ solution\ could\ not\ be\ computed.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00162}00162\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ >\ A-\/>ncol:\ number\ of\ bytes\ allocated\ when\ memory\ allocation}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00163}00163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failure\ occurred,\ plus\ A-\/>ncol.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00164}00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ <\ 0:\ some\ other\ error}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00165}00165\ \textcolor{comment}{\ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00166}00166\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00167}\mbox{\hyperlink{superlu__dist_8c_abed14a95611831a19ffd921de0d4a89d}{00167}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{superlu__dist_8c_abed14a95611831a19ffd921de0d4a89d}{superlu\_dist\_distributed\_matrix}}(\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\_flag\_t}}\ opt\_flag,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ allow\_permutations,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nnz\_local,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nrow\_local,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ first\_row,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ col\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ row\_start,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nprow,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ npcol,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ doc,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}**\ data,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ info,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPI\_Comm\ comm)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00183}00183\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00184}00184\ \ \ \textcolor{comment}{/*\ Some\ SuperLU\ structures\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00185}00185\ \ \ superlu\_dist\_options\_t*\ options;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00186}00186\ \ \ SuperLUStat\_t\ stat;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00187}00187\ \ \ SuperMatrix*\ A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00188}00188\ \ \ dScalePermstruct\_t*\ ScalePermstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00189}00189\ \ \ dLUstruct\_t*\ LUstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00190}00190\ \ \ dSOLVEstruct\_t*\ SOLVEstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00191}00191\ \ \ gridinfo\_t*\ grid;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00193}00193\ \ \ \textcolor{comment}{/*\ Structure\ to\ hold\ SuperLU\ structures\ and\ data\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00194}00194\ \ \ \mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*\ superlu\_data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00196}00196\ \ \ int\_t*\ perm\_r;\ \textcolor{comment}{/*\ row\ permutations\ from\ partial\ pivoting\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00197}00197\ \ \ int\_t*\ perm\_c;\ \textcolor{comment}{/*\ column\ permutation\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00198}00198\ \ \ int\_t*\ etree;\ \textcolor{comment}{/*\ elimination\ tree\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00199}00199\ \ \ int\_t*\ rowptr\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00200}00200\ \ \ int\_t*\ colind;\ \textcolor{comment}{/*\ Local\ A\ in\ NR*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00201}00201\ \ \ int\_t\ job,\ rowequ,\ colequ,\ iinfo,\ need\_value,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ j,\ irow,\ icol;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00202}00202\ \ \ int\_t\ m\_loc,\ fst\_row,\ nnz,\ nnz\_loc;\ \textcolor{comment}{/*\ dist\_mem\_use;\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00203}00203\ \ \ int\_t\ *colptr,\ *rowind;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00204}00204\ \ \ Glu\_persist\_t*\ Glu\_persist;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00205}00205\ \ \ Glu\_freeable\_t*\ Glu\_freeable\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00207}00207\ \ \ \textcolor{keywordtype}{float}\ GA\_mem\_use\ =\ 0.0;\ \textcolor{comment}{/*\ memory\ usage\ by\ global\ A\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00208}00208\ \ \ \textcolor{keywordtype}{float}\ dist\_mem\_use\ =\ 0.0;\ \textcolor{comment}{/*\ memory\ usage\ during\ distribution\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00209}00209\ \ \ superlu\_dist\_mem\_usage\_t\ num\_mem\_usage,\ symb\_mem\_usage;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00210}00210\ \ \ int64\_t\ nnzLU;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00211}00211\ \ \ int\_t\ nsupers;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00213}00213\ \ \ \textcolor{comment}{/*\ Other\ stuff\ needed\ by\ SuperLU\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00214}00214\ \ \ \textcolor{keywordtype}{double}*\ berr\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00215}00215\ \ \ \textcolor{keywordtype}{double}*\ a\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00216}00216\ \ \ \textcolor{keywordtype}{double}\ *X,\ *b\_col;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00217}00217\ \ \ \textcolor{keywordtype}{double}*\ B\ =\ b;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00218}00218\ \ \ \textcolor{keywordtype}{double}\ *C,\ *R,\ *C1,\ *R1,\ *x\_col;\ \textcolor{comment}{/*\ *bcol,\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00219}00219\ \ \ \textcolor{keywordtype}{double}\ amax,\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ colcnd,\ rowcnd;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00220}00220\ \ \ \textcolor{keywordtype}{double}\ anorm\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00221}00221\ \ \ \textcolor{keywordtype}{char}\ equed[1],\ norm[1];}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00222}00222\ \ \ \textcolor{keywordtype}{int}\ ldx;\ \textcolor{comment}{/*\ LDA\ for\ matrix\ X\ (local).\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00223}00223\ \ \ \textcolor{comment}{//\ static\ superlu\_dist\_mem\_usage\_t\ symb\_mem\_usage;}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00224}00224\ \ \ fact\_t\ Fact;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00225}00225\ \ \ int\_t\ Equil,\ factored,\ notran,\ permc\_spec;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00227}00227\ \ \ \textcolor{comment}{/*\ We're\ only\ doing\ single\ rhs\ problems}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00228}00228\ \textcolor{comment}{\ \ \ \ \ note:\ code\ will\ need\ modifying\ to\ deal\ with}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00229}00229\ \textcolor{comment}{\ \ \ \ \ multiple\ rhs\ (see\ function\ pdgssvx)\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00231}00231\ \ \ \textcolor{comment}{/*\ Square\ matrix\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00232}00232\ \ \ \textcolor{keywordtype}{int}\ m\ =\ n;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00234}00234\ \ \ \textcolor{comment}{/*\ Set\ 'Leading\ dimension'\ of\ rhs\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00235}00235\ \ \ \textcolor{keywordtype}{int}\ ldb\ =\ n;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00237}00237\ \ \ \textcolor{comment}{/*\ Initialize\ the\ statistics\ variables.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00238}00238\ \ \ PStatInit(\&stat);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00240}00240\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00241}00241\ \textcolor{comment}{\ \ \ \ \ SET\ UP\ GRID,\ FACTORS,\ ETC}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00242}00242\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00243}00243\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}{SETUP\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00244}00244\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00245}00245\ \ \ \ \ \textcolor{comment}{/*\ Allocate\ data\ structure\ to\ store\ data\ between\ calls\ to\ this\ function\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00246}00246\ \ \ \ \ superlu\_data\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00247}00247\ \ \ \ \ \ \ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00249}00249\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ the\ superlu\ process\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00250}00250\ \ \ \ \ grid\ =\ (gridinfo\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(gridinfo\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00251}00251\ \ \ \ \ superlu\_gridinit(comm,\ nprow,\ npcol,\ grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00252}00252\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}}\ =\ grid;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00254}00254\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00255}00255\ \ \ \ \ \textcolor{keywordtype}{int}\ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00256}00256\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00258}00258\ \ \ \ \ \textcolor{comment}{/*\ Allocate\ memory\ for\ SuperLU\_DIST\ structures\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00259}00259\ \ \ \ \ options\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00260}00260\ \ \ \ \ \ \ (superlu\_dist\_options\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(superlu\_dist\_options\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00261}00261\ \ \ \ \ A\ =\ (SuperMatrix*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(SuperMatrix));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00262}00262\ \ \ \ \ ScalePermstruct\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00263}00263\ \ \ \ \ \ \ (dScalePermstruct\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(dScalePermstruct\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00264}00264\ \ \ \ \ LUstruct\ =\ (dLUstruct\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(dLUstruct\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00265}00265\ \ \ \ \ SOLVEstruct\ =\ (dSOLVEstruct\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(dSOLVEstruct\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00267}00267\ \ \ \ \ \textcolor{comment}{/*\ Create\ SuperMatrix\ from\ compressed\ row\ representation\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00268}00268\ \ \ \ \ dCreate\_CompRowLoc\_Matrix\_dist(A,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nnz\_local,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nrow\_local,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ first\_row,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ col\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ row\_start,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SLU\_NR\_loc,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SLU\_D,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SLU\_GE);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00281}00281\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ default\ options\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00282}00282\ \ \ \ \ set\_default\_options\_dist(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00284}00284\ \ \ \ \ \textcolor{comment}{/*\ Is\ the\ matrix\ transposed\ (NOTRANS\ or\ TRANS)?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00285}00285\ \ \ \ \ options-\/>Trans\ =\ NOTRANS;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00287}00287\ \ \ \ \ \textcolor{comment}{/*\ Row\ permutations\ (NATURAL\ [=\ do\ nothing],\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00288}00288\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LargeDiag\_MC64\ [default],\ ...)?\ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00289}00289\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ options-\/>RowPerm=NATURAL;\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00290}00290\ \ \ \ \ options-\/>RowPerm\ =\ LargeDiag\_MC64;\ \textcolor{comment}{/*\ hierher\ used\ to\ be\ LargeDiag\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00292}00292\ \ \ \ \ \textcolor{comment}{/*\ note:\ LargeDiag\_HWPM\ seems\ to\ be\ an\ opption\ too\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00293}00293\ \ \ \ \ \textcolor{comment}{/*\ Column\ permutations\ (NATURAL\ [=\ do\ nothing],\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00294}00294\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MMD\_AT\_PLUS\_A\ [default],...)\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00295}00295\ \ \ \ \ options-\/>ColPerm\ =\ MMD\_AT\_PLUS\_A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00297}00297\ \ \ \ \ \textcolor{comment}{/*\ Use\ natural\ ordering\ instead?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00298}00298\ \ \ \ \ \textcolor{keywordflow}{if}\ (allow\_permutations\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00299}00299\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00300}00300\ \ \ \ \ \ \ options-\/>ColPerm\ =\ NATURAL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00301}00301\ \ \ \ \ \ \ options-\/>RowPerm\ =\ NOROWPERM;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00302}00302\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00304}00304\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ printf("{}\(\backslash\)n\(\backslash\)n\(\backslash\)nSWITCHING\ OFF\ EQUILIBRATION\(\backslash\)n\(\backslash\)n\(\backslash\)n"{});\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00305}00305\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ options-\/>Equil=NO;\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00307}00307\ \ \ \ \ \textcolor{comment}{/*\ Iterative\ refinement\ (essential\ as\ far\ as\ I\ can\ tell).*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00308}00308\ \ \ \ \ \textcolor{comment}{/*\ Can\ be\ "{}NO"{}\ or\ "{}DOUBLE"{}*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00309}00309\ \ \ \ \ options-\/>IterRefine\ =\ SLU\_DOUBLE;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00311}00311\ \ \ \ \ \textcolor{comment}{/*\ Specifies\ whether\ to\ replace\ the\ tiny\ diagonals\ by\ sqrt(eps)*||A||\ during}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00312}00312\ \textcolor{comment}{\ \ \ \ \ *\ LU\ factorization.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00313}00313\ \ \ \ \ options-\/>ReplaceTinyPivot\ =\ YES;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00315}00315\ \ \ \ \ \textcolor{comment}{/*\ Print\ stats\ during\ solve?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00316}00316\ \ \ \ \ \textcolor{keywordflow}{if}\ (doc\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00317}00317\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00318}00318\ \ \ \ \ \ \ options-\/>PrintStat\ =\ YES;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00319}00319\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00321}00321\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00322}00322\ \ \ \ \ \ \ options-\/>PrintStat\ =\ NO;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00323}00323\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00325}00325\ \ \ \ \ \textcolor{comment}{/*\ Doc\ output\ on\ process\ 0\ if\ required:\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00326}00326\ \ \ \ \ \textcolor{keywordflow}{if}\ ((!iam)\ \&\&\ (doc\ ==\ 0))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00327}00327\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00328}00328\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nPerforming\ SuperLU\_DIST\ setup\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00329}00329\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Process\ grid\(\backslash\)t\%d\ X\ \%d\(\backslash\)n"{}},\ grid-\/>nprow,\ grid-\/>npcol);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00330}00330\ \ \ \ \ \ \ print\_options\_dist(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00331}00331\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00333}00333\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ ScalePermstruct\ and\ LUstruct.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00334}00334\ \ \ \ \ dScalePermstructInit(m,\ n,\ ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00335}00335\ \ \ \ \ dLUstructInit(n,\ LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00337}00337\ \ \ \ \ \textcolor{comment}{/*\ Call\ the\ linear\ equation\ solver\ but\ only\ perform\ the\ LU\ factorisation.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00338}00338\ \ \ \ \ \textcolor{keywordtype}{int}\ nrhs\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00339}00339\ \ \ \ \ pdgssvx(options,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ A,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ ScalePermstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ ldb,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ nrhs,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ grid,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ LUstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ SOLVEstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ berr,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \&stat,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00352}00352\ \ \ \ \ \textcolor{comment}{/*\ Indicate\ that\ A\ has\ now\ been\ factorised.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00353}00353\ \ \ \ \ options-\/>Fact\ =\ FACTORED;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00355}00355\ \ \ \ \ \textcolor{comment}{/*\ Print\ the\ statistics.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00356}00356\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00357}00357\ \textcolor{comment}{\ \ \ \ \ \ PM:\ A\ driver\ can\ hang\ if\ this\ is\ only\ executed\ when\ on\ the\ root\ processor}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00358}00358\ \textcolor{comment}{\ \ \ \ \ \ so\ make\ sure\ not\ to\ add\ "{}\&\&\ (!iam)"{}\ to\ the\ if\ condition!}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00359}00359\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00360}00360\ \ \ \ \ \textcolor{keywordflow}{if}\ (doc\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00361}00361\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00362}00362\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nStats\ after\ distributed\ setup....\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00363}00363\ \ \ \ \ \ \ PStatPrint(options,\ \&stat,\ grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00364}00364\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00366}00366\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00367}00367\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ up\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00368}00368\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00369}00369\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}}\ =\ A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00370}00370\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}}\ =\ options;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00371}00371\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}}\ =\ ScalePermstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00372}00372\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}}\ =\ LUstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00373}00373\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a07dd36c5d59ef09bf6938788c5939b58}{SOLVEstruct}}\ =\ SOLVEstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00374}00374\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{colequ}}\ =\ colequ;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00375}00375\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{rowequ}}\ =\ rowequ;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00376}00376\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{anorm}}\ =\ anorm;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00377}00377\ \ \ \ \ *data\ =\ superlu\_data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00378}00378\ \ \ \}\ \textcolor{comment}{/*\ End\ of\ setup\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00381}00381\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00382}00382\ \textcolor{comment}{\ \ \ \ \ PERFORM\ A\ SOLVE\_PHASE}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00383}00383\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00384}00384\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}{SOLVE\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00385}00385\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00386}00386\ \ \ \ \ \textcolor{comment}{/*\ Get\ pointer\ to\ the\ grid\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00387}00387\ \ \ \ \ superlu\_data\ =\ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)*data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00388}00388\ \ \ \ \ grid\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00390}00390\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00391}00391\ \ \ \ \ \textcolor{keywordtype}{int}\ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00392}00392\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00393}00393\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00394}00394\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00395}00395\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00397}00397\ \ \ \ \ \textcolor{keywordflow}{if}\ ((doc\ ==\ 0)\ \&\&\ (!iam))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00398}00398\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00399}00399\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nPerforming\ SuperLU\_DIST\ solve\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00400}00400\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00402}00402\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00403}00403\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ other\ \ pointers\ to\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00404}00404\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00405}00405\ \ \ \ \ A\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00406}00406\ \ \ \ \ options\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00407}00407\ \ \ \ \ ScalePermstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00408}00408\ \ \ \ \ LUstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00409}00409\ \ \ \ \ SOLVEstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a07dd36c5d59ef09bf6938788c5939b58}{SOLVEstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00410}00410\ \ \ \ \ colequ\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{colequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00411}00411\ \ \ \ \ rowequ\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{rowequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00412}00412\ \ \ \ \ anorm\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{anorm}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00414}00414\ \ \ \ \ \textcolor{comment}{/*\ Solving\ for\ a\ single\ RHS\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00415}00415\ \ \ \ \ \textcolor{keywordtype}{int}\ nrhs\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00416}00416\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00417}00417\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(berr\ =\ doubleMalloc\_dist(nrhs)))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00418}00418\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00419}00419\ \ \ \ \ \ \ ABORT(\textcolor{stringliteral}{"{}Malloc\ fails\ for\ berr[]."{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00420}00420\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00422}00422\ \ \ \ \ \textcolor{comment}{/*\ Call\ the\ linear\ solver\ to\ perform\ the\ back\ sub.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00423}00423\ \ \ \ \ pdgssvx(options,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ A,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ ScalePermstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ ldb,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ nrhs,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ grid,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ LUstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ SOLVEstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ berr,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \&stat,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00436}00436\ \ \ \ \ SUPERLU\_FREE(berr);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00437}00437\ \ \ \}\ \textcolor{comment}{/*\ End\ of\ solve\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00439}00439\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00440}00440\ \textcolor{comment}{\ \ \ \ \ PERFORM\ CLEAN\ UP\ OF\ MEMORY}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00441}00441\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00442}00442\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}{CLEAN\_UP\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00443}00443\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00444}00444\ \ \ \ \ \textcolor{comment}{/*\ Get\ pointer\ to\ the\ process\ grid\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00445}00445\ \ \ \ \ superlu\_data\ =\ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)*data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00446}00446\ \ \ \ \ grid\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00448}00448\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00449}00449\ \ \ \ \ \textcolor{keywordtype}{int}\ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00450}00450\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00451}00451\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00452}00452\ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ out;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00453}00453\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00454}00454\ \ \ \ \ \textcolor{keywordflow}{if}\ ((doc\ ==\ 0)\ \&\&\ (!iam))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00455}00455\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00456}00456\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nCleaning\ up\ memory\ allocated\ for\ SuperLU\_DIST\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00457}00457\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00459}00459\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00460}00460\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ pointers\ to\ the\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00461}00461\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00462}00462\ \ \ \ \ A\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00463}00463\ \ \ \ \ options\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00464}00464\ \ \ \ \ ScalePermstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00465}00465\ \ \ \ \ LUstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00466}00466\ \ \ \ \ SOLVEstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a07dd36c5d59ef09bf6938788c5939b58}{SOLVEstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00467}00467\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00468}00468\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00469}00469\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ the\ other\ pointers\ required}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00470}00470\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00471}00471\ \ \ \ \ R\ =\ ScalePermstruct-\/>R;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00472}00472\ \ \ \ \ C\ =\ ScalePermstruct-\/>C;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00473}00473\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00474}00474\ \ \ \ \ \textcolor{comment}{/*\ Local\ control\ paramaters\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00475}00475\ \ \ \ \ Fact\ =\ options-\/>Fact;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00476}00476\ \ \ \ \ factored\ =\ (Fact\ ==\ FACTORED);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00477}00477\ \ \ \ \ Equil\ =\ (!factored\ \&\&\ options-\/>Equil\ ==\ YES);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00479}00479\ \ \ \ \ \textcolor{comment}{/*\ Deallocate\ R\ and/or\ C\ if\ it\ was\ not\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00480}00480\ \ \ \ \ \textcolor{keywordflow}{if}\ (Equil\ \&\&\ Fact\ !=\ SamePattern\_SameRowPerm)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00481}00481\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00482}00482\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (ScalePermstruct-\/>DiagScale)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00483}00483\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00484}00484\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NOEQUIL:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(R);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(C);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00488}00488\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ROW:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(C);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COL:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(R);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00494}00494\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00496}00496\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00497}00497\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00499}00499\ \ \ \ \ \textcolor{comment}{/*\ \ Free\ storage\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00500}00500\ \ \ \ \ PStatFree(\&stat);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00501}00501\ \ \ \ \ \textcolor{comment}{//\ Destroy\_CompRowLoc\_Matrix\_dist(\&A);}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00502}00502\ \ \ \ \ dScalePermstructFree(ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00503}00503\ \ \ \ \ dDestroy\_LU(n,\ grid,\ LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00504}00504\ \ \ \ \ dLUstructFree(LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00505}00505\ \ \ \ \ dSolveFinalize(options,\ SOLVEstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00507}00507\ \ \ \ \ \textcolor{comment}{//\ Only\ destroy\ the\ store\ part\ of\ the\ matrix}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00508}00508\ \ \ \ \ Destroy\_SuperMatrix\_Store\_dist(A);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00510}00510\ \ \ \ \ \textcolor{comment}{/*\ Deallocate\ memory\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00511}00511\ \ \ \ \ SUPERLU\_FREE(A);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00512}00512\ \ \ \ \ SUPERLU\_FREE(ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00513}00513\ \ \ \ \ SUPERLU\_FREE(LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00514}00514\ \ \ \ \ SUPERLU\_FREE(SOLVEstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00515}00515\ \ \ \ \ SUPERLU\_FREE(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00517}00517\ \ \ \ \ \textcolor{comment}{/*\ \ Release\ the\ superlu\ process\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00518}00518\ \ \ out:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00519}00519\ \ \ \ \ superlu\_gridexit(grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00521}00521\ \ \ \ \ SUPERLU\_FREE(grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00522}00522\ \ \ \ \ SUPERLU\_FREE(superlu\_data);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00523}00523\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00524}00524\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00525}00525\ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00528}00528\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00529}00529\ \textcolor{comment}{\ \ \ Bridge\ to\ distributed\ SuperLU\ with\ distributed\ memory\ (version\ 2.0).}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00530}00530\ \textcolor{comment}{\ \ \ Requires\ input\ of\ system\ matrix\ in\ compressed\ row\ form.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00531}00531\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00532}00532\ \textcolor{comment}{\ \ \ Parameters:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00533}00533\ \textcolor{comment}{\ \ \ op\_flag\ \ \ \ =\ int\ specifies\ the\ operation:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00534}00534\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ performs\ LU\ decomposition\ for\ the\ first\ time}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00535}00535\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2,\ performs\ triangular\ solve}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00536}00536\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3,\ free\ all\ the\ storage\ in\ the\ end}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00537}00537\ \textcolor{comment}{\ \ \ -\/\ n\ =\ size\ of\ system\ (square\ matrix)}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00538}00538\ \textcolor{comment}{\ \ \ -\/\ nnz\ =\ \#\ of\ nonzero\ entries}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00539}00539\ \textcolor{comment}{\ \ \ -\/\ values\ =\ 1D\ C\ array\ of\ nonzero\ entries}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00540}00540\ \textcolor{comment}{\ \ \ -\/\ row\_index\ =\ \ 1D\ C\ array\ of\ row\ indices}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00541}00541\ \textcolor{comment}{\ \ \ -\/\ column\_start\ =\ \ 1D\ C\ array\ of\ column\ start\ indices}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00542}00542\ \textcolor{comment}{\ \ \ -\/\ b\ =\ 1D\ C\ array\ representing\ the\ rhs\ vector,\ is\ overwritten}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00543}00543\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ by\ solution.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00544}00544\ \textcolor{comment}{\ \ \ -\/\ nprow\ =\ \#\ of\ rows\ in\ process\ grid}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00545}00545\ \textcolor{comment}{\ \ \ -\/\ npcol\ =\ \#\ of\ columns\ in\ process\ grid}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00546}00546\ \textcolor{comment}{\ \ \ -\/\ doc\ =\ 0/1\ for\ doc/no\ doc}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00547}00547\ \textcolor{comment}{\ \ \ -\/\ data\ \ =\ pointer\ to\ structure\ to\ contain\ LU\ solver\ data.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00548}00548\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ If\ *opt\_flag\ ==\ 1,\ it\ is\ an\ output.\ Otherwise,\ it\ it\ an\ input.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00549}00549\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00550}00550\ \textcolor{comment}{\ \ \ Return\ value\ of\ *info:}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00551}00551\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ =\ 0:\ successful\ exit}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00552}00552\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ >\ 0:\ if\ *info\ =\ i,\ and\ i\ is}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00553}00553\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <=\ A-\/>ncol:\ U(i,i)\ is\ exactly\ zero.\ The\ factorization\ has}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00554}00554\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ been\ completed,\ but\ the\ factor\ U\ is\ exactly\ singular,}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00555}00555\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ so\ the\ solution\ could\ not\ be\ computed.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00556}00556\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ >\ A-\/>ncol:\ number\ of\ bytes\ allocated\ when\ memory\ allocation}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00557}00557\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failure\ occurred,\ plus\ A-\/>ncol.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00558}00558\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ <\ 0:\ some\ other\ error}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00559}00559\ \textcolor{comment}{\ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00560}00560\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00561}\mbox{\hyperlink{superlu__dist_8c_a95c6e8a7870a4921759e90111073ccb8}{00561}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{superlu__dist_8c_a95c6e8a7870a4921759e90111073ccb8}{superlu\_dist\_global\_matrix}}(\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\_flag\_t}}\ opt\_flag,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ allow\_permutations,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\_in,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nnz\_in,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ values,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ row\_index,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ col\_start,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nprow,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ npcol,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ doc,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}**\ data,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ info,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPI\_Comm\ comm)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00575}00575\ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00576}00576\ \ \ \textcolor{comment}{/*\ Some\ SuperLU\ structures\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00577}00577\ \ \ superlu\_dist\_options\_t*\ options;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00578}00578\ \ \ SuperLUStat\_t\ stat;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00579}00579\ \ \ SuperMatrix*\ A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00580}00580\ \ \ dScalePermstruct\_t*\ ScalePermstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00581}00581\ \ \ dLUstruct\_t*\ LUstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00582}00582\ \ \ gridinfo\_t*\ grid;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00583}00583\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00584}00584\ \ \ \textcolor{comment}{/*\ Structure\ to\ hold\ SuperLU\ structures\ and\ data\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00585}00585\ \ \ \mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*\ superlu\_data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00587}00587\ \ \ int\_t*\ perm\_r;\ \textcolor{comment}{/*\ row\ permutations\ from\ partial\ pivoting\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00588}00588\ \ \ int\_t*\ perm\_c;\ \textcolor{comment}{/*\ column\ permutation\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00589}00589\ \ \ int\_t*\ etree;\ \textcolor{comment}{/*\ elimination\ tree\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00590}00590\ \ \ int\_t\ job,\ rowequ,\ colequ,\ iinfo,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ j,\ irow;\ \textcolor{comment}{/*\ ,\ need\_value\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00591}00591\ \ \ int\_t\ m,\ n,\ nnz;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00592}00592\ \ \ int\_t\ *colptr,\ *rowind;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00593}00593\ \ \ int\_t\ Equil,\ factored,\ notran,\ permc\_spec;\ \textcolor{comment}{/*,\ dist\_mem\_use;\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00594}00594\ \ \ NCformat*\ Astore;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00595}00595\ \ \ NCPformat*\ ACstore;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00596}00596\ \ \ Glu\_persist\_t*\ Glu\_persist;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00597}00597\ \ \ Glu\_freeable\_t*\ Glu\_freeable\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00598}00598\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00599}00599\ \ \ \textcolor{comment}{/*\ Other\ stuff\ needed\ by\ SuperLU\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00600}00600\ \ \ \textcolor{keywordtype}{double}*\ berr\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00601}00601\ \ \ \textcolor{keywordtype}{double}\ *a,\ *X,\ *b\_col;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00602}00602\ \ \ \textcolor{keywordtype}{double}*\ B\ =\ b;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00603}00603\ \ \ \textcolor{keywordtype}{double}\ *C,\ *R,\ *C1,\ *R1,\ *b\_work,\ *x\_col;\ \textcolor{comment}{/*\ *bcol,\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00604}00604\ \ \ \textcolor{keywordtype}{double}\ amax,\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ colcnd,\ rowcnd;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00605}00605\ \ \ \textcolor{keywordtype}{double}\ anorm\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00606}00606\ \ \ \textcolor{keywordtype}{char}\ equed[1],\ norm[1];}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00607}00607\ \ \ \textcolor{keywordtype}{int}\ ldx;\ \textcolor{comment}{/*\ LDA\ for\ matrix\ X\ (local).\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00608}00608\ \ \ \textcolor{keywordtype}{int}\ iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00609}00609\ \ \ \textcolor{comment}{//\ static\ superlu\_dist\_mem\_usage\_t\ \ num\_mem\_usage,\ symb\_mem\_usage;}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00610}00610\ \ \ fact\_t\ Fact;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00612}00612\ \ \ \textcolor{comment}{/*\ Square\ matrix\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00613}00613\ \ \ n\ =\ n\_in;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00614}00614\ \ \ m\ =\ n\_in;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00615}00615\ \ \ nnz\ =\ nnz\_in;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00617}00617\ \ \ \textcolor{comment}{/*\ Set\ 'Leading\ dimension'\ of\ rhs\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00618}00618\ \ \ \textcolor{keywordtype}{int}\ ldb\ =\ n;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00620}00620\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00621}00621\ \ \ \textcolor{comment}{/*\ Initialize\ the\ statistics\ variables.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00622}00622\ \ \ PStatInit(\&stat);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00623}00623\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00624}00624\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00625}00625\ \textcolor{comment}{\ \ \ \ \ SET\ UP\ GRID,\ FACTORS,\ ETC}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00626}00626\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00627}00627\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}{SETUP\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00628}00628\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00629}00629\ \ \ \ \ \textcolor{comment}{/*\ Allocate\ data\ structure\ to\ store\ data\ between\ calls\ to\ this\ function\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00630}00630\ \ \ \ \ superlu\_data\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00631}00631\ \ \ \ \ \ \ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00633}00633\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ the\ superlu\ process\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00634}00634\ \ \ \ \ grid\ =\ (gridinfo\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(gridinfo\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00635}00635\ \ \ \ \ superlu\_gridinit(comm,\ nprow,\ npcol,\ grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00636}00636\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}}\ =\ grid;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00637}00637\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00638}00638\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00639}00639\ \ \ \ \ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00640}00640\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00641}00641\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00642}00642\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00643}00643\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00644}00644\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00645}00645\ \ \ \ \ \textcolor{comment}{/*\ Allocate\ memory\ for\ SuperLU\_DIST\ structures\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00646}00646\ \ \ \ \ options\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00647}00647\ \ \ \ \ \ \ (superlu\_dist\_options\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(superlu\_dist\_options\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00648}00648\ \ \ \ \ A\ =\ (SuperMatrix*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(SuperMatrix));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00649}00649\ \ \ \ \ ScalePermstruct\ =}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00650}00650\ \ \ \ \ \ \ (dScalePermstruct\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(dScalePermstruct\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00651}00651\ \ \ \ \ LUstruct\ =\ (dLUstruct\_t*)SUPERLU\_MALLOC(\textcolor{keyword}{sizeof}(dLUstruct\_t));}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00653}00653\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ default\ options\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00654}00654\ \ \ \ \ set\_default\_options\_dist(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00655}00655\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00656}00656\ \ \ \ \ \textcolor{comment}{/*\ Is\ the\ matrix\ transposed\ (NOTRANS\ or\ TRANS)?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00657}00657\ \ \ \ \ options-\/>Trans\ =\ NOTRANS;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00659}00659\ \ \ \ \ \textcolor{comment}{/*\ Row\ permutations\ (NATURAL\ [=\ do\ nothing],\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00660}00660\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LargeDiag\_MC64\ [default],\ ...)?\ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00661}00661\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ options-\/>RowPerm=NATURAL;\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00662}00662\ \ \ \ \ options-\/>RowPerm\ =\ LargeDiag\_MC64;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00663}00663\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00664}00664\ \ \ \ \ \textcolor{comment}{/*\ Column\ permutations\ (NATURAL\ [=\ do\ nothing],\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00665}00665\ \ \ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MMD\_AT\_PLUS\_A\ [default],...)\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00666}00666\ \ \ \ \ options-\/>ColPerm\ =\ MMD\_AT\_PLUS\_A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00668}00668\ \ \ \ \ \textcolor{comment}{/*\ Use\ natural\ ordering\ instead?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00669}00669\ \ \ \ \ \textcolor{keywordflow}{if}\ (allow\_permutations\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00670}00670\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00671}00671\ \ \ \ \ \ \ options-\/>ColPerm\ =\ NATURAL;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00672}00672\ \ \ \ \ \ \ options-\/>RowPerm\ =\ NOROWPERM;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00673}00673\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00674}00674\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00675}00675\ \ \ \ \ \textcolor{comment}{/*\ Iterative\ refinement\ (essential\ as\ far\ as\ I\ can\ tell).*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00676}00676\ \ \ \ \ \textcolor{comment}{/*\ Can\ be\ "{}NO"{}\ or\ "{}DOUBLE"{}*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00677}00677\ \ \ \ \ options-\/>IterRefine\ =\ SLU\_DOUBLE;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00679}00679\ \ \ \ \ \textcolor{comment}{/*\ Print\ stats\ during\ solve?\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00680}00680\ \ \ \ \ \textcolor{keywordflow}{if}\ (doc\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00681}00681\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00682}00682\ \ \ \ \ \ \ options-\/>PrintStat\ =\ YES;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00683}00683\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00684}00684\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00685}00685\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00686}00686\ \ \ \ \ \ \ options-\/>PrintStat\ =\ NO;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00687}00687\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00688}00688\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00689}00689\ \ \ \ \ \textcolor{comment}{/*\ Doc\ output\ on\ process\ 0\ if\ required:\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00690}00690\ \ \ \ \ \textcolor{keywordflow}{if}\ ((!iam)\ \&\&\ (doc\ ==\ 0))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00691}00691\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00692}00692\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nPerforming\ SuperLU\_DIST\ setup\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00693}00693\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Process\ grid\(\backslash\)t\%d\ X\ \%d\(\backslash\)n"{}},\ grid-\/>nprow,\ grid-\/>npcol);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00694}00694\ \ \ \ \ \ \ print\_options\_dist(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00695}00695\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00696}00696\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00697}00697\ \ \ \ \ \textcolor{comment}{/*\ \ Create\ SuperMatrix\ from\ compressed\ column\ representation\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00698}00698\ \ \ \ \ dCreate\_CompCol\_Matrix\_dist(}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00699}00699\ \ \ \ \ \ \ A,\ m,\ n,\ nnz,\ values,\ row\_index,\ col\_start,\ SLU\_NC,\ SLU\_D,\ SLU\_GE);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00700}00700\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00701}00701\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ ScalePermstruct\ and\ LUstruct.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00702}00702\ \ \ \ \ dScalePermstructInit(m,\ n,\ ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00703}00703\ \ \ \ \ dLUstructInit(n,\ LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00704}00704\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00705}00705\ \ \ \ \ \textcolor{comment}{/*\ Call\ the\ linear\ equation\ solver.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00706}00706\ \ \ \ \ \textcolor{keywordtype}{int}\ nrhs\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00707}00707\ \ \ \ \ pdgssvx\_ABglobal(options,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ScalePermstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ldb,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nrhs,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LUstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ berr,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&stat,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00718}00718\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00719}00719\ \ \ \ \ \textcolor{comment}{/*\ Indicate\ that\ A\ has\ now\ been\ factorised.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00720}00720\ \ \ \ \ options-\/>Fact\ =\ FACTORED;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00722}00722\ \ \ \ \ \textcolor{keywordflow}{if}\ (*info\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00723}00723\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00724}00724\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Trouble\ in\ \ pdgstrf.\ Info=\%i\(\backslash\)n"{}},\ *info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00725}00725\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*info\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00726}00726\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00727}00727\ \ \ \ \ \ \ \ \ printf(}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}U(\%i,\%i)\ is\ exactly\ zero.\ The\ factorization\ has\(\backslash\)n"{}},\ *info,\ *info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}been\ completed,\ but\ the\ factor\ U\ is\ exactly\ singular,\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00730}00730\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}and\ division\ by\ zero\ will\ occur\ if\ it\ is\ used\ to\ solve\ a\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}system\ of\ equations.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00732}00732\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00733}00733\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00734}00734\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00735}00735\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}The\ \%i-\/th\ argument\ had\ an\ illegal\ value.\(\backslash\)n"{}},\ *info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00736}00736\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00737}00737\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00738}00738\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00739}00739\ \ \ \ \ \textcolor{comment}{/*\ Print\ the\ statistics.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00740}00740\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00741}00741\ \textcolor{comment}{\ \ \ \ \ \ PM:\ A\ driver\ can\ hang\ if\ this\ is\ only\ executed\ when\ on\ the\ root\ processor}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00742}00742\ \textcolor{comment}{\ \ \ \ \ \ so\ make\ sure\ not\ to\ add\ "{}\&\&\ (!iam)"{}\ to\ the\ if\ condition!}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00743}00743\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00744}00744\ \ \ \ \ \textcolor{keywordflow}{if}\ (doc\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00745}00745\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00746}00746\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nStats\ after\ global\ setup....\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00747}00747\ \ \ \ \ \ \ PStatPrint(options,\ \&stat,\ grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00748}00748\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00749}00749\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00750}00750\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00751}00751\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ up\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00752}00752\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00753}00753\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}}\ =\ A;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00754}00754\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}}\ =\ options;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00755}00755\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}}\ =\ ScalePermstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00756}00756\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}}\ =\ LUstruct;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00757}00757\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{colequ}}\ =\ colequ;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00758}00758\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{rowequ}}\ =\ rowequ;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00759}00759\ \ \ \ \ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{anorm}}\ =\ anorm;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00760}00760\ \ \ \ \ *data\ =\ superlu\_data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00761}00761\ \ \ \}\ \textcolor{comment}{/*\ End\ of\ setup\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00762}00762\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00763}00763\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00764}00764\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00765}00765\ \textcolor{comment}{\ \ \ \ \ PERFORM\ A\ SOLVE\_PHASE}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00766}00766\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00767}00767\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}{SOLVE\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00768}00768\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00769}00769\ \ \ \ \ \textcolor{comment}{/*\ Get\ pointer\ to\ the\ grid\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00770}00770\ \ \ \ \ superlu\_data\ =\ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)*data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00771}00771\ \ \ \ \ grid\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00773}00773\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00774}00774\ \ \ \ \ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00775}00775\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00776}00776\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00777}00777\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00778}00778\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00779}00779\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00780}00780\ \ \ \ \ \textcolor{keywordflow}{if}\ ((doc\ ==\ 0)\ \&\&\ (!iam))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00781}00781\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00782}00782\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nPerforming\ SuperLU\_DIST\ solve\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00783}00783\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00784}00784\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00785}00785\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00786}00786\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ other\ \ pointers\ to\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00787}00787\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00788}00788\ \ \ \ \ A\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00789}00789\ \ \ \ \ options\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00790}00790\ \ \ \ \ ScalePermstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00791}00791\ \ \ \ \ LUstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00792}00792\ \ \ \ \ colequ\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_afcd49a61eae2c99435c86aa0d652d3a3}{colequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00793}00793\ \ \ \ \ rowequ\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a37b3cd09e40a3a8853bc633592b71baa}{rowequ}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00794}00794\ \ \ \ \ anorm\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_acc2a4e57ead3ba7686c1adcdc882372b}{anorm}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00796}00796\ \ \ \ \ \textcolor{comment}{/*\ Solving\ for\ a\ single\ RHS\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00797}00797\ \ \ \ \ \textcolor{keywordtype}{int}\ nrhs\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00799}00799\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(berr\ =\ doubleMalloc\_dist(nrhs)))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00800}00800\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00801}00801\ \ \ \ \ \ \ ABORT(\textcolor{stringliteral}{"{}Malloc\ fails\ for\ berr[]."{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00802}00802\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00803}00803\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00804}00804\ \ \ \ \ \textcolor{comment}{/*\ Call\ the\ linear\ solver\ to\ perform\ the\ back\ sub.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00805}00805\ \ \ \ \ pdgssvx\_ABglobal(options,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ScalePermstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ldb,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nrhs,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LUstruct,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ berr,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&stat,}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ info);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00816}00816\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00817}00817\ \ \ \ \ SUPERLU\_FREE(berr);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00818}00818\ \ \ \}\ \textcolor{comment}{/*\ End\ of\ solve\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00819}00819\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00820}00820\ \ \ \textcolor{comment}{/*\ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00821}00821\ \textcolor{comment}{\ \ \ \ \ PERFORM\ CLEAN\ UP\ OF\ MEMORY}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00822}00822\ \textcolor{comment}{\ \ \ \ \ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00823}00823\ \ \ \textcolor{keywordflow}{if}\ (opt\_flag\ ==\ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}{CLEAN\_UP\_PHASE}})}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00824}00824\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00825}00825\ \ \ \ \ \textcolor{comment}{/*\ Get\ pointer\ to\ the\ process\ grid\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00826}00826\ \ \ \ \ superlu\_data\ =\ (\mbox{\hyperlink{structsuperlu__dist__data}{superlu\_dist\_data}}*)*data;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00827}00827\ \ \ \ \ grid\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a4f94d5dfa393e9ac7e9955383a4ecf11}{grid}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00828}00828\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00829}00829\ \ \ \ \ \textcolor{comment}{/*\ Bail\ out\ if\ I\ do\ not\ belong\ in\ the\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00830}00830\ \ \ \ \ iam\ =\ grid-\/>iam;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00831}00831\ \ \ \ \ \textcolor{keywordflow}{if}\ (iam\ >=\ nprow\ *\ npcol)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00832}00832\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00833}00833\ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ out;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00834}00834\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00835}00835\ \ \ \ \ \textcolor{keywordflow}{if}\ ((doc\ ==\ 0)\ \&\&\ (!iam))}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00836}00836\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00837}00837\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nCleaning\ up\ memory\ allocated\ for\ SuperLU\_DIST\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00838}00838\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00839}00839\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00840}00840\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00841}00841\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ pointers\ to\ the\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00842}00842\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00843}00843\ \ \ \ \ A\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a8e78baf55994a10e8c84c6f1e8270c80}{A}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00844}00844\ \ \ \ \ options\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a371e2aa16db9392d53da18930fad44fd}{options}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00845}00845\ \ \ \ \ ScalePermstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a2e7574d4fe99d0f079e329477dee82d4}{ScalePermstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00846}00846\ \ \ \ \ LUstruct\ =\ superlu\_data-\/>\mbox{\hyperlink{structsuperlu__dist__data_a5fd5c0b62dcc698a91077ca827491aa9}{LUstruct}};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00847}00847\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00848}00848\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00849}00849\ \textcolor{comment}{\ \ \ \ \ \ \ Set\ the\ other\ pointers\ required}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00850}00850\ \textcolor{comment}{\ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00851}00851\ \ \ \ \ R\ =\ ScalePermstruct-\/>R;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00852}00852\ \ \ \ \ C\ =\ ScalePermstruct-\/>C;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00853}00853\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00854}00854\ \ \ \ \ \textcolor{comment}{/*\ Local\ control\ paramaters\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00855}00855\ \ \ \ \ Fact\ =\ options-\/>Fact;}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00856}00856\ \ \ \ \ factored\ =\ (Fact\ ==\ FACTORED);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00857}00857\ \ \ \ \ Equil\ =\ (!factored\ \&\&\ options-\/>Equil\ ==\ YES);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00858}00858\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00859}00859\ \ \ \ \ \textcolor{comment}{/*\ Deallocate\ storage.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00860}00860\ \ \ \ \ \textcolor{keywordflow}{if}\ (Equil\ \&\&\ Fact\ !=\ SamePattern\_SameRowPerm)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00861}00861\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00862}00862\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (ScalePermstruct-\/>DiagScale)}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00863}00863\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00864}00864\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NOEQUIL:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00865}00865\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(R);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(C);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00867}00867\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00868}00868\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ROW:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(C);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00871}00871\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COL:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ SUPERLU\_FREE(R);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00874}00874\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00875}00875\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00876}00876\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00877}00877\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00878}00878\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00879}00879\ \ \ \ \ \textcolor{comment}{/*\ \ Free\ storage\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00880}00880\ \ \ \ \ PStatFree(\&stat);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00881}00881\ \ \ \ \ \textcolor{comment}{//\ Destroy\_CompCol\_Matrix\_dist(\&A);}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00882}00882\ \ \ \ \ dDestroy\_LU(n,\ grid,\ LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00883}00883\ \ \ \ \ dScalePermstructFree(ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00884}00884\ \ \ \ \ dLUstructFree(LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00885}00885\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00886}00886\ \ \ \ \ \textcolor{comment}{//\ \ Only\ destroy\ the\ store\ part\ of\ the\ matrix}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00887}00887\ \ \ \ \ Destroy\_SuperMatrix\_Store\_dist(A);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00888}00888\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00889}00889\ \ \ \ \ \textcolor{comment}{/*\ Deallocate\ memory\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00890}00890\ \ \ \ \ SUPERLU\_FREE(A);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00891}00891\ \ \ \ \ SUPERLU\_FREE(ScalePermstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00892}00892\ \ \ \ \ SUPERLU\_FREE(LUstruct);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00893}00893\ \ \ \ \ SUPERLU\_FREE(options);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00894}00894\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00895}00895\ \ \ \ \ \textcolor{comment}{/*\ \ Release\ the\ superlu\ process\ grid.\ */}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00896}00896\ \ \ out:}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00897}00897\ \ \ \ \ superlu\_gridexit(grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00898}00898\ }
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00899}00899\ \ \ \ \ SUPERLU\_FREE(grid);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00900}00900\ \ \ \ \ SUPERLU\_FREE(superlu\_data);}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00901}00901\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00902}00902\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{superlu__dist_8c_source_l00903}00903\ \}}
+
+\end{DoxyCode}

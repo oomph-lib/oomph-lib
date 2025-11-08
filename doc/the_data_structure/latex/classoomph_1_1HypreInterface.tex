@@ -1,5 +1,5 @@
-\hypertarget{classoomph_1_1HypreInterface}{}\doxysection{oomph\+::Hypre\+Interface Class Reference}
-\label{classoomph_1_1HypreInterface}\index{oomph::HypreInterface@{oomph::HypreInterface}}
+\doxysection{oomph\+::Hypre\+Interface Class Reference}
+\hypertarget{classoomph_1_1HypreInterface}{}\label{classoomph_1_1HypreInterface}\index{oomph::HypreInterface@{oomph::HypreInterface}}
 
 
 An interface class to the suite of Hypre solvers and preconditioners to allow use of\+:  
@@ -15,7 +15,7 @@ Inheritance diagram for oomph\+::Hypre\+Interface\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{classoomph_1_1HypreInterface}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Types}
+\doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}{Hypre\+\_\+method\+\_\+types}} \{ \newline
@@ -29,199 +29,198 @@ enum \mbox{\hyperlink{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03
 , \mbox{\hyperlink{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5}{None}}
  \}
 \begin{DoxyCompactList}\small\item\em Enumerated flag to define which Hypre methods are used CAREFUL\+: DON\textquotesingle{}T CHANGE THE ORDER OF THESE! \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1HypreInterface_a411f8026204716846b34eec5a1296d28}{Hypre\+Interface}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf}{$\sim$\+Hypre\+Interface}} ()
+\mbox{\hyperlink{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf}{\texorpdfstring{$\sim$}{\string~}\+Hypre\+Interface}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226}{Hypre\+Interface}} (const \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226}{Hypre\+Interface}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602}{operator=}} (const \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&)=delete
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518}{enable\+\_\+hypre\+\_\+error\+\_\+messages}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518}{enable\+\_\+hypre\+\_\+error\+\_\+messages}} ()
 \begin{DoxyCompactList}\small\item\em Turn on the hypre error messages. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5}{disable\+\_\+hypre\+\_\+error\+\_\+messages}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5}{disable\+\_\+hypre\+\_\+error\+\_\+messages}} ()
 \begin{DoxyCompactList}\small\item\em Turn off hypre error messages. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434}{existing\+\_\+solver}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434}{existing\+\_\+solver}} ()
 \begin{DoxyCompactList}\small\item\em Function to return value of which solver (if any) is currently stored. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb}{existing\+\_\+preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb}{existing\+\_\+preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Function return value of which preconditioner (if any) is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae}{AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi}}
-\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f}{AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling}}
-\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1}{AMGEuclid\+Smoother\+\_\+use\+\_\+ilut}}
-\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb}{AMGEuclid\+Smoother\+\_\+level}}
-\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee}{AMGEuclid\+Smoother\+\_\+drop\+\_\+tol}}
-\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39}{AMGEuclid\+Smoother\+\_\+print\+\_\+level}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}{hypre\+\_\+clean\+\_\+up\+\_\+memory}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}{hypre\+\_\+clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Function deletes all solver data. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b}{hypre\+\_\+matrix\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$matrix\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Function which sets values of First\+\_\+global\+\_\+row, Last\+\_\+global\+\_\+row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix\+\_\+ij/\+Matrix\+\_\+par) from the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb}{hypre\+\_\+solver\+\_\+setup}} ()
-\begin{DoxyCompactList}\small\item\em Sets up the data required for to use as an oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} or \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. This must be called after the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793}{hypre\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
-\begin{DoxyCompactList}\small\item\em Helper function performs a solve if any solver exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b}{hypre\+\_\+matrix\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function which sets values of First\+\_\+global\+\_\+row, Last\+\_\+global\+\_\+row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix\+\_\+ij/\+Matrix\+\_\+par) from the \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb}{hypre\+\_\+solver\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the data required for to use as an oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} or \doxylink{classoomph_1_1Preconditioner}{Preconditioner}. This must be called after the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793}{hypre\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em Helper function performs a solve if any solver exists. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a9bf3a478dc337afec62a690445865980}{doc\+\_\+hypre\+\_\+parameters}} ()
+\begin{DoxyCompactList}\small\item\em Doc parameters used in hypre solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57}{Output\+\_\+info}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57}{Output\+\_\+info}}
 \begin{DoxyCompactList}\small\item\em Flag is true to output info and results of timings. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614}{Max\+\_\+iter}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614}{Max\+\_\+iter}}
 \begin{DoxyCompactList}\small\item\em Maximum number of iterations used in solver. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924}{Tolerance}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924}{Tolerance}}
 \begin{DoxyCompactList}\small\item\em Tolerance used to terminate solver. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947}{Hypre\+\_\+method}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947}{Hypre\+\_\+method}}
 \begin{DoxyCompactList}\small\item\em Hypre method flag. Valid values are specified in enumeration. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27}{Internal\+\_\+preconditioner}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} method flag used with Hypre\textquotesingle{}s PCG, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} and \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}} in solve(...) or resolve(...). Valid values are Boomer\+AMG, Euclid, Para\+Sails or None (all enumerated above), for any other value no preconditioner is set. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74}{AMG\+\_\+print\+\_\+level}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27}{Internal\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} method flag used with Hypre\textquotesingle{}s PCG, \doxylink{classoomph_1_1GMRES}{GMRES} and \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab} in solve(...) or resolve(...). Valid values are Boomer\+AMG, Euclid, Para\+Sails or None (all enumerated above), for any other value no preconditioner is set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74}{AMG\+\_\+print\+\_\+level}}
 \begin{DoxyCompactList}\small\item\em Used to set the Hypre printing level for AMG 0\+: no printout 1\+: print setup information 2\+: print solve information 3\+: print setup and solve information. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9}{AMG\+\_\+max\+\_\+levels}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9}{AMG\+\_\+max\+\_\+levels}}
 \begin{DoxyCompactList}\small\item\em Maximum number of levels used in AMG. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218}{AMG\+\_\+max\+\_\+row\+\_\+sum}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218}{AMG\+\_\+max\+\_\+row\+\_\+sum}}
 \begin{DoxyCompactList}\small\item\em Parameter to identify diagonally dominant parts of the matrix in AMG. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161}{AMG\+\_\+using\+\_\+simple\+\_\+smoothing}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161}{AMG\+\_\+using\+\_\+simple\+\_\+smoothing}}
 \begin{DoxyCompactList}\small\item\em Flag to determine whether simple smoothers (determined by the AMG\+\_\+simple\+\_\+smoother flag) or complex smoothers (determined by the AMG\+\_\+complex\+\_\+smoother flag are used in AMG. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c}{AMG\+\_\+simple\+\_\+smoother}}
-\begin{DoxyCompactList}\small\item\em Simple smoothing methods used in Boomer\+AMG. Relaxation types include\+: 0 = Jacobi 1 = Gauss-\/\+Seidel, sequential (very slow in parallel!) 2 = Gauss-\/\+Seidel, interior points in parallel, boundary sequential (slow in parallel!) 3 = hybrid Gauss-\/\+Seidel or SOR, forward solve 4 = hybrid Gauss-\/\+Seidel or SOR, backward solve 6 = hybrid symmetric Gauss-\/\+Seidel or SSOR To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to true. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e}{AMG\+\_\+complex\+\_\+smoother}}
-\begin{DoxyCompactList}\small\item\em Complex smoothing methods used in Boomer\+AMG. Relaxation types are\+: 6 = Schwarz 7 = Pilut 8 = Para\+Sails 9 = Euclid To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to false. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680}{AMG\+\_\+smoother\+\_\+iterations}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c}{AMG\+\_\+simple\+\_\+smoother}}
+\begin{DoxyCompactList}\small\item\em Simple smoothing methods used in Boomer\+AMG. To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to true. Here are the current options (from hypre\textquotesingle{}s HYPRE\+\_\+parcsr\+\_\+ls.\+h)\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e}{AMG\+\_\+complex\+\_\+smoother}}
+\begin{DoxyCompactList}\small\item\em Complex smoothing methods used in Boomer\+AMG. To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to false Here are the current options (from hypre\textquotesingle{}s HYPRE\+\_\+parcsr\+\_\+ls.\+h)\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680}{AMG\+\_\+smoother\+\_\+iterations}}
 \begin{DoxyCompactList}\small\item\em The number of smoother iterations to apply. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc}{AMG\+\_\+damping}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc}{AMG\+\_\+damping}}
 \begin{DoxyCompactList}\small\item\em Damping factor for Boomer\+AMG smoothed Jacobi or hybrid SOR. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea}{AMG\+\_\+strength}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea}{AMG\+\_\+strength}}
 \begin{DoxyCompactList}\small\item\em Connection strength threshold parameter for Boomer\+AMG. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46}{AMG\+\_\+truncation}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46}{AMG\+\_\+truncation}}
 \begin{DoxyCompactList}\small\item\em Interpolation truncation factor for Boomer\+AMG. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf}{AMG\+\_\+coarsening}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf}{AMG\+\_\+coarsening}}
 \begin{DoxyCompactList}\small\item\em AMG coarsening strategy. Coarsening types include\+: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6}{Para\+Sails\+\_\+symmetry}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6}{Para\+Sails\+\_\+symmetry}}
 \begin{DoxyCompactList}\small\item\em Para\+Sails symmetry flag, used to inform Para\+Sails of Symmetry of definitenss of problem and type of Para\+Sails preconditioner\+: 0 = nonsymmetric and/or indefinite problem, nonsymmetric preconditioner 1 = SPD problem, and SPD (factored preconditioner) 2 = nonsymmetric, definite problem and SDP (factored preconditoner) \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4}{Para\+Sails\+\_\+nlevel}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4}{Para\+Sails\+\_\+nlevel}}
 \begin{DoxyCompactList}\small\item\em Para\+Sails nlevel parameter. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d}{Para\+Sails\+\_\+thresh}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d}{Para\+Sails\+\_\+thresh}}
 \begin{DoxyCompactList}\small\item\em Para\+Sails thresh parameter. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a}{Para\+Sails\+\_\+filter}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a}{Para\+Sails\+\_\+filter}}
 \begin{DoxyCompactList}\small\item\em Para\+Sails filter parameter. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}{Euclid\+\_\+droptol}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}{Euclid\+\_\+droptol}}
 \begin{DoxyCompactList}\small\item\em Euclid drop tolerance for ILU(k) and ILUT factorization. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286}{Euclid\+\_\+row\+Scale}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286}{Euclid\+\_\+row\+Scale}}
 \begin{DoxyCompactList}\small\item\em Flag to switch on Euclid row scaling. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22}{Euclid\+\_\+using\+\_\+\+ILUT}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22}{Euclid\+\_\+using\+\_\+\+ILUT}}
 \begin{DoxyCompactList}\small\item\em Flag to determine if ILUT (if true) or ILU(k) is used in Euclid. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0}{Euclid\+\_\+using\+\_\+\+BJ}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0}{Euclid\+\_\+using\+\_\+\+BJ}}
 \begin{DoxyCompactList}\small\item\em Flag to determine if Block Jacobi is used instead of PILU. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e}{Euclid\+\_\+level}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e}{Euclid\+\_\+level}}
 \begin{DoxyCompactList}\small\item\em Euclid level parameter for ILU(k) factorization. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1}{Euclid\+\_\+print\+\_\+level}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1}{Euclid\+\_\+print\+\_\+level}}
 \begin{DoxyCompactList}\small\item\em Flag to set the level of printing from Euclid when the Euclid destructor is called 0\+: no printing (default) 1\+: prints summary of runtime settings and timings 2\+: as 1 plus prints memory usage. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b}{Krylov\+\_\+print\+\_\+level}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae}{AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f}{AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1}{AMGEuclid\+Smoother\+\_\+use\+\_\+ilut}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb}{AMGEuclid\+Smoother\+\_\+level}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee}{AMGEuclid\+Smoother\+\_\+drop\+\_\+tol}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39}{AMGEuclid\+Smoother\+\_\+print\+\_\+level}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b}{Krylov\+\_\+print\+\_\+level}}
 \begin{DoxyCompactList}\small\item\em Used to set the Hypre printing level for the Krylov subspace solvers. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090}{Hypre\+\_\+error\+\_\+messages}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090}{Hypre\+\_\+error\+\_\+messages}}
 \begin{DoxyCompactList}\small\item\em Flag to determine if non-\/zero values of the Hypre error flag plus Hypre error messages are output to screen at various points in the solve function, i.\+e. after\+: \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}{Delete\+\_\+input\+\_\+data}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}{Delete\+\_\+input\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Internal flag which is true when hypre\+\_\+setup or hypre\+\_\+solve can delete input matrix. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}{Using\+\_\+distributed\+\_\+rhs}}
-\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}{Returning\+\_\+distributed\+\_\+solution}}
-\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}{Using\+\_\+distributed\+\_\+rhs}}
+\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the rhs \doxylink{classoomph_1_1Vector}{Vector} is distributed or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}{Returning\+\_\+distributed\+\_\+solution}}
+\begin{DoxyCompactList}\small\item\em Internal flag which tell the solver if the solution \doxylink{classoomph_1_1Vector}{Vector} to be returned is distributed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044}{Delete\+\_\+matrix}}
-\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. \end{DoxyCompactList}\item 
-HYPRE\+\_\+\+IJMatrix \mbox{\hyperlink{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d}{Matrix\+\_\+ij}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044}{Delete\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJMatrix}} \mbox{\hyperlink{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d}{Matrix\+\_\+ij}}
 \begin{DoxyCompactList}\small\item\em The Hypre\+\_\+\+IJMatrix version of the matrix used in solve(...), resolve(...) or preconditioner\+\_\+solve(...). \end{DoxyCompactList}\item 
-HYPRE\+\_\+\+Par\+CSRMatrix \mbox{\hyperlink{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d}{Matrix\+\_\+par}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+CSRMatrix}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d}{Matrix\+\_\+par}}
 \begin{DoxyCompactList}\small\item\em The Hypre\+\_\+\+Par\+CSRMatrix version of the matrix used in solve(...), resolve(...) or preconditioner\+\_\+solve(...). \end{DoxyCompactList}\item 
-HYPRE\+\_\+\+Solver \mbox{\hyperlink{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}{Solver}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}{Solver}}
 \begin{DoxyCompactList}\small\item\em The Hypre solver used in solve(...), resolve(...) or preconditioner\+\_\+solve(...). \mbox{[}This is a C structure!\mbox{]}. \end{DoxyCompactList}\item 
-HYPRE\+\_\+\+Solver \mbox{\hyperlink{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d}{Preconditioner}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d}{Preconditioner}}
 \begin{DoxyCompactList}\small\item\em The internal Hypre preconditioner used in conjunction with Solver. \mbox{[}This is a C structure!\mbox{]}. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b}{Existing\+\_\+solver}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b}{Existing\+\_\+solver}}
 \begin{DoxyCompactList}\small\item\em Used to keep track of which solver (if any) is currently stored. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e}{Existing\+\_\+preconditioner}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e}{Existing\+\_\+preconditioner}}
 \begin{DoxyCompactList}\small\item\em Used to keep track of which preconditioner (if any) is currently stored. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$ \mbox{\hyperlink{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127}{Hypre\+\_\+distribution\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127}{Hypre\+\_\+distribution\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em the distribution for this helpers-\/ \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 An interface class to the suite of Hypre solvers and preconditioners to allow use of\+: 
 
-Boomer\+AMG (AMG), \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}, Euclid (ILU) or Para\+Sails (Approximate inverse)
+Boomer\+AMG (AMG), \doxylink{classoomph_1_1CG}{CG}, \doxylink{classoomph_1_1GMRES}{GMRES} or \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab}, Euclid (ILU) or Para\+Sails (Approximate inverse)
 
-Hypre\textquotesingle{}s Krylov subspace solvers (\mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} and \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}) may be preconditioned using\+: \begin{DoxyVerb}    BoomerAMG, Euclid or ParaSails
+Hypre\textquotesingle{}s Krylov subspace solvers (\doxylink{classoomph_1_1CG}{CG}, \doxylink{classoomph_1_1GMRES}{GMRES} and \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab}) may be preconditioned using\+: \begin{DoxyVerb}    BoomerAMG, Euclid or ParaSails
 \end{DoxyVerb}
  
 
-Definition at line 133 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00138}{138}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Member Enumeration Documentation}
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}} 
+\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Hypre\_method\_types@{Hypre\_method\_types}}
 \index{Hypre\_method\_types@{Hypre\_method\_types}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Hypre\_method\_types}{Hypre\_method\_types}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method\+\_\+types}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}} \mbox{\hyperlink{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2ab}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method\+\_\+types}}}
 
 
 
 Enumerated flag to define which Hypre methods are used CAREFUL\+: DON\textquotesingle{}T CHANGE THE ORDER OF THESE! 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{CG@{CG}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!CG@{CG}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CG@{CG}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!CG@{CG}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805} 
 CG&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{GMRES@{GMRES}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!GMRES@{GMRES}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GMRES@{GMRES}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!GMRES@{GMRES}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45} 
 GMRES&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{BiCGStab@{BiCGStab}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!BiCGStab@{BiCGStab}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BiCGStab@{BiCGStab}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!BiCGStab@{BiCGStab}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb} 
 Bi\+CGStab&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{BoomerAMG@{BoomerAMG}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!BoomerAMG@{BoomerAMG}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BoomerAMG@{BoomerAMG}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!BoomerAMG@{BoomerAMG}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061} 
 Boomer\+AMG&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{Euclid@{Euclid}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid@{Euclid}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Euclid@{Euclid}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid@{Euclid}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d} 
 Euclid&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{ParaSails@{ParaSails}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails@{ParaSails}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ParaSails@{ParaSails}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails@{ParaSails}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165} 
 Para\+Sails&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!None@{None}}}\mbox{\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!oomph::HypreInterface@{oomph::HypreInterface}}\index{oomph::HypreInterface@{oomph::HypreInterface}!None@{None}}}\Hypertarget{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5}\label{classoomph_1_1HypreInterface_a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5} 
 None&\\
 \hline
 
 \end{DoxyEnumFields}
 
 
-Definition at line 255 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00283}{283}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a411f8026204716846b34eec5a1296d28}\label{classoomph_1_1HypreInterface_a411f8026204716846b34eec5a1296d28}} 
+\Hypertarget{classoomph_1_1HypreInterface_a411f8026204716846b34eec5a1296d28}\label{classoomph_1_1HypreInterface_a411f8026204716846b34eec5a1296d28} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!HypreInterface@{HypreInterface}}
 \index{HypreInterface@{HypreInterface}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{HypreInterface()}{HypreInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -233,17 +232,17 @@ Constructor.
 
 
 
-Definition at line 137 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00142}{142}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+coarsening, AMG\+\_\+coarsening, AMG\+\_\+complex\+\_\+smoother, AMG\+\_\+damping, AMG\+\_\+max\+\_\+levels, AMG\+\_\+max\+\_\+row\+\_\+sum, AMG\+\_\+print\+\_\+level, AMG\+\_\+simple\+\_\+smoother, AMG\+\_\+smoother\+\_\+iterations, oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+strength, AMG\+\_\+strength, oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+truncation, AMG\+\_\+truncation, AMG\+\_\+using\+\_\+simple\+\_\+smoothing, AMGEuclid\+Smoother\+\_\+drop\+\_\+tol, AMGEuclid\+Smoother\+\_\+level, AMGEuclid\+Smoother\+\_\+print\+\_\+level, AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi, AMGEuclid\+Smoother\+\_\+use\+\_\+ilut, AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling, oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt(), e, Euclid\+\_\+droptol, Euclid\+\_\+level, Euclid\+\_\+print\+\_\+level, Euclid\+\_\+row\+Scale, Euclid\+\_\+using\+\_\+\+BJ, Euclid\+\_\+using\+\_\+\+ILUT, Existing\+\_\+preconditioner, Existing\+\_\+solver, GMRES, Hypre\+\_\+distribution\+\_\+pt, Hypre\+\_\+error\+\_\+messages, Hypre\+\_\+method, Internal\+\_\+preconditioner, Krylov\+\_\+print\+\_\+level, Max\+\_\+iter, oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), None, Output\+\_\+info, Para\+Sails\+\_\+filter, Para\+Sails\+\_\+nlevel, Para\+Sails\+\_\+symmetry, Para\+Sails\+\_\+thresh, and Tolerance.
+References \mbox{\hyperlink{hypre__solver_8cc_source_l00142}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+coarsening}}, \mbox{\hyperlink{hypre__solver_8h_source_l00456}{AMG\+\_\+coarsening}}, \mbox{\hyperlink{hypre__solver_8h_source_l00430}{AMG\+\_\+complex\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00436}{AMG\+\_\+damping}}, \mbox{\hyperlink{hypre__solver_8h_source_l00351}{AMG\+\_\+max\+\_\+levels}}, \mbox{\hyperlink{hypre__solver_8h_source_l00354}{AMG\+\_\+max\+\_\+row\+\_\+sum}}, \mbox{\hyperlink{hypre__solver_8h_source_l00348}{AMG\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00408}{AMG\+\_\+simple\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00433}{AMG\+\_\+smoother\+\_\+iterations}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00126}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+strength}}, \mbox{\hyperlink{hypre__solver_8h_source_l00439}{AMG\+\_\+strength}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00148}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+truncation}}, \mbox{\hyperlink{hypre__solver_8h_source_l00442}{AMG\+\_\+truncation}}, \mbox{\hyperlink{hypre__solver_8h_source_l00359}{AMG\+\_\+using\+\_\+simple\+\_\+smoothing}}, \mbox{\hyperlink{hypre__solver_8h_source_l00503}{AMGEuclid\+Smoother\+\_\+drop\+\_\+tol}}, \mbox{\hyperlink{hypre__solver_8h_source_l00502}{AMGEuclid\+Smoother\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00504}{AMGEuclid\+Smoother\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00499}{AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi}}, \mbox{\hyperlink{hypre__solver_8h_source_l00501}{AMGEuclid\+Smoother\+\_\+use\+\_\+ilut}}, \mbox{\hyperlink{hypre__solver_8h_source_l00500}{AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01054}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{hypre__solver_8h_source_l00476}{Euclid\+\_\+droptol}}, \mbox{\hyperlink{hypre__solver_8h_source_l00488}{Euclid\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00495}{Euclid\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00479}{Euclid\+\_\+row\+Scale}}, \mbox{\hyperlink{hypre__solver_8h_source_l00485}{Euclid\+\_\+using\+\_\+\+BJ}}, \mbox{\hyperlink{hypre__solver_8h_source_l00482}{Euclid\+\_\+using\+\_\+\+ILUT}}, \mbox{\hyperlink{hypre__solver_8h_source_l00673}{Existing\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00670}{Existing\+\_\+solver}}, \mbox{\hyperlink{hypre__solver_8h_source_l00286}{GMRES}}, \mbox{\hyperlink{hypre__solver_8h_source_l00676}{Hypre\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}, \mbox{\hyperlink{hypre__solver_8h_source_l00335}{Hypre\+\_\+method}}, \mbox{\hyperlink{hypre__solver_8h_source_l00341}{Internal\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00508}{Krylov\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00329}{Max\+\_\+iter}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00291}{None}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00120}{oomph\+::\+Hypre\+Helpers\+::\+Number\+\_\+of\+\_\+active\+\_\+hypre\+\_\+solvers}}, \mbox{\hyperlink{hypre__solver_8h_source_l00326}{Output\+\_\+info}}, \mbox{\hyperlink{hypre__solver_8h_source_l00473}{Para\+Sails\+\_\+filter}}, \mbox{\hyperlink{hypre__solver_8h_source_l00467}{Para\+Sails\+\_\+nlevel}}, \mbox{\hyperlink{hypre__solver_8h_source_l00464}{Para\+Sails\+\_\+symmetry}}, \mbox{\hyperlink{hypre__solver_8h_source_l00470}{Para\+Sails\+\_\+thresh}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00332}{Tolerance}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf}\label{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf}} 
-\index{oomph::HypreInterface@{oomph::HypreInterface}!````~HypreInterface@{$\sim$HypreInterface}}
-\index{````~HypreInterface@{$\sim$HypreInterface}!oomph::HypreInterface@{oomph::HypreInterface}}
-\doxysubsubsection{\texorpdfstring{$\sim$HypreInterface()}{~HypreInterface()}}
-{\footnotesize\ttfamily oomph\+::\+Hypre\+Interface\+::$\sim$\+Hypre\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\Hypertarget{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf}\label{classoomph_1_1HypreInterface_a713e74ad0f84ae06be5c7daa87337ecf} 
+\index{oomph::HypreInterface@{oomph::HypreInterface}!````~HypreInterface@{\texorpdfstring{$\sim$}{\string~}HypreInterface}}
+\index{````~HypreInterface@{\texorpdfstring{$\sim$}{\string~}HypreInterface}!oomph::HypreInterface@{oomph::HypreInterface}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HypreInterface()}{\string~HypreInterface()}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Interface\+::\texorpdfstring{$\sim$}{\string~}\+Hypre\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -251,17 +250,17 @@ Destructor.
 
 
 
-Definition at line 226 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00238}{238}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References hypre\+\_\+clean\+\_\+up\+\_\+memory(), and Hypre\+\_\+distribution\+\_\+pt.
+References \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00676}{Hypre\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00120}{oomph\+::\+Hypre\+Helpers\+::\+Number\+\_\+of\+\_\+active\+\_\+hypre\+\_\+solvers}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226}\label{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226}} 
+\Hypertarget{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226}\label{classoomph_1_1HypreInterface_a25217cef5216d81c59a3de62062da226} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!HypreInterface@{HypreInterface}}
 \index{HypreInterface@{HypreInterface}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{HypreInterface()}{HypreInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -270,11 +269,11 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5}\label{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5}} 
+\Hypertarget{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5}\label{classoomph_1_1HypreInterface_a5123a1836f5d9f68bc6736829132b5a5} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!disable\_hypre\_error\_messages@{disable\_hypre\_error\_messages}}
 \index{disable\_hypre\_error\_messages@{disable\_hypre\_error\_messages}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{disable\_hypre\_error\_messages()}{disable\_hypre\_error\_messages()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::disable\+\_\+hypre\+\_\+error\+\_\+messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::disable\+\_\+hypre\+\_\+error\+\_\+messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -282,17 +281,35 @@ Turn off hypre error messages.
 
 
 
-Definition at line 248 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00276}{276}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References Hypre\+\_\+error\+\_\+messages.
+References \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518}\label{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518}} 
+\Hypertarget{classoomph_1_1HypreInterface_a9bf3a478dc337afec62a690445865980}\label{classoomph_1_1HypreInterface_a9bf3a478dc337afec62a690445865980} 
+\index{oomph::HypreInterface@{oomph::HypreInterface}!doc\_hypre\_parameters@{doc\_hypre\_parameters}}
+\index{doc\_hypre\_parameters@{doc\_hypre\_parameters}!oomph::HypreInterface@{oomph::HypreInterface}}
+\doxysubsubsection{\texorpdfstring{doc\_hypre\_parameters()}{doc\_hypre\_parameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::doc\+\_\+hypre\+\_\+parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Doc parameters used in hypre solver. 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00511}{511}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{hypre__solver_8h_source_l00456}{AMG\+\_\+coarsening}}, \mbox{\hyperlink{hypre__solver_8h_source_l00430}{AMG\+\_\+complex\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00436}{AMG\+\_\+damping}}, \mbox{\hyperlink{hypre__solver_8h_source_l00351}{AMG\+\_\+max\+\_\+levels}}, \mbox{\hyperlink{hypre__solver_8h_source_l00354}{AMG\+\_\+max\+\_\+row\+\_\+sum}}, \mbox{\hyperlink{hypre__solver_8h_source_l00348}{AMG\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00408}{AMG\+\_\+simple\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00433}{AMG\+\_\+smoother\+\_\+iterations}}, \mbox{\hyperlink{hypre__solver_8h_source_l00439}{AMG\+\_\+strength}}, \mbox{\hyperlink{hypre__solver_8h_source_l00442}{AMG\+\_\+truncation}}, \mbox{\hyperlink{hypre__solver_8h_source_l00359}{AMG\+\_\+using\+\_\+simple\+\_\+smoothing}}, \mbox{\hyperlink{hypre__solver_8h_source_l00335}{Hypre\+\_\+method}}, \mbox{\hyperlink{hypre__solver_8h_source_l00341}{Internal\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00508}{Krylov\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00329}{Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00332}{Tolerance}}.
+
+\Hypertarget{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518}\label{classoomph_1_1HypreInterface_a281c9cf1e254871a957dbf46698cd518} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!enable\_hypre\_error\_messages@{enable\_hypre\_error\_messages}}
 \index{enable\_hypre\_error\_messages@{enable\_hypre\_error\_messages}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{enable\_hypre\_error\_messages()}{enable\_hypre\_error\_messages()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::enable\+\_\+hypre\+\_\+error\+\_\+messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::enable\+\_\+hypre\+\_\+error\+\_\+messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -300,17 +317,17 @@ Turn on the hypre error messages.
 
 
 
-Definition at line 242 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00270}{270}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References Hypre\+\_\+error\+\_\+messages.
+References \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb}\label{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb}} 
+\Hypertarget{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb}\label{classoomph_1_1HypreInterface_a49751f00702cd3176ee61c4b226424eb} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!existing\_preconditioner@{existing\_preconditioner}}
 \index{existing\_preconditioner@{existing\_preconditioner}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{existing\_preconditioner()}{existing\_preconditioner()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::existing\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::existing\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -318,17 +335,17 @@ Function return value of which preconditioner (if any) is stored.
 
 
 
-Definition at line 273 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00301}{301}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References Existing\+\_\+preconditioner.
+References \mbox{\hyperlink{hypre__solver_8h_source_l00673}{Existing\+\_\+preconditioner}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434}\label{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434}} 
+\Hypertarget{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434}\label{classoomph_1_1HypreInterface_a976554ee58a357435c047f78a1539434} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!existing\_solver@{existing\_solver}}
 \index{existing\_solver@{existing\_solver}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{existing\_solver()}{existing\_solver()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::existing\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::existing\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -336,67 +353,65 @@ Function to return value of which solver (if any) is currently stored.
 
 
 
-Definition at line 267 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00295}{295}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-References Existing\+\_\+solver.
+References \mbox{\hyperlink{hypre__solver_8h_source_l00670}{Existing\+\_\+solver}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), and oomph\+::\+Hypre\+Solver\+::resolve().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01838}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01595}{oomph\+::\+Hypre\+Solver\+::resolve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}\label{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}} 
+\Hypertarget{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}\label{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!hypre\_clean\_up\_memory@{hypre\_clean\_up\_memory}}
 \index{hypre\_clean\_up\_memory@{hypre\_clean\_up\_memory}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{hypre\_clean\_up\_memory()}{hypre\_clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::hypre\+\_\+clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::hypre\+\_\+clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Function deletes all solver data. 
 
-\mbox{\hyperlink{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}} deletes any existing Hypre solver and Hypre matrix 
+\doxylink{classoomph_1_1HypreInterface_a989fc83bc47f7b4fb8a753b16a26a012}{hypre\+\_\+clean\+\_\+up\+\_\+memory()} deletes any existing Hypre solver and Hypre matrix 
 
-Definition at line 1301 of file hypre\+\_\+solver.\+cc.
-
-
-
-References Boomer\+AMG, oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag(), Euclid, Existing\+\_\+preconditioner, Existing\+\_\+solver, Hypre\+\_\+error\+\_\+messages, Matrix\+\_\+ij, None, Para\+Sails, and Solver.
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{1364}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Hypre\+Preconditioner\+::clean\+\_\+up\+\_\+memory(), and $\sim$\+Hypre\+Interface().
+References \mbox{\hyperlink{hypre__solver_8h_source_l00288}{Boomer\+AMG}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00289}{Euclid}}, \mbox{\hyperlink{hypre__solver_8h_source_l00673}{Existing\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00670}{Existing\+\_\+solver}}, \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}, \mbox{\hyperlink{hypre__solver_8h_source_l00655}{Matrix\+\_\+ij}}, \mbox{\hyperlink{hypre__solver_8h_source_l00291}{None}}, \mbox{\hyperlink{hypre__solver_8h_source_l00290}{Para\+Sails}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00663}{Solver}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b}\label{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b}} 
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01649}{oomph\+::\+Hypre\+Solver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01905}{oomph\+::\+Hypre\+Preconditioner\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00238}{\texorpdfstring{$\sim$}{\string~}\+Hypre\+Interface()}}.
+
+\Hypertarget{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b}\label{classoomph_1_1HypreInterface_aebc23d169937d5e6a5b492710843ae7b} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!hypre\_matrix\_setup@{hypre\_matrix\_setup}}
 \index{hypre\_matrix\_setup@{hypre\_matrix\_setup}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{hypre\_matrix\_setup()}{hypre\_matrix\_setup()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Function which sets values of First\+\_\+global\+\_\+row, Last\+\_\+global\+\_\+row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix\+\_\+ij/\+Matrix\+\_\+par) from the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}. 
+Function which sets values of First\+\_\+global\+\_\+row, Last\+\_\+global\+\_\+row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix\+\_\+ij/\+Matrix\+\_\+par) from the \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. 
 
-////////////////////////////////////////////////////////////////////
+Helper function which creates a Hypre matrix from a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} If OOMPH-\/\+LIB has been set up for MPI use, the Hypre matrix is distributed over the available processors. 
 
-//////////////////////////////////////////////////////////////////// Helper function which creates a Hypre matrix from a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} If OOMPH-\/\+LIB has been set up for MPI use, the Hypre matrix is distributed over the available processors. 
-
-Definition at line 513 of file hypre\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{548}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag(), oomph\+::\+CRDouble\+Matrix\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), Delete\+\_\+input\+\_\+data, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), hypre\+\_\+\+\_\+global\+\_\+error, Hypre\+\_\+distribution\+\_\+pt, Hypre\+\_\+error\+\_\+messages, Matrix\+\_\+ij, Matrix\+\_\+par, oomph\+::\+CRDouble\+Matrix\+::nrow(), and oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{oomph\+::\+CRDouble\+Matrix\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00278}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00631}{Delete\+\_\+input\+\_\+data}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{hypre__solver_8h_a3f159862f67e03500e947e98e0938171}{hypre\+\_\+\+\_\+global\+\_\+error}}, \mbox{\hyperlink{hypre__solver_8h_source_l00676}{Hypre\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}, \mbox{\hyperlink{hypre__solver_8h_source_l00655}{Matrix\+\_\+ij}}, \mbox{\hyperlink{hypre__solver_8h_source_l00659}{Matrix\+\_\+par}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Preconditioner\+::setup(), and oomph\+::\+Hypre\+Solver\+::solve().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01446}{oomph\+::\+Hypre\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793}\label{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793}} 
+\Hypertarget{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793}\label{classoomph_1_1HypreInterface_a5cdd3f8621333e94d8a1004611bc6793} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!hypre\_solve@{hypre\_solve}}
 \index{hypre\_solve@{hypre\_solve}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{hypre\_solve()}{hypre\_solve()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -404,43 +419,43 @@ Helper function performs a solve if any solver exists.
 
 Helper function performs a solve if solver data has been set up using hypre\+\_\+solver\+\_\+setup(...). 
 
-Definition at line 1086 of file hypre\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{1149}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
 
 
 
-References Boomer\+AMG, oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag(), oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Euclid, Existing\+\_\+solver, oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), Hypre\+\_\+distribution\+\_\+pt, Hypre\+\_\+error\+\_\+messages, Hypre\+\_\+method, i, Matrix\+\_\+par, oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::oomph\+\_\+info, Output\+\_\+info, Para\+Sails, oomph\+::\+Double\+Vector\+::redistribute(), Solver, oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{hypre__solver_8h_source_l00288}{Boomer\+AMG}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01054}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00186}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00289}{Euclid}}, \mbox{\hyperlink{hypre__solver_8h_source_l00670}{Existing\+\_\+solver}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00676}{Hypre\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}, \mbox{\hyperlink{hypre__solver_8h_source_l00335}{Hypre\+\_\+method}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{hypre__solver_8h_source_l00659}{Matrix\+\_\+par}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{hypre__solver_8h_source_l00326}{Output\+\_\+info}}, \mbox{\hyperlink{hypre__solver_8h_source_l00290}{Para\+Sails}}, \mbox{\hyperlink{hypre__solver_8h_source_l00663}{Solver}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Solver\+::resolve(), and oomph\+::\+Hypre\+Solver\+::solve().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01838}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01595}{oomph\+::\+Hypre\+Solver\+::resolve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01446}{oomph\+::\+Hypre\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb}\label{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb}} 
+\Hypertarget{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb}\label{classoomph_1_1HypreInterface_afeddc250f9c56ac94e8c013c23a69deb} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!hypre\_solver\_setup@{hypre\_solver\_setup}}
 \index{hypre\_solver\_setup@{hypre\_solver\_setup}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{hypre\_solver\_setup()}{hypre\_solver\_setup()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Sets up the data required for to use as an oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} or \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. This must be called after the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). 
+Sets up the data required for to use as an oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} or \doxylink{classoomph_1_1Preconditioner}{Preconditioner}. This must be called after the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). 
 
-Sets up the solver data required for use in an oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} or \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}, once the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). 
+Sets up the solver data required for use in an oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} or \doxylink{classoomph_1_1Preconditioner}{Preconditioner}, once the Hypre matrix has been generated using hypre\+\_\+matrix\+\_\+setup(...). 
 
-Definition at line 558 of file hypre\+\_\+solver.\+cc.
-
-
-
-References AMG\+\_\+coarsening, AMG\+\_\+complex\+\_\+smoother, AMG\+\_\+damping, AMG\+\_\+max\+\_\+levels, AMG\+\_\+max\+\_\+row\+\_\+sum, AMG\+\_\+print\+\_\+level, AMG\+\_\+simple\+\_\+smoother, AMG\+\_\+smoother\+\_\+iterations, AMG\+\_\+strength, AMG\+\_\+truncation, AMG\+\_\+using\+\_\+simple\+\_\+smoothing, AMGEuclid\+Smoother\+\_\+drop\+\_\+tol, AMGEuclid\+Smoother\+\_\+level, AMGEuclid\+Smoother\+\_\+print\+\_\+level, AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi, AMGEuclid\+Smoother\+\_\+use\+\_\+ilut, AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling, Bi\+CGStab, Boomer\+AMG, CG, oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector(), Euclid, Euclid\+\_\+droptol, Euclid\+\_\+level, Euclid\+\_\+print\+\_\+level, Euclid\+\_\+row\+Scale, oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper(), Euclid\+\_\+using\+\_\+\+BJ, Euclid\+\_\+using\+\_\+\+ILUT, Existing\+\_\+preconditioner, Existing\+\_\+solver, GMRES, hypre\+\_\+\+\_\+global\+\_\+error, Hypre\+\_\+distribution\+\_\+pt, Hypre\+\_\+error\+\_\+messages, Hypre\+\_\+method, i, Internal\+\_\+preconditioner, Krylov\+\_\+print\+\_\+level, Matrix\+\_\+par, Max\+\_\+iter, oomph\+::oomph\+\_\+info, Output\+\_\+info, Para\+Sails, Para\+Sails\+\_\+filter, Para\+Sails\+\_\+nlevel, Para\+Sails\+\_\+symmetry, Para\+Sails\+\_\+thresh, Solver, oomph\+::\+Timing\+Helpers\+::timer(), and Tolerance.
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{592}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Preconditioner\+::setup(), and oomph\+::\+Hypre\+Solver\+::solve().
+References \mbox{\hyperlink{hypre__solver_8h_source_l00456}{AMG\+\_\+coarsening}}, \mbox{\hyperlink{hypre__solver_8h_source_l00430}{AMG\+\_\+complex\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00436}{AMG\+\_\+damping}}, \mbox{\hyperlink{hypre__solver_8h_source_l00351}{AMG\+\_\+max\+\_\+levels}}, \mbox{\hyperlink{hypre__solver_8h_source_l00354}{AMG\+\_\+max\+\_\+row\+\_\+sum}}, \mbox{\hyperlink{hypre__solver_8h_source_l00348}{AMG\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00408}{AMG\+\_\+simple\+\_\+smoother}}, \mbox{\hyperlink{hypre__solver_8h_source_l00433}{AMG\+\_\+smoother\+\_\+iterations}}, \mbox{\hyperlink{hypre__solver_8h_source_l00439}{AMG\+\_\+strength}}, \mbox{\hyperlink{hypre__solver_8h_source_l00442}{AMG\+\_\+truncation}}, \mbox{\hyperlink{hypre__solver_8h_source_l00359}{AMG\+\_\+using\+\_\+simple\+\_\+smoothing}}, \mbox{\hyperlink{hypre__solver_8h_source_l00503}{AMGEuclid\+Smoother\+\_\+drop\+\_\+tol}}, \mbox{\hyperlink{hypre__solver_8h_source_l00502}{AMGEuclid\+Smoother\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00504}{AMGEuclid\+Smoother\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00499}{AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi}}, \mbox{\hyperlink{hypre__solver_8h_source_l00501}{AMGEuclid\+Smoother\+\_\+use\+\_\+ilut}}, \mbox{\hyperlink{hypre__solver_8h_source_l00500}{AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling}}, \mbox{\hyperlink{hypre__solver_8h_source_l00287}{Bi\+CGStab}}, \mbox{\hyperlink{hypre__solver_8h_source_l00288}{Boomer\+AMG}}, \mbox{\hyperlink{hypre__solver_8h_source_l00285}{CG}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00186}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00289}{Euclid}}, \mbox{\hyperlink{hypre__solver_8h_source_l00476}{Euclid\+\_\+droptol}}, \mbox{\hyperlink{hypre__solver_8h_source_l00488}{Euclid\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00495}{Euclid\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00479}{Euclid\+\_\+row\+Scale}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00444}{oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00485}{Euclid\+\_\+using\+\_\+\+BJ}}, \mbox{\hyperlink{hypre__solver_8h_source_l00482}{Euclid\+\_\+using\+\_\+\+ILUT}}, \mbox{\hyperlink{hypre__solver_8h_source_l00673}{Existing\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00670}{Existing\+\_\+solver}}, \mbox{\hyperlink{hypre__solver_8h_source_l00286}{GMRES}}, \mbox{\hyperlink{hypre__solver_8h_a3f159862f67e03500e947e98e0938171}{hypre\+\_\+\+\_\+global\+\_\+error}}, \mbox{\hyperlink{hypre__solver_8h_source_l00676}{Hypre\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{hypre__solver_8h_source_l00627}{Hypre\+\_\+error\+\_\+messages}}, \mbox{\hyperlink{hypre__solver_8h_source_l00335}{Hypre\+\_\+method}}, \mbox{\hyperlink{hypre__solver_8h_source_l00341}{Internal\+\_\+preconditioner}}, \mbox{\hyperlink{hypre__solver_8h_source_l00508}{Krylov\+\_\+print\+\_\+level}}, \mbox{\hyperlink{hypre__solver_8h_source_l00659}{Matrix\+\_\+par}}, \mbox{\hyperlink{hypre__solver_8h_source_l00329}{Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{hypre__solver_8h_source_l00326}{Output\+\_\+info}}, \mbox{\hyperlink{hypre__solver_8h_source_l00290}{Para\+Sails}}, \mbox{\hyperlink{hypre__solver_8h_source_l00473}{Para\+Sails\+\_\+filter}}, \mbox{\hyperlink{hypre__solver_8h_source_l00467}{Para\+Sails\+\_\+nlevel}}, \mbox{\hyperlink{hypre__solver_8h_source_l00464}{Para\+Sails\+\_\+symmetry}}, \mbox{\hyperlink{hypre__solver_8h_source_l00470}{Para\+Sails\+\_\+thresh}}, \mbox{\hyperlink{hypre__solver_8h_source_l00663}{Solver}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00332}{Tolerance}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602}\label{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602}} 
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01446}{oomph\+::\+Hypre\+Solver\+::solve()}}.
+
+\Hypertarget{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602}\label{classoomph_1_1HypreInterface_a50bd66edf8ceed2eb9514548dee84602} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Hypre\+Interface\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Interface\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HypreInterface}{Hypre\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -449,11 +464,11 @@ Broken assignment operator.
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf}\label{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf}} 
+\Hypertarget{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf}\label{classoomph_1_1HypreInterface_a0a75db2a70cfd31653be6681abccffbf} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_coarsening@{AMG\_coarsening}}
 \index{AMG\_coarsening@{AMG\_coarsening}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_coarsening}{AMG\_coarsening}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+coarsening\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+coarsening\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -461,35 +476,43 @@ AMG coarsening strategy. Coarsening types include\+: 0 = CLJP (parallel coarseni
 
 
 
-Definition at line 386 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00456}{456}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+coarsening(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+coarsening(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00800}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+coarsening()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01206}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+coarsening()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e}\label{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e}} 
+\Hypertarget{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e}\label{classoomph_1_1HypreInterface_a7e4d8eeb1fb32cb7ada7c273edbf070e} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_complex\_smoother@{AMG\_complex\_smoother}}
 \index{AMG\_complex\_smoother@{AMG\_complex\_smoother}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_complex\_smoother}{AMG\_complex\_smoother}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+complex\+\_\+smoother\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+complex\+\_\+smoother\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Complex smoothing methods used in Boomer\+AMG. Relaxation types are\+: 6 = Schwarz 7 = Pilut 8 = Para\+Sails 9 = Euclid To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to false. 
+Complex smoothing methods used in Boomer\+AMG. To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to false Here are the current options (from hypre\textquotesingle{}s HYPRE\+\_\+parcsr\+\_\+ls.\+h)\+: 
+
+
+\begin{DoxyItemize}
+\item 4 \+: FSAI (routines needed to set\+: HYPRE\+\_\+\+Boomer\+AMGSet\+FSAIMax\+Steps, HYPRE\+\_\+\+Boomer\+AMGSet\+FSAIMax\+Step\+Size, HYPRE\+\_\+\+Boomer\+AMGSet\+FSAIEig\+Max\+Iters, HYPRE\+\_\+\+Boomer\+AMGSet\+FSAIKap\+Tolerance)
+\item 5 \+: Par\+ILUK (routines needed to set\+: HYPRE\+\_\+\+ILUSet\+Level\+Of\+Fill, HYPRE\+\_\+\+ILUSet\+Type)
+\item 6 \+: Schwarz (routines needed to set\+: HYPRE\+\_\+\+Boomer\+AMGSet\+Domain\+Type, HYPRE\+\_\+\+Boomer\+AMGSet\+Overlap, HYPRE\+\_\+\+Boomer\+AMGSet\+Variant, HYPRE\+\_\+\+Boomer\+AMGSet\+Schwarz\+Rlx\+Weight)
+\item 7 \+: Pilut (routines needed to set\+: HYPRE\+\_\+\+Boomer\+AMGSet\+Drop\+Tol, HYPRE\+\_\+\+Boomer\+AMGSet\+Max\+Nz\+Per\+Row)
+\item 8 \+: Para\+Sails (routines needed to set\+: HYPRE\+\_\+\+Boomer\+AMGSet\+Sym, HYPRE\+\_\+\+Boomer\+AMGSet\+Level, HYPRE\+\_\+\+Boomer\+AMGSet\+Filter, HYPRE\+\_\+\+Boomer\+AMGSet\+Threshold)
+\item 9 \+: Euclid (routines needed to set\+: HYPRE\+\_\+\+Boomer\+AMGSet\+Euclid\+File) 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00430}{430}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Definition at line 360 of file hypre\+\_\+solver.\+h.
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00782}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+complex\+\_\+smoother()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01182}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+complex\+\_\+smoother()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-
-
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+complex\+\_\+smoother(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+complex\+\_\+smoother(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
-
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc}\label{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc}} 
+\Hypertarget{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc}\label{classoomph_1_1HypreInterface_abdf7a5f5744201ae75368c2b07f662bc} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_damping@{AMG\_damping}}
 \index{AMG\_damping@{AMG\_damping}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_damping}{AMG\_damping}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+damping\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+damping\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -497,17 +520,17 @@ Damping factor for Boomer\+AMG smoothed Jacobi or hybrid SOR.
 
 
 
-Definition at line 366 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00436}{436}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+damping(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+damping(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00812}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+damping()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01218}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+damping()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9}\label{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9}} 
+\Hypertarget{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9}\label{classoomph_1_1HypreInterface_adf57ef35573b468881617d8cae4643c9} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_max\_levels@{AMG\_max\_levels}}
 \index{AMG\_max\_levels@{AMG\_max\_levels}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_max\_levels}{AMG\_max\_levels}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+max\+\_\+levels\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+max\+\_\+levels\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -515,17 +538,17 @@ Maximum number of levels used in AMG.
 
 
 
-Definition at line 330 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00351}{351}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+levels(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+levels(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00806}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+levels()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01212}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+levels()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218}\label{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218}} 
+\Hypertarget{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218}\label{classoomph_1_1HypreInterface_af3d118bd7fa11c89ec5fb39dc2f0d218} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_max\_row\_sum@{AMG\_max\_row\_sum}}
 \index{AMG\_max\_row\_sum@{AMG\_max\_row\_sum}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_max\_row\_sum}{AMG\_max\_row\_sum}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+max\+\_\+row\+\_\+sum\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+max\+\_\+row\+\_\+sum\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -533,17 +556,17 @@ Parameter to identify diagonally dominant parts of the matrix in AMG.
 
 
 
-Definition at line 333 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00354}{354}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+row\+\_\+sum(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+row\+\_\+sum(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00824}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+max\+\_\+row\+\_\+sum()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01230}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+max\+\_\+row\+\_\+sum()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74}\label{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74}} 
+\Hypertarget{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74}\label{classoomph_1_1HypreInterface_ad1e2b0066abfccd0c489227c208c0f74} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_print\_level@{AMG\_print\_level}}
 \index{AMG\_print\_level@{AMG\_print\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_print\_level}{AMG\_print\_level}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -551,35 +574,68 @@ Used to set the Hypre printing level for AMG 0\+: no printout 1\+: print setup i
 
 
 
-Definition at line 327 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00348}{348}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+print\+\_\+level(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+print\+\_\+level(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00788}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+print\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01194}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+print\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c}\label{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c}} 
+\Hypertarget{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c}\label{classoomph_1_1HypreInterface_ac2671434b9202b17d9ecff0a7787f83c} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_simple\_smoother@{AMG\_simple\_smoother}}
 \index{AMG\_simple\_smoother@{AMG\_simple\_smoother}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_simple\_smoother}{AMG\_simple\_smoother}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+simple\+\_\+smoother\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+simple\+\_\+smoother\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Simple smoothing methods used in Boomer\+AMG. Relaxation types include\+: 0 = Jacobi 1 = Gauss-\/\+Seidel, sequential (very slow in parallel!) 2 = Gauss-\/\+Seidel, interior points in parallel, boundary sequential (slow in parallel!) 3 = hybrid Gauss-\/\+Seidel or SOR, forward solve 4 = hybrid Gauss-\/\+Seidel or SOR, backward solve 6 = hybrid symmetric Gauss-\/\+Seidel or SSOR To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to true. 
+Simple smoothing methods used in Boomer\+AMG. To use these methods set AMG\+\_\+using\+\_\+simple\+\_\+smoothing to true. Here are the current options (from hypre\textquotesingle{}s HYPRE\+\_\+parcsr\+\_\+ls.\+h)\+: 
+
+(Optional) Defines the smoother to be used. It uses the given smoother on the fine grid, the up and the down cycle and sets the solver on the coarsest level to Gaussian elimination (9). The default is $\ell_1$-\/Gauss-\/\+Seidel, forward solve (13) on the down cycle and backward solve (14) on the up cycle.
+
+There are the following options for {\itshape relax\+\_\+type\+:} 
+
+
+\begin{DoxyItemize}
+\item 0 \+: Jacobi
+\item 1 \+: Gauss-\/\+Seidel, sequential (very slow!)
+\item 2 \+: Gauss-\/\+Seidel, interior points in parallel, boundary sequential (slow!)
+\item 3 \+: hybrid Gauss-\/\+Seidel or SOR, forward solve
+\item 4 \+: hybrid Gauss-\/\+Seidel or SOR, backward solve
+\item 5 \+: hybrid chaotic Gauss-\/\+Seidel (works only with Open\+MP)
+\item 6 \+: hybrid symmetric Gauss-\/\+Seidel or SSOR
+\item 7 \+: Jacobi (uses Matvec)
+\item 8 \+: $\ell_1$-\/scaled hybrid symmetric Gauss-\/\+Seidel
+\item 9 \+: Gaussian elimination (only on coarsest level)
+\item 10 \+: On-\/processor direct forward solve for matrices with triangular structure
+\item 11 \+: Two Stage approximation to \doxylink{classoomph_1_1GS}{GS}. Uses the strict lower part of the diagonal matrix
+\item 12 \+: Two Stage approximation to \doxylink{classoomph_1_1GS}{GS}. Uses the strict lower part of the diagonal matrix and a second iteration for additional error approximation
+\item 13 \+: $\ell_1$ Gauss-\/\+Seidel, forward solve
+\item 14 \+: $\ell_1$ Gauss-\/\+Seidel, backward solve
+\item 15 \+: \doxylink{classoomph_1_1CG}{CG} (warning -\/ not a fixed smoother -\/ may require FGMRES)
+\item 16 \+: Chebyshev
+\item 17 \+: FCF-\/\+Jacobi
+\item 18 \+: $\ell_1$-\/scaled jacobi
+\item 19 \+: Gaussian elimination (old version)
+\item 21 \+: The same as 8 except forcing serialization on CPU ( \# OMP-\/thread = 1)
+\item 29 \+: Direct solve\+: use Gaussian elimination \& BLAS (with pivoting) (old version)
+\item 30 \+: Kaczmarz
+\item 88\+: The same methods as 8 with a convergent l1-\/term
+\item 89\+: Symmetric l1-\/hybrid Gauss-\/\+Seidel (i.\+e., 13 followed by 14)
+\item 98 \+: LU with pivoting
+\item 99 \+: LU with pivoting -\/199 \+: Matvec with the inverse 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00408}{408}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Definition at line 351 of file hypre\+\_\+solver.\+h.
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00769}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+simple\+\_\+smoother()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01169}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+simple\+\_\+smoother()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-
-
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+simple\+\_\+smoother(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+simple\+\_\+smoother(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
-
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680}\label{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680}} 
+\Hypertarget{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680}\label{classoomph_1_1HypreInterface_a968f16488385d717c96993883cf4a680} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_smoother\_iterations@{AMG\_smoother\_iterations}}
 \index{AMG\_smoother\_iterations@{AMG\_smoother\_iterations}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_smoother\_iterations}{AMG\_smoother\_iterations}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+smoother\+\_\+iterations\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+smoother\+\_\+iterations\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -587,17 +643,17 @@ The number of smoother iterations to apply.
 
 
 
-Definition at line 363 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00433}{433}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+smoother\+\_\+iterations(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+smoother\+\_\+iterations(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00794}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+smoother\+\_\+iterations()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01200}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+smoother\+\_\+iterations()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea}\label{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea}} 
+\Hypertarget{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea}\label{classoomph_1_1HypreInterface_a1e87cc2c06ff1391b293e636b19236ea} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_strength@{AMG\_strength}}
 \index{AMG\_strength@{AMG\_strength}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_strength}{AMG\_strength}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+strength\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+strength\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -605,17 +661,17 @@ Connection strength threshold parameter for Boomer\+AMG.
 
 
 
-Definition at line 369 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00439}{439}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+strength(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+strength(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00818}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+strength()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01224}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+strength()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46}\label{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46}} 
+\Hypertarget{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46}\label{classoomph_1_1HypreInterface_a8fa7abd65dec3d2318a36d8fddb96a46} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_truncation@{AMG\_truncation}}
 \index{AMG\_truncation@{AMG\_truncation}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_truncation}{AMG\_truncation}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+truncation\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+truncation\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -623,17 +679,17 @@ Interpolation truncation factor for Boomer\+AMG.
 
 
 
-Definition at line 372 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00442}{442}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+truncation(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+truncation(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00830}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+truncation()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01236}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+truncation()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161}\label{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161}} 
+\Hypertarget{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161}\label{classoomph_1_1HypreInterface_aa4bac4203fb7ec08f5a9fc7cf3f47161} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMG\_using\_simple\_smoothing@{AMG\_using\_simple\_smoothing}}
 \index{AMG\_using\_simple\_smoothing@{AMG\_using\_simple\_smoothing}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMG\_using\_simple\_smoothing}{AMG\_using\_simple\_smoothing}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+using\+\_\+simple\+\_\+smoothing\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+AMG\+\_\+using\+\_\+simple\+\_\+smoothing\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -641,101 +697,101 @@ Flag to determine whether simple smoothers (determined by the AMG\+\_\+simple\+\
 
 
 
-Definition at line 338 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00359}{359}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing(), oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing(), oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00776}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01176}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+complex\+\_\+smoothing()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00763}{oomph\+::\+Hypre\+Solver\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01163}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01188}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+using\+\_\+simple\+\_\+smoothing\+\_\+flag()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee}\label{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee}} 
+\Hypertarget{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee}\label{classoomph_1_1HypreInterface_a0dab8a5b8cc96e3d1c38960735f3fbee} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_drop\_tol@{AMGEuclidSmoother\_drop\_tol}}
 \index{AMGEuclidSmoother\_drop\_tol@{AMGEuclidSmoother\_drop\_tol}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_drop\_tol}{AMGEuclidSmoother\_drop\_tol}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+drop\+\_\+tol}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+drop\+\_\+tol\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 283 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00503}{503}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb}\label{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb}} 
+\Hypertarget{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb}\label{classoomph_1_1HypreInterface_a3677d64e347986f0693acb90ab9510fb} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_level@{AMGEuclidSmoother\_level}}
 \index{AMGEuclidSmoother\_level@{AMGEuclidSmoother\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_level}{AMGEuclidSmoother\_level}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+level}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 282 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00502}{502}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39}\label{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39}} 
+\Hypertarget{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39}\label{classoomph_1_1HypreInterface_a75e69886d00203474a4eea60c751fa39} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_print\_level@{AMGEuclidSmoother\_print\_level}}
 \index{AMGEuclidSmoother\_print\_level@{AMGEuclidSmoother\_print\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_print\_level}{AMGEuclidSmoother\_print\_level}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+print\+\_\+level}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 284 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00504}{504}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae}\label{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae}} 
+\Hypertarget{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae}\label{classoomph_1_1HypreInterface_a79fa8ccf580df282a6a2955e3d5327ae} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_use\_block\_jacobi@{AMGEuclidSmoother\_use\_block\_jacobi}}
 \index{AMGEuclidSmoother\_use\_block\_jacobi@{AMGEuclidSmoother\_use\_block\_jacobi}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_use\_block\_jacobi}{AMGEuclidSmoother\_use\_block\_jacobi}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+block\+\_\+jacobi\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 279 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00499}{499}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1}\label{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1}} 
+\Hypertarget{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1}\label{classoomph_1_1HypreInterface_a4ead069d2811580d1f7a743a0c5569b1} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_use\_ilut@{AMGEuclidSmoother\_use\_ilut}}
 \index{AMGEuclidSmoother\_use\_ilut@{AMGEuclidSmoother\_use\_ilut}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_use\_ilut}{AMGEuclidSmoother\_use\_ilut}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+ilut}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+ilut\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 281 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00501}{501}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f}\label{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f}} 
+\Hypertarget{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f}\label{classoomph_1_1HypreInterface_a3570de904e329445f987481d61821b0f} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!AMGEuclidSmoother\_use\_row\_scaling@{AMGEuclidSmoother\_use\_row\_scaling}}
 \index{AMGEuclidSmoother\_use\_row\_scaling@{AMGEuclidSmoother\_use\_row\_scaling}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{AMGEuclidSmoother\_use\_row\_scaling}{AMGEuclidSmoother\_use\_row\_scaling}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+AMGEuclid\+Smoother\+\_\+use\+\_\+row\+\_\+scaling\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Definition at line 280 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00500}{500}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}\label{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}} 
+\Hypertarget{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07}\label{classoomph_1_1HypreInterface_a0117cae635c9242ccfd9ad7153511c07} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Delete\_input\_data@{Delete\_input\_data}}
 \index{Delete\_input\_data@{Delete\_input\_data}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Delete\_input\_data}{Delete\_input\_data}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+input\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+input\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -743,31 +799,31 @@ Internal flag which is true when hypre\+\_\+setup or hypre\+\_\+solve can delete
 
 
 
-Definition at line 445 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00631}{631}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), and oomph\+::\+Hypre\+Solver\+::solve().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01446}{oomph\+::\+Hypre\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044}\label{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044}} 
+\Hypertarget{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044}\label{classoomph_1_1HypreInterface_a8668ea7323b2efb227a461e80d62b044} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Delete\_matrix@{Delete\_matrix}}
 \index{Delete\_matrix@{Delete\_matrix}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Delete\_matrix}{Delete\_matrix}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Delete\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. 
+Hypre copies matrix data from oomph-\/lib\textquotesingle{}s \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-\/lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. 
 
 
 
-Definition at line 465 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00651}{651}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}\label{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}} 
+\Hypertarget{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf}\label{classoomph_1_1HypreInterface_af91bb7e92785e510c04cdb0c11ef99cf} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_droptol@{Euclid\_droptol}}
 \index{Euclid\_droptol@{Euclid\_droptol}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_droptol}{Euclid\_droptol}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+droptol\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+droptol\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -775,17 +831,17 @@ Euclid drop tolerance for ILU(k) and ILUT factorization.
 
 
 
-Definition at line 406 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00476}{476}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::euclid\+\_\+droptol(), oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+droptol(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00860}{oomph\+::\+Hypre\+Solver\+::euclid\+\_\+droptol()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01278}{oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+droptol()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e}\label{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e}} 
+\Hypertarget{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e}\label{classoomph_1_1HypreInterface_a0ae9320b5116bb330ddd1096d20f556e} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_level@{Euclid\_level}}
 \index{Euclid\_level@{Euclid\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_level}{Euclid\_level}}
-{\footnotesize\ttfamily int oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -793,17 +849,17 @@ Euclid level parameter for ILU(k) factorization.
 
 
 
-Definition at line 418 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00488}{488}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::euclid\+\_\+level(), oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+level(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00867}{oomph\+::\+Hypre\+Solver\+::euclid\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01284}{oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1}\label{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1}} 
+\Hypertarget{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1}\label{classoomph_1_1HypreInterface_adc83c27b78ac44ccdba2a85191e474c1} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_print\_level@{Euclid\_print\_level}}
 \index{Euclid\_print\_level@{Euclid\_print\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_print\_level}{Euclid\_print\_level}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -811,17 +867,17 @@ Flag to set the level of printing from Euclid when the Euclid destructor is call
 
 
 
-Definition at line 425 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00495}{495}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::euclid\+\_\+print\+\_\+level(), oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+print\+\_\+level(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00917}{oomph\+::\+Hypre\+Solver\+::euclid\+\_\+print\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01334}{oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+print\+\_\+level()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286}\label{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286}} 
+\Hypertarget{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286}\label{classoomph_1_1HypreInterface_a16a2f90a3e7fcdb2909d400d82b90286} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_rowScale@{Euclid\_rowScale}}
 \index{Euclid\_rowScale@{Euclid\_rowScale}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_rowScale}{Euclid\_rowScale}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+row\+Scale\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -829,17 +885,17 @@ Flag to switch on Euclid row scaling.
 
 
 
-Definition at line 409 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00479}{479}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+row\+Scale(), oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+row\+Scale(), oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+row\+Scale(), oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+row\+Scale(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00879}{oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+row\+Scale()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01296}{oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+row\+Scale()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00873}{oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+row\+Scale()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01290}{oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+row\+Scale()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0}\label{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0}} 
+\Hypertarget{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0}\label{classoomph_1_1HypreInterface_a1405f23d6ffdf4afe2839434a3f738e0} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_using\_BJ@{Euclid\_using\_BJ}}
 \index{Euclid\_using\_BJ@{Euclid\_using\_BJ}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_using\_BJ}{Euclid\_using\_BJ}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+BJ\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -847,17 +903,17 @@ Flag to determine if Block Jacobi is used instead of PILU.
 
 
 
-Definition at line 415 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00485}{485}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ(), oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ(), oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ(), oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00893}{oomph\+::\+Hypre\+Solver\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01310}{oomph\+::\+Hypre\+Preconditioner\+::disable\+\_\+euclid\+\_\+using\+\_\+\+BJ()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00886}{oomph\+::\+Hypre\+Solver\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01303}{oomph\+::\+Hypre\+Preconditioner\+::enable\+\_\+euclid\+\_\+using\+\_\+\+BJ()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22}\label{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22}} 
+\Hypertarget{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22}\label{classoomph_1_1HypreInterface_afe6e93b2655b578090a5d9abb91c2e22} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Euclid\_using\_ILUT@{Euclid\_using\_ILUT}}
 \index{Euclid\_using\_ILUT@{Euclid\_using\_ILUT}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Euclid\_using\_ILUT}{Euclid\_using\_ILUT}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+ILUT\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Euclid\+\_\+using\+\_\+\+ILUT\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -865,17 +921,17 @@ Flag to determine if ILUT (if true) or ILU(k) is used in Euclid.
 
 
 
-Definition at line 412 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00482}{482}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+ILUK(), oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+ILUK(), oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+ILUT(), oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+ILUT(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00900}{oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+ILUK()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01317}{oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+ILUK()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00907}{oomph\+::\+Hypre\+Solver\+::euclid\+\_\+using\+\_\+\+ILUT()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01324}{oomph\+::\+Hypre\+Preconditioner\+::euclid\+\_\+using\+\_\+\+ILUT()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e}\label{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e}} 
+\Hypertarget{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e}\label{classoomph_1_1HypreInterface_afbf32858e2c01d037c7f16de713df49e} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Existing\_preconditioner@{Existing\_preconditioner}}
 \index{Existing\_preconditioner@{Existing\_preconditioner}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Existing\_preconditioner}{Existing\_preconditioner}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Existing\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Existing\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -883,17 +939,17 @@ Used to keep track of which preconditioner (if any) is currently stored.
 
 
 
-Definition at line 487 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00673}{673}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by existing\+\_\+preconditioner(), hypre\+\_\+clean\+\_\+up\+\_\+memory(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00301}{existing\+\_\+preconditioner()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b}\label{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b}} 
+\Hypertarget{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b}\label{classoomph_1_1HypreInterface_ab81e804ece2fbf658eac9c1f5c1ddc0b} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Existing\_solver@{Existing\_solver}}
 \index{Existing\_solver@{Existing\_solver}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Existing\_solver}{Existing\_solver}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Existing\+\_\+solver\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Existing\+\_\+solver\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -901,17 +957,17 @@ Used to keep track of which solver (if any) is currently stored.
 
 
 
-Definition at line 484 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00670}{670}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by existing\+\_\+solver(), hypre\+\_\+clean\+\_\+up\+\_\+memory(), hypre\+\_\+solve(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00295}{existing\+\_\+solver()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127}\label{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127}} 
+\Hypertarget{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127}\label{classoomph_1_1HypreInterface_a30dce43f55e1f40d6f5e3ec48130a127} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Hypre\_distribution\_pt@{Hypre\_distribution\_pt}}
 \index{Hypre\_distribution\_pt@{Hypre\_distribution\_pt}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Hypre\_distribution\_pt}{Hypre\_distribution\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}$\ast$ oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -919,17 +975,17 @@ the distribution for this helpers-\/
 
 
 
-Definition at line 490 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00676}{676}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+matrix\+\_\+setup(), hypre\+\_\+solve(), hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), and $\sim$\+Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00238}{\texorpdfstring{$\sim$}{\string~}\+Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090}\label{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090}} 
+\Hypertarget{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090}\label{classoomph_1_1HypreInterface_aa0570d52546893f0767060c6efcd4090} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Hypre\_error\_messages@{Hypre\_error\_messages}}
 \index{Hypre\_error\_messages@{Hypre\_error\_messages}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Hypre\_error\_messages}{Hypre\_error\_messages}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+error\+\_\+messages\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+error\+\_\+messages\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -946,17 +1002,17 @@ Flag to determine if non-\/zero values of the Hypre error flag plus Hypre error 
 \item deallocation of solver data 
 \end{DoxyEnumerate}
 
-Definition at line 441 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00627}{627}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+hypre\+\_\+error\+\_\+messages(), enable\+\_\+hypre\+\_\+error\+\_\+messages(), hypre\+\_\+clean\+\_\+up\+\_\+memory(), hypre\+\_\+matrix\+\_\+setup(), hypre\+\_\+solve(), hypre\+\_\+solver\+\_\+setup(), and Hypre\+Interface().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00276}{disable\+\_\+hypre\+\_\+error\+\_\+messages()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00270}{enable\+\_\+hypre\+\_\+error\+\_\+messages()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947}\label{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947}} 
+\Hypertarget{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947}\label{classoomph_1_1HypreInterface_ae2a79282191b4430ef6631df9fc8c947} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Hypre\_method@{Hypre\_method}}
 \index{Hypre\_method@{Hypre\_method}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Hypre\_method}{Hypre\_method}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Hypre\+\_\+method\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -964,35 +1020,35 @@ Hypre method flag. Valid values are specified in enumeration.
 
 
 
-Definition at line 314 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00335}{335}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Solver\+::hypre\+\_\+method(), oomph\+::\+Hypre\+Preconditioner\+::hypre\+\_\+method(), hypre\+\_\+solve(), hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner(), oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Boomer\+AMG(), oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Euclid(), and oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Para\+Sails().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00749}{oomph\+::\+Hypre\+Solver\+::hypre\+\_\+method()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01131}{oomph\+::\+Hypre\+Preconditioner\+::hypre\+\_\+method()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01016}{oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01144}{oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Boomer\+AMG()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01272}{oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Euclid()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01242}{oomph\+::\+Hypre\+Preconditioner\+::use\+\_\+\+Para\+Sails()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27}\label{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27}} 
+\Hypertarget{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27}\label{classoomph_1_1HypreInterface_a5694f23f49b16ca978e6bcb629c7ab27} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Internal\_preconditioner@{Internal\_preconditioner}}
 \index{Internal\_preconditioner@{Internal\_preconditioner}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Internal\_preconditioner}{Internal\_preconditioner}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Internal\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Internal\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} method flag used with Hypre\textquotesingle{}s PCG, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} and \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}} in solve(...) or resolve(...). Valid values are Boomer\+AMG, Euclid, Para\+Sails or None (all enumerated above), for any other value no preconditioner is set. 
+\doxylink{classoomph_1_1Preconditioner}{Preconditioner} method flag used with Hypre\textquotesingle{}s PCG, \doxylink{classoomph_1_1GMRES}{GMRES} and \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab} in solve(...) or resolve(...). Valid values are Boomer\+AMG, Euclid, Para\+Sails or None (all enumerated above), for any other value no preconditioner is set. 
 
 
 
-Definition at line 320 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00341}{341}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner(), oomph\+::\+Hypre\+Solver\+::internal\+\_\+preconditioner(), and oomph\+::\+Hypre\+Preconditioner\+::internal\+\_\+preconditioner().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01016}{oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00756}{oomph\+::\+Hypre\+Solver\+::internal\+\_\+preconditioner()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01138}{oomph\+::\+Hypre\+Preconditioner\+::internal\+\_\+preconditioner()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b}\label{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b}} 
+\Hypertarget{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b}\label{classoomph_1_1HypreInterface_a901fbdfa98992faf1cdae4d2d1ac9a2b} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Krylov\_print\_level@{Krylov\_print\_level}}
 \index{Krylov\_print\_level@{Krylov\_print\_level}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Krylov\_print\_level}{Krylov\_print\_level}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Krylov\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Krylov\+\_\+print\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1000,17 +1056,17 @@ Used to set the Hypre printing level for the Krylov subspace solvers.
 
 
 
-Definition at line 429 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00508}{508}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), and oomph\+::\+Hypre\+Solver\+::krylov\+\_\+print\+\_\+level().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00923}{oomph\+::\+Hypre\+Solver\+::krylov\+\_\+print\+\_\+level()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d}\label{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d}} 
+\Hypertarget{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d}\label{classoomph_1_1HypreInterface_ad94c5a5a5191a786ce63e4d2c0d4c65d} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Matrix\_ij@{Matrix\_ij}}
 \index{Matrix\_ij@{Matrix\_ij}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Matrix\_ij}{Matrix\_ij}}
-{\footnotesize\ttfamily HYPRE\+\_\+\+IJMatrix oomph\+::\+Hypre\+Interface\+::\+Matrix\+\_\+ij\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJMatrix}} oomph\+::\+Hypre\+Interface\+::\+Matrix\+\_\+ij\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1018,17 +1074,17 @@ The Hypre\+\_\+\+IJMatrix version of the matrix used in solve(...), resolve(...)
 
 
 
-Definition at line 469 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00655}{655}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+clean\+\_\+up\+\_\+memory(), and hypre\+\_\+matrix\+\_\+setup().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{hypre\+\_\+matrix\+\_\+setup()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d}\label{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d}} 
+\Hypertarget{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d}\label{classoomph_1_1HypreInterface_a4a6418573f59098d6cfdaf9b36a6949d} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Matrix\_par@{Matrix\_par}}
 \index{Matrix\_par@{Matrix\_par}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Matrix\_par}{Matrix\_par}}
-{\footnotesize\ttfamily HYPRE\+\_\+\+Par\+CSRMatrix oomph\+::\+Hypre\+Interface\+::\+Matrix\+\_\+par\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+CSRMatrix}} oomph\+::\+Hypre\+Interface\+::\+Matrix\+\_\+par\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1036,17 +1092,17 @@ The Hypre\+\_\+\+Par\+CSRMatrix version of the matrix used in solve(...), resolv
 
 
 
-Definition at line 473 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00659}{659}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+matrix\+\_\+setup(), hypre\+\_\+solve(), and hypre\+\_\+solver\+\_\+setup().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614}\label{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614}} 
+\Hypertarget{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614}\label{classoomph_1_1HypreInterface_abca9f624ee43955c6607a62b50128614} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Max\_iter@{Max\_iter}}
 \index{Max\_iter@{Max\_iter}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Max\_iter}{Max\_iter}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Interface\+::\+Max\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1054,17 +1110,17 @@ Maximum number of iterations used in solver.
 
 
 
-Definition at line 308 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00329}{329}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+iterations(), hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner(), oomph\+::\+Hypre\+Solver\+::max\+\_\+iter(), and oomph\+::\+Hypre\+Preconditioner\+::set\+\_\+amg\+\_\+iterations().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l01156}{oomph\+::\+Hypre\+Preconditioner\+::amg\+\_\+iterations()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01016}{oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00737}{oomph\+::\+Hypre\+Solver\+::max\+\_\+iter()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01150}{oomph\+::\+Hypre\+Preconditioner\+::set\+\_\+amg\+\_\+iterations()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57}\label{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57}} 
+\Hypertarget{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57}\label{classoomph_1_1HypreInterface_a011667f822e82fc40fde8ab5f2bd4d57} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Output\_info@{Output\_info}}
 \index{Output\_info@{Output\_info}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Output\_info}{Output\_info}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Output\+\_\+info\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1072,17 +1128,17 @@ Flag is true to output info and results of timings.
 
 
 
-Definition at line 305 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00326}{326}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solve(), hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Solver\+::resolve(), oomph\+::\+Hypre\+Preconditioner\+::setup(), and oomph\+::\+Hypre\+Solver\+::solve().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01838}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01595}{oomph\+::\+Hypre\+Solver\+::resolve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l01446}{oomph\+::\+Hypre\+Solver\+::solve()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a}\label{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a}} 
+\Hypertarget{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a}\label{classoomph_1_1HypreInterface_a34ee95ad2f64b9d4fb0b0951a64c357a} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails\_filter@{ParaSails\_filter}}
 \index{ParaSails\_filter@{ParaSails\_filter}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{ParaSails\_filter}{ParaSails\_filter}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+filter\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+filter\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1090,17 +1146,17 @@ Para\+Sails filter parameter.
 
 
 
-Definition at line 403 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00473}{473}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Solver\+::parasails\+\_\+filter(), and oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+filter().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00854}{oomph\+::\+Hypre\+Solver\+::parasails\+\_\+filter()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01266}{oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+filter()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4}\label{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4}} 
+\Hypertarget{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4}\label{classoomph_1_1HypreInterface_a313c9638a579d912e3f570b21db611f4} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails\_nlevel@{ParaSails\_nlevel}}
 \index{ParaSails\_nlevel@{ParaSails\_nlevel}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{ParaSails\_nlevel}{ParaSails\_nlevel}}
-{\footnotesize\ttfamily int oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+nlevel\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+nlevel\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1108,17 +1164,17 @@ Para\+Sails nlevel parameter.
 
 
 
-Definition at line 397 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00467}{467}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Solver\+::parasails\+\_\+nlevel(), and oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+nlevel().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00842}{oomph\+::\+Hypre\+Solver\+::parasails\+\_\+nlevel()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01254}{oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+nlevel()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6}\label{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6}} 
+\Hypertarget{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6}\label{classoomph_1_1HypreInterface_a3cdba8c59c318125fbb367207f1082b6} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails\_symmetry@{ParaSails\_symmetry}}
 \index{ParaSails\_symmetry@{ParaSails\_symmetry}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{ParaSails\_symmetry}{ParaSails\_symmetry}}
-{\footnotesize\ttfamily int oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+symmetry\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+symmetry\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1126,17 +1182,17 @@ Para\+Sails symmetry flag, used to inform Para\+Sails of Symmetry of definitenss
 
 
 
-Definition at line 394 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00464}{464}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Solver\+::parasails\+\_\+symmetry(), and oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+symmetry().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00836}{oomph\+::\+Hypre\+Solver\+::parasails\+\_\+symmetry()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01248}{oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+symmetry()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d}\label{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d}} 
+\Hypertarget{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d}\label{classoomph_1_1HypreInterface_a8deadae96f1791b9f2552505cc68af2d} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!ParaSails\_thresh@{ParaSails\_thresh}}
 \index{ParaSails\_thresh@{ParaSails\_thresh}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{ParaSails\_thresh}{ParaSails\_thresh}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+thresh\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+Para\+Sails\+\_\+thresh\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1144,17 +1200,17 @@ Para\+Sails thresh parameter.
 
 
 
-Definition at line 400 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00470}{470}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Solver\+::parasails\+\_\+thresh(), and oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+thresh().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00848}{oomph\+::\+Hypre\+Solver\+::parasails\+\_\+thresh()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l01260}{oomph\+::\+Hypre\+Preconditioner\+::parasails\+\_\+thresh()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d}\label{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d}} 
+\Hypertarget{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d}\label{classoomph_1_1HypreInterface_a72e975bac0718a91226b20e9a819b30d} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Preconditioner@{Preconditioner}}
 \index{Preconditioner@{Preconditioner}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Preconditioner}{Preconditioner}}
-{\footnotesize\ttfamily HYPRE\+\_\+\+Solver oomph\+::\+Hypre\+Interface\+::\+Preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} oomph\+::\+Hypre\+Interface\+::\+Preconditioner\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1162,27 +1218,27 @@ The internal Hypre preconditioner used in conjunction with Solver. \mbox{[}This 
 
 
 
-Definition at line 481 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00667}{667}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}\label{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}} 
+\Hypertarget{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641}\label{classoomph_1_1HypreInterface_a1bc7fe7e11b5c08cc768969b9e1f8641} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Returning\_distributed\_solution@{Returning\_distributed\_solution}}
 \index{Returning\_distributed\_solution@{Returning\_distributed\_solution}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Returning\_distributed\_solution}{Returning\_distributed\_solution}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Returning\+\_\+distributed\+\_\+solution\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Returning\+\_\+distributed\+\_\+solution\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Internal flag which tell the solver if the solution \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to be returned is distributed or not. 
+Internal flag which tell the solver if the solution \doxylink{classoomph_1_1Vector}{Vector} to be returned is distributed or not. 
 
 
 
-Definition at line 454 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00640}{640}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}\label{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}} 
+\Hypertarget{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489}\label{classoomph_1_1HypreInterface_a3b245194966a26307c86f3cf42062489} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Solver@{Solver}}
 \index{Solver@{Solver}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Solver}{Solver}}
-{\footnotesize\ttfamily HYPRE\+\_\+\+Solver oomph\+::\+Hypre\+Interface\+::\+Solver\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} oomph\+::\+Hypre\+Interface\+::\+Solver\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1190,17 +1246,17 @@ The Hypre solver used in solve(...), resolve(...) or preconditioner\+\_\+solve(.
 
 
 
-Definition at line 477 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00663}{663}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+clean\+\_\+up\+\_\+memory(), hypre\+\_\+solve(), and hypre\+\_\+solver\+\_\+setup().
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{hypre\+\_\+solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924}\label{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924}} 
+\Hypertarget{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924}\label{classoomph_1_1HypreInterface_aa32a993d324c6b198726064299a4e924} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Tolerance@{Tolerance}}
 \index{Tolerance@{Tolerance}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Tolerance}{Tolerance}}
-{\footnotesize\ttfamily double oomph\+::\+Hypre\+Interface\+::\+Tolerance\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Interface\+::\+Tolerance\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -1208,25 +1264,25 @@ Tolerance used to terminate solver.
 
 
 
-Definition at line 311 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00332}{332}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 
-Referenced by hypre\+\_\+solver\+\_\+setup(), Hypre\+Interface(), oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner(), and oomph\+::\+Hypre\+Solver\+::tolerance().
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00511}{doc\+\_\+hypre\+\_\+parameters()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{hypre\+\_\+solver\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{Hypre\+Interface()}}, \mbox{\hyperlink{hypre__solver_8h_source_l01016}{oomph\+::\+Hypre\+Preconditioner\+::\+Hypre\+Preconditioner()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00743}{oomph\+::\+Hypre\+Solver\+::tolerance()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}\label{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}} 
+\Hypertarget{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f}\label{classoomph_1_1HypreInterface_a3e1fd87d247b737001fb366bf4a7081f} 
 \index{oomph::HypreInterface@{oomph::HypreInterface}!Using\_distributed\_rhs@{Using\_distributed\_rhs}}
 \index{Using\_distributed\_rhs@{Using\_distributed\_rhs}!oomph::HypreInterface@{oomph::HypreInterface}}
 \doxysubsubsection{\texorpdfstring{Using\_distributed\_rhs}{Using\_distributed\_rhs}}
-{\footnotesize\ttfamily bool oomph\+::\+Hypre\+Interface\+::\+Using\+\_\+distributed\+\_\+rhs\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Hypre\+Interface\+::\+Using\+\_\+distributed\+\_\+rhs\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Internal flag which tell the solver if the rhs \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is distributed or not. 
+Internal flag which tell the solver if the rhs \doxylink{classoomph_1_1Vector}{Vector} is distributed or not. 
 
 
 
-Definition at line 450 of file hypre\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{hypre__solver_8h_source_l00636}{636}} of file \mbox{\hyperlink{hypre__solver_8h_source}{hypre\+\_\+solver.\+h}}.
 
 
 

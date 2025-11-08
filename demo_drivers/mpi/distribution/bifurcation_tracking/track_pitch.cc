@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -323,33 +323,6 @@ RotatingProblem<ELEMENT>::RotatingProblem
  Problem::mesh_pt() = 
   new CylinderMesh<ELEMENT>(Nr1,Nr2,Nz1,Nz2,Length);
 
- //dynamic_cast<SuperLUSolver*>(this->linear_solver_pt())
- //->set_solver_type(SuperLUSolver::Serial);
-
-//  MumpsSolver* solver_pt=new MumpsSolver;
-//  this->linear_solver_pt() = solver_pt;
-//  solver_pt->enable_suppress_warning_about_MPI_COMM_WORLD();
-
-//  //Build iterative linear solver
-//  /*GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new
-//   GMRES<CRDoubleMatrix>;
- 
-//   // Set maximum number of iterations
-//   iterative_linear_solver_pt->max_iter() = 500;
- 
-// //  // Set tolerance
-//   iterative_linear_solver_pt->tolerance() = 1.0e-8;   
- 
-//   AxisymmetricNavierStokesLSCPreconditioner* prec_pt = 
-//    new AxisymmetricNavierStokesLSCPreconditioner;
-//   //Set the mesh
-//   prec_pt->set_navier_stokes_mesh(this->mesh_pt());
-
-// //  //Set the preconditioner
-//   iterative_linear_solver_pt->preconditioner_pt() = prec_pt;
- 
-// //  //Set the linear solver
-// this->linear_solver_pt() = iterative_linear_solver_pt;*/
 
 /*#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
@@ -451,7 +424,8 @@ RotatingProblem<ELEMENT>::RotatingProblem
  
  //Setup all the equation numbering and look-up schemes 
  //(function defined in Problem class)
- oomph_info << assign_eqn_numbers() << std::endl; 
+ oomph_info << assign_eqn_numbers() << std::endl;
+
 }
 
 //Finish the specification of the elements in the problem
@@ -583,7 +557,7 @@ void RotatingProblem<ELEMENT>::solve_system()
 
    //Output data at each step
    //Create the filename, including the array index
-   /*sprintf(filename,"step%g_%g.dat",Length,Re);
+   /*snprintf(filename, sizeof(filename), "step%g_%g.dat",Length,Re);
    //Actually, write the data
    file.open(filename);
    mesh_pt()->output(file,5);

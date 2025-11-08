@@ -522,5 +522,5 @@ demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elast
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

@@ -155,5 +155,5 @@ demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/unstructured_time_h
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

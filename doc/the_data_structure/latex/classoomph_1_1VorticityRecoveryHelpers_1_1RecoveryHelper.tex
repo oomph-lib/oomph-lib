@@ -1,5 +1,5 @@
-\hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper}{}\doxysection{oomph\+::Vorticity\+Recovery\+Helpers\+::Recovery\+Helper Class Reference}
-\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper}\index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
+\doxysection{oomph\+::Vorticity\+Recovery\+Helpers\+::Recovery\+Helper Class Reference}
+\hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper}{}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper}\index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 
 
 Class to indicate which derivatives of the vorticity/ velocity we want to recover. We choose to immediately instantiate an object of this class by dropping the semi-\/colon after the class description.  
@@ -9,45 +9,45 @@ Class to indicate which derivatives of the vorticity/ velocity we want to recove
 
 {\ttfamily \#include $<$vorticity\+\_\+smoother.\+h$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a588568f558fcea66735e8fb62c7c80f1}{Recovery\+Helper}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd}{maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd}{maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the vorticity recovery. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582}{maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582}{maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the velocity recovery. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} (const int \&max\+\_\+deriv)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\+\_\+deriv}})
 \begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the vorticity recovery. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} (const int \&max\+\_\+deriv)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\+\_\+deriv}})
 \begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the velocity recovery. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}} ()
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}} ()
 \begin{DoxyCompactList}\small\item\em Calculates the number of values per field given the number of vorticity and velocity derivatives to recover (stored as private data) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17}{npartial\+\_\+derivative}} (const unsigned \&n) const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17}{npartial\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Helper function that determines the number of n-\/th order partial derivatives in d-\/dimensions. Specifically there are (n+d-\/1)(choose)(d-\/1) possible n-\/th order partial derivatives in d-\/dimensions. Implementation makes use of the code found at\+: www.\+geeksforgeeks.\+org/space-\/and-\/time-\/efficient-\/binomial-\/coefficient/. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f}{ncont\+\_\+interpolated\+\_\+values}} () const
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b}{Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}
-\begin{DoxyCompactList}\small\item\em Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d$^\wedge$2/dx$^\wedge$2,d$^\wedge$2/dxdy,d$^\wedge$2/dy$^\wedge$2, d$^\wedge$3/dx$^\wedge$3,d$^\wedge$3/dx$^\wedge$2dy,d$^\wedge$3/dxdy$^\wedge$2,d$^\wedge$3/dy$^\wedge$3, du/dx,du/dy,dv/dx,dv/dy. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b}{Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}
+\begin{DoxyCompactList}\small\item\em Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3, du/dx,du/dy,dv/dx,dv/dy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}
 \begin{DoxyCompactList}\small\item\em Maximum number of derivatives to retain in the vorticity recovery. Note, the value -\/1 means we ONLY output u,v\mbox{[},w\mbox{]},p. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}
 \begin{DoxyCompactList}\small\item\em Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don\textquotesingle{}t calculate the derivatives of the velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class to indicate which derivatives of the vorticity/ velocity we want to recover. We choose to immediately instantiate an object of this class by dropping the semi-\/colon after the class description. 
 
-Definition at line 54 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00054}{54}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a588568f558fcea66735e8fb62c7c80f1}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a588568f558fcea66735e8fb62c7c80f1}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a588568f558fcea66735e8fb62c7c80f1}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a588568f558fcea66735e8fb62c7c80f1} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!RecoveryHelper@{RecoveryHelper}}
 \index{RecoveryHelper@{RecoveryHelper}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{RecoveryHelper()}{RecoveryHelper()}}
@@ -59,20 +59,20 @@ Constructor.
 
 
 
-Definition at line 58 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00058}{58}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative, and Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00211}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00206}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a81e9ce59067778e843b9fada67c36eb9} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!calculate\_number\_of\_values\_per\_field@{calculate\_number\_of\_values\_per\_field}}
 \index{calculate\_number\_of\_values\_per\_field@{calculate\_number\_of\_values\_per\_field}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{calculate\_number\_of\_values\_per\_field()}{calculate\_number\_of\_values\_per\_field()}}
-{\footnotesize\ttfamily void oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -80,21 +80,21 @@ Calculates the number of values per field given the number of vorticity and velo
 
 
 
-Definition at line 126 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{126}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References i, Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative, Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative, npartial\+\_\+derivative(), and Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00211}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00206}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00155}{npartial\+\_\+derivative()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00202}{Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}.
 
 
 
-Referenced by set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative(), and set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative().
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00103}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00082}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a04617cfe4ae00832dad1ab445f670582} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!maximum\_order\_of\_velocity\_derivative@{maximum\_order\_of\_velocity\_derivative}}
 \index{maximum\_order\_of\_velocity\_derivative@{maximum\_order\_of\_velocity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{maximum\_order\_of\_velocity\_derivative()}{maximum\_order\_of\_velocity\_derivative()}}
-{\footnotesize\ttfamily int oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -102,21 +102,17 @@ The maximum order of derivatives calculated in the velocity recovery.
 
 
 
-Definition at line 75 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00075}{75}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00211}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}.
 
-
-
-Referenced by oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element().
-
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aee2cd32415604ee6585f565e0c6cc8bd} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!maximum\_order\_of\_vorticity\_derivative@{maximum\_order\_of\_vorticity\_derivative}}
 \index{maximum\_order\_of\_vorticity\_derivative@{maximum\_order\_of\_vorticity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{maximum\_order\_of\_vorticity\_derivative()}{maximum\_order\_of\_vorticity\_derivative()}}
-{\footnotesize\ttfamily int oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -124,21 +120,17 @@ The maximum order of derivatives calculated in the vorticity recovery.
 
 
 
-Definition at line 68 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00068}{68}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00206}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}.
 
-
-
-Referenced by oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element().
-
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_aaa14d720c414b6c90b6067270253310f} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
 \index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -146,21 +138,17 @@ Number of continuously interpolated values\+:
 
 
 
-Definition at line 191 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00191}{191}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00202}{Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}.
 
-
-
-Referenced by oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element().
-
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_abddaf75308a06b853355a2f0fd7acd17} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!npartial\_derivative@{npartial\_derivative}}
 \index{npartial\_derivative@{npartial\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{npartial\_derivative()}{npartial\_derivative()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::npartial\+\_\+derivative (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::npartial\+\_\+derivative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -168,21 +156,21 @@ Helper function that determines the number of n-\/th order partial derivatives i
 
 
 
-Definition at line 155 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00155}{155}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
-Referenced by calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), and oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative().
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a56eb67510ea8b188b9f5e92b1cf6fe01} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!set\_maximum\_order\_of\_velocity\_derivative@{set\_maximum\_order\_of\_velocity\_derivative}}
 \index{set\_maximum\_order\_of\_velocity\_derivative@{set\_maximum\_order\_of\_velocity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{set\_maximum\_order\_of\_velocity\_derivative()}{set\_maximum\_order\_of\_velocity\_derivative()}}
-{\footnotesize\ttfamily void oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}\item[{const int \&}]{max\+\_\+deriv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{max\+\_\+deriv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -190,17 +178,17 @@ The maximum order of derivatives calculated in the velocity recovery.
 
 
 
-Definition at line 103 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00103}{103}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), and Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00211}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}.
 
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_ade8563120c4c4743c738399e2b35fe27} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!set\_maximum\_order\_of\_vorticity\_derivative@{set\_maximum\_order\_of\_vorticity\_derivative}}
 \index{set\_maximum\_order\_of\_vorticity\_derivative@{set\_maximum\_order\_of\_vorticity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{set\_maximum\_order\_of\_vorticity\_derivative()}{set\_maximum\_order\_of\_vorticity\_derivative()}}
-{\footnotesize\ttfamily void oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}\item[{const int \&}]{max\+\_\+deriv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{max\+\_\+deriv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -208,20 +196,20 @@ The maximum order of derivatives calculated in the vorticity recovery.
 
 
 
-Definition at line 82 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00082}{82}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-References calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), and Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative.
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00206}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a9075ed323c333feb9c2a6e43b780150c} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!Maximum\_order\_of\_velocity\_derivative@{Maximum\_order\_of\_velocity\_derivative}}
 \index{Maximum\_order\_of\_velocity\_derivative@{Maximum\_order\_of\_velocity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_velocity\_derivative}{Maximum\_order\_of\_velocity\_derivative}}
-{\footnotesize\ttfamily int oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -229,17 +217,17 @@ Maximum number of derivatives to retain in the velocity recovery. Note, the valu
 
 
 
-Definition at line 211 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00211}{211}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-Referenced by calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative(), Recovery\+Helper(), and set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative().
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00075}{maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00058}{Recovery\+Helper()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00103}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a48870979a47b05c46d540f985517746e} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!Maximum\_order\_of\_vorticity\_derivative@{Maximum\_order\_of\_vorticity\_derivative}}
 \index{Maximum\_order\_of\_vorticity\_derivative@{Maximum\_order\_of\_vorticity\_derivative}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_vorticity\_derivative}{Maximum\_order\_of\_vorticity\_derivative}}
-{\footnotesize\ttfamily int oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -247,29 +235,29 @@ Maximum number of derivatives to retain in the vorticity recovery. Note, the val
 
 
 
-Definition at line 206 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00206}{206}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-Referenced by calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative(), Recovery\+Helper(), and set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative().
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00068}{maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00058}{Recovery\+Helper()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00082}{set\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative()}}.
 
-\mbox{\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b}} 
+\Hypertarget{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b}\label{classoomph_1_1VorticityRecoveryHelpers_1_1RecoveryHelper_a24925c7c5b573a3e9ced37ace48deb5b} 
 \index{oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}!Number\_of\_values\_per\_field@{Number\_of\_values\_per\_field}}
 \index{Number\_of\_values\_per\_field@{Number\_of\_values\_per\_field}!oomph::VorticityRecoveryHelpers::RecoveryHelper@{oomph::VorticityRecoveryHelpers::RecoveryHelper}}
 \doxysubsubsection{\texorpdfstring{Number\_of\_values\_per\_field}{Number\_of\_values\_per\_field}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+Helper\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d$^\wedge$2/dx$^\wedge$2,d$^\wedge$2/dxdy,d$^\wedge$2/dy$^\wedge$2, d$^\wedge$3/dx$^\wedge$3,d$^\wedge$3/dx$^\wedge$2dy,d$^\wedge$3/dxdy$^\wedge$2,d$^\wedge$3/dy$^\wedge$3, du/dx,du/dy,dv/dx,dv/dy. 
+Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3, du/dx,du/dy,dv/dx,dv/dy. 
 
 
 
-Definition at line 202 of file vorticity\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00202}{202}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
 
 
 
-Referenced by calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field(), and ncont\+\_\+interpolated\+\_\+values().
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00126}{calculate\+\_\+number\+\_\+of\+\_\+values\+\_\+per\+\_\+field()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00191}{ncont\+\_\+interpolated\+\_\+values()}}.
 
 
 

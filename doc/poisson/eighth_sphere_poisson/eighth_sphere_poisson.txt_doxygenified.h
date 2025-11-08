@@ -220,5 +220,5 @@ demo_drivers/poisson/eighth_sphere_poisson/eighth_sphere_poisson.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

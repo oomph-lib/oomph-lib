@@ -1,36 +1,36 @@
-\hypertarget{namespaceoomph_1_1VectorHelpers}{}\doxysection{oomph\+::Vector\+Helpers Namespace Reference}
-\label{namespaceoomph_1_1VectorHelpers}\index{oomph::VectorHelpers@{oomph::VectorHelpers}}
+\doxysection{oomph\+::Vector\+Helpers Namespace Reference}
+\hypertarget{namespaceoomph_1_1VectorHelpers}{}\label{namespaceoomph_1_1VectorHelpers}\index{oomph::VectorHelpers@{oomph::VectorHelpers}}
 
 
-Namespace for helper functions for \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}}  
+Namespace for helper functions for \doxylink{classoomph_1_1Vector}{Vector$<$double$>$}  
 
 
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{check\+\_\+lengths\+\_\+match}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&a, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{check\+\_\+lengths\+\_\+match}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Check the lengths if two Vectors are the same length. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&a, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{dot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Probably not always best/fastest because not optimised for dimension but useful... \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{magnitude}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&a)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{magnitude}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a)
 \begin{DoxyCompactList}\small\item\em Get the magnitude of a vector. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{angle}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&a, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&b)
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{angle}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Get the angle between two vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}{cross}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&A, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&B, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&C)
-\begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok nowadays). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}{cross}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&A, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&B)
-\begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok This calls the other cross(...) function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}{cross}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&A, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&B, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&C)
+\begin{DoxyCompactList}\small\item\em Cross product using "{}proper"{} output (move semantics means this is ok nowadays). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a46b44975d832ac17e752658afa5e0927}{cross}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&A, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&B)
+\begin{DoxyCompactList}\small\item\em Cross product using "{}proper"{} output (move semantics means this is ok This calls the other cross(...) function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Namespace for helper functions for \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}} 
+Namespace for helper functions for \doxylink{classoomph_1_1Vector}{Vector$<$double$>$} 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}\label{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}} 
+\Hypertarget{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}\label{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!angle@{angle}}
 \index{angle@{angle}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{angle()}{angle()}}
-{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::angle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Vector\+Helpers\+::angle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -38,21 +38,21 @@ Get the angle between two vector.
 
 
 
-Definition at line 309 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00309}{309}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-References dot().
+References \mbox{\hyperlink{Vector_8h_source_l00291}{dot()}}.
 
 
 
-Referenced by oomph\+::\+Oc\+Tree\+::construct\+\_\+rotation\+\_\+matrix(), and oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal().
+Referenced by \mbox{\hyperlink{elements_8cc_source_l05543}{oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}\label{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}} 
+\Hypertarget{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}\label{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!check\_lengths\_match@{check\_lengths\_match}}
 \index{check\_lengths\_match@{check\_lengths\_match}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{check\_lengths\_match()}{check\_lengths\_match()}}
-{\footnotesize\ttfamily void oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -60,57 +60,61 @@ Check the lengths if two Vectors are the same length.
 
 
 
-Definition at line 271 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00271}{271}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-Referenced by dot().
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}\label{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}} 
+
+
+Referenced by \mbox{\hyperlink{Vector_8h_source_l00291}{dot()}}.
+
+\Hypertarget{namespaceoomph_1_1VectorHelpers_a46b44975d832ac17e752658afa5e0927}\label{namespaceoomph_1_1VectorHelpers_a46b44975d832ac17e752658afa5e0927} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!cross@{cross}}
 \index{cross@{cross}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{A,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok This calls the other cross(...) function. 
+Cross product using "{}proper"{} output (move semantics means this is ok This calls the other cross(...) function. 
 
 
 
-Definition at line 344 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00344}{344}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B, cross(), and oomph\+::\+Command\+Line\+Args\+::output().
+References \mbox{\hyperlink{Vector_8h_source_l00319}{cross()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}\label{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}} 
+\Hypertarget{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}\label{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!cross@{cross}}
 \index{cross@{cross}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{cross()}{cross()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Vector\+Helpers\+::cross (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{A,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok nowadays). 
+Cross product using "{}proper"{} output (move semantics means this is ok nowadays). 
 
 
 
-Definition at line 319 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00319}{319}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B.
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), cross(), and oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal().
+Referenced by \mbox{\hyperlink{elements_8cc_source_l05543}{oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{Vector_8h_source_l00344}{cross()}}, and \mbox{\hyperlink{elements_8cc_source_l06037}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}\label{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}} 
+\Hypertarget{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}\label{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!dot@{dot}}
 \index{dot@{dot}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{dot()}{dot()}}
-{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Vector\+Helpers\+::dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -118,21 +122,21 @@ Probably not always best/fastest because not optimised for dimension but useful.
 
 
 
-Definition at line 291 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00291}{291}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-References check\+\_\+lengths\+\_\+match(), and i.
+References \mbox{\hyperlink{Vector_8h_source_l00271}{check\+\_\+lengths\+\_\+match()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by angle(), oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux(), oomph\+::\+Point\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Fluid\+Interface\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface\+\_\+boundary(), oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), and magnitude().
+Referenced by \mbox{\hyperlink{Vector_8h_source_l00309}{angle()}}, \mbox{\hyperlink{elements_8cc_source_l05543}{oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}}, and \mbox{\hyperlink{Vector_8h_source_l00303}{magnitude()}}.
 
-\mbox{\Hypertarget{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}\label{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}} 
+\Hypertarget{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}\label{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69} 
 \index{oomph::VectorHelpers@{oomph::VectorHelpers}!magnitude@{magnitude}}
 \index{magnitude@{magnitude}!oomph::VectorHelpers@{oomph::VectorHelpers}}
 \doxysubsubsection{\texorpdfstring{magnitude()}{magnitude()}}
-{\footnotesize\ttfamily double oomph\+::\+Vector\+Helpers\+::magnitude (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Vector\+Helpers\+::magnitude (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -140,13 +144,13 @@ Get the magnitude of a vector.
 
 
 
-Definition at line 303 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00303}{303}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
-References dot().
+References \mbox{\hyperlink{Vector_8h_source_l00291}{dot()}}.
 
 
 
-Referenced by oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal(), and oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal().
+Referenced by \mbox{\hyperlink{elements_8cc_source_l05543}{oomph\+::\+Face\+Element\+::continuous\+\_\+tangent\+\_\+and\+\_\+outer\+\_\+unit\+\_\+normal()}}, and \mbox{\hyperlink{elements_8cc_source_l06037}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}.
 

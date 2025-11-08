@@ -319,7 +319,7 @@ volume flux divided by the reference length scale.
 
 <HR>
 
-\subsection bound Identification/assignment of mesh boundaries
+\subsection bound2 Identification/assignment of mesh boundaries
 We wish to re-iterate the comments made in the 
 <a href="../../../solid/unstructured_solid/html/index.html#comm_ex">
 corresponding solid mechanics tutorial</a> that the manual 
@@ -444,5 +444,5 @@ demo_drivers/navier_stokes/unstructured_fluid/unstructured_two_d_fluid.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

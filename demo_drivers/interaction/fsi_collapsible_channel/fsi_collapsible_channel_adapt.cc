@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -82,9 +82,9 @@ namespace BL_Squash
 
 
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 //====start_of_underformed_wall============================================
@@ -723,14 +723,14 @@ void FSICollapsibleChannelProblem<ELEMENT>:: doc_solution(DocInfo& doc_info,
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);
@@ -742,7 +742,7 @@ void FSICollapsibleChannelProblem<ELEMENT>:: doc_solution(DocInfo& doc_info,
  unsigned nsteps=time_stepper_pt(1)->nprev_values();
  for (unsigned t=0;t<=nsteps;t++)
   {     
-   sprintf(filename,"%s/wall%i-%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/wall%i-%i.dat",doc_info.directory().c_str(),
            doc_info.number(),t);
    some_file.open(filename);
    unsigned n_elem=wall_mesh_pt()->nelement();
@@ -1068,7 +1068,7 @@ int main(int argc, char* argv[])
  // Open a trace file 
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Output the initial condition

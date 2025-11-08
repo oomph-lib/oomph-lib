@@ -451,7 +451,7 @@ value at the initial time. \c oomph-lib's timestepping procedures
 provide several functions that allow the simulation to be initiated
 with an "impulsive start", corresponding to a past history in which
 the boundary condition (3) describes the system's
-state for all \f$ t \le 0\f$ rather than only \e at \f$ t =
+state for all \f$ t \le 0\f$ rather than only at \f$ t =
 0\f$ . For instance, the top-level function \c
 Problem::assign_initial_values_impulsive() sets the  "history values"
 of all \c Data objects and the \c Nodes' "positional history values" 
@@ -533,5 +533,5 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat.cc
 <hr>
 \section pdf PDF file
 A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
-**/
+\*/
 

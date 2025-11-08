@@ -60,20 +60,20 @@ for nel_1d in `echo $nel_1d_list`; do
 
     file=$dir/CaseSuperLU/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_iter_string=`echo $superlu_iter_string " <TD>  " $av " </TD> "`
 
     file=$dir/CaseElasticBlockSuperLU/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_block_iter_string=`echo $superlu_block_iter_string " <TD>  " $av" </TD> "`
 
 
     file=$dir/CaseElasticBlockHypreCGLagrange/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     full_iter_string=`echo $full_iter_string " <TD>  " $av " </TD> "`
 
@@ -123,20 +123,20 @@ for nel_1d in `echo $nel_1d_list`; do
 
     file=$dir/CaseSuperLU/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_iter_string=`echo $superlu_iter_string " <TD>  " $av " </TD> "`
 
     file=$dir/CaseElasticBlockSuperLU/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_block_iter_string=`echo $superlu_block_iter_string " <TD>  " $av" </TD> "`
 
 
     file=$dir/CaseElasticBlockHypreCGLagrange/RESLT_`echo $nel_1d`/OUTPUT
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $7}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $7}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     full_iter_string=`echo $full_iter_string " <TD>  " $av " </TD> "`
 
