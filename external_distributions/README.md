@@ -16,13 +16,19 @@
     <table>
     <tr>
         <th>Test platform</th>
-        <th><a href="../../../tree/cmake-beta"><code>cmake-beta</code></a></th>
+        <th><a href="../../../tree/main"><code>main</code></a></th>
+        <th><a href="../../../tree/development"><code>development</code></a></th>
     </tr>
     <tr>
         <td>Ubuntu</td>
         <td>
             <a href="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml/badge.svg?branch=cmake-beta" style="vertical-align: middle">
+                <img alt="Ubuntu" src="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml/badge.svg?branch=main" style="vertical-align: middle">
+            </a>
+        </td>
+        <td>
+            <a href="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
         </td>
     </tr>
@@ -30,7 +36,12 @@
         <td>macOS</td>
         <td>
             <a href="../../../actions/workflows/test-third-party-libs-on-macos.yaml">
-                <img alt="macOS" src="../../../actions/workflows/test-third-party-libs-on-macos.yaml/badge.svg?branch=cmake-beta" style="vertical-align: middle">
+                <img alt="macOS" src="../../../actions/workflows/test-third-party-libs-on-macos.yaml/badge.svg?branch=main" style="vertical-align: middle">
+            </a>
+        </td>
+        <td>
+            <a href="../../../actions/workflows/test-third-party-libs-on-macos.yaml">
+                <img alt="macOS" src="../../../actions/workflows/test-third-party-libs-on-macos.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
         </td>
     </tr>
@@ -59,7 +70,7 @@ Tool    | Version
 --------|--------
 `CMake` | 3.24
 
-If you cannot obtain a recent enough version of CMake via your favourite package manager, you will need to build it from source. Worry not however, this is a straightforward task. For details on how to do this, see [the instructions here](https://github.com/puneetmatharu/oomph-lib/tree/cmake-beta#building-cmake).
+If you cannot obtain a recent enough version of CMake via your favourite package manager, you will need to build it from source. Worry not however, this is a straightforward task. For details on how to do this, see [the instructions here](https://github.com/oomph-lib/oomph-lib/tree/main#building-cmake).
 
 ## Library versions
 

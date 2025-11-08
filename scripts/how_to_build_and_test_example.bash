@@ -16,7 +16,7 @@ set -o nounset
 #==========================================
 
 # clone repos?
-oomphlib_branch="cmake-beta"
+oomphlib_branch="development"
 clone_oomphlib=1
 clone_stand_alone_code=1
 
