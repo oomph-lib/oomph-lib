@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -309,7 +309,7 @@ void SteadyHelicalProblem<ELEMENT>::doc_solution()
  //Need high precision for large radii of curvature
  //some_file.precision(10);
  // Output solution 
- sprintf(filename,"%s/soln_Re%g.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_Re%g.dat",Doc_info.directory().c_str(),
          Global_Physical_Variables::Re);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -320,9 +320,9 @@ void SteadyHelicalProblem<ELEMENT>::doc_solution()
  
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

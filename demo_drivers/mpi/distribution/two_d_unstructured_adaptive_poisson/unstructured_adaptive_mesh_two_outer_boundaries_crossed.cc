@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -856,8 +856,7 @@ void PoissonProblem<ELEMENT>::complete_problem_setup() {
   // Setup equation numbering scheme
   cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
 
-
-   apply_boundary_conditions();
+  apply_boundary_conditions();
 
 }
 
@@ -910,7 +909,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
    unsigned region_id = (unsigned)att;
    oomph_info << "attribute in reg: " << att << std::endl;
 
-   sprintf(filename,"%s/region%i_%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/region%i_%i.dat",doc_info.directory().c_str(),
            region_id,doc_info.number());   
    some_file.open(filename);
    
@@ -947,7 +946,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/boundaries.dat",doc_info.directory().c_str());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
  some_file.close();
@@ -955,7 +954,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -964,7 +963,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -974,7 +973,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -1076,7 +1075,7 @@ int main(int argc, char* argv[])
 
   // Open trace file
   char trace_filename[100];
-  sprintf(trace_filename,"%s/trace.dat", 
+  snprintf(trace_filename, sizeof(trace_filename), "%s/trace.dat", 
           doc_info.directory().c_str());
 
   /// Trace file to document norm of solution

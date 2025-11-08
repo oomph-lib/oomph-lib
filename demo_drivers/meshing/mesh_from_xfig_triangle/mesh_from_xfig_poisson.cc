@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -258,7 +258,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/boundaries.dat",doc_info.directory().c_str());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
  some_file.close();
@@ -266,7 +266,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -279,7 +279,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
    // Output exact solution 
    //----------------------
-   sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -289,7 +289,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
    // Doc error
    //----------
    double error,norm;
-   sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,

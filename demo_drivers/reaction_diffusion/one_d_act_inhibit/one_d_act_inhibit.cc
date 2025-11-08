@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -262,7 +262,7 @@ void RefineableOneDAdvectionDiffusionReactionProblem<ELEMENT>::timestep(
  {
   unsigned i=0;
   char file1[100];
-  sprintf(file1,"step%i.dat",i+1);
+  snprintf(file1, sizeof(file1), "step%i.dat",i+1);
   ofstream out1(file1);
   mesh_pt()->output(out1,5);
   out1.close();
@@ -280,7 +280,7 @@ void RefineableOneDAdvectionDiffusionReactionProblem<ELEMENT>::timestep(
    unsteady_newton_solve(dt,max_adapt,first);
    //Output the result
    char file1[100];
-   sprintf(file1,"step%i.dat",i+1);
+   snprintf(file1, sizeof(file1), "step%i.dat",i+1);
    ofstream out1(file1);
    mesh_pt()->output(out1,5);
    out1.close();

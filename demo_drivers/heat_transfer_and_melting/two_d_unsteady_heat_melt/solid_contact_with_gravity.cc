@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -51,9 +51,9 @@ using namespace MathematicalConstants;
 
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
 
 
 //======================================================================
@@ -606,9 +606,9 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
  };
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
 
 //======start_of_ProblemParameters=====================
 /// Namespace for problem parameters
@@ -684,9 +684,9 @@ namespace ProblemParameters
 } // end of ProblemParameters
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class=========================================
@@ -738,7 +738,7 @@ public:
    // // Output contact elements
    // ofstream some_file;
    // char filename[100];
-   // sprintf(filename,"contact_before.dat");
+   // snprintf(filename, sizeof(filename), "contact_before.dat");
    // some_file.open(filename);
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
@@ -784,7 +784,7 @@ public:
    // // Output contact elements
    // ofstream some_file;
    // char filename[100];
-   // sprintf(filename,"contact_after.dat");
+   // snprintf(filename, sizeof(filename), "contact_after.dat");
    // some_file.open(filename);
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
@@ -1705,7 +1705,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  npts=5;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -1713,7 +1713,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
@@ -1721,7 +1721,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  
  
  // Output contact elements
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_contact_mesh_pt->nelement();
@@ -1735,7 +1735,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
  // Output integration points of contact elements
- sprintf(filename,"%s/contact_integration_points%i.dat",
+ snprintf(filename, sizeof(filename), "%s/contact_integration_points%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1761,7 +1761,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
  
  // Output penetrator
- sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nplot=500;
@@ -1771,7 +1771,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  // Output contact elements and assemble total resulting force
  Vector<double> total_contact_force(2,0.0);
  Vector<double> contact_force(2,0.0);
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nel=Surface_contact_mesh_pt->nelement();
@@ -1803,7 +1803,7 @@ void ContactProblem<ELEMENT>::doc_solution()
   }
 
  // Output Hertzian pressure contact distribution
- sprintf(filename,"%s/hertz%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/hertz%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n=500;
@@ -1867,9 +1867,9 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 

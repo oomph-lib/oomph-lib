@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 #Set the number of tests to be checked
 NUM_TESTS=2
@@ -45,19 +45,19 @@ cat RESLT_no_global/ring0.dat \
     RESLT_no_global/ring20.dat \
     RESLT_no_global/trace.dat\
     > ring_results2.dat
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-  ../../../../bin/fpdiff.py ../validata/ring_results.dat.gz \
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ring_results.dat.gz \
    ring_results.dat >> validation.log
-  ../../../../bin/fpdiff.py ../validata/ring_results.dat.gz \
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ring_results.dat.gz \
    ring_results2.dat >> validation.log
 fi
 
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -70,7 +70,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

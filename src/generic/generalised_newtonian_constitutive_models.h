@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@
 
 
 // Oomph-lib includes
-//#include "generic.h"
+// #include "generic.h"
 
 namespace oomph
 {
@@ -379,7 +379,7 @@ namespace oomph
     double c;
 
     /// Fraction of the cut-off strain rate below which the viscosity is
-    /// constant 0 <= \alpha < 1
+    /// constant 0 <= alpha < 1
     double alpha;
 
 
@@ -1214,9 +1214,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
 } // namespace oomph
 

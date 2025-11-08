@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -44,9 +44,9 @@
 
 namespace oomph
 {
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
@@ -116,13 +116,34 @@ namespace oomph
     Mumps_struc_pt->ICNTL(4) = 2;
 
     // Write matrix
-    // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
+    // snprintf(Mumps_struc_pt->write_problem,
+    // sizeof(Mumps_struc_pt->write_problem), "/work/e173/e173/mheil/matrix");
 
     // Assembled matrix (rather than element-by_element)
     Mumps_struc_pt->ICNTL(5) = 0;
 
-    // set the package to use for ordering during (sequential) analysis
-    Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
+    // are we doing parallel ordering?
+    if (Jacobian_ordering_flag == Ptscotch_ordering)
+    {
+      // set parallel computation
+      Mumps_struc_pt->ICNTL(28) = 2;
+
+      // PT-SCOTCH magic number
+      Mumps_struc_pt->ICNTL(29) = 1;
+    }
+    else if (Jacobian_ordering_flag == Parmetis_ordering)
+    {
+      // set parallel computation
+      Mumps_struc_pt->ICNTL(28) = 2;
+
+      // ParMETIS magic number
+      Mumps_struc_pt->ICNTL(29) = 2;
+    }
+    else
+    {
+      // set the package to use for ordering during (sequential) analysis
+      Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
+    }
 
     // Distributed problem with user-specified distribution
     Mumps_struc_pt->ICNTL(18) = 3;
@@ -212,6 +233,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -237,6 +259,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
 #endif
 
@@ -387,21 +410,45 @@ namespace oomph
             << "Time for mumps analysis stage in MumpsSolver            : "
             << TimingHelpers::convert_secs_to_formatted_string(t_end_analyse -
                                                                t_start_analyse)
-            << "\n(Ordering generated using: ";
+            << "\n(Ordering generated ";
 
-          switch (Mumps_struc_pt->INFOG(7))
+          // did MUMPS select parallel analysis?
+          if (Mumps_struc_pt->INFOG(32) == 2)
           {
-            case MumpsJacobianOrderingFlags::Scotch_ordering:
-              oomph_info << "SCOTCH";
-              break;
-            case MumpsJacobianOrderingFlags::Pord_ordering:
-              oomph_info << "PORD";
-              break;
-            case MumpsJacobianOrderingFlags::Metis_ordering:
-              oomph_info << "METIS";
-              break;
-            default:
-              oomph_info << Mumps_struc_pt->INFOG(7);
+            oomph_info << "in parallel using: ";
+            switch (Mumps_struc_pt->INFOG(7))
+            {
+              case MumpsJacobianOrderingFlags::Ptscotch_ordering:
+                oomph_info << "PT-SCOTCH";
+                break;
+
+              case MumpsJacobianOrderingFlags::Parmetis_ordering:
+                oomph_info << "ParMETIS";
+                break;
+            }
+          }
+          else
+          {
+            oomph_info << "sequentially using: ";
+
+            // options for sequential analysis
+            switch (Mumps_struc_pt->INFOG(7))
+            {
+              case MumpsJacobianOrderingFlags::Scotch_ordering:
+                oomph_info << "SCOTCH";
+                break;
+
+              case MumpsJacobianOrderingFlags::Pord_ordering:
+                oomph_info << "PORD";
+                break;
+
+              case MumpsJacobianOrderingFlags::Metis_ordering:
+                oomph_info << "METIS";
+                break;
+
+              default:
+                oomph_info << Mumps_struc_pt->INFOG(7);
+            }
           }
 
           oomph_info << ")" << std::endl;
@@ -449,17 +496,48 @@ namespace oomph
             if (!Suppress_mumps_info_during_solve)
             {
               oomph_info << "Error during mumps factorisation!\n";
-              oomph_info << "Error codes: " << Mumps_struc_pt->INFO(1) << " "
-                         << Mumps_struc_pt->INFO(2) << std::endl;
             }
 
-            // Increase scaling factor for workspace and run again
-            Workspace_scaling_factor *= 2;
+            std::ostringstream error_message_stream;
 
-            if (!Suppress_mumps_info_during_solve)
+            switch (Mumps_struc_pt->INFOG(1))
             {
-              oomph_info << "Increasing workspace_scaling_factor to "
-                         << Workspace_scaling_factor << std::endl;
+              case MumpsErrorCodes::Structurally_singular_jacobian:
+
+                error_message_stream << "Structurally singular matrix\n";
+
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
+
+              case MumpsErrorCodes::Numerically_singular_jacobian:
+
+                error_message_stream << "Numerically singular matrix\n";
+
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
+
+              case MumpsErrorCodes::Workspace_too_small:
+
+                // Increase scaling factor for workspace and run again
+                Workspace_scaling_factor *= 2;
+
+                if (!Suppress_mumps_info_during_solve)
+                {
+                  oomph_info << "Increasing workspace_scaling_factor to "
+                             << Workspace_scaling_factor << std::endl;
+                }
+                break;
+
+              default:
+                error_message_stream
+                  << "MUMPS error codes: " << Mumps_struc_pt->INFO(1) << " "
+                  << Mumps_struc_pt->INFO(2) << std::endl;
+
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
             }
           }
           else
@@ -528,6 +606,7 @@ namespace oomph
     double t_start = TimingHelpers::timer();
 
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -553,6 +632,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
     // Initialised?
     if (!Mumps_is_initialised)
@@ -668,12 +748,14 @@ namespace oomph
       tmp_rhs[j] = Mumps_struc_pt->rhs[j];
     }
 
+#ifdef OOMPH_HAS_MPI
     // Broadcast the result which is only held on root
     MPI_Bcast(&tmp_rhs[0],
               ndof,
               MPI_DOUBLE,
               0,
               this->distribution_pt()->communicator_pt()->mpi_comm());
+#endif
 
     // If the result vector is distributed, re-distribute the
     // non-distributed tmp_rhs vector to match
@@ -726,6 +808,7 @@ namespace oomph
                           DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
@@ -753,6 +836,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -894,6 +978,7 @@ namespace oomph
   void MumpsSolver::solve(Problem* const& problem_pt, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (problem_pt->communicator_pt()->mpi_comm() != MPI_COMM_WORLD)
@@ -918,6 +1003,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -1005,6 +1091,7 @@ namespace oomph
   void MumpsSolver::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -1029,6 +1116,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Store starting time for solve

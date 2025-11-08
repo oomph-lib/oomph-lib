@@ -1,0 +1,112 @@
+# ==============================================================================
+# Taken from:
+# https://github.com/pablospe/cmake-example-library/blob/master/cmake/Uninstall.cmake.in
+# which, in turn, is based on:
+# http://www.cmake.org/Wiki/CMake_FAQ#Can_I_do_.22make_uninstall.22_with_CMake.3F
+# ==============================================================================
+# Define the function 'delete_folder_if_empty'
+function(delete_folder_if_empty DIR)
+  # Set this policy to make sure that GLOB_RECURSE does NOT follow symlinks!
+  cmake_policy(SET CMP0009 NEW)
+
+  # If the directory doesn't exist, don't do anything
+  if(NOT EXISTS ${DIR})
+    return()
+  endif()
+
+  # Check if folder is empty
+  file(GLOB_RECURSE RESULT "${DIR}/*")
+  if(NOT RESULT)
+    message(STATUS "Deleted empty folder ${DIR}")
+    file(REMOVE_RECURSE ${DIR})
+  endif()
+endfunction(delete_folder_if_empty)
+
+# Find 'install_manifest.txt' which contains a list of the installed files
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt")
+  message(
+    FATAL_ERROR
+      "Cannot find install manifest: ${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt"
+  )
+endif()
+
+# Remove files from 'install_manifest.txt'
+message(STATUS "")
+message(STATUS "Removing files from 'install_manifest.txt'")
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt" INSTALLED_FILES)
+string(REGEX REPLACE "\n" ";" INSTALLED_FILES "${INSTALLED_FILES}")
+foreach(FILE IN LISTS INSTALLED_FILES)
+  # Print file info
+  set(FILE_TYPE "file")
+  if(IS_SYMLINK "${FILE}")
+    set(FILE_TYPE "symlink")
+  endif()
+  message(STATUS "Uninstalling ${FILE_TYPE} ${FILE}")
+
+  # Try to uninstall it
+  if(IS_SYMLINK "${FILE}" OR EXISTS "${FILE}")
+    file(REMOVE "${FILE}")
+    if(EXISTS "${FILE}")
+      message(FATAL_ERROR "Problem when removing ${FILE}")
+    endif()
+  else()
+    message(STATUS "File ${FILE} does not exist.")
+  endif()
+
+  # Store parent folders to possibly delete (will only delete it if empty)
+  cmake_path(GET FILE PARENT_PATH PARENT_DIR)
+  set(ALL_PARENT_DIRS ${ALL_PARENT_DIRS} ${PARENT_DIR})
+endforeach()
+
+# The list of auto-generated combined headers
+set(EXTRA_INSTALLED_FILES_FOR_CLEAN_UP "@EXTRA_INSTALLED_FILES_FOR_CLEAN_UP@")
+
+# Remove other files we need to track manually and clean up ourselves
+if(EXTRA_INSTALLED_FILES_FOR_CLEAN_UP)
+  message(STATUS "")
+  message(STATUS "Manually removing extra installed files")
+  foreach(HEADER IN LISTS EXTRA_INSTALLED_FILES_FOR_CLEAN_UP)
+    # Print file info
+    set(FILE_TYPE "file")
+    if(IS_SYMLINK "${HEADER}")
+      set(FILE_TYPE "symlink")
+    endif()
+    message(STATUS "Uninstalling ${FILE_TYPE} ${HEADER}")
+
+    # Try to remove the file
+    if(IS_SYMLINK "${HEADER}" OR EXISTS "${HEADER}")
+      file(REMOVE ${HEADER})
+      if(EXISTS ${HEADER})
+        message(FATAL_ERROR "Problem when uninstalling ${HEADER}")
+      endif()
+    else()
+      message(STATUS "File ${HEADER} does not exist.")
+    endif()
+
+    # Update parent folders to possibly delete (will only delete it if empty)
+    cmake_path(GET HEADER PARENT_PATH PARENT_DIR)
+    list(APPEND ALL_PARENT_DIRS ${PARENT_DIR})
+  endforeach()
+endif()
+
+# Remove empty folders
+message(STATUS "")
+message(STATUS "Removing empty folders")
+
+list(REMOVE_DUPLICATES ALL_PARENT_DIRS)
+foreach(PARENT_DIR IN LISTS ALL_PARENT_DIRS)
+  delete_folder_if_empty(${PARENT_DIR})
+endforeach()
+
+set(OOMPH_INSTALL_LIB_DIR "@OOMPH_INSTALL_LIB_DIR@")
+set(OOMPH_INSTALL_CONFIG_DIR "@OOMPH_INSTALL_CONFIG_DIR@")
+set(OOMPH_INSTALL_INCLUDE_DIR "@OOMPH_INSTALL_INCLUDE_DIR@")
+set(OOMPH_INSTALL_BIN_DIR "@OOMPH_INSTALL_BIN_DIR@")
+
+delete_folder_if_empty("${OOMPH_INSTALL_CONFIG_DIR}")
+delete_folder_if_empty("${OOMPH_INSTALL_INCLUDE_DIR}")
+delete_folder_if_empty("${OOMPH_INSTALL_BIN_DIR}")
+delete_folder_if_empty("${OOMPH_INSTALL_LIB_DIR}")
+
+message(STATUS "Uninstall complete.")
+# ------------------------------------------------------------------------------

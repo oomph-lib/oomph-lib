@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -313,14 +313,14 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Output solution 
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  npts=2;
@@ -329,7 +329,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  
  // Output perturbation solution 
  //-----------------------------
- sprintf(filename,"%s/perturbation_soln_two_term%i.dat",
+ snprintf(filename, sizeof(filename), "%s/perturbation_soln_two_term%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  PerturbationSolution::N_terms_for_plot=2;
@@ -341,7 +341,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output perturbation solution 
  //-----------------------------
- sprintf(filename,"%s/perturbation_soln_one_term%i.dat",
+ snprintf(filename, sizeof(filename), "%s/perturbation_soln_one_term%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -354,7 +354,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output first-order perturbation solution (Stokes)
  //--------------------------------------------------
- sprintf(filename,"%s/first_order_perturbation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/first_order_perturbation%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -367,7 +367,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output second-order perturbation solution (Stokes)
  //--------------------------------------------------
- sprintf(filename,"%s/second_order_perturbation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/second_order_perturbation%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -379,11 +379,11 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Do line plots
- sprintf(filename,"%s/line_plot%i.dat",
+ snprintf(filename, sizeof(filename), "%s/line_plot%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- sprintf(filename,"%s/second_order_perturbation_line_plot%i.dat",
+ snprintf(filename, sizeof(filename), "%s/second_order_perturbation_line_plot%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file2.open(filename);

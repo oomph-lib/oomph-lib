@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_TUBE_MESH_TEMPLATE_CC
-#define OOMPH_TUBE_MESH_TEMPLATE_CC
+#ifndef OOMPH_TUBE_MESH_TEMPLATE_HEADER
+#define OOMPH_TUBE_MESH_TEMPLATE_HEADER
 
-#include "tube_mesh.template.h"
-
+#ifndef OOMPH_TUBE_MESH_HEADER
+#error __FILE__ should only be included from tube_mesh.h.
+#endif // OOMPH_TUBE_MESH_HEADER
 
 namespace oomph
 {
@@ -56,7 +57,7 @@ namespace oomph
     set_nboundary(3);
 
     // We have only bothered to parametrise boundary 1
-    Boundary_coordinate_exists[1] = true;
+    set_boundary_coordinate_exists(1);
 
     // Allocate the store for the elements
     unsigned nelem = 5 * nlayer;
@@ -226,13 +227,11 @@ namespace oomph
             }
           }
 
-
           break;
 
           // Macro element 1: Bottom
           //---------------------------------
         case 1:
-
 
           // Loop over rows in z/s_2-direction
           for (unsigned i2 = 0; i2 < n_p; i2++)
@@ -262,7 +261,6 @@ namespace oomph
                   unsigned i2_neigh = n_p - 1;
                   unsigned jnod_local_neigh =
                     i0_neigh + i1_neigh * n_p + i2_neigh * n_p * n_p;
-
 
                   // Check:
                   for (unsigned i = 0; i < 3; i++)
@@ -380,7 +378,6 @@ namespace oomph
 
           break;
 
-
           // Macro element 2: Right element
           //--------------------------------
         case 2:
@@ -478,7 +475,6 @@ namespace oomph
                     finite_element_pt(ielem)->node_pt(jnod_local) =
                       finite_element_pt(ielem_neigh)->node_pt(jnod_local_neigh);
                   }
-
 
                   // Duplicate node: kill and set pointer to central element
                   if ((i0 == 0) && (i1 != 0))
@@ -759,7 +755,6 @@ namespace oomph
           }
           break;
 
-
           // Macro element 4: Left element
           //--------------------------------
         case 4:
@@ -933,7 +928,6 @@ namespace oomph
                     finite_element_pt(ielem)->node_pt(jnod_local) =
                       finite_element_pt(ielem_neigh)->node_pt(jnod_local_neigh);
                   }
-
 
                   // No duplicate node: Copy across to mesh
                   if (!killed)

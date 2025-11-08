@@ -1,27 +1,22 @@
 
 /* Wrapper for SuperLU solver. Based on fortran wrapper supplied
-   with SuperLU version 3.0. Given that, it seems appropriate
-   to retain this copyright notice:
+ * with SuperLU version 3.0. Given that, it seems appropriate
+ * to retain this copyright notice:
+ *
+ * -- SuperLU routine (version 3.0) --
+ * Univ. of California Berkeley, Xerox Palo Alto Research Center,
+ * and Lawrence Berkeley National Lab.
+ * October 15, 2003
+ *
+ */
 
-   -- SuperLU routine (version 3.0) --
-   Univ. of California Berkeley, Xerox Palo Alto Research Center,
-   and Lawrence Berkeley National Lab.
-   October 15, 2003
-
-*/
-
-#ifdef USING_OOMPH_SUPERLU
-#include "../../external_src/oomph_superlu_4.3/slu_ddefs.h"
-#else
 #include "slu_ddefs.h"
-#endif
 #include "math.h"
 
 /* ================================================= */
 /* Pointer to the LU factors*/
 /* ================================================= */
-typedef void* fptr;
-
+typedef void *fptr;
 
 /* ================================================= */
 /* Struct for the lu factors  */
@@ -129,23 +124,24 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
   int *etree;  /* column elimination tree */
   SCformat *Lstore;
   NCformat *Ustore;
-  int      i, j, panel_size, permc_spec, relax;
-  trans_t  trans;
+  int i, j, panel_size, permc_spec, relax;
+  trans_t trans;
   //double   drop_tol = 0.0; //No longer need SuperLU 4.3
-  //mem_usage_t   mem_usage;
+  mem_usage_t mem_usage;
   superlu_options_t options;
   SuperLUStat_t stat;
   factors_t *LUfactors;
+  GlobalLU_t Glu;
 
   double *Lval;
   double *diagU, *dblock;
   int_t fsupc, nsupr, nsupc, luptr;
   int_t i2, k2, nsupers;
-  int signature=1;
+  int signature = 1;
   int sign = 0;
 
   /*   Do we need to transpose? */
-  if (*transpose==0)
+  if (*transpose == 0)
   {
     trans = NOTRANS;
   }
@@ -187,14 +183,15 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
     relax = sp_ienv(2);
 
     dgstrf(&options, &AC, /*drop_tol,*/ relax, panel_size,
-           etree, NULL, 0, perm_c, perm_r, L, U, &stat, info);
+           etree, NULL, 0, perm_c, perm_r, L, U,
+           &Glu, /* new with SuperLU 5.0 */
+           &stat, info);
 
     if (*info == 0)
     {
-      Lstore = (SCformat *) L->Store;
-      Ustore = (NCformat *) U->Store;
-      dQuerySpace(L, U, &memory_statistics_storage.Memory_usage);
-      if (*doc!=0)
+      Lstore = (SCformat *)L->Store;
+      Ustore = (NCformat *)U->Store;
+      if (*doc != 0)
       {
         printf(" No of nonzeros in factor L = %d\n", Lstore->nnz);
         printf(" No of nonzeros in factor U = %d\n", Ustore->nnz);
@@ -226,20 +223,13 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
       }
     }
 
-    /* PM: Indicate that the memory statistics have been recorded */
-    memory_statistics_storage.Memory_usage_has_been_recorded=1;
-
-    //printf(" L\\U MB %.3f\ttotal MB needed %.3f\n",
-    //       get_lu_factor_memory_usage_in_bytes()/1e6,
-    //       get_total_memory_usage_in_bytes()/1e6);
-
     /* Save the LU factors in the factors handle */
-    LUfactors = (factors_t*) SUPERLU_MALLOC(sizeof(factors_t));
+    LUfactors = (factors_t *)SUPERLU_MALLOC(sizeof(factors_t));
     LUfactors->L = L;
     LUfactors->U = U;
     LUfactors->perm_c = perm_c;
     LUfactors->perm_r = perm_r;
-    *f_factors = (fptr) LUfactors;
+    *f_factors = (fptr)LUfactors;
 
     //Work out and print the sign of the determinant
     //This code is hacked from supraLU by  Alex Pletzer
@@ -253,11 +243,11 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
     if (!(diagU = SUPERLU_MALLOC(*n * sizeof(SuperMatrix))))
       ABORT("Malloc fails for diagU[].");
     //Loop over the number of super diagonal terms(?)
-    for (k2=0; k2< nsupers; k2++)
+    for (k2 = 0; k2 < nsupers; k2++)
     {
       fsupc = L_FST_SUPC(k2);
-      nsupc = L_FST_SUPC(k2+1) - fsupc;
-      nsupr = L_SUB_START(fsupc+1) - L_SUB_START(fsupc);
+      nsupc = L_FST_SUPC(k2 + 1) - fsupc;
+      nsupr = L_SUB_START(fsupc + 1) - L_SUB_START(fsupc);
       luptr = L_NZ_START(fsupc);
 
       dblock = &diagU[fsupc];
@@ -271,9 +261,9 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
     //Now multiply all the diagonal terms together to get the determinant
     //Note that we need to use the mantissa, exponent formulation to
     //avoid underflow errors
-    double determinant_mantissa=1.0;
+    double determinant_mantissa = 1.0;
     int determinant_exponent = 0, iexp;
-    for (i=0; i<*n; i++)
+    for (i = 0; i < *n; i++)
     {
       determinant_mantissa *= frexp(diagU[i], &iexp);
       determinant_exponent += iexp;
@@ -306,15 +296,14 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
 
     //Return the sign of the determinant
     return sign;
-
   }
-  else if (*op_flag == 2)       /* Triangular solve */
-  {
+  else if (*op_flag == 2)
+  { /* Triangular solve */
     /* Initialize the statistics variables. */
     StatInit(&stat);
 
     /* Extract the LU factors in the factors handle */
-    LUfactors = (factors_t*) *f_factors;
+    LUfactors = (factors_t *)*f_factors;
     L = LUfactors->L;
     U = LUfactors->U;
     perm_c = LUfactors->perm_c;
@@ -330,12 +319,11 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
 
     //Return zero
     return 0;
-
   }
-  else if (*op_flag == 3)       /* Free storage */
-  {
+  else if (*op_flag == 3)
+  { /* Free storage */
     /* Free the LU factors in the factors handle */
-    LUfactors = (factors_t*) *f_factors;
+    LUfactors = (factors_t *)*f_factors;
     SUPERLU_FREE(LUfactors->perm_r);
     SUPERLU_FREE(LUfactors->perm_c);
     Destroy_SuperNode_Matrix(LUfactors->L);
@@ -347,8 +335,7 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
   }
   else
   {
-    fprintf(stderr,"Invalid op_flag=%d passed to c_cpp_dgssv()\n",*op_flag);
+    fprintf(stderr, "Invalid op_flag=%d passed to c_cpp_dgssv()\n", *op_flag);
     exit(-1);
   }
 }
-

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -445,7 +445,6 @@ template<class FLUID_ELEMENT, class POROELASTICITY_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
 PressureWaveFSIProblem()
 {
-
   // Create timesteppers
  Poro_time_stepper_pt = new Newmark<2>;
  add_time_stepper_pt(Poro_time_stepper_pt);
@@ -1129,7 +1128,7 @@ doc_solution(DocInfo& doc_info)
  ofstream file;
 
  // Fluid
- sprintf(filename,"%s/soln-fluid%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln-fluid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1155,7 +1154,7 @@ doc_solution(DocInfo& doc_info)
    pad="0";
   }
 
- sprintf(filename,"%s/soln-fluid%s%i.vtu",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln-fluid%s%i.vtu",doc_info.directory().c_str(),
          pad.c_str(),doc_info.number());
  file.open(filename);
  Fluid_mesh_pt->output_paraview(file,5);
@@ -1163,7 +1162,7 @@ doc_solution(DocInfo& doc_info)
  
 
  // Fluid at regularly spaced points
- sprintf(filename,"%s/regular_fluid%i.dat",
+ snprintf(filename, sizeof(filename), "%s/regular_fluid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1196,7 +1195,7 @@ doc_solution(DocInfo& doc_info)
  file.close();
 
  // Fluid inflow traction
- sprintf(filename,"%s/fluid_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1204,7 +1203,7 @@ doc_solution(DocInfo& doc_info)
  file.close();
 
  // Fluid FSI traction
- sprintf(filename,"%s/fluid_fsi_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_fsi_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1212,7 +1211,7 @@ doc_solution(DocInfo& doc_info)
  file.close();
 
  // Poroelasticity
- sprintf(filename,"%s/soln-poro%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln-poro%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1221,7 +1220,7 @@ doc_solution(DocInfo& doc_info)
 
 
  // Output solution to file in paraview format
- sprintf(filename,"%s/soln-poro%s%i.vtu",
+ snprintf(filename, sizeof(filename), "%s/soln-poro%s%i.vtu",
          doc_info.directory().c_str(),
          pad.c_str(),
          doc_info.number());
@@ -1230,7 +1229,7 @@ doc_solution(DocInfo& doc_info)
  file.close();
  
  // Solid at regularly spaced points
- sprintf(filename,"%s/regular_poro%i.dat",
+ snprintf(filename, sizeof(filename), "%s/regular_poro%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -1258,7 +1257,7 @@ doc_solution(DocInfo& doc_info)
  file.close();
 
  // Poroelasticity FSI traction
- sprintf(filename,"%s/poro_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/poro_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);

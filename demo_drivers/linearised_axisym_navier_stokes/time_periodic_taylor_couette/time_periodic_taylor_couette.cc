@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -99,9 +99,9 @@ namespace GlobalPhysicalVariables
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -168,7 +168,7 @@ public:
   {
    // Open trace file
    char filename1[256];
-   sprintf(filename1,"%s/base_trace_epsilon%2.1f_Re%4.2f.dat",
+   snprintf(filename1, sizeof(filename1), "%s/base_trace_epsilon%2.1f_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current);
@@ -461,7 +461,7 @@ void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
    const unsigned npts = 2;//5;
    
    // Open solution output file
-   sprintf(filename,"%s/base_soln_epsilon%2.1f_Re%4.2f_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/base_soln_epsilon%2.1f_Re%4.2f_soln%i.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current,
@@ -479,9 +479,9 @@ void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -552,7 +552,7 @@ public:
   {
    // Open trace file
    char filename[256];
-   sprintf(filename,"%s/perturbed_trace_epsilon%2.1f_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/perturbed_trace_epsilon%2.1f_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current);
@@ -830,7 +830,7 @@ doc_solution(DocInfo& doc_info,const bool& output_soln)
    const unsigned npts = 2;//5;
    
    // Open solution output file
-   sprintf(filename,"%s/perturbed_soln_epsilon%2.1f_Re%4.2f_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/perturbed_soln_epsilon%2.1f_Re%4.2f_soln%i.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current,
@@ -848,9 +848,9 @@ doc_solution(DocInfo& doc_info,const bool& output_soln)
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -896,13 +896,13 @@ public:
 
    // Set up stability problem trace files
    char filename[256];
-   sprintf(filename,"%s/periodic_base_flow_trace_epsilon%2.1f_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/periodic_base_flow_trace_epsilon%2.1f_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current);
    Trace_file_periodic_base_flow.open(filename);
 
-   sprintf(filename,"%s/power_method_trace_epsilon%2.1f_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/power_method_trace_epsilon%2.1f_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::Epsilon,
            GlobalPhysicalVariables::MMC_Re_current);
@@ -1620,9 +1620,9 @@ perform_power_method(const double& dt,
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1744,7 +1744,7 @@ int main(int argc, char* argv[])
   // Create and initialise global trace file
   ofstream global_trace;
   char filename[256];
-  sprintf(filename,"%s/global_trace_epsilon%2.1f.dat",
+  snprintf(filename, sizeof(filename), "%s/global_trace_epsilon%2.1f.dat",
           doc_info.directory().c_str(),
           GlobalPhysicalVariables::Epsilon);
   global_trace.open(filename);
@@ -1859,7 +1859,7 @@ int main(int argc, char* argv[])
   // Create and initialise global trace file
   ofstream global_trace;
   char filename[256];
-  sprintf(filename,"%s/global_trace_epsilon%2.1f.dat",
+  snprintf(filename, sizeof(filename), "%s/global_trace_epsilon%2.1f.dat",
           doc_info.directory().c_str(),
           GlobalPhysicalVariables::Epsilon);
   global_trace.open(filename);

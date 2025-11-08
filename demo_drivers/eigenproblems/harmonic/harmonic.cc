@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -58,9 +58,7 @@ public:
 //=================================================================
 /// A class for all elements that solve the simple one-dimensional
 /// eigenvalue problem
-/// \f[ 
-/// \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0
-/// \f] 
+/// \f[ \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0 \f]
 /// These elements are very closely related to the Poisson
 /// elements and could inherit from them. They are here developed
 /// from scratch for pedagogical purposes.
@@ -338,7 +336,7 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(const unsigned& label)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
+ snprintf(filename, sizeof(filename), "soln%i.dat",label);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -410,7 +408,7 @@ solve(const unsigned& label)
  this->doc_solution(label);
 
  char filename[100];
- sprintf(filename,"eigenvalues%i.dat",label);
+ snprintf(filename, sizeof(filename), "eigenvalues%i.dat",label);
  
  //Open an output file for the sorted eigenvalues
  ofstream evalues(filename);
@@ -428,9 +426,9 @@ solve(const unsigned& label)
 } //end_of_solve
  
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main==================================================

@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -40,10 +40,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_pseudo_elastic_non_adapt_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/pseudo_elastic_non_adapt_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/pseudo_elastic_non_adapt_TH.dat.gz \
     result_pseudo_elastic_non_adapt_TH.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -73,10 +73,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_pseudo_elastic_non_adapt_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/pseudo_elastic_non_adapt_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/pseudo_elastic_non_adapt_CR.dat.gz \
     result_pseudo_elastic_non_adapt_CR.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -108,10 +108,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_pseudo_elastic_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/pseudo_elastic_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/pseudo_elastic_TH.dat.gz \
     result_pseudo_elastic_TH.dat 0.5 1.0e-8 >> validation.log
 fi
 
@@ -141,10 +141,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_pseudo_elastic_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/pseudo_elastic_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/pseudo_elastic_CR.dat.gz \
     result_pseudo_elastic_CR.dat 7.0 1.50e-6 >> validation.log
 fi
 
@@ -176,10 +176,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_macro_no_adapt_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro_no_adapt_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro_no_adapt_TH.dat.gz \
     result_macro_no_adapt_TH.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -207,10 +207,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_macro_no_adapt_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro_no_adapt_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro_no_adapt_CR.dat.gz \
     result_macro_no_adapt_CR.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -244,10 +244,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_algebraic_no_adapt_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/alg_no_adapt_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_no_adapt_TH.dat.gz \
     result_algebraic_no_adapt_TH.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -276,10 +276,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_algebraic_no_adapt_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/alg_no_adapt_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_no_adapt_CR.dat.gz \
     result_algebraic_no_adapt_CR.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -313,10 +313,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_macro_adapt_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro_adapt_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro_adapt_TH.dat.gz \
     result_macro_adapt_TH.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -346,10 +346,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_macro_adapt_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro_adapt_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro_adapt_CR.dat.gz \
     result_macro_adapt_CR.dat 7.0 1.5e-6 >> validation.log
 fi
 
@@ -381,10 +381,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_algebraic_adapt_TH.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/alg_adapt_TH.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_adapt_TH.dat.gz \
     result_algebraic_adapt_TH.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -414,10 +414,10 @@ cat RESLT/soln0.dat RESLT/soln1.dat  \
     RESLT/soln2.dat RESLT/soln3.dat  \
     > result_algebraic_adapt_CR.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/alg_adapt_CR.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_adapt_CR.dat.gz \
     result_algebraic_adapt_CR.dat 7.0 1.5e-6 >> validation.log
 fi
 
@@ -428,7 +428,7 @@ mv RESLT RESLT_algebraic_adapt_CR
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -442,7 +442,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

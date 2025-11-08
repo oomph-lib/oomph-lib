@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -378,7 +378,7 @@ DarcyProblem<ELEMENT>::DarcyProblem()
 
  // Open trace file
  char filename[50];
- sprintf(filename,"%s/trace.dat",TestProblem::Directory.c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",TestProblem::Directory.c_str());
  Trace_file.open(filename);
 
 } // end of problem constructor
@@ -570,7 +570,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
 
  // Coarse solution
  unsigned npts_coarse=2;
- sprintf(filename,"%s/coarse_soln.dat",TestProblem::Directory.c_str());
+ snprintf(filename, sizeof(filename), "%s/coarse_soln.dat",TestProblem::Directory.c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts_coarse);
  some_file.close();
@@ -677,7 +677,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
    delete face_el_pt;
 
    // Plot
-   sprintf(filename,"%s/q_shape_fct%i.dat",TestProblem::Directory.c_str(),
+   snprintf(filename, sizeof(filename), "%s/q_shape_fct%i.dat",TestProblem::Directory.c_str(),
            count_shape_doc++);
    some_file.open(filename);
    unsigned nel=Bulk_mesh_pt->nelement();
@@ -689,7 +689,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
    some_file.close();
 
 
-   sprintf(filename,"%s/outer_unit_normal%i.dat",
+   snprintf(filename, sizeof(filename), "%s/outer_unit_normal%i.dat",
            TestProblem::Directory.c_str(),j);
    some_file.open(filename);
    some_file << x[0] << " " 
@@ -700,7 +700,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
    some_file.close();
 
 
-   sprintf(filename,"%s/flux_interpolation_point%i.dat",
+   snprintf(filename, sizeof(filename), "%s/flux_interpolation_point%i.dat",
            TestProblem::Directory.c_str(),j);
    some_file.open(filename);
    Vector<double> flux_interpolation_point(2);
@@ -711,7 +711,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
              << std::endl;
    some_file.close();
 
-   sprintf(filename,"%s/q_shape_fct_with_project%i.dat",
+   snprintf(filename, sizeof(filename), "%s/q_shape_fct_with_project%i.dat",
            TestProblem::Directory.c_str(),j);
    some_file.open(filename);
    for (unsigned e=0;e<nel;e++)
@@ -730,7 +730,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
  for (unsigned j=n_q_basis_edge;j<n_q_basis;j++)
   {
    el_pt->set_q_internal(j-n_q_basis_edge,1.0);
-   sprintf(filename,"%s/q_shape_fct%i.dat",
+   snprintf(filename, sizeof(filename), "%s/q_shape_fct%i.dat",
            TestProblem::Directory.c_str(),
            count_shape_doc++);
    some_file.open(filename);
@@ -750,7 +750,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
  for (unsigned j=0;j<n_p_basis;j++)
   {
    el_pt->set_p_value(j,1.0);
-   sprintf(filename,"%s/p_shape_fct%i.dat",
+   snprintf(filename, sizeof(filename), "%s/p_shape_fct%i.dat",
            TestProblem::Directory.c_str(),
            count_shape_doc++);
    some_file.open(filename);
@@ -812,7 +812,7 @@ void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
  // Output computed solution
  //-------------------------
  unsigned npts=5;
- sprintf(filename,"%s/soln%i.dat",TestProblem::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",TestProblem::Directory.c_str(),label);
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -821,14 +821,14 @@ void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
  // Output coarse solution
  //-----------------------
  unsigned npts_coarse=2;
- sprintf(filename,"%s/coarse_soln%i.dat",TestProblem::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",TestProblem::Directory.c_str(),label);
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts_coarse);
  some_file.close();
 
  // Output exact solution
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",TestProblem::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",TestProblem::Directory.c_str(),label);
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,
                             npts,
@@ -837,7 +837,7 @@ void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
 
  // Output boundary condition elements
  //-----------------------------------
- sprintf(filename,"%s/bc_elements%i.dat",TestProblem::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/bc_elements%i.dat",TestProblem::Directory.c_str(),label);
  some_file.open(filename);
  Surface_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -846,7 +846,7 @@ void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
  //----------
  Vector<double> norm(2,0.0);
  Vector<double> error(2,0.0);
- sprintf(filename,"%s/error%i.dat",TestProblem::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",TestProblem::Directory.c_str(),label);
   some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
                              TestProblem::exact_soln,

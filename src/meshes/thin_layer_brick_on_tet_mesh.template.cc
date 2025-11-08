@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,13 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_TEMPLATE_CC
-#define OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_TEMPLATE_CC
+#ifndef OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_TEMPLATE_HEADER
+#define OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_HEADER
+#error __FILE__ should only be included from thin_layer_brick_on_tet_mesh.h.
+#endif // OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_HEADER
 
 #include "../solid/solid_elements.h"
-#include "thin_layer_brick_on_tet_mesh.template.h"
-
 
 namespace oomph
 {
@@ -109,12 +110,10 @@ namespace oomph
           s_face[i][1] = 0.5;
           break;
 
-
         case 5:
           s_face[i][0] = 0.5;
           s_face[i][1] = 0.0;
           break;
-
 
           // Quarter side nodes
 
@@ -155,7 +154,6 @@ namespace oomph
           s_face[i][1] = 1.0 / 3.0;
           break;
 
-
           // Vertical internal midside nodes connecting 2 and 3
 
         case 13:
@@ -180,7 +178,6 @@ namespace oomph
           s_face[i][0] = 1.0 / 6.0; // 1.0-2.0*5.0/12.0;
           break;
 
-
           // Internal midside nodes connecting nodes 1 and 5
 
         case 17:
@@ -194,7 +191,6 @@ namespace oomph
           break;
       }
     }
-
 
     // Translation scheme for inverted FaceElements
     MapMatrixMixed<int, unsigned, unsigned> translate;
@@ -281,7 +277,6 @@ namespace oomph
       is_on_fsi_boundary[boundary_ids[ib]] = true;
     }
 
-
     // Figure out which boundaries are on the identified in/outflow boundaries
     unsigned n = in_out_boundary_id.size();
     Vector<std::vector<bool>> is_on_in_out_boundary(n);
@@ -311,7 +306,6 @@ namespace oomph
     Boundary_element_pt.resize(maxb);
     Face_index_at_boundary.resize(maxb);
 
-
     // Loop over all boundaries in tet mesh that make up the FSI interface
     nb = boundary_ids.size();
     for (unsigned ib = 0; ib < nb; ib++)
@@ -319,9 +313,8 @@ namespace oomph
       // Boundary number in "fluid" tet mesh
       unsigned b = boundary_ids[ib];
 
-
       // We'll setup boundary coordinates for this one
-      Boundary_coordinate_exists[b] = true;
+      set_boundary_coordinate_exists(b);
 
       // Remember for future reference
       FSI_boundary_id.push_back(b);
@@ -375,7 +368,6 @@ namespace oomph
             new DummyFaceElement<TElement<3, 3>>(bulk_elem_pt, face_index);
         }
 
-
         // Specify boundary id in bulk mesh (needed to extract
         // boundary coordinate)
         face_el_pt->set_boundary_number_in_bulk_mesh(b);
@@ -420,7 +412,6 @@ namespace oomph
           face_el_pt->interpolated_x(s, x);
           face_el_pt->outer_unit_normal(s, unit_normal);
 
-
           // Get node in the "fluid" mesh from face
           Node* fluid_node_pt = face_el_pt->node_pt(translate(normal_sign, j));
 
@@ -454,7 +445,6 @@ namespace oomph
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
             normals[new_node_pt].push_back(unit_normal);
-
 
             // If bottom node is only on FSI boundary, the nodes above
             // are not boundary nodes, apart from the last one!
@@ -571,7 +561,6 @@ namespace oomph
                 connected_node_pt[existing_node_pt][2 * ilayer + 1];
             }
           }
-
 
           // Second node with midside node in triangular face
           //-------------------------------------------------
@@ -734,7 +723,6 @@ namespace oomph
             }
           }
 
-
           // First node is quarter-edge node on triangular face
           //---------------------------------------------------
           j_local = 1;
@@ -787,7 +775,6 @@ namespace oomph
             }
             new_node_pt->set_coordinates_on_boundary(b, zeta);
             normals[new_node_pt].push_back(unit_normal);
-
 
             // If bottom node is only on FSI boundary, the nodes above
             // are not boundary nodes, apart from the last one!
@@ -893,7 +880,6 @@ namespace oomph
             new_el_pt[j][0]->node_pt(j_local + 18) =
               connected_node_pt[existing_node_pt][1];
 
-
             // Now do other layers
             for (unsigned ilayer = 1; ilayer < nlayer; ilayer++)
             {
@@ -905,7 +891,6 @@ namespace oomph
                 connected_node_pt[existing_node_pt][2 * ilayer + 1];
             }
           }
-
 
           // Third node is three-quarter-edge node on triangular face
           //---------------------------------------------------------
@@ -1091,7 +1076,6 @@ namespace oomph
             }
           }
 
-
           // Fourth node is unique for all elements
           //--------------------------------------
           j_local = 4;
@@ -1181,7 +1165,6 @@ namespace oomph
               Node_pt.push_back(new_nod_pt);
             }
           }
-
 
           // Fifth node is created by all elements (internal to this
           //--------------------------------------------------------
@@ -1279,7 +1262,6 @@ namespace oomph
           }
 
         } // End over the three bricks erected on current triangular face
-
 
         // Last element builds central node as its node 8
         //-----------------------------------------------
@@ -1395,7 +1377,6 @@ namespace oomph
           new_el_pt[0][ilayer]->node_pt(j_local + 18) =
             connected_node_pt[new_node_pt][2 * ilayer + 1];
         }
-
 
         // Nodes 6 and 7 in all elements are the same as nodes 2 and 5
         //------------------------------------------------------------
@@ -1527,7 +1508,6 @@ namespace oomph
       }
     }
 
-
     // Copy boundary IDs across
     for (unsigned jj = 0; jj < n; jj++)
     {
@@ -1538,7 +1518,6 @@ namespace oomph
         In_out_boundary_id[jj].push_back((*it));
       }
     }
-
 
 #ifdef PARANOID
     // Check
@@ -1561,7 +1540,6 @@ namespace oomph
       }
     }
 #endif
-
 
     // Average unit normals
     std::ofstream outfile;
@@ -1614,11 +1592,9 @@ namespace oomph
     }
     if (doc_normals) outfile.close();
 
-
     // Lookup scheme has now been setup yet
     Lookup_for_elements_next_boundary_is_setup = true;
   }
-
 
 } // namespace oomph
 

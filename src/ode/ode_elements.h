@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -26,13 +26,13 @@
 #ifndef OOMPH_ODE_ELEMENTS_H
 #define OOMPH_ODE_ELEMENTS_H
 
-#include "../generic/oomph_definitions.h"
-#include "../generic/oomph_utilities.h"
+#include "generic/oomph_definitions.h"
+#include "generic/oomph_utilities.h"
 
-#include "../generic/matrices.h"
-#include "../generic/Vector.h"
-#include "../generic/elements.h"
-#include "../generic/timesteppers.h"
+#include "generic/matrices.h"
+#include "generic/Vector.h"
+#include "generic/elements.h"
+#include "generic/timesteppers.h"
 
 namespace oomph
 {

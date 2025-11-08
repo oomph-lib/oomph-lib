@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -79,9 +79,9 @@ namespace Global_Physical_Variables
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_undeformed_leaflet=================================
@@ -152,9 +152,9 @@ public:
 }; //end_of_undeformed_wall
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class========================================
@@ -489,9 +489,19 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
    // Build iterative linear solver
    //------------------------------
+#ifdef OOMPH_HAS_TRILINOS
+   
+   TrilinosAztecOOSolver* iterative_linear_solver_pt = new
+    TrilinosAztecOOSolver;
+   iterative_linear_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+   
+#else
+   
    GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
     new GMRES<CRDoubleMatrix>;
-
+   
+#endif
+   
    // Set maximum number of iterations
    iterative_linear_solver_pt->max_iter() = 200;
 
@@ -531,7 +541,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_2D_poisson_problem(p_preconditioner_pt);
 
    // Pass to preconditioner
-   //prec_pt->set_p_preconditioner(p_preconditioner_pt);
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_p_preconditioner(p_preconditioner_pt);
 
 
    // Create internal preconditioner used on momentum block
@@ -547,7 +558,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_navier_stokes_momentum_block(f_preconditioner_pt);
 
    // Use Hypre for momentum block
-   //prec_pt->set_f_preconditioner(f_preconditioner_pt);
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_f_preconditioner(f_preconditioner_pt);
 
 #endif
 
@@ -688,14 +700,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  npts=5;
 
  // Output fluid solution
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output wall solution
- sprintf(filename,"%s/wall_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/wall_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Wall_mesh_pt->output(some_file,npts);
@@ -730,7 +742,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output fluid elements on fluid mesh boundary 4 (associated with
  // the "front")
  unsigned bound=4;
- sprintf(filename,"%s/fluid_boundary_elements_front_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_boundary_elements_front_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -746,7 +758,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output fluid elements on fluid mesh boundary 5 (associated with
  // the "back")
  bound=5;
- sprintf(filename,"%s/fluid_boundary_elements_back_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_boundary_elements_back_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -760,7 +772,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
 
  // Output normal vector on wall elements
- sprintf(filename,"%s/wall_normal_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/wall_normal_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -820,7 +832,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[1000];
- sprintf(filename,"OUTPUT.%i",
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",
          MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
@@ -860,7 +872,7 @@ int main(int argc, char* argv[])
  ofstream trace;
  if (problem.communicator_pt()->my_rank()==0)
   {
-   sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
    trace.open(filename);
   }
 
@@ -902,7 +914,7 @@ int main(int argc, char* argv[])
    Vector<unsigned> in_element_partition(n_partition,0);
 
    // Get partition from file
-   sprintf(filename,"fsi_channel_with_leaflet_partition.dat");
+   snprintf(filename, sizeof(filename), "fsi_channel_with_leaflet_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_partition;e++)
@@ -961,6 +973,9 @@ int main(int argc, char* argv[])
  //--------------------------
 
  // Limit the number of adaptations during unsteady run to one per timestep
+ max_adapt=0; // hierher this works for unsteady solves; otherwise seg
+              // fault during adaptation when run in non-validation mode.
+              // MH to sort out.
  max_adapt=1;
 
  // Don't re-set the initial conditions when adapting the mesh

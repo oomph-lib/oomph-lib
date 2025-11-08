@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -78,9 +78,9 @@ namespace TanhSolnForPoisson
 
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -416,7 +416,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"RESLT/trace.dat");
+ snprintf(filename, sizeof(filename), "RESLT/trace.dat");
  Trace_file.open(filename);
 
  // Setup equation numbering scheme
@@ -521,7 +521,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  unsigned npts;
  npts=5; 
  
- sprintf(filename,"RESLT/soln%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",Doc_info.number());
  some_file.open(filename);
  this->My_mesh_pt->output(some_file,npts); 
  some_file << "TEXT X = 22, Y = 92, CS=FRAME T = \"" 
@@ -530,14 +530,14 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  
  // Output exact solution 
  //----------------------
- sprintf(filename,"RESLT/exact_soln%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/exact_soln%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
  some_file.close();
  
  // Output boundaries
  //------------------
- sprintf(filename,"RESLT/boundaries%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/boundaries%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->output_boundaries(some_file);
  some_file.close();
@@ -546,7 +546,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm,dummy_error,zero_norm;
- sprintf(filename,"RESLT/error%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/error%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
                            error,norm); 

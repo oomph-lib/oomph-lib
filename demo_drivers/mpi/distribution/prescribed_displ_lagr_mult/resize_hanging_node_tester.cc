@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -127,9 +127,9 @@ private:
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -506,7 +506,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output nodes and number of values
  //----------------------------------
- sprintf(filename,"%s/nodes%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/nodes%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  unsigned nnod=solid_mesh_pt()->nnode();
@@ -521,7 +521,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output shape of deformed body
  //------------------------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -529,7 +529,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output Lagrange multipliers
  //----------------------------
- sprintf(filename,"%s/lagr%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/lagr%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
 

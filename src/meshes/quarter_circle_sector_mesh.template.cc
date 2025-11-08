@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_QUARTER_CIRCLE_SECTOR_MESH_TEMPLATE_CC
-#define OOMPH_QUARTER_CIRCLE_SECTOR_MESH_TEMPLATE_CC
+#ifndef OOMPH_QUARTER_CIRCLE_SECTOR_MESH_TEMPLATE_HEADER
+#define OOMPH_QUARTER_CIRCLE_SECTOR_MESH_TEMPLATE_HEADER
 
-
-#include "quarter_circle_sector_mesh.template.h"
+#ifndef OOMPH_QUARTER_CIRCLE_SECTOR_MESH_HEADER
+#error __FILE__ should only be included from quarter_circle_sector_mesh.h.
+#endif // OOMPH_QUARTER_CIRCLE_SECTOR_MESH_HEADER
 
 namespace oomph
 {
@@ -59,7 +60,7 @@ namespace oomph
     set_nboundary(3);
 
     // We have only bothered to parametrise boundary 1
-    Boundary_coordinate_exists[1] = true;
+    set_boundary_coordinate_exists(1);
 
     // Allocate the store for the elements
     Element_pt.resize(3);
@@ -73,13 +74,11 @@ namespace oomph
     // Can now allocate the store for the nodes
     Node_pt.resize(n_p * n_p + (n_p - 1) * n_p + (n_p - 1) * (n_p - 1));
 
-
     Vector<double> s(2);
     Vector<double> r(2);
 
     // Storage for the intrinsic boundary coordinate
     Vector<double> zeta(1);
-
 
     // Set up geometrical data
     //------------------------
@@ -87,10 +86,8 @@ namespace oomph
     // Initialise node counter
     unsigned long node_count = 0;
 
-
     // Now assign the topology
     // Boundaries are numbered 0 1 2 from the bottom proceeding anticlockwise
-
 
     // FIRST ELEMENT (lower left corner)
     //
@@ -147,7 +144,6 @@ namespace oomph
       node_count++;
     }
 
-
     // Loop over the other rows of nodes
     //------------------------------------
     for (unsigned l2 = 1; l2 < n_p; l2++)
@@ -165,7 +161,6 @@ namespace oomph
       // Set the pointer from the element to the node
       finite_element_pt(0)->node_pt(jnod_local) = Node_pt[node_count];
 
-
       // Set the position of the node
       s[0] = -1.0;
       s[1] = -1.0 + 2.0 * double(l2) / double(n_p - 1);
@@ -179,7 +174,6 @@ namespace oomph
 
       // Increment the node number
       node_count++;
-
 
       // The other nodes are in the interior
       //------------------------------------
@@ -343,11 +337,9 @@ namespace oomph
       zeta[0] = Xi_lo + 0.5 * (1.0 + s[1]) * Fract_mid * (Xi_hi - Xi_lo);
       Node_pt[node_count]->set_coordinates_on_boundary(1, zeta);
 
-
       // Increment the node number
       node_count++;
     }
-
 
     // THIRD ELEMENT (upper left corner)
     //
@@ -369,7 +361,6 @@ namespace oomph
         finite_element_pt(0)->node_pt(jnod_local_old);
     }
 
-
     // Loop over the remaining nodes in the last column (has already
     //--------------------------------------------------------------
     // been created via element 1)
@@ -386,7 +377,6 @@ namespace oomph
       finite_element_pt(2)->node_pt(jnod_local) =
         finite_element_pt(1)->node_pt(jnod_local_old);
     }
-
 
     // Loop over the nodes in rows (apart from last one which is on boundary 1)
     //-------------------------------------------------------------------------
@@ -446,7 +436,6 @@ namespace oomph
       }
     }
 
-
     // Top left corner is on boundaries 1 and 2:
     //------------------------------------------
 
@@ -474,7 +463,6 @@ namespace oomph
     // Set the intrinsic coordinate on the boundary 1
     zeta[0] = Xi_hi + 0.5 * (s[0] + 1.0) * (1.0 - Fract_mid) * (Xi_lo - Xi_hi);
     Node_pt[node_count]->set_coordinates_on_boundary(1, zeta);
-
 
     // Increment the node number
     node_count++;
@@ -529,12 +517,11 @@ namespace oomph
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
   // Algebraic-mesh-version of RefineableQuarterCircleSectorMesh
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //======================================================================
   /// Setup algebraic update operation, based on individual
@@ -613,7 +600,6 @@ namespace oomph
     Vector<double> s_tl(1);
     this->Wall_pt->locate_zeta(xi, obj_tl_pt, s_tl);
 
-
     // Element 0: central box
     //-----------------------
     {
@@ -647,7 +633,6 @@ namespace oomph
         // we'll have to recompute this reference
         // when the mesh is refined  as we might fall off the element otherwise)
         ref_value[2] = s_br[0];
-
 
         // Wall element at top left end of wall mesh:
         geom_object_pt[1] = obj_tl_pt;
@@ -753,7 +738,6 @@ namespace oomph
       }
     }
 
-
     // Element 2: Top left box
     //---------------------------
     {
@@ -841,7 +825,6 @@ namespace oomph
     }
   }
 
-
   //======================================================================
   /// Algebraic update function: Update in central box according
   /// to wall shape at time level t (t=0: present; t>0: previous)
@@ -896,7 +879,6 @@ namespace oomph
     // Second reference value: fractional y-position of node inside box
     double rho_y = ref_value[1];
 
-
     // Wall position in bottom right corner:
 
     // Pointer to wall element:
@@ -929,7 +911,6 @@ namespace oomph
     node_pt->x(t, 0) = r_br[0] * Lambda_x * rho_x;
     node_pt->x(t, 1) = r_tl[1] * Lambda_y * rho_y;
   }
-
 
   //====================================================================
   /// Algebraic update function: Update in lower right box according
@@ -1144,12 +1125,10 @@ namespace oomph
     Vector<double> r_wall(n_dim);
     obj_wall_pt->position(t, s_wall, r_wall);
 
-
     // Assign new nodal coordinate
     node_pt->x(t, 0) = r_top[0] + rho_1 * (r_wall[0] - r_top[0]);
     node_pt->x(t, 1) = r_top[1] + rho_1 * (r_wall[1] - r_top[1]);
   }
-
 
   //======================================================================
   /// Update algebraic update function for nodes in lower right box.
@@ -1165,7 +1144,6 @@ namespace oomph
     Vector<GeomObject*> geom_object_pt(
       node_pt->vector_geom_object_pt(Lower_right_box));
 
-
     // Now remove the update  info to allow overwriting below
     node_pt->kill_node_update_info(Lower_right_box);
 
@@ -1180,7 +1158,6 @@ namespace oomph
 
     // Second reference value: fractional s1-position of node inside box
     double rho_1 = ref_value[1];
-
 
     // Update reference to wall point in bottom right corner
     //------------------------------------------------------
@@ -1202,7 +1179,6 @@ namespace oomph
     // when the mesh is refined  as we might fall off the element otherwise
     ref_value[2] = s_br[0];
 
-
     // Update reference to wall point in upper left corner
     //----------------------------------------------------
 
@@ -1221,7 +1197,6 @@ namespace oomph
     // We'll have to recompute this reference
     // when the mesh is refined  as we might fall off the element otherwise
     ref_value[3] = s_tl[0];
-
 
     // Update reference to reference point on wall
     //--------------------------------------------
@@ -1319,7 +1294,6 @@ namespace oomph
     // when the mesh is refined  as we might fall off the element otherwise
     ref_value[3] = s_tl[0];
 
-
     // Update reference to reference point on wall
     //--------------------------------------------
 
@@ -1346,7 +1320,6 @@ namespace oomph
                                   geom_object_pt, // vector of geom objects
                                   ref_value); // vector of ref. vals
   }
-
 
 } // namespace oomph
 #endif

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -62,9 +62,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on two rectangular domains, discretised 
@@ -394,14 +394,14 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  unsigned npts=5;
 
  // Output Navier-Stokes solution
- sprintf(filename,"%s/fluid_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fluid_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Output advection diffusion solution
- sprintf(filename,"%s/temperature_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/temperature_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);

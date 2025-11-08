@@ -1,2 +1,0 @@
-SUBDIRS = \
-circular_disk

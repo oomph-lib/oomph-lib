@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -66,15 +66,15 @@ namespace Flags
  unsigned Convergence_criterion=0;
 
  /// Convergence tolerance
- double Convergence_tolerance=1.0e-8;
+ double Convergence_tolerance=1.0e-10;
 
 }
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -334,14 +334,14 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>:: doc_solution(
  unsigned npts=5;
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->wall_mesh_pt()->output(some_file,npts);

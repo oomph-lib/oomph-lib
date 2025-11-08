@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,14 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef LMESH2OOMPH_D_HEADER
-#define LMESH2OOMPH_D_HEADER
+#ifndef OOMPH_REFINEABLE_LINE_MESH_HEADER
+#define OOMPH_REFINEABLE_LINE_MESH_HEADER
 
 #include "line_mesh.h"
 #include "refineable_mesh.h"
 #include "refineable_line_element.h"
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.template.cc"
 
 namespace oomph
 {

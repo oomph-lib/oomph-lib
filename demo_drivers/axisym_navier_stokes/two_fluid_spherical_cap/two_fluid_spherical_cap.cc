@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -370,7 +370,7 @@ void CapProblem<ELEMENT>::solve_system()
    steady_newton_solve();
 
    //Create the filename, including the array index
-   sprintf(filename,"step%i_spine.dat",i);
+   snprintf(filename, sizeof(filename), "step%i_spine.dat",i);
    //Actually, write the data
    file.open(filename);
    Bulk_mesh_pt->output(file,5);

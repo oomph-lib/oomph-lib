@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_TEMPLATE_HEADER
 
-#include "single_layer_cubic_spine_mesh.template.h"
-#include "simple_cubic_mesh.template.cc"
+#ifndef OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_HEADER
+#error __FILE__ should only be included from single_layer_cubic_spine_mesh.h.
+#endif // OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_HEADER
+
+#include "simple_cubic_mesh.h"
 
 namespace oomph
 {
@@ -125,7 +128,6 @@ namespace oomph
       }
     }
 
-
     // LOOP OVER OTHER ELEMENTS IN THE FIRST ROW
     //-----------------------------------------
 
@@ -196,7 +198,6 @@ namespace oomph
           Spine* new_spine_pt = new Spine(1.0);
           Spine_pt.push_back(new_spine_pt);
 
-
           // Get pointer to node
           // Element i*n_x; node l2 + l1*n_p
           SpineNode* nod_pt = element_node_pt(i * n_x, l2 + l1 * n_p);
@@ -229,7 +230,6 @@ namespace oomph
         }
       }
 
-
       // REST OF THE ELEMENTS OF THE ROW
       for (unsigned j = 1; j < n_x; j++)
       {
@@ -242,7 +242,6 @@ namespace oomph
             // Assign the new spine with unit length
             Spine* new_spine_pt = new Spine(1.0);
             Spine_pt.push_back(new_spine_pt);
-
 
             // Get pointer to node
             // Element j + i*n_x; node l2 + l1*n_p

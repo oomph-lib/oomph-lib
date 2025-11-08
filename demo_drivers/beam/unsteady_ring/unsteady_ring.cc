@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -39,9 +39,9 @@ using namespace std;
 using namespace oomph;
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //====start_of_namespace============================
@@ -85,9 +85,9 @@ namespace Global_Physical_Variables
 
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -266,7 +266,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
  unsigned npts=5;
   
  // Output solution 
- sprintf(filename,"%s/ring%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ring%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -289,7 +289,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
  unsigned nsteps=time_stepper_pt()->nprev_values();
  for (unsigned t=0;t<=nsteps;t++)
   {     
-   sprintf(filename,"%s/ring%i-%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/ring%i-%i.dat",doc_info.directory().c_str(),
            doc_info.number(),t);
    some_file.open(filename);
    unsigned n_elem=mesh_pt()->nelement();
@@ -303,7 +303,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
   
  
  // Write restart file
- sprintf(filename,"%s/ring_restart%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ring_restart%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  dump_it(some_file);
@@ -476,7 +476,7 @@ void ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady_run()
 
  // Set up trace file
  char filename[100];
- sprintf(filename,"%s/trace_ring.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace_ring.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
  
  Trace_file <<  "VARIABLES=\"time\",\"R<sub>ctrl</sub>\",\"E<sub>pot</sub>\"";

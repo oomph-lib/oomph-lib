@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -40,9 +40,9 @@ using namespace oomph;
 
 using namespace MathematicalConstants;
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //============start_of_MyUnitCircle====================================
@@ -87,9 +87,9 @@ public:
 }; // end of MyUnitCircle
 
 
-/// //////////////////////////////////////////////////////////////////// 
-/// ////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_TanhSolnForUnsteadyHeat==============================
@@ -175,9 +175,9 @@ time)))-Y)),2.0))*Alpha*NY;
 } // end of TanhSolnForUnsteadyHeat
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class=========================================
@@ -294,7 +294,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
  
  Trace_file << "VARIABLES=\"time t\",\"u<SUB>FE</SUB>\",\"u<SUB>exact</SUB>\","
@@ -671,7 +671,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -700,7 +700,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,time_pt()->time(),
@@ -724,7 +724,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
@@ -762,7 +762,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 
  // Plot wall posn
  //---------------
- sprintf(filename,"%s/Wall%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/Wall%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  
@@ -776,7 +776,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Write restart file
- sprintf(filename,"%s/restart%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  dump_it(some_file);
@@ -872,9 +872,9 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 //======start_of_main=====================================================
 /// Demonstrate how to solve an unsteady heat problem

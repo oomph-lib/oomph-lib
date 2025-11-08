@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -24,10 +24,12 @@
 // LIC//
 // LIC//====================================================================
 
-#ifndef OOMPH_FULL_CIRCLE_MESH_TEMPLATE_CC
-#define OOMPH_FULL_CIRCLE_MESH_TEMPLATE_CC
+#ifndef OOMPH_FULL_CIRCLE_MESH_TEMPLATE_HEADER
+#define OOMPH_FULL_CIRCLE_MESH_TEMPLATE_HEADER
 
-#include "full_circle_mesh.template.h"
+#ifndef OOMPH_FULL_CIRCLE_MESH_HEADER
+#error __FILE__ should only be included from full_circle_mesh.h.
+#endif // OOMPH_FULL_CIRCLE_MESH_HEADER
 
 namespace oomph
 {
@@ -66,7 +68,7 @@ namespace oomph
     set_nboundary(1);
 
     // We have only bothered to parametrise the only boundary (boundary 0)
-    Boundary_coordinate_exists[0] = true;
+    set_boundary_coordinate_exists(0);
 
     // Allocate the store for the elements
     const unsigned nelem = 5;
@@ -245,7 +247,6 @@ namespace oomph
 
           break;
 
-
           // Macro element 2: Right element
           //--------------------------------
         case 2:
@@ -298,7 +299,6 @@ namespace oomph
                 finite_element_pt(ielem)->node_pt(jnod_local) =
                   finite_element_pt(ielem_neigh)->node_pt(jnod_local_neigh);
               }
-
 
               // Duplicate node: kill and set pointer to central element
               if ((i0 == 0) && (i1 != 0))
@@ -364,7 +364,6 @@ namespace oomph
             }
           }
 
-
           break;
 
           // Macro element 3: Top element
@@ -382,7 +381,6 @@ namespace oomph
 
               // Has the node been killed?
               bool killed = false;
-
 
               // Duplicate node: kill and set pointer to previous element
               if (i0 == n_p - 1)
@@ -484,7 +482,6 @@ namespace oomph
             }
           }
           break;
-
 
           // Macro element 4: Left element
           //--------------------------------
@@ -609,7 +606,6 @@ namespace oomph
                 finite_element_pt(ielem)->node_pt(jnod_local) =
                   finite_element_pt(ielem_neigh)->node_pt(jnod_local_neigh);
               }
-
 
               // No duplicate node: Copy across to mesh
               if (!killed)

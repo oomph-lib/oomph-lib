@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,6 @@
 
 // oomph-lib header
 #include "multi_domain.h"
-#include "multi_domain.template.cc"
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"

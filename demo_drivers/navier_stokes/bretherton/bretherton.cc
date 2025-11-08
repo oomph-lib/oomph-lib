@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -452,9 +452,9 @@ class FaceGeometry<FaceGeometry<BrethertonElement<SpineElement<QTaylorHoodElemen
 
 }
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //======================================================================
@@ -790,7 +790,7 @@ void BrethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -798,7 +798,7 @@ void BrethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output boundaries
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_boundaries(some_file);
@@ -817,7 +817,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
 {
 
  // Increase maximum residual
- Problem::Max_residuals=100.0;
+ Problem::Max_residuals=500.0;
 
  // Set output directory
  DocInfo doc_info;
@@ -827,7 +827,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  Trace_file << "VARIABLES=\"Ca\",";
@@ -854,7 +854,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
    // a certain tolerance: This is cheaper to check than restarting
    // the Newton method after divergence (we'd also need to back up
    // the previous solution)
-   double maxres=100.0;
+   double maxres = Problem::Max_residuals;
    while (true)
     {
      cout << "Checking max. res for Ca = " 

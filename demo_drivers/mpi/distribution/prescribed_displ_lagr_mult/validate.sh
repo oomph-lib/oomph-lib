@@ -1,8 +1,10 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the second argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=4
@@ -48,10 +50,10 @@ cat RESLT/soln0_on_proc0.dat RESLT/soln1_on_proc1.dat RESLT/soln2_on_proc0.dat \
     RESLT/lagr0_on_proc1.dat RESLT/lagr1_on_proc0.dat RESLT/lagr2_on_proc1.dat \
     > prescribed_displ_lagr_mult_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/prescribed_displ_lagr_mult_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/prescribed_displ_lagr_mult_results.dat.gz  \
          prescribed_displ_lagr_mult_results.dat >> validation.log
 fi
 
@@ -62,10 +64,10 @@ cat RESLT/soln3_on_proc0.dat RESLT/soln3_on_proc1.dat \
     RESLT/lagr4_on_proc0.dat RESLT/lagr4_on_proc1.dat  \
     > prescribed_displ_lagr_mult_results_load_balanced.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/prescribed_displ_lagr_mult_results_load_balanced.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/prescribed_displ_lagr_mult_results_load_balanced.dat.gz  \
          prescribed_displ_lagr_mult_results_load_balanced.dat >> validation.log
 fi
 
@@ -99,10 +101,10 @@ cat RESLT_resize_test/soln0_on_proc0.dat RESLT_resize_test/soln1_on_proc1.dat RE
     RESLT_resize_test/nodes2_on_proc0.dat RESLT_resize_test/nodes2_on_proc1.dat \
     > resize_test_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/resize_test_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/resize_test_results.dat.gz  \
          resize_test_results.dat >> validation.log
 fi
 
@@ -115,17 +117,17 @@ cat RESLT_resize_test/soln3_on_proc0.dat RESLT_resize_test/soln3_on_proc1.dat \
     RESLT_resize_test/nodes4_on_proc0.dat RESLT_resize_test/nodes4_on_proc1.dat  \
     > resize_test_load_balanced.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/resize_test_load_balanced.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/resize_test_load_balanced.dat.gz  \
          resize_test_load_balanced.dat >> validation.log
 fi
 
 #------------------------------------------------------
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -139,7 +141,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

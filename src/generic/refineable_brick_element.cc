@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -2932,7 +2932,7 @@ namespace oomph
     SolidNode* solid_node3_pt = dynamic_cast<SolidNode*>(node_pt(node3));
     SolidNode* solid_node4_pt = dynamic_cast<SolidNode*>(node_pt(node4));
 
-    //#ifdef PARANOID
+    // #ifdef PARANOID
     if (solid_node1_pt == 0)
     {
       throw OomphLibError(
@@ -2965,7 +2965,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    //#endif
+    // #endif
 
     // Number of coordinates
     unsigned n_dim = this->nodal_dimension();

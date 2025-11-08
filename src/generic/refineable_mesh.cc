@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -34,8 +34,6 @@
 #include <limits>
 
 #include "refineable_mesh.h"
-// Include to fill in additional_synchronise_hanging_nodes() function
-#include "refineable_mesh.template.cc"
 
 namespace oomph
 {
@@ -2756,13 +2754,13 @@ namespace oomph
                  {
                   char filename[100];
                   std::ofstream some_file;
-                  sprintf(filename,"sync_hanging_node_crash_mesh_proc%i.dat",
-                          my_rank);
+                  snprintf(filename, sizeof(filename),
+                "sync_hanging_node_crash_mesh_proc%i.dat", my_rank);
                   some_file.open(filename);
                   this->output(some_file);
                   some_file.close();
 
-                  sprintf(filename,
+                  snprintf(filename, sizeof(filename),
                           "sync_hanging_node_crash_mesh_with_haloes_proc%i.dat",
                           my_rank);
                   some_file.open(filename);
@@ -3936,9 +3934,9 @@ namespace oomph
 #endif
 
 
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
 
   //========================================================================
@@ -4084,8 +4082,12 @@ namespace oomph
     // Sum n_refine across all processors
     if (this->is_mesh_distributed())
     {
-      MPI_Allreduce(
-        &n_refine, &total_n_refine, 1, MPI_INT, MPI_SUM, Comm_pt->mpi_comm());
+      MPI_Allreduce(&n_refine,
+                    &total_n_refine,
+                    1,
+                    MPI_UNSIGNED,
+                    MPI_SUM,
+                    Comm_pt->mpi_comm());
     }
     else
     {
@@ -4111,7 +4113,7 @@ namespace oomph
       MPI_Allreduce(&n_unrefine,
                     &total_n_unrefine,
                     1,
-                    MPI_INT,
+                    MPI_UNSIGNED,
                     MPI_SUM,
                     Comm_pt->mpi_comm());
     }
