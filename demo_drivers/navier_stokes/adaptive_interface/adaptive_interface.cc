@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -1224,7 +1224,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
          << Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) << std::endl;   
    
    char file[100];
-   sprintf(file,"step%i.dat",i);
+   snprintf(file, sizeof(file), "step%i.dat",i);
    filename.open(file);
    Bulk_mesh_pt->output(filename,5);
    Surface_mesh_pt->output(filename,5);
@@ -1266,9 +1266,9 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 }
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
  int main()

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,8 @@
 //LIC//====================================================================
 // Driver for Helmholtz/TimeHarmonicTimeHarmonicLinElast coupling
 
+#include <cassert>
+
 //Oomph-lib includes
 #include "generic.h"
 #include "helmholtz.h"
@@ -37,9 +39,9 @@
 using namespace std;
 using namespace oomph;
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -486,7 +488,7 @@ CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::CoatedDiskProblem()
 
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
   
 
@@ -735,7 +737,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Compute/output the radiated power
  //----------------------------------
- sprintf(filename,"%s/power%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/power%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 
@@ -784,7 +786,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Output displacement field
  //--------------------------
- sprintf(filename,"%s/elast_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/elast_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,n_plot);
@@ -793,7 +795,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Output fsi traction elements
  //----------------------------- 
- sprintf(filename,"%s/traction_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  FSI_traction_mesh_pt->output(some_file,n_plot);
@@ -802,7 +804,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Output Helmholtz fsi flux elements
  //----------------------------------- 
- sprintf(filename,"%s/flux_bc_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/flux_bc_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Helmholtz_fsi_flux_mesh_pt->output(some_file,n_plot);
@@ -811,7 +813,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Output Helmholtz
  //-----------------
- sprintf(filename,"%s/helmholtz_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/helmholtz_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Helmholtz_mesh_pt->output(some_file,n_plot);
@@ -821,7 +823,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
 
  // Output exact solution for Helmholtz 
  //------------------------------------
- sprintf(filename,"%s/exact_helmholtz_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_helmholtz_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Helmholtz_mesh_pt->output_fct(some_file,n_plot,

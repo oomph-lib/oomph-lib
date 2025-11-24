@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_CYLINDER_WITH_FLAG_MESH_TEMPLATE_CC
-#define OOMPH_CYLINDER_WITH_FLAG_MESH_TEMPLATE_CC
+#ifndef OOMPH_CYLINDER_WITH_FLAG_MESH_TEMPLATE_HEADER
+#define OOMPH_CYLINDER_WITH_FLAG_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_CYLINDER_WITH_FLAG_MESH_HEADER
+#error __FILE__ should only be included from cylinder_with_flag_mesh.h.
+#endif // OOMPH_CYLINDER_WITH_FLAG_MESH_HEADER
 
 // Include the headers file
-#include "cylinder_with_flag_mesh.template.h"
-
 
 namespace oomph
 {
@@ -234,7 +236,6 @@ namespace oomph
       tmp_node_pt[9 * np * np + n * np] = 0;
     }
 
-
     // Edge between Elements 5 and 10
     for (unsigned n = 0; n < np; n++)
     {
@@ -246,7 +247,6 @@ namespace oomph
       delete tmp_node_pt[10 * np * np + n * np];
       tmp_node_pt[10 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 7 and 11
     for (unsigned n = 0; n < np; n++)
@@ -296,7 +296,6 @@ namespace oomph
       tmp_node_pt[14 * np * np + n * np] = 0;
     }
 
-
     // Edge between Elements 7 and 8
     for (unsigned n = 0; n < np; n++)
     {
@@ -309,7 +308,6 @@ namespace oomph
       tmp_node_pt[8 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 9 and 10
     for (unsigned n = 0; n < np; n++)
     {
@@ -321,7 +319,6 @@ namespace oomph
       delete tmp_node_pt[10 * np * np + np * (np - 1) + n];
       tmp_node_pt[10 * np * np + np * (np - 1) + n] = 0;
     }
-
 
     // Edge between Elements 11 and 15
     for (unsigned n = 0; n < np; n++)
@@ -371,7 +368,6 @@ namespace oomph
       tmp_node_pt[18 * np * np + n * np] = 0;
     }
 
-
     // Edge between Elements 11 and 12
     for (unsigned n = 0; n < np; n++)
     {
@@ -383,7 +379,6 @@ namespace oomph
       delete tmp_node_pt[12 * np * np + np * (np - 1) + n];
       tmp_node_pt[12 * np * np + np * (np - 1) + n] = 0;
     }
-
 
     // Edge between Elements 13 and 14
     for (unsigned n = 0; n < np; n++)
@@ -397,7 +392,6 @@ namespace oomph
       tmp_node_pt[14 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Element 15 and 19
     for (unsigned n = 0; n < np; n++)
     {
@@ -409,7 +403,6 @@ namespace oomph
       delete tmp_node_pt[19 * np * np + np * (np - 1) + n];
       tmp_node_pt[19 * np * np + np * (np - 1) + n] = 0;
     }
-
 
     // Edge between Elements 19 and 16
     for (unsigned n = 0; n < np; n++)
@@ -423,7 +416,6 @@ namespace oomph
       tmp_node_pt[16 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 15 and 16
     for (unsigned n = 0; n < np; n++)
     {
@@ -435,7 +427,6 @@ namespace oomph
       delete tmp_node_pt[16 * np * np + np * (np - 1) + n];
       tmp_node_pt[16 * np * np + np * (np - 1) + n] = 0;
     }
-
 
     // Edge between Element 18 and 20
     for (unsigned n = 0; n < np; n++)
@@ -449,7 +440,6 @@ namespace oomph
       tmp_node_pt[20 * np * np + n] = 0;
     }
 
-
     // Edge between Elements 17 and 20
     for (unsigned n = 0; n < np; n++)
     {
@@ -461,7 +451,6 @@ namespace oomph
       delete tmp_node_pt[20 * np * np + n * np];
       tmp_node_pt[20 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 17 and 18
     for (unsigned n = 0; n < np; n++)
@@ -475,7 +464,6 @@ namespace oomph
       tmp_node_pt[18 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 19 and 21
     for (unsigned n = 0; n < np; n++)
     {
@@ -487,7 +475,6 @@ namespace oomph
       delete tmp_node_pt[21 * np * np + n * np];
       tmp_node_pt[21 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 21 and 22
     for (unsigned n = 0; n < np; n++)
@@ -501,7 +488,6 @@ namespace oomph
       tmp_node_pt[22 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 20 and 23
     for (unsigned n = 0; n < np; n++)
     {
@@ -513,7 +499,6 @@ namespace oomph
       delete tmp_node_pt[23 * np * np + n * np];
       tmp_node_pt[23 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 23 and 22
     for (unsigned n = 0; n < np; n++)
@@ -527,7 +512,6 @@ namespace oomph
       tmp_node_pt[22 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 21 and 24
     for (unsigned n = 0; n < np; n++)
     {
@@ -539,7 +523,6 @@ namespace oomph
       delete tmp_node_pt[24 * np * np + n * np];
       tmp_node_pt[24 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 22 and 25
     for (unsigned n = 0; n < np; n++)
@@ -553,7 +536,6 @@ namespace oomph
       tmp_node_pt[25 * np * np + n * np] = 0;
     }
 
-
     // Edge between Elements 23 and 26
     for (unsigned n = 0; n < np; n++)
     {
@@ -565,7 +547,6 @@ namespace oomph
       delete tmp_node_pt[26 * np * np + n * np];
       tmp_node_pt[26 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 24 and 25
     for (unsigned n = 0; n < np; n++)
@@ -579,7 +560,6 @@ namespace oomph
       tmp_node_pt[25 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 25 and 26
     for (unsigned n = 0; n < np; n++)
     {
@@ -591,7 +571,6 @@ namespace oomph
       delete tmp_node_pt[26 * np * np + np * (np - 1) + n];
       tmp_node_pt[26 * np * np + np * (np - 1) + n] = 0;
     }
-
 
     // Edge between Element 24 and 27
     for (unsigned n = 0; n < np; n++)
@@ -605,7 +584,6 @@ namespace oomph
       tmp_node_pt[27 * np * np + np * (np - 1) + n] = 0;
     }
 
-
     // Edge between Elements 25 and 27
     for (unsigned n = 0; n < np; n++)
     {
@@ -617,7 +595,6 @@ namespace oomph
       delete tmp_node_pt[27 * np * np + n * np];
       tmp_node_pt[27 * np * np + n * np] = 0;
     }
-
 
     // Edge between Element 26 and 27
     for (unsigned n = 0; n < np; n++)
@@ -631,7 +608,6 @@ namespace oomph
       tmp_node_pt[27 * np * np + n] = 0;
     }
 
-
     // Edge between Elements 27 and 28
     for (unsigned n = 0; n < np; n++)
     {
@@ -644,7 +620,6 @@ namespace oomph
       tmp_node_pt[28 * np * np + n * np] = 0;
     }
 
-
     // Edge between Elements 28 and 29
     for (unsigned n = 0; n < np; n++)
     {
@@ -656,7 +631,6 @@ namespace oomph
       delete tmp_node_pt[29 * np * np + n * np];
       tmp_node_pt[29 * np * np + n * np] = 0;
     }
-
 
     // Edge between Elements 29 and 30
     for (unsigned n = 0; n < np; n++)
@@ -780,7 +754,6 @@ namespace oomph
         4, this->finite_element_pt(0)->node_pt(n * np + np - 1));
     }
 
-
     for (unsigned n = 1; n < np; n++)
     {
       // Next part of lower boundary
@@ -808,7 +781,6 @@ namespace oomph
         4, this->finite_element_pt(6)->node_pt(np * (np - 1) + n));
     }
 
-
     for (unsigned n = 1; n < np; n++)
     {
       // Next part of lower boundary
@@ -821,7 +793,6 @@ namespace oomph
       this->add_boundary_node(
         4, this->finite_element_pt(5)->node_pt(np * (np - 1) + n));
     }
-
 
     for (unsigned n = 1; n < np; n++)
     {
@@ -852,7 +823,6 @@ namespace oomph
       this->add_boundary_node(
         2, this->finite_element_pt(30)->node_pt(np * (np - 1) + n));
     }
-
 
     this->node_update();
     setup_boundary_element_info();
@@ -890,9 +860,9 @@ namespace oomph
     }
 
     // We have parametrised boundary 5,6 and 7
-    this->Boundary_coordinate_exists[5] = true;
-    this->Boundary_coordinate_exists[6] = true;
-    this->Boundary_coordinate_exists[7] = true;
+    this->set_boundary_coordinate_exists(5);
+    this->set_boundary_coordinate_exists(6);
+    this->set_boundary_coordinate_exists(7);
 
     // Loop over all elements and set macro element pointer
     for (unsigned e = 0; e < 31; e++)
@@ -903,10 +873,9 @@ namespace oomph
   }
 
 
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
-
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Setup algebraic node update
@@ -1176,7 +1145,6 @@ namespace oomph
                                ref_value); // vector of ref. values
     }
 
-
     // Part VII = macro element 20
     el_pt = this->finite_element_pt(20);
     nnode = el_pt->nnode();
@@ -1266,7 +1234,6 @@ namespace oomph
       // Sixth reference value : local coordinate in the sub geomobject
       ref_value[5] = s[0];
 
-
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
       dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
@@ -1275,7 +1242,6 @@ namespace oomph
                                geom_object_pt, // vector of geom objects
                                ref_value); // vector of ref. values
     }
-
 
     // Part IX : macro element 4
     el_pt = this->finite_element_pt(4);
@@ -1333,9 +1299,7 @@ namespace oomph
                                ref_value); // vector of ref. values
     }
 
-
   } // end of setup_algebraic_node_update
-
 
   //=================================================================
   /// The algebraic node update function
@@ -1392,7 +1356,6 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     }
 
-
   } // end of algebraic_node_update()
 
   //=================================================================
@@ -1432,7 +1395,6 @@ namespace oomph
     node_pt->x(t, 1) =
       ref_point[1] + (1.0 - r) * (flag_point[1] - ref_point[1]);
   }
-
 
   //=================================================================
   /// Node update for region II
@@ -1649,7 +1611,6 @@ namespace oomph
     p1[0] = p14[0] + ref_value[0] * (p5[0] - p14[0]);
     p1[1] = p14[1] + ref_value[0] * (p5[1] - p14[1]);
 
-
     // Connect those points with the vertical fraction ref_value[1]
     node_pt->x(t, 0) = point_flag[0] + ref_value[1] * (p1[0] - point_flag[0]);
     node_pt->x(t, 1) = point_flag[1] + ref_value[1] * (p1[1] - point_flag[1]);
@@ -1691,14 +1652,12 @@ namespace oomph
     p1[0] = p40[0] + ref_value[0] * (p45[0] - p40[0]);
     p1[1] = p40[1] + ref_value[0] * (p45[1] - p40[1]);
 
-
     // Connect those points with the vertical fraction ref_value[1]
     node_pt->x(t, 0) =
       point_flag[0] + (1 - ref_value[1]) * (p1[0] - point_flag[0]);
     node_pt->x(t, 1) =
       point_flag[1] + (1 - ref_value[1]) * (p1[1] - point_flag[1]);
   }
-
 
   //=================================================================
   /// Node update for region VIII
@@ -1871,10 +1830,9 @@ namespace oomph
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
   //===================================================================
   ///  Update the node update functions
@@ -1885,7 +1843,6 @@ namespace oomph
   {
     // Extract ID
     unsigned id = node_pt->node_update_fct_id();
-
 
     if (id == 8)
     {
@@ -1905,7 +1862,6 @@ namespace oomph
       GeomObject* geom_obj_pt;
       this->Top_flag_pt->locate_zeta(zeta_ref_flag, geom_obj_pt, s);
 
-
       // Update the pointer to the (sub-)GeomObject within which the
       // reference point is located.
       geom_object_pt[0] = geom_obj_pt;
@@ -1914,7 +1870,6 @@ namespace oomph
       // in flag sub-element
       ref_value[3] = s[0];
 
-
       // Get zeta coordinate of point at end of macro element
       Vector<double> zeta_end_flag(1);
       zeta_end_flag[0] = ref_value[4];
@@ -1922,7 +1877,6 @@ namespace oomph
       // Get the sub-geomobject and the local coordinate containing the
       // point at the end of the macro element
       this->Top_flag_pt->locate_zeta(zeta_end_flag, geom_obj_pt, s);
-
 
       // Update the pointer to the (sub-)GeomObject within which the
       // point at the end of the macro element is located
@@ -1967,7 +1921,6 @@ namespace oomph
       // in flag sub-element
       ref_value[3] = s[0];
 
-
       // Get zeta coordinate of point at end of macro element
       Vector<double> zeta_end_flag(1);
       zeta_end_flag[0] = ref_value[4];
@@ -1993,7 +1946,6 @@ namespace oomph
                                     geom_object_pt, // vector of geom objects
                                     ref_value); // vector of ref. values
     }
-
 
     if ((id == 1) || (id == 6))
     {
@@ -2045,7 +1997,6 @@ namespace oomph
                                       ref_value); // vector of ref. values
       }
     }
-
 
     if ((id == 2) || (id == 7))
     {
@@ -2132,7 +2083,6 @@ namespace oomph
       // this points to the sub-object)
       geom_object_pt[0] = geom_obj_pt;
 
-
       if (id == 3)
       {
         // Update second reference value: Reference local coordinate
@@ -2180,7 +2130,6 @@ namespace oomph
       }
     }
   }
-
 
 } // namespace oomph
 

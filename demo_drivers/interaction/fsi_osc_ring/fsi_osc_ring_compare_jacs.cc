@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -380,7 +380,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     ofstream some_file; char filename[100];
     //Construct the output filename from the doc_info number and the
     //output directory
-    sprintf(filename,"%s/soln%i_%i.dat",doc_info.directory().c_str(),
+    snprintf(filename, sizeof(filename), "%s/soln%i_%i.dat",doc_info.directory().c_str(),
             i_case,doc_info.number());
     //Open the output file
     some_file.open(filename);

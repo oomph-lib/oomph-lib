@@ -17,37 +17,30 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Install requirements
-        run: |
-             sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
-             doxygen --version
+        run: sudo apt-get install cmake ninja-build doxygen texlive texlive-latex-extra texlive-font-utils
 
-      - name: Pick configuration
-        run: cp config/configure_options/build_web_version config/configure_options/current
-
-      - name: Configure
-        run: ./non_interactive_autogen.sh -sn
-
-      - name: Build bin
-        run: make -C bin
+      - name: Check doxygen version
+        run: doxygen --version
 
       - name: Build doc
-        run: make -C doc
+        run: cmake -G Ninja -B build && cmake --build build && rm -rf build
+        working-directory: doc
 
       - name: Run website install script
-        run: ./bin/website_install.sh
+        run: ./scripts/website_install.sh
 
       - name: Grab redirect file
-        run: cp ./bin/redirect.html ./build/website/index.html
+        run: cp ./scripts/redirect.html ./build/website/index.html
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: "gh-pages" # The branch the action should deploy to.
-          FOLDER: build/website # The folder the action should deploy.
-          CLEAN: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.inputs.publishBranch }} # The branch the action should deploy to.
+          folder: build/website # The folder the action should deploy.
+          clean: true

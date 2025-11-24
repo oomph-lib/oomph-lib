@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,9 @@
 #define OOMPH_EIGHTH_SPHERE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -130,7 +130,6 @@ namespace oomph
           }
 
           break;
-
 
           // Macro element 1:right
         case 1:
@@ -265,7 +264,6 @@ namespace oomph
                               OOMPH_EXCEPTION_LOCATION);
       }
     }
-
 
   private:
     // Radius of the sphere
@@ -416,10 +414,9 @@ namespace oomph
                    Vector<double>& f);
   };
 
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Boundary of central box macro element
@@ -434,7 +431,6 @@ namespace oomph
     f[2] = Radius * 0.25 * (1.0 + zeta[1]);
   }
 
-
   //=================================================================
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -447,7 +443,6 @@ namespace oomph
     f[1] = Radius * 0.25 * (1.0 + zeta[0]);
     f[2] = Radius * 0.25 * (1.0 + zeta[1]);
   }
-
 
   //=================================================================
   ///  Boundary of central box macro element
@@ -462,7 +457,6 @@ namespace oomph
     f[2] = Radius * 0.25 * (1.0 + zeta[1]);
   }
 
-
   //=================================================================
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -475,7 +469,6 @@ namespace oomph
     f[1] = Radius * 0.5;
     f[2] = Radius * 0.25 * (1.0 + zeta[1]);
   }
-
 
   //=================================================================
   ///  Boundary of central box macro element
@@ -503,7 +496,6 @@ namespace oomph
     f[2] = Radius * 0.5;
   }
 
-
   //=================================================================
   ///  Boundary of right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -514,7 +506,6 @@ namespace oomph
   {
     r_centr_R(t, zeta, f);
   }
-
 
   //=================================================================
   ///  Boundary of right box macro element
@@ -577,7 +568,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   ///  Boundary of right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -633,7 +623,6 @@ namespace oomph
         on_center[i] + 0.5 * (zeta[0] + 1.0) * (on_sphere[i] - on_center[i]);
     }
   }
-
 
   //=================================================================
   ///  Boundary of  right box macro element
@@ -691,7 +680,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -702,7 +690,6 @@ namespace oomph
   {
     r_right_U(t, zeta, f);
   }
-
 
   //=================================================================
   ///  Boundary of top left box macro element
@@ -776,7 +763,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -804,7 +790,6 @@ namespace oomph
         on_center[i] + 0.5 * (zeta[1] + 1.0) * (on_sphere[i] - on_center[i]);
     }
   }
-
 
   //=================================================================
   ///  Boundary of top left box macro element
@@ -834,7 +819,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -848,7 +832,6 @@ namespace oomph
     zeta2[1] = zeta[0];
     r_right_F(t, zeta2, f);
   }
-
 
   //=================================================================
   ///  Boundary of top left box macro element
@@ -878,7 +861,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -890,7 +872,6 @@ namespace oomph
     r_up_F(t, zeta, f);
   }
 
-
   //=================================================================
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
@@ -901,7 +882,6 @@ namespace oomph
   {
     r_centr_F(t, zeta, f);
   }
-
 
   //=================================================================
   /// Boundary of top left box macro element
@@ -935,7 +915,6 @@ namespace oomph
       f[i] = alpha * p[i];
     }
   }
-
 
 } // namespace oomph
 

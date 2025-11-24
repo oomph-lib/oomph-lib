@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -422,14 +422,14 @@ doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
  
  // Output solution 
- sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output norm of solution (to allow validation of solution even
  // if triangle generates a slightly different mesh)
- sprintf(filename,"%s/norm.dat",doc_info.directory().c_str());   
+ snprintf(filename, sizeof(filename), "%s/norm.dat",doc_info.directory().c_str());   
  some_file.open(filename);   
  double norm=0.0;
  unsigned nel=Bulk_mesh_pt->nelement();

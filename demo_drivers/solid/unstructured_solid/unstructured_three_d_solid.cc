@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -100,9 +100,9 @@ public:
 
 };
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -311,7 +311,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output_boundaries(some_file);
@@ -320,7 +320,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -329,7 +329,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output traction
  //----------------
- sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Traction_mesh_pt->output(some_file,npts);

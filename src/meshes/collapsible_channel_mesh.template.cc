@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_COLLAPSIBLE_CHANNEL_MESH_TEMPLATE_CC
-#define OOMPH_COLLAPSIBLE_CHANNEL_MESH_TEMPLATE_CC
+#ifndef OOMPH_COLLAPSIBLE_CHANNEL_MESH_TEMPLATE_HEADER
+#define OOMPH_COLLAPSIBLE_CHANNEL_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_COLLAPSIBLE_CHANNEL_MESH_HEADER
+#error __FILE__ should only be included from collapsible_channel_mesh.h.
+#endif // OOMPH_COLLAPSIBLE_CHANNEL_MESH_HEADER
 
 // Include the headers file for collapsible channel
-#include "collapsible_channel_mesh.template.h"
-
 
 namespace oomph
 {
@@ -225,14 +227,13 @@ namespace oomph
     this->setup_boundary_element_info();
 
     // We have only bothered to parametrise boundary 3
-    this->Boundary_coordinate_exists[3] = true;
+    this->set_boundary_coordinate_exists(3);
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Perform algebraic mesh update at time level t (t=0: present;
@@ -315,7 +316,6 @@ namespace oomph
     node_pt->x(t, 1) = fract * r_wall[1];
   }
 
-
   //=====start_setup=================================================
   /// Setup algebraic mesh update -- assumes that mesh has
   /// initially been set up with a flush upper wall
@@ -382,7 +382,6 @@ namespace oomph
         }
 #endif
 
-
         // One geometric object is involved in update operation
         Vector<GeomObject*> geom_object_pt(1);
 
@@ -424,10 +423,9 @@ namespace oomph
   } // end of setup_algebraic_node_update
 
 
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
   //========start_update_node_update=================================
   /// Update the geometric references that are used
@@ -508,7 +506,6 @@ namespace oomph
     // pointer to the geom object have to be re-computed.
     // ref_value[3]=zeta[0];     //unchanged
 
-
     // Kill the existing node update info
     node_pt->kill_node_update_info();
 
@@ -517,7 +514,6 @@ namespace oomph
                                   geom_object_pt, // vector of geom objects
                                   ref_value); // vector of ref. values
   }
-
 
 } // namespace oomph
 #endif

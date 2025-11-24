@@ -7,14 +7,13 @@ former/current project/MSc/PhD students and collaborators who made (or are still
 making) significant contributions to the development of the library. The key maintainers are
 listed below; a complete list of contributors can be found at
 
-      http://oomph-lib.org/doc/people/html/index.html
-      
-     
+      https://oomph-lib.github.io/oomph-lib/doc/people/html/index.html
+
 We're always looking for more help! Get in touch if you're interested in joining the team.
- 
-Person                              | Position       
-------------------------------------|-------------------------------------------------------------------------------------------------------------
-[**Andrew Hazel**](https://github.com/alhazel) | **Architect & Maintainer** 
-[**Matthias Heil**](https://github.com/MatthiasHeilManchester)  | **Architect & Maintainer**
-[**Puneet Matharu**](https://github.com/PuneetMatharu) | **Maintainer**  
-[**Jonathan Deakin**](https://github.com/jondea) | **Maintainer**  
+
+Person                                                         | Position
+---------------------------------------------------------------|---------------------------
+[**Andrew Hazel**](https://github.com/alhazel)                 | **Architect & Maintainer**
+[**Matthias Heil**](https://github.com/MatthiasHeilManchester) | **Architect & Maintainer**
+[**Puneet Matharu**](https://github.com/PuneetMatharu)         | **Maintainer**
+[**Jonathan Deakin**](https://github.com/jondea)               | **Maintainer**

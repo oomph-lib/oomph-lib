@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -324,13 +324,13 @@ doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
  
  // Output solution 
- sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output exact solution 
- sprintf(filename,"%s/exact_soln.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/exact_soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,
                           Global_Parameters::exact_solution);
@@ -339,7 +339,7 @@ doc_solution(DocInfo& doc_info)
  // Doc error
  double error=0.0;
  double norm=0.0;
- sprintf(filename,"%s/error.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/error.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
                              Global_Parameters::exact_solution, 

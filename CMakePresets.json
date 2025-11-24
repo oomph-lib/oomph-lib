@@ -1,0 +1,111 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "base",
+      "displayName": "Release Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "base",
+      "displayName": "Debug Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "OOMPH_ENABLE_PARANOID": "ON",
+        "OOMPH_ENABLE_RANGE_CHECKING": "ON"
+      }
+    },
+    {
+      "name": "mpi",
+      "inherits": "base",
+      "displayName": "Default MPI Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-mpi",
+      "cacheVariables": {
+        "OOMPH_ENABLE_MPI": "ON"
+      }
+    },
+    {
+      "name": "ci-base",
+      "hidden": true,
+      "inherits": "base",
+      "generator": "Ninja"
+    },
+    {
+      "name": "ci",
+      "inherits": "ci-base",
+      "displayName": "Build Config for CI/CD"
+    },
+    {
+      "name": "ci-mpi",
+      "inherits": "ci-base",
+      "displayName": "MPI Build Config for CI/CD",
+      "cacheVariables": {
+        "OOMPH_ENABLE_MPI": "ON",
+        "OOMPH_ENABLE_MPI_OVERSUBSCRIPTION": "ON"
+      }
+    },
+    {
+      "name": "dummy-for-ci-demo-drivers"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "configurePreset": "release"
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "mpi",
+      "configurePreset": "mpi"
+    },
+    {
+      "name": "ci",
+      "configurePreset": "ci"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-base",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "timeout": 3600,
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "ci",
+      "configurePreset": "dummy-for-ci-demo-drivers",
+      "inherits": "test-base"
+    }
+  ]
+}

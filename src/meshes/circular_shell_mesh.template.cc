@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,14 +23,16 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_CIRCULAR_SHELL_MESH_TEMPLATE_CC
-#define OOMPH_CIRCULAR_SHELL_MESH_TEMPLATE_CC
+#ifndef OOMPH_CIRCULAR_SHELL_MESH_TEMPLATE_HEADER
+#define OOMPH_CIRCULAR_SHELL_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_CIRCULAR_SHELL_MESH_HEADER
+#error __FILE__ should only be included from circular_shell_mesh.h.
+#endif // OOMPH_CIRCULAR_SHELL_MESH_HEADER
 
 #include <float.h>
 
-#include "circular_shell_mesh.template.h"
-#include "rectangular_quadmesh.template.cc"
-
+#include "rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -57,7 +59,6 @@ namespace oomph
       node_pt(i)->xi(0) = scaled_x(node_pt(i)->x(0));
       node_pt(i)->xi(1) = node_pt(i)->x(1);
     }
-
 
     // Loop over elements and nodes to find out min axial spacing
     // for all nodes
@@ -89,7 +90,6 @@ namespace oomph
       }
     }
 
-
     // Assign gradients, etc for the Lagrangian coordinates of
     // Hermite-type elements
 
@@ -119,7 +119,6 @@ namespace oomph
     }
   }
 
-
   //=======================================================================
   /// Set the undeformed coordinates of the nodes
   //=======================================================================
@@ -147,7 +146,6 @@ namespace oomph
 
         // Get the geometrical information from the geometric object
         undeformed_midplane_pt->d2position(xi, R, a, dadxi);
-
 
         // Get derivatives of Lagr coordinates w.r.t. local coords
         DenseMatrix<double> dxids(2, 2);
@@ -187,13 +185,10 @@ namespace oomph
     }
   }
 
-
 } // namespace oomph
-
 
 // namespace oomph
 // {
-
 
 // //=======================================================================
 // /// Mesh constructor
@@ -224,7 +219,6 @@ namespace oomph
 //    node_pt(i)->xi(1) = node_pt(i)->x(1);
 //   }
 
-
 //  //Assign gradients, etc for the Lagrangian coordinates of
 //  //Hermite-type elements
 
@@ -245,7 +239,6 @@ namespace oomph
 //     }
 //   }
 // }
-
 
 // //=======================================================================
 // /// Set the undeformed coordinates of the nodes
@@ -291,7 +284,6 @@ namespace oomph
 //     }
 //   }
 // }
-
 
 // }
 #endif

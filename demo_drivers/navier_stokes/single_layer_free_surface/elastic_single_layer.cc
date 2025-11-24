@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -79,9 +79,9 @@ namespace Global_Physical_Variables
 } // End of namespace
 
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class================================================
@@ -452,7 +452,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  const unsigned npts = 5;
  
  // Open solution output file
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
 
@@ -463,7 +463,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  some_file.close();
 
  // Open interface solution output file
- sprintf(filename,"%s/interface_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/interface_soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
  
@@ -505,7 +505,7 @@ unsteady_run(const double &t_max, const double &dt)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Initialise trace file
@@ -546,9 +546,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

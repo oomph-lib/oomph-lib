@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -46,9 +46,9 @@
 using namespace oomph;
 using namespace std;
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 //======start_of_namespace================================================
 /// Namespace for the Helmholtz problem parameters
@@ -279,9 +279,9 @@ namespace GlobalParameters
 } // End of namespace
 
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 //======start_of_namespace================================================
 /// Returns a pointer to a smoother of the appropriate type
@@ -308,9 +308,9 @@ namespace Smoother_Factory_Function_Helper
  }
 } // End of Smoother_Factory_Function_Helper
 
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 //========= start_of_problem_class========================================
 /// HelmholtzMGProblem class to demonstrate use of perfectly matched
@@ -923,7 +923,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Output solution
  //-----------------
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -932,7 +932,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Ouput exact solution
  //---------------------
- sprintf(filename,"%s/exact_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -944,7 +944,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  {  
   // Output solution within pml domains
   //-----------------------------------
-  sprintf(filename,"%s/pml_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/pml_soln%i.dat",
 	  GlobalParameters::Doc_info.directory().c_str(),
 	  GlobalParameters::Doc_info.number());
   some_file.open(filename);
@@ -961,7 +961,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Output coarse solution
  //-----------------------
- sprintf(filename,"%s/coarse_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -973,7 +973,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  {  
   // Output coarse solution within pml domains
   //------------------------------------------
-  sprintf(filename,"%s/coarse_pml_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/coarse_pml_soln%i.dat",
 	  GlobalParameters::Doc_info.directory().c_str(),
 	  GlobalParameters::Doc_info.number());
   some_file.open(filename);
@@ -994,7 +994,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  // Doc error and solution norm
  //---------------------------- 
  double error,norm;
- sprintf(filename,"%s/error%i.dat",
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);

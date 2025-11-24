@@ -1,7 +1,7 @@
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-// Collection of Bessel functions and the like 
+// Collection of Bessel functions and the like
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
@@ -11,8 +11,8 @@
 
 //====================================================================
 /// Collection of Bessel functions and the like, implemented
-/// in C++ by C. Bond (http://www.crbond.com/), using the 
-/// algorithms in  Zhang and Jin's book "Computation of Special Functions". 
+/// in C++ by C. Bond (http://www.crbond.com/), using the
+/// algorithms in  Zhang and Jin's book "Computation of Special Functions".
 /// John Wiley and Sons, 1996.
 /// This is based on the version dated 06/04 which appears to have
 /// corrected errors in complex Bessel functions.
@@ -942,7 +942,7 @@ int bessjynb(int n,double x,int &nm,double *jn,double *yn,
         0.2775764465332031,
        -1.993531733751297,
         2.724882731126854e1};
-        
+
     int i,k,m;
     nm = n;
     if ((x < 0.0) || (n < 0)) return 1;
@@ -1488,7 +1488,7 @@ int cbessiknb(int n,complex<double> z,int &nm,complex<double> *ci,
             ck[l] = ca0*cbkl;
         }
     }
-    cg0 = ck[0];    
+    cg0 = ck[0];
     cg1 = ck[1];
     for (k=2;k<=nm;k++) {
         cg = 2.0*(k-1.0)*cg1/z1+cg0;
@@ -2054,7 +2054,7 @@ int cbessjynb(int n,complex<double> z,int &nm,complex<double> *cj,
                 csu += (double)((-1)*((k & 2)-1))*cf/(double)k;
             }
             else if (k > 1) {
-                csv += (double)((-1)*((k & 2)-1)*k)*cf/(double)(k*k-1.0);    
+                csv += (double)((-1)*((k & 2)-1)*k)*cf/(double)(k*k-1.0);
             }
             cf2 = cf1;
             cf1 = cf;

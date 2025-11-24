@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -371,12 +371,12 @@ class EulerProblem : public Problem
    
    if(sod)
     {
-     sprintf(filename,"sod_%li_time%g.dat",mesh_pt()->nelement(),
+     snprintf(filename, sizeof(filename), "sod_%li_time%g.dat",mesh_pt()->nelement(),
              this->time());
     }
    else
     {
-     sprintf(filename,"lax_%li_time%g.dat",mesh_pt()->nelement(),
+     snprintf(filename, sizeof(filename), "lax_%li_time%g.dat",mesh_pt()->nelement(),
              this->time());
     }
    outfile.open(filename);
@@ -396,12 +396,12 @@ class EulerProblem : public Problem
        {
         if(sod)
          {
-          sprintf(filename,"sod_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "sod_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         else
          {
-          sprintf(filename,"lax_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "lax_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         outfile.open(filename);

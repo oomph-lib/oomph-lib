@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,11 @@
 #include "navier_stokes.h"
 
 // Get the mesh
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6.h"
+#else
 #include "oomph_tetgen.h"
+#endif
 #include "meshes/tetgen_mesh.h"
 #include "meshes/refineable_tetgen_mesh.h"
 
@@ -48,9 +52,9 @@ namespace Global_Parameters
 }
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 //=============================================================
@@ -357,9 +361,9 @@ public:
 };
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 //=============================================================
@@ -482,9 +486,9 @@ public:
 };
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -775,7 +779,7 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc local node numbering
  //-------------------------
- sprintf(filename,"%s/node_numbering%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/node_numbering%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FiniteElement* el_pt=mesh_pt()->finite_element_pt(0);
@@ -793,7 +797,7 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
@@ -802,7 +806,7 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,nplot);

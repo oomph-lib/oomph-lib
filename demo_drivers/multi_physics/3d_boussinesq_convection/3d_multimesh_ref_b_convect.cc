@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -80,9 +80,9 @@ namespace Global_Physical_Variables
 } // end_of_namespace
 
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 
 
@@ -368,11 +368,10 @@ switch_to_iterative_linear_solver()
  if(MPI_Helpers::mpi_has_been_initialised())
 #endif
   {
-   // Need to create a SuperLUDistPreconditioner for the temperature ("solid")
+   // Need to create an exact preconditioner for the temperature ("solid")
    HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
    Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
     static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
-   //SuperLUPreconditioner* Temperature_prec_pt =new SuperLUPreconditioner;
    prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
    
    //Set up the internal preconditioners
@@ -534,7 +533,7 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  // Output whole solution (this will output elements from one mesh
  //----------------------  followed by the other mesh at the moment...?)
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -543,7 +542,7 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  // Output whole solution (this will output elements from one mesh
  //----------------------  followed by the other mesh at the moment...?)
- sprintf(filename,"%s/fluid_%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fluid_%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
@@ -552,7 +551,7 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  // Output whole solution (this will output elements from one mesh
  //----------------------  followed by the other mesh at the moment...?)
- sprintf(filename,"%s/temp_%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/temp_%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);

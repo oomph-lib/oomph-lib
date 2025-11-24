@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -139,9 +139,9 @@ public:
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -573,7 +573,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output shape of and stress in deformed body
  //--------------------------------------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -582,7 +582,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output St. Venant solution
  //---------------------------
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 
@@ -680,16 +680,16 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
  char dirname[100];   
 
 #ifdef REFINE
- sprintf(dirname,"RESLT_refine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_refine%i",i_case);
 #else
- sprintf(dirname,"RESLT_norefine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_norefine%i",i_case);
 #endif
 
  Doc_info.set_directory(dirname);
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
 
 

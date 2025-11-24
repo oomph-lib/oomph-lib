@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,9 +73,9 @@ public:
 };
 
 
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -357,7 +357,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solid solution
  //-----------------------
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/solid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -366,7 +366,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
     
  // Output traction
  //----------------
- sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/traction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned n=Solid_traction_boundary_id.size();

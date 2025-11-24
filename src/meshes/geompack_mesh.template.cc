@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_GEOMPACK_MESH_TEMPLATE_CC
-#define OOMPH_GEOMPACK_MESH_TEMPLATE_CC
+#ifndef OOMPH_GEOMPACK_MESH_TEMPLATE_HEADER
+#define OOMPH_GEOMPACK_MESH_TEMPLATE_HEADER
 
-#include "geompack_mesh.template.h"
-
+#ifndef OOMPH_GEOMPACK_MESH_HEADER
+#error __FILE__ should only be included from geompack_mesh.h.
+#endif // OOMPH_GEOMPACK_MESH_HEADER
 
 namespace oomph
 {
@@ -63,7 +64,6 @@ namespace oomph
       Element_pt[e] = new ELEMENT;
     }
 
-
     // At the moment we can only do four-noded quads
     if (finite_element_pt(0)->nnode() != 4)
     {
@@ -77,7 +77,6 @@ namespace oomph
       throw OomphLibError(
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-
 
     // In the first instance build all nodes from within all the elements
     unsigned nnod_el = Tmp_mesh_pt->finite_element_pt(0)->nnode();
@@ -93,7 +92,6 @@ namespace oomph
         finite_element_pt(e)->construct_node(j, time_stepper_pt);
       }
     }
-
 
     std::map<Node*, unsigned> global_number;
     unsigned global_count = 0;
@@ -128,7 +126,6 @@ namespace oomph
           // Assign coordinates
           Node_pt[global_count - 1]->x(0) = scaffold_node_pt->x(0);
           Node_pt[global_count - 1]->x(1) = scaffold_node_pt->x(1);
-
 
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary

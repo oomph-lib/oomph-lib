@@ -1,7 +1,11 @@
 
 // Oomph-lib manual addition to compile into library
-#define ANSI_DECLARATORS 
-#define LINUX 
+#define ANSI_DECLARATORS
+#ifdef __linux__
+#define LINUX
+#else
+#undef LINUX
+#endif
 #define TRILIBRARY
 
 /*****************************************************************************/
@@ -3624,7 +3628,7 @@ struct behavior *b;
     workstring[increment] = '%';
     workstring[increment + 1] = 'd';
     workstring[increment + 2] = '\0';
-    sprintf(b->outnodefilename, workstring, meshnumber + 1);
+    snprintf(b->outnodefilename, sizeof(b->outnodefilename),  workstring, meshnumber + 1);
     strcpy(b->outpolyfilename, b->outnodefilename);
     strcpy(b->outelefilename, b->outnodefilename);
     strcpy(b->edgefilename, b->outnodefilename);
@@ -6440,7 +6444,7 @@ REAL dheight;
   adxbdy = adx * bdy;
   bdxady = bdx * ady;
 
-  det = adheight * (bdxcdy - cdxbdy) 
+  det = adheight * (bdxcdy - cdxbdy)
       + bdheight * (cdxady - adxcdy)
       + cdheight * (adxbdy - bdxady);
 
@@ -11481,7 +11485,7 @@ FILE *polyfile;
       for (j = 0; j < 2; j++) {
         if ((end[j] < b->firstnumber) ||
             (end[j] >= b->firstnumber + m->invertices)) {
-          printf("Error:  Segment %ld has an invalid vertex index.\n", 
+          printf("Error:  Segment %ld has an invalid vertex index.\n",
                  segmentnumber);
           triexit(1);
         }
@@ -13116,7 +13120,7 @@ int regions;
         } else {
           printf("Spreading regional attributes.\n");
         }
-      } else { 
+      } else {
         printf("Spreading regional area constraints.\n");
       }
     }

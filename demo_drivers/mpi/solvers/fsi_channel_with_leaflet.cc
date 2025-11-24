@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -78,9 +78,9 @@ namespace Global_Physical_Variables
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_undeformed_leaflet=================================
@@ -151,9 +151,9 @@ public:
 }; //end_of_undeformed_wall
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //=====start_of_problem_class========================================
@@ -558,14 +558,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/fsi_fluid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/fsi_fluid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output wall solution 
- sprintf(filename,"%s/fsi_wall_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/fsi_wall_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -577,7 +577,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Output fluid elements on fluid mesh boundary 4 (associated with
  // the "front")
  unsigned bound=4;
- sprintf(filename,"%s/fluid_boundary_elements_front_%i.dat",
+ snprintf(filename,sizeof(filename),"%s/fluid_boundary_elements_front_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -593,7 +593,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Output fluid elements on fluid mesh boundary 5 (associated with
  // the "back")
  bound=5;
- sprintf(filename,"%s/fluid_boundary_elements_back_%i.dat",
+ snprintf(filename,sizeof(filename),"%s/fluid_boundary_elements_back_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -607,7 +607,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output normal vector on wall elements
- sprintf(filename,"%s/wall_normal_%i.dat",
+ snprintf(filename,sizeof(filename),"%s/wall_normal_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -670,7 +670,8 @@ public :
     new NavierStokesSchurComplementPreconditioner(problem_pt);
 
    // Create the Solid preconditioner
-   Solid_preconditioner_pt = new SuperLUPreconditioner;
+   Solid_preconditioner_pt =
+    ExactPreconditionerFactory::create_exact_preconditioner();
 
    // Create the matrix-vector product operator
    Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;
@@ -740,11 +741,11 @@ private:
 
 
 
-/// ///////////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // FSI preconditioner member functions
-/// ///////////////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -883,9 +884,9 @@ private:
 
 
 
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 
 //======= start_of_main================================================

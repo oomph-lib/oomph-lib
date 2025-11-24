@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -54,11 +54,11 @@ namespace Global_Physical_Variables
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 // Sinusoidal wall as geometric object
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -299,9 +299,9 @@ private:
 
 };
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -489,7 +489,7 @@ void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -610,7 +610,7 @@ void doc_sparse_node_update()
  unsigned npts=5; 
  
  // Output solution 
- sprintf(filename,"%s/mesh_update%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/mesh_update%i.dat",doc_info.directory().c_str(),
          count);
  count++;
  
@@ -625,7 +625,7 @@ void doc_sparse_node_update()
      node_pt->node_update();
      // Output solution 
      some_file.open(filename);
-     sprintf(filename,"%s/mesh_update%i.dat",doc_info.directory().c_str(),
+     snprintf(filename, sizeof(filename), "%s/mesh_update%i.dat",doc_info.directory().c_str(),
              count);
      count++;
      mesh_pt->output(some_file,npts);

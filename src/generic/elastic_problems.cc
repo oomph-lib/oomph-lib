@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -31,9 +31,9 @@
 
 namespace oomph
 {
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -567,6 +567,14 @@ namespace oomph
     // positional variables can be solved; setup equation numbering
     // scheme
     setup_problem();
+
+    // Choose the right linear solver
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+    linear_solver_pt() = Mumps_solver_pt;
+#else
+    linear_solver_pt() = SuperLU_solver_pt;
+#endif
 
     // Assign displacements
     IC_pt->ic_time_deriv() = 0;

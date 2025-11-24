@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -924,7 +924,7 @@ AxiPoroProblem<ELEMENT,TIMESTEPPER>::AxiPoroProblem()
  char filename[500];
 
  // Trace filename
- sprintf(filename,"%s/trace.dat",ProblemParameters::Directory.c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",ProblemParameters::Directory.c_str());
 
  // Open the trace file
  Trace_file.open(filename);
@@ -1235,7 +1235,7 @@ void AxiPoroProblem<ELEMENT,TIMESTEPPER>::doc_solution(const unsigned &label)
  char filename[100];
 
  unsigned npts=5;
- sprintf(filename,"%s/soln%i.dat",ProblemParameters::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",ProblemParameters::Directory.c_str(),label);
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -1243,14 +1243,14 @@ void AxiPoroProblem<ELEMENT,TIMESTEPPER>::doc_solution(const unsigned &label)
  // Output coarse solution
  //-----------------------
  unsigned npts_coarse=2;
- sprintf(filename,"%s/coarse_soln%i.dat",ProblemParameters::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",ProblemParameters::Directory.c_str(),label);
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts_coarse);
  some_file.close();
 
  // Output boundary condition elements
  //-----------------------------------
- sprintf(filename,"%s/bc_elements%i.dat",ProblemParameters::Directory.c_str(),label);
+ snprintf(filename, sizeof(filename), "%s/bc_elements%i.dat",ProblemParameters::Directory.c_str(),label);
  some_file.open(filename);
  Surface_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -1260,7 +1260,7 @@ void AxiPoroProblem<ELEMENT,TIMESTEPPER>::doc_solution(const unsigned &label)
    
    // Output exact solution
    //----------------------
-   sprintf(filename,"%s/exact_soln%i.dat",ProblemParameters::Directory.c_str(),label);
+   snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",ProblemParameters::Directory.c_str(),label);
    some_file.open(filename);
    Bulk_mesh_pt->output_fct(some_file,
                             npts,
@@ -1272,7 +1272,7 @@ void AxiPoroProblem<ELEMENT,TIMESTEPPER>::doc_solution(const unsigned &label)
    //----------
    Vector<double> norm(3,0.0);
    Vector<double> error(3,0.0);
-   sprintf(filename,"%s/error%i.dat",ProblemParameters::Directory.c_str(),label);
+   snprintf(filename, sizeof(filename), "%s/error%i.dat",ProblemParameters::Directory.c_str(),label);
    some_file.open(filename);
    Bulk_mesh_pt->compute_error(some_file,
                                ProblemParameters::exact_soln,

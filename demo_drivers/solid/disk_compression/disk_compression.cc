@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -90,9 +90,9 @@ namespace Global_Physical_Variables
 } // end namespace
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -310,7 +310,7 @@ void StaticDiskCompressionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts = 5; 
 
  // Output shape of deformed body
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -360,7 +360,7 @@ void StaticDiskCompressionProblem<ELEMENT>::parameter_study(
  DocInfo doc_info;
 
  char dirname[100];
- sprintf(dirname,"RESLT%i",case_number);
+ snprintf(dirname, sizeof(dirname), "RESLT%i",case_number);
 
  // Set output directory
  doc_info.set_directory(dirname);
@@ -370,7 +370,7 @@ void StaticDiskCompressionProblem<ELEMENT>::parameter_study(
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
  
  //Parameter incrementation

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,16 +23,18 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_BRETHERTON_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_BRETHERTON_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_BRETHERTON_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_BRETHERTON_SPINE_MESH_TEMPLATE_HEADER
 
-#include "bretherton_spine_mesh.template.h"
-#include "../generic/mesh_as_geometric_object.h"
-#include "../generic/face_element_as_geometric_object.h"
+#ifndef OOMPH_BRETHERTON_SPINE_MESH_HEADER
+#error __FILE__ should only be included from bretherton_spine_mesh.h.
+#endif // OOMPH_BRETHERTON_SPINE_MESH_HEADER
 
-#include "single_layer_spine_mesh.template.cc"
-#include "simple_rectangular_quadmesh.template.cc"
+#include "generic/mesh_as_geometric_object.h"
+#include "generic/face_element_as_geometric_object.h"
 
+#include "single_layer_spine_mesh.h"
+#include "simple_rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -144,7 +146,6 @@ namespace oomph
       oomph_info << "===================================================\n\n "
                  << std::endl;
     }
-
 
     // Add the interface elements
     // Loop over the horizontal elements
@@ -302,7 +303,6 @@ namespace oomph
       spine_centre[1] =
         r_wall_lo[1] + spine_centre_fraction() * (r_wall_up[1] - r_wall_lo[1]);
     }
-
 
     // Loop over elements in lower horizontal transition region
     // --------------------------------------------------------
@@ -482,7 +482,6 @@ namespace oomph
       n_prev_elements += nhalf * (nh + 1);
     }
 
-
     // Loop over elements in upper vertical transition region
     // ------------------------------------------------------
     {
@@ -576,7 +575,6 @@ namespace oomph
       n_prev_elements += nhalf * (nh + 1);
     }
 
-
     // Loop over elements in upper horizontal transition region
     // --------------------------------------------------------
     {
@@ -660,7 +658,6 @@ namespace oomph
       // Increment number of previous elements
       n_prev_elements += nx2 * (nh + 1);
     }
-
 
     // Loop over elements in upper deposited film region
     // -------------------------------------------------
@@ -747,7 +744,6 @@ namespace oomph
       }
     }
 
-
     // Loop over the free surface boundary (4) and set a boundary coordinate
     {
       // Boundary coordinate
@@ -759,7 +755,6 @@ namespace oomph
         this->boundary_node_pt(4, n)->set_coordinates_on_boundary(4, zeta);
       }
     }
-
 
     // Now add the rectangular mesh in the channel ahead of the finger tip
     //--------------------------------------------------------------------
@@ -835,7 +830,6 @@ namespace oomph
     // nodes that used to be at the end of the domain:
     this->remove_boundary_nodes(1);
 
-
     // FIRST SPINE
     //-----------
 
@@ -903,7 +897,6 @@ namespace oomph
       }
     }
 
-
     // LOOP OVER OTHER SPINES
     //----------------------
 
@@ -966,7 +959,6 @@ namespace oomph
         // Pass geom object(s) to spine
         new_spine_pt->set_geom_object_pt(geom_object_pt);
 
-
         // Loop vertically along the spine
         // Loop over the elements
         for (unsigned long i = 0; i < 2 * nhalf; i++)
@@ -1014,7 +1006,6 @@ namespace oomph
     // Kill the auxiliary mesh
     delete aux_mesh_pt;
   }
-
 
   //======================================================================
   /// Reorder elements: Vertical stacks of elements, each topped by
@@ -1143,7 +1134,6 @@ namespace oomph
 
     } while (maxres > 1.0e-8);
 
-
     oomph_info << "DONE " << initial_zeta[0] << std::endl;
     double spine_length = sqrt(pow((spine_base[0] - spine_end[0]), 2.0) +
                                pow((spine_base[1] - spine_end[1]), 2.0));
@@ -1181,7 +1171,6 @@ namespace oomph
     // geometric objects that form the boundary of the bulk mesh. Two
     // Eulerian coordinates, one intrinsic coordinate.
     MeshAsGeomObject* fs_geom_object_pt = new MeshAsGeomObject(fs_mesh_pt);
-
 
     // Length of deposited film region
     double llayer_lower = zeta_lo_transition_start - Zeta_start;
@@ -1230,7 +1219,6 @@ namespace oomph
       spine_centre[1] =
         r_wall_lo[1] + spine_centre_fraction() * (r_wall_up[1] - r_wall_lo[1]);
     }
-
 
     // Initialise number of elements in previous regions:
     unsigned n_prev_elements = 0;
@@ -1299,7 +1287,6 @@ namespace oomph
       // Increment number of previous elements
       n_prev_elements += Nx1 * (Nh + 1);
     }
-
 
     // Loop over elements in lower horizontal transition region
     // --------------------------------------------------------
@@ -1434,7 +1421,6 @@ namespace oomph
       n_prev_elements += Nhalf * (Nh + 1);
     }
 
-
     // Loop over elements in upper vertical transition region
     // --------------------------------------------------------
     {
@@ -1465,7 +1451,6 @@ namespace oomph
 
           lower_sub_geom_object_pt->position(s_lo, r_wall_lo);
           upper_sub_geom_object_pt->position(s_up, r_wall_up);
-
 
           // Set vertical fraction
           double vertical_fraction =
@@ -1507,7 +1492,6 @@ namespace oomph
       // Increment number of previous elements
       n_prev_elements += Nhalf * (Nh + 1);
     }
-
 
     // Loop over elements in upper horizontal transition region
     // --------------------------------------------------------
@@ -1559,7 +1543,6 @@ namespace oomph
           // Pass geom object(s) to spine
           nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
-
           // Get position vector to wall
           upper_sub_geom_object_pt->position(s_up, r_wall_up);
           // Find spine height
@@ -1571,7 +1554,6 @@ namespace oomph
       // Increment number of previous elements
       n_prev_elements += Nx2 * (Nh + 1);
     }
-
 
     // Loop over elements in upper deposited film region
     // -------------------------------------------------
@@ -1628,11 +1610,9 @@ namespace oomph
         }
       }
 
-
       // Increment number of previous elements
       n_prev_elements += Nx1 * (Nh + 1);
     }
-
 
     // Additional mesh
     {
@@ -1726,7 +1706,6 @@ namespace oomph
         }
       }
     }
-
 
     // Clean up all the memory
     // Can delete the Geometric object

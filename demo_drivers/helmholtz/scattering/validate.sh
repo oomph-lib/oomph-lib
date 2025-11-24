@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -32,10 +32,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > adaptive_scattering_results0.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/adaptive_scattering_results0.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_scattering_results0.dat.gz   \
     adaptive_scattering_results0.dat  >> validation.log
 fi
 mv RESLT RESLT_adapt_0
@@ -57,10 +57,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > adaptive_scattering_results1.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/adaptive_scattering_results1.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_scattering_results1.dat.gz   \
     adaptive_scattering_results1.dat  >> validation.log
 fi
 mv RESLT RESLT_adapt_1
@@ -83,10 +83,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > adaptive_scattering_results2.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/adaptive_scattering_results2.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_scattering_results2.dat.gz   \
     adaptive_scattering_results2.dat  >> validation.log
 fi
 mv RESLT RESLT_adapt_2
@@ -108,10 +108,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > adaptive_scattering_results3.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/adaptive_scattering_results3.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_scattering_results3.dat.gz   \
     adaptive_scattering_results3.dat  >> validation.log
 fi
 mv RESLT RESLT_adapt_3
@@ -134,10 +134,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > scattering_results0.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/scattering_results0.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/scattering_results0.dat.gz   \
     scattering_results0.dat  >> validation.log
 fi
 mv RESLT RESLT_0
@@ -159,10 +159,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > scattering_results1.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/scattering_results1.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/scattering_results1.dat.gz   \
     scattering_results1.dat  >> validation.log
 fi
 mv RESLT RESLT_1
@@ -185,10 +185,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > scattering_results2.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/scattering_results2.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/scattering_results2.dat.gz   \
     scattering_results2.dat  >> validation.log
 fi
 mv RESLT RESLT_2
@@ -210,10 +210,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat > scattering_results3.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/scattering_results3.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/scattering_results3.dat.gz   \
     scattering_results3.dat  >> validation.log
 fi
 mv RESLT RESLT_3
@@ -242,10 +242,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_adaptive_scattering_results0.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_adaptive_scattering_results0.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_adaptive_scattering_results0.dat.gz   \
     unstructured_adaptive_scattering_results0.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt_0
@@ -266,10 +266,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_adaptive_scattering_results1.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_adaptive_scattering_results1.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_adaptive_scattering_results1.dat.gz   \
     unstructured_adaptive_scattering_results1.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt_1
@@ -292,10 +292,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_adaptive_scattering_results2.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_adaptive_scattering_results2.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_adaptive_scattering_results2.dat.gz   \
     unstructured_adaptive_scattering_results2.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt_2
@@ -317,10 +317,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_adaptive_scattering_results3.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_adaptive_scattering_results3.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_adaptive_scattering_results3.dat.gz   \
     unstructured_adaptive_scattering_results3.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt_3
@@ -343,10 +343,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_scattering_results0.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_scattering_results0.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_scattering_results0.dat.gz   \
     unstructured_scattering_results0.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_0
@@ -367,10 +367,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_scattering_results1.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_scattering_results1.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_scattering_results1.dat.gz   \
     unstructured_scattering_results1.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_1
@@ -393,10 +393,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_scattering_results2.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_scattering_results2.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_scattering_results2.dat.gz   \
     unstructured_scattering_results2.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_2
@@ -418,10 +418,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > unstructured_scattering_results3.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_scattering_results3.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_scattering_results3.dat.gz   \
     unstructured_scattering_results3.dat  >> validation.log
 fi
 mv RESLT RESLT_unstructured_3
@@ -432,7 +432,7 @@ mv RESLT RESLT_unstructured_3
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -445,7 +445,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

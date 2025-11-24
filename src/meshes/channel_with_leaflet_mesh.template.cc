@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -24,13 +24,14 @@
 // LIC//
 // LIC//====================================================================
 
-#ifndef OOMPH_CHANNEL_WITH_LEAFLET_MESH_TEMPLATE_CC
-#define OOMPH_CHANNEL_WITH_LEAFLET_MESH_TEMPLATE_CC
+#ifndef OOMPH_CHANNEL_WITH_LEAFLET_MESH_TEMPLATE_HEADER
+#define OOMPH_CHANNEL_WITH_LEAFLET_MESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_CHANNEL_WITH_LEAFLET_MESH_HEADER
+#error __FILE__ should only be included from channel_with_leaflet_mesh.h.
+#endif // OOMPH_CHANNEL_WITH_LEAFLET_MESH_HEADER
 
 // Include the headers file
-#include "channel_with_leaflet_mesh.template.h"
-
 
 namespace oomph
 {
@@ -69,7 +70,6 @@ namespace oomph
     // represented by the geometric object
     Domain_pt = new ChannelWithLeafletDomain(
       leaflet_pt, lleft, lright, hleaflet, htot, nleft, nright, ny1, ny2);
-
 
     // Total number of (macro/finite)elements
     unsigned nmacro = (ny1 + ny2) * (nleft + nright);
@@ -141,7 +141,6 @@ namespace oomph
       }
     }
 
-
     // Duplicate the nodes of the wall and assign then as a boundary.
     // This will make one boundary for the east of the elements at the
     // left of the wall, and one for the west of the elements at the right
@@ -176,7 +175,6 @@ namespace oomph
       zeta[0] = i * hleaflet / double(ny1) / double(nnode_1d - 1);
       nod_pt->set_coordinates_on_boundary(5, zeta);
     }
-
 
     // Other elements just at the left of the wall
     for (unsigned k = 1; k < ny1; k++)
@@ -223,16 +221,15 @@ namespace oomph
     this->setup_boundary_element_info();
 
     // We have parametrised boundary 4 and 5
-    this->Boundary_coordinate_exists[4] = true;
-    this->Boundary_coordinate_exists[5] = true;
+    this->set_boundary_coordinate_exists(4);
+    this->set_boundary_coordinate_exists(5);
 
   } // end of constructor
 
 
-  /// ////////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Setup algebraic node update.  Leaflet is
@@ -275,7 +272,6 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 
-
       // The update function requires four parameters:
       Vector<double> ref_value(4);
 
@@ -307,7 +303,6 @@ namespace oomph
         // Third reference value:fraction of the horizontal line
         // between the edge and the wall
         ref_value[2] = (lleft + x - X_0) / lleft;
-
 
         // Setup algebraic update for node: Pass update information
         // to AlgebraicNode:
@@ -404,7 +399,6 @@ namespace oomph
 
   } // end of setup_algebraic_node_update
 
-
   //=================================================================
   /// Perform algebraic node update
   //=================================================================
@@ -447,7 +441,6 @@ namespace oomph
 
   } // end of algebraic_node_update()
 
-
   //=================================================================
   /// Node update for region I
   //=================================================================
@@ -476,22 +469,18 @@ namespace oomph
     Vector<double> s(1);
     s[0] = ref_value[1];
 
-
     // Get position vector to wall at timestep t
     Vector<double> r_wall(2);
     leaflet_pt->position(t, s, r_wall);
-
 
     // Third reference value : fraction of the horizontal line
     // between the edge and the wall
     double r = ref_value[2];
 
-
     // Assign new nodal coordinates
     node_pt->x(t, 0) = x0 + r * (r_wall[0] - x0);
     node_pt->x(t, 1) = y0 + r * (r_wall[1] - y0);
   }
-
 
   //=================================================================
   /// Node update for region II
@@ -533,7 +522,6 @@ namespace oomph
     node_pt->x(t, 0) = r_wall[0] + r * (x0 - r_wall[0]);
     node_pt->x(t, 1) = r_wall[1] + r * (y0 - r_wall[1]);
   }
-
 
   //=================================================================
   /// Slanted bound : helper function
@@ -627,10 +615,9 @@ namespace oomph
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
   //===================================================================
   ///  Update the node update functions
@@ -668,7 +655,6 @@ namespace oomph
       // Update second reference value: Reference local coordinate
       // in wall sub-element
       ref_value[1] = s[0];
-
 
       if (id == 1)
       {

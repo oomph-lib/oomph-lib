@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,7 @@ namespace oomph
       unsigned nb = nboundary();
       for (unsigned b = 0; b < nb; b++)
       {
-        if (Boundary_coordinate_exists[b])
+        if (boundary_coordinate_exists(b))
         {
           dump_file << "1 # Boundary coordinate for boundary " << b
                     << " does exist\n";
@@ -143,7 +143,7 @@ namespace oomph
         if (bound_coord_exists == 1)
         {
           // Remember it!
-          Boundary_coordinate_exists[b] = true;
+          set_boundary_coordinate_exists(b);
 
           // Read line up to termination sign
           getline(restart_file, input_string, '#');
@@ -224,7 +224,8 @@ namespace oomph
     std::ofstream outfile;
     char filename[100];
 
-    sprintf(filename, "Triangulateio_object_%s.dat", s.c_str());
+    snprintf(
+      filename, sizeof(filename), "Triangulateio_object_%s.dat", s.c_str());
     outfile.open(filename);
     outfile << "# Triangulateio object values:\n\n" << std::endl;
 
@@ -273,7 +274,7 @@ namespace oomph
     std::ofstream nodefile;
     char nodename[100];
 
-    sprintf(nodename, "file_%s.1.node", s.c_str());
+    snprintf(nodename, sizeof(nodename), "file_%s.1.node", s.c_str());
     nodefile.open(nodename);
     nodefile << triangle.numberofpoints << " 2 "
              << triangle.numberofpointattributes << " 0" << std::endl;
@@ -376,7 +377,7 @@ namespace oomph
       std::ofstream elefile;
       char elename[100];
 
-      sprintf(elename, "file_%s.1.ele", s.c_str());
+      snprintf(elename, sizeof(elename), "file_%s.1.ele", s.c_str());
       elefile.open(elename);
       elefile << triangle.numberoftriangles << " 3 0" << std::endl;
       for (int j = 0; j < triangle.numberoftriangles * 3; j += 3)

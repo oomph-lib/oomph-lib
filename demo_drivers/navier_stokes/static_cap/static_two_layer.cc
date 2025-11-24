@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -343,7 +343,7 @@ void CapProblem<ELEMENT>::parameter_study()
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
  Trace_file << "VARIABLES=\"<greek>a</greek><sub>prescribed</sub>\",";
  Trace_file << "\"h<sub>left</sub>\",\"h<sub>right</sub>\",";
@@ -396,7 +396,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  //Output domain
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -534,8 +534,8 @@ public:
         nod_pt->get_coordinates_on_boundary(3,b_coord);
         //Indicate that the boundary coordinates are to be set on the 
         //new boundaries
-        this->Boundary_coordinate_exists[4]=true;
-        this->Boundary_coordinate_exists[5]=true;
+        this->set_boundary_coordinate_exists(4);
+        this->set_boundary_coordinate_exists(5);
        }
       
       //Now remove the node from the old boundary
@@ -548,7 +548,7 @@ public:
        {
         this->add_boundary_node(4,nod_pt);
         //Add the boundary coordinate if it has been set up
-        if(this->Boundary_coordinate_exists[4])
+        if(this->boundary_coordinate_exists(4))
          {
           nod_pt->set_coordinates_on_boundary(4,b_coord);
          }
@@ -558,7 +558,7 @@ public:
        {
         this->add_boundary_node(5,nod_pt);
         //Add the boundary coordinate if it has been set up
-        if(this->Boundary_coordinate_exists[5])
+        if(this->boundary_coordinate_exists(5))
          {
           nod_pt->set_coordinates_on_boundary(5,b_coord);
          }
@@ -581,14 +581,14 @@ public:
        {
         b_coord.resize(nod_pt->ncoordinates_on_boundary(2));
         nod_pt->get_coordinates_on_boundary(2,b_coord);
-        this->Boundary_coordinate_exists[3]=true;
+        this->set_boundary_coordinate_exists(3);
        }
       
       //Now remove the node from the boundary 2
       nod_pt->remove_from_boundary(2);
       //and add to boundary 3
       this->add_boundary_node(3,nod_pt);
-      if(this->Boundary_coordinate_exists[3])
+      if(this->boundary_coordinate_exists(3))
        {
         nod_pt->set_coordinates_on_boundary(3,b_coord);
        }
@@ -618,7 +618,7 @@ public:
          {
           b_coord.resize(nod_pt->ncoordinates_on_boundary(1));
           nod_pt->get_coordinates_on_boundary(1,b_coord);
-          this->Boundary_coordinate_exists[2]=true;
+          this->set_boundary_coordinate_exists(2);
          }
         
         //Now remove the node from the boundary 1 if above interace
@@ -629,7 +629,7 @@ public:
         //Always add to boundary 2
         this->add_boundary_node(2,nod_pt);
         //Add the boundary coordinate if it has been set up
-        if(this->Boundary_coordinate_exists[2])
+        if(this->boundary_coordinate_exists(2))
          {
           nod_pt->set_coordinates_on_boundary(2,b_coord);
          }
@@ -655,7 +655,7 @@ public:
    //Add the nodes on the interface to the boundary 6
    //Storage for boundary coordinates (x-coordinate)
    b_coord.resize(1);
-   this->Boundary_coordinate_exists[6];
+   this->set_boundary_coordinate_exists(6);
    //Starting index of the nodes
    unsigned n_start=0;
    for(unsigned e=0;e<nx;e++)
@@ -1141,7 +1141,7 @@ void PseudoSolidCapProblem<ELEMENT>::parameter_study(const string& dir_name)
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
  Trace_file << "VARIABLES=\"<greek>a</greek><sub>prescribed</sub>\",";
  Trace_file << "\"h<sub>left</sub>\",\"h<sub>right</sub>\",";
@@ -1190,7 +1190,7 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
 
  //Output domain
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);

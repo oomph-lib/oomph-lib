@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -67,10 +67,10 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/steady_precond.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/steady_precond.dat.gz \
     steady_precond.dat 0.1 1.0e-14 >> validation.log
 fi
 
@@ -84,10 +84,10 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unst_precond.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unst_precond.dat.gz \
     unsteady_precond.dat 0.1 3.0e-14 >> validation.log
 fi
 
@@ -100,10 +100,10 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/steady.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/steady.dat.gz \
     steady.dat 0.1 1.0e-14 >> validation.log
 fi
 
@@ -116,19 +116,19 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 #Note that the higher tolerance is to cover the discrepancy between
 #different processors with this coarse mesh and the irons_and_tuck
 #accelerated case. Going back down to 1% or less doesn't make a significant
 #difference in most places
-../../../../bin/fpdiff.py ../validata/unsteady.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unsteady.dat.gz \
     unsteady.dat 5.0 5.0e-7 >> validation.log
 fi
 
 #Append log to the main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -141,7 +141,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

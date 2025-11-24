@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -270,7 +270,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
  int my_rank=this->communicator_pt()->my_rank();
  
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -280,7 +280,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
 
 
  // Output solution 
- sprintf(filename,"%s/soln_with_haloes%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln_with_haloes%i_on_proc%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number(),my_rank);
  some_file.open(filename);
@@ -295,7 +295,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
  mesh_pt()->doc_mesh_distribution(Doc_info);
 
  // Output boundaries
- sprintf(filename,"%s/boundaries%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/boundaries%i_on_proc%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number(),my_rank);
  some_file.open(filename);
@@ -323,12 +323,12 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
  
  {
   
-  sprintf(filename,"%s/soln_non_halo_nodes%i_on_proc%i.dat",
+  snprintf(filename, sizeof(filename), "%s/soln_non_halo_nodes%i_on_proc%i.dat",
           Doc_info.directory().c_str(),
           Doc_info.number(),my_rank);
   some_file.open(filename);
   
-  sprintf(filename,"%s/ndof%i_on_proc%i.dat",
+  snprintf(filename, sizeof(filename), "%s/ndof%i_on_proc%i.dat",
           Doc_info.directory().c_str(),
           Doc_info.number(),my_rank);
   some_file2.open(filename);
@@ -389,7 +389,7 @@ int main(int argc, char **argv)
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
  OomphLibWarning::set_stream_pt(&output_stream);

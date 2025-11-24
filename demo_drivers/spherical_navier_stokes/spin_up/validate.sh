@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -39,16 +39,16 @@ cat  RESLT_TH/soln3.dat RESLT_TH/time_trace.dat \
 mkdir RESLT_sphere
 mv RESLT_CR RESLT_TH RESLT_sphere
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/sphere_CR.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/sphere_CR.dat.gz  \
          sphere_CR.dat 0.1 5.0e-10 >> validation.log
 echo "Taylor-Hood elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/sphere_TH.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/sphere_TH.dat.gz  \
          sphere_TH.dat 0.1 1.0e-12 >> validation.log
 fi
 
@@ -74,16 +74,16 @@ cat  RESLT_TH/soln3.dat RESLT_TH/time_trace.dat \
 mkdir RESLT_cyl
 mv RESLT_CR RESLT_TH RESLT_cyl
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/cyl_CR.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/cyl_CR.dat.gz  \
          cyl_CR.dat 0.1 1.0e-12 >> validation.log
 echo "Taylor-Hood elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/cyl_TH.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/cyl_TH.dat.gz  \
          cyl_TH.dat 0.1 1.0e-12 >> validation.log
 fi
 
@@ -106,16 +106,16 @@ cat  RESLT/soln1.dat > ref_sphere_CR.dat
 mkdir RESLT_ref_sphere
 mv RESLT RESLT_ref_sphere
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/ref_sphere_CR.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ref_sphere_CR.dat.gz  \
          ref_sphere_CR.dat 0.1 1.0e-12 >> validation.log
 #echo "Taylor-Hood elements" >> validation.log
 #echo " " >> validation.log
-#../../../../bin/fpdiff.py ../validata/sphere_TH.dat.gz  \
+#$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/sphere_TH.dat.gz  \
 #         sphere_TH.dat 0.1 1.0e-12 >> validation.log
 fi
 
@@ -138,23 +138,23 @@ cat  RESLT/soln1.dat > ref_cyl_CR.dat
 mkdir RESLT_ref_cyl
 mv RESLT RESLT_ref_cyl
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
-../../../../bin/fpdiff.py ../validata/ref_cyl_CR.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ref_cyl_CR.dat.gz  \
          ref_cyl_CR.dat 0.1 1.0e-12 >> validation.log
 #echo "Taylor-Hood elements" >> validation.log
 #echo " " >> validation.log
-#../../../../bin/fpdiff.py ../validata/sphere_TH.dat.gz  \
+#$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/sphere_TH.dat.gz  \
 #         sphere_TH.dat 0.1 1.0e-12 >> validation.log
 fi
 
 
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -168,7 +168,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

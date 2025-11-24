@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,9 @@
 #define OOMPH_TUBE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -154,10 +154,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Vector representation of the  imacro-th macro element
@@ -345,7 +344,6 @@ namespace oomph
 
         break;
 
-
         // Macro element 1: Bottom
       case 1:
 
@@ -445,7 +443,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[1], f);
             break;
 
-
           default:
 
             std::ostringstream error_stream;
@@ -457,7 +454,6 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
             break;
         }
-
 
         break;
 
@@ -560,7 +556,6 @@ namespace oomph
             lin_interpolate(pos_2, pos_1, s[0], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -591,7 +586,6 @@ namespace oomph
             zeta[2] = Radius_box[3];
             Volume_pt->position(t, zeta, pos_2);
 
-
             // Now linearly interpolate between the two
             lin_interpolate(pos_2, pos_1, s[0], f);
             break;
@@ -607,7 +601,6 @@ namespace oomph
             // Get the position on the box
             zeta[2] = Radius_box[2];
             Volume_pt->position(t, zeta, pos_2);
-
 
             // Now linearly interpolate between the two
             lin_interpolate(pos_2, pos_1, s[0], f);
@@ -676,7 +669,6 @@ namespace oomph
             lin_interpolate(pos_2, pos_1, s[1], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -688,7 +680,6 @@ namespace oomph
         }
 
         break;
-
 
         // Macro element 4: Left
       case 4:
@@ -737,11 +728,9 @@ namespace oomph
             zeta[2] = 1.0;
             Volume_pt->position(t, zeta, pos_1);
 
-
             // Get the position on the box
             zeta[2] = Radius_box[0];
             Volume_pt->position(t, zeta, pos_2);
-
 
             // Now linearly interpolate between the two
             lin_interpolate(pos_1, pos_2, s[0], f);
@@ -780,7 +769,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[0], f);
             break;
 
-
           case F:
             // Get the position on the wall
             // Again be careful of the branch cut
@@ -798,7 +786,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[0], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -809,7 +796,6 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
         }
         break;
-
 
       default:
         // Error

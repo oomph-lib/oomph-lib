@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,9 +23,9 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-/// ////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 // What it does:                                                             //
-/// //////////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////////// 
 
 // Created 15/07/09
 // (by copying jh_streamfunction/jh_bifurcated_solutions.cc)
@@ -34,8 +34,8 @@
 // subsequent bifurcations
 
 
-/// ////////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 // Standard includes
 #include <algorithm>
@@ -108,8 +108,8 @@ namespace Global_Physical_Variables
 } // end_of_namespace
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 ///  Further includes:
 #include "meshes/rectangular_quadmesh.h"
 #include "./refineable_r_mesh.h"
@@ -119,8 +119,8 @@ namespace Global_Physical_Variables
 // Also include the FluxConstraint and jh_mesh classes to save space
 #include "./jh_includes.h"
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -562,7 +562,7 @@ void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo &doc_info,bool eigen
  stream_problem.doc_solution(doc_info);
  //Select output file 
  char file_name[100];
- sprintf(file_name,"my_streamfunction%i.dat",doc_info.number());
+ snprintf(file_name, sizeof(file_name), "my_streamfunction%i.dat",doc_info.number());
  stream_problem.my_output(201,81,false,file_name);
 
 } //End of output_streamfunction
@@ -733,7 +733,7 @@ void PolarNSProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=3; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  header( some_file );

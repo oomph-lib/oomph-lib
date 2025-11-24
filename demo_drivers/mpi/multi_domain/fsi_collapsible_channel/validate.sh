@@ -1,8 +1,10 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the second argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=2
@@ -45,10 +47,10 @@ cat RESLT/new_soln0_on_proc0.dat RESLT/new_soln1_on_proc1.dat \
     RESLT/new_soln2_on_proc0.dat RESLT/new_soln3_on_proc1.dat \
     > fsi_collapsible_channel_macro_adapt_external_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/fsi_collapsible_channel_macro_adapt_external_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/fsi_collapsible_channel_macro_adapt_external_results.dat.gz  \
          fsi_collapsible_channel_macro_adapt_external_results.dat 2.0 5.0e-5 >> validation.log
 fi
 
@@ -80,10 +82,10 @@ cat RESLT_ALG/new_soln0_on_proc0.dat RESLT_ALG/new_soln1_on_proc1.dat \
     RESLT_ALG/new_soln2_on_proc0.dat RESLT_ALG/new_soln3_on_proc1.dat \
     > fsi_collapsible_channel_adapt_external_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/fsi_collapsible_channel_adapt_external_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/fsi_collapsible_channel_adapt_external_results.dat.gz  \
          fsi_collapsible_channel_adapt_external_results.dat 2.0 5.0e-5 >> validation.log
 fi
 
@@ -91,7 +93,7 @@ mv RESLT_ALG RESLT_fsi_collapsible_channel_adapt_external
 
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -105,7 +107,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

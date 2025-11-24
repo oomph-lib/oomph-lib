@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -765,9 +765,9 @@ int main()
  char fluid_filename[100];
  char solid_filename[100];
  
- sprintf(xda_filename,"%s.xda", input_filename.c_str());
- sprintf(fluid_filename,"fluid_%s.poly", input_filename.c_str());
- sprintf(solid_filename,"solid_%s.poly", input_filename.c_str());
+ snprintf(xda_filename, sizeof(xda_filename), "%s.xda", input_filename.c_str());
+ snprintf(fluid_filename, sizeof(fluid_filename), "fluid_%s.poly", input_filename.c_str());
+ snprintf(solid_filename, sizeof(solid_filename), "solid_%s.poly", input_filename.c_str());
 
  create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
   xda_filename, fluid_filename, solid_filename, d,do_multi_boundary_ids);

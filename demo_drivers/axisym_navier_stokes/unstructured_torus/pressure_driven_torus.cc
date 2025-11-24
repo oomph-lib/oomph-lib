@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -389,7 +389,7 @@ void set_initial_condition()
   {
    using namespace Global_Physical_Variables;
    /*char filename[100];
-   sprintf(filename,"./pre_adapt_%g_%g_%g.dat", Re, Delta,Mu);
+   snprintf(filename, sizeof(filename), "./pre_adapt_%g_%g_%g.dat", Re, Delta,Mu);
    std::ofstream out_file(filename);
    Fluid_mesh_pt->output(out_file,5);
    out_file.close();*/
@@ -488,7 +488,7 @@ void set_initial_condition()
 
    //Dump the output
    /*char filename[100];
-   sprintf(filename,"./post_adapt_%g_%g_%g.dat", Re, Delta,Mu);
+   snprintf(filename, sizeof(filename), "./post_adapt_%g_%g_%g.dat", Re, Delta,Mu);
    std::ofstream out_file(filename);
    Fluid_mesh_pt->output(out_file,5);
    out_file.close();*/
@@ -823,7 +823,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
  std::ofstream file;
  //Output data after the first timestep
  //Create the filename, including the array index
- sprintf(filename,"%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
+ snprintf(filename, sizeof(filename), "%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
          Delta,Mu);
  //Actually, write the data
  file.open(filename);
@@ -841,7 +841,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
    //this->steady_newton_solve(1);
    this->Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
 
-   sprintf(filename,"%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
+   snprintf(filename, sizeof(filename), "%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
            Delta,Mu);
    //Actually, write the data
    file.open(filename);
@@ -870,7 +870,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
 
    this->Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
    
-   sprintf(filename,"%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
+   snprintf(filename, sizeof(filename), "%s/soln_De%g_Delta%g_Mu%g.dat",directory.c_str(),Dean,
            Delta,Mu);
    //Actually, write the data
    file.open(filename);

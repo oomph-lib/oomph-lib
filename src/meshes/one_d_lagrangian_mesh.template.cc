@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -23,15 +23,17 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_ONE_D_LAGRANGIAN_MESH_TEMPLATE_CC
-#define OOMPH_ONE_D_LAGRANGIAN_MESH_TEMPLATE_CC
+#ifndef OOMPH_ONE_D_LAGRANGIAN_MESH_TEMPLATE_HEADER
+#define OOMPH_ONE_D_LAGRANGIAN_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_ONE_D_LAGRANGIAN_MESH_HEADER
+#error __FILE__ should only be included from one_d_lagrangian_mesh.h.
+#endif // OOMPH_ONE_D_LAGRANGIAN_MESH_HEADER
 
 // The templated member functions of OneDLagrangianMesh
-#include "one_d_lagrangian_mesh.template.h"
 
 // Include the templated member functions of the OneDMesh
-#include "one_d_mesh.template.cc"
-
+#include "one_d_mesh.h"
 
 namespace oomph
 {
@@ -96,7 +98,6 @@ namespace oomph
     // Now set up the Eulerian position of the nodal points
     assign_undeformed_positions();
   }
-
 
   //=====================================================================
   /// Set the default (initial) gradients within each element, which
@@ -189,7 +190,6 @@ namespace oomph
       }
     }
   }
-
 
 } // namespace oomph
 #endif

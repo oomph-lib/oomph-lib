@@ -81,19 +81,19 @@ for mesh_mult in `echo $mesh_mult_list`; do
 
     file=$dir/CasePrecondSuperLUForBlocks/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_block_iter_string=`echo $superlu_block_iter_string " <TD>  " $av" </TD> "`
 
     file=$dir/CasePrecondSuperLUForBlocksLSC/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     lsc_superlu_block_iter_string=`echo $lsc_superlu_block_iter_string " <TD>  " $av" </TD> "`
 
     file=$dir/CasePrecondLSC/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     full_iter_string=`echo $full_iter_string " <TD>  " $av" </TD> "`
 
@@ -183,19 +183,19 @@ for mesh_mult in `echo $mesh_mult_list`; do
 
     file=$dir/CasePrecondSuperLUForBlocks/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     superlu_block_iter_string=`echo $superlu_block_iter_string " <TD>  " $av" </TD> "`
 
     file=$dir/CasePrecondSuperLUForBlocksLSC/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     lsc_superlu_block_iter_string=`echo $lsc_superlu_block_iter_string " <TD>  " $av" </TD> "`
 
     file=$dir/CasePrecondLSC/RESLT_`echo $mesh_mult`/OUTPUT`echo $postfix`.0
     echo $file
-    iter_list=`grep "Linear solver iterations" $file  | awk '{print $5}' `
+    iter_list=`grep "Number of iterations to convergence" $file  | awk '{print $5}' `
     av=`echo $iter_list | awk 'BEGIN{sum=0;count=0}{for (j=1;j<=NF;j++){sum+=$j; count++}}END{print sum/count}'`
     full_iter_string=`echo $full_iter_string " <TD>  " $av" </TD> "`
 

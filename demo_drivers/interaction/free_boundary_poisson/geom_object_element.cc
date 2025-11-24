@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -36,9 +36,9 @@ using namespace std;
 
 using namespace oomph;
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //======start_of_problem==============================================
@@ -136,7 +136,7 @@ GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem()
   
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
  Trace_file << "VARIABLES=\"load\",\"y<sub>circle</sub>\"" << std::endl;
 
@@ -162,7 +162,7 @@ void GeomObjectAsGeneralisedElementProblem::doc_solution()
  Vector<double> r(2);
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  for (unsigned i=0;i<npts;i++)
@@ -194,9 +194,9 @@ void GeomObjectAsGeneralisedElementProblem::doc_solution()
 
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -274,7 +274,7 @@ namespace oomph
     }
 
 
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
 
     // otherwise we are not forming BFBt
@@ -395,7 +395,7 @@ namespace oomph
     }
 
 
-    /// //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
 
 
     // form the matrix vector operator for Bt
@@ -416,7 +416,8 @@ namespace oomph
     // if the P preconditioner has not been setup
     if (P_preconditioner_pt == 0)
     {
-      P_preconditioner_pt = new SuperLUPreconditioner;
+      P_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Using_default_p_preconditioner = true;
     }
 
@@ -446,7 +447,8 @@ namespace oomph
     // if the F preconditioner has not been setup
     if (F_preconditioner_pt == 0)
     {
-      F_preconditioner_pt = new SuperLUPreconditioner;
+      F_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Using_default_f_preconditioner = true;
     }
 
@@ -1301,7 +1303,7 @@ namespace oomph
                           "PressureBasedSolidLSCPreconditioner::assemble_mass_"
                           "matrix_diagonal()",
                           OOMPH_EXCEPTION_LOCATION);
-//#pragma clang diagnostic pop
+// #pragma clang diagnostic pop
 #endif
         }
         else

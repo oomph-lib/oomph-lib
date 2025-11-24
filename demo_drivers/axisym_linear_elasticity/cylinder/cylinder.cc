@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -355,7 +355,7 @@ AxisymmetricLinearElasticityProblem()
 
  // for (unsigned it=0;it<ntime;it++)
  //  {
- //   sprintf(filename,"animation%i.dat",it);
+ //   snprintf(filename, sizeof(filename), "animation%i.dat",it);
  //   Global_Parameters::Output_stream.open(filename);
  //   double t=(2*MathematicalConstants::Pi)*(double(it)/(ntime-1));
  //   std::cout << t << std::endl;
@@ -670,14 +670,14 @@ doc_solution(DocInfo& doc_info)
  unsigned npts=10; 
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
    doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output exact solution 
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
    doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,time_pt()->time(),
@@ -687,7 +687,7 @@ doc_solution(DocInfo& doc_info)
  // Doc error
  double error=0.0;
  double norm=0.0;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
    doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,

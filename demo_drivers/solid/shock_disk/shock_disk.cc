@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -41,9 +41,9 @@ using namespace std;
 
 using namespace oomph;
  
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 //================================================================
@@ -78,9 +78,9 @@ namespace Global_Physical_Variables
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -193,9 +193,9 @@ public:
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -480,7 +480,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution()
  // Output shape of deformed body
  ofstream some_file;
  char filename[100];
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,npts);
@@ -489,7 +489,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution()
 
  // Output traction
  unsigned nel=traction_mesh_pt()->nelement();
- sprintf(filename,"%s/traction%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Vector<double> unit_normal(2);
@@ -526,7 +526,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution()
   unsigned nelem=solid_mesh_pt()->nboundary_element(0);
 
   // Open files
-  sprintf(filename,"%s/displ%i.dat",Doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/displ%i.dat",Doc_info.directory().c_str(),
           Doc_info.number());
   some_file.open(filename);
   
@@ -584,7 +584,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution()
  // SolidHelpers::doc_2D_principal_stress<ELEMENT>(Doc_info,solid_mesh_pt());
 
 //  // Write restart file
-//  sprintf(filename,"%s/restart%i.dat",Doc_info.directory().c_str(),
+//  snprintf(filename, sizeof(filename), "%s/restart%i.dat",Doc_info.directory().c_str(),
 //          Doc_info.number());
 //  some_file.open(filename);
 //  dump_it(some_file);
@@ -624,17 +624,17 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_displ_and_veloc(
  // Open file
  if (stage==-1)
   {
-   sprintf(filename,"%s/displ_and_veloc_before%i.dat",
+   snprintf(filename, sizeof(filename), "%s/displ_and_veloc_before%i.dat",
            Doc_info.directory().c_str(),Doc_info.number());
   }
  else if (stage==1)
   {
-   sprintf(filename,"%s/displ_and_veloc_after%i.dat",
+   snprintf(filename, sizeof(filename), "%s/displ_and_veloc_after%i.dat",
            Doc_info.directory().c_str(),Doc_info.number());
   }
  else 
   {
-   sprintf(filename,"%s/displ_and_veloc%i.dat",
+   snprintf(filename, sizeof(filename), "%s/displ_and_veloc%i.dat",
            Doc_info.directory().c_str(),Doc_info.number());
   }
  some_file.open(filename);
@@ -725,7 +725,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::run(
 
  // Define output directory
  char dirname[100];
- sprintf(dirname,"RESLT%i",case_number);
+ snprintf(dirname, sizeof(dirname), "RESLT%i",case_number);
  Doc_info.set_directory(dirname);
 
  // Step number
@@ -733,7 +733,7 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::run(
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Set up trace nodes as the nodes on boundary 1 (=curved boundary) in 

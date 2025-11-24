@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -121,6 +121,7 @@ namespace Anasazi
     /// of selected entries of the oomph::DoubleMultiVector mv
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     /// (Non-const version for Trilinos 9 interface)
+    /// NOTE: Not required in Trilinos 13.4.0
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneView(
       oomph::DoubleMultiVector& mv, const std::vector<int>& index)
     {
@@ -142,6 +143,13 @@ namespace Anasazi
     static int GetVecLength(const oomph::DoubleMultiVector& mv)
     {
       return static_cast<int>(mv.nrow());
+    }
+
+    /// Return the number of rows in the given multivector.
+    /// NOTE: Trilinos 13.4.0 uses GetGlobalLength instead of GetVecLength
+    static ptrdiff_t GetGlobalLength(const oomph::DoubleMultiVector& mv)
+    {
+      return static_cast<ptrdiff_t>(mv.nrow());
     }
 
     /// Obtain the number of vectors in the multivector
@@ -428,6 +436,22 @@ namespace Anasazi
     }
 
     //@}
+
+#ifdef HAVE_ANASAZI_TSQR
+    /// \typedef tsqr_adaptor_type
+    /// \brief TsqrAdaptor specialization for the multivector type MV.
+    ///
+    /// By default, we provide a "stub" implementation.  It has the
+    /// right methods and typedefs, but its constructors and methods
+    /// all throw std::logic_error.  If you plan to use TSQR in
+    /// Anasazi (e.g., through TsqrOrthoManager), and if your
+    /// multivector type MV is neither Epetra_MultiVector nor
+    /// Tpetra::MultiVector, you must implement a functional TSQR
+    /// adapter.  Please refer to Epetra::TsqrAdapter (for
+    /// Epetra_MultiVector) or Tpetra::TsqrAdaptor (for
+    /// Tpetra::MultiVector) for examples.
+    typedef Anasazi::details::StubTsqrAdapter<MV> tsqr_adaptor_type;
+#endif // HAVE_ANASAZI_TSQR
   };
 
 
@@ -543,9 +567,9 @@ namespace oomph
       Linear_solver_pt->solve(AsigmaM_pt, X, Y);
 
       // Need to synchronise
-      //#ifdef OOMPH_HAS_MPI
+      // #ifdef OOMPH_HAS_MPI
       //   Problem_pt->synchronise_all_dofs();
-      //#endif
+      // #endif
 
       for (unsigned i = 0; i < n_row_local; i++)
       {
@@ -558,9 +582,9 @@ namespace oomph
         M_pt->multiply(x.doublevector(v), X);
         Linear_solver_pt->resolve(X, Y);
 
-        //#ifdef OOMPH_HAS_MPI
-        //     Problem_pt->synchronise_all_dofs();
-        //#endif
+        // #ifdef OOMPH_HAS_MPI
+        //      Problem_pt->synchronise_all_dofs();
+        // #endif
 
         for (unsigned i = 0; i < n_row_local; i++)
         {

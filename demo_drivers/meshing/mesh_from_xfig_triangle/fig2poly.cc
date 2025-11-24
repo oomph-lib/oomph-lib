@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -77,9 +77,9 @@ using namespace std;
 
 
 
-/// /////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 
 
@@ -297,7 +297,7 @@ int main(int argc, char* argv[])
  // Output points in pslg format
  //-----------------------------
  char filename[100];
- sprintf(filename,"%s.poly",argv[1]);
+ snprintf(filename, sizeof(filename), "%s.poly",argv[1]);
  ofstream poly_file(filename);
   {
    poly_file 

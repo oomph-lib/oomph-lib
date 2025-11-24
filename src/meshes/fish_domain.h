@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,9 @@
 #define OOMPH_FISH_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -68,7 +68,6 @@ namespace oomph
       }
     } // end of constructor
 
-
     /// Broken copy constructor
     FishDomain(const FishDomain&) = delete;
 
@@ -77,7 +76,6 @@ namespace oomph
 
     /// Destructor for FishDomain: Empty; cleanup done in base class
     virtual ~FishDomain() {}
-
 
     /// x-position of fin tip
     double& x_fin()
@@ -291,10 +289,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //==========start_of_macro_element_boundary========================
   /// Vector representation of the  imacro-th macro element
@@ -313,7 +310,6 @@ namespace oomph
   {
     using namespace QuadTreeNames;
 
-
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
     OomphLibWarning(
@@ -321,7 +317,6 @@ namespace oomph
       "FishDomain::macro_element_boundary(...)",
       OOMPH_EXCEPTION_LOCATION);
 #endif
-
 
     // Which macro element?
     // --------------------
@@ -393,7 +388,6 @@ namespace oomph
 
         break;
 
-
         // Macro element 2: Upper body
       case 2:
 
@@ -426,7 +420,6 @@ namespace oomph
         }
 
         break;
-
 
         // Macro element 3: Upper Fin
       case 3:
@@ -473,7 +466,6 @@ namespace oomph
 
   } // end of macro_element_boundary
 
-
   //=================================================================
   /// Northern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
@@ -492,12 +484,10 @@ namespace oomph
     r_fin[0] = X_fin;
     r_fin[1] = Y_fin;
 
-
     // Straight line along upper fin
     r[0] = r_fish[0] + (r_fin[0] - r_fish[0]) * 0.5 * (zeta[0] + 1.0);
     r[1] = r_fish[1] + (r_fin[1] - r_fish[1]) * 0.5 * (zeta[0] + 1.0);
   }
-
 
   //=================================================================
   /// Western edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
@@ -516,7 +506,6 @@ namespace oomph
     r[1] = r_fish[1] * 0.5 * (zeta[0] + 1.0);
   }
 
-
   //=================================================================
   /// Southern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
@@ -530,11 +519,9 @@ namespace oomph
     Vector<double> r_fish(2);
     Back_pt->position(t, x, r_fish);
 
-
     r[0] = r_fish[0] * 0.5 * (zeta[0] + 1.0);
     r[1] = 0.0;
   }
-
 
   //=================================================================
   /// Eastern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
@@ -547,7 +534,6 @@ namespace oomph
     r[0] = X_fin;
     r[1] = Y_fin * 0.5 * (zeta[0] + 1.0);
   }
-
 
   //===============start_of_r_upper_body_N==============================
   /// Northern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
@@ -564,7 +550,6 @@ namespace oomph
     Back_pt->position(t, x, r);
 
   } // end of r_upper_body_N
-
 
   //================start_of_r_upper_body_E=============================
   /// Eastern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
@@ -587,9 +572,7 @@ namespace oomph
     r[0] = r_back[0] + (r_top[0] - r_back[0]) * 0.5 * (zeta[0] + 1.0);
     r[1] = r_back[1] + (r_top[1] - r_back[1]) * 0.5 * (zeta[0] + 1.0);
 
-
   } // end of r_upper_body_E
-
 
   //==================start_of_r_upper_body_S============================
   /// Southern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
@@ -609,7 +592,6 @@ namespace oomph
     r[1] = 0.0;
 
   } // end of r_upper_body_S
-
 
   //===============start_of_r_upper_body_W==============================
   /// Western edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
@@ -635,7 +617,6 @@ namespace oomph
     r[1] = r_mouth[1] + (r_top[1] - r_mouth[1]) * 0.5 * (zeta[0] + 1.0);
 
   } // end of r_upper_body_W
-
 
 } // namespace oomph
 
