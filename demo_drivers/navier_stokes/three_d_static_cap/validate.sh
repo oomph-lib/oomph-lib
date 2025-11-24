@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -45,44 +45,44 @@ cat  RESLT_CR_external_elastic/soln0.dat RESLT_CR_external_elastic/soln1.dat \
     > CR_ext_elastic.dat 
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Spine Tests" >> validation.log
 echo >> validation.log
 echo "Taylor Hood (hijacked internal pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/TH_int.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/TH_int.dat.gz  \
    TH_int.dat 0.1 1.0e-5 >> validation.log
 echo "Taylor Hood (hijacked external pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/TH_ext.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/TH_ext.dat.gz  \
    TH_ext.dat 0.1 1.1e-5 >> validation.log
 echo "Crouzeix Raviart (hijacked internal pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/CR_int.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/CR_int.dat.gz  \
    CR_int.dat 0.1 1.0e-5 >> validation.log
 echo "Crouzeix Raviart (hijacked external pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/CR_ext.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/CR_ext.dat.gz  \
    CR_ext.dat 0.1 1.0e-5 >> validation.log
 
 echo >> validation.log
 echo "PseudoSolidMeshUpdate Tests" >> validation.log
 echo >> validation.log
 echo "Taylor Hood (hijacked internal pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/TH_int_elastic.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/TH_int_elastic.dat.gz  \
    TH_int_elastic.dat 0.1 5.0e-7 >> validation.log
 echo "Taylor Hood (hijacked external pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/TH_ext_elastic.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/TH_ext_elastic.dat.gz  \
    TH_ext_elastic.dat 0.1 5.0e-7 >> validation.log
 echo "Crouzeix Raviart (hijacked internal pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/CR_int_elastic.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/CR_int_elastic.dat.gz  \
    CR_int_elastic.dat 0.1 5.0e-7 >> validation.log
 echo "Crouzeix Raviart (hijacked external pressure)">> validation.log
-../../../../bin/fpdiff.py  ../validata/CR_ext_elastic.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/CR_ext_elastic.dat.gz  \
    CR_ext_elastic.dat 0.1 5.0e-7 >> validation.log
 
 fi
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -98,7 +98,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

@@ -26,8 +26,8 @@
 // Non-inline member function of the flux transport elements class
 
 #include "flux_transport_elements.h"
-#include "../generic/shape.h"
-#include "../generic/timesteppers.h"
+#include "generic/shape.h"
+#include "generic/timesteppers.h"
 
 namespace oomph
 {

@@ -23,13 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_XDA_TET_MESH_TEMPLATE_CC
-#define OOMPH_XDA_TET_MESH_TEMPLATE_CC
+#ifndef OOMPH_XDA_TET_MESH_TEMPLATE_HEADER
+#define OOMPH_XDA_TET_MESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_XDA_TET_MESH_HEADER
+#error __FILE__ should only be included from xda_tet_mesh.h.
+#endif // OOMPH_XDA_TET_MESH_HEADER
 
-#include "../generic/Telements.h"
-#include "xda_tet_mesh.template.h"
-
+#include "generic/Telements.h"
 
 namespace oomph
 {
@@ -149,7 +150,6 @@ namespace oomph
       infile.getline(dummy, 100);
     }
 
-
     // Create storage for coordinates
     Vector<double> x_node(n_node);
     Vector<double> y_node(n_node);
@@ -162,7 +162,6 @@ namespace oomph
       infile >> y_node[i];
       infile >> z_node[i];
     }
-
 
     // Read in boundaries for faces
     unsigned element_nmbr;
@@ -319,7 +318,6 @@ namespace oomph
     // Figure out which elements are next to the boundaries.
     setup_boundary_element_info();
 
-
     // Setup boundary coordinates
     unsigned nb = nboundary();
     for (unsigned b = 0; b < nb; b++)
@@ -328,7 +326,6 @@ namespace oomph
       setup_boundary_coordinates(b, switch_normal);
     }
   }
-
 
   //======================================================================
   /// Setup boundary coordinate on boundary b while is
@@ -396,14 +393,12 @@ namespace oomph
             0.5 * (el_pt->node_pt(2)->x(i) + el_pt->node_pt(0)->x(i));
         }
 
-
         // Output faces?
         if (outfile.is_open())
         {
           face_el_pt[face_el_pt.size() - 1]->output(outfile);
         }
       }
-
 
       // Loop over all nodes to find the lower left and upper right ones
       Node* lower_left_node_pt = this->boundary_node_pt(b, 0);
@@ -590,7 +585,7 @@ namespace oomph
     }
 
     // Indicate that boundary coordinate has been set up
-    Boundary_coordinate_exists[b] = true;
+    set_boundary_coordinate_exists(b);
 
     // Cleanup
     unsigned n = face_el_pt.size();
@@ -598,7 +593,6 @@ namespace oomph
     {
       delete face_el_pt[e];
     }
-
 
     // Reset nodal position
     for (std::map<Node*, Vector<double>>::iterator it = backup_position.begin();
@@ -614,8 +608,6 @@ namespace oomph
     }
   }
 
-
 } // namespace oomph
-
 
 #endif

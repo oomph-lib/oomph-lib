@@ -28,9 +28,9 @@
 #define OOMPH_QUARTER_PIPE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/octree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/octree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -221,7 +221,6 @@ namespace oomph
 
   }; // endofclass
 
-
   //=================================================================
   /// Vector representation of the  imacro-th macro element
   /// boundary idirect (U/D/L/R/F/B) at time level t:
@@ -255,7 +254,6 @@ namespace oomph
     // zdirection (tube)
     double zmin = double(num_z) * Length / double(Nz);
     double zmax = double(num_z + 1) * Length / double(Nz);
-
 
     // Which direction?
     if (idirect == U)
@@ -296,7 +294,6 @@ namespace oomph
     double z_frac = f[2] / Length;
     f[2] = Length * axial_spacing_fct(z_frac);
   }
-
 
   //=================================================================
   /// Left face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
@@ -380,7 +377,6 @@ namespace oomph
     f[2] = zmin + (zmax - zmin) * (0.5 * (s[1] + 1.0));
   }
 
-
   //=================================================================
   /// Left face of a macro element \f$s \in [-1,1]*[-1,1] \f$
   //=================================================================
@@ -414,7 +410,6 @@ namespace oomph
     f[2] = zmin + (zmax - zmin) * (0.5 * (s[1] + 1.0));
   }
 
-
   //=================================================================
   /// Right face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
@@ -447,7 +442,6 @@ namespace oomph
     }
     f[2] = zmin + (zmax - zmin) * (0.5 * (s[1] + 1.0));
   }
-
 
   //=================================================================
   /// Front face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
@@ -483,7 +477,6 @@ namespace oomph
     f[2] = zmax;
   }
 
-
   //=================================================================
   /// Back face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
@@ -517,7 +510,6 @@ namespace oomph
     }
     f[2] = zmin;
   }
-
 
 } // namespace oomph
 

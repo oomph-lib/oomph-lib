@@ -176,7 +176,7 @@ void AxisymFvKProblem<ELEMENT>::doc_solution()
  // Output solution with specified number of plot points per element
  char filename[100];
 
- sprintf(filename, "%s/soln%i.dat",
+ snprintf(filename, sizeof(filename),  "%s/soln%i.dat",
          AxisymFvKParameters::Directory.c_str(),Doc_info.number());
  ofstream solution_file(filename,ios::app);
  mesh_pt()->output(solution_file,npts);
@@ -184,14 +184,14 @@ void AxisymFvKProblem<ELEMENT>::doc_solution()
  
  
  //  Output exact solution
- sprintf(filename, "%s/exactsol%i.dat",
+ snprintf(filename, sizeof(filename),  "%s/exactsol%i.dat",
          AxisymFvKParameters::Directory.c_str(),Doc_info.number());
  ofstream exact_file(filename,ios::app); 
  mesh_pt()->output_fct(exact_file,npts,AxisymFvKParameters::get_exact_u); 
  exact_file.close();
  
   // Output solution at the centre (r=0) as function of the pressure
- sprintf(filename, "%s/w_centre.dat",AxisymFvKParameters::Directory.c_str());
+ snprintf(filename, sizeof(filename),  "%s/w_centre.dat",AxisymFvKParameters::Directory.c_str());
  ofstream w_centre_file(filename,ios::app);
  w_centre_file << AxisymFvKParameters::Pressure << " " 
                << mesh_pt()->node_pt(0)->value(0) << std::endl;
@@ -204,9 +204,9 @@ void AxisymFvKProblem<ELEMENT>::doc_solution()
 } // end of doc
 
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //===start_of_main=====================================================

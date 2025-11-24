@@ -23,12 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-// Oomph-lib headers
-#include "extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.h"
+#ifndef OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
+#define OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+#ifndef OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_HEADER
+#error __FILE__ should only be included from extruded_cube_mesh_from_quad_mesh_with_macro_elements.h.
+#endif // OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_HEADER
 
 namespace oomph
 {
@@ -715,7 +715,6 @@ namespace oomph
                   } // quad_node_pt->is_on_boundary()
                 } // if (((i==0)&&(n_2==0))||((i==Nz-1)&&(n_2==n_node_1d-1)))
 
-
                 // Check if there is any other boundary information
                 if (el_boundary_information.size() > 0)
                 {
@@ -1318,3 +1317,4 @@ namespace oomph
     }
   } // End of build_mesh
 } // End of namespace oomph
+#endif

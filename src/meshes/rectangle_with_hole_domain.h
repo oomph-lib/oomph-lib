@@ -26,13 +26,11 @@
 #ifndef OOMPH_RECTANGLE_WITH_HOLE_DOMAIN_HEADER
 #define OOMPH_RECTANGLE_WITH_HOLE_DOMAIN_HEADER
 
-
 // Generic includes
-#include "../generic/quadtree.h"
-#include "../generic/geom_objects.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
-
+#include "generic/quadtree.h"
+#include "generic/geom_objects.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
 
 namespace oomph
 {
@@ -67,7 +65,6 @@ namespace oomph
       Upper_right[0] = 0.5 * length;
       Upper_right[1] = 0.5 * length;
 
-
       // Coordinates of points where the "radial" lines from central
       // cylinder meet the upper and lower boundaries
       Lower_mid_left.resize(2);
@@ -86,7 +83,6 @@ namespace oomph
       Upper_mid_right[0] = 0.5 * length;
       Upper_mid_right[1] = 0.5 * length;
 
-
       // There are four macro elements
       Macro_element_pt.resize(4);
 
@@ -96,7 +92,6 @@ namespace oomph
         Macro_element_pt[i] = new QMacroElement<2>(this, i);
       }
     }
-
 
     /// Destructor: Empty; cleanup done in base class
     ~RectangleWithHoleDomain() {}
@@ -306,7 +301,6 @@ namespace oomph
       }
     }
 
-
   private:
     /// Lower left corner of rectangle
     Vector<double> Lower_left;
@@ -335,7 +329,6 @@ namespace oomph
     /// Pointer to geometric object that represents the central cylinder
     GeomObject* Cylinder_pt;
   };
-
 
 } // namespace oomph
 #endif

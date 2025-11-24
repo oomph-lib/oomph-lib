@@ -89,9 +89,9 @@ namespace GlobalPhysicalVariables
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -172,7 +172,7 @@ public:
   {
    // Open trace file
    char filename[256];
-   sprintf(filename,"%s/base_trace_k%i_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/base_trace_k%i_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::k,
            GlobalPhysicalVariables::Re_current);
@@ -458,7 +458,7 @@ void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
    const unsigned npts = 5;
    
    // Open solution output file
-   sprintf(filename,"%s/base_soln_k%i_Re%4.2f_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/base_soln_k%i_Re%4.2f_soln%i.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::k,
            GlobalPhysicalVariables::Re_current,
@@ -475,9 +475,9 @@ void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -576,7 +576,7 @@ public:
   {
    // Open trace file
    char filename[256];
-   sprintf(filename,"%s/perturbed_trace_k%i_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/perturbed_trace_k%i_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::k,
            GlobalPhysicalVariables::Re_current);
@@ -886,7 +886,7 @@ doc_solution(DocInfo& doc_info,const bool& output_soln)
    const unsigned npts = 5;
    
    // Open solution output file
-   sprintf(filename,"%s/perturbed_soln_k%i_Re%4.2f_soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/perturbed_soln_k%i_Re%4.2f_soln%i.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::k,
            GlobalPhysicalVariables::Re_current,
@@ -903,9 +903,9 @@ doc_solution(DocInfo& doc_info,const bool& output_soln)
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -949,7 +949,7 @@ public:
 
    // Set up stability problem trace files
    char filename[256];
-   sprintf(filename,"%s/power_method_trace_k%i_Re%4.2f.dat",
+   snprintf(filename, sizeof(filename), "%s/power_method_trace_k%i_Re%4.2f.dat",
            doc_info.directory().c_str(),
            GlobalPhysicalVariables::k,
            GlobalPhysicalVariables::Re_current);
@@ -1231,9 +1231,9 @@ perform_power_method(const double& dt,
 
 
 
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1324,7 +1324,7 @@ int main(int argc, char* argv[])
   // Create and initialise global trace file
   ofstream global_trace;
   char filename[256];
-  sprintf(filename,"%s/global_trace_k%i.dat",
+  snprintf(filename, sizeof(filename), "%s/global_trace_k%i.dat",
           doc_info.directory().c_str(),
           GlobalPhysicalVariables::k);
   global_trace.open(filename);
@@ -1496,7 +1496,7 @@ int main(int argc, char* argv[])
   // Create and initialise global trace file
   ofstream global_trace;
   char filename[256];
-  sprintf(filename,"%s/global_trace_k%i.dat",
+  snprintf(filename, sizeof(filename), "%s/global_trace_k%i.dat",
           doc_info.directory().c_str(),
           GlobalPhysicalVariables::k);
   global_trace.open(filename);

@@ -233,21 +233,21 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"%s/soln_direct_solver_%i.dat",doc.directory().c_str(),doc.number());
+ snprintf(filename, sizeof(filename), "%s/soln_direct_solver_%i.dat",doc.directory().c_str(),doc.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Output exact solution at much higher resolution (so we can
  // see how well the solutions agree between nodal points)
- sprintf(filename,"%s/exact_soln%i.dat",doc.directory().c_str(),doc.number());
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc.directory().c_str(),doc.number());
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,20*npts,FishSolnOneDPoisson::get_exact_u); 
  some_file.close();
 
  // Doc pointwise error and compute norm of error and of the solution
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc.directory().c_str(),doc.number());
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc.directory().c_str(),doc.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,FishSolnOneDPoisson::get_exact_u,
                           error,norm); 
@@ -262,9 +262,9 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc)
 
  
 
-/// ////////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main==========================================================
@@ -282,20 +282,15 @@ int main(int argc, char **argv)
  //Number of elements
  unsigned n_element=40;
 
- // global distribution
- // LinearAlgebraDistribution 
- //  distributed_dist(problem.communicator_pt(),ndof,true);
-
  // the doc info
  DocInfo doc_info;
  doc_info.set_directory("RESLT");
 
 #ifdef OOMPH_HAS_MPI
- /// ///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
  // SuperLU_dist Test
- /// ///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (global)
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -321,7 +316,6 @@ int main(int argc, char **argv)
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_global.dat");
  }
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (distributed)
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -425,7 +419,7 @@ int main(int argc, char **argv)
  char filename[100];
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"RESLT/dummy_mumps.dat");
+ snprintf(filename, sizeof(filename), "RESLT/dummy_mumps.dat");
  some_file.open(filename);
  some_file << "dummy data for missing mumps\n";
  some_file.close();

@@ -221,8 +221,8 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
  fix_pressure(0,0,0.0);
   
  // Setup equation numbering scheme
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
- 
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
+
 } // end_of_constructor
 
 
@@ -244,7 +244,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  int my_rank=this->communicator_pt()->my_rank();
 
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -301,7 +301,7 @@ int main(int argc, char **argv)
     // Write partition to disk
     std::ofstream output_file;
     char filename[100];
-    sprintf(filename,"out_adaptive_cavity_1_partition.dat");
+    snprintf(filename, sizeof(filename), "out_adaptive_cavity_1_partition.dat");
     output_file.open(filename);
     for (unsigned e=0;e<n_element;e++)
      {
@@ -338,7 +338,7 @@ int main(int argc, char **argv)
     // Read in partitioning from disk
     std::ifstream input_file;
     char filename[100];
-    sprintf(filename,"adaptive_cavity_1_partition.dat");
+    snprintf(filename, sizeof(filename), "adaptive_cavity_1_partition.dat");
     input_file.open(filename);
     std::string input_string;
     for (unsigned e=0;e<n_element;e++)
@@ -409,7 +409,7 @@ int main(int argc, char **argv)
     // Get the partition to be used from file
     const unsigned n_element=problem.mesh_pt()->nelement();
     Vector<unsigned> element_partition(n_element);
-    sprintf(filename,"adaptive_cavity_2_partition.dat");
+    snprintf(filename, sizeof(filename), "adaptive_cavity_2_partition.dat");
     input_file.open(filename);
     std::string input_string;
     for (unsigned e=0;e<n_element;e++)
@@ -450,4 +450,3 @@ int main(int argc, char **argv)
 #endif
 
 } // end_of_main
-

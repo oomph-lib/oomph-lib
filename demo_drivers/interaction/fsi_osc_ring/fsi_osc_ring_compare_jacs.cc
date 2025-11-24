@@ -380,7 +380,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     ofstream some_file; char filename[100];
     //Construct the output filename from the doc_info number and the
     //output directory
-    sprintf(filename,"%s/soln%i_%i.dat",doc_info.directory().c_str(),
+    snprintf(filename, sizeof(filename), "%s/soln%i_%i.dat",doc_info.directory().c_str(),
             i_case,doc_info.number());
     //Open the output file
     some_file.open(filename);

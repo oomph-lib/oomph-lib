@@ -28,7 +28,6 @@
 
 // oomph-lib header
 #include "multi_domain.h"
-#include "multi_domain.template.cc"
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"

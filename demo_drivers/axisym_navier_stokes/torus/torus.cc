@@ -250,6 +250,9 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
 //run in serial
 #ifndef OOMPH_HAS_MPI
+  // The Newton solver sometimes doesn't converge within 10 iterations when
+  // using the HyprePreconditioner. Let's relax that condition a little...
+  this->max_newton_iterations() = 20;
 
  //Set up the internal preconditioners
  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -401,7 +404,7 @@ void TorusProblem<ELEMENT>::solve_system(const double &dt,
  
  //Output data after the first timestep
  //Create the filename, including the array index
- sprintf(filename,"soln_Re%g_t%g.dat",Re,time());
+ snprintf(filename, sizeof(filename), "soln_Re%g_t%g.dat",Re,time());
  //Actually, write the data
  file.open(filename);
  mesh_pt()->output(file,5);
@@ -420,7 +423,7 @@ void TorusProblem<ELEMENT>::solve_system(const double &dt,
   
    //Output data at each step
    //Create the filename, including the array index
-   sprintf(filename,"soln_Re%g_t%g.dat",Re,time());
+   snprintf(filename, sizeof(filename), "soln_Re%g_t%g.dat",Re,time());
    //Actually, write the data
    file.open(filename);
    mesh_pt()->output(file,5);

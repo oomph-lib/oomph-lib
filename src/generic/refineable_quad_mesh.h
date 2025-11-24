@@ -31,8 +31,6 @@
 #include "quad_mesh.h"
 #include "refineable_mesh.h"
 #include "refineable_quad_element.h"
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.template.cc"
 
 namespace oomph
 {

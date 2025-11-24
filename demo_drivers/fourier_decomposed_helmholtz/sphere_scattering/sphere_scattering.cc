@@ -44,9 +44,9 @@ using namespace oomph;
 using namespace std;
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 //========================================================================
 // AnnularQuadMesh, derived from SimpleRectangularQuadMesh.
@@ -211,9 +211,9 @@ namespace PlanarWave
 }
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //===== start_of_namespace=============================================
@@ -367,9 +367,9 @@ namespace ProblemParameters
 
 
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //========= start_of_problem_class=====================================
@@ -512,7 +512,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo& doc_info)
  ofstream some_file;
  char filename[100];
 
- sprintf(filename,"%s/gamma_test%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/gamma_test%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
   
@@ -582,7 +582,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -591,7 +591,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,ProblemParameters::get_exact_u); 
@@ -601,7 +601,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,ProblemParameters::get_exact_u,
@@ -618,10 +618,10 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Compute/output the radiated power
  //----------------------------------
- sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/power%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- sprintf(filename,"%s/total_power%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/total_power%i.dat",doc_info.directory().c_str(),
          doc_info.number());
 
  // Accumulate contribution from elements

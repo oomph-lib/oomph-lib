@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_BRICK_FROM_TET_MESH_TEMPLATE_CC
-#define OOMPH_BRICK_FROM_TET_MESH_TEMPLATE_CC
+#ifndef OOMPH_BRICK_FROM_TET_MESH_TEMPLATE_HEADER
+#define OOMPH_BRICK_FROM_TET_MESH_TEMPLATE_HEADER
 
-
-#include "brick_from_tet_mesh.template.h"
+#ifndef OOMPH_BRICK_FROM_TET_MESH_HEADER
+#error __FILE__ should only be included from brick_from_tet_mesh.h.
+#endif // OOMPH_BRICK_FROM_TET_MESH_HEADER
 
 namespace oomph
 {
@@ -94,7 +95,6 @@ namespace oomph
           s_face[i][1] = 0.0;
           break;
 
-
           // Quarter side nodes
 
         case 6:
@@ -134,7 +134,6 @@ namespace oomph
           s_face[i][1] = 1.0 / 3.0;
           break;
 
-
           // Vertical internal midside nodes connecting 2 and 3
 
         case 13:
@@ -158,7 +157,6 @@ namespace oomph
           s_face[i][1] = 5.0 / 12.0;
           s_face[i][0] = 1.0 / 6.0; // 1.0-2.0*5.0/12.0;
           break;
-
 
           // Internal midside nodes connecting nodes 1 and 5
 
@@ -243,7 +241,6 @@ namespace oomph
       FiniteElement* brick_el1_pt = 0;
       FiniteElement* brick_el2_pt = 0;
       FiniteElement* brick_el3_pt = 0;
-
 
       // First brick element is centred at node 0 of tet:
       //-------------------------------------------------
@@ -354,7 +351,6 @@ namespace oomph
           }
         }
 
-
         // Create actual zeroth brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el0_pt = el_pt;
@@ -368,7 +364,6 @@ namespace oomph
 
         TFace face2(
           tet_el_pt->node_pt(0), tet_el_pt->node_pt(1), tet_el_pt->node_pt(3));
-
 
         // Tet vertex nodes along edges emanating from node 0 in brick
         Vector<Vector<unsigned>> tet_edge_node(3);
@@ -425,7 +420,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -462,7 +456,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -501,7 +494,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -538,7 +530,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0, spanned by
         // tet vertices 0, 1, 2. Enumerated "11" in initial sketch.
@@ -673,7 +664,6 @@ namespace oomph
           }
         }
 
-
         // Internal brick node -- always built
         {
           unsigned j = 13;
@@ -730,7 +720,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -880,7 +869,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -954,7 +942,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -1030,7 +1017,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -1067,7 +1053,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -1106,7 +1091,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -1143,7 +1127,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -1186,7 +1169,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -1227,7 +1209,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -1270,7 +1251,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by first element
         {
           unsigned j = 22;
@@ -1287,7 +1267,6 @@ namespace oomph
           new_node_pt->x(1) = x_tet[1];
           new_node_pt->x(2) = x_tet[2];
         }
-
 
         // Right mid brick-face node -- only built by first element
         {
@@ -1306,7 +1285,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Back mid brick-face node -- only built by first element
         {
           unsigned j = 16;
@@ -1324,7 +1302,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
       }
-
 
       // Second brick element is centred at node 1 of tet:
       //--------------------------------------------------
@@ -1435,7 +1412,6 @@ namespace oomph
           }
         }
 
-
         // Create actual first brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el1_pt = el_pt;
@@ -1505,7 +1481,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -1542,7 +1517,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -1581,7 +1555,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -1618,7 +1591,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -1728,7 +1700,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -1737,7 +1708,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -1758,7 +1728,6 @@ namespace oomph
             new_node_pt->x(2) = x_tet[2];
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 2
         {
@@ -1797,7 +1766,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 0 and 6
         {
           unsigned j = 3;
@@ -1834,7 +1802,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 2 and 8
         {
@@ -1947,7 +1914,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -2021,7 +1987,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -2097,7 +2062,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -2134,7 +2098,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -2173,7 +2136,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -2210,7 +2172,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -2253,7 +2214,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -2294,7 +2254,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -2337,7 +2296,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
@@ -2354,7 +2312,6 @@ namespace oomph
           new_node_pt->x(1) = x_tet[1];
           new_node_pt->x(2) = x_tet[2];
         }
-
 
         // Right mid brick-face node -- only built by this element
         {
@@ -2373,7 +2330,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Back mid brick-face node copy from previous element
         {
           unsigned j = 16;
@@ -2382,7 +2338,6 @@ namespace oomph
           el_pt->node_pt(j) = right_mid_face_node0_pt;
         }
       }
-
 
       // Third brick element is centred at node 3 of tet:
       //-------------------------------------------------
@@ -2493,7 +2448,6 @@ namespace oomph
           }
         }
 
-
         // Create actual second brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el2_pt = el_pt;
@@ -2563,7 +2517,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -2600,7 +2553,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -2639,7 +2591,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -2676,7 +2627,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -2786,7 +2736,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -2795,7 +2744,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -2853,7 +2801,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -3003,7 +2950,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -3077,7 +3023,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -3153,7 +3098,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -3190,7 +3134,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -3229,7 +3172,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -3266,7 +3208,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -3309,7 +3250,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -3349,7 +3289,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -3392,7 +3331,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
@@ -3410,7 +3348,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Right mid brick-face node copy from first element
         {
           unsigned j = 14;
@@ -3418,7 +3355,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = back_mid_face_node0_pt;
         }
-
 
         // Back mid brick-face node copy from previous element
         {
@@ -3428,7 +3364,6 @@ namespace oomph
           el_pt->node_pt(j) = right_mid_face_node1_pt;
         }
       }
-
 
       // Fourth brick element is centred at node 2 of tet:
       //--------------------------------------------------
@@ -3539,7 +3474,6 @@ namespace oomph
           }
         }
 
-
         // Create actual third brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el3_pt = el_pt;
@@ -3609,7 +3543,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -3646,7 +3579,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -3685,7 +3617,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -3722,7 +3653,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -3832,7 +3762,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -3841,7 +3770,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -3899,7 +3827,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -4049,7 +3976,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -4123,7 +4049,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -4199,7 +4124,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -4236,7 +4160,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -4275,7 +4198,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -4312,7 +4234,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -4355,7 +4276,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -4396,7 +4316,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -4439,7 +4358,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node copy from top of second element
         {
           unsigned j = 22;
@@ -4447,7 +4365,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = top_mid_face_node2_pt;
         }
-
 
         // Right mid brick-face node copy from top of first element
         {
@@ -4457,7 +4374,6 @@ namespace oomph
           el_pt->node_pt(j) = top_mid_face_node1_pt;
         }
 
-
         // Back mid brick-face node  copy from top of zeroth element
         {
           unsigned j = 16;
@@ -4466,7 +4382,6 @@ namespace oomph
           el_pt->node_pt(j) = top_mid_face_node0_pt;
         }
       }
-
 
       // Check if the four faces of the tet are on a boundary.
       // If they are, add the nodes in the brick mesh to those
@@ -4494,7 +4409,6 @@ namespace oomph
 
             break;
 
-
           case 2:
             // Face 2: s[2]=0; opposite node 2
             face_pt = new TFace(tet_el_pt->node_pt(0),
@@ -4510,7 +4424,6 @@ namespace oomph
                                 tet_el_pt->node_pt(2));
             break;
         }
-
 
         if (face_pt->is_boundary_face())
         {
@@ -4574,11 +4487,10 @@ namespace oomph
                 new DummyFaceElement<TElement<3, 3>>(tet_el_pt, face_index);
             }
 
-
             // Specify boundary id in bulk mesh (needed to extract
             // boundary coordinate)
             unsigned b = (*(*bnd_pt).begin());
-            Boundary_coordinate_exists[b] = true;
+            set_boundary_coordinate_exists(b);
             face_el_pt->set_boundary_number_in_bulk_mesh(b);
 
             // Now set up the brick nodes on this face, enumerated as
@@ -4876,7 +4788,6 @@ namespace oomph
       Boundary_id[xda_b] = tet_mesh_pt->oomph_lib_boundary_ids(xda_b);
     }
 
-
     // Cleanup
     for (unsigned e = 0; e < 4; e++)
     {
@@ -4951,7 +4862,6 @@ namespace oomph
           s_face[i][1] = 0.0;
           break;
 
-
           // Quarter side nodes
 
         case 6:
@@ -4991,7 +4901,6 @@ namespace oomph
           s_face[i][1] = 1.0 / 3.0;
           break;
 
-
           // Vertical internal midside nodes connecting 2 and 3
 
         case 13:
@@ -5015,7 +4924,6 @@ namespace oomph
           s_face[i][1] = 5.0 / 12.0;
           s_face[i][0] = 1.0 / 6.0; // 1.0-2.0*5.0/12.0;
           break;
-
 
           // Internal midside nodes connecting nodes 1 and 5
 
@@ -5100,7 +5008,6 @@ namespace oomph
       FiniteElement* brick_el1_pt = 0;
       FiniteElement* brick_el2_pt = 0;
       FiniteElement* brick_el3_pt = 0;
-
 
       // First brick element is centred at node 0 of tet:
       //-------------------------------------------------
@@ -5211,7 +5118,6 @@ namespace oomph
           }
         }
 
-
         // Create actual zeroth brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el0_pt = el_pt;
@@ -5225,7 +5131,6 @@ namespace oomph
 
         TFace face2(
           tet_el_pt->node_pt(0), tet_el_pt->node_pt(1), tet_el_pt->node_pt(3));
-
 
         // Tet vertex nodes along edges emanating from node 0 in brick
         Vector<Vector<unsigned>> tet_edge_node(3);
@@ -5282,7 +5187,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -5319,7 +5223,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -5358,7 +5261,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -5395,7 +5297,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0, spanned by
         // tet vertices 0, 1, 2. Enumerated "11" in initial sketch.
@@ -5530,7 +5431,6 @@ namespace oomph
           }
         }
 
-
         // Internal brick node -- always built
         {
           unsigned j = 13;
@@ -5587,7 +5487,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -5737,7 +5636,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -5811,7 +5709,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -5887,7 +5784,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -5924,7 +5820,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -5963,7 +5858,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -6000,7 +5894,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -6043,7 +5936,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -6084,7 +5976,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -6127,7 +6018,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by first element
         {
           unsigned j = 22;
@@ -6144,7 +6034,6 @@ namespace oomph
           new_node_pt->x(1) = x_tet[1];
           new_node_pt->x(2) = x_tet[2];
         }
-
 
         // Right mid brick-face node -- only built by first element
         {
@@ -6163,7 +6052,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Back mid brick-face node -- only built by first element
         {
           unsigned j = 16;
@@ -6181,7 +6069,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
       }
-
 
       // Second brick element is centred at node 1 of tet:
       //--------------------------------------------------
@@ -6292,7 +6179,6 @@ namespace oomph
           }
         }
 
-
         // Create actual first brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el1_pt = el_pt;
@@ -6362,7 +6248,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -6399,7 +6284,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -6438,7 +6322,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -6475,7 +6358,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -6585,7 +6467,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -6594,7 +6475,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -6615,7 +6495,6 @@ namespace oomph
             new_node_pt->x(2) = x_tet[2];
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 2
         {
@@ -6654,7 +6533,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 0 and 6
         {
           unsigned j = 3;
@@ -6691,7 +6569,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 2 and 8
         {
@@ -6804,7 +6681,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -6878,7 +6754,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -6954,7 +6829,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -6991,7 +6865,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -7030,7 +6903,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -7067,7 +6939,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -7110,7 +6981,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -7151,7 +7021,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -7194,7 +7063,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
@@ -7211,7 +7079,6 @@ namespace oomph
           new_node_pt->x(1) = x_tet[1];
           new_node_pt->x(2) = x_tet[2];
         }
-
 
         // Right mid brick-face node -- only built by this element
         {
@@ -7230,7 +7097,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Back mid brick-face node copy from previous element
         {
           unsigned j = 16;
@@ -7239,7 +7105,6 @@ namespace oomph
           el_pt->node_pt(j) = right_mid_face_node0_pt;
         }
       }
-
 
       // Third brick element is centred at node 3 of tet:
       //-------------------------------------------------
@@ -7350,7 +7215,6 @@ namespace oomph
           }
         }
 
-
         // Create actual second brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el2_pt = el_pt;
@@ -7420,7 +7284,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -7457,7 +7320,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -7496,7 +7358,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -7533,7 +7394,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -7643,7 +7503,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -7652,7 +7511,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -7710,7 +7568,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -7860,7 +7717,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -7934,7 +7790,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -8010,7 +7865,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -8047,7 +7901,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -8086,7 +7939,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -8123,7 +7975,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -8166,7 +8017,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -8206,7 +8056,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -8249,7 +8098,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
@@ -8267,7 +8115,6 @@ namespace oomph
           new_node_pt->x(2) = x_tet[2];
         }
 
-
         // Right mid brick-face node copy from first element
         {
           unsigned j = 14;
@@ -8275,7 +8122,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = back_mid_face_node0_pt;
         }
-
 
         // Back mid brick-face node copy from previous element
         {
@@ -8285,7 +8131,6 @@ namespace oomph
           el_pt->node_pt(j) = right_mid_face_node1_pt;
         }
       }
-
 
       // Fourth brick element is centred at node 2 of tet:
       //--------------------------------------------------
@@ -8396,7 +8241,6 @@ namespace oomph
           }
         }
 
-
         // Create actual third brick element
         FiniteElement* el_pt = new ELEMENT;
         brick_el3_pt = el_pt;
@@ -8466,7 +8310,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-edge node on tet edge 0
         {
           unsigned j = 2;
@@ -8503,7 +8346,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node coindides with mid vertex node of tet edge 1
         {
@@ -8542,7 +8384,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node coindides with mid-vertex node of tet edge 2
         {
           unsigned j = 18;
@@ -8579,7 +8420,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick vertex node in the middle of tet face0
         {
@@ -8689,7 +8529,6 @@ namespace oomph
           }
         }
 
-
         // Brick vertex node in centroid of tet. Only built for first element.
         // Enumerated "13" in initial sketch.
         {
@@ -8698,7 +8537,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = centroid_node_pt;
         }
-
 
         // Internal brick node -- always built
         {
@@ -8756,7 +8594,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 0 and 6
         {
@@ -8906,7 +8743,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 18 and 24
         {
           unsigned j = 21;
@@ -8980,7 +8816,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 24 and 26
         {
@@ -9056,7 +8891,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 2 and 20
         {
           unsigned j = 11;
@@ -9093,7 +8927,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Brick edge node between brick nodes 6 and 24
         {
@@ -9132,7 +8965,6 @@ namespace oomph
           }
         }
 
-
         // Brick edge node between brick nodes 8 and 26
         {
           unsigned j = 17;
@@ -9169,7 +9001,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 2
@@ -9212,7 +9043,6 @@ namespace oomph
           }
         }
 
-
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 1 and 2
         {
@@ -9253,7 +9083,6 @@ namespace oomph
             el_pt->node_pt(j) = old_node_pt;
           }
         }
-
 
         // Mid brick-face node associated with face
         // spanned by mid-vertex nodes associated with tet edges 0 and 1
@@ -9296,7 +9125,6 @@ namespace oomph
           }
         }
 
-
         // Top mid brick-face node copy from top of second element
         {
           unsigned j = 22;
@@ -9304,7 +9132,6 @@ namespace oomph
           // Always copied
           el_pt->node_pt(j) = top_mid_face_node2_pt;
         }
-
 
         // Right mid brick-face node copy from top of first element
         {
@@ -9314,7 +9141,6 @@ namespace oomph
           el_pt->node_pt(j) = top_mid_face_node1_pt;
         }
 
-
         // Back mid brick-face node  copy from top of zeroth element
         {
           unsigned j = 16;
@@ -9323,7 +9149,6 @@ namespace oomph
           el_pt->node_pt(j) = top_mid_face_node0_pt;
         }
       }
-
 
       // Check if the four faces of the tet are on a boundary.
       // If they are, add the nodes in the brick mesh to those
@@ -9351,7 +9176,6 @@ namespace oomph
 
             break;
 
-
           case 2:
             // Face 2: s[2]=0; opposite node 2
             face_pt = new TFace(tet_el_pt->node_pt(0),
@@ -9367,7 +9191,6 @@ namespace oomph
                                 tet_el_pt->node_pt(2));
             break;
         }
-
 
         if (face_pt->is_boundary_face())
         {
@@ -9431,11 +9254,10 @@ namespace oomph
                 new DummyFaceElement<TElement<3, 3>>(tet_el_pt, face_index);
             }
 
-
             // Specify boundary id in bulk mesh (needed to extract
             // boundary coordinate)
             unsigned b = (*(*bnd_pt).begin());
-            Boundary_coordinate_exists[b] = true;
+            set_boundary_coordinate_exists(b);
             face_el_pt->set_boundary_number_in_bulk_mesh(b);
 
             // Now set up the brick nodes on this face, enumerated as
@@ -9733,7 +9555,6 @@ namespace oomph
     //    //Boundary_id[xda_b]=tet_mesh_pt->oomph_lib_boundary_ids(xda_b);
     //    Boundary_id[xda_b]=xda_b;
     //   }
-
 
     // Cleanup
     for (unsigned e = 0; e < 4; e++)

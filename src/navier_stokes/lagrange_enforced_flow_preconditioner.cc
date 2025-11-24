@@ -301,9 +301,9 @@ namespace oomph
   } // namespace
     // Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
-  /// /////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
 
   /// Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
@@ -630,9 +630,9 @@ namespace oomph
     // The rest are Lagrange multiplier DOF types.
     N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
 
-    /// ///////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
     //   Now construct the DOF to block map for block_setup()   //
-    /// ///////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     // Now that we have
     //
@@ -940,7 +940,7 @@ namespace oomph
 
       // Step 3.3: Perform the augmentation: v_aug + m_i * inv(w_i) * m_j
 
-      /// /////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////
       // Now we create the augmented matrix in v_aug_pt.
       // v_aug_pt is already re-ordered
       // Loop through the mm_locations
@@ -1174,7 +1174,8 @@ namespace oomph
       {
         if (Navier_stokes_preconditioner_pt == 0)
         {
-          Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
+          Navier_stokes_preconditioner_pt =
+            ExactPreconditionerFactory::create_exact_preconditioner();
         }
       }
       else
@@ -1182,7 +1183,7 @@ namespace oomph
         if (Navier_stokes_preconditioner_pt == 0)
         {
           std::ostringstream err_msg;
-          err_msg << "Not using SuperLUPreconditioner for NS block,\n"
+          err_msg << "Not using ExactPreconditioner for NS block,\n"
                   << "but the Navier_stokes_preconditioner_pt is null.\n";
           throw OomphLibError(
             err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);

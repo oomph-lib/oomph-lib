@@ -2932,7 +2932,7 @@ namespace oomph
     SolidNode* solid_node3_pt = dynamic_cast<SolidNode*>(node_pt(node3));
     SolidNode* solid_node4_pt = dynamic_cast<SolidNode*>(node_pt(node4));
 
-    //#ifdef PARANOID
+    // #ifdef PARANOID
     if (solid_node1_pt == 0)
     {
       throw OomphLibError(
@@ -2965,7 +2965,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    //#endif
+    // #endif
 
     // Number of coordinates
     unsigned n_dim = this->nodal_dimension();

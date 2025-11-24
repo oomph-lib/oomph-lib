@@ -23,16 +23,19 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_TRIANGLE_MESH_TEMPLATE_CC
-#define OOMPH_TRIANGLE_MESH_TEMPLATE_CC
+#ifndef OOMPH_TRIANGLE_MESH_TEMPLATE_HEADER
+#define OOMPH_TRIANGLE_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_TRIANGLE_MESH_HEADER
+#error __FILE__ should only be included from triangle_mesh.h.
+#endif // OOMPH_TRIANGLE_MESH_HEADER
 
 #include <iostream>
 
-#include "triangle_mesh.template.h"
-#include "../generic/map_matrix.h"
-#include "../generic/multi_domain.h"
-#include "../generic/projection.h"
-#include "../generic/face_element_as_geometric_object.h"
+#include "generic/map_matrix.h"
+#include "generic/multi_domain.h"
+#include "generic/projection.h"
+#include "generic/face_element_as_geometric_object.h"
 
 namespace oomph
 {
@@ -370,7 +373,6 @@ namespace oomph
 
       } // end of loop over edges
     } // end of loop over elements
-
 
     // Lookup scheme has now been setup
     Lookup_for_elements_next_boundary_is_setup = true;
@@ -6222,7 +6224,7 @@ namespace oomph
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
                   1,
-                  MPI_DOUBLE,
+                  MPI_UNSIGNED,
                   send_proc,
                   3,
                   comm_pt->mpi_comm(),
@@ -6231,7 +6233,7 @@ namespace oomph
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
                  1,
-                 MPI_DOUBLE,
+                 MPI_UNSIGNED,
                  receive_proc,
                  3,
                  comm_pt->mpi_comm(),
@@ -6453,7 +6455,7 @@ namespace oomph
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
                   1,
-                  MPI_DOUBLE,
+                  MPI_UNSIGNED,
                   send_proc,
                   3,
                   comm_pt->mpi_comm(),
@@ -6462,7 +6464,7 @@ namespace oomph
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
                  1,
-                 MPI_DOUBLE,
+                 MPI_UNSIGNED,
                  receive_proc,
                  3,
                  comm_pt->mpi_comm(),
@@ -7193,7 +7195,6 @@ namespace oomph
 
 #endif // OOMPH_HAS_MPI
 
-
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   //========================================================================
@@ -7879,7 +7880,6 @@ namespace oomph
           restart_file.ignore(80, '\n');
 
           // Set the values in the containers
-
 
           this->boundary_initial_coordinate(b) = initial_coordinates;
           this->boundary_final_coordinate(b) = final_coordinates;
@@ -15206,7 +15206,6 @@ namespace oomph
     // Tolerance for lower-left comparison
     static double Tol;
 
-
     // Comparison operator for "lower left" ordering
     bool operator()(const std::pair<double, double>& lhs,
                     const std::pair<double, double>& rhs) const
@@ -15255,7 +15254,6 @@ namespace oomph
         }
       }
 
-
       // if (lhs.second < rhs.second)
       //  {
       //   return true;
@@ -15285,10 +15283,8 @@ namespace oomph
 
   } Bottom_left_sorter; // struct classcomp
 
-
   // Assign value for tolerance
   double classcomp::Tol = 1.0e-14;
-
 
   //======================================================================
   // Sort the nodes on shared boundaries so that the processors that share
@@ -15312,7 +15308,6 @@ namespace oomph
       // std::map<std::pair<double, double>, Node*> sorted_nodes_pt;
       std::map<std::pair<double, double>, Node*, classcomp> sorted_nodes_pt;
 
-
 #ifdef PARANOID
 
       // Check min distance between nodes; had better be less than the
@@ -15335,7 +15330,6 @@ namespace oomph
         std::pair<double, double> vertex =
           std::make_pair(node_pt->x(0), node_pt->x(1));
         sorted_nodes_pt[vertex] = node_pt;
-
 
 #ifdef PARANOID
 
@@ -17432,7 +17426,7 @@ namespace oomph
         // Get the size of the package to communicate to the iproc
         // processor
         const unsigned n_udata_send = flat_package_unsigned_send.size();
-        int n_udata_send_int = n_udata_send;
+        unsigned n_udata_send_int = n_udata_send;
 
         // Send/receive data to/from iproc processor
         MPI_Isend(&n_udata_send_int,
@@ -17443,7 +17437,7 @@ namespace oomph
                   comm_pt->mpi_comm(),
                   &request);
 
-        int n_udata_received_int = 0;
+        unsigned n_udata_received_int = 0;
         MPI_Recv(&n_udata_received_int,
                  1,
                  MPI_UNSIGNED,
@@ -17490,7 +17484,7 @@ namespace oomph
         // Get the size of the package to communicate to the iproc
         // processor
         const unsigned n_ddata_send = flat_package_double_send.size();
-        int n_ddata_send_int = n_ddata_send;
+        unsigned n_ddata_send_int = n_ddata_send;
 
         // Send/receive data to/from iproc processor
         MPI_Isend(&n_ddata_send_int,
@@ -17501,7 +17495,7 @@ namespace oomph
                   comm_pt->mpi_comm(),
                   &request);
 
-        int n_ddata_received_int = 0;
+        unsigned n_ddata_received_int = 0;
         MPI_Recv(&n_ddata_received_int,
                  1,
                  MPI_UNSIGNED,
@@ -18983,10 +18977,10 @@ namespace oomph
               comm_pt->mpi_comm(),
               &request);
 
-    int receive_count_double_values = 0;
+    unsigned receive_count_double_values = 0;
     MPI_Recv(&receive_count_double_values,
              1,
-             MPI_INT,
+             MPI_UNSIGNED,
              recv_proc,
              1,
              comm_pt->mpi_comm(),
@@ -19045,10 +19039,10 @@ namespace oomph
               comm_pt->mpi_comm(),
               &request);
 
-    int receive_count_unsigned_values = 0;
+    unsigned receive_count_unsigned_values = 0;
     MPI_Recv(&receive_count_unsigned_values,
              1,
-             MPI_INT,
+             MPI_UNSIGNED,
              recv_proc,
              14,
              comm_pt->mpi_comm(),
@@ -19432,7 +19426,8 @@ namespace oomph
     Vector<Node*>& global_shared_node_pt)
   {
     // The first entry indicates the number of values at this new Node
-    //(which may be different across the same element e.g. Lagrange multipliers)
+    //(which may be different across the same element e.g. Lagrange
+    // multipliers)
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
     oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
                << "  Number of values of external halo node "
@@ -27929,7 +27924,8 @@ namespace oomph
     const unsigned my_rank = this->communicator_pt()->my_rank();
 
     // The first entry indicates the number of values at this new Node
-    //(which may be different across the same element e.g. Lagrange multipliers)
+    //(which may be different across the same element e.g. Lagrange
+    // multipliers)
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION_LOAD_BALANCE
     oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
                << "  Number of values of external halo node "
@@ -30445,7 +30441,6 @@ namespace oomph
         tmp_new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt);
         }*/
 
-
       // tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat");
       // this->output("existing_mesh.dat");
 
@@ -30469,7 +30464,6 @@ namespace oomph
       {
         use_eulerian_coords = true;
       }
-
 
 #ifdef OOMPH_HAS_CGAL
 
@@ -30570,7 +30564,6 @@ namespace oomph
                    << double(tot_n_entry) / double(n_bin) << ")" << std::endl;
       }
 
-
       // For each bin, compute the minimum of the target areas in the bin
 
       // Timing for map
@@ -30642,7 +30635,6 @@ namespace oomph
       oomph_info << "CPU for map[counter=" << counter_map
                  << "]: " << t_total_map << std::endl;
 
-
       // Optional output for debugging (keep it around!)
       const bool output_bins = false;
       if (output_bins)
@@ -30656,7 +30648,6 @@ namespace oomph
       }
 
 #endif
-
 
       // Now start iterating to refine mesh recursively
       //-----------------------------------------------
@@ -30823,7 +30814,6 @@ namespace oomph
 
         } // for (e<nelem)
 
-
         // do some output (keep it alive!)
         const bool output_target_areas = false;
         if (output_target_areas)
@@ -30838,7 +30828,6 @@ namespace oomph
         }
         oomph_info << "Time for loop over integration points in new mesh: "
                    << TimingHelpers::timer() - t0_loop_int_pts << std::endl;
-
 
         // {
         // tmp.open((Global_string_for_annotation::
@@ -30906,7 +30895,6 @@ namespace oomph
         unsigned n_ele_need_refinement_iter = 0;
 #endif
 
-
         // Don't delete! Keep these around for debugging
         // ofstream tmp_mesh_file;
         // tmp_mesh_file.open("tmp_mesh_file.dat");
@@ -30966,7 +30954,6 @@ namespace oomph
             //  << new_area << " "
             //  << new_target_area[e] << std::endl;
 
-
 #ifdef OOMPH_HAS_MPI
             // Keep track of the elements that require (un)refinement
             n_ele_need_refinement_iter++;
@@ -30975,7 +30962,6 @@ namespace oomph
           } // else if (new_area <= 0.0)
 
         } // for (e < nel_new)
-
 
         // Don't delete! Keep around for debugging
         // target_areas_file.close();
@@ -33690,7 +33676,6 @@ namespace oomph
       Vector<double> src_vertex_coordinates_final =
         polyline_pt->vertex_coordinate(tmp_n_vertices - 1);
 
-
 #ifdef PARANOID
       // Is the mesh distributed?
 #ifdef OOMPH_HAS_MPI
@@ -36346,7 +36331,6 @@ namespace oomph
       }
     } // end of loop over all polylines -- they are now re-distributed
 
-
     // Loop over all nodes on the boundaries of the polygon to remove
     // nodes from boundaries they are no longer on
     unsigned move_count = 0;
@@ -36463,7 +36447,6 @@ namespace oomph
     {
       // Cache the pointer to the polygon representation
       TriangleMeshPolygon* const poly_pt = this->Internal_polygon_pt[ihole];
-
 
       // Can the polygon update its own configuration, in which case this
       // is easy
@@ -37728,7 +37711,8 @@ namespace oomph
       // the splitted boundary. Used to pass the info. from sub_vertex_nodes
       // but --- without the z-value ---, used to generate the sub-polylines
       Vector<Vector<Vector<double>>> sub_vector_vertex_node;
-      // --------- Stuff to deal with splitted boundaries ----------- End ------
+      // --------- Stuff to deal with splitted boundaries ----------- End
+      // ------
 #endif
 
       // Get the boundary id
@@ -38207,7 +38191,8 @@ namespace oomph
       }
 
 #ifdef OOMPH_HAS_MPI
-      // --------- Stuff for the sub_boundaries ----- Begin section ---------
+      // --------- Stuff for the sub_boundaries ----- Begin section
+      // ---------
 #ifdef PARANOID
       unsigned nsub_boundaries_set = sub_vertex_nodes.size();
       if (nsub_boundaries_set != nsub_boundaries)
@@ -38250,7 +38235,8 @@ namespace oomph
           }
         }
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ------------
+        // --------- Stuff for the sub_boundaries ----- End section
+        // ------------
 #endif // OOMPH_HAS_MPI
 
       // For further processing the three-dimensional vector has to be
@@ -38295,7 +38281,8 @@ namespace oomph
       // and then we can create the sub-boundaries representations to
       // ease the generation of the mesh by Triangle
 
-      // --------- Stuff for the sub_boundaries ----- End section ------------
+      // --------- Stuff for the sub_boundaries ----- End section
+      // ------------
 #endif // OOMPH_HAS_MPI
 
       // --------------------------------------------------------------------
@@ -38593,7 +38580,7 @@ namespace oomph
         } // for (isub < nsub_boundaries)
 
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ---------
+        // --------- Stuff for the sub_boundaries ----- End section ---------
 #endif // OOMPH_HAS_MPI
 
       // Delete the allocated memory for the geometric object that
@@ -38816,7 +38803,8 @@ namespace oomph
       // but --- without the z-value ---, used to generate the sub-polylines
       Vector<Vector<Vector<double>>> sub_vector_vertex_node;
 
-      // --------- Stuff to deal with splitted boundaries ----------- End ------
+      // --------- Stuff to deal with splitted boundaries ----------- End
+      // ------
 
 #endif // #ifdef OOMPH_HAS_MPI
 
@@ -39498,7 +39486,7 @@ namespace oomph
           }
         }
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ----------
+        // --------- Stuff for the sub_boundaries ----- End section ----------
 #endif // OOMPH_HAS_MPI
 
       // For further processing the three-dimensional vector has to be
@@ -39867,7 +39855,7 @@ namespace oomph
         } // for (isub < nsub_boundaries)
 
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ---------
+        // --------- Stuff for the sub_boundaries ----- End section ---------
 #endif // OOMPH_HAS_MPI
 
       // Delete the allocated memory for the geometric object
@@ -41328,7 +41316,8 @@ namespace oomph
       // the splitted boundary. Used to pass the info. from sub_vertex_nodes
       // but --- without the z-value ---, used to generate the sub-polylines
       Vector<Vector<Vector<double>>> sub_vector_vertex_node;
-      // --------- Stuff to deal with splitted boundaries ----------- End ------
+      // --------- Stuff to deal with splitted boundaries ----------- End
+      // ------
 #endif
 
       // Get the boundary id
@@ -41629,7 +41618,8 @@ namespace oomph
       }
 
 #ifdef OOMPH_HAS_MPI
-      // --------- Stuff for the sub_boundaries ----- Begin section ---------
+      // --------- Stuff for the sub_boundaries ----- Begin section
+      // ---------
 #ifdef PARANOID
       unsigned nsub_boundaries_set = sub_vertex_nodes.size();
       if (nsub_boundaries_set != nsub_boundaries)
@@ -41673,9 +41663,9 @@ namespace oomph
           }
         }
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ------------
+        // --------- Stuff for the sub_boundaries ----- End section
+        // ------------
 #endif // OOMPH_HAS_MPI
-
 
       // For further processing the three-dimensional vector
       // has to be reduced to a two-dimensional vector
@@ -41719,7 +41709,8 @@ namespace oomph
       // and then we can create the sub-boundaries representations to
       // ease the generation of the mesh by Triangle
 
-      // --------- Stuff for the sub_boundaries ----- End section ------------
+      // --------- Stuff for the sub_boundaries ----- End section
+      // ------------
 #endif // OOMPH_HAS_MPI
 
       // *********************************************************************
@@ -42011,7 +42002,8 @@ namespace oomph
           } // for (isub < nsub_boundaries)
 
         } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-        // --------- Stuff for the sub_boundaries ----- End section ---------
+          // --------- Stuff for the sub_boundaries ----- End section
+          // ---------
 #endif // OOMPH_HAS_MPI
 
       } // update polyline representation
@@ -42029,7 +42021,6 @@ namespace oomph
       delete face_mesh_pt[p];
     }
   }
-
 
   //======================================================================
   /// Updates the open curve representation after restart
@@ -42223,7 +42214,8 @@ namespace oomph
       // but --- without the z-value ---, used to generate the sub-polylines
       Vector<Vector<Vector<double>>> sub_vector_vertex_node;
 
-      // --------- Stuff to deal with splitted boundaries ----------- End ------
+      // --------- Stuff to deal with splitted boundaries ----------- End
+      // ------
 #endif
 
       // Sort face elements, separate those with both nonhalo face
@@ -42632,7 +42624,7 @@ namespace oomph
           }
         }
       } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-      // --------- Stuff for the sub_boundaries ----- End section ----------
+        // --------- Stuff for the sub_boundaries ----- End section ----------
 #endif // OOMPH_HAS_MPI
 
       // For further processing the three-dimensional vector has to be
@@ -42677,7 +42669,8 @@ namespace oomph
       // then we can create the sub-boundaries representations to ease the
       // generation of the mesh by Triangle
 
-      // --------- Stuff for the sub_boundaries ----- End section ------------
+      // --------- Stuff for the sub_boundaries ----- End section
+      // ------------
 #endif // OOMPH_HAS_MPI
 
       // *********************************************************************
@@ -42987,7 +42980,8 @@ namespace oomph
           }
 
         } // if (this->is_mesh_distributed() && nsub_boundaries > 1)
-        // --------- Stuff for the sub_boundaries ----- End section ---------
+          // --------- Stuff for the sub_boundaries ----- End section
+          // ---------
 #endif // OOMPH_HAS_MPI
 
       } // update polyline representation
@@ -43659,7 +43653,7 @@ namespace oomph
     RefineableTriangleMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)
   {
     // Quick return
-    if (!Boundary_coordinate_exists[b])
+    if (!boundary_coordinate_exists(b))
     {
       return;
     }
@@ -44261,7 +44255,6 @@ namespace oomph
       delete dummy_six_node_element.node_pt(j);
     }
   }
-
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 

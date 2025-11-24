@@ -28,9 +28,9 @@
 #define OOMPH_COLLAPSIBLE_CHANNEL_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -78,10 +78,8 @@ namespace oomph
       }
     }
 
-
     /// Destructor: emtpy; cleanup done in base class
     ~CollapsibleChannelDomain() {}
-
 
     /// Number of vertical columns of macro elements the upstream section
     unsigned nup()
@@ -209,8 +207,6 @@ namespace oomph
                                 const Vector<double>& zeta,
                                 Vector<double>& r);
 
-
-    /// Rotate the domain (for axisymmetric problems)
     void enable_rotate_domain()
     {
       Rotate_domain = true;
@@ -221,7 +217,6 @@ namespace oomph
     {
       Rotate_domain = false;
     }
-
 
   private:
     /// Northern boundary of the macro element imacro in the
@@ -296,7 +291,6 @@ namespace oomph
       return xi;
     }
 
-
     /// Number of vertical element columns in upstream section
     unsigned Nup;
 
@@ -329,9 +323,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //===================================================================
   /// Vector representation of the  imacro-th macro element
@@ -484,7 +478,6 @@ namespace oomph
     }
   }
 
-
   //===========================================================================
   /// Western edge of the  macro element in the upstream (part=0)
   /// or downstream (part=1) parts of the channel; \f$ \zeta \in [-1,1] \f$
@@ -535,7 +528,6 @@ namespace oomph
     }
   }
 
-
   //===========================================================================
   /// Eastern  edge of the  macro element in the straight parts
   /// of the channel; \f$ \zeta \in [-1,1] \f$
@@ -579,7 +571,6 @@ namespace oomph
 
       default:
 
-
         std::ostringstream error_stream;
         error_stream << "Never get here! part=" << part << std::endl;
 
@@ -601,7 +592,6 @@ namespace oomph
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
     unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
-
 
     // Where are we?
     switch (part)
@@ -634,7 +624,6 @@ namespace oomph
 
       default:
 
-
         std::ostringstream error_stream;
         error_stream << "Never get here! part=" << part << std::endl;
 
@@ -642,7 +631,6 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
-
 
   //=========================================================================
   /// Southern  edge of the  macro element in the straight parts of
@@ -689,7 +677,6 @@ namespace oomph
 
       default:
 
-
         std::ostringstream error_stream;
         error_stream << "Never get here! part=" << part << std::endl;
 
@@ -697,7 +684,6 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
-
 
   //========================================================================
   /// Western edge of the  macro element in the collapsible part of the
@@ -734,7 +720,6 @@ namespace oomph
     r[1] = r_wall[1] * fract;
   }
 
-
   //=========================================================================
   /// Eastern  edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$
@@ -769,7 +754,6 @@ namespace oomph
     // y-coordinate
     r[1] = r_wall[1] * fract;
   }
-
 
   //==========================================================================
   /// Northern edge of the  macro element in the collapsible part of the
@@ -807,7 +791,6 @@ namespace oomph
     r[1] = r_wall[1] * fract;
   }
 
-
   //========================================================================
   /// Southern  edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$
@@ -843,7 +826,6 @@ namespace oomph
     // y-coordinate
     r[1] = r_wall[1] * fract;
   }
-
 
 } // namespace oomph
 

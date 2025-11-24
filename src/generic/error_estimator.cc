@@ -1025,7 +1025,8 @@ namespace oomph
                     MPI_UNSIGNED,
                     MPI_MAX,
                     comm_pt->mpi_comm());
-      MPI_Allreduce(&dim_local, &dim, 1, MPI_INT, MPI_MAX, comm_pt->mpi_comm());
+      MPI_Allreduce(
+        &dim_local, &dim, 1, MPI_UNSIGNED, MPI_MAX, comm_pt->mpi_comm());
       MPI_Allreduce(&recovery_order_local,
                     &recovery_order,
                     1,
@@ -1824,7 +1825,8 @@ namespace oomph
     std::string rank_string = "";
     if (comm_pt != 0)
     {
-      rank_string = "_on_proc_" + comm_pt->my_rank();
+      rank_string =
+        std::string("_on_proc_") + std::to_string(comm_pt->my_rank());
     }
 
     // Setup output files

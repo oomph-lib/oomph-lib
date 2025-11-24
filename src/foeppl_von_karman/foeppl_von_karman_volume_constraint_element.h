@@ -31,7 +31,7 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
+#include "generic/elements.h"
 #include "../meshes/triangle_mesh.h"
 #include "Tfoeppl_von_karman_elements.h"
 

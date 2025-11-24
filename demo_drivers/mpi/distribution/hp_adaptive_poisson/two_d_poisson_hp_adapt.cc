@@ -298,7 +298,7 @@ void RefineableTwoDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -307,7 +307,7 @@ void RefineableTwoDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -316,7 +316,7 @@ void RefineableTwoDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm;
- sprintf(filename,"%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -379,7 +379,7 @@ int main(int argc, char** argv)
    // Write partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"out_hp_adaptive_poisson_partition.dat");
+   snprintf(filename, sizeof(filename), "out_hp_adaptive_poisson_partition.dat");
    output_file.open(filename);
    for (unsigned e=0;e<n_element;e++)
     {
@@ -406,7 +406,7 @@ int main(int argc, char** argv)
    // Get the partition to be used from file
    const unsigned n_element=problem.mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element);
-   sprintf(filename,"hp_adaptive_poisson_partition.dat");
+   snprintf(filename, sizeof(filename), "hp_adaptive_poisson_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)

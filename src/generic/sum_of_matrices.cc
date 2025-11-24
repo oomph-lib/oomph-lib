@@ -29,7 +29,6 @@
 #include "double_vector.h"
 #include "sum_of_matrices.h"
 
-
 namespace oomph
 {
   // =================================================================

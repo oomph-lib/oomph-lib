@@ -376,9 +376,9 @@ namespace oomph
 
 
 
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 
 
@@ -1067,7 +1067,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
  unsigned npoints = 5;
  
  // Output solution and projection files
- sprintf(filename,"RESLT/inner_hole_boundary_from_geom_obj.dat");
+ snprintf(filename, sizeof(filename), "RESLT/inner_hole_boundary_from_geom_obj.dat");
  some_file.open(filename);
 
  //Initialize zeta and r
@@ -1289,13 +1289,13 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
  // Output solution and projection files
  if(!project)
   {
-   sprintf(filename,"%s/soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",
            Problem_Parameter::Doc_info.directory().c_str(),
            Problem_Parameter::Doc_info.number());
   }
  else
   {
-   sprintf(filename,"%s/proj%i.dat",
+   snprintf(filename, sizeof(filename), "%s/proj%i.dat",
            Problem_Parameter::Doc_info.directory().c_str(),
            Problem_Parameter::Doc_info.number()-1);
   }

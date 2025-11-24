@@ -36,8 +36,11 @@
 // Get the mesh
 #include "meshes/tetgen_mesh.h"
 
-//#include "../../../external_src/oomph_tetgen/tetgen.h"
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6.h"
+#else
 #include "oomph_tetgen.h"
+#endif
 
 using namespace std;
 
@@ -145,7 +148,7 @@ template<class ELEMENT>
      
      // Convert to a *char required by the triangulate function
      char tetswitches[100];
-     sprintf(tetswitches,"%s",input_string_stream.str().c_str());
+     snprintf(tetswitches, sizeof(tetswitches), "%s",input_string_stream.str().c_str());
      
      // Build triangulateio refined object
      tetrahedralize(tetswitches, tetgen_input_pt, this->Tetgenio_pt);       
@@ -741,9 +744,9 @@ template<class ELEMENT>
    
   }; 
 
-/// //////////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
@@ -892,12 +895,12 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
     std::map<GeneralisedElement*,double> target_size_map;
 
 
-    /// ///////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
     // NOTE: Repeated setup of multidomain interaction could
     // be avoided by setting up a sufficiently fine bin
     // for the original mesh and reading out the target
     // area information from there
-    /// ///////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
 
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
@@ -2125,7 +2128,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc local node numbering
  //-------------------------
- sprintf(filename,"%s/node_numbering%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/node_numbering%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FiniteElement* el_pt=Fluid_mesh_pt->finite_element_pt(0);
@@ -2146,7 +2149,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/surface%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/surface%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Free_surface_mesh_pt->output(some_file,nplot);
@@ -2157,7 +2160,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,nplot);

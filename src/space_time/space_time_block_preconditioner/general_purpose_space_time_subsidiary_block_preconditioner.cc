@@ -27,12 +27,12 @@
 #include "general_purpose_space_time_subsidiary_block_preconditioner.h"
 
 #ifdef OOMPH_HAS_HYPRE
-#include "../../generic/hypre_solver.h"
+#include "generic/hypre_solver.h"
 #endif
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -51,9 +51,9 @@ namespace oomph
   } // namespace HypreSubsidiaryPreconditionerHelper
 #endif
 
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
-  /// /////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
   //============================================================================
   /// Setup for the block triangular preconditioner
@@ -291,33 +291,6 @@ namespace oomph
     // Set the matrix-vector product up
     this->setup_matrix_vector_product(G_mat_vec_pt, g_pt, 1);
 
-    // Do we need to doc. the memory statistics?
-    if (Compute_memory_statistics)
-    {
-      // Initialise the memory usage variable
-      Memory_usage_in_bytes = 0.0;
-
-      // How many rows are there in the momentum block?
-      unsigned n_row_f = f_pt->nrow();
-
-      // How many nonzeros are there in the momentum block?
-      unsigned n_nnz_f = f_pt->nnz();
-
-      // Update the memory usage variable. NOTE: This calculation is done by
-      // taking into account the storage scheme for a compressed row matrix
-      Memory_usage_in_bytes += ((2 * ((n_row_f + 1) * sizeof(int))) +
-                                (n_nnz_f * (sizeof(int) + sizeof(double))));
-
-      // How many rows are there in the gradient block?
-      unsigned n_row_g = g_pt->nrow();
-
-      // How many nonzeros are there in the gradient block?
-      unsigned n_nnz_g = g_pt->nnz();
-
-      // Update the memory usage variable
-      Memory_usage_in_bytes += ((2 * ((n_row_g + 1) * sizeof(int))) +
-                                (n_nnz_g * (sizeof(int) + sizeof(double))));
-    }
 
     // Kill the gradient matrix because we don't need it any more
     delete g_pt;
@@ -372,7 +345,8 @@ namespace oomph
     if (P_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      P_preconditioner_pt = new SuperLUPreconditioner;
+      P_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_p_preconditioner = true;
@@ -380,33 +354,6 @@ namespace oomph
 
     // Compute the LU decomposition of P
     P_preconditioner_pt->setup(p_matrix_pt);
-
-    // If we need to document the memory statistics
-    if (Compute_memory_statistics)
-    {
-      // If we're using SuperLU as the preconditioner
-      if (Using_default_p_preconditioner)
-      {
-        // Add on the memory needed to store and calculate the LU factors of P
-        Memory_usage_in_bytes +=
-          dynamic_cast<SuperLUPreconditioner*>(P_preconditioner_pt)
-            ->get_total_memory_needed_for_superlu();
-      }
-      // Using Hypre which just really means we just store the matrix P
-      else
-      {
-        // How many rows are there in the momentum block?
-        unsigned n_row_p = p_matrix_pt->nrow();
-
-        // How many nonzeros are there in the momentum block?
-        unsigned n_nnz_p = p_matrix_pt->nnz();
-
-        // Update the memory usage variable. NOTE: This calculation is done by
-        // taking into account the storage scheme for a compressed row matrix
-        Memory_usage_in_bytes += ((2 * ((n_row_p + 1) * sizeof(int))) +
-                                  (n_nnz_p * (sizeof(int) + sizeof(double))));
-      }
-    } // if (Compute_memory_statistics)
 
     // Now delete the actual matrix P, we don't need it anymore
     delete p_matrix_pt;
@@ -418,7 +365,8 @@ namespace oomph
     if (F_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      F_preconditioner_pt = new SuperLUPreconditioner;
+      F_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_f_preconditioner = true;
@@ -426,34 +374,6 @@ namespace oomph
 
     // Compute the LU decomposition of F
     F_preconditioner_pt->setup(f_pt);
-
-    // If we need to document the memory statistics
-    if (Compute_memory_statistics)
-    {
-      // If we're using SuperLU as the preconditioner
-      if (Using_default_f_preconditioner)
-      {
-        // Add on the memory needed to store and calculate the LU factors of P
-        Memory_usage_in_bytes +=
-          dynamic_cast<SuperLUPreconditioner*>(F_preconditioner_pt)
-            ->get_total_memory_needed_for_superlu();
-      }
-      // Using Hypre which just really means we store the matrix F (again, as
-      // it is duplicated inside Hypre)
-      else
-      {
-        // How many rows are there in the momentum block?
-        unsigned n_row_f = f_pt->nrow();
-
-        // How many nonzeros are there in the momentum block?
-        unsigned n_nnz_f = f_pt->nnz();
-
-        // Update the memory usage variable. NOTE: This calculation is done by
-        // taking into account the storage scheme for a compressed row matrix
-        Memory_usage_in_bytes += ((2 * ((n_row_f + 1) * sizeof(int))) +
-                                  (n_nnz_f * (sizeof(int) + sizeof(double))));
-      }
-    } // if (Compute_memory_statistics)
 
     // Now delete the matrix, we don't need it anymore
     delete f_pt;
@@ -568,7 +488,6 @@ namespace oomph
     return_block_vector(0, temp_vec, z);
   } // End of preconditioner_solve
 
-
   //============================================================================
   /// Setup for the GMRES block preconditioner
   //============================================================================
@@ -666,25 +585,6 @@ namespace oomph
     // Create a new instance of the NS subsidiary preconditioner
     Navier_stokes_subsidiary_preconditioner_pt =
       new SpaceTimeNavierStokesSubsidiaryPreconditioner;
-
-    // Do we need to doc. the memory statistics?
-    if (Compute_memory_statistics)
-    {
-      // How many rows are there in this block?
-      unsigned n_row = Matrix_pt->nrow();
-
-      // How many nonzeros are there in this block?
-      unsigned n_nnz = Matrix_pt->nnz();
-
-      // Compute the memory usage. The only memory overhead here (for the
-      // setup phase) is storing the system matrix
-      Memory_usage_in_bytes = ((2 * ((n_row + 1) * sizeof(int))) +
-                               (n_nnz * (sizeof(int) + sizeof(double))));
-
-      // We might as well document the memory statistics of the Navier-Stokes
-      // subsidiary block preconditioner while we're at it...
-      Navier_stokes_subsidiary_preconditioner_pt->enable_doc_memory_usage();
-    }
 
     // Create a map to declare which of the 3 dof types in the GMRES
     // subsidiary preconditioner correspond to the dof types in the NS
@@ -1234,7 +1134,6 @@ namespace oomph
         return;
       }
     }
-
 
     // otherwise GMRES failed convergence
     oomph_info << "\nGMRES block preconditioner did not converge to required "

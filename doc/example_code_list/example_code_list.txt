@@ -47,8 +47,8 @@ driver codes before the documentation is complete. Such codes
 usually need a bit of tidying to make them acceptable for 
 "general release", but they are fully functional. In fact, they
 are run on a regular basis as part of <code> oomph-lib's </code> self-test
-routines (activated by typing <code> make check </code> in the top-level
-directory). 
+routines, activated with "<code>cd demo_drivers; cmake -G Ninja -B build;
+cd build; ctest</code>" . 
 </div>
 </TD>
 </TR>
@@ -1372,7 +1372,7 @@ node update strategies for free surface problems.
 </TR>
 
 ########################################################################
-<!-- <TR>
+<TR>
 <TD>
 <A HREF="../../navier_stokes/adaptive_interface/html/index.html">
 <B>A steadily-rotating cylinder below a free surface in a finite box.</B>
@@ -1385,12 +1385,10 @@ Uses a pseudo-elastic remesh strategy and spatial adaptivity in a
 non-trivial free surface problem.
 </TD>
 <TD>
-- ***
-- General conventions:
-  - ***
-<span style="color:red">Note: this driver code is currently undocumented.</span>
+- A validation code.
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
-</TR> -->
+</TR>
 #####################################################################
 
 
@@ -3015,7 +3013,7 @@ input from third-party mesh generators</H2></A>
 <TR>
 <TD>
 <B>
-<A NAME="third_party_meshes">
+<A NAME="third_party_meshes2">
 <A HREF="../../meshes/third_party_meshes/html/index.html">
 Unstructured meshes generated via input from
            third-party mesh generators

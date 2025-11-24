@@ -259,7 +259,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc local node numbering
  //-------------------------
- sprintf(filename,"%s/node_numbering%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/node_numbering%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FiniteElement* el_pt=mesh_pt()->finite_element_pt(0);
@@ -277,7 +277,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
@@ -286,7 +286,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,nplot);
@@ -295,7 +295,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,nplot,TanhSolnForPoisson::get_exact_u); 
@@ -304,7 +304,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,

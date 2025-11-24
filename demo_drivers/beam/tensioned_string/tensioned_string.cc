@@ -236,7 +236,7 @@ void ElasticBeamProblem::parameter_study()
     } 
    
    // Document the solution
-   sprintf(filename,"RESLT/beam%i.dat",i);
+   snprintf(filename, sizeof(filename), "RESLT/beam%i.dat",i);
    file.open(filename);
    mesh_pt()->output(file,5);
    file.close();

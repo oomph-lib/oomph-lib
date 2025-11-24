@@ -36,11 +36,11 @@
 using namespace std;
 using namespace oomph;
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 // Straight line as geometric object
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -94,9 +94,9 @@ private:
 
 
 
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
-/// ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -761,7 +761,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output displacement field
  //--------------------------
- sprintf(filename,"%s/elast_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/elast_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,n_plot);
@@ -769,7 +769,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output traction elements
  //-------------------------
- sprintf(filename,"%s/traction_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Traction_mesh_pt->output(some_file,n_plot);
@@ -780,7 +780,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
  unsigned nreg=Solid_mesh_pt->nregion();
  for (unsigned r=0;r<nreg;r++)
   {
-   sprintf(filename,"%s/region%i_%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/region%i_%i.dat",Doc_info.directory().c_str(),
            r,Doc_info.number());   
    some_file.open(filename);   
    unsigned nel=Solid_mesh_pt->nregion_element(r);
@@ -794,7 +794,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output norm of solution (to allow validation of solution even
  // if triangle generates a slightly different mesh)
- sprintf(filename,"%s/norm%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/norm%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());   
  some_file.open(filename);   
  double norm=0.0;

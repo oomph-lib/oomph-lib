@@ -23,13 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_RECTANGULAR_QUADMESH_TEMPLATE_CC
-#define OOMPH_RECTANGULAR_QUADMESH_TEMPLATE_CC
+#ifndef OOMPH_RECTANGULAR_QUADMESH_TEMPLATE_HEADER
+#define OOMPH_RECTANGULAR_QUADMESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_RECTANGULAR_QUADMESH_HEADER
+#error __FILE__ should only be included from rectangular_quadmesh.h.
+#endif // OOMPH_RECTANGULAR_QUADMESH_HEADER
 
 // OOMPH-LIB Headers
-#include "rectangular_quadmesh.template.h"
-
 
 namespace oomph
 {

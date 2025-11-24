@@ -23,11 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_EIGHTH_SPHERE_MESH_TEMPLATE_CC
-#define OOMPH_EIGHTH_SPHERE_MESH_TEMPLATE_CC
+#ifndef OOMPH_EIGHTH_SPHERE_MESH_TEMPLATE_HEADER
+#define OOMPH_EIGHTH_SPHERE_MESH_TEMPLATE_HEADER
 
-#include "eighth_sphere_mesh.template.h"
-
+#ifndef OOMPH_EIGHTH_SPHERE_MESH_HEADER
+#error __FILE__ should only be included from eighth_sphere_mesh.h.
+#endif // OOMPH_EIGHTH_SPHERE_MESH_HEADER
 
 namespace oomph
 {
@@ -51,7 +52,6 @@ namespace oomph
 
     // Set the domain pointer: Pass the radius of the sphere
     Domain_pt = new EighthSphereDomain(Radius);
-
 
     Vector<double> s(3), s_fraction(3);
     Vector<double> r(3);
@@ -94,7 +94,6 @@ namespace oomph
           // coordinate system
           this->finite_element_pt(0)->local_fraction_of_node(jnod, s_fraction);
 
-
           // Get the position of the node from macro element mapping
           s[0] = -1.0 + 2.0 * s_fraction[0];
           s[1] = -1.0 + 2.0 * s_fraction[1];
@@ -116,7 +115,6 @@ namespace oomph
         }
       }
     }
-
 
     // Create a second element
     //------------------------
@@ -186,7 +184,6 @@ namespace oomph
         }
       }
     }
-
 
     // Create a third element
     //------------------------
@@ -266,7 +263,6 @@ namespace oomph
         }
       }
     }
-
 
     // Create the fourth element
     //-------------------------

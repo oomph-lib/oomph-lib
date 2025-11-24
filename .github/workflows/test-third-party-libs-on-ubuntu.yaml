@@ -1,0 +1,73 @@
+# ------------------------------------------------------------------------------
+
+name: Test third-party libraries (Ubuntu)
+
+# Test third-party libs building ONLY if we edited code in external_distributions/
+on:
+  push:
+    paths:
+      - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "oomph_build.py"
+
+# Print the output of a test if it fails
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+  # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
+  # more processors than are available
+  OMPI_MCA_rmaps_base_oversubscribe: 1
+
+# ------------------------------------------------------------------------------
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        mpi: ["OFF", "ON"]
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -y gfortran ninja-build
+
+      - name: Install MPI dependencies (if required)
+        if: matrix.mpi == 'ON'
+        run: sudo apt-get install openmpi-bin libopenmpi-dev
+
+      - name: Get CMake v3.24
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "~3.24.0"
+
+      - name: Check CMake version
+        run: cmake --version
+
+      - name: Configure, build, and install
+
+        id: build
+        run: |
+          python3 oomph_build.py \
+            --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
+            --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            --no-build-oomph \
+            --verbose
+        continue-on-error: true
+
+      - name: Rename build logs
+        run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}
+          path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}/
+
+      - name: Propagate build status
+        if: steps.build.outcome == 'failure'
+        run: exit 1
+# ------------------------------------------------------------------------------

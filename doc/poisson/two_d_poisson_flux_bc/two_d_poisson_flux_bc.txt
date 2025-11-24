@@ -305,7 +305,7 @@ additional difficulties in refineable problems and we shall demonstrate
    // Doc error and return of the square of the L2 error
    //---------------------------------------------------
    double error,norm;
-   sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,

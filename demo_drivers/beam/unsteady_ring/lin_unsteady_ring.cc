@@ -34,9 +34,9 @@ using namespace std;
 
 using namespace oomph;
 
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
-/// /////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
 //====start_of_namespace============================
@@ -57,9 +57,9 @@ namespace Global_Physical_Variables
 
 } // end of namespace
 
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
-/// //////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -257,7 +257,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
  unsigned npts=5;
 
  // Output solution 
- sprintf(filename,"%s/ring%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ring%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -267,7 +267,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
  unsigned nsteps=time_stepper_pt()->nprev_values();
  for (unsigned t=0;t<=nsteps;t++)
   {     
-   sprintf(filename,"%s/ring%i-%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/ring%i-%i.dat",doc_info.directory().c_str(),
            doc_info.number(),t);
    some_file.open(filename);
    unsigned Nelem=mesh_pt()->nelement();
@@ -280,7 +280,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
   }
   
  // Output for initial condition object
- sprintf(filename,"%s/ic_ring%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/ic_ring%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
   
@@ -331,7 +331,7 @@ void ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady_run()
 
  // Set up trace file
  char filename[100];
- sprintf(filename,"%s/trace_ring.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace_ring.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  Trace_file <<  "VARIABLES=\"time\",\"R<sub>ctrl</sub>\",\"E<sub>pot</sub>\"";

@@ -136,9 +136,9 @@ public:
 
 
 
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -358,7 +358,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
  
 
@@ -503,7 +503,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output shape of and stress in deformed body
  //--------------------------------------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -512,7 +512,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output St. Venant solution
  //---------------------------
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 

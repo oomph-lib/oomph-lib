@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_CC
-#define OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_CC
+#ifndef OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_HEADER
+#define OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_HEADER
 
-#include "../generic/Qelements.h"
-#include "simple_rectangular_quadmesh.template.h"
+#ifndef OOMPH_SIMPLE_RECTANGULAR_QUADMESH_HEADER
+#error __FILE__ should only be included from simple_rectangular_quadmesh.h.
+#endif // OOMPH_SIMPLE_RECTANGULAR_QUADMESH_HEADER
 
+#include "generic/Qelements.h"
 
 namespace oomph
 {
@@ -99,7 +101,6 @@ namespace oomph
     // Pinned value are denoted by an integer value 1
     // Thus if a node is on two boundaries, ORing the values of the
     // boundary conditions will give the most restrictive case (pinning)
-
 
     // FIRST ELEMENT (lower left corner)
     //----------------------------------
@@ -193,7 +194,6 @@ namespace oomph
       }
     }
 
-
     // CENTRE OF FIRST ROW OF ELEMENTS
     //--------------------------------
     // Now loop over the first row of elements, apart from final element
@@ -262,7 +262,6 @@ namespace oomph
         }
       }
     }
-
 
     // FINAL ELEMENT IN FIRST ROW (lower right corner)
     //-----------------------------------------------
@@ -376,7 +375,6 @@ namespace oomph
       // Increment the node number
       node_count++;
     }
-
 
     // ALL CENTRAL ELEMENT ROWS
     //------------------------
@@ -566,10 +564,8 @@ namespace oomph
       } // End of loop over rows of nodes in the element
     } // End of loop over rows of elements
 
-
     // FINAL ELEMENT ROW
     //=================
-
 
     // FIRST ELEMENT IN UPPER ROW (upper left corner)
     //----------------------------------------------
@@ -680,7 +676,6 @@ namespace oomph
       finite_element_pt(Nx * (Ny - 1))
         ->local_fraction_of_node(n_p * (n_p - 1) + l2, s_fraction);
 
-
       // Set the position of the node
       Node_pt[node_count]->x(0) = xinit + el_length_x * s_fraction[0];
       Node_pt[node_count]->x(1) = yinit + el_length_y * Ny;
@@ -768,7 +763,6 @@ namespace oomph
         node_count++;
       }
     } // End of loop over central elements in row
-
 
     // FINAL ELEMENT IN ROW (upper right corner)
     //-----------------------------------------

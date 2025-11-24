@@ -23,23 +23,23 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_TETGEN_MESH_TEMPLATE_CC
-#define OOMPH_TETGEN_MESH_TEMPLATE_CC
+#ifndef OOMPH_TETGEN_MESH_TEMPLATE_HEADER
+#define OOMPH_TETGEN_MESH_TEMPLATE_HEADER
 
+#ifndef OOMPH_TETGEN_MESH_HEADER
+#error __FILE__ should only be included from tetgen_mesh.h.
+#endif // OOMPH_TETGEN_MESH_HEADER
 
 #include <algorithm>
 
-#include "tetgen_mesh.template.h"
-#include "../generic/Telements.h"
-#include "../generic/map_matrix.h"
-
+#include "generic/Telements.h"
+#include "generic/map_matrix.h"
 
 namespace oomph
 {
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //========================================================================
   /// Build unstructured tet mesh based on output from scaffold
@@ -442,7 +442,6 @@ namespace oomph
 
       } // End of case for edge nodes
 
-
       // Now loop over the faces to setup the information about elements
       // adjacent to the boundary
       for (unsigned j = 0; j < 4; ++j)
@@ -479,10 +478,8 @@ namespace oomph
         }
       } // End of loop over faces
 
-
       // Lookup scheme has now been setup
       Lookup_for_elements_next_boundary_is_setup = true;
-
 
       //   /*
 
@@ -509,7 +506,6 @@ namespace oomph
       //       edge_node1_pt=Tmp_mesh_pt->finite_element_pt(e)->node_pt(0);
       //       edge_node2_pt=Tmp_mesh_pt->finite_element_pt(e)->node_pt(1);
       //       break;
-
 
       //       // Node 5 is between nodes 0 and 2
       //      case 5:
@@ -555,7 +551,6 @@ namespace oomph
       //       OOMPH_CURRENT_FUNCTION,
       //                           OOMPH_EXCEPTION_LOCATION);
       //      }
-
 
       //     // Do we need a boundary node?
       //     bool need_boundary_node=false;
@@ -654,7 +649,6 @@ namespace oomph
       //         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(3));
       //         break;
 
-
       //         //Error
       //        default:
 
@@ -734,7 +728,6 @@ namespace oomph
 
       //  } //end of loop over elements
 
-
       // //Boundary conditions
 
       // // Matrix map to check if a node has already been added to
@@ -767,7 +760,6 @@ namespace oomph
       //        }
       //      }
 
-
       //     // These are the face nodes on the element's face 1:
       //     if ( (j==4) || (j==6) || (j==9) )
       //      {
@@ -796,7 +788,6 @@ namespace oomph
       //        }
       //      }
 
-
       //     // These are the face nodes on the element's face 3:
       //     if  ( (j==7) || (j==8) || (j==9) )
       //      {
@@ -816,7 +807,6 @@ namespace oomph
       // */
 
     } // end for e
-
 
   } // end function
 
@@ -852,10 +842,9 @@ namespace oomph
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
   //=========================================================================
   /// Transfer tetgenio data from the input to the output
@@ -1114,7 +1103,6 @@ namespace oomph
       }
     }
   }
-
 
 } // namespace oomph
 #endif

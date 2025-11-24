@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_CHANNEL_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_CHANNEL_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_CHANNEL_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_CHANNEL_SPINE_MESH_TEMPLATE_HEADER
 
-#include "channel_spine_mesh.template.h"
-#include "rectangular_quadmesh.template.cc"
+#ifndef OOMPH_CHANNEL_SPINE_MESH_HEADER
+#error __FILE__ should only be included from channel_spine_mesh.h.
+#endif // OOMPH_CHANNEL_SPINE_MESH_HEADER
 
+#include "rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -88,7 +90,6 @@ namespace oomph
     build_channel_spine_mesh(time_stepper_pt);
   }
 
-
   //===========================================================================
   /// Constuctor for spine 2D mesh: Pass number of elements in x-direction,
   /// number of elements in y-direction, axial length and height of layer,
@@ -143,7 +144,6 @@ namespace oomph
     // Now build the mesh:
     build_channel_spine_mesh(time_stepper_pt);
   }
-
 
   //===========================================================================
   /// Helper function that actually builds the channel-spine mesh
@@ -233,7 +233,6 @@ namespace oomph
 
     // end Allocating memory
 
-
     // set up the vectors of geometric data & objects for building spines
     Vector<double> r_wall(2), zeta(1), s_wall(1);
     GeomObject* geometric_object_pt = 0;
@@ -250,7 +249,6 @@ namespace oomph
 
     // Initialise number of elements in previous regions:
     unsigned n_prev_elements = 0;
-
 
     // FIRST SPINE
     //-----------
@@ -323,7 +321,6 @@ namespace oomph
         nod_pt->node_update_fct_id() = 0;
       }
     } // end loop over elements
-
 
     // LOOP OVER OTHER SPINES
     //----------------------
@@ -408,7 +405,6 @@ namespace oomph
 
     // Increment number of previous elements
     n_prev_elements += n_x0 * n_y;
-
 
     // CENTRE REGION
     // ===========
@@ -502,7 +498,6 @@ namespace oomph
 
     // Increment number of previous elements
     n_prev_elements += n_x1 * n_y;
-
 
     // RIGHT REGION
     // ===========
@@ -682,9 +677,7 @@ namespace oomph
       }
     }
 
-
   } // end of build_channel_spine_mesh
-
 
   //======================================================================
   /// Reorder the elements, so we loop over them vertically first
@@ -723,7 +716,6 @@ namespace oomph
     }
 
   } // end of element_reorder
-
 
 } // namespace oomph
 

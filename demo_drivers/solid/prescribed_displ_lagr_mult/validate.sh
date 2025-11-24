@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
 #Set the number of tests to be checked
 NUM_TESTS=4
@@ -34,10 +34,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/lagr2.dat RESLT/soln2.dat > result.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/result.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz \
     result.dat  >> validation.log
 fi
 
@@ -59,10 +59,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln2.dat > result2.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/result2.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result2.dat.gz \
     result2.dat  >> validation.log
 fi
 
@@ -97,10 +97,10 @@ fi
 
 cat RESLT/soln2.dat > result_precond.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/result_precond.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_precond.dat.gz \
     result_precond.dat  >> validation.log
 fi
 
@@ -109,7 +109,7 @@ mv RESLT RESLT_precond
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -124,7 +124,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

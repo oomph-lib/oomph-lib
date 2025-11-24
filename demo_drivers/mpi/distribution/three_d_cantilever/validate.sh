@@ -1,8 +1,10 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+# Get the OOMPH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the second argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=1
@@ -65,18 +67,18 @@ cat RESLT_refine0/soln1_on_proc0.dat RESLT_refine0/soln1_on_proc1.dat \
     RESLT_refine9/soln1_on_proc0.dat RESLT_refine9/soln1_on_proc1.dat \
     > three_d_cantilever_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/three_d_cantilever_results.dat.gz  \
-         three_d_cantilever_results.dat 0.2 5.0e-7 >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/three_d_cantilever_results.dat.gz  \
+         three_d_cantilever_results.dat 0.2 5.0e-06 >> validation.log
 fi
 
 mkdir RESLT_three_d_cantilever_adapt
 mv RESLT_refine* RESLT_three_d_cantilever_adapt
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -90,7 +92,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

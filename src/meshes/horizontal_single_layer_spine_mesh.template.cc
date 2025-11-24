@@ -23,12 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_TEMPLATE_CC
-#define OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_TEMPLATE_CC
+#ifndef OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_TEMPLATE_HEADER
+#define OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_TEMPLATE_HEADER
 
-#include "horizontal_single_layer_spine_mesh.template.h"
-#include "rectangular_quadmesh.template.cc"
+#ifndef OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_HEADER
+#error __FILE__ should only be included from horizontal_single_layer_spine_mesh.h.
+#endif // OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_HEADER
 
+#include "rectangular_quadmesh.h"
 
 namespace oomph
 {
@@ -97,7 +99,6 @@ namespace oomph
     Spine* new_spine_pt = new Spine(1.0);
     Spine_pt.push_back(new_spine_pt);
 
-
     // Get pointer to node
     SpineNode* nod_pt = element_node_pt(0, 0);
     // Set the pointer to the spine
@@ -128,7 +129,6 @@ namespace oomph
         nod_pt->spine_mesh_pt() = this;
       }
     }
-
 
     // LOOP OVER OTHER SPINES
     // ----------------------
@@ -184,7 +184,6 @@ namespace oomph
       }
     }
   }
-
 
 } // namespace oomph
 #endif

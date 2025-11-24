@@ -28,9 +28,9 @@
 #define OOMPH_QUARTER_CIRCLE_SECTOR_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/quadtree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/quadtree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {
@@ -67,7 +67,6 @@ namespace oomph
       }
     }
 
-
     /// Broken copy constructor
     QuarterCircleSectorDomain(const QuarterCircleSectorDomain&) = delete;
 
@@ -83,7 +82,6 @@ namespace oomph
     /// coordinate to the return value
     typedef double (*BLSquashFctPt)(const double& s);
 
-
     /// Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
@@ -92,7 +90,6 @@ namespace oomph
     {
       return BL_squash_fct_pt;
     }
-
 
     /// Function that squashes the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
@@ -114,7 +111,6 @@ namespace oomph
                                 const unsigned& i_direct,
                                 const Vector<double>& s,
                                 Vector<double>& f);
-
 
   private:
     /// Lower limit for the (1D) coordinates along the wall
@@ -206,10 +202,9 @@ namespace oomph
   };
 
 
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-  /// //////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
   //=================================================================
   /// Vector representation of the  imacro-th macro element
@@ -347,7 +342,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   /// Northern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
@@ -362,7 +356,6 @@ namespace oomph
 
     Wall_pt->position(t, x, f);
   }
-
 
   //=================================================================
   /// Western edge of top left macro element \f$s \in [-1,1] \f$
@@ -383,7 +376,6 @@ namespace oomph
     f[1] = 0.5 * r_top[1] * (1.0 + s_squashed(0.5 * (s[0] + 1.0)));
   }
 
-
   //=================================================================
   /// Southern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
@@ -399,7 +391,6 @@ namespace oomph
 
     Wall_pt->position(t, x, r_top);
 
-
     // Bottom right corner
     Vector<double> r_bot(2);
     x[0] = 0.0;
@@ -409,7 +400,6 @@ namespace oomph
     f[0] = 0.5 * r_bot[0] * 0.5 * (s[0] + 1.0);
     f[1] = 0.5 * r_top[1];
   }
-
 
   //=================================================================
   /// Eastern edge of top left macro element \f$ s \in [-1,1] \f$
@@ -443,7 +433,6 @@ namespace oomph
     f[1] = 0.5 * (r_top[1] + s_squashed(0.5 * (s[0] + 1.0)) *
                                (2.0 * r_half[1] - r_top[1]));
   }
-
 
   //=================================================================
   /// Northern edge of bottom right macro element
@@ -494,7 +483,6 @@ namespace oomph
     x[0] = Xi_lo;
     Wall_pt->position(t, x, r_bot);
 
-
     f[0] = 0.5 * r_bot[0] * (1.0 + s_squashed(0.5 * (s[0] + 1.0)));
     f[1] = 0.0;
   }
@@ -514,7 +502,6 @@ namespace oomph
     Wall_pt->position(t, x, f);
   }
 
-
   //=================================================================
   /// Northern edge of central box
   //=================================================================
@@ -525,7 +512,6 @@ namespace oomph
     r_top_left_S(t, s, f);
   }
 
-
   //=================================================================
   /// Eastern edge of central box
   //=================================================================
@@ -535,7 +521,6 @@ namespace oomph
   {
     r_bot_right_W(t, s, f);
   }
-
 
   //=================================================================
   /// Southern edge of central box
@@ -555,7 +540,6 @@ namespace oomph
     f[1] = 0.0;
   }
 
-
   //=================================================================
   /// Western  edge of central box
   //=================================================================
@@ -573,7 +557,6 @@ namespace oomph
     f[0] = 0.0;
     f[1] = 0.5 * r_top[1] * 0.5 * (s[0] + 1.0);
   }
-
 
 } // namespace oomph
 

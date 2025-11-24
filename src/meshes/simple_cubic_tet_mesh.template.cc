@@ -23,16 +23,19 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_CC
-#define OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_CC
+#ifndef OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_HEADER
+#define OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_SIMPLE_CUBIC_TET_MESH_HEADER
+#error __FILE__ should only be included from simple_cubic_tet_mesh.h.
+#endif // OOMPH_SIMPLE_CUBIC_TET_MESH_HEADER
 
 #include <algorithm>
 
 // Simple 3D tetrahedral mesh class
-#include "simple_cubic_tet_mesh.template.h"
-#include "../generic/map_matrix.h"
-#include <algorithm>
 
+#include "generic/map_matrix.h"
+#include <algorithm>
 
 namespace oomph
 {
@@ -78,7 +81,6 @@ namespace oomph
         finite_element_pt(e)->construct_node(j, time_stepper_pt);
       }
     }
-
 
     // Setup map to check the (pseudo-)global node number
     // Nodes whose number is zero haven't been copied across
@@ -150,11 +152,9 @@ namespace oomph
       }
     }
 
-
     // At this point we've created all the elements and
     // created their vertex nodes. Now we need to create
     // the additional (midside and internal) nodes!
-
 
     // We'll first create all local nodes for all elements
     // and then delete the superfluous ones that have
@@ -208,7 +208,6 @@ namespace oomph
       } // end of loop over new nodes
     } // end of loop over elements
 
-
     // Bracket this away so the edge map goes out of scope
     // when we're done
     {
@@ -248,7 +247,6 @@ namespace oomph
               }
               break;
 
-
               // Node 5 is located between nodes 0 and 2
             case 5:
 
@@ -261,7 +259,6 @@ namespace oomph
                 central_edge_node_pt(edge_node2_pt, edge_node1_pt) = node_pt;
               }
               break;
-
 
               // Node 6 is located between nodes 0 and 3
             case 6:
@@ -276,7 +273,6 @@ namespace oomph
               }
               break;
 
-
               // Node 7 is located between nodes 1 and 2
             case 7:
 
@@ -290,7 +286,6 @@ namespace oomph
               }
               break;
 
-
               // Node 8 is located between nodes 2 and 3
             case 8:
 
@@ -303,7 +298,6 @@ namespace oomph
                 central_edge_node_pt(edge_node2_pt, edge_node1_pt) = node_pt;
               }
               break;
-
 
               // Node 9 is located between nodes 1 and 3
             case 9:
@@ -342,7 +336,6 @@ namespace oomph
       }
     }
 
-
     // Boundary conditions
 
     // Matrix map to check if a node has already been added to
@@ -366,7 +359,6 @@ namespace oomph
         orig_node_pt[e][j] = finite_element_pt(e)->node_pt(j);
       }
     }
-
 
     // Loop over elements
     for (unsigned e = 0; e < nelem; e++)
@@ -407,7 +399,6 @@ namespace oomph
                 }
                 break;
 
-
                 // Node 5 is located between nodes 0 and 2
               case 5:
 
@@ -418,7 +409,6 @@ namespace oomph
                   add_boundary_node(bo, loc_node_pt);
                 }
                 break;
-
 
                 // Node 6 is located between nodes 0 and 3
               case 6:
@@ -431,7 +421,6 @@ namespace oomph
                 }
                 break;
 
-
                 // Node 7 is located between nodes 1 and 2
               case 7:
 
@@ -442,7 +431,6 @@ namespace oomph
                   add_boundary_node(bo, loc_node_pt);
                 }
                 break;
-
 
                 // Node 8 is located between nodes 2 and 3
               case 8:
@@ -455,7 +443,6 @@ namespace oomph
                 }
                 break;
 
-
                 // Node 9 is located between nodes 1 and 3
               case 9:
 
@@ -466,7 +453,6 @@ namespace oomph
                   add_boundary_node(bo, loc_node_pt);
                 }
                 break;
-
 
               default:
                 throw OomphLibError("More than ten nodes in Tet Element",
