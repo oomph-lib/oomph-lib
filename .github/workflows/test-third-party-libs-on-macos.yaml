@@ -2,9 +2,24 @@
 
 name: Test third-party libraries (macOS)
 
+concurrency:
+  # One active run per PR or per ref (branch), cancel older ones
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 # Test third-party libs building ONLY if we edited code in external_distributions/
 on:
   push:
+    paths:
+      - ".github/workflows/test-third-party-libs-on-macos.yaml"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "oomph_build.py"
+  pull_request:
+    # Run for PRs targeting main or development
+    branches:
+      - main
+      - development
     paths:
       - ".github/workflows/test-third-party-libs-on-macos.yaml"
       - "external_distributions/CMakeLists.txt"
