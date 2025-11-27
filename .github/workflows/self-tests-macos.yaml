@@ -2,6 +2,11 @@
 
 name: oomph-lib self-tests (macOS)
 
+concurrency:
+  # One active run per PR or per ref (branch), cancel older ones
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   # IMPORTANT: A schedule workflow action *must* be placed on the default branch
   # of the repository. Only then will it run as scheduled. It is also placed in a
@@ -15,6 +20,26 @@ on:
     paths:
       # Only run the self-tests if we edited the demo drivers, sources, third-party
       # library code or self-tests
+      - ".github/workflows/self-tests-macos.yaml"
+      - "cmake/**"
+      - "CMakeLists.txt"
+      - "CMakePresets.json"
+      - "demo_drivers/**"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "external_src/**"
+      - "oomph_build.py"
+      - "scripts/**"
+      - "src/**"
+      - "!**/.gitignore"
+      - "!**/README.md"
+      - "!**/Makefile.am"
+  pull_request:
+    # Run for PRs targeting main or development
+    branches:
+      - main
+      - development
+    paths:
       - ".github/workflows/self-tests-macos.yaml"
       - "cmake/**"
       - "CMakeLists.txt"
