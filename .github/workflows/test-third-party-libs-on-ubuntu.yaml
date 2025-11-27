@@ -2,9 +2,24 @@
 
 name: Test third-party libraries (Ubuntu)
 
+concurrency:
+  # One active run per PR or per ref (branch), cancel older ones
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 # Test third-party libs building ONLY if we edited code in external_distributions/
 on:
   push:
+    paths:
+      - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "oomph_build.py"
+  pull_request:
+    # Run for PRs targeting main or development
+    branches:
+      - main
+      - development
     paths:
       - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
       - "external_distributions/CMakeLists.txt"
@@ -33,11 +48,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran ninja-build
+        run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build
 
       - name: Install MPI dependencies (if required)
         if: matrix.mpi == 'ON'
-        run: sudo apt-get install openmpi-bin libopenmpi-dev
+        run: sudo apt-get install -y openmpi-bin libopenmpi-dev
 
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
