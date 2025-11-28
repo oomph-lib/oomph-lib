@@ -93,6 +93,7 @@ namespace oomph
 
   //=====================================================================
   /// Output FE representation of soln: \f$ x,y,q1,q2,div_q,p,q \cdot n \f$
+  /// Pressure can be scaled.
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_with_projected_flux(
@@ -100,6 +101,13 @@ namespace oomph
     const unsigned& nplot,
     const Vector<double> unit_normal)
   {
+
+   double pressure_scaling_factor=1.0;
+   if (Darcy_pressure_scaling_factor_for_output_pt!=0)
+    {
+     pressure_scaling_factor=*Darcy_pressure_scaling_factor_for_output_pt;
+    }
+
     // Vector of local coordinates
     Vector<double> s(DIM);
 
@@ -129,8 +137,8 @@ namespace oomph
       // Output FE representation of div q at s
       outfile << this->interpolated_div_q(s) << " ";
 
-      // Output FE representation of p at s
-      outfile << this->interpolated_p(s) << " ";
+      // Output FE representation of (possibly scaled) p at s
+      outfile << pressure_scaling_factor*this->interpolated_p(s) << " ";
 
       // Fluxes projected into the direction of the face normal
       double flux = 0.0;
@@ -150,11 +158,18 @@ namespace oomph
 
   //=====================================================================
   /// Output FE representation of soln: x,y,q1,q2,div_q,p at
-  /// Nplot^DIM plot points
+  /// Nplot^DIM plot points. Pressure can be scaled.
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output(std::ostream& outfile, const unsigned& nplot)
   {
+   
+   double pressure_scaling_factor=1.0;
+   if (Darcy_pressure_scaling_factor_for_output_pt!=0)
+    {
+     pressure_scaling_factor=*Darcy_pressure_scaling_factor_for_output_pt;
+    }
+   
     // Vector of local coordinates
     Vector<double> s(DIM);
 
@@ -184,8 +199,8 @@ namespace oomph
       // Output FE representation of div q at s
       outfile << interpolated_div_q(s) << " ";
 
-      // Output FE representation of p at s
-      outfile << interpolated_p(s) << " ";
+      // Output FE representation of (possibly scaled) p at s
+      outfile << pressure_scaling_factor*interpolated_p(s) << " ";
 
       outfile << std::endl;
     }

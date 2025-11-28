@@ -55,7 +55,8 @@ namespace oomph
     typedef void (*MassSourceFctPt)(const Vector<double>& x, double& f);
 
     /// Constructor
-    DarcyEquations() : Source_fct_pt(0), Mass_source_fct_pt(0) {}
+   DarcyEquations() : Source_fct_pt(0), Mass_source_fct_pt(0),
+                      Darcy_pressure_scaling_factor_for_output_pt(0) {}
 
     /// Access function: Pointer to body force function
     SourceFctPt& source_fct_pt()
@@ -116,6 +117,26 @@ namespace oomph
         // Get body force
         (*Mass_source_fct_pt)(x, b);
       }
+    }
+   
+   /// Pressure scaling factor for output (Darcy equations are
+   /// non-dimensionalised to be parameter free; coupling to
+   /// Navier-Stokes, say, may introduce different pressure
+   /// scales. This factor multiplies the Darcy pressure in the
+   /// output functinos (only!). Const version
+   double* darcy_pressure_scaling_factor_for_output_pt() const
+    {
+     return Darcy_pressure_scaling_factor_for_output_pt;
+    }
+
+   /// Pressure scaling factor for output (Darcy equations are
+   /// non-dimensionalised to be parameter free; coupling to
+   /// Navier-Stokes, say, may introduce different pressure
+   /// scales. This factor multiplies the Darcy pressure in the
+   /// output functinos (only!). Read/write version
+   double*& darcy_pressure_scaling_factor_for_output_pt()
+    {
+     return Darcy_pressure_scaling_factor_for_output_pt;
     }
 
     /// Number of values required at node n
@@ -497,11 +518,20 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, bool flag);
 
   private:
+
     /// Pointer to body force function
     SourceFctPt Source_fct_pt;
 
     /// Pointer to the mass source function
     MassSourceFctPt Mass_source_fct_pt;
+
+   /// Pressure scaling factor for output (Darcy equations are
+   /// non-dimensionalised to be parameter free; coupling to
+   /// Navier-Stokes, say, may introduce different pressure
+   /// scales. This factor multiplies the Darcy pressure in the
+   /// output functinos (only!)
+   double* Darcy_pressure_scaling_factor_for_output_pt;
+   
   };
 
 
