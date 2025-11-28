@@ -101,11 +101,10 @@ namespace oomph
     const unsigned& nplot,
     const Vector<double> unit_normal)
   {
-
-   double pressure_scaling_factor=1.0;
-   if (Darcy_pressure_scaling_factor_for_output_pt!=0)
+    double pressure_scaling_factor = 1.0;
+    if (Darcy_pressure_scaling_factor_for_output_pt != 0)
     {
-     pressure_scaling_factor=*Darcy_pressure_scaling_factor_for_output_pt;
+      pressure_scaling_factor = *Darcy_pressure_scaling_factor_for_output_pt;
     }
 
     // Vector of local coordinates
@@ -138,7 +137,7 @@ namespace oomph
       outfile << this->interpolated_div_q(s) << " ";
 
       // Output FE representation of (possibly scaled) p at s
-      outfile << pressure_scaling_factor*this->interpolated_p(s) << " ";
+      outfile << pressure_scaling_factor * this->interpolated_p(s) << " ";
 
       // Fluxes projected into the direction of the face normal
       double flux = 0.0;
@@ -163,13 +162,12 @@ namespace oomph
   template<unsigned DIM>
   void DarcyEquations<DIM>::output(std::ostream& outfile, const unsigned& nplot)
   {
-   
-   double pressure_scaling_factor=1.0;
-   if (Darcy_pressure_scaling_factor_for_output_pt!=0)
+    double pressure_scaling_factor = 1.0;
+    if (Darcy_pressure_scaling_factor_for_output_pt != 0)
     {
-     pressure_scaling_factor=*Darcy_pressure_scaling_factor_for_output_pt;
+      pressure_scaling_factor = *Darcy_pressure_scaling_factor_for_output_pt;
     }
-   
+
     // Vector of local coordinates
     Vector<double> s(DIM);
 
@@ -200,7 +198,7 @@ namespace oomph
       outfile << interpolated_div_q(s) << " ";
 
       // Output FE representation of (possibly scaled) p at s
-      outfile << pressure_scaling_factor*interpolated_p(s) << " ";
+      outfile << pressure_scaling_factor * interpolated_p(s) << " ";
 
       outfile << std::endl;
     }
