@@ -27,6 +27,15 @@
 
 namespace oomph
 {
+
+ /// Namespace to allow customisation of Darcy output
+ namespace DarcyOutputCustomiser
+ {
+  /// Suppress output of divergence?
+  bool Suppress_divergence_in_darcy_output=false;
+ }
+
+ 
   //=====================================================================
   /// Performs a div-conserving transformation of the vector basis
   /// functions from the reference element to the actual element
@@ -195,8 +204,11 @@ namespace oomph
       }
 
       // Output FE representation of div q at s
-      outfile << interpolated_div_q(s) << " ";
-
+      if (!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
+       {
+        outfile << interpolated_div_q(s) << " ";
+       }
+      
       // Output FE representation of (possibly scaled) p at s
       outfile << pressure_scaling_factor * interpolated_p(s) << " ";
 

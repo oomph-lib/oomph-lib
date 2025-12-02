@@ -39,6 +39,15 @@
 
 namespace oomph
 {
+
+ /// Namespace to allow customisation of Darcy output
+ namespace DarcyOutputCustomiser
+ {
+  /// Suppress output of divergence?
+  extern bool Suppress_divergence_in_darcy_output;
+ }
+ 
+ 
   //===========================================================================
   /// Class implementing the generic maths of the Darcy equations using
   /// Raviart-Thomas elements with both edge and internal degrees of freedom
