@@ -17,12 +17,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Install requirements
-        run: sudo apt-get install cmake ninja-build doxygen texlive texlive-latex-extra texlive-font-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            ninja-build \
+            doxygen \
+            texlive \
+            texlive-latex-extra \
+            texlive-font-utils
 
       - name: Check doxygen version
         run: doxygen --version
