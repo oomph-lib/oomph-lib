@@ -55,8 +55,7 @@ def read_external_json_file(json_path):
             data = json.load(f)
             return data
     except (json.JSONDecodeError, FileNotFoundError) as e:
-        print(
-            f"ERROR: Failed to read or parse {json_path}: {e}", file=sys.stderr)
+        print(f"ERROR: Failed to read or parse {json_path}: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -73,8 +72,7 @@ def run_command(cmd: list[str], cwd: Path, verbose: bool):
         else:
             result = subprocess.run(cmd, cwd=cwd)
     except Exception as e:
-        print(
-            f"ERROR: failed to run command: {' '.join(cmd)}\n{e}", file=sys.stderr)
+        print(f"ERROR: failed to run command: {' '.join(cmd)}\n{e}", file=sys.stderr)
         sys.exit(1)
 
     if result.returncode != 0:
@@ -97,11 +95,9 @@ def print_progress(message, *args, pad_to: Optional[int] = None, flush=True, **k
 
 def print_time(time_elapsed: float, *args, verbose: bool = False, flush=True, **kwargs):
     if verbose:
-        print(bold_green(
-            f"Time taken [sec]: {time_elapsed:.2f}\n"), *args, flush=flush, **kwargs)
+        print(bold_green(f"Time taken [sec]: {time_elapsed:.2f}\n"), *args, flush=flush, **kwargs)
     else:
-        print(bold_green(f"[{time_elapsed:.2f} s]"),
-              *args, flush=flush, **kwargs)
+        print(bold_green(f"[{time_elapsed:.2f} s]"), *args, flush=flush, **kwargs)
 
 
 def write_presets_file(presets_dict: dict, json_path: Path):
@@ -202,8 +198,7 @@ def configure_build_and_install_external_libs(
             continue
         if not (opt.startswith("ext_OOMPH") or opt.startswith("ext_CMAKE")):
             continue
-        flag_name = opt.replace("ext_OOMPH", "OOMPH").replace(
-            "ext_CMAKE", "CMAKE")
+        flag_name = opt.replace("ext_OOMPH", "OOMPH").replace("ext_CMAKE", "CMAKE")
         if isinstance(val, Path):
             val = str(val)
         ext_cache[flag_name] = val
@@ -221,16 +216,15 @@ def configure_build_and_install_external_libs(
         ext_cache["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
     # Generate CMakeUserPresets.json for external project
-    presets_dict = generate_external_dist_preset(
-        external_dist_build_dir, ext_cache, args.generator)
+    presets_dict = generate_external_dist_preset(external_dist_build_dir, ext_cache, args.generator)
     preset_path = external_dist_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
 
     # The ending of the string
-    end = "\n" if verbose else ""
+    line_end = "\n" if verbose else ""
 
     # Construct configuration command
-    print_progress(">>> Configuring third-party libraries", pad_to=60, end=end)
+    print_progress(">>> Configuring third-party libraries", pad_to=60, end=line_end)
     config_cmd = ["cmake", "--preset", "tpl"]
     if args.ext_extra_cmake_options:
         config_cmd += args.ext_extra_cmake_options
@@ -241,7 +235,7 @@ def configure_build_and_install_external_libs(
 
     # Build and install external
     print_progress(
-        ">>> Building and installing third-party libraries", pad_to=60, end=end)
+        ">>> Building and installing third-party libraries", pad_to=60, end=line_end)
     extra_build_args = get_extra_build_args(args)
     build_cmd = ["cmake", "--build", "--preset", "tpl"] + extra_build_args
     start_time = time.perf_counter()
@@ -295,14 +289,14 @@ def configure_build_and_install_oomph(
         final_cache[k] = v
 
     # Generate oomph-lib presets
-    presets_dict = generate_oomph_preset(
-        oomph_build_dir, final_cache, args.generator)
+    presets_dict = generate_oomph_preset(oomph_build_dir, final_cache, args.generator)
     preset_path = oomph_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
 
+    line_end = "\n" if verbose else ""
+
     # Configure with the 'main' preset
-    print_progress(">>> Configuring main project",
-                   pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Configuring main project", pad_to=60, end=line_end)
     config_cmd = ["cmake", "--preset", "main"]
     if args.oomph_extra_cmake_options:
         config_cmd += args.oomph_extra_cmake_options
@@ -312,11 +306,9 @@ def configure_build_and_install_oomph(
     print_time(time_elapsed, verbose=verbose)
 
     # Build and install in one go
-    print_progress(">>> Building and installing main project",
-                   pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Building and installing main project", pad_to=60, end=line_end)
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "--preset", "main",
-                 "--target", "install"] + extra_build_args
+    build_cmd = ["cmake", "--build", "--preset", "main", "--target", "install"] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, oomph_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -332,8 +324,7 @@ def configure_build_doc(
     Configure and build the docs.
     """
     # Configure
-    print_progress(">>> Configuring docs", pad_to=60,
-                   end="\n" if verbose else "")
+    print_progress(">>> Configuring docs", pad_to=60, end="\n" if verbose else "")
     config_cmd = ["cmake", "-G", args.generator, "-B", "build"]
     start_time = time.perf_counter()
     run_command(config_cmd, doc_dir, verbose)
@@ -399,14 +390,21 @@ def check_cmake_version(min_version: tuple[int, int, int] = OOMPH_MINIMUM_CMAKE_
         version_tuple = tuple(map(int, version_str.split(".")[:3]))
 
         if version_tuple < min_version:
-            print(bold_red(
-                f"\nCMake >= {min_version_as_str} is required (found {version_str})."), file=sys.stderr)
-            print(bold_yellow(
-                "\nRun the helper at ./scripts/install_cmake.sh to install an up-to-date CMake."), file=sys.stderr)
+            print(
+                bold_red(f"\nCMake >= {min_version_as_str} is required (found {version_str})."),
+                file=sys.stderr,
+            )
+            print(
+                bold_yellow(
+                    "\nRun the helper at ./scripts/install_cmake.sh to install an up-to-date CMake."),
+                file=sys.stderr,
+            )
             sys.exit(1)
         else:
-            print(bold_green(
-                f"\nCMake version {version_str} >= {min_version_as_str} found."), file=sys.stdout)
+            print(
+                bold_green(f"\nCMake version {version_str} >= {min_version_as_str} found.\n"),
+                file=sys.stdout,
+            )
     except FileNotFoundError:
         print(
             bold_red("\nCommand 'cmake' not found in your PATH."),
@@ -417,8 +415,7 @@ def check_cmake_version(min_version: tuple[int, int, int] = OOMPH_MINIMUM_CMAKE_
         )
         sys.exit(1)
     except Exception as exc:
-        print(bold_red("\nUnable to determine CMake version:\n" +
-              str(exc)), file=sys.stderr)
+        print(bold_red("\nUnable to determine CMake version:\n" + str(exc)), file=sys.stderr)
         sys.exit(1)
 
 
@@ -460,6 +457,7 @@ def parse_args():
     doc_group = parser.add_mutually_exclusive_group()
     doc_group.add_argument("--wipe-doc", action="store_true", help="Wipe the doc build directory if it already exists.")
     doc_group.add_argument("--reuse-doc", action="store_true", help="Don't stop running if the doc build directory already exists.")
+    doc_group.add_argument("--doc-build-dir", type=expanded_path, metavar="PATH", help="Custom build directory for the docs.")
 
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
@@ -473,6 +471,7 @@ def parse_args():
 
     # External distributions flags
     ext_group = parser.add_argument_group("external_distributions flags")
+    ext_group.add_argument("--ext-build-dir", type=expanded_path, metavar="PATH", help="Custom build directory for third-party libraries.")
     ext_group.add_argument("--ext-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom install directory for third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries (ignored if --ext-OOMPH_USE_OPENBLAS_FROM is given).")
     ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries.")
@@ -493,6 +492,7 @@ def parse_args():
 
     # oomph-lib flags
     oomph_group = parser.add_argument_group("oomph-lib project flags")
+    oomph_group.add_argument("--oomph-build-dir", type=expanded_path, metavar="PATH", help="Custom build directory for the main project.")
     oomph_group.add_argument("--oomph-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
     oomph_group.add_argument("--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set).")
     oomph_group.add_argument("--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS", metavar="ON/OFF", choices=["ON", "OFF"], help="Install symlinks to the oomph-lib headers instead of copying them (default: OFF).")
@@ -544,6 +544,20 @@ if __name__ == "__main__":
 
     # Root project working directories
     doc_build_dir = doc_dir / "build"
+
+    # If the user has provided custom build directories
+    if args.ext_build_dir is not None:
+        external_dist_build_dir = args.ext_build_dir
+        if args.verbose and args.build_tpl:
+            print(f" * Overriding TPL build dir: {external_dist_build_dir}")
+    if args.oomph_build_dir is not None:
+        oomph_build_dir = args.oomph_build_dir
+        if args.verbose and args.build_oomph:
+            print(f" * Overriding main project build dir: {oomph_build_dir}")
+    if args.doc_build_dir is not None:
+        doc_build_dir = args.doc_build_dir
+        if args.verbose and args.build_doc:
+            print(f" * Overriding doc build dir: {doc_build_dir}")
 
     # If the user has provided custom install directories
     if args.ext_CMAKE_INSTALL_PREFIX:
@@ -620,7 +634,7 @@ if __name__ == "__main__":
             time.sleep(2)
 
     # Let's go
-    print_progress("\n>>> Starting project build...")
+    print_progress(">>> Starting project build...")
     start_time = time.perf_counter()
 
     # Configure, build and install external libraries, retrieving the JSON file path

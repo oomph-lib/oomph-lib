@@ -1,11 +1,25 @@
 name: Test build of docs
 
+concurrency:
+  # One active run per PR or per ref (branch), cancel older ones
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     # Never run on main
     branches-ignore:
       - main
     # but on any other branch watch for changes to these paths
+    paths:
+      - ".github/workflows/test-build-of-docs.yaml"
+      - "demo_drivers/**"
+      - "doc/**"
+      - "oomph_build.py"
+  pull_request:
+    # Run for PRs targeting development
+    branches:
+      - development
     paths:
       - ".github/workflows/test-build-of-docs.yaml"
       - "demo_drivers/**"
@@ -23,7 +37,15 @@ jobs:
           persist-credentials: false
 
       - name: Install requirements
-        run: sudo apt-get install cmake ninja-build doxygen texlive texlive-latex-extra texlive-font-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            ninja-build \
+            doxygen \
+            texlive \
+            texlive-latex-extra \
+            texlive-font-utils
 
       - name: Check doxygen version
         run: doxygen --version
