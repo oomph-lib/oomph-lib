@@ -23,29 +23,26 @@ include_guard()
 
 # Where to get the code from and where to install it to
 set(MUMPS_GIT_URL https://github.com/puneetmatharu/mumps.git)
-set(MUMPS_GIT_TAG v5.8.1.3-pm)
-set(MUMPS_UPSTREAM_VERSION 5.8.1)
+set(MUMPS_GIT_TAG v5.6.2.5)
 set(MUMPS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/mumps")
 
 # MUMPS build options
 set(MUMPS_CMAKE_CONFIGURE_ARGS
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -DCMAKE_INSTALL_PREFIX=${MUMPS_INSTALL_DIR}
-    -DMUMPS_UPSTREAM_VERSION=${MUMPS_UPSTREAM_VERSION}
-    -DMUMPS_parallel=${OOMPH_ENABLE_MPI}
-    -DMUMPS_scalapack=ON
-    -DMUMPS_find_SCALAPACK=OFF
-    # -Dfind_static=OFF # NOTE: using ON doesn't work on macOS!
-    -DMUMPS_find_static=OFF # NOTE: using ON doesn't work on macOS!
+    -DMUMPS_UPSTREAM_VERSION=5.6.2
+    -Dparallel=${OOMPH_ENABLE_MPI}
+    # -Dfind_static=ON # FIXME: Doesn't work on macOS!
     -Dgemmt=ON
-    -DMUMPS_intsize64=OFF
-    -DMUMPS_scotch=OFF
-    -DMUMPS_parmetis=OFF
-    -DMUMPS_metis=OFF
-    -DMUMPS_openmp=OFF
-    -DMUMPS_matlab=OFF
-    -DSCALAPACK_BUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
-    -DMUMPS_BUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
+    -Dintsize64=OFF
+    -Dscotch=OFF
+    -Dparmetis=OFF
+    -Dmetis=OFF
+    -Dopenmp=OFF
+    -Dmatlab=OFF
+    -Doctave=OFF
+    -Dfind=OFF
+    -DBUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
     -DBUILD_SHARED_LIBS=OFF
     -DBUILD_SINGLE=ON
     -DBUILD_DOUBLE=ON
@@ -53,18 +50,6 @@ set(MUMPS_CMAKE_CONFIGURE_ARGS
     -DBUILD_COMPLEX16=OFF
     -DLAPACK_VENDOR=OpenBLAS
     -DLAPACK_ROOT=${OpenBLAS_ROOT})
-
-if(NOT OOMPH_MUMPS_TARBALL_PATH STREQUAL "")
-  if(EXISTS "${OOMPH_MUMPS_TARBALL_PATH}")
-    list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
-         "-DMUMPS_url=${OOMPH_MUMPS_TARBALL_PATH}")
-  else()
-    message(
-      FATAL_ERROR
-        "OOMPH_MUMPS_TARBALL_PATH was set but the file does not exist:\n"
-        "  ${OOMPH_MUMPS_TARBALL_PATH}")
-  endif()
-endif()
 
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(

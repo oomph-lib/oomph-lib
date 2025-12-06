@@ -106,10 +106,6 @@ oomph_path_option(
   FLAG OOMPH_USE_BOOST_FROM
   DOCSTRING "The path to a preinstalled version of Boost."
 )
-oomph_path_option(
-  FLAG OOMPH_MUMPS_TARBALL_PATH
-  DOCSTRING "The path to a preinstalled version of Boost."
-)
 
 # cmake-format: on
 # ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------

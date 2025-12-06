@@ -32,18 +32,11 @@ env:
   # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
   # more processors than are available
   OMPI_MCA_rmaps_base_oversubscribe: 1
-  MUMPS_UPSTREAM_VERSION: &mumps_upstream_version 5.8.1
 
 # ------------------------------------------------------------------------------
 
 jobs:
-  cache-mumps:
-    uses: puneetmatharu/oomph-lib/.github/workflows/_cache-mumps.yaml@patch-limited-mumps-downloads
-    with:
-      mumps-version: *mumps_upstream_version
-
   build:
-    needs: cache-mumps
     strategy:
       fail-fast: false
       matrix:
@@ -61,11 +54,6 @@ jobs:
         if: matrix.mpi == 'ON'
         run: brew install open-mpi
 
-      - name: Restore MUMPS tarball
-        uses: ./.github/actions/restore-mumps
-        with:
-          mumps-version: *mumps_upstream_version
-
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
         with:
@@ -81,7 +69,6 @@ jobs:
              --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
              --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
-             --ext-OOMPH_MUMPS_TARBALL_PATH="${OOMPH_MUMPS_TARBALL_PATH}" \
              --no-build-oomph \
              --verbose
         continue-on-error: true
