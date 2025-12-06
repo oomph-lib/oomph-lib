@@ -486,6 +486,7 @@ def parse_args():
     ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled METIS from the given path; used by SuperLU.")
     ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled ParMETIS from the given path; used by SuperLU_DIST.")
     ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path; used by CGAL.")
+    ext_group.add_argument("--ext-OOMPH_MUMPS_TARBALL_PATH", type=expanded_path, metavar="PATH", help="The path to the pre-downloaded MUMPS tarball. WARNING: Make sure this tarball matches the MUMPS_UPSTREAM_VERSION we're using!")
 
     # Any additional flags for the external distributions project
     ext_group.add_argument("--ext-extra-cmake-options", type=shlex.split, metavar="OPTIONS", help="Additional raw CMake flags for external_distributions (e.g. --ext-extra-cmake-options='-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++').")
