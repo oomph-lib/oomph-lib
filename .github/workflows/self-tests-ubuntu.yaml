@@ -58,11 +58,18 @@ on:
 # Environment variables that can be read during jobs
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  MUMPS_UPSTREAM_VERSION: &mumps_upstream_version 5.8.1
 
 # ------------------------------------------------------------------------------
 
 jobs:
+  cache-mumps:
+    uses: puneetmatharu/oomph-lib/.github/workflows/_cache-mumps.yaml@patch-limited-mumps-downloads
+    with:
+      mumps-version: *mumps_upstream_version
+
   build:
+    needs: cache-mumps
     strategy:
       fail-fast: false
       matrix:
@@ -88,6 +95,11 @@ jobs:
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
         run: sudo apt-get install -y openmpi-bin libopenmpi-dev ccache
+
+      - name: Restore MUMPS tarball
+        uses: ./.github/actions/restore-mumps
+        with:
+          mumps-version: *mumps_upstream_version
 
       - name: Configure ccache
         run: |
@@ -158,6 +170,7 @@ jobs:
              --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_MUMPS_TARBALL_PATH="${OOMPH_MUMPS_TARBALL_PATH}" \
              --no-build-oomph \
              --verbose
 
