@@ -58,11 +58,29 @@ on:
 # Environment variables that can be read during jobs
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  MUMPS_UPSTREAM_VERSION: &mumps_upstream_version 5.8.1
 
 # ------------------------------------------------------------------------------
 
 jobs:
+  cache-mumps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Grab actions (only) from oomph-lib repository
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github
+          sparse-checkout-cone-mode: false
+          fetch-depth: 1
+
+      - name: Cache / download MUMPS tarball
+        uses: ./.github/actions/cache-mumps
+        with:
+          mumps-version: *mumps_upstream_version
+
   build:
+    needs: cache-mumps
     strategy:
       fail-fast: false
       matrix:
@@ -80,7 +98,7 @@ jobs:
       # INITIAL SETUP:
       # -------------------
       - name: Check out oomph-lib repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build ccache
@@ -88,6 +106,11 @@ jobs:
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
         run: sudo apt-get install -y openmpi-bin libopenmpi-dev ccache
+
+      - name: Restore MUMPS tarball
+        uses: ./.github/actions/restore-mumps
+        with:
+          mumps-version: *mumps_upstream_version
 
       - name: Configure ccache
         run: |
@@ -158,6 +181,7 @@ jobs:
              --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_MUMPS_TARBALL_PATH="${OOMPH_MUMPS_TARBALL_PATH}" \
              --no-build-oomph \
              --verbose
 
