@@ -18,21 +18,22 @@ if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../install")
 endif()
 
-# Limit the number of cores used by ninja to (number of processors - 2)
-# (rather than (number of processors + 2) which is the default and
-# causes under-powered computers to die).
+# Limit the number of cores used by ninja to (number of processors - 2) (rather
+# than (number of processors + 2) which is the default and causes under-powered
+# computers to die).
 include(ProcessorCount)
 ProcessorCount(NPROC)
-if (NPROC GREATER 2)
-    math(EXPR NJOBS "${NPROC} - 6") # hierher
+if(NPROC GREATER 2)
+  math(EXPR NJOBS "${NPROC} - 6") # hierher
 else()
-    set(NJOBS 1)
+  set(NJOBS 1)
 endif()
 set_property(GLOBAL PROPERTY JOB_POOLS limit_pool=${NJOBS})
 set(CMAKE_JOB_POOL_COMPILE limit_pool)
-set(CMAKE_JOB_POOL_LINK    limit_pool)
-set(CMAKE_JOB_POOL_CUSTOM  limit_pool)
-message(STATUS "Detected ${NPROC} cores → limiting Ninja to ${NJOBS} parallel jobs")
+set(CMAKE_JOB_POOL_LINK limit_pool)
+set(CMAKE_JOB_POOL_CUSTOM limit_pool)
+message(
+  STATUS "Detected ${NPROC} cores → limiting Ninja to ${NJOBS} parallel jobs")
 
 # Pass it on to sub-directories/sub-projects
 set(NJOBS "${NJOBS}" CACHE STRING "Number of Ninja parallel jobs")
