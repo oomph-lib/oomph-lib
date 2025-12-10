@@ -83,6 +83,28 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
+
+
+# Limit the number of cores used by ninja to (number of processors - 2)
+# (rather than (number of processors + 2) which is the default and
+# causes under-powered computers to die).
+include(ProcessorCount)
+ProcessorCount(NPROC)
+if (NPROC GREATER 2)
+    math(EXPR NJOBS "${NPROC} - 6") # hierher
+else()
+    set(NJOBS 1)
+endif()
+set_property(GLOBAL PROPERTY JOB_POOLS limit_pool=${NJOBS})
+set(CMAKE_JOB_POOL_COMPILE limit_pool)
+set(CMAKE_JOB_POOL_LINK    limit_pool)
+set(CMAKE_JOB_POOL_CUSTOM  limit_pool)
+message(STATUS "Detected ${NPROC} cores → limiting Ninja to ${NJOBS} parallel jobs")
+
+# Pass it on to sub-directories/sub-projects
+set(NJOBS "${NJOBS}" CACHE STRING "Number of Ninja parallel jobs")
+
+
 # Control the installation
 oomph_option(OOMPH_ALLOW_INSTALL_AS_SUPERUSER "Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set)" OFF)
 oomph_option(OOMPH_INSTALL_HEADERS_AS_SYMLINKS "Install symlinks to the oomph-lib headers instead of copying them" OFF)
