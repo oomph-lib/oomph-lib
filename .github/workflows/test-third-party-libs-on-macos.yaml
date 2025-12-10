@@ -94,6 +94,7 @@ jobs:
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
              --ext-OOMPH_MUMPS_TARBALL_PATH="${OOMPH_MUMPS_TARBALL_PATH}" \
              --no-build-oomph \
+             --use-max-jobs \
              --verbose
         continue-on-error: true
 
