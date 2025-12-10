@@ -24,7 +24,7 @@ endif()
 include(ProcessorCount)
 ProcessorCount(NPROC)
 if (NPROC GREATER 2)
-    math(EXPR NJOBS "${NPROC} - 6") # hierher
+    math(EXPR NJOBS "${NPROC} - 2") 
 else()
     set(NJOBS 1)
 endif()

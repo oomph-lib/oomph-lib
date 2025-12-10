@@ -91,7 +91,7 @@ option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the
 include(ProcessorCount)
 ProcessorCount(NPROC)
 if (NPROC GREATER 2)
-    math(EXPR NJOBS "${NPROC} - 6") # hierher
+    math(EXPR NJOBS "${NPROC} - 2")
 else()
     set(NJOBS 1)
 endif()
