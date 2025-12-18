@@ -153,6 +153,18 @@ namespace oomph
       return Zeta_boundary_end[b];
     }
 
+    /// Initial value of 1D global boundary coordinate
+    double zeta_global_boundary_start(const unsigned& b) const
+    {
+      return Zeta_global_boundary_start[b];
+    }
+
+    /// Final value of 1D global boundary coordinate
+    double zeta_global_boundary_end(const unsigned& b) const
+    {
+      return Zeta_global_boundary_end[b];
+    }
+
 
     /// Boundary triad on boundary b at boundary coordinate zeta_bound.
     /// Broken virtual.
@@ -309,14 +321,87 @@ namespace oomph
       return Zeta_in_region;
     }
 
+    /// Lagrangian coordinates on the boundary xi1_b(zeta),xi2_b(zeta)
+    /// Note that zeta_global is from 0 to 2pi
+    virtual void boundary_lagrangian_coordinates(const double& zeta_global,
+                                      Vector<double>& lagr_coords) const
+    {
+      // The number of the boundaries
+      unsigned n_boundary = nboundary();
+
+      // Flag to indicate whether the corresponding boundary segment
+      // for the given global zeta coordinate has been found
+      bool found = false;
+
+      // Loop over all boundary segments except the last one
+      for(unsigned b=0; b<n_boundary-1; b++)
+      {
+        // Check if the global zeta coordinate lies within
+        // the global zeta range of boundary segment b
+        if(zeta_global >= Zeta_global_boundary_start[b] &&
+        zeta_global <  Zeta_global_boundary_end[b])
+        {
+          // Compute the linear mapping ratio between the global
+          // zeta and the local boundary zeta
+          double ratio =
+           (Zeta_boundary_end[b]-Zeta_boundary_start[b])/
+           (Zeta_global_boundary_end[b]-Zeta_global_boundary_start[b]);
+
+          // Map the global zeta to the local zeta on boundary segment b
+          double zeta_local = Zeta_boundary_start[b]+
+          ratio*(zeta_global-Zeta_global_boundary_start[b]);
+
+          // Obtain the Lagrangian coordinates corresponding to
+          // boundary segment b at the local zeta
+          zeta_on_boundary(b, zeta_local, lagr_coords);
+
+          // Mark that a valid boundary segment has been found
+          found = true;
+
+          // Exit the loop since the correct boundary segment is identified
+          break;
+        }
+      } 
+
+      // If no boundary segment was found in the loop above,
+      // assign the global zeta to the last boundary segment
+      if(!found)
+      {
+        // Index of the last boundary segment
+        unsigned b = n_boundary-1;
+
+        // Compute the linear mapping ratio between the global
+        // and local zeta for the last boundary segment
+        double ratio =
+         (Zeta_boundary_end[b]-Zeta_boundary_start[b])/
+         (Zeta_global_boundary_end[b]-Zeta_global_boundary_start[b]);
+
+        // Map the global zeta to the local zeta on the last boundary segment
+        double zeta_local = Zeta_boundary_start[b]+
+          ratio*(zeta_global-Zeta_global_boundary_start[b]);
+        
+        // Obtain the Lagrangian coordinates corresponding to
+        // the last boundary segment at the local zeta 
+        zeta_on_boundary(b, zeta_local, lagr_coords);
+    }
+  }
+  
+
   protected:
-    /// Storage for initial value of 1D boundary coordinate
+    
+    /// Storage for initial value of 1D local boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_start;
 
-    /// Storage for final value of 1D boundary coordinate
+    /// Storage for final value of 1D local boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_end;
+
+    /// Storage for initial value of 1D global boundary coordinate
+    Vector<double> Zeta_global_boundary_start;
+
+    /// Storage for final value of 1D global boundary coordinate
+    Vector<double> Zeta_global_boundary_end;
 
     /// Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b; essentially provides a wrapper to
@@ -325,6 +410,7 @@ namespace oomph
 
     /// Map to store zeta coordinates of points that identify regions
     std::map<unsigned, Vector<double>> Zeta_in_region;
+    
   };
 
 
@@ -570,6 +656,7 @@ namespace oomph
     /// Thickness of annular region (distance of internal boundary
     /// from outer edge of unit circle)
     double H_annulus;
+    
   };
 
 
