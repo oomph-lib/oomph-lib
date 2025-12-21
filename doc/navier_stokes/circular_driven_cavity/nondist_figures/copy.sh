@@ -18,15 +18,15 @@ find demo_drivers/navier_stokes/circular_driven_cavity/*/.svn \
 tar -cv -X excluded-files -f circular_driven_cavity.tar \
     doc/navier_stokes/circular_driven_cavity/ \
     demo_drivers/navier_stokes/circular_driven_cavity \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 #    config/makefile_templates/doc \
-#    configure.ac 
+#    configure.ac
 
 gzip -9 circular_driven_cavity.tar
 
 rm -rf excluded-files
 
 
-    
+
