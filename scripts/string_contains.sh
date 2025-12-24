@@ -15,7 +15,7 @@
 # Example:
 #
 # # First source this file:
-# . $OOMPH_ROOT_DIR/bin/string_contains.sh
+# . $OOMPH_ROOT_DIR/scripts/string_contains.sh
 #
 # # Run the contains function:
 # contains "my_long_string" "long" 
