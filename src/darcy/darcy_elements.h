@@ -136,7 +136,7 @@ namespace oomph
     /// non-dimensionalised to be parameter free; coupling to
     /// Navier-Stokes, say, may introduce different pressure
     /// scales. This factor multiplies the Darcy pressure in the
-    /// output functinos (only!). Const version
+    /// output functions (only!). Const version
     double* darcy_pressure_scaling_factor_for_output_pt() const
     {
       return Darcy_pressure_scaling_factor_for_output_pt;
@@ -146,7 +146,7 @@ namespace oomph
     /// non-dimensionalised to be parameter free; coupling to
     /// Navier-Stokes, say, may introduce different pressure
     /// scales. This factor multiplies the Darcy pressure in the
-    /// output functinos (only!). Read/write version
+    /// output functions (only!). Read/write version
     double*& darcy_pressure_scaling_factor_for_output_pt()
     {
       return Darcy_pressure_scaling_factor_for_output_pt;
@@ -541,7 +541,7 @@ namespace oomph
     /// non-dimensionalised to be parameter free; coupling to
     /// Navier-Stokes, say, may introduce different pressure
     /// scales. This factor multiplies the Darcy pressure in the
-    /// output functinos (only!)
+    /// output functions (only!)
     double* Darcy_pressure_scaling_factor_for_output_pt;
   };
 
