@@ -18,7 +18,7 @@ find demo_drivers/navier_stokes/spine_channel_flow/*/.svn \
 tar -cv -X excluded-files -f spine_channel_flow.tar \
     doc/navier_stokes/spine_channel_flow/ \
     demo_drivers/navier_stokes/spine_channel_flow \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
     src/meshes/channel_spine_mesh*.h \

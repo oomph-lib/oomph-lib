@@ -19,7 +19,7 @@ find demo_drivers/wave/two_d_wave/*/.svn \
 tar -cv -X excluded-files -f two_d_wave.tar \
     doc/wave/two_d_wave/ \
     demo_drivers/wave/two_d_wave \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 
