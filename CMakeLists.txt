@@ -63,6 +63,32 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(HAVE_DEBUG_BUILD TRUE)
 endif()
 
+# Limits the parallelism in ninja? Note this needs to go before any
+# targets are created, otherwise ninja gets confused. Here this means
+# it needs to go before the inclusion of OomphConfigureCMakeInfoForProject
+if (CMAKE_GENERATOR MATCHES "Ninja")
+  if (OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS)
+    message(VERBOSE "Not limiting the number of parallel ninja jobs when building oomph-lib")
+  else()
+    message(VERBOSE "Limiting the number of parallel ninja jobs when building oomph-lib")
+    include(OomphLimitNinjaJobs)
+    include(ProcessorCount)
+    ProcessorCount(NPROC)
+    if (NPROC GREATER 2)
+        # By default, ninja uses nproc+2! Let's go
+        # the other way for safety
+        math(EXPR oomph_NJOBS "${NPROC} - 2")
+    else()
+        set(oomph_NJOBS 1)
+    endif()
+
+    # Do it (for oomph-lib main build only!)
+    oomph_limit_ninja_jobs(${oomph_NJOBS})
+  endif()
+endif()
+
+
+
 # Sort out config files
 include(OomphConfigureCMakeInfoForProject)
 
@@ -299,29 +325,7 @@ if(OOMPH_EXTRA_COMPILE_DEFINES)
 endif()
 
 
-# Limits the parallelism in ninja?
-if (CMAKE_GENERATOR MATCHES "Ninja")
-  if (OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS)
-    message(VERBOSE "Not limiting the number of parallel ninja jobs when building oomph-lib")
-  else()
-    message(VERBOSE "Limiting the number of parallel ninja jobs when building oomph-lib")
-    include(OomphLimitNinjaJobs)
-    include(ProcessorCount)
-    ProcessorCount(NPROC)
-    if (NPROC GREATER 2)
-        # By default, ninja uses nproc+2! Let's go
-        # the other way for safety
-        math(EXPR oomph_NJOBS "${NPROC} - 2")
-    else()
-        set(oomph_NJOBS 1)
-    endif()
-
-    # Do it (for oomph-lib main build only!)
-    oomph_limit_ninja_jobs(${oomph_NJOBS})
-  endif()
-endif()
-
-# Install even if we're not building with ninja
+# Install ninja limiter script even if we're not building with ninja
 install(FILES cmake/OomphLimitNinjaJobs.cmake
         DESTINATION lib/cmake/oomphlib)
 

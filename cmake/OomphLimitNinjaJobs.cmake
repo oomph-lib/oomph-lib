@@ -25,6 +25,14 @@ include_guard()
 function(oomph_limit_ninja_jobs)
     message(VERBOSE "Limiting number of ninja jobs")
 
+    # Safety check
+    get_property(_targets GLOBAL PROPERTY TARGETS)
+    if (_targets)
+       message(FATAL_ERROR
+        "oomph_limit_ninja_jobs() must be called before any targets are created")
+    endif()
+
+
     # No argument → intentional no-op
     if (ARGC EQUAL 0)
         message(STATUS "oomph_limit_ninja_jobs(): no job count provided, skipping")
