@@ -329,17 +329,37 @@ namespace oomph
       // The number of the boundaries
       unsigned n_boundary = nboundary();
 
-      // Flag to indicate whether the corresponding boundary segment
-      // for the given global zeta coordinate has been found
-      bool found = false;
-
-      // Loop over all boundary segments except the last one
-      for(unsigned b=0; b<n_boundary-1; b++)
+      // Loop over all boundary segments
+      for(unsigned b=0; b<n_boundary; b++)
       {
-        // Check if the global zeta coordinate lies within
-        // the global zeta range of boundary segment b
-        if(zeta_global >= Zeta_global_boundary_start[b] &&
-        zeta_global <  Zeta_global_boundary_end[b])
+        // Flag indicating whether implements the process to obtain the 
+        // Lagriangian coordinates
+        bool do_it = false;
+
+        // Check if zeta_global is to the right of (or equal to)
+        // the start of boundary segment b
+        if(zeta_global >= Zeta_global_boundary_start[b])
+        {
+          // For all segments except the last one, require
+          // zeta_global < Zeta_global_boundary_end[b]
+          // so that segments are half-open intervals [start, end)
+          if (b<n_boundary-1)
+          {
+            if (zeta_global < Zeta_global_boundary_end[b])
+            {
+              do_it = true;
+            }
+          }
+          // For the last boundary segment, accept all remaining values
+          // (in particular, this includes the endpoint zeta_global = 2*pi)
+          else 
+          {
+            do_it = true;
+          }
+        }
+            
+        // If the correct boundary segment has been identified
+        if (do_it==true)
         {
           // Compute the linear mapping ratio between the global
           // zeta and the local boundary zeta
@@ -355,36 +375,12 @@ namespace oomph
           // boundary segment b at the local zeta
           zeta_on_boundary(b, zeta_local, lagr_coords);
 
-          // Mark that a valid boundary segment has been found
-          found = true;
-
           // Exit the loop since the correct boundary segment is identified
           break;
         }
-      } 
-
-      // If no boundary segment was found in the loop above,
-      // assign the global zeta to the last boundary segment
-      if(!found)
-      {
-        // Index of the last boundary segment
-        unsigned b = n_boundary-1;
-
-        // Compute the linear mapping ratio between the global
-        // and local zeta for the last boundary segment
-        double ratio =
-         (Zeta_boundary_end[b]-Zeta_boundary_start[b])/
-         (Zeta_global_boundary_end[b]-Zeta_global_boundary_start[b]);
-
-        // Map the global zeta to the local zeta on the last boundary segment
-        double zeta_local = Zeta_boundary_start[b]+
-          ratio*(zeta_global-Zeta_global_boundary_start[b]);
-        
-        // Obtain the Lagrangian coordinates corresponding to
-        // the last boundary segment at the local zeta 
-        zeta_on_boundary(b, zeta_local, lagr_coords);
+      }
     }
-  }
+  
   
 
   protected:
