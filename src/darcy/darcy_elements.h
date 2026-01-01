@@ -472,138 +472,145 @@ namespace oomph
                                     const Vector<double> unit_normal);
 
 
-   /// Number of scalars/fields output by this element. Reimplements
-   /// broken virtual function in base class.
-   unsigned nscalar_paraview() const
+    /// Number of scalars/fields output by this element. Reimplements
+    /// broken virtual function in base class.
+    unsigned nscalar_paraview() const
     {
-     unsigned nscalar=DIM+2;
-     if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
+      unsigned nscalar = DIM + 2;
+      if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
       {
-       nscalar=DIM+1;
+        nscalar = DIM + 1;
       }
-     return nscalar;
+      return nscalar;
     }
 
-   
+
     /// Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_paraview(std::ofstream& file_out,
                                const unsigned& i,
                                const unsigned& nplot) const
     {
-     double pressure_scaling_factor = 1.0;
-     if (Darcy_pressure_scaling_factor_for_output_pt != 0)
+      double pressure_scaling_factor = 1.0;
+      if (Darcy_pressure_scaling_factor_for_output_pt != 0)
       {
-       pressure_scaling_factor = *Darcy_pressure_scaling_factor_for_output_pt;
-      }
-     
-     // Vector of local coordinates
-     Vector<double> s(DIM);
-     
-     // Loop over plot points
-     unsigned num_plot_points = nplot_points_paraview(nplot);
-     for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
-      {
-       // Get local coordinates of plot point
-       get_s_plot(iplot, nplot, s);
-       
-       // Velocities
-       if (i < DIM)
-        {
-         file_out << this->interpolated_q(s, i) << std::endl;
-        }
-       else
-        {
-         unsigned count=0;
-         // Pressure
-         if ((i==DIM)  &&( DarcyOutputCustomiser::Suppress_divergence_in_darcy_output) ||
-             (i==DIM+1)&&(!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
-          {
-           // Output FE representation of (possibly scaled) p at s
-           file_out << pressure_scaling_factor * this->interpolated_p(s) << std::endl;
-           count++;
-          }
-         
-         // Divergence
-         if ((i==DIM)  &&(!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
-          {
-           file_out << this->interpolated_div_q(s) << std::endl;
-           count++;
-          }
-         
-#ifdef PARANOID
-         if (count!=1)
-          {
-           std::stringstream error_stream;
-           error_stream << "Something's gone wrong in Darcy paraview output: count = " << count
-                        << " ; i = " << i << " and we're ";
-           if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
-            {
-             error_stream << " not ";
-            }
-           error_stream << "outputting the divergence." << std::endl;
-           throw OomphLibError(error_stream.str(),
-                               OOMPH_CURRENT_FUNCTION,
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-#endif        
-        }
-      }
-    }
-   
-   /// Name of the i-th scalar field. Default implementation
-   /// returns V1 for the first one, V2 for the second etc. Can (should!) be
-   /// overloaded with more meaningful names in specific elements.
-   std::string scalar_name_paraview(const unsigned& i) const
-    {
-     // Velocities
-     if (i < DIM)
-      {
-       return "Velocity " + StringConversion::to_string(i);
-      }
-     else
-      {
-       unsigned count=0;
-       // Pressure
-       if ((i==DIM)  &&( DarcyOutputCustomiser::Suppress_divergence_in_darcy_output) ||
-           (i==DIM+1)&&(!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
-        {
-         return "Pressure";
-         count++;
-        }
-       
-       // Divergence
-       if ((i==DIM)  &&(!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
-        {
-         return "Divergence";
-         count++;
-        }
-       
-#ifdef PARANOID
-       if (count!=1)
-        {
-         std::stringstream error_stream;
-         error_stream << "Something's gone wrong in Darcy scalar_name_paraview: count = " << count
-                      << " ; i = " << i << " and we're ";
-         if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
-          {
-           error_stream << " not ";
-          }
-         error_stream << "outputting the divergence." << std::endl;
-         throw OomphLibError(error_stream.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-#endif        
+        pressure_scaling_factor = *Darcy_pressure_scaling_factor_for_output_pt;
       }
 
-     // dummy return
-     return "";
-     
+      // Vector of local coordinates
+      Vector<double> s(DIM);
+
+      // Loop over plot points
+      unsigned num_plot_points = nplot_points_paraview(nplot);
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get local coordinates of plot point
+        get_s_plot(iplot, nplot, s);
+
+        // Velocities
+        if (i < DIM)
+        {
+          file_out << this->interpolated_q(s, i) << std::endl;
+        }
+        else
+        {
+          unsigned count = 0;
+          // Pressure
+          if ((i == DIM) &&
+                (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output) ||
+              (i == DIM + 1) &&
+                (!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
+          {
+            // Output FE representation of (possibly scaled) p at s
+            file_out << pressure_scaling_factor * this->interpolated_p(s)
+                     << std::endl;
+            count++;
+          }
+
+          // Divergence
+          if ((i == DIM) &&
+              (!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
+          {
+            file_out << this->interpolated_div_q(s) << std::endl;
+            count++;
+          }
+
+#ifdef PARANOID
+          if (count != 1)
+          {
+            std::stringstream error_stream;
+            error_stream
+              << "Something's gone wrong in Darcy paraview output: count = "
+              << count << " ; i = " << i << " and we're ";
+            if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
+            {
+              error_stream << " not ";
+            }
+            error_stream << "outputting the divergence." << std::endl;
+            throw OomphLibError(error_stream.str(),
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+        }
+      }
     }
-   
-   
-   
+
+    /// Name of the i-th scalar field. Default implementation
+    /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+    /// overloaded with more meaningful names in specific elements.
+    std::string scalar_name_paraview(const unsigned& i) const
+    {
+      // Velocities
+      if (i < DIM)
+      {
+        return "Velocity " + StringConversion::to_string(i);
+      }
+      else
+      {
+        unsigned count = 0;
+        // Pressure
+        if ((i == DIM) &&
+              (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output) ||
+            (i == DIM + 1) &&
+              (!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
+        {
+          return "Pressure";
+          count++;
+        }
+
+        // Divergence
+        if ((i == DIM) &&
+            (!DarcyOutputCustomiser::Suppress_divergence_in_darcy_output))
+        {
+          return "Divergence";
+          count++;
+        }
+
+#ifdef PARANOID
+        if (count != 1)
+        {
+          std::stringstream error_stream;
+          error_stream
+            << "Something's gone wrong in Darcy scalar_name_paraview: count = "
+            << count << " ; i = " << i << " and we're ";
+          if (DarcyOutputCustomiser::Suppress_divergence_in_darcy_output)
+          {
+            error_stream << " not ";
+          }
+          error_stream << "outputting the divergence." << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+      }
+
+      // dummy return
+      return "";
+    }
+
+
     /// Output FE representation of exact soln: x,y,q1,q2,div_q,p at
     /// Nplot^DIM plot points
     void output_fct(std::ostream& outfile,
