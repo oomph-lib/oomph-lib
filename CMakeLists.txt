@@ -63,17 +63,18 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(HAVE_DEBUG_BUILD TRUE)
 endif()
 
-# Limits the parallelism in ninja? Note this needs to go before any targets are
+# Limit the parallelism in ninja? Note this needs to go before any targets are
 # created, otherwise ninja gets confused. Here this means it needs to go before
 # the inclusion of OomphConfigureCMakeInfoForProject
 if(CMAKE_GENERATOR MATCHES "Ninja")
+  # Note that this flag only gets defined below but cmake can sort this out!
   if(OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS)
     message(
-      VERBOSE
+      STATUS
       "Not limiting the number of parallel ninja jobs when building oomph-lib")
   else()
     message(
-      VERBOSE
+      STATUS
       "Limiting the number of parallel ninja jobs when building oomph-lib")
     include(OomphLimitNinjaJobs)
     include(ProcessorCount)
@@ -118,28 +119,6 @@ option(OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS "Allow ninja to decide on the numb
 
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
-
-
-
-# Limit the number of cores used by ninja to (number of processors - 2)
-# (rather than (number of processors + 2) which is the default and
-# causes under-powered computers to die).
-include(ProcessorCount)
-ProcessorCount(NPROC)
-if (NPROC GREATER 2)
-    math(EXPR NJOBS "${NPROC} - 2")
-else()
-    set(NJOBS 1)
-endif()
-set_property(GLOBAL PROPERTY JOB_POOLS limit_pool=${NJOBS})
-set(CMAKE_JOB_POOL_COMPILE limit_pool)
-set(CMAKE_JOB_POOL_LINK    limit_pool)
-set(CMAKE_JOB_POOL_CUSTOM  limit_pool)
-message(STATUS "Detected ${NPROC} cores → limiting Ninja to ${NJOBS} parallel jobs")
-
-# Pass it on to sub-directories/sub-projects
-set(NJOBS "${NJOBS}" CACHE STRING "Number of Ninja parallel jobs")
-
 
 # Control the installation
 oomph_option(OOMPH_ALLOW_INSTALL_AS_SUPERUSER "Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set)" OFF)
