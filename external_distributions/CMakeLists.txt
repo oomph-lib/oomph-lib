@@ -108,7 +108,7 @@ oomph_path_option(
 )
 oomph_path_option(
   FLAG OOMPH_MUMPS_TARBALL_PATH
-  DOCSTRING "The path to a preinstalled version of Boost."
+  DOCSTRING "The local path to an already-downloaded MUMPS tarball."
 )
 
 # cmake-format: on
