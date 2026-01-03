@@ -71,11 +71,12 @@ if(CMAKE_GENERATOR MATCHES "Ninja")
   if(OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS)
     message(
       STATUS
-      "Not limiting the number of parallel ninja jobs when building oomph-lib")
+        "Not limiting the number of parallel ninja jobs when building oomph-lib"
+    )
   else()
     message(
       STATUS
-      "Limiting the number of parallel ninja jobs when building oomph-lib")
+        "Limiting the number of parallel ninja jobs when building oomph-lib")
     include(OomphLimitNinjaJobs)
     include(ProcessorCount)
     ProcessorCount(NPROC)

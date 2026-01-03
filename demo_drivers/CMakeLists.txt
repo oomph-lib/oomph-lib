@@ -18,13 +18,12 @@ if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../install")
 endif()
 
-# Limit number of ninja jobs to what was used during oomph-lib build
-# (ignored if oomph-lib build wasn't limited)
+# Limit number of ninja jobs to what was used during oomph-lib build (ignored if
+# oomph-lib build wasn't limited)
 include(OomphLimitNinjaJobs)
 
 # Pass on oomph-lib specific variable
 oomph_limit_ninja_jobs(${oomph_NJOBS})
-
 
 include(CTest)
 
