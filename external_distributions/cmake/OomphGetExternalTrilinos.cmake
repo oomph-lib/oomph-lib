@@ -64,6 +64,10 @@ set(TRILINOS_CMAKE_CONFIGURE_ARGS
     -DTPL_LAPACK_LIBRARIES=${OpenBLAS_LIBRARIES}
     -DTPL_ENABLE_MPI=${OOMPH_ENABLE_MPI})
 
+if(DEFINED BUILD_SHARED_LIBS)
+  list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+endif()
+
 set(DESIRED_TRILINOS_PACKAGES Amesos Anasazi AztecOO Epetra EpetraExt Ifpack ML Teuchos Triutils)
 
 # Enable the package but disable the deprecated warning

@@ -12,14 +12,18 @@ include_guard()
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
 # Where to clone the repos from
-set(GKLIB_GIT_URL https://github.com/KarypisLab/GKlib.git)
-set(METIS_GIT_URL https://github.com/KarypisLab/METIS.git)
+# set(GKLIB_GIT_URL https://github.com/KarypisLab/GKlib.git)
+# set(METIS_GIT_URL https://github.com/KarypisLab/METIS.git)
+set(GKLIB_GIT_URL https://github.com/puneetmatharu/GKlib.git)
+set(METIS_GIT_URL https://github.com/puneetmatharu/METIS.git)
 set(PARMETIS_GIT_URL https://github.com/puneetmatharu/ParMETIS.git)
 set(SUPERLU_GIT_URL https://github.com/xiaoyeli/superlu.git)
 set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
 
-set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
-set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+# set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
+# set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+set(GKLIB_GIT_TAG 82fc6c3e00b6deaf02578862e9b3364a648c1824)
+set(METIS_GIT_TAG 39dec33bec14833de55ae4e8d842604bce4270fc)
 set(PARMETIS_GIT_TAG 83bb3d4f5b2af826d0683329cad1accc8d829de2)
 set(SUPERLU_GIT_TAG v6.0.1)
 set(SUPERLU_DIST_GIT_TAG v9.1.0)
@@ -47,7 +51,11 @@ endif()
 # GKLIB:
 # -------------
 # Expected library path and include directory
-set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
+if(BUILD_SHARED_LIBS)
+  set(GKLIB_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}GKlib${CMAKE_SHARED_LIBRARY_SUFFIX})
+else()
+  set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
 set(GKLIB_LIBRARIES ${GKLIB_INSTALL_DIR}/lib/${GKLIB_LIBNAME} CACHE PATH "Path to GKlib libraries")
 set(GKLIB_INCLUDE_DIR ${GKLIB_INSTALL_DIR}/include CACHE PATH "Path to GKlib include directory")
 
@@ -64,6 +72,10 @@ if(NOT OOMPH_USE_GKLIB_FROM)
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -DNO_X86=${CONFIGURE_GKLIB_WITH_NO_X86}
   )
+
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND GKLIB_CMAKE_ARGS -DSHARED=${BUILD_SHARED_LIBS})
+  endif()
 
   oomph_get_external_project_helper(
     PROJECT_NAME gklib
@@ -84,12 +96,22 @@ endif()
 # ------
 # Expected library path and include directory
 # NOTE: This does assume that metis will be built as a static library...
-set(METIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}metis${CMAKE_STATIC_LIBRARY_SUFFIX})
+if(BUILD_SHARED_LIBS)
+  set(METIS_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}metis${CMAKE_SHARED_LIBRARY_SUFFIX})
+else()
+  set(METIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}metis${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
 set(METIS_LIBRARIES ${METIS_INSTALL_DIR}/lib/${METIS_LIBNAME} CACHE PATH "Path to METIS libraries")
 set(METIS_INCLUDE_DIR ${METIS_INSTALL_DIR}/include CACHE PATH "Path to METIS include directory")
 
 # If we need to build METIS
 if(NOT OOMPH_USE_METIS_FROM)
+  # Do we want to build shared libs?
+  set(METIS_EXTRA_ARGS)
+  if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+    list(APPEND METIS_EXTRA_ARGS shared=1)
+  endif()
+
   oomph_get_external_project_helper(
     PROJECT_NAME metis
     GIT_REPOSITORY ${METIS_GIT_URL}
@@ -99,7 +121,7 @@ if(NOT OOMPH_USE_METIS_FROM)
     BUILD_IN_SOURCE TRUE
     CONFIGURE_HANDLED_BY_BUILD TRUE
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${CMAKE_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR}
+    BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${CMAKE_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} ${METIS_EXTRA_ARGS}
     INSTALL_COMMAND ${CMAKE_COMMAND} -E env MAKEFLAGS= ${MAKE_EXECUTABLE} install
   )
 endif()
@@ -125,6 +147,10 @@ if (OOMPH_BUILD_SUPERLU)
     -DTPL_METIS_LIBRARIES=${TPL_METIS_LIBRARIES_FOR_SUPERLU}
     -DTPL_BLAS_LIBRARIES=${TPL_BLAS_LIBRARIES_FOR_SUPERLU}
   )
+
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND SUPERLU_CMAKE_CONFIGURE_ARGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+  endif()
 
   set(TEST_COMMAND)
   if(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)
@@ -155,12 +181,22 @@ if(OOMPH_ENABLE_MPI)
   # PARMETIS:
   # ---------
   # Expected library path and include directory
-  set(PARMETIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}parmetis${CMAKE_STATIC_LIBRARY_SUFFIX})
+  if(BUILD_SHARED_LIBS)
+    set(PARMETIS_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}parmetis${CMAKE_SHARED_LIBRARY_SUFFIX})
+  else()
+    set(PARMETIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}parmetis${CMAKE_STATIC_LIBRARY_SUFFIX})
+  endif()
   set(PARMETIS_LIBRARIES ${PARMETIS_INSTALL_DIR}/lib/${PARMETIS_LIBNAME} CACHE PATH "Path to ParMETIS libraries")
   set(PARMETIS_INCLUDE_DIR ${PARMETIS_INSTALL_DIR}/include CACHE PATH "Path to ParMETIS include directory")
 
   # If we need to build ParMETIS
   if(NOT OOMPH_USE_PARMETIS_FROM)
+    # Do we want to build shared libs?
+    set(PARMETIS_EXTRA_ARGS)
+    if(DEFINED BUILD_SHARED_LIBS)
+      list(APPEND PARMETIS_EXTRA_ARGS shared=1)
+    endif()
+
     oomph_get_external_project_helper(
       PROJECT_NAME parmetis
       GIT_REPOSITORY ${PARMETIS_GIT_URL}
@@ -169,7 +205,7 @@ if(OOMPH_ENABLE_MPI)
       INSTALL_DIR "${PARMETIS_INSTALL_DIR}"
       CONFIGURE_HANDLED_BY_BUILD TRUE
       CONFIGURE_COMMAND ""
-      BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${MPI_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} metis_path=${METIS_INSTALL_DIR}
+      BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${MPI_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} metis_path=${METIS_INSTALL_DIR} ${PARMETIS_EXTRA_ARGS}
       INSTALL_COMMAND ${CMAKE_COMMAND} -E env MAKEFLAGS= ${MAKE_EXECUTABLE} install
     )
   endif()
@@ -200,6 +236,10 @@ if(OOMPH_ENABLE_MPI)
       -Denable_examples=OFF
       -Denable_tests=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
       -Denable_python=OFF)
+
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND SUPERLU_DIST_CMAKE_CONFIGURE_ARGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+  endif()
 
   set(TEST_COMMAND)
   if(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)

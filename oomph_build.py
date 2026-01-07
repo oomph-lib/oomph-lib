@@ -215,6 +215,10 @@ def configure_build_and_install_external_libs(
     if args.OOMPH_ENABLE_MPI:
         ext_cache["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
+    # Do we want to build shared libs?
+    if args.BUILD_SHARED_LIBS:
+        ext_cache["BUILD_SHARED_LIBS"] = args.BUILD_SHARED_LIBS
+
     # Generate CMakeUserPresets.json for external project
     presets_dict = generate_external_dist_preset(external_dist_build_dir, ext_cache, args.generator)
     preset_path = external_dist_dir / "CMakeUserPresets.json"
@@ -282,6 +286,10 @@ def configure_build_and_install_oomph(
     # Do we need to enable MPI?
     if args.OOMPH_ENABLE_MPI:
         oomph_cache_vars["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
+
+    # Do we want to build shared libs?
+    if args.BUILD_SHARED_LIBS:
+        oomph_cache_vars["BUILD_SHARED_LIBS"] = args.BUILD_SHARED_LIBS
 
     # Merge in ext_flags first, then user `oomph_OOMPH_*` flags override if duplicated
     final_cache = dict(ext_flags)
@@ -468,6 +476,7 @@ def parse_args():
     # Flags common to both external_distributions and the oomph-lib project
     common_group = parser.add_argument_group("common build flags")
     common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and oomph-lib project.")
+    common_group.add_argument("--BUILD_SHARED_LIBS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build shared libs.")
 
     # External distributions flags
     ext_group = parser.add_argument_group("external_distributions flags")
@@ -654,7 +663,9 @@ if __name__ == "__main__":
     # Configure, build, and install oomph-lib (main) project
     if args.build_oomph:
         # Attempt to locate 'cmake_flags_for_oomph_lib.json'
-        if not external_dist_json_path.is_file():
+        if external_dist_json_path.is_file():
+            print_progress(">>> Located 'cmake_flags_for_oomph_lib.json' from external_distributions build")
+        else:
             print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
             sys.exit(1)
 

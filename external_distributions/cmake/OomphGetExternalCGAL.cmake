@@ -37,6 +37,12 @@ endif()
 # BOOST
 # ----------------------------------------
 if(NOT OOMPH_USE_BOOST_FROM)
+  if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+    set(BOOST_LIBTYPE shared)
+  else()
+    set(BOOST_LIBTYPE static)
+  endif()
+
   oomph_get_external_project_helper(
     PROJECT_NAME boost
     GIT_REPOSITORY ${BOOST_GIT_URL}
@@ -44,7 +50,7 @@ if(NOT OOMPH_USE_BOOST_FROM)
     GIT_SUBMODULES_RECURSE TRUE
     INSTALL_DIR "${BOOST_INSTALL_DIR}"
     CONFIGURE_COMMAND ./bootstrap.sh --prefix=<INSTALL_DIR> --with-libraries=thread,system,program_options CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER}
-    BUILD_COMMAND ./b2 install --jobs=${OOMPH_NUM_JOBS}
+    BUILD_COMMAND ./b2 install --jobs=${OOMPH_NUM_JOBS} link=${BOOST_LIBTYPE}
     INSTALL_COMMAND ""
   )
 endif()
