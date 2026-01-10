@@ -91,27 +91,19 @@ Contributing to `oomph-lib` involves three separate repositories:
     >>> ls -l
     ```
 
-The official (`upstream`) repository has two key branches: `main` and `development`. These have now made it onto your computer. You can list the local branches as follows:
+The official (`upstream`) repository typically has a number of branches but usually the only one of interest to you is the  `main` branch. You can list all local branches as follows:
 ```bash
 >>> git branch
-  development
-  main
 ```
-If the `development` branch is not listed when running `git branch`, you can switch to it by using:
-```bash
->>> git checkout development
-Branch 'development' set up to track remote branch 'development' from 'origin'.
-Switched to a new branch 'development'
-```
-You should only ever interact with the `development` branch. The `main` branch is only updated (and never by you!) when a new stable version with significant new features is available and needs to be shared with the whole wide world.
+**Note:** We used have a `development` branch but have recently retired this. 
 
 ## The workflow
-We will assume that you have updated your remote forked repository from the official one, and have updated the `development` branch on your computer before doing any new
+We will assume that you have updated your remote forked repository from the official one, and have updated the `main` branch on your computer before doing any new
 work. (We show below how this is done as part of the overall workflow but want
 to make sure we know where to start; if you have just completed the steps described in 'Basic setup' above, you are now in this blissful state).
 
 The end-goal is to emulate the Git branching model described
-in [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model).
+in [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model) (but with the `development` branch omitted).
 
 The idea is as follows: you add your changes to your *local forked forked*
 repository, and then push these changes to your *remote forked* repository. Once
@@ -126,24 +118,24 @@ This involves the following steps:
 4. Check it again.
 5. Push the changes from your local forked repository (the one on your computer) to your remote forked repository (on GitHub).
 6. Wait for the automated self-tests to pass (check the Actions tab of your remote forked repository on GitHub for progress updates and log files). If they don't, resolve the issues and repeat from step 2.
-7. Create a pull request to merge the changes created in that branch into the `development` branch of the official (`oomph-lib/oomph-lib`) repository (`upstream`).
+7. Create a pull request to merge the changes created in that branch into the `main` branch of the official (`oomph-lib/oomph-lib`) repository (`upstream`).
 8. Once the pull request has been accepted (and your changes have thus been merged into the official repository), update your remote forked repository (`origin`) on GitHub.
-9. Update the `development` branch on your computer from your remote forked repository (`origin`).
+9. Update the `main` branch on your computer from your remote forked repository (`origin`).
 
 ## The steps in detail
 
 
-1. Start from the branch you want to work on, e.g. `development`
+1. Start from the branch you want to work on, e.g. `main`
    ```bash
-   >>> git checkout development
-   Switched to branch 'development'
-   Your branch is up-to-date with 'origin/development'.
+   >>> git checkout main
+   Switched to branch 'main'
+   Your branch is up-to-date with 'origin/main'.
    ```
    and check that everything is clean:
    ```bash
    >>> git status
-   On branch development
-   Your branch is up to date with 'origin/development'.
+   On branch main
+   Your branch is up to date with 'origin/main'.
 
    nothing to commit, working tree clean
    ```
@@ -195,10 +187,10 @@ This involves the following steps:
          new-file3.h
          new-file4.h
    ```
-   (Note: If you only want to add files that were changed and that are
-   already under Git version control, you can use `git add -u`; this command will not add any newly created files.)
- 
-   (Second Note: As soon as you have staged any files then `git diff` will no longer show any differences between them and the current versions in the repository.)
+   **Note:** If you only want to add files that were changed and that are
+   already under Git version control, you can use `git add -u`; this command will not add any newly created files.
+
+   **Second Note:** As soon as you have staged any files then `git diff` will no longer show any differences between them and the current versions in the repository. The staged files can be unstaged as follows:
 
 
     ```bash
@@ -316,9 +308,7 @@ This involves the following steps:
 
    ![](doc/README/base_repository_button.png)
 
-   Since commits must only be made to the `development` branch, not the `main` branch, click the "`base: main`" button and click "`development`" from the dropdown menu:
-
-   ![](doc/README/base_repository_button_development.png)
+   If necessary, you can change the target branch using the drop-down menu.
 
    Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests; see below in [Code review](#code-review) for details of the review process). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
 
@@ -333,41 +323,40 @@ This involves the following steps:
    and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests (again, see the instructions for the [Code review](#code-review) for details), and then fingers crossed!
 
 7. Once the pull request has been accepted and the changes made have been merged
-   into the official repository, update the `development` branch on your remote forked branch. This is done most easily via the webpage: go to the `development` branch for the remote forked repository, i.e. go to https://github.com/JoeCoolDummy/oomph-lib and click on the button with a branch symbol and the text "`main`":
+   into the official repository, update the `main` branch on your remote forked branch. This is done most easily via the webpage: go to the `main` branch for the remote forked repository, i.e. go to https://github.com/JoeCoolDummy/oomph-lib and click on the button with a branch symbol and the text "`main`":
 
     ![](doc/README/main_button.png)
 
-    Select the `development` branch from the dropdown menu.
-     GitHub will show you that "This branch is n commits behind `oomph-lib:development`."
-     The "Fetch upstream" button allows a comparison ("Compare") and "Fetch and merge". Go for the latter when happy. GitHub will now announce that "This branch is even with `oomph-lib:development`".
+     GitHub will show you that "This branch is n commits behind `oomph-lib:main`."
+     The "Fetch upstream" button allows a comparison ("Compare") and "Fetch and merge". Go for the latter when happy. GitHub will now announce that "This branch is even with `oomph-lib:main`".
 
    **Note: It is a good idea to do this regularly to make sure that you have the latest changes.**
 
-8. Now the `development` branch on your computer (cloned from the forked
-   remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature-add-new-important-headers..development` you'll see that the `development` branch obviously(!) does not yet contain the changes we've made in the local forked `feature-add-new-important-headers` branch.) So pull the updated
-   `development` branch from the `origin` repository, as follows:
+8. Now the `main` branch on your computer (cloned from the forked
+   remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature-add-new-important-headers..main` you'll see that the `main` branch obviously(!) does not yet contain the changes we've made in the local forked `feature-add-new-important-headers` branch.) So pull the updated
+   `main` branch from the `origin` repository, as follows:
 
-   First go back to `development` branch (assuming we're still on the
+   First go back to `main` branch (assuming we're still on the
    `feature-add-new-important-headers` one)
 
    ```bash
-   >>> git checkout development
+   >>> git checkout main
    ```
 
    Now `git pull` (= `git fetch` + `git merge`) the changes from the
-   `development` branch in the remote forked repository (`origin`):
+   `main` branch in the remote forked repository (`origin`):
 
    ```bash
-   >>> git pull origin development
+   >>> git pull origin main
    ```
 
    Assuming this pull doesn't conflict with any other changes made to your
-   `development` branch, the local forked `development` and
+   `main` branch, the local forked `main` and
    `feature-add-new-important-headers` branches should now agree. Check by
    running
 
    ```bash
-   >>> git diff feature-add-new-important-headers..development
+   >>> git diff feature-add-new-important-headers..main
    ```
 
    The above command should not produce an output. We can then get rid of the branch on which we did the work, both locally,
@@ -457,15 +446,15 @@ The general workflow for approving a pull request is as follows:
 
    ![](doc/README/list_of_changes_requested_approve.png)
 
-1. **Reviewer:** When all requests from all reviewers have been dealt with, and all reviewers have approved the changes, the changes can be merged in by pressing the green "Merge pull request" button. **IMPORTANT:** Before you merge, go to the top of the page and double-check that you're merging into the `development` branch rather than the `main` branch!
+1. **Reviewer:** When all requests from all reviewers have been dealt with, and all reviewers have approved the changes, the changes can be merged in by pressing the green "Merge pull request" button. **IMPORTANT:** Before you merge, go to the top of the page and double-check that you're merging into the `main` branch!
 
 ## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
 
-1. Switch to the `development` branch
+1. Switch to the `main` branch
    ```bash
-   >>> git checkout development
+   >>> git checkout main
    ```
 
 2. If you haven't done this already, add the upstream repository as a new remote repository named `upstream`
@@ -481,18 +470,18 @@ Described below is an alternative way to pull changes from the official reposito
    upstream	git@github.com:oomph-lib/oomph-lib.git (fetch)
    upstream	git@github.com:oomph-lib/oomph-lib.git (push)
    ```
-4. Fetch the upstream copy of the `development` branch and immediately merge it into your local copy
+4. Fetch the upstream copy of the `main` branch and immediately merge it into your local copy
    ```bash
-   >>> git pull upstream development
+   >>> git pull upstream main
    ```
 
 5. Resolve any merge conflicts you may have. Strictly speaking, you
-   should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
+   should only be using the `main` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
 6. Now push the changes in your local forked repository up to your remote forked
    repository (`origin`)
    ```bash
-   >>> git push origin development
+   >>> git push origin main
    ```
    Now both your local forked repository and your remote forked repository are in
    sync with the upstream (i.e. official) repository. Hurray!
@@ -500,7 +489,7 @@ Described below is an alternative way to pull changes from the official reposito
 
 ## Advanced: pulling in changes from another branch without going through the central repository
 
-  Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main `oomph-lib` development branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the development branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
+  Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main `oomph-lib` `main` branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the `main` branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
 
  1. Make sure that you fetch the upstream copy of repository that includes the changes pulled in
     from the external source. 
@@ -510,12 +499,12 @@ Described below is an alternative way to pull changes from the official reposito
 
  2. Resolve any merge conflicts. If you have created a separate branch there should be no conflicts, but if you have pulled changes into an existing branch then there is potential for some conflicts.
 
- 3. Use git checkout to switch to the branch into which you want to bring the changes
+ 3. Use `git checkout` to switch to the branch into which you want to bring the changes
     ```bash
     >>> git checkout my-cool-feature
     ```
 
- 4. Now use git merge to bring in the changes from the other branch
+ 4. Now use `git merge` to bring in the changes from the other branch
     ```bash
      >>> git merge external-feature-branch
     ```
@@ -536,7 +525,10 @@ GitHub Action applies the formatting. If you followed the steps in [Basic setup
 automatically be enabled for you.
 
 Whenever you push to a branch in your GitHub repository, the `clang-format`
-GitHub Action will be triggered and run. (**Note:** this Action does exclude the
+GitHub Action will be triggered and run. 
+
+PUNEET/hierher: PLEASE CHECK/UPDATE, OR GIVE ME TEXT TO DO SO
+(**Note:** this Action does exclude the
 `main` branch and it assumes that you won't touch your `development` branch, but
 it should be clear after reading this guide that you should never push to them
 directly anyway!) After formatting your code it will create an extra commit
