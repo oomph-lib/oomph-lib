@@ -171,7 +171,10 @@ namespace oomph
     }
   }
 
-  template class BiharmonicElement<2>;
+  template class BiharmonicEquations<1>;
+  template class BiharmonicEquations<2>;
+
   template class BiharmonicElement<1>;
+  template class BiharmonicElement<2>;
 
 } // namespace oomph

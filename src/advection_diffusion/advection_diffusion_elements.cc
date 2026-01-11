@@ -473,6 +473,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class AdvectionDiffusionEquations<1>;
+  template class AdvectionDiffusionEquations<2>;
+  template class AdvectionDiffusionEquations<3>;
+
   template class QAdvectionDiffusionElement<1, 2>;
   template class QAdvectionDiffusionElement<1, 3>;
   template class QAdvectionDiffusionElement<1, 4>;

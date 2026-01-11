@@ -361,6 +361,8 @@ namespace oomph
   // Force build of templates:
   // Build 2D (in space) elements --> 3D (space-time) elements
   //=========================================================================
+  template class RefineableSpaceTimeUnsteadyHeatEquations<2>;
+
   template class RefineableQUnsteadyHeatSpaceTimeElement<2, 2>;
   template class RefineableQUnsteadyHeatSpaceTimeElement<2, 3>;
   template class RefineableQUnsteadyHeatSpaceTimeElement<2, 4>;

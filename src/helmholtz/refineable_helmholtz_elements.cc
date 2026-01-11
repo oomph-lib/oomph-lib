@@ -347,6 +347,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class RefineableHelmholtzEquations<1>;
+  template class RefineableHelmholtzEquations<2>;
+  template class RefineableHelmholtzEquations<3>;
+
   template class RefineableQHelmholtzElement<1, 2>;
   template class RefineableQHelmholtzElement<1, 3>;
   template class RefineableQHelmholtzElement<1, 4>;

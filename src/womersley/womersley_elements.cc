@@ -679,12 +679,11 @@ namespace oomph
   //====================================================================
 
   template class WomersleyEquations<1>;
+  template class WomersleyEquations<2>;
 
   template class QWomersleyElement<1, 2>;
   template class QWomersleyElement<1, 3>;
   template class QWomersleyElement<1, 4>;
-
-  template class WomersleyEquations<2>;
 
   template class QWomersleyElement<2, 2>;
   template class QWomersleyElement<2, 3>;
@@ -693,5 +692,4 @@ namespace oomph
   // template class QWomersleyElement<3,2>;
   // template class QWomersleyElement<3,3>;
   // template class QWomersleyElement<3,4>;
-
 } // namespace oomph

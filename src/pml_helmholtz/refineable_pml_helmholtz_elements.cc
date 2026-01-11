@@ -443,6 +443,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class RefineablePMLHelmholtzEquations<1>;
+  template class RefineablePMLHelmholtzEquations<2>;
+  template class RefineablePMLHelmholtzEquations<3>;
+
   template class RefineableQPMLHelmholtzElement<1, 2>;
   template class RefineableQPMLHelmholtzElement<1, 3>;
   template class RefineableQPMLHelmholtzElement<1, 4>;
