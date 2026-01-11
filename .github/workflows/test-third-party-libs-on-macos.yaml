@@ -89,6 +89,7 @@ jobs:
         id: build
         run: |
           python3 oomph_build.py \
+             --BUILD_SHARED_LIBS=ON \
              --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
              --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
