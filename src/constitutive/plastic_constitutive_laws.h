@@ -144,17 +144,19 @@ namespace oomph
       return isotropic_hardening_yield_function(H, a, false);
     }
 
-    double isotropic_hardening_yield_function(const double& H, double& dfdH, bool computeDerivative)
+    double isotropic_hardening_yield_function(const double& H,
+                                              double& dfdH,
+                                              bool computeDerivative)
     {
       const double exp_val = std::exp(-isotropic_hardening_h2 * H);
       if (computeDerivative)
       {
-        dfdH = isotropic_hardening_f0 * isotropic_hardening_h1 * isotropic_hardening_h2 * exp_val;
+        dfdH = isotropic_hardening_f0 * isotropic_hardening_h1 *
+               isotropic_hardening_h2 * exp_val;
       }
 
       return isotropic_hardening_f0 *
-             (1 + isotropic_hardening_h1 *
-                    (1 - exp_val));
+             (1 + isotropic_hardening_h1 * (1 - exp_val));
     }
 
     void mandel_like_kinematic_hardening_variable(
