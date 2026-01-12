@@ -20,7 +20,6 @@ on:
       - "CMakeLists.txt"
       - "src/**.h"
       - "src/**.cc"
-      - "src/**.tpp"
 
 jobs:
   build:
@@ -33,12 +32,12 @@ jobs:
       - name: Format oomph-lib sources
         uses: puneetmatharu/clang-format-lint-action@v0.19
         with:
-          regex: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
+          regex: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$
           version: 18.1.8
           style: file
           inplace: True
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_user_name: clang-format-bot
           commit_message: "Automated commit of clang-format CI changes."
@@ -50,7 +49,7 @@ jobs:
           args: --config-files .cmake-format.py --in-place
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_user_name: cmake-format-bot
           commit_message: "Automated commit of cmake-format CI changes."
