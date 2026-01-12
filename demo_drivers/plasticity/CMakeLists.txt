@@ -30,6 +30,5 @@ oomph_add_executable(
   SOURCES plasticity_solid_elements_test.cpp
   LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
 
-
 message(VERBOSE "Leaving plasticity subdirectory")
 # ------------------------------------------------------------------------------
