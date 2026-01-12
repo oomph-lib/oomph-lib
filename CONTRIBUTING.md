@@ -105,7 +105,7 @@ to make sure we know where to start; if you have just completed the steps descri
 The end-goal is to emulate the Git branching model described
 in [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model) (but with the `development` branch omitted).
 
-The idea is as follows: you add your changes to your *local forked forked*
+The idea is as follows: you add your changes to your *local forked*
 repository, and then push these changes to your *remote forked* repository. Once
 you are happy to share your additions with the *upstream* repository, you can
 create a contribution via a mechanism called a "pull request", from your *remote forked repository* on GitHub.
