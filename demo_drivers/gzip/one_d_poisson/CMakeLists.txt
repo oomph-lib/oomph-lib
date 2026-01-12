@@ -20,16 +20,18 @@ endif()
 
 include(CTest)
 
-# NOTE: The compiler (on macOS) produces a warning about
-# std::experimental::filesystem being deprecated into favour of C++17's
-# std::filesystem and "This experimental version will be removed in LLVM 11.".
-# Should revert to C++17 but will need to patch the issue with Trilinos if it is
-# still around
+set(EXTRA_LIBS "")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9)
+    list(APPEND EXTRA_LIBS stdc++fs)
+  endif()
+endif()
+
 if(CMAKE_CXX_STANDARD GREATER_EQUAL 17)
   oomph_add_executable(
     NAME one_d_poisson_with_gzip_validation
     SOURCES one_d_poisson_with_gzip_validation.cc
-    LIBRARIES oomph::poisson oomph::meshes oomph::generic stdc++fs)
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic ${EXTRA_LIBS})
 endif()
 
 # ---------------------------------- TESTING ----------------------------------
