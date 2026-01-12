@@ -37,6 +37,7 @@
 
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
+#include "generic/fsi.h"
 #include "generic/hermite_elements.h"
 
 namespace oomph

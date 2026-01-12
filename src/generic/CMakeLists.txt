@@ -110,7 +110,8 @@ set(HEADERS
     extruded_domain.h
     black_box_newton_solver.h
     gzip_reader.h
-    fpdiff.h)
+    fpdiff.h
+    matrix_helpers.h)
 
 if(OOMPH_HAS_STACKTRACE)
   list(APPEND HEADERS stacktrace.h)

@@ -3,7 +3,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered constitutive subdirectory")
 
 # Define the headers
-set(HEADERS constitutive_laws.h)
+set(HEADERS constitutive_laws.h plastic_constitutive_laws.h)
 
 # Define the sources
 set(SOURCES constitutive_laws.cc)
