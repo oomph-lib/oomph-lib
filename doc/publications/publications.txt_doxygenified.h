@@ -60,9 +60,14 @@ and we will install a link to it.
 - Maretvadakethope, S., Hazel, A. L., Vasiev, B. & Bearon, R. N. (2023) The interplay between bulk flow and boundary conditions on the
 distribution of micro-swimmers in channel flow. <em> Journal of Fluid Mechanics </em> <strong> 976</strong>, A13. DOI: <a href="https://doi.org/10.1017/jfm.2023.897">10.1017/jfm.2023.897 </a>
 
-- Smith, K., Retallick, A., Melendrez Armada, D., Vijayaraghavan, A., & Heil, M. (2023). Modelling graphene-polymer heterostructure MEMS membranes with the Föppl–von Kármán equations. ACS Applied Materials and Interfaces . https://doi.org/10.1021/acsami.2c21096
+- Smith, K., Retallick, A., Melendrez Armada, D., Vijayaraghavan, A., & Heil, M. (2023). Modelling graphene-polymer heterostructure MEMS membranes with the Föppl–von Kármán equations. ACS Applied Materials and Interfaces. https://doi.org/10.1021/acsami.2c21096
 
-- Li, H., Retallick, A., Juel, A., Heil, M., & Pihler-Puzovic, D. (2023). Swelling-induced Patterning in Soft Microchannels. Soft Matter. https://doi.org/10.1039/D3SM01008B
+- Li, H., Retallick, A., Juel, A., Heil, M., & Pihler-Puzovic,
+  D. (2023). Swelling-induced Patterning in Soft Microchannels. Soft
+  Matter. https://doi.org/10.1039/D3SM01008B
+
+- Juan Esteban Alvarez Naranjo (2023) Multi-scale Sintering Model of
+  Visco-Elastic Powders. PhD thesis. University of Twente. https://doi.org/10.3990/1.9789036558082
 
 - Cheng, H., Luding, S. & Weinhart, T. (2023), CG-enriched concurrent
   multi-scale modeling of dynamic surface interactions between
@@ -119,7 +124,12 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Thiele, Uwe, and Simon Hartmann. “Gradient dynamics model for drops spreading on polymer brushes”. The European Physical Journal Special Topics 229 (2020): 1819–1832. https://doi.org/10.1140/epjst/e2020-900231-2.
 
 - Trinschek, Sarah, et al. “Thin-film modeling of resting and moving
-  active droplets”. Physical Review E 101 (2020): 062802. https://doi.org/10.1103/physreve.101.062802.
+  active droplets”. Physical Review E 101 (2020):
+  062802. https://doi.org/10.1103/physreve.101.062802.
+
+- Marnix Pieter van Schrojenstein Lantman (2019). A study on fundamental
+  segregation mechanisms in dense granular flows. PhD thesis,
+  University of Twente. https://doi.org/10.3990/1.9789036547628
 
 - Saxby, B. & Hazel, A. (2019) Improving the Modiﬁed XFEM for Optimal High-Order Approximation. <em> International Journal for Numerical Methods in Engineering</em>. <a href="https://doi.org/10.1002/nme.6214"> 10.1002/nme.6214 </a>
 
@@ -128,9 +138,8 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Vaquero-Stainer, C., Heil, M., Juel, A. & Pihler-Puzovic, D. (2019) 
   Self-similar and disordered front propagation in a radial Hele-Shaw 
   channel with time-varying cell depth. <em>Physical Review Fluids</em> 
-  <b>4</b>, 064002. <a
-  href="https://link.aps.org/doi/10.1103/PhysRevFluids.4.064002">DOI:
-  10.1103/PhysRevFluids.4.064002</A>.
+  <b>4</b>, 064002. <a href="https://link.aps.org/doi/10.1103/PhysRevFluids.4.064002">DOI:
+  10.1103/PhysRevFluids.4.064002</a>.
   
 - Shepherd, D., Miles, J., Heil, M. & Mihajlovic, M. (2019)
   An adaptive step implicit midpoint rule for the time integration of 
@@ -180,15 +189,15 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 
 - Cisonni, J., Lucey, A.D., Elliott, S.J & Heil, M. (2017) 
   The stability of a flexible cantilever in viscous channel flow
-  <EM>Journal of Sound and Vibration</EM> <b>369</B> 186-202. DOI: 
-  <A HREF="http://dx.doi.org/10.1016/j.jsv.2017.02.045">
+  <em>Journal of Sound and Vibration</em> <b>369</B> 186-202. DOI: 
+  <a href="http://dx.doi.org/10.1016/j.jsv.2017.02.045">
   10.1016/j.jsv.2017.02.045</a>
 
 - Lopes, André v. B., Uwe Thiele, and Andrew L. Hazel. “On the multiple solutions of coating and rimming flows on rotating cylinders”. Journal of Fluid Mechanics 835 (2017): 540–574. https://doi.org/10.1017/jfm.2017.756.
 
 - Heil, M., Rosso, J., Hazel, A.L., Brons, M. (2017).
   Topological fluid mechanics of the formation of the Karman-vortex street.
-  <EM>Journal of Fluid Mechanics</EM>  <b>812</b> 199-221.
+  <em>Journal of Fluid Mechanics</em>  <b>812</b> 199-221.
   DOI: <a href="https://doi.org/10.1017/jfm.2016.792">https://doi.org/10.1017/jfm.2016.792</a>
   (Open Access).
 
@@ -207,14 +216,14 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Heil, M. & Bertram, C. (2016). A poroelastic fluid-structure
   interaction  model of syringomyelia. <em>Journal of Fluid Mechanics</em>, 
   <b>809</b>, 360-389. 
-  DOI: <A HREF="https://doi.org/10.1017/jfm.2016.669">https://doi.org/10.1017/jfm.2016.669</a>
+  DOI: <a href="https://doi.org/10.1017/jfm.2016.669">https://doi.org/10.1017/jfm.2016.669</a>
 
 - Pestana, J., Muddle, R., Heil, M., Tisseur, F. & Mihajlovic M. (2016)
   Efficient block preconditioning for a C1 finite element discretisation
   of the Dirichlet biharmonic problem.
-  <EM>SIAM Journal on Scientific Computing</EM> <b>38</b>(1), A325-A345.
+  <em>SIAM Journal on Scientific Computing</em> <b>38</b>(1), A325-A345.
   DOI: <a href="http://epubs.siam.org/doi/10.1137/15M1014887">10.1137/15M1014887
-  </a>. <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/PestanaEtAlSIAM2016.pdf">(pdf)</A>
+  </a>. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/PestanaEtAlSIAM2016.pdf">(pdf)</a>
 
 - Bearon, R. N. & Hazel, A. L. (2015) The trapping in high-shear regions of slender bacteria undergoing chemotaxis in a channel. <em>Journal of Fluid Mechanics</em>, <strong>771</strong>, p. R3-1-R3-13. DOI: <a href="https://doi.org/10.1017/jfm.2015.198"> 10.1017/jfm.2015.198 </a>
 
@@ -226,16 +235,16 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Pihler-Puzovic, D., Juel, A., Peng, G., Lister, J. & Heil, M. (2015) 
   Displacement flows under elastic membranes. Part 1: Experiments and
   direct numerical simulations.
-  <EM>Journal of Fluid Mechanics</EM> <b>784</b> 487- 511.
+  <em>Journal of Fluid Mechanics</em> <b>784</b> 487- 511.
   DOI: <a href="http://dx.doi.org/10.1017/jfm.2015.590">doi:10.1017/jfm.2015.590
-  </a>. <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/DragaAxisymPart1.pdf">(pdf)</A>
+  </a>. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/DragaAxisymPart1.pdf">(pdf)</a>
 
 - Peng, G., Pihler-Puzovic, D., Juel, A., Heil, M. & Lister, J. (2015) 
   Displacement flows under elastic membranes. Part 2: Analysis of
   interfacial effects.
-  <EM>Journal of Fluid Mechanics</EM>  <b>784</b> 512- 547.
+  <em>Journal of Fluid Mechanics</em>  <b>784</b> 512- 547.
   DOI: <a href="http://dx.doi.org/10.1017/jfm.2015.589">doi:10.1017/jfm.2015.589
-  </a>. <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/DragaAxisymPart2.pdf">(pdf)</A>
+  </a>. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/DragaAxisymPart2.pdf">(pdf)</a>
 
 - Cimpeanu, R., Martinsson, A. & Heil, M. (2015) A parameter-free 
   perfectly matched layer formulation for the finite-element-based 
@@ -249,14 +258,14 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 
 - Pihler-Puzovic, D., Perillat, R., Russell, M., Juel, A. & Heil, M. (2013) 
   Modelling the suppression of viscous fingering in elastic-walled 
-  Hele-Shaw cells. <EM>Journal of Fluid Mechanics</EM>  <b>731</b>, 162-183
+  Hele-Shaw cells. <em>Journal of Fluid Mechanics</em>  <b>731</b>, 162-183
   DOI: <a href="http://dx.doi.org/10.1017/jfm.2013.375"> 
   10.1017/jfm.2013.375</a>
 
 - Pihler-Puzovic, D., Juel, A. & Heil, M. (2014) 
   The interaction between viscous fingering and wrinkling
   in elastic-walled Hele-Shaw cells. 
-  <EM>Physics of Fluids</EM> <STRONG>26</STRONG>, 022102.
+  <em>Physics of Fluids</em> <STRONG>26</STRONG>, 022102.
   DOI: <a href="http://scitation.aip.org/content/aip/journal/pof2/26/2/10.1063/1.4864188">doi:10.1063/1.4864188</a>.
 
 - Shepherd, D., Miles, J.,  Heil, M., Mihajlovic, M. (2014) 
@@ -268,7 +277,7 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Thompson, A., Juel, A. & Hazel, A. L. (2014) Multiple finger propagation modes in Hele-Shaw channels of variable depth. <em> Journal of Fluid Mechanics</em>, <STRONG> 746</STRONG>, p. 123-164 DOI: <a href="https://doi.org/10.1017/jfm.2014.100"> 10.1017/jfm.2014.100 </a>
 
 - Thompson, A., Tipton, C., Juel, A., Hazel, A. & Dowling, M. (2014) Sequential deposition of overlapping droplets to form a liquid line.
-<EM> Journal of Fluid Mechanics</EM>, <STRONG>761</STRONG>, p. 261-281 DOI: <a href="https://doi.org/10.1017/jfm.2014.621"> 10.1017/jfm.2014.621</a>
+<em> Journal of Fluid Mechanics</em>, <STRONG>761</STRONG>, p. 261-281 DOI: <a href="https://doi.org/10.1017/jfm.2014.621"> 10.1017/jfm.2014.621</a>
 
 
 - Muddle, R.L., Mihajlovic, M. & Heil, M. (2012)
@@ -281,21 +290,21 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 
 - Heil, M., Kharrat, T., Cotterill, P.A. & Abrahams, I.D. (2012) 
   Quasi-resonances in sound-insulating coatings.
-  <EM>Journal of Sound and Vibration</EM>
+  <em>Journal of Sound and Vibration</em>
   <b>331</B> 4774-4784. DOI: 
-  <A HREF="http://dx.doi.org/10.1016/j.jsv.2012.05.029">
+  <a href="http://dx.doi.org/10.1016/j.jsv.2012.05.029">
   10.1016/j.sv.2012.05.029</a>
 
 - Hazel, A. L., Heil, M., Waters, S.L. & Oliver, J.M. (2012) 
   On the liquid lining in fluid-conveying curved tubes.
-  <EM>Journal of Fluid Mechanics</EM>  <b>705</b>, 213-233.
+  <em>Journal of Fluid Mechanics</em>  <b>705</b>, 213-233.
   DOI: <a href="http://dx.doi.org/10.1017/jfm.2011.346"> 
   10.1017/jfm.2011.346</a>
 
 - Willoughby, N., Parnell, W. J., Hazel, A. L. &amp; Abrahams, I. D.(2012)
   Homogenization methods to approximate the effective response of
   random fibre-reinforced composites
-  <EM> International Journal of Solids and Structures </EM> <b>49</b>, 
+  <em> International Journal of Solids and Structures </em> <b>49</b>, 
   1421--1433. 
   DOI: <a href="http://dx.doi.org/10.1016/j.ijsolstr.2012.02.010">
   10.1016/j.ijsolstr.2012.02.010</a>
@@ -322,46 +331,46 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 
 - Stewart, P.S., Heil, M.,  Waters, S.L. & Jensen, O.E.
   (2010) Sloshing and slamming oscillations in
-  collapsible channel flow. <EM>Journal of Fluid Mechanics</EM> 
+  collapsible channel flow. <em>Journal of Fluid Mechanics</em> 
   <B>662</B>, 288-319.
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/StewartEtAl2010.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/StewartEtAl2010.pdf">(pdf)</A>
-  <A HREF="http://journals.cambridge.org/fulltext_content/supplementary/S0022112010003277sup001/index.htm">(Supplementary
-  material (movie))</A>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/StewartEtAl2010.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/StewartEtAl2010.pdf">(pdf)</a>
+  <a href="http://journals.cambridge.org/fulltext_content/supplementary/S0022112010003277sup001/index.htm">(Supplementary
+  material (movie))</a>
 
 - Whittaker, R.J.,  Heil, M., Jensen, O.E., & Waters, S.L. 
   (2010) The onset of high-frequency self-excited
   oscillations in elastic-walled tubes.
-  <EM>Proceedings of the Royal Society A</EM> <B>466</B>, 3635-3657.
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlProcRoySoc2009.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlProcRoySoc2010.pdf">(pdf)</A>
+  <em>Proceedings of the Royal Society A</em> <B>466</B>, 3635-3657.
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlProcRoySoc2009.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlProcRoySoc2010.pdf">(pdf)</a>
 
 - Whittaker, R.J.,  Heil, M., Jensen, O.E., & Waters, S.L. 
   (2010) A rational derivation of a tube law from shell theory.
-  <EM>Quarterly Journal of Mechanics and Applied Mathematics </EM>
-  <A HREF="http://qjmam.oxfordjournals.org/cgi/reprint/hbq020?ijkey=UMRmzz13qllX4v4&keytype=ref">(pdf)</a>
-  <A HREF="http://qjmam.oxfordjournals.org/cgi/content/abstract/hbq020?ijkey=UMRmzz13qllX4v4&keytype=ref">(abstract)</A>
+  <em>Quarterly Journal of Mechanics and Applied Mathematics </em>
+  <a href="http://qjmam.oxfordjournals.org/cgi/reprint/hbq020?ijkey=UMRmzz13qllX4v4&keytype=ref">(pdf)</a>
+  <a href="http://qjmam.oxfordjournals.org/cgi/content/abstract/hbq020?ijkey=UMRmzz13qllX4v4&keytype=ref">(abstract)</a>
 
 - Heil, M., Boyle, J. 
   (2010) Self-excited oscillations in three-dimensional collapsible 
   tubes: Simulating their onset and large-amplitude oscillations.
-  <EM>Journal of Fluid Mechanics</EM> <STRONG>652</STRONG>, 405-426
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilBoyle2009.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/HeilBoyleJFM2010.pdf">(pdf)</A>
+  <em>Journal of Fluid Mechanics</em> <STRONG>652</STRONG>, 405-426
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilBoyle2009.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/HeilBoyleJFM2010.pdf">(pdf)</a>
 
 - Whittaker, R.J., Waters, S.L., Jensen, O.E., Boyle, J. & Heil,
   M. (2010) The energetics of flow through  a rapidly oscillating tube. 
   Part I: General theory.
-  <EM>Journal of Fluid Mechanics</EM> <STRONG>648</STRONG>, 83-121
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlPart1_2008.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlPart1.pdf">(pdf)</A>
+  <em>Journal of Fluid Mechanics</em> <STRONG>648</STRONG>, 83-121
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlPart1_2008.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlPart1.pdf">(pdf)</a>
 
 - Whittaker, R.J.,  Heil, M., Boyle, J., Jensen, O.E., & Waters, S.L. 
   (2010) The energetics of flow through  a rapidly oscillating tube. 
   Part II: Application to an elliptical tube.
-  <EM>Journal of Fluid Mechanics</EM> <STRONG>648</STRONG>, 123-153
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlPart2_2008.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlPart2.pdf">(pdf)</A>
+  <em>Journal of Fluid Mechanics</em> <STRONG>648</STRONG>, 123-153
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/WhittakerEtAlPart2_2008.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/WhittakerEtAlPart2.pdf">(pdf)</a>
 
 - de L&oacute;zar, A., Juel, A. &amp; Hazel, A. L. (2008)
   The steady propagation of an air finger into a rectangular tube.
@@ -372,8 +381,8 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 - Hazel, A.L. & Heil, M. (2008) The influence of gravity on the steady
   propagation of a semi-infinite bubble into a flexible channel.
   Physics of Fluids <STRONG>20</STRONG>, 092109.
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HazelHeilPoF2007.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/HazelHeilPoF2008.pdf">(pdf preprint)</A>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HazelHeilPoF2007.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/HazelHeilPoF2008.pdf">(pdf preprint)</a>
 
 - Heil, M., Hazel, A.L. & Boyle, J. (2008): Solvers for large-displacement 
   fluid-structure interaction problems: Segregated vs. monolithic
@@ -388,41 +397,39 @@ Hazel, A. (2022) The interaction of multiple bubbles in a Hele-Shaw channel <em>
 
 - Hewitt, R. E. & Hazel, A. L. (2006) Midplane-symmetry breaking in
   the flow between two counter-rotating disks. 
-  <EM>Journal of Engineering Mathematics</EM>  
+  <em>Journal of Engineering Mathematics</em>  
   <STRONG>DOI: 10.1007/s10665-006-9098-2</STRONG>.
-  <A HREF="http://www.springerlink.com/content/8930128433612244/">
-  (journal link)</A> 
+  <a href="http://www.springerlink.com/content/8930128433612244/">
+  (journal link)</a> 
 
 - Heil, M. & Hazel, A. L. (2006) <TT>oomph-lib</TT> -- An 
-  <EM>O</EM>bject-<EM>O</EM>riented <EM>M</EM>ulti-<EM>Ph</EM>ysics
-  Finite-Element <EM>Lib</EM>rary. In: <EM>Fluid-Structure
-  Interaction</EM>, Editors: M. Schafer und H.-J. Bungartz. 
+  <em>O</em>bject-<em>O</em>riented <em>M</em>ulti-<em>Ph</em>ysics
+  Finite-Element <em>Lib</em>rary. In: <em>Fluid-Structure
+  Interaction</em>, Editors: M. Schafer und H.-J. Bungartz. 
    Springer (Lecture Notes on Computational Science and Engineering), 
-  pp 19--49. <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilHazelOomph2006.html">(abstract)</A> <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/oomph_for_www.pdf">(pdf
-preprint)</A>
+  pp 19--49. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilHazelOomph2006.html">(abstract)</a> <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/oomph_for_www.pdf">(pdf
+preprint)</a>
 
 - Heil, M. & Waters, S.L. (2006) Transverse flows in rapidly
   oscillating, elastic cylindrical shells. 
-  <EM>Journal of Fluid Mechanics</EM>  <STRONG>547</STRONG>,
-  185-214. <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilWaters2004.html">(abstract)</A>
-  <A HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/OscRing_final_version_for_WWW.pdf">(pdf
-  preprint)</A> 
+  <em>Journal of Fluid Mechanics</em>  <STRONG>547</STRONG>,
+  185-214. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/HeilWaters2004.html">(abstract)</a>
+  <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/OscRing_final_version_for_WWW.pdf">(pdf
+  preprint)</a> 
 
 - Jensen, O.E. & Heil, M. (2003) High-frequency self-excited
   oscillations in a collapsible-channel flow.
-  <EM>Journal of Fluid Mechanics</EM> <STRONG>481</STRONG>
-  235-268. <A
-  HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/JensenHeil2003.pdf">(pdf
-  preprint)</A> <A
-  HREF="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/JensenHeil02.html">
-  (abstract)</A> \n\n
+  <em>Journal of Fluid Mechanics</em> <STRONG>481</STRONG>
+  235-268. <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/PDF/JensenHeil2003.pdf">(pdf
+  preprint)</a> <a href="https://www.matthias-heil.co.uk/oomph-lib_old_papers/ABSTRACTS/JensenHeil02.html">
+  (abstract)</a> \n\n
   The computations shown in this paper were performed in the days
   before \c oomph-lib, but the problem considered in this study 
   now features in oomph-lib demo problems: \n\n
-  - <A HREF="../../navier_stokes/collapsible_channel/html/index.html">
-    Flow in a 2D channel with an oscillating wall.</A> \n\n
-  - <A HREF="../../interaction/fsi_collapsible_channel/html/index.html">
-    Flow in a 2D collapsible channel.</A>
+  - <a href="../../navier_stokes/collapsible_channel/html/index.html">
+    Flow in a 2D channel with an oscillating wall.</a> \n\n
+  - <a href="../../interaction/fsi_collapsible_channel/html/index.html">
+    Flow in a 2D collapsible channel.</a>
   . 
 .
 

@@ -493,12 +493,63 @@ Diagram of a ChannelSpineMesh, going through the process of updating its central
 Making a SpineMesh</h2>
 <p>In this example we use a <code>SpineMesh</code> to model the domain. This mesh constitutes three regions: left (0), centre (1) and right (2), the left and right regions have a constant height, while in the centre region the height varies. These heights are defined by two geometric objects, a <a href="../../../the_data_structure/html/classoomph_1_1StraightLine.html">straight line </a> and a deflected line respectively. We will discuss the necessary steps taken to create this mesh (the complete documentation for this specific mesh can be found <a href="../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html">here </a>).</p>
 <p>To begin, we create a new class templated by a element and inheriting from <code>RectangularQuadMesh&lt;ELEMENT&gt;</code> and <code>SpineMesh</code>. The latter adds the functionality needed for using Spines.</p>
- <div class="fragment"></div><!-- fragment --><p> All SpineMeshs must include a function <code>spine_node_update(SpineNode*
+ <div class="fragment"><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">  <span class="keyword">class </span><a class="code hl_class" href="classSimpleSpineMesh.html">ChannelSpineMesh</a> : <span class="keyword">public</span> <a class="code hl_class" href="classSimpleSpineMesh.html">RectangularQuadMesh</a>&lt;ELEMENT&gt;, <span class="keyword">public</span> SpineMesh</div>
+</div><!-- fragment --><p> All SpineMeshs must include a function <code>spine_node_update(SpineNode*
 spine_node_pt)</code>, this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes fraction along the spine.</p>
-<div class="fragment"></div><!-- fragment --><p> We then get the local coordinate on the geometric object that defines the upper wall.</p>
-<div class="fragment"></div><!-- fragment --><p> Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.</p>
-<div class="fragment"></div><!-- fragment --><p> We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.</p>
-<div class="fragment"></div><!-- fragment --><p> All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, copies these values to their storage in the mesh.</p>
+<div class="fragment"><div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classSimpleSpineMesh.html#a4735e047eab146cafc3090f829373ef2">spine_node_update</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">SpineNode</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">spine_node_pt</a>)</div>
+<div class="ttc" id="aclassSimpleSpineMesh_html_a4735e047eab146cafc3090f829373ef2"><div class="ttname"><a href="classSimpleSpineMesh.html#a4735e047eab146cafc3090f829373ef2">SimpleSpineMesh::spine_node_update</a></div><div class="ttdeci">virtual void spine_node_update(SpineNode *spine_node_pt)</div><div class="ttdoc">General node update function implements pure virtual function defined in SpineMesh base class and per...</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00157">simple_spine_channel.cc:157</a></div></div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Get spine node&#39;s fraction along the spine</span></div>
+<div class="line">      <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">W</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">spine_node_pt</a>-&gt;fraction();</div>
+</div><!-- fragment --><p> We then get the local coordinate on the geometric object that defines the upper wall.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Get local coordinates</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>(1);</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>[0] = <a class="code hl_class" href="classSimpleSpineMesh.html">spine_node_pt</a>-&gt;spine_pt()-&gt;geom_parameter(0);</div>
+</div><!-- fragment --><p> Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Get position vector to wall</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Vector&lt;double&gt;</a> position(2);</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">spine_node_pt</a>-&gt;spine_pt()-&gt;geom_object_pt(0)-&gt;position(<a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>, position);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Set the value of y</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">spine_node_pt</a>-&gt;x(1) = this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">Ymin</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">W</a> * position[1];</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.</p>
+<div class="fragment"><div class="line"><span class="comment">    /// Number of elements in the left region</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx0</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Number of elements in the centre region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx1</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Number of elements in the right region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx2</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Length of left region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Length of centre region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx1</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Length of right region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx2</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Number of spines in left region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nleft_spine</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Number of spines in centre region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Ncentre_spine</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Number of spines in right region</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nright_spine</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// GeomObject for upper wall</span></div>
+<div class="line"><span class="comment"></span>    GeomObject* <a class="code hl_class" href="classSimpleSpineMesh.html">Wall_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// GeomObject for the straight upper wall</span></div>
+<div class="line"><span class="comment"></span>    GeomObject* <a class="code hl_class" href="classSimpleSpineMesh.html">Straight_wall_pt</a>;</div>
+</div><!-- fragment --><p> All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, copies these values to their storage in the mesh.</p>
  <div class="fragment"><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
 <div class="line">  <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">ChannelSpineMesh&lt;ELEMENT&gt;::ChannelSpineMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">nx0</a>,</div>
 <div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">nx1</a>,</div>
@@ -775,7 +826,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Jan 13 2026 16:20:39
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue Jan 13 2026 16:25:50
         </div>
       </div>
     </footer>

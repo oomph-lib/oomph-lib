@@ -416,30 +416,80 @@ To begin, we create a new class templated by a element and inheriting from {\ttf
 
  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSimpleSpineMesh}{ChannelSpineMesh}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classSimpleSpineMesh}{RectangularQuadMesh}}<ELEMENT>,\ \textcolor{keyword}{public}\ SpineMesh}
 
 \end{DoxyCodeInclude}
  All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update(\+Spine\+Node\texorpdfstring{$\ast$}{*} spine\+\_\+node\+\_\+pt)}, this will describe the operations performed when updating every Spine\+Node in the mesh. First we find the Spine\+Nodes fraction along the spine.
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleSpineMesh_a4735e047eab146cafc3090f829373ef2}{spine\_node\_update}}(\mbox{\hyperlink{classSimpleSpineMesh}{SpineNode}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{spine\_node\_pt}})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ spine\ node's\ fraction\ along\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{W}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{spine\_node\_pt}}-\/>fraction();}
 
 \end{DoxyCodeInclude}
  We then get the local coordinate on the geometric object that defines the upper wall.
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ local\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Vector<double>}}\ \mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}}(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}}[0]\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{spine\_node\_pt}}-\/>spine\_pt()-\/>geom\_parameter(0);}
 
 \end{DoxyCodeInclude}
  Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ position\ vector\ to\ wall}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Vector<double>}}\ position(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{spine\_node\_pt}}-\/>spine\_pt()-\/>geom\_object\_pt(0)-\/>position(\mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}},\ position);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ value\ of\ y}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{spine\_node\_pt}}-\/>x(1)\ =\ this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{Ymin}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{W}}\ *\ position[1];}
+\DoxyCodeLine{\ \ \ \ \}}
 
 \end{DoxyCodeInclude}
  We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ elements\ in\ the\ left\ region}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx0}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ elements\ in\ the\ centre\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx1}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ elements\ in\ the\ right\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx2}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Length\ of\ left\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx0}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Length\ of\ centre\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx1}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Length\ of\ right\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx2}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ spines\ in\ left\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nleft\_spine}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ spines\ in\ centre\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Ncentre\_spine}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Number\ of\ spines\ in\ right\ region}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nright\_spine}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ GeomObject\ for\ upper\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ GeomObject*\ \mbox{\hyperlink{classSimpleSpineMesh}{Wall\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ GeomObject\ for\ the\ straight\ upper\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ GeomObject*\ \mbox{\hyperlink{classSimpleSpineMesh}{Straight\_wall\_pt}};}
 
 \end{DoxyCodeInclude}
  All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, copies these values to their storage in the mesh.

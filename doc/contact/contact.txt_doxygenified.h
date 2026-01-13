@@ -12,8 +12,7 @@ of
 - Additional demo codes/tutorials
 - Code that provides additional functionality to the library. 
 .
-Please consult the library's <a
-href="https://github.com/oomph-lib/oomph-lib">GitHub repository</a>
+Please consult the library's <a href="https://github.com/oomph-lib/oomph-lib">GitHub repository</a>
 for details on how to submit bug fixes (or at least bug reports) and
 how to contribute.
 
