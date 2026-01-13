@@ -38,7 +38,7 @@ Your use or distribution of \c oomph-lib or any derivative code
 implies that you  agree to this License.
 <br>
 <br>
-Copyright (C) 2006-2025 by
+Copyright (C) 2006-2026 by
 <a href="https://www.matthias-heil.co.uk/new_webpage/index.html">Matthias Heil</a>
 and <a href="https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/">Andrew L. Hazel</a>.
 
