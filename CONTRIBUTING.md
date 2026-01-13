@@ -12,7 +12,7 @@ _Notation:_ We prefix any command line input with "`>>>`" and generally show the
   - [Testing the documentation](#testing-the-documentation)
     - [Initial setup (only to be done once)](#initial-setup-only-to-be-done-once)
     - [Initiating the (re-)build of the webpages](#initiating-the-re-build-of-the-webpages)
-  - [Code review](#code-review) 
+  - [Code review](#code-review)
   - [Advanced: pulling in upstream changes from the command-line](#advanced-pulling-in-upstream-changes-from-the-command-line)
 
   - [Clang-format](#clang-format)
@@ -95,7 +95,7 @@ The official (`upstream`) repository typically has a number of branches but usua
 ```bash
 >>> git branch
 ```
-**Note:** We used have a `development` branch but have recently retired this. 
+**Note:** We used have a `development` branch but have recently retired this.
 
 ## The workflow
 We will assume that you have updated your remote forked repository from the official one, and have updated the `main` branch on your computer before doing any new
@@ -214,7 +214,7 @@ This involves the following steps:
    (use "git add <file>..." to include in what will be committed)
          new-file2.h
          new-file3.h
-         new-file4.h 
+         new-file4.h
    ```
 
 4. Now commit. A one-line commit message can be provided from the command line.
@@ -397,7 +397,7 @@ You can add this information by clicking on the settings for this page which ope
 
 ### Initiating the (re-)build of the webpages
 
-To rebuild the webpages from some specified branch in your forked repository, click on the "Actions" tab and choose the "Documentation" workflow. 
+To rebuild the webpages from some specified branch in your forked repository, click on the "Actions" tab and choose the "Documentation" workflow.
 
 ![](doc/README/manual_doc_build.png)
 
@@ -419,9 +419,9 @@ The general workflow for approving a pull request is as follows:
     ![](doc/README/plus_sign.png)
 
     Click on it to make the comments window appear. Describe the issue and if it's something that you feel *must* be resolved, press the green "Start a review" button. (If it's just a comment, use "Add single comment" instead.)
-   
+
     ![](doc/README/comment_requesting_changes.png)
-   
+
 1. **Reviewer:** Keep going until you've reviewed all the changed files and left comments on all relevant issues, then finish the review by pressing the green "Finish your review" button at the very top of the page.
 
     ![](doc/README/finish_your_review.png)
@@ -432,7 +432,7 @@ The general workflow for approving a pull request is as follows:
 
    If the changes are deemed essential, check the "Request changes" radio button before submitting the review.
 
-1. **Reviewee:** Work your way through the comments and either change the code as suggested (do this in your local cloned version of your forked repository, in the same branch from which you originally submitted the pull request; then commit/push the changes to your remote forked repository; the changes will then automatically be included into the pull request), and leave a comment to say that you've done so. Alternatively, discuss/clarify the issue with the reviewer. 
+1. **Reviewee:** Work your way through the comments and either change the code as suggested (do this in your local cloned version of your forked repository, in the same branch from which you originally submitted the pull request; then commit/push the changes to your remote forked repository; the changes will then automatically be included into the pull request), and leave a comment to say that you've done so. Alternatively, discuss/clarify the issue with the reviewer.
 
 1. **Reviewee:** When you believe the issue has been resolved to everybody's satisfaction (this may involve a few iterations), leave a final comment "Done" in the chain of comments, and let the reviewer know when you've dealt with all of them.
 
@@ -440,7 +440,7 @@ The general workflow for approving a pull request is as follows:
 
    ![](doc/README/resolve_conversation.png)
 
-   Once you're happy with the changes made (or agree that the request wasn't sensible), press the "Resolve conversation" button. 
+   Once you're happy with the changes made (or agree that the request wasn't sensible), press the "Resolve conversation" button.
 
 1. **Reviewer:** Once all the issues have been dealt with to your satisfaction, go to the bottom of the page and indicate that you approve the changes made as part of this pull request (click on the "..." next to your name):
 
@@ -492,7 +492,7 @@ Described below is an alternative way to pull changes from the official reposito
   Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main `oomph-lib` `main` branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the `main` branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
 
  1. Make sure that you fetch the upstream copy of repository that includes the changes pulled in
-    from the external source. 
+    from the external source.
     ```bash
     >>> git pull upstream external-feature-branch
     ```
@@ -525,22 +525,20 @@ GitHub Action applies the formatting. If you followed the steps in [Basic setup
 automatically be enabled for you.
 
 Whenever you push to a branch in your GitHub repository, the `clang-format`
-GitHub Action will be triggered and run. 
+GitHub Action will be triggered and run.
 
-PUNEET/hierher: PLEASE CHECK/UPDATE, OR GIVE ME TEXT TO DO SO
-(**Note:** this Action does exclude the
-`main` branch and it assumes that you won't touch your `development` branch, but
-it should be clear after reading this guide that you should never push to them
-directly anyway!) After formatting your code it will create an extra commit
-containing any changes that were made. If your code did not require any changes,
-an additional commit will not be created.
+(**Note:** this Action excludes the `main` branch, but it should be clear after
+reading this guide that you should never push to `main` directly anyway!) After
+formatting your code it will create an extra commit containing any changes that
+were made. If your code did not require any changes, an additional commit will
+not be created.
 
 To manually format specific files containing C++ code with `clang-format`, you
 will need to pass their names to the `clang-format` command and also specify the
 `-i` and `--style=file` flags. These flags specify that the formatting should be
 performed "in-place" and using the style specification provided in the
 `.clang-format` file (which should be located either in the current directory
-or in one of its parent directories -- the "nearest one" is used), respectively. 
+or in one of its parent directories -- the "nearest one" is used), respectively.
 For example, to format two files named `file1.cc` and `file2.cc`, use the following:
 ```bash
 >>> clang-format -i --style=file file1.cc file2.cc
