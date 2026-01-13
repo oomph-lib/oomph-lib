@@ -131,10 +131,23 @@ include(OomphGetExternalProjectHelper)
 # --------------------------------[ GENERAL ]----------------------------------
 
 # Decide on number of jobs to use for building projects
-ProcessorCount(OOMPH_NUM_JOBS)
+
+# Check CMAKE_BUILD_PARALLEL_LEVEL first and if not defined, defer to checking
+# the number of available processors
+if($ENV{CMAKE_BUILD_PARALLEL_LEVEL})
+  set(OOMPH_NUM_JOBS $ENV{CMAKE_BUILD_PARALLEL_LEVEL})
+elseif(NOT DEFINED OOMPH_NUM_JOBS)
+  ProcessorCount(OOMPH_NUM_JOBS)
+  math(EXPR OOMPH_NUM_JOBS "${OOMPH_NUM_JOBS} - 2")
+endif()
+
+# Make sure we use a positive number of jobs
 if(OOMPH_NUM_JOBS EQUAL 0)
   set(OOMPH_NUM_JOBS 1)
   message(WARNING "Could not determine CPU cores. Using single job.")
+elseif(OOMPH_NUM_JOBS LESS 0)
+  set(OOMPH_NUM_JOBS 1)
+  message(WARNING "Overriding number of CPU cores to use single job.")
 else()
   message(STATUS "Number of jobs for parallel make: ${OOMPH_NUM_JOBS}")
 endif()

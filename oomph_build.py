@@ -182,6 +182,7 @@ def configure_build_and_install_external_libs(
     args: Namespace,
     external_dist_dir: Path,
     external_dist_build_dir: Path,
+    num_jobs: int,
     verbose: bool,
 ):
     """
@@ -205,6 +206,10 @@ def configure_build_and_install_external_libs(
 
     # Specify the build type; 'args.config' will always be set
     ext_cache["CMAKE_BUILD_TYPE"] = args.config
+
+    # Certain TPLs have their build parallel level specified with OOMPH_NUM_JOBS; set
+    # this variable with num_jobs
+    ext_cache["OOMPH_NUM_JOBS"] = str(num_jobs)
 
     # Do we need to add 'ccache' support?
     if args.enable_ccache:
@@ -237,7 +242,9 @@ def configure_build_and_install_external_libs(
     print_progress(
         ">>> Building and installing third-party libraries", pad_to=60, end=line_end)
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "--preset", "tpl"] + extra_build_args
+    build_cmd = ["cmake", "--build", "--preset", "tpl"]
+    build_cmd += ["--parallel", str(num_jobs)]
+    build_cmd += extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, external_dist_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -249,6 +256,7 @@ def configure_build_and_install_oomph(
     oomph_dir: Path,
     oomph_build_dir: Path,
     ext_flags: dict,
+    num_jobs: int,
     verbose: bool
 ):
     """
@@ -308,7 +316,9 @@ def configure_build_and_install_oomph(
     # Build and install in one go
     print_progress(">>> Building and installing main project", pad_to=60, end=line_end)
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "--preset", "main", "--target", "install"] + extra_build_args
+    build_cmd = ["cmake", "--build", "--preset", "main", "--target", "install"]
+    build_cmd += ["--parallel", str(num_jobs)]
+    build_cmd += extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, oomph_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -318,6 +328,7 @@ def configure_build_and_install_oomph(
 def configure_build_doc(
     args: Namespace,
     doc_dir: Path,
+    num_jobs: int,
     verbose: bool,
 ):
     """
@@ -334,7 +345,9 @@ def configure_build_doc(
     # Build
     print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "build"] + extra_build_args
+    build_cmd = ["cmake", "--build", "build"]
+    build_cmd += ["--parallel", str(num_jobs)]
+    build_cmd += extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -426,6 +439,11 @@ def parse_args():
     NOTE: argparse automatically converts flags with hyphens inbetween to variables with underscores
     in, e.g. '--enable-ccache' --> 'args.enable_ccache'.
     """
+    def get_max_jobs_allowed():
+        return os.cpu_count() or 1
+
+    def get_default_parallel_level():
+        return max(1, get_max_jobs_allowed() - 2)
 
     def expanded_path(p):
         if p is None:
@@ -437,6 +455,7 @@ def parse_args():
 
     parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output, show only high-level progress messages.")
     parser.add_argument("-s", "--silence-warnings-about-existing-build-and-install-directories", action="store_true", help="Suppress warnings about existing build/install directories.")
+    parser.add_argument(      "--clean-only", action="store_true", help="Just clean up and don't do anything else.")
 
     # Only want to build TPLs or oomph-lib project?
     parser.add_argument("--build-tpl", action=BooleanOptionalAction, default=True, help="Build and install the third-party libraries (default: '--build-tpl').")
@@ -464,6 +483,9 @@ def parse_args():
     general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and oomph-lib.")
     general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use. For example, 'Unix Makefiles' or 'Ninja' (default: Ninja).")
     general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
+    general_group_mutex = general_group.add_mutually_exclusive_group(required=False)
+    general_group_mutex.add_argument("-j", "--parallel", default=get_default_parallel_level(), help=f"The number of jobs to build in parallel with (default: {get_default_parallel_level()}).")
+    general_group_mutex.add_argument("--use-max-jobs", action="store_true", help=f"Use the maximum number of jobs to build in parallel (i.e. {get_max_jobs_allowed()}). Cannot be combined with the -j/--parallel flag.")
 
     # Flags common to both external_distributions and the oomph-lib project
     common_group = parser.add_argument_group("common build flags")
@@ -522,6 +544,17 @@ def parse_args():
                 f"when '--config' is set to 'Debug' or 'RelWithDebInfo'; you're building with '--config={args.config}'."
             ), file=sys.stderr)
             sys.exit(1)
+
+    # Don't build anything and wipe everything
+    if args.clean_only:
+        for name in ("build_tpl", "build_oomph", "build_doc"):
+            setattr(args, name, False)
+        for name in ("wipe_tpl", "wipe_oomph", "wipe_doc"):
+            setattr(args, name, True)
+
+    if args.use_max_jobs:
+        args.parallel = get_max_jobs_allowed()
+        delattr(args, "use_max_jobs")
     return args
 
 
@@ -641,7 +674,7 @@ if __name__ == "__main__":
     # Configure, build and install external libraries, retrieving the JSON file path
     if args.build_tpl:
         configure_build_and_install_external_libs(
-            args, external_dist_dir, external_dist_build_dir, args.verbose)
+            args, external_dist_dir, external_dist_build_dir, args.parallel, args.verbose)
     else:
         print_progress(">>> Skipping build of third-party libraries")
 
@@ -662,13 +695,13 @@ if __name__ == "__main__":
         ext_flags = read_external_json_file(external_dist_json_path)
 
         configure_build_and_install_oomph(
-            args, project_root, oomph_build_dir, ext_flags, args.verbose)
+            args, project_root, oomph_build_dir, ext_flags, args.parallel, args.verbose)
     else:
         print_progress(">>> Skipping build of oomph-lib project")
 
     # Configure and build the docs
     if args.build_doc:
-        configure_build_doc(args, doc_dir, args.verbose)
+        configure_build_doc(args, doc_dir, args.parallel, args.verbose)
     else:
         print_progress(">>> Skipping build of docs")
 

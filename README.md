@@ -58,9 +58,9 @@
 - [Prerequisites](#prerequisites)
   - [CMake](#cmake)
   - [Ninja](#ninja)
-  - [[macOS only: OpenBLAS]](#macos-only-openblas)
+  - [\[macOS only: OpenBLAS\]](#macos-only-openblas)
   - [Compilers](#compilers)
-  - [Other tools (and how to install all the prerequisites)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
+  - [Other tools (and how to install all the prerequisites in one go)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
 - [Building, installing and uninstalling `oomph-lib`](#building-installing-and-uninstalling-oomph-lib)
   - [Required/optional third-party libraries](#requiredoptional-third-party-libraries)
   - [Step 1: Installing the third-party libraries](#step-1-installing-the-third-party-libraries)
@@ -120,15 +120,15 @@
     - [Autotools](#autotools-5)
     - [CMake](#cmake-6)
 - [Dos and Don'ts](#dos-and-donts)
-- [FAQs](#faq)
-  - [When configuring my driver code CMake can't find the package configuration file. Now what?](#when-configuring-my-driver-code-cmake-cant-find-the-package-configuration-file)
+- [FAQ](#faq)
+  - [When configuring my driver code CMake can't find the package configuration file](#when-configuring-my-driver-code-cmake-cant-find-the-package-configuration-file)
   - [Are there any complete worked examples of the build process?](#are-there-any-complete-worked-examples-of-the-build-process)
-  - [What happened to the `user_src` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-user_src-directory)
-  - [What happened to the `bin` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-bin-directory)
+  - [I'm used to the Autotools-based version of `oomph-lib`; what happened to the `user_src` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-user_src-directory)
+  - [I'm used to the Autotools-based version of `oomph-lib`; what happened to the `bin` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-bin-directory)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
-  - [Paranoia and range checking are incompatible with Release mode](#paranoia-and-range-checking-are-deemed-to-be-incompatible-with-release-mode)
-  - [How to add additional compiler macros to `oomph-lib` (and to stand-alone driver codes)](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes)
+  - [Paranoia and range checking are deemed to be incompatible with Release mode](#paranoia-and-range-checking-are-deemed-to-be-incompatible-with-release-mode)
+  - [How to add additional compiler macros to oomph-lib (and to stand-alone driver codes)](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
     - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
     - [Handling non-deterministic output](#handling-non-deterministic-output)
@@ -138,9 +138,7 @@
   - [CMake resources](#cmake-resources)
   - [Building CMake](#building-cmake)
     - [Ubuntu](#ubuntu)
-    - [macOS](#macos)
-
-
+  - [macOS](#macos)
 
 ## Overview
 
@@ -201,6 +199,16 @@ sudo apt install ninja-build
 
 will do the trick.
 
+> [!IMPORTANT]
+> By default, the number of threads Ninja will attempt to N+2, where N is the number of CPU cores.
+> On some systems this can result in the system crashing so, unless you are sure that your system
+> can handle using this many threads, we recommend that you set the following environment variable
+> before running a Ninja build to ensure that the number of threads it uses is equal to N-2:
+>
+> ```bash
+> export CMAKE_BUILD_PARALLEL_LEVEL=$(python3 -c "import os; n=os.cpu_count() or 1; print(max(1, n - 2))")
+> ```
+
 ### [macOS only: OpenBLAS]
 
 > [!IMPORTANT]
@@ -225,49 +233,51 @@ will do the trick.
 ```bash
 sudo apt install gfortran
 ```
+
 If you wish to use `oomph-lib`'s parallel capabilities you need a working MPI installation on your machine. We tend to use [OpenMPI](https://www.open-mpi.org/) which on Ubuntu can be installed using
+
 ```bash
 sudo apt install openmpi-bin libopenmpi-dev
 ```
 
 ### Other tools (and how to install all the prerequisites in one go)
+
 If you also want to build the documentation (which will give you a local copy of the `oomph-lib` webpages) you need a few other tools. On Ubuntu the following command should give you all you need:
+
 ```bash
 sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils openmpi-bin libopenmpi-dev
 ```
 
-
 ## Building, installing and uninstalling `oomph-lib`
 
 ### Required/optional third-party libraries
+
 `oomph-lib` relies on/works with the third-party libraries listed in the table below. The third and fourth columns of the table show which libraries our build script `oomph_build.py`, discussed below, will build by default. (Some libraries require MPI support and cannot be built in a serial installation.)
 
 | Library        | Required/optional | Built by default by `oomph_build.py` (serial build)? | Built by default by `oomph_build.py` (MPI build)?  | Version |
-| ----           | ---               | -----                    | ---                    | ---     | 
+| ----           | ---               | -----                    | ---                    | ---     |
 | `OpenBLAS`     | required by `oomph-lib`              | Yes | Yes |  [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
-| `SuperLU`       | required by `oomph-lib`               | Yes | Yes | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
-| `METIS`        | required by `oomph-lib` (via `SuperLU`) | Yes | Yes | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
+| `SuperLU`       | required by `oomph-lib`               | Yes | Yes | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) |
+| `METIS`        | required by `oomph-lib` (via `SuperLU`) | Yes | Yes | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |
 `GKlib`          | required by `oomph-lib` (via `METIS`)  | Yes | Yes | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
-| `SuperLU_DIST` | required for `oomph-lib` MPI build                   | No | Yes | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
-| `ParMETIS`     | required for `oomph-lib` MPI build (via `SuperLU_DIST`)                  | No | Yes | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
+| `SuperLU_DIST` | required for `oomph-lib` MPI build                   | No | Yes | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)
+| `ParMETIS`     | required for `oomph-lib` MPI build (via `SuperLU_DIST`)                  | No | Yes | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) |
 | `CGAL`         | optional, highly recommended                        | Yes | Yes | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
 | `Boost`        | required by `CGAL`                          | Yes | Yes | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |
 | `MUMPS`        | optional                                  | Yes | Yes | [5.6.2](https://github.com/puneetmatharu/mumps/tree/v5.6.2.5)                                                                             |
 | `HYPRE`        | optional                                  | Yes | Yes | [2.32.0](https://github.com/hypre-space/hypre/tree/v2.32.0)                                                                               |
 | `Trilinos`     | optional                                  | Yes | Yes | [16.0.0](https://github.com/trilinos/Trilinos/tree/trilinos-release-16-0-0)                                                               |
 
-
 > [!IMPORTANT]
 > If you are an Apple user, make sure you read our instructions for installing [OpenBLAS](#macos-only-openblas). Unlike the other third-party libraries listed above, we cannot install this for you.
 
-To facilitate the installation of the required third-party libraries (currently `OpenBLAS`, `SuperLU` and the underlying libraries for the latter, plus `SuperLU_DIST` and its underlying libraries for a build with MPI support; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process. 
-In the following subsections of this document we provide a detailed description of the two-stage process, partly to explain the deliberate distinction between `oomph-lib` and its third-party libraries. 
+To facilitate the installation of the required third-party libraries (currently `OpenBLAS`, `SuperLU` and the underlying libraries for the latter, plus `SuperLU_DIST` and its underlying libraries for a build with MPI support; the other libraries listed in the table above are optional but highly recommended), we provide the option to build them as part of our overall build process.
+In the following subsections of this document we provide a detailed description of the two-stage process, partly to explain the deliberate distinction between `oomph-lib` and its third-party libraries.
 > [!TIP]
 **we strongly encourage users to use our `oomph_build.py` script
 that performs all these actions in one operation. Details are
-described in the section 
-[Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) below, and we suggest that new users jump straight there.** 
-
+described in the section
+[Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy) below, and we suggest that new users jump straight there.**
 
 For everybody still reading, the two stages of the build process are:
 
@@ -525,6 +535,16 @@ The `oomph_build.py` script is provided as a convenient one-stop solution for bu
 
 > [!IMPORTANT]
 > In addition to the standard requirements (CMake and Ninja, as described above), you will need a working Python 3 installation to run `oomph_build.py`. Ensure that `python3` is available in your `PATH`. If you plan to use the script's documentation-building feature (described below), make sure `doxygen` is installed as well.
+
+> [!NOTE]
+> As mentioned in the [Ninja](#ninja) section, the Ninja build system aggressively tries to build
+> with more threads than CPU cores (i.e. N+2) which can cause some systems to crash, and that we
+> recommend you set the `CMAKE_BUILD_PARALLEL_LEVEL` environment variable to N-2 to address this.
+> If you use the `oomph_build.py` script to build the third-party libraries, main project and/or
+> the documentation, the number of jobs to use for the build stage will be set to N-2 by default.
+> However, you can override this value using the `-j`/`--parallel` flag. Alternatively, you can
+> use N jobs by passing the `--use-max-jobs` flag. (Note that this flag cannot be combined with
+> `-j`/`--parallel`.)
 
 ### Using the script
 
@@ -1019,10 +1039,10 @@ oomph_add_executable(
 ```
 
 > [!NOTE]
-> In the above example we have included the header file `glued_mesh_stuff.h` into the `SOURCES` 
-> variable. This is not strictly necessary in the sense that the code will compile 
+> In the above example we have included the header file `glued_mesh_stuff.h` into the `SOURCES`
+> variable. This is not strictly necessary in the sense that the code will compile
 > even if the included header files are not listed. However, they are needed for CMake to detect
-> the executable's dependency on these files. It is therefore good practice to include them. 
+> the executable's dependency on these files. It is therefore good practice to include them.
 > (This behaviour is different from the Autotools which scan code for included files to detect such dependencies automatically.)
 
 Note that this directory is completely unconnected to the `oomph-lib` directory. To be able to find the `oomph-lib` installation directory, if it is not in one of the system-wide standard locations such as `/usr/local`, it must be declared somehow.
@@ -1042,7 +1062,7 @@ cmake -G Ninja -B -Doomphlib_ROOT=/home/joe_user/oomph_lib_install
 # Option 2: Define/export the oomphlib_ROOT variable and configure.
 # Not quite so good. It saves you having to type the install directory
 # every time, but you may forget what you've set the variable
-# to and thus acccidentally use an old installation. 
+# to and thus acccidentally use an old installation.
 export oomphlib_ROOT=/home/joe_user/oomph_lib_install
 cmake -G Ninja -B build
 
@@ -1053,7 +1073,7 @@ cmake -G Ninja -B build
 #   find_package(oomphlib CONFIG REQUIRED PATHS "/home/joe_cool/oomph_lib_install")
 # then configure the project. This is considered bad practice since
 # the build process will only work correctly on the present machine (or some
-# other machine where oomph-lib happens to have been installed in this 
+# other machine where oomph-lib happens to have been installed in this
 # specific directory)
 cmake -G Ninja -B build
 
@@ -1068,36 +1088,44 @@ mkdir RESLT
 
 Note the three options for specifying the install directory (but stick to Option 1!).
 
-Given that the install directory is quite deep, users sometimes worry if they 
-have specified the right level of that directory tree. If you've only just installed `oomph-lib` 
+Given that the install directory is quite deep, users sometimes worry if they
+have specified the right level of that directory tree. If you've only just installed `oomph-lib`
 it's easy to reconstruct:
-- If you've built `oomph-lib` by running `oomph_build.py` (or the corresponding `cmake` 
-  commands) in `/home/joe_cool/oomph-lib`, say, without explicitly specifying an install 
+
+- If you've built `oomph-lib` by running `oomph_build.py` (or the corresponding `cmake`
+  commands) in `/home/joe_cool/oomph-lib`, say, without explicitly specifying an install
   directory, the relevant directory is `/home/joe_cool/oomph-lib/install`.
 - If you specified a different install directory, either by running
-  ```bash      
+
+  ```bash
   ./oomph_build.py [...] --oomph-CMAKE_INSTALL_PREFIX=/home/joe_cool/local/oomph-lib
   ```
+
   or the raw CMake equivalent
 
-  ```bash  
+  ```bash
   cmake -G Ninja -B build [...] -DCMAKE_INSTALL_PREFIX=/home/joe_cool/local/oomph-lib
-  ``` 
+  ```
+
   then this is the one you use.
 
-If you're unsure (because the installation was too long ago, say) you should check 
-that the directory you're about to specify as the install directory contains the 
+If you're unsure (because the installation was too long ago, say) you should check
+that the directory you're about to specify as the install directory contains the
 file `oomphlibConfig.cmake`. This is the file that contains the key information
 that allows CMake to work with the installed library. So doing this
+
 ```bash
 # Check that oomphlibConfig.cmake is there
 find /home/joe_cool/local/oomph-lib -name 'oomphlibConfig.cmake'
 ```
+
 should find the file
+
 ```bash
 /home/joe_cool/local/oomph-lib/lib/cmake/oomphlib/oomphlibConfig.cmake
 ```
-if the file can't be found (or it appears at a different level in the directory 
+
+if the file can't be found (or it appears at a different level in the directory
 tree) the configuration will fail.
 
 > [!NOTE]
@@ -1173,11 +1201,14 @@ will replicate the `g++` command shown above (but also link the code against `oo
 > Given that most compilers pass macros via the `-D` option, you could also add the flag `-DREFINEABLE` to the `CXX_OPTIONS` and omit the `CXX_DEFINITIONS`. It will achieve the same thing but may upset the CMake purists.
 
 In the above example we've hard-coded the use of the `REFINEABLE` macro into the `CMakeLists.txt` file, so it will be applied for every build of that executable. What if you want to control its use from the command line when configuring your project? The temptation is to use the `-DCMAKE_CXX_FLAGS` command line option for CMake, as in
+
 ```bash
 # Note: don't do this!
 cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DCMAKE_CXX_FLAGS="-DREFINEABLE"
 ```
+
 However, this will overwrite all the C++ compiler flags from the `oomph-lib` build (e.g. paranoia, range checking, debug vs. release mode, etc.). This is extremely dangerous and should be avoided. The proper way to handle this is to put the logic into the `CMakeLists.txt` file:
+
 ```cmake
 [...]
 
@@ -1186,10 +1217,10 @@ oomph_add_executable(
   SOURCES one_d_poisson.cc
   LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
-# Get hashed target name 
+# Get hashed target name
 oomph_get_target_name(one_d_poisson HASHED_TARGET_NAME)
 
-# Only execute this if `REFINEABLE` is set to `ON` during the 
+# Only execute this if `REFINEABLE` is set to `ON` during the
 # configuration of the project
 if(REFINEABLE)
     # This specifies the compile definitions on a per-target basis
@@ -1198,14 +1229,14 @@ endif()
 
 [...]
 ```
+
 [See below for an explanation of the hashed target name.]
 
 With the above instructions in the `CMakeLists.txt` file, we can now activate the `REFINEABLE` flag when configuring the project on the command line:
+
 ```bash
 cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir -DREFINEABLE=ON
 ```
-
-
 
 #### Customising targets using native CMake commands; hashed target names
 
@@ -1982,6 +2013,7 @@ cmake --install build
 ### When configuring my driver code CMake can't find the package configuration file
 
 If you get an error message like this
+
 ```bash
 CMake Error at CMakeLists.txt:86 (find_package):
   Could not find a package configuration file provided by "oomphlib" with any
@@ -1995,40 +2027,49 @@ CMake Error at CMakeLists.txt:86 (find_package):
   "oomphlib" provides a separate development package or SDK, be sure it has
   been installed.
 ```
-when configuring your driver code then you've either specified the wrong 
-installation directory or you haven't specified one at all when you should 
+
+when configuring your driver code then you've either specified the wrong
+installation directory or you haven't specified one at all when you should
 have. In the latter case you may have used the command
+
 ```bash
 cmake -G Ninja -B build
 ```
-when you should have done 
+
+when you should have done
+
 ```bash
 cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph-lib_playground/oomph_lib_installation
 ```
-say. (This assumes that you've installed `oomph-lib` in 
-`/home/joe_cool/oomph-lib_playground/oomph_lib_installation`). Please consult 
+
+say. (This assumes that you've installed `oomph-lib` in
+`/home/joe_cool/oomph-lib_playground/oomph_lib_installation`). Please consult
 the section [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alone-project-to-oomph-lib) for detailed instructions.
 
 ### Are there any complete worked examples of the build process?
+
 Yes, there are! The script
+
 ```bash
 scripts/how_to_build_and_test_example.bash
-``` 
-was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from GitHub, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it. 
+```
+
+was written in parallel to this documentation. It demonstrates many variants of the entire build process, starting with downloading the sources from GitHub, installing the library (using various methods and settings), running driver codes within `oomph-lib` and linking stand-alone projects to it.
 
 ### I'm used to the Autotools-based version of `oomph-lib`; what happened to the `user_src` directory?
+
 When rewriting the build system to CMake, we retained the `user_drivers` directory to allow users to build their own code within the overall `oomph-lib` framework (but outside the `demo_drivers` directory; it doesn't belong there). The `user_src` directory was initially provided as test-bed within which users could develop their own libraries. The change to GitHub and CMake makes this unnecessary: if you want to provide your own library within the overall `oomph-lib` framework, simply create a fork of `oomph-lib` on GitHub, clone this onto your computer and create a new branch, within which you can create a new library, placing the code in a new directory, `src/joe_cools_new_library`, say. See the section [Adding your own library](#adding-a-new-library)
 for instructions. If it all works and is likely to be useful for others, send us a pull request and we'll consider including it into `oomph-lib`'s development branch.
 
 ### I'm used to the Autotools-based version of `oomph-lib`; what happened to the `bin` directory?
-We renamed it to `scripts` because CMake generally assumes that a `bin` directory contains binary objects, i.e. executables.
 
+We renamed it to `scripts` because CMake generally assumes that a `bin` directory contains binary objects, i.e. executables.
 
 ## Additional information for developers
 
 ### Use symbolic links for header files
 
-Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py` 
+Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py`
 
 ```bash
 ./oomph_build.py [...] --oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON
@@ -2044,30 +2085,37 @@ With these flags, the header files in the `install` directories (usually copied 
 
 ### Paranoia and range checking are deemed to be incompatible with Release mode
 
-As mentioned before, we strongly recommend building `oomph-lib` with the `PARANOID` and `RANGE_CHECKING` flags when developing new code. (Recall that these are enabled with `-DOOMPH_ENABLE_PARANOID=ON` and `-DOOMPH_ENABLE_RANGE_CHECKING=ON` when configuring the `oomph-lib` build with CMake). These compiler macros activate a large number of internal sanity checks that help you trap errors. The (hopefully) helpful messages that are issued when an error is encountered should facilitate debugging the new code. However, since the sanity checks add to the runtime, our build machinery does not allow the flags to be enabled when `oomph-lib` is built in `Release` mode (which is the default setting, if the mode is not specified explicitly). Note that using range checking and paranoia without having compiled the code in `Debug` mode (which adds the `-g` flag to the compiler) is unlikely to be helpful anyway. The executable may tell you that a function was called with illegal arguments, say, but without being able to backtrack where this function was called from this information is unlikely to be helpful! 
+As mentioned before, we strongly recommend building `oomph-lib` with the `PARANOID` and `RANGE_CHECKING` flags when developing new code. (Recall that these are enabled with `-DOOMPH_ENABLE_PARANOID=ON` and `-DOOMPH_ENABLE_RANGE_CHECKING=ON` when configuring the `oomph-lib` build with CMake). These compiler macros activate a large number of internal sanity checks that help you trap errors. The (hopefully) helpful messages that are issued when an error is encountered should facilitate debugging the new code. However, since the sanity checks add to the runtime, our build machinery does not allow the flags to be enabled when `oomph-lib` is built in `Release` mode (which is the default setting, if the mode is not specified explicitly). Note that using range checking and paranoia without having compiled the code in `Debug` mode (which adds the `-g` flag to the compiler) is unlikely to be helpful anyway. The executable may tell you that a function was called with illegal arguments, say, but without being able to backtrack where this function was called from this information is unlikely to be helpful!
 
 ### How to add additional compiler macros to oomph-lib (and to stand-alone driver codes)
-`oomph-lib` uses the compiler macros `PARANOID` and `RANGE_CHECKING` to isolate optional code that facilitate debugging; the relevant code is only compiled if the macros are defined. The same technique can be used to isolate "work in progress" code that shouldn't (yet) be used by the general public. (Of course, there's a separate question if "work in progress" code should even be committed to the repository. The answer is generally no, and code reviews should at least question the wisdom of this!). Assuming the relevant macro is called `USE_NEW_CODE`, use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e. 
+
+`oomph-lib` uses the compiler macros `PARANOID` and `RANGE_CHECKING` to isolate optional code that facilitate debugging; the relevant code is only compiled if the macros are defined. The same technique can be used to isolate "work in progress" code that shouldn't (yet) be used by the general public. (Of course, there's a separate question if "work in progress" code should even be committed to the repository. The answer is generally no, and code reviews should at least question the wisdom of this!). Assuming the relevant macro is called `USE_NEW_CODE`, use the`-DOOMPH_EXTRA_COMPILE_DEFINES` flag when configuring the `oomph-lib` build, i.e.
+
 ```bash
-cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE" 
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE"
 ```
+
 or use the `--oomph-OOMPH_EXTRA_COMPILE_DEFINES` flag when building `oomph-lib` using the build script:
+
 ```bash
-./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE" 
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE"
 ```
-Note that the `-D` is omitted. You can pass multiple flags in the same quoted string, separating the definitions by spaces, e.g. 
+
+Note that the `-D` is omitted. You can pass multiple flags in the same quoted string, separating the definitions by spaces, e.g.
+
 ```bash
-cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE" 
+cmake -G Ninja -B build [...] -DOOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE"
 ```
-or 
+
+or
+
 ```bash
-./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE" 
+./oomph_build.py [...] --oomph-OOMPH_EXTRA_COMPILE_DEFINES="USE_NEW_CODE USE_OTHER_NEW_CODE"
 ```
+
 when using the build script.
 
-
 Please refer to [this repository](https://github.com/oomph-lib/stand_alone_oomph-lib_user_code) for an illustration of how to do this for stand-alone driver codes that use `oomph-lib`. The `CMakeLists.txt` file in that repository illustrates various ways of doing this, but whatever you do, do not use the `-DCMAKE_CXX_FLAGS` flag when configuring your project.
-
 
 ### Creating robust `validata` for self tests
 
