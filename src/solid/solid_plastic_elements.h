@@ -1233,10 +1233,9 @@ namespace oomph
       }
     }
 
-    // g_{ij} = gamma^(2.0/DIM)F_{ki}F_{kj}
     void calculate_g(const unsigned& ipt,
-                     const double diag_entry,
-                     DenseMatrix<double>& g) const
+                     const double diag_entry, 
+                     DenseMatrix<double>& g) const override
     {
       DenseMatrix<double> invFp(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
@@ -1261,6 +1260,125 @@ namespace oomph
             g(i, j) += Fp(k, i) * Fp(k, j);
           }
           g(i, j) *= diag_entry;
+        }
+      }
+    }
+
+    /// Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
+    /// as calculated from the constitutive law: Pass the interpolation point,
+    /// the diagonal value of g, the metric tensors in the stress free and
+    /// current configurations and the current value of the the stress tensor.
+    inline void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      RankFourTensor<double>& d_sigma_dG) override
+    {
+      PVDEquations<DIM>::get_d_stress_dG_upper(g, G, sigma, d_sigma_dG);
+
+      // Now compute the rest
+      RankFourTensor<double> d_sigma_dg;
+      this->Constitutive_law_pt->calculate_d_second_piola_kirchhoff_stress_dg(
+        g, G, sigma, d_sigma_dg, false);
+
+      //////////////////////////777
+      // d_g_dG
+      RankFourTensor<double> d_g_dG(DIM);
+
+      // Record the plastic data values
+      const unsigned num_plastic_dof = this->get_num_plastic_dofs(ipt);
+      Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
+      for (unsigned i = 0; i < num_plastic_dof; i++)
+      {
+        plastic_values_prior_to_fd[i] = *Plastic_dof_data_pt[ipt][i];
+      }
+
+      // Perform finite differencing g wrt F
+      DenseMatrix<double> g_new(DIM, DIM, 0.0);
+      DenseMatrix<double> G_test(DIM, DIM);
+      for (unsigned int i = 0; i < DIM; i++)
+      {
+        for (unsigned j = i; j < DIM; j++)
+        {
+          G_test(i, j) = G(i, j);
+          G_test(j, i) = G(j, i);
+        }
+      }
+
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        for (unsigned j = i; j < DIM; j++)
+        {
+          const double saved_value = G(i, j);
+          G_test(i, j) += FiniteElement::Default_fd_jacobian_step;
+          if (i != j)
+          {
+            G_test(j, i) = G_test(i, j);
+          }
+
+          plastic_newton_solve(ipt, G_test);
+
+          g_new.initialise(0.0);
+          calculate_g(ipt, diag_entry, g_new);
+
+          // We can reduce this to only the upper (or lower?) triangular
+          // elements
+          for (unsigned n = 0; n < DIM; n++)
+          {
+            for (unsigned m = 0; m < DIM; m++)
+            {
+              d_g_dG(n, m, i, j) = (g_new(n, m) - g(n, m)) /
+                                   FiniteElement::Default_fd_jacobian_step;
+            }
+          }
+          G_test(i, j) = saved_value;
+          if (i != j)
+          {
+            G_test(j, i) = saved_value;
+          }
+        }
+      }
+
+      // Restore the values of the plastic variables
+      for (unsigned i = 0; i < num_plastic_dof; i++)
+      {
+        *Plastic_dof_data_pt[ipt][i] = plastic_values_prior_to_fd[i];
+      }
+
+      ////////////////
+      // Put it all together
+      // Loop Output Stress (i, j): Upper Triangle Only
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        for (unsigned j = i; j < DIM; j++)
+        {
+          // Loop Input Metric G (n, m): Upper Triangle Only
+          for (unsigned n = 0; n < DIM; n++)
+          {
+            for (unsigned m = n; m < DIM; m++)
+            {
+              double sum = 0.0;
+              
+              // Summation Loop (k, l): Upper Triangle Only
+              // We exploit the "Doubled" storage convention here.
+              // - Diagonal (k==l): Adds pure product.
+              // - Off-diagonal (k!=l): The single product d_stress * d_g 
+              //   already equals the sum of the pair (k,l) + (l,k) 
+              //   because both inputs are "Doubled".
+              for (unsigned k = 0; k < DIM; k++)
+              {
+                for (unsigned l = k; l < DIM; l++)
+                {
+                   sum += d_sigma_dg(i, j, k, l) * d_g_dG(k, l, n, m);
+                }
+              }
+
+              // Assign to the target tensor
+              d_sigma_dG(i, j, n, m) += sum;
+            }
+          }
         }
       }
     }

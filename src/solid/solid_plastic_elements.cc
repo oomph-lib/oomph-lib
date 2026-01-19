@@ -2198,52 +2198,6 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
     DenseMatrix<double> g;
     calculate_g(ipt, diag_entry, g);
 
-    RankFourTensor<double> d_g_dG(DIM);
-    if (flag)
-    {
-      // Record the plastic data values
-      const unsigned num_plastic_dof = this->get_num_plastic_dofs(ipt);
-      Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
-      for (unsigned i = 0; i < num_plastic_dof; i++)
-      {
-        plastic_values_prior_to_fd[i] = *Plastic_dof_data_pt[ipt][i];
-      }
-
-      // Perform finite differencing g wrt F
-      DenseMatrix<double> g_new(DIM, DIM, 0.0);
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          const double saved_value = G(i, j);
-          G(i, j) += FiniteElement::Default_fd_jacobian_step;
-
-          plastic_newton_solve(ipt, G);
-
-          g_new.initialise(0.0);
-          calculate_g(ipt, diag_entry, g_new);
-
-          // We can reduce this to only the upper (or lower?) triangular
-          // elements
-          for (unsigned n = 0; n < DIM; n++)
-          {
-            for (unsigned m = 0; m < DIM; m++)
-            {
-              d_g_dG(n, m, i, j) = (g_new(n, m) - g(n, m)) /
-                                   FiniteElement::Default_fd_jacobian_step;
-            }
-          }
-          G(i, j) = saved_value;
-        }
-      }
-
-      // Restore the values of the plastic variables
-      for (unsigned i = 0; i < num_plastic_dof; i++)
-      {
-        *Plastic_dof_data_pt[ipt][i] = plastic_values_prior_to_fd[i];
-      }
-    }
-
     // Now calculate the stress tensor from the constitutive law
     DenseMatrix<double> sigma(DIM);
     this->get_stress(g, G, sigma);
@@ -2294,55 +2248,7 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
 
       // Get the "upper triangular" entries of the derivatives of the stress
       // tensor with respect to G
-      this->get_d_stress_dG_upper(g, G, sigma, d_stress_dG);
-
-      // Calculate d_stress_dg
-      RankFourTensor<double> d_stress_dg(DIM);
-      DenseMatrix<double> sigma_test(DIM);
-
-      // Loop over elements of g
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          const double saved_value = g(i, j);
-          g(i, j) += FiniteElement::Default_fd_jacobian_step;
-
-          this->get_stress(g, G, sigma_test);
-
-          for (unsigned n = 0; n < DIM; n++)
-          {
-            for (unsigned m = 0; m < DIM; m++)
-            {
-              d_stress_dg(n, m, i, j) = (sigma_test(n, m) - sigma(n, m)) /
-                                        FiniteElement::Default_fd_jacobian_step;
-            }
-          }
-          g(i, j) = saved_value;
-        }
-      }
-
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          for (unsigned n = 0; n < DIM; n++)
-          {
-            for (unsigned m = 0; m < DIM; m++)
-            {
-              for (unsigned k = 0; k < DIM; k++)
-              {
-                for (unsigned l = 0; l < DIM; l++)
-                {
-                  // C is G in cartesian frame
-                  d_stress_dG(i, j, n, m) +=
-                    d_stress_dg(i, j, k, l) * d_g_dG(k, l, n, m);
-                }
-              }
-            }
-          }
-        }
-      }
+      this->get_d_stress_dG_upper(ipt, diag_entry, g, G, sigma, d_stress_dG);
     }
 
     //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
