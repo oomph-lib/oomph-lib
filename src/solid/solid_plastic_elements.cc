@@ -2197,7 +2197,7 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
     double diag_entry = pow(gamma, 2.0 / double(DIM));
     DenseMatrix<double> g;
     calculate_g(ipt, diag_entry, g);
-    
+
     RankFourTensor<double> d_g_dG(DIM);
     if (flag)
     {
