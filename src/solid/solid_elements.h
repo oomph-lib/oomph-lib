@@ -590,6 +590,20 @@ namespace oomph
         g, G, sigma, d_sigma_dG, false);
     }
 
+    /// Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
+    /// as calculated from the constitutive law: Pass the interpolation point,
+    /// the diagonal value of g, the metric tensors in the stress free and
+    /// current configurations and the current value of the the stress tensor.
+    inline virtual void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      RankFourTensor<double>& d_sigma_dG)
+    {
+      return this->get_d_stress_dG_upper(g, G, sigma, d_sigma_dG);
+    }
 
   private:
     /// Unpin all solid pressure dofs -- empty as there are no pressures
