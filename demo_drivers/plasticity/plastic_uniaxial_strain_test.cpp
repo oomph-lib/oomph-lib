@@ -179,10 +179,12 @@ private:
     stress_strain_file.open("stress_strain_result.dat");
 
 #if DIM == 2
-    stress_strain_file << "Time Strain Stress_XX Stress_YY Nnewton_iter_taken" << std::endl;
-#else
-    stress_strain_file << "Time Strain Stress_XX Stress_YY Stress_ZZ Nnewton_iter_taken"
+    stress_strain_file << "Time Strain Stress_XX Stress_YY Nnewton_iter_taken"
                        << std::endl;
+#else
+    stress_strain_file
+      << "Time Strain Stress_XX Stress_YY Stress_ZZ Nnewton_iter_taken"
+      << std::endl;
 #endif
   }
 
@@ -191,8 +193,6 @@ private:
     // Get Stress
     DenseMatrix<double> sigma;
     getStress(sigma);
-    oomph_info << "record_stress_strain: sigma(0, 0) = " << sigma(0, 0)
-               << std::endl;
 
     // Get strain
     double strain = getStrain();
@@ -320,11 +320,6 @@ private:
         }
 
         node_pt->x(0) = lOne * totalStrain;
-
-        oomph_info << " Setting x to " << node_pt->x(0) / lOne << std::endl;
-        oomph_info << "Last starting strain " << lastStartingStrain
-                   << " depsilon " << depsilon << " result " << totalStrain
-                   << std::endl;
       }
     }
   }
@@ -441,7 +436,6 @@ private:
 
         getStress(sigma);
 
-        oomph_info << "Sigma(0, 0) is " << sigma(0, 0) << std::endl;
       } while (sigma(0, 0) > 0);
     }
   }
