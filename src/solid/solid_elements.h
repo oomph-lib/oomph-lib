@@ -605,6 +605,12 @@ namespace oomph
       return this->get_d_stress_dG_upper(g, G, sigma, d_sigma_dG);
     }
 
+    // Compute the undeformed metric tensor at a given integration point
+    virtual void calculate_g(const unsigned& ipt,
+                             const double diag_entry,
+                             DenseMatrix<double>& g) const;
+
+
   private:
     /// Unpin all solid pressure dofs -- empty as there are no pressures
     void unpin_elemental_solid_pressure_dofs() {}

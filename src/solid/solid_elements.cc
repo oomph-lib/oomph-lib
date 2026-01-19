@@ -567,6 +567,29 @@ namespace oomph
     } // End of loop over integration points
   }
 
+  // Compute the undeformed metric tensor at a given integration point
+  template<unsigned DIM>
+  void PVDEquations<DIM>::calculate_g(const unsigned& ipt,
+                                      const double diag_entry,
+                                      DenseMatrix<double>& g) const
+  {
+    g.resize(DIM, DIM);
+    for (unsigned i = 0; i < DIM; i++)
+    {
+      for (unsigned j = 0; j < DIM; j++)
+      {
+        if (i == j)
+        {
+          g(i, j) = diag_entry;
+        }
+        else
+        {
+          g(i, j) = 0.0;
+        }
+      }
+    }
+  }
+
 
   //=======================================================================
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
