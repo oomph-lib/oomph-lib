@@ -534,6 +534,26 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
+    /// Calculate the derivatives of the contravariant
+    /// 2nd Piola Kirchhoff stress tensor with respect to the undeformed metric
+    /// tensor. Arguments are the
+    /// covariant undeformed and deformed metric tensor, the current value of
+    /// the stress tensor and the
+    /// rank four tensor in which to return the derivatives of the stress tensor
+    /// The default implementation uses finite differences, but can be
+    /// overloaded for constitutive laws in which an analytic formulation
+    /// is possible.
+    /// If the boolean flag symmetrize_tensor is false, only the
+    /// "upper  triangular" entries of the tensor will be filled in. This is
+    /// a useful efficiency when using the derivatives in Jacobian calculations.
+    virtual void calculate_d_second_piola_kirchhoff_stress_dg(
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      RankFourTensor<double>& d_sigma_dg,
+      const bool& symmetrize_tensor = true);
+
+
     /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
