@@ -298,30 +298,9 @@ namespace oomph
       double gamma = 1.0;
       this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
 
-
       // Get body force at current time
       Vector<double> b(DIM);
       this->body_force(interpolated_xi, b);
-
-      // We use Cartesian coordinates as the reference coordinate
-      // system. In this case the undeformed metric tensor is always
-      // the identity matrix -- stretched by the isotropic growth
-      double diag_entry = pow(gamma, 2.0 / double(DIM));
-      DenseMatrix<double> g(DIM);
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          if (i == j)
-          {
-            g(i, j) = diag_entry;
-          }
-          else
-          {
-            g(i, j) = 0.0;
-          }
-        }
-      }
 
       // Premultiply the undeformed volume ratio (from the isotropic
       // growth), the weights and the Jacobian
@@ -351,9 +330,15 @@ namespace oomph
         }
       }
 
+      // Compute the undeformed coordinates from the deformed ones
+      double diag_entry = pow(gamma, 2.0 / double(DIM));
+      DenseMatrix<double> g;
+      calculate_g(ipt, diag_entry, G, g);
+
+
       // Now calculate the stress tensor from the constitutive law
       DenseMatrix<double> sigma(DIM);
-      get_stress(g, G, sigma);
+      this->get_stress(g, G, sigma);
 
       // Add pre-stress
       for (unsigned i = 0; i < DIM; i++)
@@ -402,7 +387,7 @@ namespace oomph
 
         // Get the "upper triangular" entries of the derivatives of the stress
         // tensor with respect to G
-        this->get_d_stress_dG_upper(g, G, sigma, d_stress_dG);
+        this->get_d_stress_dG_upper(ipt, diag_entry, g, G, sigma, d_stress_dG);
       }
 
       //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
@@ -571,7 +556,8 @@ namespace oomph
   template<unsigned DIM>
   void PVDEquations<DIM>::calculate_g(const unsigned& ipt,
                                       const double diag_entry,
-                                      DenseMatrix<double>& g) const
+                                      const DenseMatrix<double>& G,
+                                      DenseMatrix<double>& g)
   {
     g.resize(DIM, DIM);
     for (unsigned i = 0; i < DIM; i++)

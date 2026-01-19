@@ -584,11 +584,6 @@ namespace oomph
      */
     bool is_there_plastic_deformation(const unsigned int ipt);
 
-    virtual void fill_in_generic_contribution_to_residuals_pvd(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      const unsigned& flag) override;
-
   public:
     void enable_plastic_solve_by_fd()
     {
@@ -1235,8 +1230,13 @@ namespace oomph
 
     void calculate_g(const unsigned& ipt,
                      const double diag_entry,
-                     DenseMatrix<double>& g) const override
+                     const DenseMatrix<double>& G,
+                     DenseMatrix<double>& g) override
     {
+      // Compute the undeformed coordinates from the deformed ones
+      // Solve the plastic equations
+      this->plastic_newton_solve(ipt, G);
+
       DenseMatrix<double> invFp(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -1318,10 +1318,8 @@ namespace oomph
             G_test(j, i) = G_test(i, j);
           }
 
-          plastic_newton_solve(ipt, G_test);
-
           g_new.initialise(0.0);
-          calculate_g(ipt, diag_entry, g_new);
+          calculate_g(ipt, diag_entry, G_test, g_new);
 
           // We can reduce this to only the upper (or lower?) triangular
           // elements
@@ -1362,11 +1360,6 @@ namespace oomph
               double sum = 0.0;
 
               // Summation Loop (k, l): Upper Triangle Only
-              // We exploit the "Doubled" storage convention here.
-              // - Diagonal (k==l): Adds pure product.
-              // - Off-diagonal (k!=l): The single product d_stress * d_g
-              //   already equals the sum of the pair (k,l) + (l,k)
-              //   because both inputs are "Doubled".
               for (unsigned k = 0; k < DIM; k++)
               {
                 for (unsigned l = k; l < DIM; l++)

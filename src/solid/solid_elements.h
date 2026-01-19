@@ -608,7 +608,8 @@ namespace oomph
     // Compute the undeformed metric tensor at a given integration point
     virtual void calculate_g(const unsigned& ipt,
                              const double diag_entry,
-                             DenseMatrix<double>& g) const;
+                             const DenseMatrix<double> &G,
+                             DenseMatrix<double>& g);
 
 
   private:
