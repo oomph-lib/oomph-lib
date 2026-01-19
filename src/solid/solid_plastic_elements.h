@@ -1234,7 +1234,7 @@ namespace oomph
     }
 
     void calculate_g(const unsigned& ipt,
-                     const double diag_entry, 
+                     const double diag_entry,
                      DenseMatrix<double>& g) const override
     {
       DenseMatrix<double> invFp(DIM, DIM, 0.0);
@@ -1360,18 +1360,18 @@ namespace oomph
             for (unsigned m = n; m < DIM; m++)
             {
               double sum = 0.0;
-              
+
               // Summation Loop (k, l): Upper Triangle Only
               // We exploit the "Doubled" storage convention here.
               // - Diagonal (k==l): Adds pure product.
-              // - Off-diagonal (k!=l): The single product d_stress * d_g 
-              //   already equals the sum of the pair (k,l) + (l,k) 
+              // - Off-diagonal (k!=l): The single product d_stress * d_g
+              //   already equals the sum of the pair (k,l) + (l,k)
               //   because both inputs are "Doubled".
               for (unsigned k = 0; k < DIM; k++)
               {
                 for (unsigned l = k; l < DIM; l++)
                 {
-                   sum += d_sigma_dg(i, j, k, l) * d_g_dG(k, l, n, m);
+                  sum += d_sigma_dg(i, j, k, l) * d_g_dG(k, l, n, m);
                 }
               }
 
