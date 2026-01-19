@@ -2093,59 +2093,6 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
   // Loop over the integration points
   for (unsigned ipt = 0; ipt < n_intpt; ipt++)
   {
-    // Calculate the plastic variables for this integral point
-    DenseMatrix<double> F(DIM);
-    compute_deformation_gradient_tensor(ipt, F);
-    DenseMatrix<double> C(DIM, DIM, 0.0);
-    MatrixHelpers::multiply_transpose(F, F, C);
-    plastic_newton_solve(ipt, C);
-
-    DenseMatrix<double> g = calculate_g(ipt);
-    RankFourTensor<double> d_g_dC(DIM);
-
-    if (flag)
-    {
-      // Record the plastic data values
-      const unsigned num_plastic_dof = this->get_num_plastic_dofs(ipt);
-      Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
-      for (unsigned i = 0; i < num_plastic_dof; i++)
-      {
-        plastic_values_prior_to_fd[i] = *Plastic_dof_data_pt[ipt][i];
-      }
-
-      // Perform finite differencing g wrt F
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          const double saved_value = C(i, j);
-          C(i, j) += FiniteElement::Default_fd_jacobian_step;
-
-          plastic_newton_solve(ipt, C);
-
-          DenseMatrix<double> g_new = calculate_g(ipt);
-
-          // We can reduce this to only the upper (or lower?) triangular
-          // elements
-          for (unsigned n = 0; n < DIM; n++)
-          {
-            for (unsigned m = 0; m < DIM; m++)
-            {
-              d_g_dC(n, m, i, j) = (g_new(n, m) - g(n, m)) /
-                                   FiniteElement::Default_fd_jacobian_step;
-            }
-          }
-          C(i, j) = saved_value;
-        }
-      }
-
-      // Restore the values of the plastic variables
-      for (unsigned i = 0; i < num_plastic_dof; i++)
-      {
-        *Plastic_dof_data_pt[ipt][i] = plastic_values_prior_to_fd[i];
-      }
-    }
-
     // Assign the values of s
     for (unsigned i = 0; i < DIM; ++i)
     {
@@ -2216,15 +2163,6 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
     Vector<double> b(DIM);
     this->body_force(interpolated_xi, b);
 
-    // std::cout << "g:" << std::endl;
-    // for (unsigned i = 0; i < DIM; i++)
-    // {
-    //   for (unsigned j = 0; j < DIM; j++)
-    //   {
-    //     std::cout << g(i,j) << " ";
-    //   }
-    //   std::cout << std::endl;
-    // }
     // Premultiply the undeformed volume ratio (from the isotropic
     // growth), the weights and the Jacobian
     double W = gamma * w * J;
@@ -2250,6 +2188,59 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
       for (unsigned j = 0; j < i; j++)
       {
         G(i, j) = G(j, i);
+      }
+    }
+
+    // Compute the undeformed coordinates from the deformed ones
+    // Solve the plastic equations
+    plastic_newton_solve(ipt, G);
+    double diag_entry = pow(gamma, 2.0 / double(DIM));
+    DenseMatrix<double> g;
+    calculate_g(ipt, diag_entry, g);
+    
+    RankFourTensor<double> d_g_dG(DIM);
+    if (flag)
+    {
+      // Record the plastic data values
+      const unsigned num_plastic_dof = this->get_num_plastic_dofs(ipt);
+      Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
+      for (unsigned i = 0; i < num_plastic_dof; i++)
+      {
+        plastic_values_prior_to_fd[i] = *Plastic_dof_data_pt[ipt][i];
+      }
+
+      // Perform finite differencing g wrt F
+      DenseMatrix<double> g_new(DIM, DIM, 0.0);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          const double saved_value = G(i, j);
+          G(i, j) += FiniteElement::Default_fd_jacobian_step;
+
+          plastic_newton_solve(ipt, G);
+
+          g_new.initialise(0.0);
+          calculate_g(ipt, diag_entry, g_new);
+
+          // We can reduce this to only the upper (or lower?) triangular
+          // elements
+          for (unsigned n = 0; n < DIM; n++)
+          {
+            for (unsigned m = 0; m < DIM; m++)
+            {
+              d_g_dG(n, m, i, j) = (g_new(n, m) - g(n, m)) /
+                                   FiniteElement::Default_fd_jacobian_step;
+            }
+          }
+          G(i, j) = saved_value;
+        }
+      }
+
+      // Restore the values of the plastic variables
+      for (unsigned i = 0; i < num_plastic_dof; i++)
+      {
+        *Plastic_dof_data_pt[ipt][i] = plastic_values_prior_to_fd[i];
       }
     }
 
@@ -2345,7 +2336,7 @@ void PlasticEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
                 {
                   // C is G in cartesian frame
                   d_stress_dG(i, j, n, m) +=
-                    d_stress_dg(i, j, k, l) * d_g_dC(k, l, n, m);
+                    d_stress_dg(i, j, k, l) * d_g_dG(k, l, n, m);
                 }
               }
             }

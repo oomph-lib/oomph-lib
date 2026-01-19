@@ -1234,7 +1234,9 @@ namespace oomph
     }
 
     // g_{ij} = gamma^(2.0/DIM)F_{ki}F_{kj}
-    DenseMatrix<double> calculate_g(const unsigned& ipt) const
+    void calculate_g(const unsigned& ipt,
+                     const double diag_entry,
+                     DenseMatrix<double>& g) const
     {
       DenseMatrix<double> invFp(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
@@ -1249,52 +1251,7 @@ namespace oomph
       DenseMatrix<double> Fp(DIM, DIM, 0.0);
       MatrixHelpers::invert_matrix<DIM>(invFp, Fp);
 
-      // std::cout << "F:\n";
-      // for (unsigned i = 0; i < DIM; ++i)
-      // {
-      //  for (unsigned j = 0; j < DIM; ++j) std::cout << F(i, j) << " ";
-      //  std::cout << "\n";
-      // }
-
-      // std::cout << "Fp:\n";
-      // for (unsigned i = 0; i < DIM; ++i)
-      // {
-      //  for (unsigned j = 0; j < DIM; ++j) std::cout << Fp(i, j) << " ";
-      //  std::cout << "\n";
-      // }
-
-      // std::cout << "Fe:\n";
-      // for (unsigned i = 0; i < DIM; ++i)
-      // {
-      //  for (unsigned j = 0; j < DIM; ++j) std::cout << Fe(i, j) << " ";
-      //  std::cout << "\n";
-      // }
-
-      // std::cout << "invFe:\n";
-      // for (unsigned i = 0; i < DIM; ++i)
-      // {
-      //  for (unsigned j = 0; j < DIM; ++j) std::cout << invFe(i, j) << " ";
-      //  std::cout << "\n";
-      // }
-
-      // Get the isotropic growth factor:
-      // Local coordinate
-      Vector<double> s(DIM);
-      for (unsigned i = 0; i < DIM; i++)
-        s[i] = this->integral_pt()->knot(ipt, i);
-
-      // Lagrangian coordinates
-      Vector<double> xi(DIM);
-      this->interpolated_xi(s, xi);
-
-      double gamma;
-      this->get_isotropic_growth(ipt, s, xi, gamma);
-
-      // The diagonal entry of g in the undeformed condiguration before plastic
-      // deformation occurs
-      double diag_entry = pow(gamma, 2.0 / double(DIM));
-
-      DenseMatrix<double> g(DIM, DIM, 0.0);
+      g.resize(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
       {
         for (unsigned j = 0; j < DIM; j++)
@@ -1306,7 +1263,6 @@ namespace oomph
           g(i, j) *= diag_entry;
         }
       }
-      return g;
     }
 
     /*!
