@@ -755,7 +755,7 @@ class TecplotZone:
             if not data or data.strip() == "":
                 data = file.readline() # ...in case of empty line
 
-            data = data.strip().split(" ")
+            data = re.split(r'\s+',data.strip())
             if len(data) < dim:
                 raise TecplotParsingError("Invalid zone", "not enough values for this node ! Try to convert with -p option", line)
 
@@ -783,7 +783,7 @@ class TecplotZone:
                 if not data or data.strip() == "":
                     data = file.readline() # ...in case of empty line
 
-                data = data.strip().split(" ")
+                data = re.split(r'\s+',data.strip())
                 if cell == 3:  cellNodes = 2 # VTK_LINE
                 if cell == 5:  cellNodes = 3 # VTK_TRIANGLE
                 if cell == 9:  cellNodes = 4 # VTK_QUAD
