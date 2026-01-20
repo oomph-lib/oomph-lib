@@ -400,8 +400,8 @@ namespace oomph
         }
       }
 
-      // Now check the outer boundary; this can contain closed regions which are 
-      // not enclosed by internal surfaces, since internal surfaces cannot share 
+      // Now check the outer boundary; this can contain closed regions which are
+      // not enclosed by internal surfaces, since internal surfaces cannot share
       // faces with the outer boundary
       {
 	unsigned n_int_pts = Outer_boundary_pt->ninternal_point_for_tetgen();
@@ -446,7 +446,7 @@ namespace oomph
 
     /// Build tetgenio object from the TetMeshFacetedSurfaces
     void build_tetgenio(
-      TetMeshFacetedSurface* const& outer_boundary_pt,
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
       Vector<TetMeshFacetedSurface*>& internal_surface_pt,
       Vector<double>* const& target_element_volume_in_region_pt,
       tetgenio& tetgen_io)
@@ -625,20 +625,18 @@ namespace oomph
 
       // Also count the enclosed holes or regions from the outer boundary
       {
-	TetMeshFacetedClosedSurface* srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface*>(outer_boundary_pt);
-
-	unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
+	unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
 	for (unsigned j = 0; j < n_int_pts; j++)
 	{
-	  if (srf_pt->internal_point_identifies_hole_for_tetgen(j))
+	  if (outer_boundary_pt->internal_point_identifies_hole_for_tetgen(j))
 	  {
 	    ++tetgen_io.numberofholes;
 	  }
 	  // Otherwise it may be region
 	  else
 	  {
-	    if (srf_pt->internal_point_identifies_region_for_tetgen(j))
+	    if (outer_boundary_pt->
+		internal_point_identifies_region_for_tetgen(j))
 	    {
 	      ++tetgen_io.numberofregions;
 	    }
@@ -675,18 +673,15 @@ namespace oomph
 
       // Repeat for outer boundary
       {
-	TetMeshFacetedClosedSurface* srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface*>(outer_boundary_pt);
-
-	unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
+	unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
 	for (unsigned j = 0; j < n_int_pts; j++)
 	{
-	  if (srf_pt->internal_point_identifies_hole_for_tetgen(j))
+	  if (outer_boundary_pt->internal_point_identifies_hole_for_tetgen(j))
 	  {
 	    for (unsigned i = 0; i < 3; ++i)
 	    {
 	      tetgen_io.holelist[counter] =
-		srf_pt->internal_point_for_tetgen(j, i);
+		outer_boundary_pt->internal_point_for_tetgen(j, i);
 	      ++counter;
 	    }
 	  }
@@ -740,22 +735,19 @@ namespace oomph
 
       // Also add any holes/regions from the outer boundary
       {
-	TetMeshFacetedClosedSurface* srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface*>(outer_boundary_pt);
-
-	unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
+	unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
 	for (unsigned j = 0; j < n_int_pts; j++)
 	{
-	  if (srf_pt->internal_point_identifies_region_for_tetgen(j))
+	  if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
 	  {
 	    for (unsigned i = 0; i < 3; ++i)
 	    {
 	      tetgen_io.regionlist[counter] =
-		srf_pt->internal_point_for_tetgen(j, i);
+		outer_boundary_pt->internal_point_for_tetgen(j, i);
 	      ++counter;
 	    }
 	    tetgen_io.regionlist[counter] =
-	      static_cast<double>(srf_pt->region_id_for_tetgen(j));
+	      static_cast<double>(outer_boundary_pt->region_id_for_tetgen(j));
 	    ++counter;
 
 	    // if there's no target volumes specified, default to zero
