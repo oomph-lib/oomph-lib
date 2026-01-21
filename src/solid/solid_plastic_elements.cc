@@ -77,8 +77,7 @@ void PlasticEquations<DIM>::get_cauchy_stress(unsigned ipt,
  */
 template<unsigned DIM>
 double PlasticEquations<DIM>::compute_r_plastic(const double& u,
-                                                const double& lambda,
-                                                const double& lambda_prev,
+                                                const double& delta_lambda,
                                                 const double& R_prev,
                                                 double& dRdLambda,
                                                 double& dRdu,
@@ -102,7 +101,6 @@ double PlasticEquations<DIM>::compute_r_plastic(const double& u,
 
   // Compute the argument of cos^{-1}
   // We do not need a max around R_prev - Re, since R_prev >= Re by definition
-  double delta_lambda = lambda - lambda_prev;
   double inner_arg = std::cos(preFactorArg * (R_prev - Re)) *
                      std::exp(-u * preFactorArg * delta_lambda);
 
@@ -1117,7 +1115,22 @@ bool PlasticEquations<DIM>::is_there_plastic_deformation(const unsigned int ipt)
   return plasticDeformation;
 }
 
-// Placeholder for testing finite differencing of plastic jacobian
+/*!
+ * \details This function computes the residuals of the plastic data. This is
+ * done in two ways.
+ *
+ * 1. If the timestepper is unsteady, the residual is the difference of the time
+ * derivatives of the plastic variables, e.g.,
+ *    r_{Fp} = \dot{F}^{\text{p} -1}_\text{timestepper}
+ *           - \dot{F}^{\text{p} -1}_\text{analytical}.
+ *
+ * 2. If the timestepper is steady, the residual is computed based on a finite
+ * increment of the plastic variables compared to the previous values. If the
+ * time stepper does not save any previous value, the default value is assumed
+ * as the previous values. The increments are computed assuming backwards Euler
+ * integration, e.g.,
+ * \Delta F^{\text{p} -1} = \dot{F}^{\text{p} -1} / \dot{\lambda} \Delta\lambda.
+ */
 template<unsigned DIM>
 void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DoubleVector& residuals,
@@ -1136,12 +1149,57 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
       OOMPH_EXCEPTION_LOCATION);
   }
 
+  // Is the time-stepper steady?
+  Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->is_steady();
+
+  // Retreive the time-step weights
+  double inv_Fp_time_step_weight = 1.0;
+  double dot_or_delta_lambda_time_step_weight = 1.0;
+  double fpks_time_step_weight = 1.0;
+  double fpcs_time_step_weight = 1.0;
+  double r_time_step_weight = 1.0;
+
+  if (Plastic_data_has_been_built[invFp_INDEX] &&
+      !Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->is_steady())
+  {
+    inv_Fp_time_step_weight =
+      Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->weight(1, 0);
+  }
+  if (Plastic_data_has_been_built[Lambda_INDEX] &&
+      !Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt()->is_steady())
+  {
+    dot_or_delta_lambda_time_step_weight =
+      Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt()->weight(1, 0);
+  }
+  if (Plastic_data_has_been_built[Fpks_INDEX] &&
+      !Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt()->is_steady())
+  {
+    fpks_time_step_weight =
+      Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt()->weight(1, 0);
+  }
+  if (Plastic_data_has_been_built[Fpcs_INDEX] &&
+      !Plastic_data_pt[ipt][Fpcs_INDEX]->time_stepper_pt()->is_steady())
+  {
+    fpcs_time_step_weight =
+      Plastic_data_pt[ipt][Fpcs_INDEX]->time_stepper_pt()->weight(1, 0);
+  }
+  if (Plastic_data_has_been_built[R_INDEX] &&
+      !Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->is_steady())
+  {
+    r_time_step_weight =
+      Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->weight(1, 0);
+  }
+
+  // Retreive dot_or_delta_lambda
+  const double dot_or_delta_lambda = this->get_dot_or_delta_lambda(ipt);
+
   // Compute R
   double R = 1.0;
   if (Plastic_data_has_been_built[R_INDEX])
   {
     R = get_r(ipt);
   }
+
 
   // Will be used to help with the computations
   DenseMatrix<double> tmp(DIM);
@@ -1284,26 +1342,21 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DenseMatrix<double> minus_dotinvFp;
   MatrixHelpers::multiply(invFp, bar_Lp, minus_dotinvFp);
 
-  DenseMatrix<double> dotinvFp_fromTimeStepper(DIM);
-  get_dot_inv_fp_matrix(ipt, dotinvFp_fromTimeStepper);
+  DenseMatrix<double> dot_or_delta_invFp_fromTimeStepper(DIM);
+  get_dot_or_delta_inv_fp_matrix(ipt, dot_or_delta_invFp_fromTimeStepper);
 
-  // Get \dot{\bar{lambda}}
-  double dot_lambda = this->get_dot_lambda(ipt);
   for (unsigned int i = 0; i < DIM; i++)
   {
     for (unsigned int j = 0; j < DIM; j++)
     {
       residuals[this->plastic_inv_fp_eqn_number(ipt, i, j)] =
-        dotinvFp_fromTimeStepper(i, j) + dot_lambda * minus_dotinvFp(i, j);
+        dot_or_delta_invFp_fromTimeStepper(i, j) +
+        dot_or_delta_lambda * minus_dotinvFp(i, j);
     }
   }
 
   if (flag)
   {
-    const double inv_Fp_time_step_weight =
-      Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->weight(1, 0);
-    const double lambda_time_step_weight =
-      Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt()->weight(1, 0);
     for (unsigned int i = 0; i < DIM; i++)
     {
       for (unsigned int j = 0; j < DIM; j++)
@@ -1320,7 +1373,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         {
           // First the delta term:
           jacobian(row_eq, this->plastic_inv_fp_eqn_number(ipt, i, l)) +=
-            dot_lambda * bar_Lp(l, j);
+            dot_or_delta_lambda * bar_Lp(l, j);
 
           // Now the remainder
           for (unsigned int k = 0; k < DIM; k++)
@@ -1334,7 +1387,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             const unsigned int col_eq_inv_Fp =
               this->plastic_inv_fp_eqn_number(ipt, k, l);
 
-            jacobian(row_eq, col_eq_inv_Fp) += dot_lambda * sum;
+            jacobian(row_eq, col_eq_inv_Fp) += dot_or_delta_lambda * sum;
           }
         }
 
@@ -1356,7 +1409,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
               const unsigned int col_eq_fpks =
                 this->plastic_fpks_eqn_number(ipt, k, l);
 
-              jacobian(row_eq, col_eq_fpks) += dot_lambda * sum;
+              jacobian(row_eq, col_eq_fpks) += dot_or_delta_lambda * sum;
             }
           }
         }
@@ -1379,7 +1432,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
               const unsigned int col_eq_fpcs =
                 this->plastic_fpcs_eqn_number(ipt, k, l);
 
-              jacobian(row_eq, col_eq_fpcs) += dot_lambda * sum;
+              jacobian(row_eq, col_eq_fpcs) += dot_or_delta_lambda * sum;
             }
           }
         }
@@ -1388,7 +1441,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         // Derivative wrt. lambda
         const unsigned int lambda_col = this->plastic_lambda_eqn_number(ipt);
         jacobian(row_eq, lambda_col) +=
-          minus_dotinvFp(i, j) * lambda_time_step_weight;
+          minus_dotinvFp(i, j) * dot_or_delta_lambda_time_step_weight;
 
         // Derivative wrt. R
         if (Plastic_data_has_been_built[R_INDEX])
@@ -1400,7 +1453,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             // invFp(i,a) * dbar_Lp_dR(a,j)
             sum_R += invFp(i, a) * dbar_Lp_dR(a, j);
           }
-          jacobian(row_eq, R_col) += dot_lambda * sum_R;
+          jacobian(row_eq, R_col) += dot_or_delta_lambda * sum_R;
         }
       }
     }
@@ -1528,14 +1581,16 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
       }
     }
 
-    DenseMatrix<double> dotFpks_fromTimeStepper;
-    get_dot_fpks_matrix(ipt, dotFpks_fromTimeStepper);
+    DenseMatrix<double> dot_or_delta_Fpks_fromTimeStepper;
+    get_dot_or_delta_fpks_matrix(ipt, dot_or_delta_Fpks_fromTimeStepper);
+
     for (unsigned int i = 0; i < DIM; i++)
     {
       for (unsigned int j = 0; j < DIM; j++)
       {
         residuals[this->plastic_fpks_eqn_number(ipt, i, j)] =
-          dotFpks_fromTimeStepper(i, j) - dot_lambda * dotFpks(i, j);
+          dot_or_delta_Fpks_fromTimeStepper(i, j) -
+          dot_or_delta_lambda * dotFpks(i, j);
       }
     }
 
@@ -1573,12 +1628,6 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         }
       }
 
-      const double fpks_time_step_weight =
-        Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt()->weight(1, 0);
-      const double lambda_time_step_weight =
-        Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt()->weight(1, 0);
-
-
       for (unsigned int i = 0; i < DIM; i++)
       {
         for (unsigned int j = 0; j < DIM; j++)
@@ -1594,7 +1643,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           {
             // The delta term \delta_{jl} (Lp - Lpkd)_{ik}
             jacobian(row_eq_fpks, this->plastic_fpks_eqn_number(ipt, k, j)) -=
-              dot_lambda * (bar_Lp(i, k) - bar_Lpkd(i, k));
+              dot_or_delta_lambda * (bar_Lp(i, k) - bar_Lpkd(i, k));
 
             for (unsigned int l = 0; l < DIM; l++)
             {
@@ -1632,10 +1681,13 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
                 if (Plastic_data_has_been_built[Fpcs_INDEX])
                   fpcs_sum += Fpks(a, j) * (dbar_Lp_dFpcs(i, a, k, l));
               }
-              jacobian(row_eq_fpks, col_eq_fpks) -= dot_lambda * fpks_sum;
-              jacobian(row_eq_fpks, col_eq_invFp) -= dot_lambda * invFp_sum;
+              jacobian(row_eq_fpks, col_eq_fpks) -=
+                dot_or_delta_lambda * fpks_sum;
+              jacobian(row_eq_fpks, col_eq_invFp) -=
+                dot_or_delta_lambda * invFp_sum;
               if (Plastic_data_has_been_built[Fpcs_INDEX])
-                jacobian(row_eq_fpks, col_eq_fpcs) -= dot_lambda * fpcs_sum;
+                jacobian(row_eq_fpks, col_eq_fpcs) -=
+                  dot_or_delta_lambda * fpcs_sum;
             }
           }
 
@@ -1643,7 +1695,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           // Derivative wrt. lambda
           const unsigned int lambda_col = this->plastic_lambda_eqn_number(ipt);
           jacobian(row_eq_fpks, lambda_col) -=
-            dotFpks(i, j) * lambda_time_step_weight;
+            dotFpks(i, j) * dot_or_delta_lambda_time_step_weight;
 
           // Derivative wrt. R
           if (Plastic_data_has_been_built[R_INDEX])
@@ -1654,7 +1706,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             {
               sum_R += Fpks(l, j) * dbar_Lp_dR(i, l);
             }
-            jacobian(row_eq_fpks, R_col) -= dot_lambda * sum_R;
+            jacobian(row_eq_fpks, R_col) -= dot_or_delta_lambda * sum_R;
           }
         }
       }
@@ -1749,14 +1801,17 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
       }
     }
 
-    DenseMatrix<double> dotFpcs_fromTimeStepper;
-    get_dot_fpcs_matrix(ipt, dotFpcs_fromTimeStepper);
+    DenseMatrix<double> dot_or_delta_Fpcs_fromTimeStepper;
+    get_dot_or_delta_fpcs_matrix(ipt, dot_or_delta_Fpcs_fromTimeStepper);
+
+
     for (unsigned int i = 0; i < DIM; i++)
     {
       for (unsigned int j = 0; j < DIM; j++)
       {
         residuals[this->plastic_fpcs_eqn_number(ipt, i, j)] =
-          dotFpcs_fromTimeStepper(i, j) - dot_lambda * dotFpcs(i, j);
+          dot_or_delta_Fpcs_fromTimeStepper(i, j) -
+          dot_or_delta_lambda * dotFpcs(i, j);
       }
     }
 
@@ -1800,11 +1855,6 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         }
       }
 
-      const double fpcs_time_step_weight =
-        Plastic_data_pt[ipt][Fpcs_INDEX]->time_stepper_pt()->weight(1, 0);
-      const double lambda_time_step_weight =
-        Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt()->weight(1, 0);
-
       for (unsigned int i = 0; i < DIM; i++)
       {
         for (unsigned int j = 0; j < DIM; j++)
@@ -1820,7 +1870,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           {
             // The delta term \delta_{jl} (Lp - Lpcd)_{ik}
             jacobian(row_eq_fpcs, this->plastic_fpcs_eqn_number(ipt, k, j)) -=
-              dot_lambda * (bar_Lp(i, k) - bar_Lpcd(i, k));
+              dot_or_delta_lambda * (bar_Lp(i, k) - bar_Lpcd(i, k));
 
             for (unsigned int l = 0; l < DIM; l++)
             {
@@ -1865,10 +1915,13 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
                 sum_R += Fpcs(l, j) * dbar_Lp_dR(i, l);
               }
 
-              jacobian(row_eq_fpcs, col_eq_fpcs) -= dot_lambda * fpcs_sum;
-              jacobian(row_eq_fpcs, col_eq_fpks) -= dot_lambda * fpks_sum;
-              jacobian(row_eq_fpcs, col_eq_invFp) -= dot_lambda * invFp_sum;
-              jacobian(row_eq_fpcs, r_col) -= dot_lambda * sum_R;
+              jacobian(row_eq_fpcs, col_eq_fpcs) -=
+                dot_or_delta_lambda * fpcs_sum;
+              jacobian(row_eq_fpcs, col_eq_fpks) -=
+                dot_or_delta_lambda * fpks_sum;
+              jacobian(row_eq_fpcs, col_eq_invFp) -=
+                dot_or_delta_lambda * invFp_sum;
+              jacobian(row_eq_fpcs, r_col) -= dot_or_delta_lambda * sum_R;
             }
           }
 
@@ -1876,7 +1929,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           // - dotFpcs(i, j) - dot_lambda dotFpcs_dh * dh_dlambda
           const unsigned int lambda_col = this->plastic_lambda_eqn_number(ipt);
           jacobian(row_eq_fpcs, lambda_col) -=
-            dotFpcs(i, j) * lambda_time_step_weight;
+            dotFpcs(i, j) * dot_or_delta_lambda_time_step_weight;
 
           // The second part: (dot_Fpcs/dh)_{i, j} = - dLpcd_ia/h Fpcs_aj;
           double sum_lambda = 0.0;
@@ -1885,7 +1938,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             sum_lambda += dbar_Lpcd_dh(i, a) * Fpcs(a, j);
           }
           jacobian(row_eq_fpcs, lambda_col) +=
-            dot_lambda * sum_lambda *
+            dot_or_delta_lambda * sum_lambda *
             this->Plastic_consitutive_law_pt->isotropic_hardening_factor;
         }
       }
@@ -1930,13 +1983,12 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   //////////////////////////////////////////////////////////////////////////////
   if (Plastic_data_has_been_built[R_INDEX])
   {
-    double lambda = get_lambda(ipt);
-    double lambda_prev = get_lambda(1, ipt);
+    const double delta_lambda = get_delta_lambda(ipt);
     double R_prev = get_r(1, ipt);
     double dRdLambda;
     double dRdu;
     double computed_R =
-      compute_r_plastic(u, lambda, lambda_prev, R_prev, dRdLambda, dRdu, flag);
+      compute_r_plastic(u, delta_lambda, R_prev, dRdLambda, dRdu, flag);
 
     const unsigned int row_r = this->plastic_r_eqn_number(ipt);
     residuals[row_r] = get_r(ipt) - computed_R;

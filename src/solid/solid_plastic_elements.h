@@ -600,18 +600,16 @@ namespace oomph
     void get_cauchy_stress(unsigned ipt, DenseMatrix<double>& sigma);
 
     double compute_r_plastic(const double& u,
-                             const double& lambda,
-                             const double& lambda_prev,
+                             const double& delta_lambda,
                              const double& R_prev)
     {
       double derivative;
       return compute_r_plastic(
-        u, lambda, lambda_prev, R_prev, derivative, derivative, 0);
+        u, delta_lambda, R_prev, derivative, derivative, 0);
     }
 
     double compute_r_plastic(const double& u,
-                             const double& lambda,
-                             const double& lambda_prev,
+                             const double& delta_lambda,
                              const double& R_prev,
                              double& dRdLambda,
                              double& dRdu,
@@ -685,8 +683,17 @@ namespace oomph
                       const unsigned& i,
                       const unsigned& j) const
     {
+      return get_inv_fp(0, ipt, i, j);
+    }
+
+    // Access the plasticity variable values
+    double get_inv_fp(const unsigned& t,
+                      const unsigned& ipt,
+                      const unsigned& i,
+                      const unsigned& j) const
+    {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
-      return Plastic_data_pt[ipt][invFp_INDEX]->value(i * DIM + j);
+      return Plastic_data_pt[ipt][invFp_INDEX]->value(t, i * DIM + j);
     }
 
     /*!
@@ -747,6 +754,35 @@ namespace oomph
       }
     }
 
+    void get_delta_inv_fp_matrix(const unsigned& ipt,
+                                 DenseMatrix<double>& deltainvFp)
+    {
+      deltainvFp.resize(DIM);
+
+      for (unsigned int i = 0; i < DIM; i++)
+      {
+        for (unsigned int j = 0; j < DIM; j++)
+        {
+          deltainvFp(i, j) =
+            get_inv_fp(0, ipt, i, j) - get_inv_fp(1, ipt, i, j);
+        }
+      }
+    }
+
+    void get_dot_or_delta_inv_fp_matrix(const unsigned& ipt,
+                                        DenseMatrix<double>& dot_or_delta_invFp)
+    {
+      const TimeStepper* invFp_time_stepper_pt =
+        Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt();
+
+      if (invFp_time_stepper_pt->is_steady())
+      {
+        return get_delta_inv_fp_matrix(ipt, dot_or_delta_invFp);
+      }
+
+      return get_dot_inv_fp_matrix(ipt, dot_or_delta_invFp);
+    }
+
     double get_fpks(const unsigned& ipt,
                     const unsigned& i,
                     const unsigned& j) const
@@ -802,12 +838,48 @@ namespace oomph
       }
     }
 
+    void get_delta_fpks_matrix(const unsigned& ipt,
+                               DenseMatrix<double>& delta_Fpks)
+    {
+      delta_Fpks.resize(DIM);
+
+      for (unsigned int i = 0; i < DIM; i++)
+      {
+        for (unsigned int j = 0; j < DIM; j++)
+        {
+          delta_Fpks(i, j) = get_fpks(0, ipt, i, j) - get_fpks(1, ipt, i, j);
+        }
+      }
+    }
+
+    void get_dot_or_delta_fpks_matrix(const unsigned& ipt,
+                                      DenseMatrix<double>& dot_or_delta_Fpks)
+    {
+      const TimeStepper* fpks_time_stepper_pt =
+        Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt();
+
+      if (fpks_time_stepper_pt->is_steady())
+      {
+        return get_delta_fpks_matrix(ipt, dot_or_delta_Fpks);
+      }
+
+      return get_dot_fpks_matrix(ipt, dot_or_delta_Fpks);
+    }
+
     double get_fpcs(const unsigned& ipt,
                     const unsigned& i,
                     const unsigned& j) const
     {
+      return get_fpcs(0, ipt, i, j);
+    }
+
+    double get_fpcs(const unsigned& t,
+                    const unsigned& ipt,
+                    const unsigned& i,
+                    const unsigned& j) const
+    {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
-      return Plastic_data_pt[ipt][Fpcs_INDEX]->value(i * DIM + j);
+      return Plastic_data_pt[ipt][Fpcs_INDEX]->value(t, i * DIM + j);
     }
 
     void get_fpcs_matrix(const unsigned int& ipt, DenseMatrix<double>& Fpcs)
@@ -847,6 +919,34 @@ namespace oomph
             Plastic_data_pt[ipt][Fpcs_INDEX], i * DIM + j);
         }
       }
+    }
+
+    void get_delta_fpcs_matrix(const unsigned& ipt,
+                               DenseMatrix<double>& delta_Fpcs)
+    {
+      delta_Fpcs.resize(DIM);
+
+      for (unsigned int i = 0; i < DIM; i++)
+      {
+        for (unsigned int j = 0; j < DIM; j++)
+        {
+          delta_Fpcs(i, j) = get_fpcs(0, ipt, i, j) - get_fpcs(1, ipt, i, j);
+        }
+      }
+    }
+
+    void get_dot_or_delta_fpcs_matrix(const unsigned& ipt,
+                                      DenseMatrix<double>& dot_or_delta_Fpcs)
+    {
+      const TimeStepper* fpcs_time_stepper_pt =
+        Plastic_data_pt[ipt][Fpcs_INDEX]->time_stepper_pt();
+
+      if (fpcs_time_stepper_pt->is_steady())
+      {
+        return get_delta_fpcs_matrix(ipt, dot_or_delta_Fpcs);
+      }
+
+      return get_dot_fpcs_matrix(ipt, dot_or_delta_Fpcs);
     }
 
     double get_h(const unsigned& ipt) const
@@ -897,6 +997,27 @@ namespace oomph
     double get_dot_lambda(const unsigned& ipt) const
     {
       return this->dinternal_data_dt(Plastic_data_pt[ipt][Lambda_INDEX], 0);
+    }
+
+    double get_dot_or_delta_lambda(const unsigned& ipt) const
+    {
+      const TimeStepper* lambda_time_stepper_pt =
+        Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt();
+      if (!lambda_time_stepper_pt->is_steady())
+        return this->dinternal_data_dt(Plastic_data_pt[ipt][Lambda_INDEX], 0);
+
+      return get_delta_lambda(ipt);
+    }
+
+    double get_delta_lambda(const unsigned& ipt) const
+    {
+      const TimeStepper* lambda_time_stepper_pt =
+        Plastic_data_pt[ipt][Lambda_INDEX]->time_stepper_pt();
+      if (lambda_time_stepper_pt->ntstorage() > 1)
+        return get_lambda(0, ipt) - get_lambda(1, ipt);
+
+      oomph_info << "Timestepper is steady and has 0 history" << std::endl;
+      return get_lambda(ipt);
     }
 
     void set_lambda(const unsigned& ipt, const double& val) const
@@ -1157,6 +1278,14 @@ namespace oomph
     // Assign the time-stepper for the plastic data
     void assign_plastic_timestepper(TimeStepper* time_stepper_pt)
     {
+      if (time_stepper_pt->ntstorage() < 2)
+      {
+        throw OomphLibError("PlasticEquations requires a time stepper with at "
+                            "least one history value.",
+                            OOMPH_EXCEPTION_LOCATION,
+                            OOMPH_CURRENT_FUNCTION);
+      }
+
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         for (unsigned data_type = 0;

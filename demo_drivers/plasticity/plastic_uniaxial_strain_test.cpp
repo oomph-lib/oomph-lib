@@ -86,9 +86,18 @@ private:
   double initialStrain = 0.05;
   double consecutiveStrain = 0.25 * initialStrain;
 
+  bool steady_solve = false;
+
   void setup()
   {
-    my_time_stepper_pt = new Newmark<2>;
+    if (steady_solve)
+    {
+      my_time_stepper_pt = new Steady<1>;
+    }
+    else
+    {
+      my_time_stepper_pt = new Newmark<2>;
+    }
     add_time_stepper_pt(my_time_stepper_pt);
 
     // Create Mesh based on DIM
@@ -157,7 +166,7 @@ private:
 
       el_pt->plastic_newton_solver_tolerance() = Newton_solver_tolerance;
 
-      el_pt->disable_plastic_solve_by_fd();
+      // el_pt->enable_plastic_solve_by_fd();
 #endif
       el_pt->lambda_sq_pt() = &rhoOne;
     }
@@ -394,7 +403,7 @@ private:
       }
       while (getStrain() - lastStartingStrain < targetStrain)
       {
-        unsteady_newton_solve(dtOne);
+        solve_step();
 
         oomph_info << " Last solve took " << Nnewton_iter_taken << " iterations"
                    << std::endl;
@@ -419,7 +428,7 @@ private:
       DenseMatrix<double> sigma;
       do
       {
-        unsteady_newton_solve(dtOne);
+        solve_step();
 
 #if defined(PLASTIC) && (DIM == 2)
         for (unsigned int e = 0; e < plasticMesh->nelement(); e++)
@@ -440,6 +449,19 @@ private:
     }
   }
 
+  void solve_step()
+  {
+    if (steady_solve)
+    {
+      steady_newton_solve();
+      time_pt()->time() += dtOne;
+    }
+    else
+    {
+      unsteady_newton_solve(dtOne);
+    }
+  }
+
 
 public:
   void run()
@@ -447,10 +469,32 @@ public:
     setup();
     solve();
   }
+
+  void set_steady_solve(bool steady)
+  {
+    steady_solve = steady;
+
+    if (steady_solve)
+      oomph_info << "Steady solve activated." << std::endl;
+    else
+      oomph_info << "Unsteady solve activated." << std::endl;
+  }
 };
 
-int main()
+int main(int argc, char* argv[])
 {
+  // Check, if a steady solve should be performed
+  bool steady_analysis = false;
+
+  for (int i = 1; i < argc; ++i)
+  {
+    std::string arg = argv[i];
+    if (arg == "-s" || arg == "--steady")
+    {
+      steady_analysis = true;
+    }
+  }
+
 // Select element based on DIM using simplified syntax
 #ifdef PLASTIC
   PlasticUniaxialStrainTestProblem<QPlasticPVDElement<DIM, 2>> problem;
@@ -458,6 +502,7 @@ int main()
   PlasticUniaxialStrainTestProblem<QPVDElement<DIM, 2>> problem;
 #endif
 
+  problem.set_steady_solve(steady_analysis);
   problem.run();
   return 0;
 }
