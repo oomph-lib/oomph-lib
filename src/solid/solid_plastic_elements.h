@@ -48,9 +48,6 @@ namespace oomph
     // We store a separate set of plastic: internal data indices, pinned status,
     // and eqn numbers per integral point in the element.
 
-    // [Number of ipts]
-    std::vector<bool> Plastic_data_has_been_built;
-
     // [Number of ipts, number of types of plastic data]
     // Pointer to the plastic data at the given integral point and of the given
     // type.
@@ -188,7 +185,6 @@ namespace oomph
              data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE;
              data_type++)
         {
-          if (!Plastic_data_has_been_built[data_type]) continue;
           Data* data_pt = Plastic_data_pt[ipt][data_type];
           const unsigned nvalue = data_pt->nvalue();
           for (unsigned i = 0; i < nvalue; i++)
@@ -206,9 +202,6 @@ namespace oomph
 
     void construct_inv_fp_internal_data()
     {
-      if (Plastic_data_has_been_built[invFp_INDEX]) return;
-      Plastic_data_has_been_built[invFp_INDEX] = true;
-
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -237,8 +230,6 @@ namespace oomph
 
     void construct_fpks_internal_data()
     {
-      if (Plastic_data_has_been_built[Fpks_INDEX]) return;
-      Plastic_data_has_been_built[Fpks_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -267,8 +258,6 @@ namespace oomph
 
     void construct_fpcs_internal_data()
     {
-      if (Plastic_data_has_been_built[Fpcs_INDEX]) return;
-      Plastic_data_has_been_built[Fpcs_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -297,8 +286,6 @@ namespace oomph
 
     void construct_h_internal_data()
     {
-      if (Plastic_data_has_been_built[H_INDEX]) return;
-      Plastic_data_has_been_built[H_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -320,8 +307,6 @@ namespace oomph
 
     void construct_r_internal_data()
     {
-      if (Plastic_data_has_been_built[R_INDEX]) return;
-      Plastic_data_has_been_built[R_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -343,8 +328,6 @@ namespace oomph
 
     void construct_lambda_internal_data()
     {
-      if (Plastic_data_has_been_built[Lambda_INDEX]) return;
-      Plastic_data_has_been_built[Lambda_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -708,7 +691,6 @@ namespace oomph
              data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
-          if (!Plastic_data_has_been_built[data_type]) continue;
           str_str << "[" << Plastic_data_names[data_type] << "]:";
           const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
           if (data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE)
@@ -737,14 +719,11 @@ namespace oomph
 
     void assign_default_values_based_on_constitutive_law()
     {
-      if (Plastic_data_has_been_built[R_INDEX])
+      double Re =
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+      for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
-        double Re =
-          this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
-        for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
-        {
-          set_r(ipt, Re);
-        }
+        set_r(ipt, Re);
       }
     }
 
@@ -1330,13 +1309,9 @@ namespace oomph
         }
 
         // Because h is not solved for, it will be updated here
-        if (Plastic_data_has_been_built[H_INDEX] &&
-            Plastic_data_has_been_built[Lambda_INDEX])
-        {
-          set_h(ipt,
-                get_lambda(ipt) *
-                  this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
-        }
+        set_h(ipt,
+              get_lambda(ipt) *
+                this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
 
         nIter++;
       } while (maxres > Plastic_Newton_Solver_Tolerance);
@@ -1349,9 +1324,6 @@ namespace oomph
 
     PlasticEquations() : PVDEquations<DIM>()
     {
-      Plastic_data_has_been_built.resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES,
-                                         false);
-
       this->unity.resize(DIM, DIM, 0.0);
       for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
 
@@ -1380,7 +1352,6 @@ namespace oomph
         {
           // Could swap the loops, slightly more efficient but we only do this
           // once per element
-          if (!Plastic_data_has_been_built[data_type]) continue;
           Data* data_pt = Plastic_data_pt[ipt][data_type];
           // We want to preserve the existing data hence true
           data_pt->set_time_stepper(time_stepper_pt, false);
@@ -1395,52 +1366,41 @@ namespace oomph
     {
       // Now check the initial values
       unsigned ipt = 0;
-      if (Plastic_data_has_been_built[invFp_INDEX])
-      {
-        DenseMatrix<double> invFp;
-        get_inv_fp_matrix(0, ipt, invFp);
-        oomph_info << "invFp(0): " << std::endl
-                   << MatrixHelpers::format(invFp) << std::endl;
+      DenseMatrix<double> invFp;
+      get_inv_fp_matrix(0, ipt, invFp);
+      oomph_info << "invFp(0): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
 
-        get_inv_fp_matrix(1, ipt, invFp);
-        oomph_info << "invFp(1): " << std::endl
-                   << MatrixHelpers::format(invFp) << std::endl;
+      get_inv_fp_matrix(1, ipt, invFp);
+      oomph_info << "invFp(1): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
 
-        get_inv_fp_matrix(2, ipt, invFp);
-        oomph_info << "invFp(2): " << std::endl
-                   << MatrixHelpers::format(invFp) << std::endl;
-      }
-      if (Plastic_data_has_been_built[Fpks_INDEX])
-      {
-        DenseMatrix<double> Fpks;
-        get_inv_fp_matrix(0, ipt, Fpks);
-        oomph_info << "Fpks(0): " << std::endl
-                   << MatrixHelpers::format(Fpks) << std::endl;
+      get_inv_fp_matrix(2, ipt, invFp);
+      oomph_info << "invFp(2): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
 
-        get_inv_fp_matrix(1, ipt, Fpks);
-        oomph_info << "Fpks(1): " << std::endl
-                   << MatrixHelpers::format(Fpks) << std::endl;
+      DenseMatrix<double> Fpks;
+      get_inv_fp_matrix(0, ipt, Fpks);
+      oomph_info << "Fpks(0): " << std::endl
+                 << MatrixHelpers::format(Fpks) << std::endl;
 
-        get_inv_fp_matrix(2, ipt, Fpks);
-        oomph_info << "Fpks(2): " << std::endl
-                   << MatrixHelpers::format(Fpks) << std::endl;
-      }
-      if (Plastic_data_has_been_built[H_INDEX])
-      {
-        oomph_info << "H(0) = " << get_h(0, ipt) << " H(1) = " << get_h(1, ipt)
-                   << " H(2) = " << get_h(2, ipt) << std::endl;
-      }
-      if (Plastic_data_has_been_built[Lambda_INDEX])
-      {
-        oomph_info << "lambda(0) = " << get_lambda(0, ipt)
-                   << " lambda(1) = " << get_lambda(1, ipt)
-                   << " lambda(2) = " << get_lambda(2, ipt) << std::endl;
-      }
-      if (Plastic_data_has_been_built[R_INDEX])
-      {
-        oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
-                   << " R(2) = " << get_r(2, ipt) << std::endl;
-      }
+      get_inv_fp_matrix(1, ipt, Fpks);
+      oomph_info << "Fpks(1): " << std::endl
+                 << MatrixHelpers::format(Fpks) << std::endl;
+
+      get_inv_fp_matrix(2, ipt, Fpks);
+      oomph_info << "Fpks(2): " << std::endl
+                 << MatrixHelpers::format(Fpks) << std::endl;
+      
+      oomph_info << "H(0) = " << get_h(0, ipt) << " H(1) = " << get_h(1, ipt)
+                 << " H(2) = " << get_h(2, ipt) << std::endl;
+
+      oomph_info << "lambda(0) = " << get_lambda(0, ipt)
+                 << " lambda(1) = " << get_lambda(1, ipt)
+                 << " lambda(2) = " << get_lambda(2, ipt) << std::endl;
+
+      oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
+                 << " R(2) = " << get_r(2, ipt) << std::endl;
     }
 
     void calculate_g(const unsigned& ipt,
