@@ -719,8 +719,7 @@ namespace oomph
 
     void assign_default_values_based_on_constitutive_law()
     {
-      double Re =
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+      double Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
       for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         set_r(ipt, Re);
@@ -1391,7 +1390,7 @@ namespace oomph
       get_inv_fp_matrix(2, ipt, Fpks);
       oomph_info << "Fpks(2): " << std::endl
                  << MatrixHelpers::format(Fpks) << std::endl;
-      
+
       oomph_info << "H(0) = " << get_h(0, ipt) << " H(1) = " << get_h(1, ipt)
                  << " H(2) = " << get_h(2, ipt) << std::endl;
 
