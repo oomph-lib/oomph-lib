@@ -1354,6 +1354,9 @@ namespace oomph
 
       this->unity.resize(DIM, DIM, 0.0);
       for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
+
+      // Construct all plastic data
+      construct_plastic_data();
     }
 
     ~PlasticEquations() {}
@@ -1622,8 +1625,6 @@ namespace oomph
   public:
     QPlasticPVDElement() : SolidQElement<DIM, NNODE>(), PlasticEquations<DIM>()
     {
-      // Construct all plastic data
-      this->construct_plastic_data();
     }
 
     /// Output function
