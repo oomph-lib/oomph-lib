@@ -70,7 +70,6 @@ namespace oomph
     // differenced
     Vector<Vector<double*>> Plastic_dof_data_pt;
 
-
     // Keeps track of if data for the  plastic dof numbers has been allocated
     // We do it within this function because this allows us to reliably zero the
     // counters Num_plastic_Dofs and Num_plastic_residuals
@@ -85,10 +84,76 @@ namespace oomph
     // A pointer to the plastic constitutive law
     PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
 
+    // By default we assume that the plastic solve is steady for which we
+    // require a single history value
+    static Steady<1> Default_plastic_timestepper;
 
-    void resize_plastic_dof_numbers(const unsigned& nipt)
+    // Pin the plastic dof of type data_type at the integral point, if index<0
+    // then pin all plastic data of that type, otherwise pin the value specified
+    void pin_plastic_dof(const unsigned& ipt,
+                         const unsigned& data_type,
+                         const int& index = -1)
+    {
+      if (index < 0)
+      {
+        const unsigned nvalue =
+          Plastic_data_pinned_status[ipt][data_type].size();
+        for (unsigned i = 0; i < nvalue; i++)
+        {
+          Plastic_data_pinned_status[ipt][data_type][i] = true;
+        }
+      }
+      else
+      {
+#ifdef PARANOID
+        // Check if the index makes sense
+        if (index > Plastic_data_pinned_status[ipt][data_type].size() - 1)
+        {
+          throw OomphLibError("Plastic data index is too large",
+                              OOMPH_EXCEPTION_LOCATION,
+                              OOMPH_CURRENT_FUNCTION);
+        }
+#endif
+        Plastic_data_pinned_status[ipt][data_type][index] = true;
+      }
+    }
+
+    void unpin_plastic_dof(const unsigned& ipt,
+                           const unsigned& data_type,
+                           const int& index = -1)
+    {
+      if (index < 0)
+      {
+        const unsigned nvalue =
+          Plastic_data_pinned_status[ipt][data_type].size();
+        for (unsigned i = 0; i < nvalue; i++)
+        {
+          Plastic_data_pinned_status[ipt][data_type][i] = false;
+        }
+      }
+      else
+      {
+#ifdef PARANOID
+        // Check if the index makes sense
+        if (index > Plastic_data_pinned_status[ipt][data_type].size() - 1)
+        {
+          throw OomphLibError("Plastic data index is too large",
+                              OOMPH_EXCEPTION_LOCATION,
+                              OOMPH_CURRENT_FUNCTION);
+        }
+#endif
+        Plastic_data_pinned_status[ipt][data_type][index] = false;
+      }
+    }
+
+    // Change to not have an argument - in fact if we're always building all
+    // plastic data then we don't need thi Collapse all building plastic data
+    // into a single function
+    void resize_plastic_dof_numbers()
     {
       if (Plastic_dof_nunbers_has_been_resized) return;
+
+      const unsigned nipt = this->integral_pt()->nweight();
 
       Plastic_data_pt.resize(nipt);
       Plastic_data_pinned_status.resize(nipt);
@@ -145,11 +210,10 @@ namespace oomph
       Plastic_data_has_been_built[invFp_INDEX] = true;
 
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
-
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][invFp_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -176,10 +240,10 @@ namespace oomph
       if (Plastic_data_has_been_built[Fpks_INDEX]) return;
       Plastic_data_has_been_built[Fpks_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Fpks_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -206,10 +270,10 @@ namespace oomph
       if (Plastic_data_has_been_built[Fpcs_INDEX]) return;
       Plastic_data_has_been_built[Fpcs_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Fpcs_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -236,10 +300,10 @@ namespace oomph
       if (Plastic_data_has_been_built[H_INDEX]) return;
       Plastic_data_has_been_built[H_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][H_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -259,10 +323,10 @@ namespace oomph
       if (Plastic_data_has_been_built[R_INDEX]) return;
       Plastic_data_has_been_built[R_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][R_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -282,10 +346,10 @@ namespace oomph
       if (Plastic_data_has_been_built[Lambda_INDEX]) return;
       Plastic_data_has_been_built[Lambda_INDEX] = true;
       const unsigned nipt = this->integral_pt()->nweight();
-      resize_plastic_dof_numbers(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
+        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Lambda_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -297,6 +361,25 @@ namespace oomph
         Plastic_data_eqn_number[ipt][Lambda_INDEX].push_back(-1);
         data_pt->set_value(0, 0.0);
       }
+    }
+
+    void construct_plastic_data()
+    {
+      resize_plastic_dof_numbers();
+
+      construct_inv_fp_internal_data();
+      construct_fpks_internal_data();
+      construct_fpcs_internal_data();
+      construct_r_internal_data();
+      construct_lambda_internal_data();
+
+      // No longer really neccesary
+      construct_h_internal_data();
+
+      // We assign the equation numbers now because the user will likely want
+      // all plastic data unpinned. If they pin any then they will need to call
+      // assign_plastic_eqn_numbers again
+      assign_plastic_eqn_numbers();
     }
 
     unsigned plastic_inv_fp_eqn_number(const unsigned& ipt,
@@ -1301,7 +1384,7 @@ namespace oomph
         }
       }
 
-      // Need to reassign eqn numbers, because pointers may have changed.
+      // Need to reassign eqn numbers because pointers may have changed.
       assign_plastic_eqn_numbers();
     }
 
@@ -1539,19 +1622,8 @@ namespace oomph
   public:
     QPlasticPVDElement() : SolidQElement<DIM, NNODE>(), PlasticEquations<DIM>()
     {
-      // For our test case we assume no plastic core and no plastic kinematic
-      // dissipation so we don't construct those data
-      this->construct_inv_fp_internal_data();
-      this->construct_fpks_internal_data();
-      this->construct_fpcs_internal_data();
-      this->construct_r_internal_data();
-      this->construct_lambda_internal_data();
-
-      // No longer really neccesary
-      this->construct_h_internal_data();
-
-      // Assign the equation numbers
-      this->assign_plastic_eqn_numbers();
+      // Construct all plastic data
+      this->construct_plastic_data();
     }
 
     /// Output function

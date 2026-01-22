@@ -18,6 +18,9 @@ template class QPlasticPVDElement<3, 2>;
 template<unsigned DIM>
 RankFourTensor<double> PlasticEquations<DIM>::Dummy_rankfourtensor;
 
+template<unsigned DIM>
+Steady<1> PlasticEquations<DIM>::Default_plastic_timestepper;
+
 /*
  * \details Computes the Caucystress using the plastic deformation gradient
  */
