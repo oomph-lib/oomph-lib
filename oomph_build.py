@@ -326,6 +326,7 @@ def configure_build_and_install_oomph(
 def configure_build_doc(
     args: Namespace,
     doc_dir: Path,
+    doc_build_dir: Path,
     verbose: bool,
 ):
     """
@@ -333,7 +334,7 @@ def configure_build_doc(
     """
     # Configure
     print_progress(">>> Configuring docs", pad_to=60, end="\n" if verbose else "")
-    config_cmd = ["cmake", "-G", args.generator, "-B", "build"]
+    config_cmd = ["cmake", "-G", args.generator, "-B", doc_build_dir]
     start_time = time.perf_counter()
     run_command(config_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -342,7 +343,7 @@ def configure_build_doc(
     # Build
     print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "build"] + extra_build_args
+    build_cmd = ["cmake", "--build", doc_build_dir] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -679,7 +680,7 @@ if __name__ == "__main__":
 
     # Configure and build the docs
     if args.build_doc:
-        configure_build_doc(args, doc_dir, args.verbose)
+        configure_build_doc(args, doc_dir, doc_build_dir, args.verbose)
     else:
         print_progress(">>> Skipping build of docs")
 
