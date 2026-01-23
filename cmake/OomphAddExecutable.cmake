@@ -153,6 +153,27 @@ function(oomph_add_executable)
     target_link_options(${NAME}_${PATH_HASH} PRIVATE ${LINK_OPTIONS})
   endif()
 
+  # Ensure executables can find shared libs at runtime when using an installed
+  # oomph-lib (e.g. demo drivers built out-of-tree on Linux).
+  if(UNIX AND NOT APPLE)
+    set(_OOMPH_RUNTIME_RPATHS "")
+    foreach(LIB IN LISTS LIBRARIES)
+      if(TARGET ${LIB})
+        get_target_property(_OOMPH_LIB_TYPE ${LIB} TYPE)
+        if(_OOMPH_LIB_TYPE AND NOT _OOMPH_LIB_TYPE STREQUAL "INTERFACE_LIBRARY")
+          list(APPEND _OOMPH_RUNTIME_RPATHS "$<TARGET_FILE_DIR:${LIB}>")
+        endif()
+      endif()
+    endforeach()
+    if(_OOMPH_RUNTIME_RPATHS)
+      list(REMOVE_DUPLICATES _OOMPH_RUNTIME_RPATHS)
+      set_property(
+        TARGET ${NAME}_${PATH_HASH}
+        APPEND
+        PROPERTY BUILD_RPATH "${_OOMPH_RUNTIME_RPATHS}")
+    endif()
+  endif()
+
   # Optionally colorize compiler output
   option(FORCE_COLORED_OUTPUT "Produce ANSI-colored output (GNU/Clang)." ON)
   if(FORCE_COLORED_OUTPUT)

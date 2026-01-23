@@ -175,18 +175,6 @@ oomph_path_option(
 # C++ files only
 include(OomphAddCXXCompileDefinitions)
 
-# ~~~
-# # FIXME: XCode 15.0 has a new linker implementation which breaks things; setting
-# # this values tells CMake to revert to the old linker
-# if(APPLE)
-#   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-#     if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 15.0)
-#       add_link_options("-Wl,-ld_classic")
-#     endif()
-#   endif()
-# endif()
-# ~~~
-
 # Let CMake take care of the famous -fPIC flag
 if(BUILD_SHARED_LIBS)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -276,6 +264,15 @@ include(OomphCheckForRequiredHeaders)
 # Enable @rpath in the install name for any shared library being built note:
 # this is overwritten by INSTALL_NAME_DIR. See: https://tinyurl.com/feksedtz
 set(CMAKE_MACOSX_RPATH TRUE)
+
+# Ensure installed executables can find oomph-lib shared libraries without
+# requiring LD_LIBRARY_PATH on Linux.
+if(UNIX AND NOT APPLE)
+  if(NOT CMAKE_INSTALL_RPATH)
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../${OOMPH_INSTALL_LIB_DIR}")
+  endif()
+  set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+endif()
 
 # -------------------------[ ADD CONFIG. HEADER FLAG ]--------------------------
 
