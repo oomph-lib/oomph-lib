@@ -217,6 +217,16 @@ jobs:
             --no-build-tpl \
             --verbose
 
+      - name: Diagnostics for installed lib RUNPATH
+        run: |
+          echo "Installed libs:"
+          ls -la install/lib/oomphlib || true
+          echo "RUNPATH/RPATH for libgeneric.so:"
+          readelf -d install/lib/oomphlib/libgeneric.so | grep -E 'RPATH|RUNPATH' || true
+          echo "RUNPATH/RPATH for liboomph_zlib.so:"
+          readelf -d install/lib/oomphlib/liboomph_zlib.so | grep -E 'RPATH|RUNPATH' || true
+          ls -la external_distributions/install/gklib/lib || true
+
       - name: Wipe main library build directory
         run: |
           echo "Size of main build folder: $(du -sh build | cut -f1)"
@@ -236,6 +246,16 @@ jobs:
             -DCMAKE_C_COMPILER_LAUNCHER=ccache \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
             --log-level=VERBOSE
+
+      - name: Diagnostics demo driver ldd
+        run: |
+          cd demo_drivers/build
+          ninja two_d_adv_diff_adapt
+          if [ -f advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt ]; then
+            ldd advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt || true
+          else
+            echo "ERROR: two_d_adv_diff_adapt not built yet."
+          fi
 
       - name: Run demo driver self-tests
         id: demo_drivers

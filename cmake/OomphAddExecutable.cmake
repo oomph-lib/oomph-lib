@@ -157,6 +157,8 @@ function(oomph_add_executable)
   # oomph-lib (e.g. demo drivers built out-of-tree on Linux).
   if(UNIX AND NOT APPLE)
     set(_OOMPH_RUNTIME_RPATHS "")
+
+    # Add runtime paths of libs
     foreach(LIB IN LISTS LIBRARIES)
       if(TARGET ${LIB})
         get_target_property(_OOMPH_LIB_TYPE ${LIB} TYPE)
@@ -165,6 +167,39 @@ function(oomph_add_executable)
         endif()
       endif()
     endforeach()
+
+    # Add runtime paths for OpenBLAS if used
+    if(OpenBLAS_LIBRARIES)
+      foreach(_OOMPH_OPENBLAS_LIB IN LISTS OpenBLAS_LIBRARIES)
+        if(IS_ABSOLUTE "${_OOMPH_OPENBLAS_LIB}")
+          get_filename_component(_OOMPH_OPENBLAS_DIR "${_OOMPH_OPENBLAS_LIB}"
+                                 DIRECTORY)
+          list(APPEND _OOMPH_RUNTIME_RPATHS "${_OOMPH_OPENBLAS_DIR}")
+        endif()
+      endforeach()
+    elseif(OOMPH_USE_OPENBLAS_FROM)
+      list(APPEND _OOMPH_RUNTIME_RPATHS "${OOMPH_USE_OPENBLAS_FROM}/lib")
+    endif()
+
+    # Add runtime paths for other third-party libs
+    foreach(
+      _OOMPH_TPL_ROOT IN
+      ITEMS OOMPH_USE_SUPERLU_FROM
+            OOMPH_USE_SUPERLU_DIST_FROM
+            OOMPH_USE_METIS_FROM
+            OOMPH_USE_GKLIB_FROM
+            OOMPH_USE_PARMETIS_FROM
+            OOMPH_USE_MUMPS_FROM
+            OOMPH_USE_HYPRE_FROM
+            OOMPH_USE_TRILINOS_FROM
+            OOMPH_USE_CGAL_FROM
+            OOMPH_USE_BOOST_FROM)
+      if(${_OOMPH_TPL_ROOT})
+        list(APPEND _OOMPH_RUNTIME_RPATHS "${${_OOMPH_TPL_ROOT}}/lib")
+      endif()
+    endforeach()
+
+    # Append the runtime path to the executable in the build tree
     if(_OOMPH_RUNTIME_RPATHS)
       list(REMOVE_DUPLICATES _OOMPH_RUNTIME_RPATHS)
       set_property(
@@ -178,7 +213,8 @@ function(oomph_add_executable)
   option(FORCE_COLORED_OUTPUT "Produce ANSI-colored output (GNU/Clang)." ON)
   if(FORCE_COLORED_OUTPUT)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      target_compile_options("${NAME}_${PATH_HASH}" PRIVATE -fdiagnostics-color=always)
+      target_compile_options("${NAME}_${PATH_HASH}"
+                             PRIVATE -fdiagnostics-color=always)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
       target_compile_options("${NAME}_${PATH_HASH}" PRIVATE -fcolor-diagnostics)
     endif()
