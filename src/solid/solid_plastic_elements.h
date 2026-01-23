@@ -3,6 +3,7 @@
 
 #include "solid_elements.h"
 #include "constitutive/plastic_constitutive_laws.h"
+#include "refineable_solid_elements.h"
 
 // We initially implement the simplified plasticity model with no elastic core
 // and no plastic dissipation
@@ -22,6 +23,13 @@ namespace oomph
   template<unsigned DIM>
   class PlasticEquations : public virtual PVDEquations<DIM>
   {
+  protected:
+    // If finite difference should be used for the plastic solve;
+    bool Plastic_solve_use_fd = false;
+
+    // A pointer to the plastic constitutive law
+    PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
+
   private:
     // We use an enum to define the indices in the vectors at which the
     // different types of plastic data are stored. This simplifies things
@@ -74,12 +82,6 @@ namespace oomph
 
     // The solver tolerance for the plastic newton solve
     double Plastic_Newton_Solver_Tolerance = 1.0e-8;
-
-    // If finite difference should be used for the plastic solve;
-    bool Plastic_solve_use_fd = false;
-
-    // A pointer to the plastic constitutive law
-    PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
 
     // By default we assume that the plastic solve is steady for which we
     // require a single history value
@@ -658,6 +660,11 @@ namespace oomph
     void disable_plastic_solve_by_fd()
     {
       Plastic_solve_use_fd = false;
+    }
+
+    const bool get_plastic_solve_by_fd() const
+    {
+      return Plastic_solve_use_fd;
     }
 
     /*!
@@ -1321,6 +1328,86 @@ namespace oomph
       // }
     }
 
+    void plastic_newton_solve()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        // FIRST WE CALCULATE G (C)
+
+        // Find out how many nodes there are
+        unsigned n_node = this->nnode();
+
+        // Find out how many positional dofs there are
+        unsigned n_position_type = this->nnodal_position_type();
+
+        // Set up memory for the shape functions
+        Shape psi(n_node, n_position_type);
+        DShape dpsidxi(n_node, n_position_type, DIM);
+
+        // Call the derivatives of the shape functions (ignore Jacobian)
+        (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
+
+        // Calculate interpolated values of the derivative of global position
+        // wrt lagrangian coordinates
+        DenseMatrix<double> interpolated_G(DIM);
+
+        // Initialise to zero
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          for (unsigned j = 0; j < DIM; j++)
+          {
+            interpolated_G(i, j) = 0.0;
+          }
+        }
+
+        // Calculate displacements and derivatives
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over positional dofs
+          for (unsigned k = 0; k < n_position_type; k++)
+          {
+            // Loop over displacement components (deformed position)
+            for (unsigned i = 0; i < DIM; i++)
+            {
+              // Loop over derivative directions
+              for (unsigned j = 0; j < DIM; j++)
+              {
+                interpolated_G(j, i) +=
+                  this->nodal_position_gen(l, k, i) * dpsidxi(l, k, j);
+              }
+            }
+          }
+        }
+        // Declare and calculate the deformed metric tensor
+        DenseMatrix<double> G(DIM);
+
+        // Assign values of G
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          // Do upper half of matrix
+          for (unsigned j = i; j < DIM; j++)
+          {
+            // Initialise G(i,j) to zero
+            G(i, j) = 0.0;
+            // Now calculate the dot product
+            for (unsigned k = 0; k < DIM; k++)
+            {
+              G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
+            }
+          }
+          // Matrix is symmetric so just copy lower half
+          for (unsigned j = 0; j < i; j++)
+          {
+            G(i, j) = G(j, i);
+          }
+        }
+
+        // THEN WE SOLVE THE PLASTIC EQUATIONS
+        plastic_newton_solve(ipt, G);
+      }
+    }
+
     PlasticEquations() : PVDEquations<DIM>()
     {
       this->unity.resize(DIM, DIM, 0.0);
@@ -1586,6 +1673,25 @@ namespace oomph
     {
     }
 
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      PlasticEquations<DIM>::plastic_newton_solve();
+
+      PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    /// Fill in contribution to Jacobian (either by FD or analytically,
+    /// control this via evaluate_jacobian_by_fd()
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      PlasticEquations<DIM>::plastic_newton_solve();
+
+      PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
+        residuals, jacobian, 1);
+    }
+
     /// Output function
     void output(std::ostream& outfile)
     {
@@ -1623,6 +1729,130 @@ namespace oomph
 
   template<unsigned NNODE_1D>
   class FaceGeometry<QPlasticPVDElement<3, NNODE_1D>>
+    : public virtual SolidQElement<2, NNODE_1D>
+  {
+  public:
+    /// Constructor must call the constructor of the underlying solid element
+    FaceGeometry() : SolidQElement<2, NNODE_1D>() {}
+  };
+
+
+  // We define in here the additional functions required to build child elements
+  // We need to pass any flags to the child as well as build the data at the
+  // integral points, to do this we interpolate from the integral points to the
+  // nodes first then interpolate to the child integral points
+  template<unsigned DIM>
+  class RefineablePlasticEquations : public virtual PlasticEquations<DIM>,
+                                     public virtual RefineableSolidElement
+  {
+  protected:
+    void further_build()
+    {
+      PlasticEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
+
+      this->Plastic_solve_use_fd =
+        cast_father_element_pt->get_plastic_solve_by_fd();
+      this->Plastic_consitutive_law_pt =
+        cast_father_element_pt->plastic_constitutive_law_pt();
+
+      // Now interpolate the plastic data to the integral points from the parent
+      // integral points
+
+      // First we need to get the weights for interpolating from the parent
+      // integral points to the parent nodes
+
+      // Then we get the weights from the parent nodes to the child integral
+      // points
+
+      // Then we can perform the interpolation directly in a single step by
+      // composing the two individual interpolations
+    }
+  };
+
+
+  template<unsigned DIM, unsigned NNODE>
+  class RefineableQPlasticPVDElement
+    : public virtual RefineableQPVDElement<DIM, NNODE>,
+      public virtual RefineablePlasticEquations<DIM>
+  {
+  public:
+    RefineableQPlasticPVDElement()
+      : QPVDElement<DIM, NNODE>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        RefineablePVDEquations<DIM>(),
+        RefineableSolidQElement<DIM>(),
+        RefineableQPVDElement<DIM, NNODE>(),
+        PlasticEquations<DIM>()
+    {
+    }
+
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      PlasticEquations<DIM>::plastic_newton_solve();
+
+      RefineablePVDEquations<DIM>::
+        fill_in_generic_contribution_to_residuals_pvd(
+          residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    void further_build()
+    {
+      RefineableQPVDElement<DIM, NNODE>::further_build();
+      RefineablePlasticEquations<DIM>::further_build();
+    }
+
+    /// Fill in contribution to Jacobian (either by FD or analytically,
+    /// control this via evaluate_jacobian_by_fd()
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      PlasticEquations<DIM>::plastic_newton_solve();
+
+      RefineablePVDEquations<
+        DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
+                                                            jacobian,
+                                                            1);
+    }
+
+    /// Output function
+    void output(std::ostream& outfile)
+    {
+      RefineableQPVDElement<DIM, NNODE>::output(outfile);
+    }
+
+    /// Output function
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      RefineableQPVDElement<DIM, NNODE>::output(outfile, n_plot);
+    }
+
+    /// C-style output function
+    void output(FILE* file_pt)
+    {
+      RefineableQPVDElement<DIM, NNODE>::output(file_pt);
+    }
+
+    /// C-style output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      RefineableQPVDElement<DIM, NNODE>::output(file_pt, n_plot);
+    }
+  };
+
+
+  template<unsigned NNODE_1D>
+  class FaceGeometry<RefineableQPlasticPVDElement<2, NNODE_1D>>
+    : public virtual SolidQElement<1, NNODE_1D>
+  {
+  public:
+    /// Constructor must call the constructor of the underlying solid element
+    FaceGeometry() : SolidQElement<1, NNODE_1D>() {}
+  };
+
+  template<unsigned NNODE_1D>
+  class FaceGeometry<RefineableQPlasticPVDElement<3, NNODE_1D>>
     : public virtual SolidQElement<2, NNODE_1D>
   {
   public:
