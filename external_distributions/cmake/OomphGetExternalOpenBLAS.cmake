@@ -80,16 +80,12 @@ else()
 
 endif()
 
-# Define the global variables OpenBLAS_ROOT and OpenBLAS_LIBRARIES for MUMPS,
-# HYPRE and Trilinos to use
-set(OpenBLAS_LIBNAME "${CMAKE_STATIC_LIBRARY_PREFIX}openblas${CMAKE_STATIC_LIBRARY_SUFFIX}")
+if(BUILD_SHARED_LIBS)
+  set(OpenBLAS_LIBNAME "${CMAKE_SHARED_LIBRARY_PREFIX}openblas${CMAKE_SHARED_LIBRARY_SUFFIX}")
+else()
+  set(OpenBLAS_LIBNAME "${CMAKE_STATIC_LIBRARY_PREFIX}openblas${CMAKE_STATIC_LIBRARY_SUFFIX}")
+endif()
 set(OpenBLAS_LIBRARIES "${OPENBLAS_INSTALL_DIR}/lib/${OpenBLAS_LIBNAME}" CACHE PATH "" FORCE)
-
-# # When OpenBLAS is installed with the CMake build system; this is different to
-# # when it is installed with a package manager, where the include directory would
-# # just be OpenBLAS_ROOT/include/. As of 0.3.29, this include directory is hardcoded
-# # so we have to set it like below for MUMPS to work:
-# set(OpenBLAS_INCLUDE_DIRS "${OPENBLAS_INSTALL_DIR}/include/openblas" CACHE PATH "" FORCE)
 
 # ---------------------------------------------------------------------------------
 # cmake-format: on

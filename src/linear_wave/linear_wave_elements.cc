@@ -567,6 +567,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class LinearWaveEquations<1>;
+  template class LinearWaveEquations<2>;
+  template class LinearWaveEquations<3>;
+
   template class QLinearWaveElement<1, 2>;
   template class QLinearWaveElement<1, 3>;
   template class QLinearWaveElement<1, 4>;
@@ -578,6 +582,4 @@ namespace oomph
   template class QLinearWaveElement<3, 2>;
   template class QLinearWaveElement<3, 3>;
   template class QLinearWaveElement<3, 4>;
-
-
 } // namespace oomph

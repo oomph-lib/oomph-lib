@@ -59,11 +59,6 @@ find_package_handle_standard_args(
 
 # If METIS was found, create an imported target
 if(METIS_FOUND)
-  message(
-    STATUS
-      "Found METIS: ${METIS_LIBRARIES}, includes: ${METIS_INCLUDE_DIRS}, version: ${METIS_VERSION}"
-  )
-
   if(NOT TARGET METIS::METIS_HEADER_ONLY)
     # We'll define an INTERFACE version of the library just to propagate the
     # location of metis.h

@@ -12,14 +12,18 @@ include_guard()
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
 # Where to clone the repos from
-set(GKLIB_GIT_URL https://github.com/KarypisLab/GKlib.git)
-set(METIS_GIT_URL https://github.com/KarypisLab/METIS.git)
+# set(GKLIB_GIT_URL https://github.com/KarypisLab/GKlib.git)
+# set(METIS_GIT_URL https://github.com/KarypisLab/METIS.git)
+set(GKLIB_GIT_URL https://github.com/puneetmatharu/GKlib.git)
+set(METIS_GIT_URL https://github.com/puneetmatharu/METIS.git)
 set(PARMETIS_GIT_URL https://github.com/puneetmatharu/ParMETIS.git)
 set(SUPERLU_GIT_URL https://github.com/xiaoyeli/superlu.git)
 set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
 
-set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
-set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+# set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
+# set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+set(GKLIB_GIT_TAG 82fc6c3e00b6deaf02578862e9b3364a648c1824)
+set(METIS_GIT_TAG 39dec33bec14833de55ae4e8d842604bce4270fc)
 set(PARMETIS_GIT_TAG 83bb3d4f5b2af826d0683329cad1accc8d829de2)
 set(SUPERLU_GIT_TAG v6.0.1)
 set(SUPERLU_DIST_GIT_TAG v9.1.0)
@@ -47,7 +51,11 @@ endif()
 # GKLIB:
 # -------------
 # Expected library path and include directory
-set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
+if(BUILD_SHARED_LIBS)
+  set(GKLIB_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}GKlib${CMAKE_SHARED_LIBRARY_SUFFIX})
+else()
+  set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
 set(GKLIB_LIBRARIES ${GKLIB_INSTALL_DIR}/lib/${GKLIB_LIBNAME} CACHE PATH "Path to GKlib libraries")
 set(GKLIB_INCLUDE_DIR ${GKLIB_INSTALL_DIR}/include CACHE PATH "Path to GKlib include directory")
 
@@ -64,6 +72,10 @@ if(NOT OOMPH_USE_GKLIB_FROM)
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -DNO_X86=${CONFIGURE_GKLIB_WITH_NO_X86}
   )
+
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND GKLIB_CMAKE_ARGS -DSHARED=${BUILD_SHARED_LIBS})
+  endif()
 
   oomph_get_external_project_helper(
     PROJECT_NAME gklib
@@ -84,12 +96,31 @@ endif()
 # ------
 # Expected library path and include directory
 # NOTE: This does assume that metis will be built as a static library...
-set(METIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}metis${CMAKE_STATIC_LIBRARY_SUFFIX})
+if(BUILD_SHARED_LIBS)
+  set(METIS_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}metis${CMAKE_SHARED_LIBRARY_SUFFIX})
+else()
+  set(METIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}metis${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
 set(METIS_LIBRARIES ${METIS_INSTALL_DIR}/lib/${METIS_LIBNAME} CACHE PATH "Path to METIS libraries")
 set(METIS_INCLUDE_DIR ${METIS_INSTALL_DIR}/include CACHE PATH "Path to METIS include directory")
 
 # If we need to build METIS
 if(NOT OOMPH_USE_METIS_FROM)
+  # Do we want to build shared libs?
+  set(METIS_EXTRA_ARGS)
+  if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+    list(APPEND METIS_EXTRA_ARGS shared=1)
+  endif()
+
+  set(_OOMPH_METIS_LDFLAGS "")
+  if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+    if(UNIX AND NOT APPLE)
+      set(_OOMPH_METIS_LDFLAGS "-Wl,--disable-new-dtags -Wl,-rpath,${GKLIB_INSTALL_DIR}/lib")
+    elseif(APPLE)
+      set(_OOMPH_METIS_LDFLAGS "-Wl,-rpath,${GKLIB_INSTALL_DIR}/lib")
+    endif()
+  endif()
+
   oomph_get_external_project_helper(
     PROJECT_NAME metis
     GIT_REPOSITORY ${METIS_GIT_URL}
@@ -99,7 +130,7 @@ if(NOT OOMPH_USE_METIS_FROM)
     BUILD_IN_SOURCE TRUE
     CONFIGURE_HANDLED_BY_BUILD TRUE
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${CMAKE_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR}
+    BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${CMAKE_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} ${METIS_EXTRA_ARGS} LDFLAGS=${_OOMPH_METIS_LDFLAGS}
     INSTALL_COMMAND ${CMAKE_COMMAND} -E env MAKEFLAGS= ${MAKE_EXECUTABLE} install
   )
 endif()
@@ -118,6 +149,23 @@ if (OOMPH_BUILD_SUPERLU)
   string(REPLACE ";" "|" TPL_METIS_LIBRARIES_FOR_SUPERLU "${TPL_METIS_LIBRARIES_FOR_SUPERLU}")
   string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU "${OpenBLAS_LIBRARIES}")
 
+  set(_OOMPH_SUPERLU_RPATHS "")
+  foreach(_OOMPH_TPL_LIBVAR IN ITEMS GKLIB_LIBRARIES METIS_LIBRARIES OpenBLAS_LIBRARIES)
+    if(DEFINED ${_OOMPH_TPL_LIBVAR})
+      foreach(_OOMPH_TPL_LIBPATH IN LISTS ${_OOMPH_TPL_LIBVAR})
+        if(IS_ABSOLUTE "${_OOMPH_TPL_LIBPATH}")
+          get_filename_component(_OOMPH_TPL_LIBDIR "${_OOMPH_TPL_LIBPATH}" DIRECTORY)
+          list(APPEND _OOMPH_SUPERLU_RPATHS "${_OOMPH_TPL_LIBDIR}")
+        endif()
+      endforeach()
+    endif()
+  endforeach()
+
+  if(_OOMPH_SUPERLU_RPATHS)
+    list(REMOVE_DUPLICATES _OOMPH_SUPERLU_RPATHS)
+    string(REPLACE ";" "|" _OOMPH_SUPERLU_RPATHS "${_OOMPH_SUPERLU_RPATHS}")
+  endif()
+
   set(SUPERLU_CMAKE_CONFIGURE_ARGS
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -DTPL_ENABLE_METISLIB=ON
@@ -125,6 +173,21 @@ if (OOMPH_BUILD_SUPERLU)
     -DTPL_METIS_LIBRARIES=${TPL_METIS_LIBRARIES_FOR_SUPERLU}
     -DTPL_BLAS_LIBRARIES=${TPL_BLAS_LIBRARIES_FOR_SUPERLU}
   )
+
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND SUPERLU_CMAKE_CONFIGURE_ARGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+  endif()
+  if(_OOMPH_SUPERLU_RPATHS)
+    list(APPEND SUPERLU_CMAKE_CONFIGURE_ARGS
+         -DCMAKE_BUILD_RPATH=${_OOMPH_SUPERLU_RPATHS}
+         -DCMAKE_INSTALL_RPATH=${_OOMPH_SUPERLU_RPATHS}
+         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON)
+    if(UNIX AND NOT APPLE)
+      list(APPEND SUPERLU_CMAKE_CONFIGURE_ARGS
+           -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--disable-new-dtags
+           -DCMAKE_EXE_LINKER_FLAGS=-Wl,--disable-new-dtags)
+    endif()
+  endif()
 
   set(TEST_COMMAND)
   if(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)
@@ -155,12 +218,30 @@ if(OOMPH_ENABLE_MPI)
   # PARMETIS:
   # ---------
   # Expected library path and include directory
-  set(PARMETIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}parmetis${CMAKE_STATIC_LIBRARY_SUFFIX})
+  if(BUILD_SHARED_LIBS)
+    set(PARMETIS_LIBNAME ${CMAKE_SHARED_LIBRARY_PREFIX}parmetis${CMAKE_SHARED_LIBRARY_SUFFIX})
+  else()
+    set(PARMETIS_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}parmetis${CMAKE_STATIC_LIBRARY_SUFFIX})
+  endif()
   set(PARMETIS_LIBRARIES ${PARMETIS_INSTALL_DIR}/lib/${PARMETIS_LIBNAME} CACHE PATH "Path to ParMETIS libraries")
   set(PARMETIS_INCLUDE_DIR ${PARMETIS_INSTALL_DIR}/include CACHE PATH "Path to ParMETIS include directory")
 
   # If we need to build ParMETIS
   if(NOT OOMPH_USE_PARMETIS_FROM)
+    # Do we want to build shared libs?
+    set(PARMETIS_EXTRA_ARGS)
+    if(DEFINED BUILD_SHARED_LIBS)
+      list(APPEND PARMETIS_EXTRA_ARGS shared=1)
+    endif()
+    set(_OOMPH_PARMETIS_LDFLAGS "")
+    if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+      if(UNIX AND NOT APPLE)
+        set(_OOMPH_PARMETIS_LDFLAGS "-Wl,--disable-new-dtags -Wl,-rpath,${GKLIB_INSTALL_DIR}/lib -Wl,-rpath,${METIS_INSTALL_DIR}/lib")
+      elseif(APPLE)
+        set(_OOMPH_PARMETIS_LDFLAGS "-Wl,-rpath,${GKLIB_INSTALL_DIR}/lib -Wl,-rpath,${METIS_INSTALL_DIR}/lib")
+      endif()
+    endif()
+
     oomph_get_external_project_helper(
       PROJECT_NAME parmetis
       GIT_REPOSITORY ${PARMETIS_GIT_URL}
@@ -169,7 +250,7 @@ if(OOMPH_ENABLE_MPI)
       INSTALL_DIR "${PARMETIS_INSTALL_DIR}"
       CONFIGURE_HANDLED_BY_BUILD TRUE
       CONFIGURE_COMMAND ""
-      BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${MPI_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} metis_path=${METIS_INSTALL_DIR}
+      BUILD_COMMAND ${MAKE_EXECUTABLE} config cc=${MPI_C_COMPILER} prefix=<INSTALL_DIR> gklib_path=${GKLIB_INSTALL_DIR} metis_path=${METIS_INSTALL_DIR} ${PARMETIS_EXTRA_ARGS} LDFLAGS=${_OOMPH_PARMETIS_LDFLAGS}
       INSTALL_COMMAND ${CMAKE_COMMAND} -E env MAKEFLAGS= ${MAKE_EXECUTABLE} install
     )
   endif()
@@ -187,6 +268,24 @@ if(OOMPH_ENABLE_MPI)
   string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU_DIST "${OpenBLAS_LIBRARIES}")
   string(REPLACE ";" "|" MPIEXEC_PREFLAGS_FOR_SUPERLU_DIST "--oversubscribe")
 
+  # Get the rpaths for all of the libs SuperLUDIST links to
+  set(_OOMPH_SUPERLU_DIST_RPATHS "")
+  foreach(_OOMPH_TPL_LIBVAR IN ITEMS GKLIB_LIBRARIES METIS_LIBRARIES PARMETIS_LIBRARIES OpenBLAS_LIBRARIES)
+    if(DEFINED ${_OOMPH_TPL_LIBVAR})
+      foreach(_OOMPH_TPL_LIBPATH IN LISTS ${_OOMPH_TPL_LIBVAR})
+        if(IS_ABSOLUTE "${_OOMPH_TPL_LIBPATH}")
+          get_filename_component(_OOMPH_TPL_LIBDIR "${_OOMPH_TPL_LIBPATH}" DIRECTORY)
+          list(APPEND _OOMPH_SUPERLU_DIST_RPATHS "${_OOMPH_TPL_LIBDIR}")
+        endif()
+      endforeach()
+    endif()
+  endforeach()
+
+  if(_OOMPH_SUPERLU_DIST_RPATHS)
+    list(REMOVE_DUPLICATES _OOMPH_SUPERLU_DIST_RPATHS)
+    string(REPLACE ";" "|" _OOMPH_SUPERLU_DIST_RPATHS "${_OOMPH_SUPERLU_DIST_RPATHS}")
+  endif()
+
   # Build options
   set(SUPERLU_DIST_CMAKE_CONFIGURE_ARGS
       -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
@@ -201,9 +300,36 @@ if(OOMPH_ENABLE_MPI)
       -Denable_tests=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
       -Denable_python=OFF)
 
+  # Default to static libs
+  if(DEFINED BUILD_SHARED_LIBS)
+    list(APPEND SUPERLU_DIST_CMAKE_CONFIGURE_ARGS
+         -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+  else()
+    list(APPEND SUPERLU_DIST_CMAKE_CONFIGURE_ARGS
+         -DBUILD_SHARED_LIBS=OFF)
+  endif()
+
+  # Sort our runtime paths and transitive deps
+  if(_OOMPH_SUPERLU_DIST_RPATHS)
+    list(
+      APPEND
+      SUPERLU_DIST_CMAKE_CONFIGURE_ARGS
+      -DCMAKE_BUILD_RPATH=${_OOMPH_SUPERLU_DIST_RPATHS}
+      -DCMAKE_INSTALL_RPATH=${_OOMPH_SUPERLU_DIST_RPATHS}
+      -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON)
+
+    # Need to use rpath instead of runpath on Linux
+    if(UNIX AND NOT APPLE)
+      list(APPEND SUPERLU_DIST_CMAKE_CONFIGURE_ARGS
+           -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--disable-new-dtags
+           -DCMAKE_EXE_LINKER_FLAGS=-Wl,--disable-new-dtags)
+    endif()
+  endif()
+
   set(TEST_COMMAND)
   if(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)
-    set(TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build --output-on-failure)
+    set(TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build
+        --output-on-failure)
   endif()
 
   oomph_get_external_project_helper(
@@ -214,16 +340,18 @@ if(OOMPH_ENABLE_MPI)
     INSTALL_DIR "${SUPERLU_DIST_INSTALL_DIR}"
     BUILD_IN_SOURCE TRUE
     LIST_SEPARATOR |
-    CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> ${SUPERLU_DIST_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -B=build
+    CONFIGURE_COMMAND
+      ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+      ${SUPERLU_DIST_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -B=build
     BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${OOMPH_NUM_JOBS}
     INSTALL_COMMAND ${CMAKE_COMMAND} --install build
-    TEST_COMMAND ${TEST_COMMAND}
-  )
+    TEST_COMMAND ${TEST_COMMAND})
 endif()
 
 # -----------------------------------------------------------------------------
 
-# If we're building OpenBLAS, make sure it gets built before SuperLU or SuperLU_DIST
+# If we're building OpenBLAS, make sure it gets built before SuperLU or
+# SuperLU_DIST
 if(TARGET openblas)
   if(TARGET superlu)
     add_dependencies(superlu openblas)
@@ -246,23 +374,23 @@ endif()
 
 # SuperLU depends on GKlib and METIS
 if(TARGET superlu)
-  if (TARGET gklib)
+  if(TARGET gklib)
     add_dependencies(superlu gklib)
   endif()
-  if (TARGET metis)
+  if(TARGET metis)
     add_dependencies(superlu metis)
   endif()
 endif()
 
 # SuperLUDist depends on GKlib, METIS and ParMETIS
 if(TARGET superlu_dist)
-  if (TARGET gklib)
+  if(TARGET gklib)
     add_dependencies(superlu_dist gklib)
   endif()
-  if (TARGET metis)
+  if(TARGET metis)
     add_dependencies(superlu_dist metis)
   endif()
-  if (TARGET parmetis)
+  if(TARGET parmetis)
     add_dependencies(superlu_dist parmetis)
   endif()
 endif()
