@@ -536,6 +536,8 @@ def parse_args():
 
 
 if __name__ == "__main__":
+    script_start_time = time.perf_counter()
+
     # Make sure a suitable CMake is available *before* we do anything else.
     check_cmake_version()
 
@@ -687,3 +689,6 @@ if __name__ == "__main__":
     print_progress(">>> Build and installation complete!", pad_to=60, end="")
     total_time_elapsed = time.perf_counter() - start_time
     print_time(total_time_elapsed, verbose=args.verbose)
+
+    # Full script execution time
+    print_progress(f"{Path(__file__).name} finished after {time.perf_counter() - script_start_time:.2f}s.")
