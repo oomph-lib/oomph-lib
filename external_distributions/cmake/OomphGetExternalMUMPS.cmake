@@ -64,22 +64,37 @@ endif()
 # get propagated to the runtime linker. Here we ensure the rpath argument is
 # used (with --disable-new-dtags) instead of runpath to ensure this
 if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
-  set(_OOMPH_MUMPS_RPATHS "${MUMPS_INSTALL_DIR}/lib" "${OpenBLAS_ROOT}/lib")
-  if(_OOMPH_MUMPS_RPATHS)
-    list(
-      APPEND
-      MUMPS_CMAKE_CONFIGURE_ARGS
-      -DCMAKE_BUILD_RPATH=${_OOMPH_MUMPS_RPATHS}
-      -DCMAKE_INSTALL_RPATH=${_OOMPH_MUMPS_RPATHS}
-      -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON)
-    if(UNIX AND NOT APPLE)
-      list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
-           -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--disable-new-dtags
-           -DCMAKE_EXE_LINKER_FLAGS=-Wl,--disable-new-dtags)
-    endif()
+  # Collect rpaths
+  set(_OOMPH_MUMPS_RPATHS "")
+  if(UNIX AND NOT APPLE)
+    list(APPEND _OOMPH_MUMPS_RPATHS "\$ORIGIN")
+  endif()
+  list(APPEND _OOMPH_MUMPS_RPATHS "${MUMPS_INSTALL_DIR}/lib"
+       "${OpenBLAS_ROOT}/lib")
+  list(REMOVE_DUPLICATES _OOMPH_MUMPS_RPATHS)
+
+  # Update configure arguments
+  if(UNIX AND NOT APPLE)
+    string(JOIN ":" _OOMPH_MUMPS_RPATHS_STR ${_OOMPH_MUMPS_RPATHS})
+  else()
+    string(REPLACE ";" "\\;" _OOMPH_MUMPS_RPATHS_STR "${_OOMPH_MUMPS_RPATHS}")
+  endif()
+  list(
+    APPEND
+    MUMPS_CMAKE_CONFIGURE_ARGS
+    -DCMAKE_BUILD_RPATH=${_OOMPH_MUMPS_RPATHS_STR}
+    -DCMAKE_INSTALL_RPATH=${_OOMPH_MUMPS_RPATHS_STR}
+    -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON)
+
+  # Prefer old dtags so transitive dependencies are correctly found
+  if(UNIX AND NOT APPLE)
+    list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
+         -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--disable-new-dtags
+         -DCMAKE_EXE_LINKER_FLAGS=-Wl,--disable-new-dtags)
   endif()
 endif()
 
+# Handle a local tarball
 if(NOT OOMPH_MUMPS_TARBALL_PATH STREQUAL "")
   if(EXISTS "${OOMPH_MUMPS_TARBALL_PATH}")
     list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
