@@ -265,12 +265,10 @@ include(OomphCheckForRequiredHeaders)
 # this is overwritten by INSTALL_NAME_DIR. See: https://tinyurl.com/feksedtz
 set(CMAKE_MACOSX_RPATH TRUE)
 
-# Ensure installed executables can find oomph-lib shared libraries without
-# requiring LD_LIBRARY_PATH on Linux.
+# CMAKE_INSTALL_RPATH_USE_LINK_PATH tells CMake to append any linked library
+# directories to the install RPATH as well, so executables can find third‑party
+# libs they were linked against without requiring LD_LIBRARY_PATH
 if(UNIX AND NOT APPLE)
-  if(NOT CMAKE_INSTALL_RPATH)
-    set(CMAKE_INSTALL_RPATH "$ORIGIN/../${OOMPH_INSTALL_LIB_DIR}")
-  endif()
   set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
 
