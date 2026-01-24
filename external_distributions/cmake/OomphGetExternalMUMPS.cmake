@@ -46,7 +46,6 @@ set(MUMPS_CMAKE_CONFIGURE_ARGS
     -DMUMPS_matlab=OFF
     -DSCALAPACK_BUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
     -DMUMPS_BUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
-    -DBUILD_SHARED_LIBS=OFF
     -DBUILD_SINGLE=ON
     -DBUILD_DOUBLE=ON
     -DBUILD_COMPLEX=OFF
@@ -57,6 +56,28 @@ set(MUMPS_CMAKE_CONFIGURE_ARGS
 if(DEFINED BUILD_SHARED_LIBS)
   list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
        -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+else()
+  list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS -DBUILD_SHARED_LIBS=OFF)
+endif()
+
+# If we're build as a shared lib, we need to make sure transitive dependencies
+# get propagated to the runtime linker. Here we ensure the rpath argument is
+# used (with --disable-new-dtags) instead of runpath to ensure this
+if(DEFINED BUILD_SHARED_LIBS AND BUILD_SHARED_LIBS)
+  set(_OOMPH_MUMPS_RPATHS "${MUMPS_INSTALL_DIR}/lib" "${OpenBLAS_ROOT}/lib")
+  if(_OOMPH_MUMPS_RPATHS)
+    list(
+      APPEND
+      MUMPS_CMAKE_CONFIGURE_ARGS
+      -DCMAKE_BUILD_RPATH=${_OOMPH_MUMPS_RPATHS}
+      -DCMAKE_INSTALL_RPATH=${_OOMPH_MUMPS_RPATHS}
+      -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON)
+    if(UNIX AND NOT APPLE)
+      list(APPEND MUMPS_CMAKE_CONFIGURE_ARGS
+           -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--disable-new-dtags
+           -DCMAKE_EXE_LINKER_FLAGS=-Wl,--disable-new-dtags)
+    endif()
+  endif()
 endif()
 
 if(NOT OOMPH_MUMPS_TARBALL_PATH STREQUAL "")

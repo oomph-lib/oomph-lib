@@ -80,9 +80,6 @@ else()
 
 endif()
 
-# Define the global variables OpenBLAS_ROOT and OpenBLAS_LIBRARIES for MUMPS,
-# HYPRE and Trilinos to use
-
 if(BUILD_SHARED_LIBS)
   set(OpenBLAS_LIBNAME "${CMAKE_SHARED_LIBRARY_PREFIX}openblas${CMAKE_SHARED_LIBRARY_SUFFIX}")
 else()
