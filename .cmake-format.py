@@ -169,6 +169,7 @@ with section("parse"):
                 "GIT_TAG": 1,
                 "GIT_SUBMODULES_RECURSE": 1,
                 "INSTALL_DIR": 1,
+                "LIST_SEPARATOR": "1",
                 "GIT_SUBMODULES": "*",
                 "CMAKE_ARGS": "*",
                 "PATCH_COMMAND": "*",
