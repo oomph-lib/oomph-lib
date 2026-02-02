@@ -612,10 +612,10 @@ namespace oomph
               ++tetgen_io.numberofholes;
             }
             // Otherwise it may be region
-            else if(srf_pt->internal_point_identifies_region_for_tetgen(j))
-	    {
-	      ++tetgen_io.numberofregions;
-	    }
+            else if (srf_pt->internal_point_identifies_region_for_tetgen(j))
+            {
+              ++tetgen_io.numberofregions;
+            }
           }
         }
       }
@@ -626,10 +626,10 @@ namespace oomph
         unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
         for (unsigned j = 0; j < n_int_pts; j++)
         {
-	  if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
-	  {
-	    ++tetgen_io.numberofregions;
-	  }
+          if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
+          {
+            ++tetgen_io.numberofregions;
+          }
         }
       }
 
