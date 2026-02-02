@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -612,35 +612,24 @@ namespace oomph
               ++tetgen_io.numberofholes;
             }
             // Otherwise it may be region
-            else
-            {
-              if (srf_pt->internal_point_identifies_region_for_tetgen(j))
-              {
-                ++tetgen_io.numberofregions;
-              }
-            }
+            else if(srf_pt->internal_point_identifies_region_for_tetgen(j))
+	    {
+	      ++tetgen_io.numberofregions;
+	    }
           }
         }
       }
 
-      // Also count the enclosed holes or regions from the outer boundary
+      // Also count the enclosed regions from the outer boundary
+      // (outer boundary cannot contain holes!)
       {
         unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
         for (unsigned j = 0; j < n_int_pts; j++)
         {
-          if (outer_boundary_pt->internal_point_identifies_hole_for_tetgen(j))
-          {
-            ++tetgen_io.numberofholes;
-          }
-          // Otherwise it may be region
-          else
-          {
-            if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(
-                  j))
-            {
-              ++tetgen_io.numberofregions;
-            }
-          }
+	  if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
+	  {
+	    ++tetgen_io.numberofregions;
+	  }
         }
       }
 
@@ -666,23 +655,6 @@ namespace oomph
                   srf_pt->internal_point_for_tetgen(j, i);
                 ++counter;
               }
-            }
-          }
-        }
-      }
-
-      // Repeat for outer boundary
-      {
-        unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
-        for (unsigned j = 0; j < n_int_pts; j++)
-        {
-          if (outer_boundary_pt->internal_point_identifies_hole_for_tetgen(j))
-          {
-            for (unsigned i = 0; i < 3; ++i)
-            {
-              tetgen_io.holelist[counter] =
-                outer_boundary_pt->internal_point_for_tetgen(j, i);
-              ++counter;
             }
           }
         }
@@ -733,7 +705,7 @@ namespace oomph
         }
       }
 
-      // Also add any holes/regions from the outer boundary
+      // Also add any regions from the outer boundary
       {
         unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
         for (unsigned j = 0; j < n_int_pts; j++)
