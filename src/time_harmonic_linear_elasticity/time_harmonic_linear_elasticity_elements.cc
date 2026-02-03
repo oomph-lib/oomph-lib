@@ -658,11 +658,10 @@ namespace oomph
 
   // Instantiate the required elements
   template class TimeHarmonicLinearElasticityEquationsBase<2>;
-  template class TimeHarmonicLinearElasticityEquations<2>;
-
-  template class QTimeHarmonicLinearElasticityElement<3, 3>;
   template class TimeHarmonicLinearElasticityEquationsBase<3>;
+
+  template class TimeHarmonicLinearElasticityEquations<2>;
   template class TimeHarmonicLinearElasticityEquations<3>;
 
-
+  template class QTimeHarmonicLinearElasticityElement<3, 3>;
 } // namespace oomph

@@ -627,6 +627,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class RefineablePoissonEquations<1>;
+  template class RefineablePoissonEquations<2>;
+  template class RefineablePoissonEquations<3>;
+
   template class RefineableQPoissonElement<1, 2>;
   template class RefineableQPoissonElement<1, 3>;
   template class RefineableQPoissonElement<1, 4>;

@@ -252,6 +252,9 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class RefineableLinearWaveEquations<2>;
+  template class RefineableLinearWaveEquations<3>;
+
   template class RefineableQLinearWaveElement<2, 2>;
   template class RefineableQLinearWaveElement<2, 3>;
   template class RefineableQLinearWaveElement<2, 4>;

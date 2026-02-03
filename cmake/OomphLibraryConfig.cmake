@@ -141,6 +141,53 @@ function(oomph_library_config)
     set(LINK_TYPE INTERFACE)
   endif()
 
+  # Ensure shared libs can resolve transitive dependencies at runtime on Linux
+  if(UNIX
+     AND NOT APPLE
+     AND SOURCES)
+    get_target_property(_OOMPH_LIB_TYPE ${LIBNAME} TYPE)
+    if(_OOMPH_LIB_TYPE STREQUAL "SHARED_LIBRARY")
+      set(_OOMPH_INSTALL_RPATHS "$ORIGIN")
+
+      # Add runtime path for OpenBLAS if used
+      if(OpenBLAS_LIBRARIES)
+        foreach(_OOMPH_OPENBLAS_LIB IN LISTS OpenBLAS_LIBRARIES)
+          if(IS_ABSOLUTE "${_OOMPH_OPENBLAS_LIB}")
+            get_filename_component(_OOMPH_OPENBLAS_DIR "${_OOMPH_OPENBLAS_LIB}"
+                                   DIRECTORY)
+            list(APPEND _OOMPH_INSTALL_RPATHS "${_OOMPH_OPENBLAS_DIR}")
+          endif()
+        endforeach()
+      elseif(OOMPH_USE_OPENBLAS_FROM)
+        list(APPEND _OOMPH_RUNTIME_RPATHS "${OOMPH_USE_OPENBLAS_FROM}/lib")
+      endif()
+
+      # Add runtime paths for other third-party libs
+      foreach(
+        _OOMPH_TPL_ROOT IN
+        ITEMS OOMPH_USE_SUPERLU_FROM
+              OOMPH_USE_SUPERLU_DIST_FROM
+              OOMPH_USE_METIS_FROM
+              OOMPH_USE_GKLIB_FROM
+              OOMPH_USE_PARMETIS_FROM
+              OOMPH_USE_MUMPS_FROM
+              OOMPH_USE_HYPRE_FROM
+              OOMPH_USE_TRILINOS_FROM
+              OOMPH_USE_CGAL_FROM
+              OOMPH_USE_BOOST_FROM)
+        if(${_OOMPH_TPL_ROOT})
+          list(APPEND _OOMPH_INSTALL_RPATHS "${${_OOMPH_TPL_ROOT}}/lib")
+        endif()
+      endforeach()
+
+      list(REMOVE_DUPLICATES _OOMPH_INSTALL_RPATHS)
+      set_property(
+        TARGET ${LIBNAME}
+        APPEND
+        PROPERTY INSTALL_RPATH "${_OOMPH_INSTALL_RPATHS}")
+    endif()
+  endif()
+
   # Provide an alias for the library so that users importing the library can
   # link to the library they require by selecting the library they need from the
   # project "namespace"

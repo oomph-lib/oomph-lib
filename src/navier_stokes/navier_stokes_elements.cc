@@ -2870,11 +2870,12 @@ namespace oomph
   /// / Force build of templates
   //====================================================================
   template class NavierStokesEquations<2>;
-  template class QCrouzeixRaviartElement<2>;
-  template class QTaylorHoodElement<2>;
-
   template class NavierStokesEquations<3>;
+
+  template class QCrouzeixRaviartElement<2>;
   template class QCrouzeixRaviartElement<3>;
+
+  template class QTaylorHoodElement<2>;
   template class QTaylorHoodElement<3>;
 
 } // namespace oomph

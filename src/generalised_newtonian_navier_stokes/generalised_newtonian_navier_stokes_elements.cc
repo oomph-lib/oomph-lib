@@ -2884,11 +2884,12 @@ namespace oomph
   /// / Force build of templates
   //====================================================================
   template class GeneralisedNewtonianNavierStokesEquations<2>;
-  template class GeneralisedNewtonianQCrouzeixRaviartElement<2>;
-  template class GeneralisedNewtonianQTaylorHoodElement<2>;
-
   template class GeneralisedNewtonianNavierStokesEquations<3>;
+
+  template class GeneralisedNewtonianQCrouzeixRaviartElement<2>;
   template class GeneralisedNewtonianQCrouzeixRaviartElement<3>;
+
+  template class GeneralisedNewtonianQTaylorHoodElement<2>;
   template class GeneralisedNewtonianQTaylorHoodElement<3>;
 
 } // namespace oomph

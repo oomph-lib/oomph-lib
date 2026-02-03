@@ -571,6 +571,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class PoissonEquations<1>;
+  template class PoissonEquations<2>;
+  template class PoissonEquations<3>;
+
   template class QPoissonElement<1, 2>;
   template class QPoissonElement<1, 3>;
   template class QPoissonElement<1, 4>;

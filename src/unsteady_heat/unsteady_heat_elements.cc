@@ -625,6 +625,10 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class UnsteadyHeatEquations<1>;
+  template class UnsteadyHeatEquations<2>;
+  template class UnsteadyHeatEquations<3>;
+
   template class QUnsteadyHeatElement<1, 2>;
   template class QUnsteadyHeatElement<1, 3>;
   template class QUnsteadyHeatElement<1, 4>;

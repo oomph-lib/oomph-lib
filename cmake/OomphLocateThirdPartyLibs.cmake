@@ -101,7 +101,7 @@ if(OOMPH_USE_BOOST_FROM OR OOMPH_USE_CGAL_FROM)
     )
   endif()
 
-  set(REQUIRED_BOOST_COMPONENTS thread system program_options)
+  set(REQUIRED_BOOST_COMPONENTS thread program_options)
   set(CGAL_CMAKE_EXACT_NT_BACKEND BOOST_BACKEND CACHE STRING "Use Boost.Multiprecision for the CGAL backend.")
   set(CGAL_DISABLE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
   set(CMAKE_DISABLE_FIND_PACKAGE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")

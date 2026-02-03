@@ -347,6 +347,10 @@ namespace oomph
   // Force build of templates
   //====================================================================
   /// One reagent
+  template class RefineableAdvectionDiffusionReactionEquations<1, 1>;
+  template class RefineableAdvectionDiffusionReactionEquations<1, 2>;
+  template class RefineableAdvectionDiffusionReactionEquations<1, 3>;
+
   template class RefineableQAdvectionDiffusionReactionElement<1, 2, 2>;
   template class RefineableQAdvectionDiffusionReactionElement<1, 2, 3>;
   template class RefineableQAdvectionDiffusionReactionElement<1, 2, 4>;
@@ -356,6 +360,10 @@ namespace oomph
   template class RefineableQAdvectionDiffusionReactionElement<1, 3, 4>;
 
   // Two reagents
+  template class RefineableAdvectionDiffusionReactionEquations<2, 1>;
+  template class RefineableAdvectionDiffusionReactionEquations<2, 2>;
+  template class RefineableAdvectionDiffusionReactionEquations<2, 3>;
+
   template class RefineableQAdvectionDiffusionReactionElement<2, 1, 2>;
   template class RefineableQAdvectionDiffusionReactionElement<2, 1, 3>;
   template class RefineableQAdvectionDiffusionReactionElement<2, 1, 4>;

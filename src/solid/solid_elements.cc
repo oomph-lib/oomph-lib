@@ -2484,21 +2484,24 @@ namespace oomph
   template<>
   const unsigned TPVDElementWithContinuousPressure<3>::Pconv[4] = {0, 1, 2, 3};
 
-
+  //=======================================================================
   // Instantiate the required elements
-  template class QPVDElementWithPressure<2>;
-  template class QPVDElementWithContinuousPressure<2>;
-  template class PVDEquationsBase<2>;
+  //=======================================================================
   template class PVDEquations<2>;
-  template class PVDEquationsWithPressure<2>;
-
-  template class QPVDElementWithPressure<3>;
-  template class QPVDElementWithContinuousPressure<3>;
-  template class PVDEquationsBase<3>;
   template class PVDEquations<3>;
+
+  template class PVDEquationsBase<2>;
+  template class PVDEquationsBase<3>;
+
+  template class PVDEquationsWithPressure<2>;
   template class PVDEquationsWithPressure<3>;
+
+  template class QPVDElementWithPressure<2>;
+  template class QPVDElementWithPressure<3>;
+
+  template class QPVDElementWithContinuousPressure<2>;
+  template class QPVDElementWithContinuousPressure<3>;
 
   template class TPVDElementWithContinuousPressure<2>;
   template class TPVDElementWithContinuousPressure<3>;
-
 } // namespace oomph

@@ -821,6 +821,9 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
+  template class SpaceTimeUnsteadyHeatEquations<1>;
+  template class SpaceTimeUnsteadyHeatEquations<2>;
+
   template class QUnsteadyHeatSpaceTimeElement<1, 2>;
   template class QUnsteadyHeatSpaceTimeElement<1, 3>;
   template class QUnsteadyHeatSpaceTimeElement<1, 4>;

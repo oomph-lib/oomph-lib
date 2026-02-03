@@ -996,15 +996,15 @@ namespace oomph
 
   // Instantiate the required elements
   template class PMLTimeHarmonicLinearElasticityEquationsBase<2>;
+  template class PMLTimeHarmonicLinearElasticityEquationsBase<3>;
+
   template class PMLTimeHarmonicLinearElasticityEquations<2>;
+  template class PMLTimeHarmonicLinearElasticityEquations<3>;
 
   template class QPMLTimeHarmonicLinearElasticityElement<3, 3>;
-  template class PMLTimeHarmonicLinearElasticityEquationsBase<3>;
-  template class PMLTimeHarmonicLinearElasticityEquations<3>;
 
   template<unsigned DIM>
   ContinuousBermudezPMLMapping
     PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::Default_pml_mapping;
-
 
 } // namespace oomph

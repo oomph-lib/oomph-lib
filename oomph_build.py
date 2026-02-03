@@ -215,6 +215,10 @@ def configure_build_and_install_external_libs(
     if args.OOMPH_ENABLE_MPI:
         ext_cache["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
+    # Do we want to build shared libs?
+    if args.BUILD_SHARED_LIBS:
+        ext_cache["BUILD_SHARED_LIBS"] = args.BUILD_SHARED_LIBS
+
     # Generate CMakeUserPresets.json for external project
     presets_dict = generate_external_dist_preset(external_dist_build_dir, ext_cache, args.generator)
     preset_path = external_dist_dir / "CMakeUserPresets.json"
@@ -283,6 +287,10 @@ def configure_build_and_install_oomph(
     if args.OOMPH_ENABLE_MPI:
         oomph_cache_vars["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
+    # Do we want to build shared libs?
+    if args.BUILD_SHARED_LIBS:
+        oomph_cache_vars["BUILD_SHARED_LIBS"] = args.BUILD_SHARED_LIBS
+
     # Merge in ext_flags first, then user `oomph_OOMPH_*` flags override if duplicated
     final_cache = dict(ext_flags)
     for (k, v) in oomph_cache_vars.items():
@@ -318,6 +326,7 @@ def configure_build_and_install_oomph(
 def configure_build_doc(
     args: Namespace,
     doc_dir: Path,
+    doc_build_dir: Path,
     verbose: bool,
 ):
     """
@@ -325,7 +334,7 @@ def configure_build_doc(
     """
     # Configure
     print_progress(">>> Configuring docs", pad_to=60, end="\n" if verbose else "")
-    config_cmd = ["cmake", "-G", args.generator, "-B", "build"]
+    config_cmd = ["cmake", "-G", args.generator, "-B", doc_build_dir]
     start_time = time.perf_counter()
     run_command(config_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -334,7 +343,7 @@ def configure_build_doc(
     # Build
     print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
     extra_build_args = get_extra_build_args(args)
-    build_cmd = ["cmake", "--build", "build"] + extra_build_args
+    build_cmd = ["cmake", "--build", doc_build_dir] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -468,6 +477,7 @@ def parse_args():
     # Flags common to both external_distributions and the oomph-lib project
     common_group = parser.add_argument_group("common build flags")
     common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and oomph-lib project.")
+    common_group.add_argument("--BUILD_SHARED_LIBS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build shared libs.")
 
     # External distributions flags
     ext_group = parser.add_argument_group("external_distributions flags")
@@ -526,6 +536,8 @@ def parse_args():
 
 
 if __name__ == "__main__":
+    script_start_time = time.perf_counter()
+
     # Make sure a suitable CMake is available *before* we do anything else.
     check_cmake_version()
 
@@ -654,7 +666,9 @@ if __name__ == "__main__":
     # Configure, build, and install oomph-lib (main) project
     if args.build_oomph:
         # Attempt to locate 'cmake_flags_for_oomph_lib.json'
-        if not external_dist_json_path.is_file():
+        if external_dist_json_path.is_file():
+            print_progress(">>> Located 'cmake_flags_for_oomph_lib.json' from external_distributions build")
+        else:
             print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
             sys.exit(1)
 
@@ -668,10 +682,13 @@ if __name__ == "__main__":
 
     # Configure and build the docs
     if args.build_doc:
-        configure_build_doc(args, doc_dir, args.verbose)
+        configure_build_doc(args, doc_dir, doc_build_dir, args.verbose)
     else:
         print_progress(">>> Skipping build of docs")
 
     print_progress(">>> Build and installation complete!", pad_to=60, end="")
     total_time_elapsed = time.perf_counter() - start_time
     print_time(total_time_elapsed, verbose=args.verbose)
+
+    # Full script execution time
+    print_progress(f"{Path(__file__).name} finished after {time.perf_counter() - script_start_time:.2f}s.")

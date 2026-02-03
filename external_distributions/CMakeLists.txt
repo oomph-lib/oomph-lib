@@ -155,7 +155,7 @@ elseif(OOMPH_BUILD_OPENBLAS)
   include(OomphGetExternalOpenBLAS)
 endif()
 
-# Get the OpenBLAS root directory (required by MUMPS)
+# Define OpenBLAS_ROOT globally for MUMPS, HYPRE and Trilinos to use
 if(OpenBLAS_LIBRARIES)
   cmake_path(GET OpenBLAS_LIBRARIES PARENT_PATH OpenBLAS_LIBDIR)
   cmake_path(GET OpenBLAS_LIBDIR PARENT_PATH OpenBLAS_ROOT)
@@ -163,8 +163,15 @@ if(OpenBLAS_LIBRARIES)
 endif()
 
 if(NOT OpenBLAS_LIBRARIES)
-  if(OOMPH_BUILD_HYPRE OR OOMPH_BUILD_TRILINOS)
-    message(FATAL_ERROR "Refusing to build HYPRE or Trilinos without OpenBLAS!")
+  if(OOMPH_BUILD_HYPRE
+     OR OOMPH_BUILD_MUMPS
+     OR OOMPH_BUILD_SUPERLU
+     OR OOMPH_BUILD_SUPERLU_DIST
+     OR OOMPH_BUILD_TRILINOS)
+    message(
+      FATAL_ERROR
+        "Refusing to build MUMPS, HYPRE, SuperLU, SuperLUDist or Trilinos without OpenBLAS!"
+    )
   endif()
 endif()
 
