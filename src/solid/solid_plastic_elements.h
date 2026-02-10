@@ -645,6 +645,12 @@ namespace oomph
     void initialise_solve(const unsigned int ipt);
 
     /*!
+     * \brief Sets the values of the current plastic variables to their
+     * respective initial values
+     */
+    void set_intial_condition(const unsigned int ipt);
+
+    /*!
      * \brief Determins, if there is plastic deformation and the plastic solve
      * routine has to be called.
      * \details Checks if the elastic stress is contained by the yield surface
@@ -822,17 +828,40 @@ namespace oomph
       }
     }
 
+    /*!
+     * \details Returns the difference between the current and the previous
+     * timestep. If the timestepper does not contain history, it will return
+     * the difference between the current timestep and the initial value.
+     */
     void get_delta_inv_fp_matrix(const unsigned& ipt,
                                  DenseMatrix<double>& deltainvFp)
     {
+      const TimeStepper* invFp_time_stepper_pt =
+        Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt();
+
       deltainvFp.resize(DIM);
 
-      for (unsigned int i = 0; i < DIM; i++)
+      if (invFp_time_stepper_pt->ntstorage() > 1)
       {
-        for (unsigned int j = 0; j < DIM; j++)
+        for (unsigned int i = 0; i < DIM; i++)
         {
-          deltainvFp(i, j) =
-            get_inv_fp(0, ipt, i, j) - get_inv_fp(1, ipt, i, j);
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            deltainvFp(i, j) =
+              get_inv_fp(0, ipt, i, j) - get_inv_fp(1, ipt, i, j);
+          }
+        }
+      }
+      else
+      {
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            deltainvFp(i, j) = get_inv_fp(0, ipt, i, j);
+
+            if (i == j) deltainvFp(i, j) -= 1;
+          }
         }
       }
     }
@@ -906,16 +935,39 @@ namespace oomph
       }
     }
 
+    /*!
+     * \details Returns the difference between the current and the previous
+     * timestep. If the timestepper does not contain history, it will return
+     * the difference between the current timestep and the initial value.
+     */
     void get_delta_fpks_matrix(const unsigned& ipt,
                                DenseMatrix<double>& delta_Fpks)
     {
+      const TimeStepper* fpks_time_stepper_pt =
+        Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt();
+
       delta_Fpks.resize(DIM);
 
-      for (unsigned int i = 0; i < DIM; i++)
+      if (fpks_time_stepper_pt->ntstorage() > 1)
       {
-        for (unsigned int j = 0; j < DIM; j++)
+        for (unsigned int i = 0; i < DIM; i++)
         {
-          delta_Fpks(i, j) = get_fpks(0, ipt, i, j) - get_fpks(1, ipt, i, j);
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            delta_Fpks(i, j) = get_fpks(0, ipt, i, j) - get_fpks(1, ipt, i, j);
+          }
+        }
+      }
+      else
+      {
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            delta_Fpks(i, j) = get_fpks(0, ipt, i, j);
+
+            if (i == j) delta_Fpks(i, j) -= 1;
+          }
         }
       }
     }
@@ -989,16 +1041,39 @@ namespace oomph
       }
     }
 
+    /*!
+     * \details Returns the difference between the current and the previous
+     * timestep. If the timestepper does not contain history, it will return
+     * the difference between the current timestep and the initial value.
+     */
     void get_delta_fpcs_matrix(const unsigned& ipt,
                                DenseMatrix<double>& delta_Fpcs)
     {
+      const TimeStepper* fpcs_time_stepper_pt =
+        Plastic_data_pt[ipt][Fpcs_INDEX]->time_stepper_pt();
+
       delta_Fpcs.resize(DIM);
 
-      for (unsigned int i = 0; i < DIM; i++)
+      if (fpcs_time_stepper_pt->ntstorage() > 1)
       {
-        for (unsigned int j = 0; j < DIM; j++)
+        for (unsigned int i = 0; i < DIM; i++)
         {
-          delta_Fpcs(i, j) = get_fpcs(0, ipt, i, j) - get_fpcs(1, ipt, i, j);
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            delta_Fpcs(i, j) = get_fpcs(0, ipt, i, j) - get_fpcs(1, ipt, i, j);
+          }
+        }
+      }
+      else
+      {
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            delta_Fpcs(i, j) = get_fpcs(0, ipt, i, j);
+
+            if (i == j) delta_Fpcs(i, j) -= 1;
+          }
         }
       }
     }
@@ -1044,6 +1119,8 @@ namespace oomph
 
     double get_r(const unsigned t, const unsigned& ipt) const
     {
+      if (Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->ntstorage() < t + 1)
+        return this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
       return Plastic_data_pt[ipt][R_INDEX]->value(t, 0);
     }
 
@@ -1077,6 +1154,11 @@ namespace oomph
       return get_delta_lambda(ipt);
     }
 
+    /*!
+     * \details Returns the difference between the current and the previous
+     * timestep. If the timestepper does not contain history, it will return
+     * the difference between the current timestep and the initial value.
+     */
     double get_delta_lambda(const unsigned& ipt) const
     {
       const TimeStepper* lambda_time_stepper_pt =
@@ -1084,7 +1166,6 @@ namespace oomph
       if (lambda_time_stepper_pt->ntstorage() > 1)
         return get_lambda(0, ipt) - get_lambda(1, ipt);
 
-      oomph_info << "Timestepper is steady and has 0 history" << std::endl;
       return get_lambda(ipt);
     }
 

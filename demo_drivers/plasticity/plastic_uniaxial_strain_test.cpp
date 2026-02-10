@@ -92,7 +92,7 @@ private:
   {
     if (steady_solve)
     {
-      my_time_stepper_pt = new Steady<1>;
+      my_time_stepper_pt = new Steady<0>;
     }
     else
     {

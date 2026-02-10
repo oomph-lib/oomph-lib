@@ -943,11 +943,66 @@ void oomph::PlasticEquations<DIM>::initialise_solve(const unsigned ipt)
        data_type++)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
+
+    // If there is not enough history, just initiallise all data with their
+    // initial condition
+    if (data_pt->time_stepper_pt()->ntstorage() < 2)
+    {
+      set_intial_condition(ipt);
+      return;
+    }
+
+    // Otherwise, use the value from the last timestep
     const unsigned nval = data_pt->nvalue();
     for (unsigned i = 0; i < nval; i++)
     {
-      // Set the previous value to the current one
       data_pt->set_value(i, data_pt->value(1, i));
+    }
+  }
+}
+
+template<unsigned DIM>
+void oomph::PlasticEquations<DIM>::set_intial_condition(const unsigned int ipt)
+{
+  for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+       data_type++)
+  {
+    if (!Plastic_data_has_been_built[data_type]) continue;
+    Data* data_pt = Plastic_data_pt[ipt][data_type];
+
+    // Set the deformation gradient tensors to unity
+    if (data_type == invFp_INDEX || data_type == Fpks_INDEX ||
+        data_type == Fpcs_INDEX)
+    {
+      const unsigned nval = data_pt->nvalue();
+      for (unsigned i = 0; i < nval; i++)
+      {
+        // Check if diagonal element (Assuming row-major storage for DIMxDIM)
+        if (i % (DIM + 1) == 0) data_pt->set_value(i, 1.0);
+        else
+          data_pt->set_value(i, 0.0);
+      }
+    }
+
+    // Set R to Re
+    else if (data_type == R_INDEX)
+    {
+      double Re = 0.0;
+      if (this->Plastic_consitutive_law_pt)
+      {
+        Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+      }
+      data_pt->set_value(0, Re);
+    }
+
+    // Set Lambda and H to 0
+    else
+    {
+      const unsigned nval = data_pt->nvalue();
+      for (unsigned i = 0; i < nval; i++)
+      {
+        data_pt->set_value(i, 0.0);
+      }
     }
   }
 }
@@ -1997,16 +2052,33 @@ void PlasticEquations<DIM>::compute_deformation_gradient_tensor(
   // Calculate displacements and derivatives and lagrangian coordinates
   for (unsigned l = 0; l < n_node; l++)
   {
+    // Check if the node has enough history for the requested time t.
+    // If not, we will take the lagrangian positions to compute F.
+    // \todo Really, we could also just use unity in that case.
+    bool has_enough_history =
+      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
+
     // Loop over positional dofs
     for (unsigned k = 0; k < n_position_type; k++)
     {
       // Loop over displacement components (deformed position)
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Loop over derivative directions
+        double coordinate_val;
+
+        if (has_enough_history)
+        {
+          coordinate_val = this->nodal_position_gen(t, l, k, i);
+        }
+        else
+        {
+          coordinate_val = this->lagrangian_position_gen(l, k, i);
+        }
+
+        // Loop over derivative directions to build F_ij = d(x_i)/d(Xi_j)
         for (unsigned j = 0; j < DIM; j++)
         {
-          F(i, j) += this->nodal_position_gen(t, l, k, i) * dpsidxi(l, k, j);
+          F(i, j) += coordinate_val * dpsidxi(l, k, j);
         }
       }
     }
