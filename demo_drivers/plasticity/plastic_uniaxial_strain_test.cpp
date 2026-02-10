@@ -160,8 +160,6 @@ private:
 #ifdef PLASTIC
       el_pt->plastic_constitutive_law_pt() = plastic_constitutive_law_pt;
 
-      el_pt->assign_plastic_timestepper(my_time_stepper_pt);
-
       el_pt->assign_default_values_based_on_constitutive_law();
 
       el_pt->plastic_newton_solver_tolerance() = Newton_solver_tolerance;

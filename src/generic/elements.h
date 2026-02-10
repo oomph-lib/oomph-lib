@@ -877,7 +877,7 @@ namespace oomph
 
     /// Set the timestepper associated with the i-th internal data
     /// object
-    void set_internal_data_time_stepper(const unsigned& i,
+    virtual void set_internal_data_time_stepper(const unsigned& i,
                                         TimeStepper* const& time_stepper_pt,
                                         const bool& preserve_existing_data)
     {

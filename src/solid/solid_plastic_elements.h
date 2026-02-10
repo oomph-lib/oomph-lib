@@ -83,10 +83,6 @@ namespace oomph
     // The solver tolerance for the plastic newton solve
     double Plastic_Newton_Solver_Tolerance = 1.0e-8;
 
-    // By default we assume that the plastic solve is steady for which we
-    // require a single history value
-    static Steady<1> Default_plastic_timestepper;
-
     // Pin the plastic dof of type data_type at the integral point, if index<0
     // then pin all plastic data of that type, otherwise pin the value specified
     void pin_plastic_dof(const unsigned& ipt,
@@ -208,7 +204,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][invFp_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -236,7 +231,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Fpks_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -264,7 +258,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Fpcs_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
@@ -292,7 +285,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][H_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -313,7 +305,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][R_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -334,7 +325,6 @@ namespace oomph
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(1);
-        data_pt->time_stepper_pt() = &Default_plastic_timestepper;
         Plastic_data_pt[ipt][Lambda_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
@@ -1500,17 +1490,25 @@ namespace oomph
 
     ~PlasticEquations() {}
 
-    // Assign the time-stepper for the plastic data
-    void assign_plastic_timestepper(TimeStepper* time_stepper_pt)
+    virtual void set_internal_data_time_stepper(
+      const unsigned& i,
+      TimeStepper* const& time_stepper_pt,
+      const bool& preserve_existing_data) override
     {
-      if (time_stepper_pt->ntstorage() < 2)
-      {
-        throw OomphLibError("PlasticEquations requires a time stepper with at "
-                            "least one history value.",
-                            OOMPH_EXCEPTION_LOCATION,
-                            OOMPH_CURRENT_FUNCTION);
-      }
+      PVDEquations<DIM>::set_internal_data_time_stepper(
+        i, time_stepper_pt, preserve_existing_data);
 
+      // We need to reassign plastic eqn numbers, after the data storage has
+      // changed to update possibly old pointers
+      assign_plastic_eqn_numbers();
+    }
+
+    // Assign the time-stepper for the plastic data only.
+    // It should be preffered to call the function
+    // set_internal_data_time_stepper
+    void assign_plastic_timestepper(TimeStepper* time_stepper_pt,
+                                    const bool& preserve_existing_data)
+    {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         for (unsigned data_type = 0;
@@ -1521,7 +1519,7 @@ namespace oomph
           // once per element
           Data* data_pt = Plastic_data_pt[ipt][data_type];
           // We want to preserve the existing data hence true
-          data_pt->set_time_stepper(time_stepper_pt, false);
+          data_pt->set_time_stepper(time_stepper_pt, preserve_existing_data);
         }
       }
 

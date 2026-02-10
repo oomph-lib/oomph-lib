@@ -81,6 +81,7 @@ private:
     Max_newton_iterations = 100;
 
     // Apply the constitutive laws to the elements
+    const bool preserve_existing_data = false;
     for (unsigned e = 0; e < plasticMesh->nelement(); e++)
     {
       ELEMENT* el_pt = dynamic_cast<ELEMENT*>(plasticMesh->element_pt(e));
@@ -90,7 +91,7 @@ private:
 
       el_pt->plastic_constitutive_law_pt() = plastic_constitutive_law_pt;
 
-      el_pt->assign_plastic_timestepper(my_time_stepper_pt);
+      el_pt->assign_plastic_timestepper(my_time_stepper_pt, preserve_existing_data);
 
       el_pt->body_force_fct_pt() = &BodyForce::body_force;
     }
