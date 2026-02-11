@@ -1475,12 +1475,6 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     }
   }
 
-  residuals[this->plastic_h_eqn_number(ipt)] =
-    get_dot_h(ipt) -
-    dot_or_delta_lambda *
-      this->Plastic_consitutive_law_pt->isotropic_hardening_factor;
-
-
   //////////////////////////////////////////////////////////////////////////////
   // The residual for lambda and R                                            //
   //////////////////////////////////////////////////////////////////////////////
