@@ -171,6 +171,7 @@ private:
 
     add_sub_mesh(plasticMesh);
     build_global_mesh();
+    set_timestepper_for_all_data(my_time_stepper_pt);
 
     initialise_dt(dtOne);
     assign_initial_values_impulsive(dtOne);

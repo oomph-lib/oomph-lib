@@ -2545,8 +2545,8 @@ namespace oomph
       // Loop over internal dofs and set the timestepper
       for (unsigned j = 0; j < n_internal; j++)
       {
-        this->element_pt(e)->internal_data_pt(j)->set_time_stepper(
-          time_stepper_pt, preserve_existing_data);
+        this->element_pt(e)->set_internal_data_time_stepper(
+          j, time_stepper_pt, preserve_existing_data);
       }
     }
   }
