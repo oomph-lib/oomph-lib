@@ -964,7 +964,6 @@ void oomph::PlasticEquations<DIM>::set_intial_condition(const unsigned int ipt)
   for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
        data_type++)
   {
-    if (!Plastic_data_has_been_built[data_type]) continue;
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
     // Set the deformation gradient tensors to unity
