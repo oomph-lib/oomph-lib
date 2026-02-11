@@ -166,8 +166,6 @@ namespace oomph
 
   protected:
     // We need a dummy double matrix for the plastic residual fill in
-    static DenseDoubleMatrix Dummy_doublematrix;
-    static RankFourTensor<double> Dummy_rankfourtensor;
     DenseMatrix<double> unity;
 
     // Assign plastic eqn numbers for each of the integral points individually
@@ -475,7 +473,7 @@ namespace oomph
                                   barbar_M,
                                   ddR,
                                   ddR,
-                                  PlasticEquations::Dummy_doublematrix,
+                                  GeneralisedElement::Dummy_matrix,
                                   false);
     }
 
@@ -495,7 +493,7 @@ namespace oomph
                        f,
                        dfdM,
                        barbar_N,
-                       PlasticEquations::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
                        false);
     }
 
@@ -516,10 +514,10 @@ namespace oomph
     {
       compute_bar_Lp(bar_M,
                      barbar_N,
-                     PlasticEquations::Dummy_rankfourtensor,
+                     GeneralisedElement::Dummy_rankfourtensor,
                      bar_Lp,
-                     PlasticEquations::Dummy_rankfourtensor,
-                     PlasticEquations::Dummy_rankfourtensor,
+                     GeneralisedElement::Dummy_rankfourtensor,
+                     GeneralisedElement::Dummy_rankfourtensor,
                      false);
     }
 
@@ -540,8 +538,8 @@ namespace oomph
       compute_bar_Lpkd(bar_M,
                        bar_Mk,
                        bar_Lpkd,
-                       PlasticEquations::Dummy_rankfourtensor,
-                       PlasticEquations::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
                        false);
     }
 
@@ -558,7 +556,7 @@ namespace oomph
       compute_hat_bar_Nc(f_Mc,
                          df_Mc_dMc,
                          hat_bar_Nc,
-                         PlasticEquations::Dummy_rankfourtensor,
+                         GeneralisedElement::Dummy_rankfourtensor,
                          false);
     }
 
@@ -586,12 +584,12 @@ namespace oomph
       compute_bar_Lpcd(bar_M,
                        hat_bar_Nc,
                        Rc,
-                       PlasticEquations::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
                        GeneralisedElement::Dummy_matrix,
                        a,
                        bar_Lpcd,
-                       PlasticEquations::Dummy_rankfourtensor,
-                       PlasticEquations::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
+                       GeneralisedElement::Dummy_rankfourtensor,
                        GeneralisedElement::Dummy_matrix,
                        false);
     }
@@ -1217,7 +1215,7 @@ namespace oomph
 
     virtual void fill_in_generic_residual_and_jacobian_plastic(
       DoubleVector& residuals,
-      DenseDoubleMatrix& jacobian,
+      DenseMatrix<double>& jacobian,
       const unsigned& ipt,
       const DenseMatrix<double>& C,
       const unsigned& flag);
@@ -1227,12 +1225,12 @@ namespace oomph
                                    const DenseMatrix<double>& C)
     {
       fill_in_generic_residual_and_jacobian_plastic(
-        residuals, Dummy_doublematrix, ipt, C, 0);
+        residuals, GeneralisedElement::Dummy_matrix, ipt, C, 0);
     }
 
     // By default we finite difference for the jacobian
     virtual void fill_in_jacobian_plastic(DoubleVector& residuals,
-                                          DenseDoubleMatrix& jacobian,
+                                          DenseMatrix<double>& jacobian,
                                           const unsigned& ipt,
                                           const DenseMatrix<double>& C)
     {

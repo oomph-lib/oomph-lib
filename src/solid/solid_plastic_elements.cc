@@ -3,9 +3,6 @@
 using namespace oomph;
 
 template<unsigned DIM>
-DenseDoubleMatrix PlasticEquations<DIM>::Dummy_doublematrix;
-
-template<unsigned DIM>
 const std::vector<std::string> PlasticEquations<DIM>::Plastic_data_names{
   "Fe", "Fpks", "Fpcs", "H", "Lambda", "R"};
 
@@ -14,9 +11,6 @@ template class QPlasticPVDElement<2, 2>;
 
 template class PlasticEquations<3>;
 template class QPlasticPVDElement<3, 2>;
-
-template<unsigned DIM>
-RankFourTensor<double> PlasticEquations<DIM>::Dummy_rankfourtensor;
 
 /*
  * \details Computes the Caucystress using the plastic deformation gradient
@@ -1186,7 +1180,7 @@ bool PlasticEquations<DIM>::is_there_plastic_deformation(const unsigned int ipt)
 template<unsigned DIM>
 void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DoubleVector& residuals,
-  DenseDoubleMatrix& jacobian,
+  DenseMatrix<double>& jacobian,
   const unsigned& ipt,
   const DenseMatrix<double>& C,
   const unsigned& flag)

@@ -226,6 +226,10 @@ namespace oomph
     /// are being assembled
     static DenseMatrix<double> Dummy_matrix;
 
+    /// Empty dense matrix used as a dummy argument in case when the derivative
+    /// of a function is not needed
+    static RankFourTensor<double> Dummy_rankfourtensor;
+
     /// Static storage for deque used to add_global_equation_numbers
     /// when pointers to the dofs in each element are not required
     static std::deque<double*> Dof_pt_deque;
