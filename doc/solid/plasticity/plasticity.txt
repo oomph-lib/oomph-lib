@@ -4,6 +4,52 @@
 <HR>
 
 \section theory Theory: Extended Subloading Surface Model
-We consider the deformation gradient tensor between the deformed state \f$\vec{x}\f$ and the undeformed one \f$ \xi \f$.
+This section is intended to introduce all variables and equations neccesary to implement the plasticity model. For a thorough derivation of the model, see the comprehensive review by K. Hashiguchi: 
+"Multiplicative Hyperelastic-Based Plasticity for Finite Elastoplastic Deformation/Sliding: A Comprehensive Review" Arch Computat Methods Eng **26**, 597–637 (2019). [DOI: 10.1007/s11831-018-9256-5](https://doi.org/10.1007/s11831-018-9256-5).
+
+We consider the deformation gradient tensor between
+\f[
+    \mathbf{F} = \frac{\mathrm{d}\mathbf{X}}{\mathrm{d} \mathbf{x}}
+\f]
+the deformed state \f$ \mathbf{X} \f$ and the undeformed one \f$ \mathbf{x} \f$. 
+We decompose it multiplicatively into an elastic deformation gradient \f$\mathbf{F}_\mathrm{e}\f$ and a plastic one \f$ \mathbf{F}_\mathrm{p} \f$:
+\f[
+    \mathbf{F} = \mathbf{F}_\mathrm{e}\mathbf{F}_\mathrm{p}
+\f]
+The plastic deformation gradient,
+\f[
+    \mathbf{F}_\mathrm{p} = \mathbf{F}_\mathrm{pks}\mathbf{F}_\mathrm{pkd} = \mathbf{F}_\mathrm{pcs}\mathbf{F}_\mathrm{pcd},
+\f]
+is further divided into the storage \f$\mathbf{F}_\mathrm{pks}\f$ and dissipative deformation gradient \f$\mathbf{F}_\mathrm{pkd}\f$ representing the kinematic hardening 
+and the plastic storage \f$\mathbf{F}_\mathrm{pcs}\f$ and dissipative deformation gradient \f$\mathbf{F}_\mathrm{pcd}\f$ which cause a translation of the elastic core.
+
+With the deformation gradient tensores introduced above, we define the right Cauchy-Green tensors
+\f[
+    \atensor{C}_\mathrm{e} \equiv \mathbf{F}_{\mathrm{e}}^{\mathrm{T}}\mathbf{F}_{\mathrm{e}};\quad
+    \ctensor{C}_\mathrm{pks} \equiv \mathbf{F}_{\mathrm{pks}}^{\mathrm{T}}\mathbf{F}_{\mathrm{pks}};\quad
+    \dtensor{C}_\mathrm{pcs} \equiv \mathbf{F}_{\mathrm{pcs}}^{\mathrm{T}}\mathbf{F}_{\mathrm{pcs}}.
+\f]
+Given appropriate strain energy functions \f$\psi_\mathrm{e}\left(\atensor{C}_\mathrm{e}\right)\f$, \f$\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)\f$ and \f$\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)\f$, we define the Mandel(-like) stresses
+\f[
+    \begin{split}        
+        \atensor{M} &= \atensor{C}_\mathrm{e}\atensor{S} = 2 \atensor{C}_\mathrm{e}\frac{\partial\psi_\mathrm{e}\left(\atensor{C}_\mathrm{e}\right)}{\partial\atensor{C}_\mathrm{e}} \left(\neq \atensor{M}^\mathrm{T}\right),\\
+        \atensor{M}_\mathrm{k} &= \ctensor{C}_\mathrm{pks}\atensor{S}_\mathrm{k} = \atensor{S}_\mathrm{k} = 2 \mathbf{F}_\mathrm{pks} \frac{\partial\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)}{\partial{\ctensor{C}}_\mathrm{pks}} \mathbf{F}_\mathrm{pks}^\mathrm{T} \left(= \atensor{M}_\mathrm{k}^\mathrm{T}\right),\\
+        \atensor{M}_\mathrm{c} &= \dtensor{C}_\mathrm{pcs}\atensor{S}_\mathrm{c} = \atensor{S}_\mathrm{c} = 2 \mathbf{F}_\mathrm{pcs} \frac{\partial\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)}{\partial{\dtensor{C}}_\mathrm{pcs}} \mathbf{F}_\mathrm{pcs}^\mathrm{T} \left(= \atensor{M}_\mathrm{c}^\mathrm{T}\right)
+    \end{split}
+\f]
+and further Mandel-like variables
+\f[
+    \begin{split}  
+        \hat{\atensor{M}}_\mathrm{c} &= \atensor{M}_\mathrm{c} - \atensor{M}_\mathrm{k} \left(= \hat{\atensor{M}}{}_\mathrm{c}^\mathrm{T}\right),\\
+        \tilde{\atensor{M}} &= \atensor{M} - \atensor{M}_\mathrm{c} \left(\neq \tilde{\atensor{M}}{}^\mathrm{T}\right),\\
+        \btensor{M}_\mathrm{k} &= \atensor{M}_\mathrm{c} - R \hat{\atensor{M}}_\mathrm{c} \left(= \btensor{M}_\mathrm{k}^\mathrm{T}\right),\\
+        \btensor{M} &= \atensor{M} - \btensor{M}_\mathrm{k} = \tilde{\atensor{M}} - R \hat{\atensor{M}}_\mathrm{c} = \atensor{M} - (1 - R) \atensor{M}_\mathrm{c} - R\atensor{M}_\mathrm{k} \left(\neq \btensor{M}^\mathrm{T}\right).
+    \end{split}
+\f]
+Here, \f$ R \f$ is the normal-yield ratio, which enters the yield surface equation
+\f[
+    f\left(\btensor{M}\right) = R F(H),
+\f]
+where \f$ H \f$ is the isotropic hardening variable and \f$ F \f$ and \f$ f \f$ are functions describing the physical model.
 
 \section implementationm Implementation: The PlasticEquations class
