@@ -4,9 +4,10 @@
 <HR>
 
 \section theory Theory: Extended Subloading Surface Model
-This section is intended to introduce all variables and equations neccesary to implement the plasticity model. For a thorough derivation of the model, see the comprehensive review by K. Hashiguchi: 
+This section is intended to introduce / list all variables and equations neccesary to implement the plasticity model. For a thorough derivation of the model, see the comprehensive review by K. Hashiguchi: 
 "Multiplicative Hyperelastic-Based Plasticity for Finite Elastoplastic Deformation/Sliding: A Comprehensive Review" Arch Computat Methods Eng **26**, 597–637 (2019). [DOI: 10.1007/s11831-018-9256-5](https://doi.org/10.1007/s11831-018-9256-5).
 
+\subsection variables Introduction of variables
 We consider the deformation gradient tensor between
 \f[
     \mathbf{F} = \frac{\mathrm{d}\mathbf{X}}{\mathrm{d} \mathbf{x}}
@@ -52,4 +53,76 @@ Here, \f$ R \f$ is the normal-yield ratio, which enters the yield surface equati
 \f]
 where \f$ H \f$ is the isotropic hardening variable and \f$ F \f$ and \f$ f \f$ are functions describing the physical model.
 
+With \f$ R \f$ and \f$ H \f$, we have 5 variables defining the plastic state:
+\f[
+    \begin{split}
+        &\mathbf{F}_\mathrm{p}, \quad\text{Plastic deformation gradient}\\
+        &\mathbf{F}_\mathrm{pks}, \quad\text{Storage part of kinematic hardening}\\
+        &\mathbf{F}_\mathrm{pcs}, \quad\text{Storage part of elastic core}\\
+        &H, \quad\text{Isotropic hardening variable}\\
+        &R, \quad\text{Normal-yield ratio}
+    \end{split}
+\f]
+The remaining quantities can be computed from these 5.
+
+\subsection derivatives Time derivatives
+Following Hashiguchi's derivation, we can state the time derivatives
+\f[
+    \begin{split}
+        &\dot{\mathbf{F}}_\mathrm{p} =  \atensor{L}_\text{p}\vec{F}_\text{p},\\
+        &\dot{\mathbf{F}}_\mathrm{pks} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pkd}\right) \mathbf{F}_\mathrm{pks},\\
+        &\dot{\mathbf{F}}_\mathrm{pcs}, \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right) \mathbf{F}_\mathrm{pcs},\\
+        &\dot{H} = f^\mathrm{H}\dot{\bar{\lambda}},\\
+        &\dot{R} = U(R)\dot{\bar{\lambda}},
+    \end{split}
+\f]
+which are computed using the plastic flow rate \f$ \dot{\bar{\lambda}} \f$, the velocity gradients
+\f[
+    \begin{split}
+        &\atensor{L}_\text{p} = \dot{\atensor{\lambda}}\left[\btensor{N} + \eta_\text{p}\left(\atensor{M}\,\btensor{N}-\btensor{N}\,\atensor{M}\right)\right],\\
+        &\atensor{L}_\text{pkd} = \frac{1}{b_\text{k}}\dot{\atensor{\lambda}}\left[\atensor{M}_\text{k} + \eta_\text{pk}\left(\atensor{M}\,\atensor{M}_\text{k}-\atensor{M}_\text{k}\,\atensor{M}\right)\right],\\
+        &\atensor{L}_\text{pcd} = \frac{R_\text{c}}{\mathcal{X}}\dot{\atensor{\lambda}}\left[\hat{\atensor{N}}_\text{c} + \eta_\text{pc}\left(\atensor{M}\,\hat{\atensor{N}}_\text{c}-\hat{\atensor{N}}_\text{c}\,\atensor{M}\right)\right],
+    \end{split}
+\f]
+and the function
+\f[
+    U(R) = u \cot\left(\frac{\pi}{2}\frac{\langle R - R_\text{e}\rangle}{1 - R_\text{e}} \right).
+\f]
+Here, \f$ f^\mathrm{H} \f$, \f$ \eta_\text{p} \f$
+, \f$ b_\text{k} \f$
+, \f$ \eta_\text{pk} \f$
+, \f$ \mathcal{X} \f$
+, \f$ \eta_\text{pc} \f$
+and \f$ R_\text{e} \f$
+are material parameters. The parameter \f$ u \f$ is computed by
+\f[ 
+    \begin{split}
+        u = \bar{u} \mathrm{exp}(u_\text{c}\mathcal{R}_\text{c}C_{\sigma}),
+    \end{split}
+\f] 
+where \f$ \bar{u} \f$ and \f$ u_\text{c} \f$ are material parameters and 
+\f[ 
+    \begin{split}
+        &C_\sigma = \btensor{N} : \hat{\atensor{N}}_\text{c},\\
+        &\mathcal{R}_\text{c} = f(\hat{\atensor{M}}_\text{c}) / F(H).
+    \end{split}
+\f]
+Further, we need the tensors
+\f[ 
+    \begin{split}
+        &\btensor{N} = \mathrm{sym} \left[\frac{\partial f(\btensor{M})}{\partial\atensor{M}}\right] / \left|\mathrm{sym} \left[\frac{\partial f(\btensor{M})}{\partial\atensor{M}}\right]\right| = \btensor{N}^\text{T}\\
+        &\hat{\atensor{N}}_\text{c} = \left[\frac{\partial f(\hat{\atensor{M}}_\text{c})}{\partial\hat{\atensor{M}}_\text{c}}\right] / \left| \left[\frac{\partial f(\hat{\atensor{M}}_\text{c})}{\partial\hat{\atensor{M}}_\text{c}}\right]\right|
+    \end{split}
+\f]
+for the calculations above. 
+\subsection material Material functions
+\subsection solving Solving for the plastic parameters
+In order to solve for the plastic parameters, we can make a few observations. The time derivative of \f$ H \f$ differs from \f$ \dot{\bar{\lambda}} \f$ just by a constant, hence we can write
+\f[
+    H(t) = \int_{t_0}^t f_\text{H}\dot{\bar{\lambda}}(t^\prime)\mathrm{d}t^\prime =  f_\text{H}\bar{\lambda}(t)
+\f]
+The time derivative of R is hard to solve for numerically, since the function \f$ \cot(\cdot) \f$ contains singularities. However, through analytical integration one can obtain the funcution
+\f[
+    R(t) = \frac{2}{\pi} (1 - R_\text{e}) \arccos\left[\cos\left(\frac{\pi}{2}\frac{R_{t_0} - R_\text{e}}{1 - R_\text{e}}\right)\exp\left(-u\frac{\pi}{2}\frac{\bar{\lambda}(t) - \bar{\lambda}(t_0)}{1-R_\text{e}}\right)\right] + R_\text{e}. 
+\f]
 \section implementationm Implementation: The PlasticEquations class
