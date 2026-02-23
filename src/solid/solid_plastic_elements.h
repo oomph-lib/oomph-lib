@@ -4,6 +4,7 @@
 #include "solid_elements.h"
 #include "constitutive/plastic_constitutive_laws.h"
 #include "refineable_solid_elements.h"
+#include "generic/interpolate_from_integral_points.h"
 
 // We initially implement the simplified plasticity model with no elastic core
 // and no plastic dissipation
@@ -1204,10 +1205,6 @@ namespace oomph
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
       Plastic_data_pt[ipt][Fpcs_INDEX]->set_value(i * DIM + j, val);
     }
-    void set_h(const unsigned& ipt, const double& val)
-    {
-      Plastic_data_pt[ipt][H_INDEX]->set_value(0, val);
-    }
     void set_r(const unsigned& ipt, const double& val)
     {
       Plastic_data_pt[ipt][R_INDEX]->set_value(0, val);
@@ -1567,7 +1564,7 @@ namespace oomph
     }
 
     void calculate_g(const unsigned& ipt,
-                     const double diag_entry,
+                     const double& diag_entry,
                      const DenseMatrix<double>& G,
                      DenseMatrix<double>& g) override
     {
@@ -1813,16 +1810,23 @@ namespace oomph
     FaceGeometry() : SolidQElement<2, NNODE_1D>() {}
   };
 
-
   // We define in here the additional functions required to build child elements
   // We need to pass any flags to the child as well as build the data at the
   // integral points, to do this we interpolate from the integral points to the
   // nodes first then interpolate to the child integral points
   template<unsigned DIM>
-  class RefineablePlasticEquations : public virtual PlasticEquations<DIM>,
-                                     public virtual RefineableSolidElement
+  class RefineablePlasticEquations
+    : public virtual InterpolateFromIntegralPointsBase,
+      public virtual PlasticEquations<DIM>,
+      public virtual RefineableSolidElement
   {
   protected:
+
+    void rebuild_from_sons()
+    {
+
+    }
+
     void further_build()
     {
       PlasticEquations<DIM>* cast_father_element_pt =
@@ -1832,21 +1836,8 @@ namespace oomph
         cast_father_element_pt->get_plastic_solve_by_fd();
       this->Plastic_consitutive_law_pt =
         cast_father_element_pt->plastic_constitutive_law_pt();
-
-      // Now interpolate the plastic data to the integral points from the parent
-      // integral points
-
-      // First we need to get the weights for interpolating from the parent
-      // integral points to the parent nodes
-
-      // Then we get the weights from the parent nodes to the child integral
-      // points
-
-      // Then we can perform the interpolation directly in a single step by
-      // composing the two individual interpolations
     }
   };
-
 
   template<unsigned DIM, unsigned NNODE>
   class RefineableQPlasticPVDElement
@@ -1874,12 +1865,6 @@ namespace oomph
           residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    void further_build()
-    {
-      RefineableQPVDElement<DIM, NNODE>::further_build();
-      RefineablePlasticEquations<DIM>::further_build();
-    }
-
     /// Fill in contribution to Jacobian (either by FD or analytically,
     /// control this via evaluate_jacobian_by_fd()
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -1891,6 +1876,141 @@ namespace oomph
         DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
                                                             jacobian,
                                                             1);
+    }
+
+    void further_build()
+    {
+      RefineableQPVDElement<DIM, NNODE>::further_build();
+      RefineablePlasticEquations<DIM>::further_build();
+
+      Vector<double> s_father;
+      if constexpr (DIM == 2)
+      {
+        using namespace QuadTreeNames;
+        // What type of son am I? Ask my quadtree representation...
+        int son_type = this->quadtree_pt()->son_type();
+
+        // Pointer to my father (in element impersonation)
+        RefineableElement* father_el_pt = this->quadtree_pt()->father_pt()->object_pt();
+
+        s_father.resize(2);
+
+        // Son midpoint is located at the following coordinates in father element:
+
+        // South west son
+        if (son_type == SW)
+        {
+          s_father[0] = -0.5;
+          s_father[1] = -0.5;
+        }
+        // South east son
+        else if (son_type == SE)
+        {
+          s_father[0] = 0.5;
+          s_father[1] = -0.5;
+        }
+        // North east son
+        else if (son_type == NE)
+        {
+          s_father[0] = 0.5;
+          s_father[1] = 0.5;
+        }
+
+        // North west son
+        else if (son_type == NW)
+        {
+          s_father[0] = -0.5;
+          s_father[1] = 0.5;
+        }
+      }
+      else if constexpr (DIM == 3)
+      {
+        using namespace OcTreeNames;
+
+        // What type of son am I? Ask my octree representation...
+        int son_type = this->octree_pt()->son_type();
+
+        // Pointer to my father (in element impersonation)
+        RefineableQElement<3>* father_el_pt = dynamic_cast<RefineableQElement<3>*>(
+          this->octree_pt()->father_pt()->object_pt());
+
+        s_father.resize(3);
+        // Son midpoint is located at the following coordinates in father element:
+        for (unsigned i = 0; i < 3; i++)
+        {
+          s_father[i] = 0.5 * OcTree::Direction_to_vector[son_type][i];
+        }
+      }
+      else
+      {
+        static_assert(DIM == 2 || DIM == 3,
+                      "RefineableQPlasticPVDElement supports only 2D (quad) or 3D (brick)");
+      }
+
+      PlasticEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
+        
+      unsigned n_ipt_father = cast_father_element_pt->integral_pt()->nweight();
+      unsigned n_node_father = cast_father_element_pt->nnode();
+      unsigned n_ipt = this->integral_pt()->nweight();
+
+      // Zero all plastic data values first
+      for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+      {
+        for (unsigned data_type = 0;
+             data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type++)
+        {
+          Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+
+          const unsigned n_data_values = data_pt->nvalue();
+          for (unsigned i = 0; i < n_data_values; i++)
+          {
+            data_pt->set_value(i, 0.0);
+          }
+        }
+      }
+
+      InterpolateFromIntegralPointsBase* father_ipt_interpolation =
+        dynamic_cast<InterpolateFromIntegralPointsBase*>(
+          this->father_element_pt());
+
+      // Now construct the plastic data values from the father element
+      for (unsigned ipt = 0; ipt < n_ipt; ipt++)
+      {
+        // Father element shape functions
+        Shape psi_father(n_node_father);
+        cast_father_element_pt->shape(s_father, psi_father);
+
+        // Interpolate from the father integral points to local integral points
+        for (unsigned ipt_father = 0; ipt_father < n_ipt_father; ipt_father++)
+        {
+          for (unsigned l = 0; l < n_node_father; l++)
+          {
+            const double interp_weight =
+              father_ipt_interpolation->integral_point_to_node_weight(
+                ipt_father, l) *
+              psi_father[l];
+            for (unsigned data_type = 0;
+                 data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 data_type++)
+            {
+              Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+              Data* data_father_pt =
+                cast_father_element_pt->Plastic_data_pt[ipt_father][data_type];
+
+              const unsigned n_data_values = data_pt->nvalue();
+              for (unsigned i = 0; i < n_data_values; i++)
+              {
+                const double value = data_pt->value(i);
+
+                data_pt->set_value(
+                  i, value + interp_weight * data_father_pt->value(i));
+              }
+            }
+          }
+        }
+      }
     }
 
     /// Output function
@@ -1917,7 +2037,6 @@ namespace oomph
       RefineableQPVDElement<DIM, NNODE>::output(file_pt, n_plot);
     }
   };
-
 
   template<unsigned NNODE_1D>
   class FaceGeometry<RefineableQPlasticPVDElement<2, NNODE_1D>>
