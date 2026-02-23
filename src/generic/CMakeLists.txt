@@ -111,7 +111,8 @@ set(HEADERS
     black_box_newton_solver.h
     gzip_reader.h
     fpdiff.h
-    matrix_helpers.h)
+    matrix_helpers.h
+    interpolate_from_integral_points.h)
 
 if(OOMPH_HAS_STACKTRACE)
   list(APPEND HEADERS stacktrace.h)
@@ -202,7 +203,8 @@ set(SOURCES
     extruded_domain.cc
     black_box_newton_solver.cc
     gzip_reader.cc
-    fpdiff.cc)
+    fpdiff.cc
+    interpolate_from_integral_points.cc)
 
 if(OOMPH_HAS_SUPERLU_DIST)
   list(APPEND SOURCES superlu_dist.c)
