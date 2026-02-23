@@ -1821,11 +1821,7 @@ namespace oomph
       public virtual RefineableSolidElement
   {
   protected:
-
-    void rebuild_from_sons()
-    {
-
-    }
+    void rebuild_from_sons() {}
 
     void further_build()
     {
@@ -1891,11 +1887,13 @@ namespace oomph
         int son_type = this->quadtree_pt()->son_type();
 
         // Pointer to my father (in element impersonation)
-        RefineableElement* father_el_pt = this->quadtree_pt()->father_pt()->object_pt();
+        RefineableElement* father_el_pt =
+          this->quadtree_pt()->father_pt()->object_pt();
 
         s_father.resize(2);
 
-        // Son midpoint is located at the following coordinates in father element:
+        // Son midpoint is located at the following coordinates in father
+        // element:
 
         // South west son
         if (son_type == SW)
@@ -1931,11 +1929,13 @@ namespace oomph
         int son_type = this->octree_pt()->son_type();
 
         // Pointer to my father (in element impersonation)
-        RefineableQElement<3>* father_el_pt = dynamic_cast<RefineableQElement<3>*>(
-          this->octree_pt()->father_pt()->object_pt());
+        RefineableQElement<3>* father_el_pt =
+          dynamic_cast<RefineableQElement<3>*>(
+            this->octree_pt()->father_pt()->object_pt());
 
         s_father.resize(3);
-        // Son midpoint is located at the following coordinates in father element:
+        // Son midpoint is located at the following coordinates in father
+        // element:
         for (unsigned i = 0; i < 3; i++)
         {
           s_father[i] = 0.5 * OcTree::Direction_to_vector[son_type][i];
@@ -1943,13 +1943,14 @@ namespace oomph
       }
       else
       {
-        static_assert(DIM == 2 || DIM == 3,
-                      "RefineableQPlasticPVDElement supports only 2D (quad) or 3D (brick)");
+        static_assert(
+          DIM == 2 || DIM == 3,
+          "RefineableQPlasticPVDElement supports only 2D (quad) or 3D (brick)");
       }
 
       PlasticEquations<DIM>* cast_father_element_pt =
         dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
-        
+
       unsigned n_ipt_father = cast_father_element_pt->integral_pt()->nweight();
       unsigned n_node_father = cast_father_element_pt->nnode();
       unsigned n_ipt = this->integral_pt()->nweight();
@@ -1958,10 +1959,12 @@ namespace oomph
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         for (unsigned data_type = 0;
-             data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type <
+             PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
-          Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+          Data* data_pt =
+            PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
 
           const unsigned n_data_values = data_pt->nvalue();
           for (unsigned i = 0; i < n_data_values; i++)
@@ -1992,10 +1995,12 @@ namespace oomph
                 ipt_father, l) *
               psi_father[l];
             for (unsigned data_type = 0;
-                 data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 data_type <
+                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
-              Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+              Data* data_pt =
+                PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
               Data* data_father_pt =
                 cast_father_element_pt->Plastic_data_pt[ipt_father][data_type];
 

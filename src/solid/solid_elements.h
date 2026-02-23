@@ -411,7 +411,6 @@ namespace oomph
                              DenseMatrix<double>& g);
 
   protected:
-
     /// Pointer to isotropic growth function
     IsotropicGrowthFctPt Isotropic_growth_fct_pt;
 
