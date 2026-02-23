@@ -404,7 +404,14 @@ namespace oomph
       }
     }
 
+    // Compute the undeformed metric tensor at a given integration point
+    virtual void calculate_g(const unsigned& ipt,
+                             const double& diag_entry,
+                             const DenseMatrix<double>& G,
+                             DenseMatrix<double>& g);
+
   protected:
+
     /// Pointer to isotropic growth function
     IsotropicGrowthFctPt Isotropic_growth_fct_pt;
 
@@ -604,13 +611,6 @@ namespace oomph
     {
       return this->get_d_stress_dG_upper(g, G, sigma, d_sigma_dG);
     }
-
-    // Compute the undeformed metric tensor at a given integration point
-    virtual void calculate_g(const unsigned& ipt,
-                             const double diag_entry,
-                             const DenseMatrix<double>& G,
-                             DenseMatrix<double>& g);
-
 
   private:
     /// Unpin all solid pressure dofs -- empty as there are no pressures

@@ -160,6 +160,19 @@ namespace oomph
         G(i, j) = G(j, i);
       }
     }
+    // +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+    // This function is const. as such we need calculate_g to be const, however
+    // the dependencies propagate throughout all of the plastic elements.
+    // A lot of functions end up needing to be const, including functions which
+    // modify data stored by pointer by the plastic element. Not ideal.
+    // +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+    // We use Cartesian coordinates as the reference coordinate
+    // system. In this case the undeformed metric tensor is always
+    // the identity matrix -- stretched by the isotropic growth
+    // double diag_entry = pow(gamma, 2.0 / double(DIM));
+    // DenseMatrix<double> g;
+    // this->calculate_g(ipt, diag_entry, G, g);
 
     // Fill in the strain tensor
     for (unsigned i = 0; i < DIM; i++)
@@ -330,10 +343,10 @@ namespace oomph
         }
       }
 
-      // Compute the undeformed coordinates from the deformed ones
+      // Compute the undeformed metric tensor
       double diag_entry = pow(gamma, 2.0 / double(DIM));
       DenseMatrix<double> g;
-      calculate_g(ipt, diag_entry, G, g);
+      this->calculate_g(ipt, diag_entry, G, g);
 
 
       // Now calculate the stress tensor from the constitutive law
@@ -554,10 +567,10 @@ namespace oomph
 
   // Compute the undeformed metric tensor at a given integration point
   template<unsigned DIM>
-  void PVDEquations<DIM>::calculate_g(const unsigned& ipt,
-                                      const double diag_entry,
-                                      const DenseMatrix<double>& G,
-                                      DenseMatrix<double>& g)
+  void PVDEquationsBase<DIM>::calculate_g(const unsigned& ipt,
+                                          const double& diag_entry,
+                                          const DenseMatrix<double>& G,
+                                          DenseMatrix<double>& g)
   {
     g.resize(DIM, DIM);
     for (unsigned i = 0; i < DIM; i++)
@@ -983,27 +996,6 @@ namespace oomph
     unsigned ipt = 0;
     this->get_isotropic_growth(ipt, s, xi, gamma);
 
-    // We use Cartesian coordinates as the reference coordinate
-    // system. In this case the undeformed metric tensor is always
-    // the identity matrix -- stretched by the isotropic growth
-    double diag_entry = pow(gamma, 2.0 / double(DIM));
-    DenseMatrix<double> g(DIM);
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        if (i == j)
-        {
-          g(i, j) = diag_entry;
-        }
-        else
-        {
-          g(i, j) = 0.0;
-        }
-      }
-    }
-
-
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
     DenseMatrix<double> interpolated_G(DIM);
@@ -1060,6 +1052,13 @@ namespace oomph
         G(i, j) = G(j, i);
       }
     }
+
+    // We use Cartesian coordinates as the reference coordinate
+    // system. In this case the undeformed metric tensor is always
+    // the identity matrix -- stretched by the isotropic growth
+    double diag_entry = pow(gamma, 2.0 / double(DIM));
+    DenseMatrix<double> g;
+    this->calculate_g(ipt, diag_entry, G, g);
 
     // Now calculate the stress tensor from the constitutive law
     get_stress(g, G, sigma);
@@ -1417,26 +1416,6 @@ namespace oomph
       Vector<double> b(DIM);
       this->body_force(interpolated_xi, b);
 
-      // We use Cartesian coordinates as the reference coordinate
-      // system. In this case the undeformed metric tensor is always
-      // the identity matrix -- stretched by the isotropic growth
-      double diag_entry = pow(gamma, 2.0 / double(DIM));
-      DenseMatrix<double> g(DIM);
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          if (i == j)
-          {
-            g(i, j) = diag_entry;
-          }
-          else
-          {
-            g(i, j) = 0.0;
-          }
-        }
-      }
-
       // Premultiply the undeformed volume ratio (from the isotropic
       // growth), the weights and the Jacobian
       double W = gamma * w * J;
@@ -1472,6 +1451,13 @@ namespace oomph
           G(i, j) = G(j, i);
         }
       }
+
+      // We use Cartesian coordinates as the reference coordinate
+      // system. In this case the undeformed metric tensor is always
+      // the identity matrix -- stretched by the isotropic growth
+      double diag_entry = pow(gamma, 2.0 / double(DIM));
+      DenseMatrix<double> g;
+      this->calculate_g(ipt, diag_entry, G, g);
 
       // Now calculate the deviatoric stress and all pressure-related
       // quantitites
@@ -2308,26 +2294,6 @@ namespace oomph
     unsigned ipt = 0;
     this->get_isotropic_growth(ipt, s, xi, gamma);
 
-    // We use Cartesian coordinates as the reference coordinate
-    // system. In this case the undeformed metric tensor is always
-    // the identity matrix -- stretched by the isotropic growth
-    double diag_entry = pow(gamma, 2.0 / double(DIM));
-    DenseMatrix<double> g(DIM);
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        if (i == j)
-        {
-          g(i, j) = diag_entry;
-        }
-        else
-        {
-          g(i, j) = 0.0;
-        }
-      }
-    }
-
 
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
@@ -2386,6 +2352,14 @@ namespace oomph
         G(i, j) = G(j, i);
       }
     }
+
+
+    // We use Cartesian coordinates as the reference coordinate
+    // system. In this case the undeformed metric tensor is always
+    // the identity matrix -- stretched by the isotropic growth
+    double diag_entry = pow(gamma, 2.0 / double(DIM));
+    DenseMatrix<double> g;
+    this->calculate_g(ipt, diag_entry, G, g);
 
 
     // Calculate the interpolated solid pressure
