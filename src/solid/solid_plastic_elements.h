@@ -1953,8 +1953,12 @@ namespace oomph
             for (unsigned data_type = 0;
                  data_type <
                  PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 data_type <
+                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
+              Data* data_pt =
+                PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
               Data* data_pt =
                 PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
               Data* data_father_pt =

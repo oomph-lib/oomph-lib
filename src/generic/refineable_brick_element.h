@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -226,7 +226,7 @@ namespace oomph
     virtual void oc_hang_helper(const int& value_id,
                                 const int& my_edge,
                                 std::ofstream& output_hangfile);
-    
+
     virtual void get_father_s(const Vector<double>& s,
                               Vector<double>& s_father) const override;
   };
