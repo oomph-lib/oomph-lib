@@ -31,7 +31,6 @@ namespace oomph
     // A pointer to the plastic constitutive law
     PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
 
-  private:
     // We use an enum to define the indices in the vectors at which the
     // different types of plastic data are stored. This simplifies things
     // considerably when searching for plastic data.
@@ -46,6 +45,8 @@ namespace oomph
       H_INDEX = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
       NUMBER_OF_PLASTIC_VARIABLE_TYPES
     };
+
+  private:
     const static std::vector<std::string> Plastic_data_names;
     // We store a vector of indices of the plastic data in internal data
     // so we can assign timesteppers etc more easily
@@ -648,6 +649,11 @@ namespace oomph
     bool is_there_plastic_deformation(const unsigned int ipt);
 
   public:
+    Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
+    {
+      return Plastic_data_pt[ipt][data_type];
+    }
+
     void enable_plastic_solve_by_fd()
     {
       Plastic_solve_use_fd = true;
@@ -1901,7 +1907,7 @@ namespace oomph
              data_type++)
         {
           Data* data_pt =
-            PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+            PlasticEquations<DIM>::plastic_data_pt(ipt, data_type);
 
           const unsigned n_data_values = data_pt->nvalue();
           for (unsigned i = 0; i < n_data_values; i++)
@@ -1953,16 +1959,12 @@ namespace oomph
             for (unsigned data_type = 0;
                  data_type <
                  PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-                 data_type <
-                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
               Data* data_pt =
-                PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
-              Data* data_pt =
-                PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+                PlasticEquations<DIM>::plastic_data_pt(ipt, data_type);
               Data* data_father_pt =
-                cast_father_element_pt->Plastic_data_pt[ipt_father][data_type];
+                cast_father_element_pt->plastic_data_pt(ipt_father, data_type);
 
               const unsigned n_data_values = data_pt->nvalue();
               for (unsigned i = 0; i < n_data_values; i++)
