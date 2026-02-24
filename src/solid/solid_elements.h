@@ -408,7 +408,7 @@ namespace oomph
     virtual void calculate_g(const unsigned& ipt,
                              const double& diag_entry,
                              const DenseMatrix<double>& G,
-                             DenseMatrix<double>& g);
+                             DenseMatrix<double>& g) const;
 
   protected:
 

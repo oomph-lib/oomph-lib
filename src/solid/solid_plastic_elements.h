@@ -1566,11 +1566,14 @@ namespace oomph
     void calculate_g(const unsigned& ipt,
                      const double& diag_entry,
                      const DenseMatrix<double>& G,
-                     DenseMatrix<double>& g) override
+                     DenseMatrix<double>& g) const override
     {
       // Compute the undeformed coordinates from the deformed ones
       // Solve the plastic equations
-      this->plastic_newton_solve(ipt, G);
+      // Could we just assume that the plastic data is consistent with G?
+      // This will be the case after the combined (plastic and elastic) Newton
+      // solve has converged so shouldn't affect outputting
+      // this->plastic_newton_solve(ipt, G);
 
       DenseMatrix<double> invFp(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
@@ -1749,6 +1752,9 @@ namespace oomph
 
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
+      // This is called at least twice per Newton solve but we only want one
+      // So we only all when we compute residuals, NOT when we compute jacobian
+      // since jacobian computation always follows a residual computation
       PlasticEquations<DIM>::plastic_newton_solve();
 
       PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
@@ -1760,8 +1766,6 @@ namespace oomph
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
-      PlasticEquations<DIM>::plastic_newton_solve();
-
       PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
         residuals, jacobian, 1);
     }
@@ -1862,6 +1866,9 @@ namespace oomph
 
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
+      // This is called at least twice per Newton solve but we only want one
+      // So we only all when we compute residuals, NOT when we compute jacobian
+      // since jacobian computation always follows a residual computation
       PlasticEquations<DIM>::plastic_newton_solve();
 
       RefineablePVDEquations<DIM>::
@@ -1874,8 +1881,6 @@ namespace oomph
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
-      PlasticEquations<DIM>::plastic_newton_solve();
-
       RefineablePVDEquations<
         DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
                                                             jacobian,

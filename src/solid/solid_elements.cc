@@ -116,25 +116,6 @@ namespace oomph
     unsigned ipt = 0;
     get_isotropic_growth(ipt, s, interpolated_xi, gamma);
 
-    // We use Cartesian coordinates as the reference coordinate
-    // system. In this case the undeformed metric tensor is always
-    // the identity matrix -- stretched by the isotropic growth
-    double diag_entry = pow(gamma, 2.0 / double(DIM));
-    DenseMatrix<double> g(DIM);
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        if (i == j)
-        {
-          g(i, j) = diag_entry;
-        }
-        else
-        {
-          g(i, j) = 0.0;
-        }
-      }
-    }
 
 
     // Declare and calculate the deformed metric tensor
@@ -170,9 +151,9 @@ namespace oomph
     // We use Cartesian coordinates as the reference coordinate
     // system. In this case the undeformed metric tensor is always
     // the identity matrix -- stretched by the isotropic growth
-    // double diag_entry = pow(gamma, 2.0 / double(DIM));
-    // DenseMatrix<double> g;
-    // this->calculate_g(ipt, diag_entry, G, g);
+    double diag_entry = pow(gamma, 2.0 / double(DIM));
+    DenseMatrix<double> g;
+    this->calculate_g(ipt, diag_entry, G, g);
 
     // Fill in the strain tensor
     for (unsigned i = 0; i < DIM; i++)
@@ -570,7 +551,7 @@ namespace oomph
   void PVDEquationsBase<DIM>::calculate_g(const unsigned& ipt,
                                           const double& diag_entry,
                                           const DenseMatrix<double>& G,
-                                          DenseMatrix<double>& g)
+                                          DenseMatrix<double>& g) const
   {
     g.resize(DIM, DIM);
     for (unsigned i = 0; i < DIM; i++)
