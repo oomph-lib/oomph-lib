@@ -117,7 +117,6 @@ namespace oomph
     get_isotropic_growth(ipt, s, interpolated_xi, gamma);
 
 
-
     // Declare and calculate the deformed metric tensor
     DenseMatrix<double> G(DIM);
 
