@@ -29,7 +29,6 @@ oomph_add_executable(
   NAME tensioned_string2
   SOURCES tensioned_string2.cc
   LIBRARIES oomph::beam oomph::meshes oomph::generic)
-  
 
 # ---------------------------------- TESTING ----------------------------------
 
