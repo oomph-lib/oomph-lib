@@ -286,6 +286,15 @@ namespace oomph
     return (det);
   }
 
+  /// Broken by default
+  void RefineableElement::get_father_s(const Vector<double>& s,
+                                       Vector<double>& s_father) const
+  {
+    throw OomphLibError("get_father_s hasn't been implemented yet",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+
   //========================================================================
   /// Deactivate the element by marking setting all local pointers to
   /// obsolete nodes to zero

@@ -1821,10 +1821,14 @@ namespace oomph
       public virtual RefineableSolidElement
   {
   protected:
-
+    // We need to get the plastic data from the children at the integral points
     void rebuild_from_sons()
     {
+      // For each integral point in this element find the daughter element it
+      // sits in and the local coordinate in that element.
 
+      // Interpolate the plastic data in the child element to that coordinate
+      // assign it to the plastic data at the integral point in this element
     }
 
     void further_build()
@@ -1883,85 +1887,16 @@ namespace oomph
       RefineableQPVDElement<DIM, NNODE>::further_build();
       RefineablePlasticEquations<DIM>::further_build();
 
-      Vector<double> s_father;
-      if constexpr (DIM == 2)
-      {
-        using namespace QuadTreeNames;
-        // What type of son am I? Ask my quadtree representation...
-        int son_type = this->quadtree_pt()->son_type();
-
-        // Pointer to my father (in element impersonation)
-        RefineableElement* father_el_pt = this->quadtree_pt()->father_pt()->object_pt();
-
-        s_father.resize(2);
-
-        // Son midpoint is located at the following coordinates in father element:
-
-        // South west son
-        if (son_type == SW)
-        {
-          s_father[0] = -0.5;
-          s_father[1] = -0.5;
-        }
-        // South east son
-        else if (son_type == SE)
-        {
-          s_father[0] = 0.5;
-          s_father[1] = -0.5;
-        }
-        // North east son
-        else if (son_type == NE)
-        {
-          s_father[0] = 0.5;
-          s_father[1] = 0.5;
-        }
-
-        // North west son
-        else if (son_type == NW)
-        {
-          s_father[0] = -0.5;
-          s_father[1] = 0.5;
-        }
-      }
-      else if constexpr (DIM == 3)
-      {
-        using namespace OcTreeNames;
-
-        // What type of son am I? Ask my octree representation...
-        int son_type = this->octree_pt()->son_type();
-
-        // Pointer to my father (in element impersonation)
-        RefineableQElement<3>* father_el_pt = dynamic_cast<RefineableQElement<3>*>(
-          this->octree_pt()->father_pt()->object_pt());
-
-        s_father.resize(3);
-        // Son midpoint is located at the following coordinates in father element:
-        for (unsigned i = 0; i < 3; i++)
-        {
-          s_father[i] = 0.5 * OcTree::Direction_to_vector[son_type][i];
-        }
-      }
-      else
-      {
-        static_assert(DIM == 2 || DIM == 3,
-                      "RefineableQPlasticPVDElement supports only 2D (quad) or 3D (brick)");
-      }
-
-      PlasticEquations<DIM>* cast_father_element_pt =
-        dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
-        
-      unsigned n_ipt_father = cast_father_element_pt->integral_pt()->nweight();
-      unsigned n_node_father = cast_father_element_pt->nnode();
-      unsigned n_ipt = this->integral_pt()->nweight();
-
       // Zero all plastic data values first
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         for (unsigned data_type = 0;
-             data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type <
+             PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
-          Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+          Data* data_pt =
+            PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
 
           const unsigned n_data_values = data_pt->nvalue();
           for (unsigned i = 0; i < n_data_values; i++)
@@ -1971,6 +1906,14 @@ namespace oomph
         }
       }
 
+      PlasticEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
+
+      const unsigned n_ipt_father =
+        cast_father_element_pt->integral_pt()->nweight();
+      const unsigned n_node_father = cast_father_element_pt->nnode();
+      const unsigned n_ipt = this->integral_pt()->nweight();
+
       InterpolateFromIntegralPointsBase* father_ipt_interpolation =
         dynamic_cast<InterpolateFromIntegralPointsBase*>(
           this->father_element_pt());
@@ -1978,6 +1921,17 @@ namespace oomph
       // Now construct the plastic data values from the father element
       for (unsigned ipt = 0; ipt < n_ipt; ipt++)
       {
+        // Get the local coordinate of the integral point
+        Vector<double> s(DIM);
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          s[DIM] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // Get the local coordinate in the father element
+        Vector<double> s_father(DIM);
+        this->get_father_s(s, s_father);
+
         // Father element shape functions
         Shape psi_father(n_node_father);
         cast_father_element_pt->shape(s_father, psi_father);
@@ -1992,10 +1946,12 @@ namespace oomph
                 ipt_father, l) *
               psi_father[l];
             for (unsigned data_type = 0;
-                 data_type < PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 data_type <
+                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
-              Data* data_pt = PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
+              Data* data_pt =
+                PlasticEquations<DIM>::Plastic_data_pt[ipt][data_type];
               Data* data_father_pt =
                 cast_father_element_pt->Plastic_data_pt[ipt_father][data_type];
 
