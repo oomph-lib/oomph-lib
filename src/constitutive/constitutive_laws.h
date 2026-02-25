@@ -305,6 +305,89 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////
 
 
+  //=====================================================================
+  /// A modified neo hookean strain energy function as presented in
+  ///
+  /// Eq. 135 of Vladimirov, I.N., Pietryga, M.P. and Reese, S. (2008), On the
+  /// modelling of non-linear kinematic hardening at finite strains with
+  /// application to springback—Comparison of time integration algorithms. Int.
+  /// J. Numer. Meth. Engng., 75: 1-28. https://doi.org/10.1002/nme.2234
+  ///
+  /// Eq. 28 of Vladimirov, I.N., Pietryga, M.P. and Reese, S. (2008), On the
+  /// modelling of non-linear kinematic hardening at finite strains with
+  /// application to springback—Comparison of time integration algorithms. Int.
+  /// J. Numer. Meth. Engng., 75: 1-28. https://doi.org/10.1002/nme.2234
+  ///
+  /// The model takes the lame parameters \Lambda and \Mu as input
+  //====================================================================
+  class ModifiedNeoHookean : public StrainEnergyFunction
+  {
+  public:
+    /// Constructor takes the pointers to the constitutive parameters:
+    /// The first lame parameter (lambda) and the second one / the shear modulus
+    /// (mu).
+    ModifiedNeoHookean(double* lambda_pt, double* mu_pt)
+      : StrainEnergyFunction(), Lambda_pt(lambda_pt), Mu_pt(mu_pt)
+    {
+    }
+
+    /// Virtual destructor
+    virtual ~ModifiedNeoHookean() = default;
+
+    /// Return the strain energy in terms of strain tensor
+    double W(const DenseMatrix<double>& gamma)
+    {
+      return StrainEnergyFunction::W(gamma);
+    }
+
+
+    /// Return the strain energy in terms of the strain invariants
+    double W(const Vector<double>& I)
+    {
+      const double log_I3 = std::log(I[2]);
+
+      // Note log(sqrt(I_3)) = 0.5 log(I_3)
+      const double term1 = 0.5 * (*Mu_pt) * (I[0] - 3.0 - log_I3);
+      const double term2 = 0.25 * (*Lambda_pt) * (I[2] - 1.0 - log_I3);
+
+      return term1 + term2;
+    }
+
+
+    /// Return the derivatives of the strain energy function with
+    /// respect to the strain invariants
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
+    {
+      const double inv_I3 = 1.0 / I[2];
+      dWdI[0] = 0.5 * (*Mu_pt);
+      dWdI[1] = 0.0;
+      dWdI[2] = -0.5 * (*Mu_pt) * inv_I3 + 0.25 * (*Lambda_pt) * (1.0 - inv_I3);
+    }
+
+
+    /// Pure virtual function in which the user must declare if the
+    /// constitutive equation requires an incompressible formulation
+    /// in which the volume constraint is enforced explicitly.
+    /// Used as a sanity check in PARANOID mode. False.
+    bool requires_incompressibility_constraint()
+    {
+      return false;
+    }
+
+  private:
+    /// First lame constant
+    double* Lambda_pt = nullptr;
+
+    /// Second lame constant
+    double* Mu_pt = nullptr;
+  };
+
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+
   //===========================================================================
   /// A class for constitutive laws for elements that solve
   /// the equations of solid mechanics based upon the principle of virtual
