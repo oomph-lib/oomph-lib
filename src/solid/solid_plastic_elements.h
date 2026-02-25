@@ -1663,6 +1663,10 @@ namespace oomph
           }
 
           g_new.initialise(0.0);
+
+          // Need to call plastic solve to update the internal variables to the
+          // new G
+          plastic_newton_solve(ipt, G_test);
           calculate_g(ipt, diag_entry, G_test, g_new);
 
           // We can reduce this to only the upper (or lower?) triangular
