@@ -1889,8 +1889,7 @@ namespace oomph
         Shape psi_child(n_node_child);
         child_pt->shape(s_child, psi_child);
 
-        const unsigned n_ipt_child =
-          child_pt->integral_pt()->nweight();
+        const unsigned n_ipt_child = child_pt->integral_pt()->nweight();
 
         // Interpolate from the father integral points to local integral
         for (unsigned ipt_child = 0; ipt_child < n_ipt_child; ipt_child++)
@@ -1905,8 +1904,7 @@ namespace oomph
                  PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
-              Data* data_pt =
-                this->plastic_data_pt(ipt, data_type);
+              Data* data_pt = this->plastic_data_pt(ipt, data_type);
               Data* data_father_pt =
                 child_pt->plastic_data_pt(ipt_child, data_type);
 
@@ -2032,16 +2030,15 @@ namespace oomph
           for (unsigned l = 0; l < n_node_father; l++)
           {
             const double interp_weight =
-              cast_father_element_pt->integral_point_to_node_weight(
-                ipt_father, l) *
+              cast_father_element_pt->integral_point_to_node_weight(ipt_father,
+                                                                    l) *
               psi_father[l];
             for (unsigned data_type = 0;
                  data_type <
                  PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
-              Data* data_pt =
-                this->plastic_data_pt(ipt, data_type);
+              Data* data_pt = this->plastic_data_pt(ipt, data_type);
               Data* data_father_pt =
                 cast_father_element_pt->plastic_data_pt(ipt_father, data_type);
 
