@@ -1838,11 +1838,90 @@ namespace oomph
     // We need to get the plastic data from the children at the integral points
     void rebuild_from_sons()
     {
-      // For each integral point in this element find the daughter element it
-      // sits in and the local coordinate in that element.
+      const unsigned nipt = this->integral_pt()->nweight();
 
-      // Interpolate the plastic data in the child element to that coordinate
-      // assign it to the plastic data at the integral point in this element
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        // get the local coordinate of the integral point
+        Vector<double> s(DIM);
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // Determine what child element the integral point is within
+        // Abd get the local cooordinate within that element
+        unsigned child_num = 0;
+        Vector<double> s_child(DIM, 0.0);
+
+        if (DIM == 2)
+        {
+          using namespace QuadTreeNames;
+
+          child_num += (s[0] >= 0.0);
+          child_num += (s[1] >= 0.0) * 2;
+
+          s_child[0] = (s[0] >= 0.0) ? (s[0] - 0.5) * 2.0 : (s[0] + 0.5) * 2.0;
+          s_child[1] = (s[1] >= 0.0) ? (s[1] - 0.5) * 2.0 : (s[1] + 0.5) * 2.0;
+        }
+        else if (DIM == 3)
+        {
+          child_num += (s[0] >= 0.0);
+          child_num += (s[1] >= 0.0) * 2;
+          child_num += (s[2] >= 0.0) * 4;
+
+          s_child[0] = (s[0] >= 0.0) ? (s[0] - 0.5) * 2.0 : (s[0] + 0.5) * 2.0;
+          s_child[1] = (s[1] >= 0.0) ? (s[1] - 0.5) * 2.0 : (s[1] + 0.5) * 2.0;
+          s_child[2] = (s[2] >= 0.0) ? (s[2] - 0.5) * 2.0 : (s[2] + 0.5) * 2.0;
+        }
+        else
+        {
+          // Throw an error
+        }
+
+        RefineablePlasticEquations<DIM>* child_pt =
+          dynamic_cast<RefineablePlasticEquations<DIM>*>(
+            this->tree_pt()->son_pt(child_num));
+
+        const unsigned n_node_child = child_pt->nnode();
+
+        // Father element shape functions
+        Shape psi_child(n_node_child);
+        child_pt->shape(s_child, psi_child);
+
+        const unsigned n_ipt_child =
+          child_pt->integral_pt()->nweight();
+
+        // Interpolate from the father integral points to local integral
+        for (unsigned ipt_child = 0; ipt_child < n_ipt_child; ipt_child++)
+        {
+          for (unsigned l = 0; l < n_node_child; l++)
+          {
+            const double interp_weight =
+              child_pt->integral_point_to_node_weight(ipt_child, l) *
+              psi_child[l];
+            for (unsigned data_type = 0;
+                 data_type <
+                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 data_type++)
+            {
+              Data* data_pt =
+                this->plastic_data_pt(ipt, data_type);
+              Data* data_father_pt =
+                child_pt->plastic_data_pt(ipt_child, data_type);
+
+              const unsigned n_data_values = data_pt->nvalue();
+              for (unsigned i = 0; i < n_data_values; i++)
+              {
+                const double value = data_pt->value(i);
+
+                data_pt->set_value(
+                  i, value + interp_weight * data_father_pt->value(i));
+              }
+            }
+          }
+        }
+      }
     }
 
     void further_build()
@@ -1929,10 +2008,6 @@ namespace oomph
       const unsigned n_node_father = cast_father_element_pt->nnode();
       const unsigned n_ipt = this->integral_pt()->nweight();
 
-      InterpolateFromIntegralPointsBase* father_ipt_interpolation =
-        dynamic_cast<InterpolateFromIntegralPointsBase*>(
-          this->father_element_pt());
-
       // Now construct the plastic data values from the father element
       for (unsigned ipt = 0; ipt < n_ipt; ipt++)
       {
@@ -1940,7 +2015,7 @@ namespace oomph
         Vector<double> s(DIM);
         for (unsigned i = 0; i < DIM; i++)
         {
-          s[DIM] = this->integral_pt()->knot(ipt, i);
+          s[i] = this->integral_pt()->knot(ipt, i);
         }
 
         // Get the local coordinate in the father element
@@ -1957,7 +2032,7 @@ namespace oomph
           for (unsigned l = 0; l < n_node_father; l++)
           {
             const double interp_weight =
-              father_ipt_interpolation->integral_point_to_node_weight(
+              cast_father_element_pt->integral_point_to_node_weight(
                 ipt_father, l) *
               psi_father[l];
             for (unsigned data_type = 0;
@@ -1966,7 +2041,7 @@ namespace oomph
                  data_type++)
             {
               Data* data_pt =
-                PlasticEquations<DIM>::plastic_data_pt(ipt, data_type);
+                this->plastic_data_pt(ipt, data_type);
               Data* data_father_pt =
                 cast_father_element_pt->plastic_data_pt(ipt_father, data_type);
 
