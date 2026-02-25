@@ -140,13 +140,7 @@ namespace oomph
         G(i, j) = G(j, i);
       }
     }
-    // +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-    // This function is const. as such we need calculate_g to be const, however
-    // the dependencies propagate throughout all of the plastic elements.
-    // A lot of functions end up needing to be const, including functions which
-    // modify data stored by pointer by the plastic element. Not ideal.
-    // +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-
+    
     // We use Cartesian coordinates as the reference coordinate
     // system. In this case the undeformed metric tensor is always
     // the identity matrix -- stretched by the isotropic growth
@@ -1038,7 +1032,7 @@ namespace oomph
     // the identity matrix -- stretched by the isotropic growth
     double diag_entry = pow(gamma, 2.0 / double(DIM));
     DenseMatrix<double> g;
-    this->calculate_g(ipt, diag_entry, G, g);
+    this->calculate_g(ipt, diag_entry, G, g);    
 
     // Now calculate the stress tensor from the constitutive law
     get_stress(g, G, sigma);
