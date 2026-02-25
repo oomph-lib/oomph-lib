@@ -324,15 +324,13 @@ namespace oomph
     /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
+    /// By default, the finite difference method is employed.
     virtual void dposition(const Vector<double>& zeta,
                            DenseMatrix<double>& drdzeta) const
     {
-      // By default, the finite difference method is employed.
-      oomph_info << "The finite difference method is employed." << std::endl;
-
       // FD step
-      // For double precision, the optimal step size is 1.0e-5
-      double dzeta = 1.0e-5;
+      // The optimal step size is 1.0e-8
+      double dzeta = 1.0e-8;
 
       // Position at the current Lagrangian coordinate
       Vector<double> r(Ndim, 0.0);
@@ -372,14 +370,10 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
+    /// By default, we use a central-difference scheme.
     virtual void d2position(const Vector<double>& zeta,
                             RankThreeTensor<double>& ddrdzeta) const
     {
-      // For the second derivative, we use a central-difference scheme.
-      oomph_info
-        << "For the second derivative, we use a central-difference scheme."
-        << std::endl;
-
       // FD step
       // For double precision, the optimal second-order central-difference
       // step size is 1.0e-5
@@ -1423,121 +1417,6 @@ namespace oomph
     /// x-half axis
     double B;
   };
-
-
-  // //===========================================================
-  // /// Elliptical tube with half axes a and b.
-  // ///
-  // /// \f[ {\bf r} = ( a \cos(\zeta_1), b \sin(zeta_1), \zeta_0)^T \f]
-  // ///
-  // //===========================================================
-  // class RoundedSquare : public GeomObject
-  // {
-  // public:
-  //   /// Constructor: Specify half length of sides of the square and
-  //   /// radius of the rounded corners
-  //   /// Note that half_side_length > radius
-  //   RoundedSquare(const double& half_side_length, const double& radius)
-  //   : GeomObject(1, 2), Half_side_length(half_side_length), Radius(radius)
-  //   {
-  //   }
-
-  //   /// Broken copy constructor
-  //   RoundedSquare(const RoundedSquare& node) = delete;
-
-  //   /// Broken assignment operator
-  //   void operator=(const RoundedSquare&) = delete;
-
-  //   /// Access function to half length of sides of the square
-  //   double& half_side_length()
-  //   {
-  //     return Half_side_length;
-  //   }
-
-  //   /// Access function to radius of the rounded corners
-  //   double& radius()
-  //   {
-  //     return Radius;
-  //   }
-
-  //   /// Position vector
-  //   /// Note that zeta[0] must from 0 to 2pi
-  //   void position(const Vector<double>& zeta, Vector<double>& r) const
-  //   {
-  //     // Note that half_side_length > radius
-  //     // Unit angle for straight line
-  //     double alpha = atan((Half_side_length-Radius)/Half_side_length);
-
-  //     // Note that half_side_length > radius
-  //     // Unit angle for a quarter of circle
-  //     double beta = (MathematicalConstants::Pi*Radius)/(2.0*
-  //       sqrt(Half_side_length*Half_side_length+(Half_side_length-Radius)*
-  //       (Half_side_length-Radius)));
-
-  //     if(zeta[0]>=0.0 && zeta[0]<alpha)
-  //     {
-  //       r[0] = Half_side_length;
-  //       r[1] = Half_side_length*tan(zeta[0]);
-  //     }
-  //     else if(zeta[0]>=alpha && zeta[0]<alpha+beta)
-  //     {
-  //       // Note that here we consider the centre of the circle is the origin
-  //       r[0] = sqrt(Half_side_length*Half_side_length+
-  //       (Half_side_length-Radius)*(Half_side_length-Radius))*cos(alpha+zeta[0]);
-  //       r[1] = sqrt(Half_side_length*Half_side_length+
-  //       (Half_side_length-Radius)*(Half_side_length-Radius))*sin(alpha+zeta[0]);
-  //     }
-  //     else if(zeta[0]>=alpha+beta && zeta[0]<MathematicalConstants::Pi/2.0)
-  //     {
-  //       r[0] =
-  //       Half_side_length*tan(MathematicalConstants::Pi/2.0-alpha-beta-zeta[0]);
-  //       r[1] = Half_side_length;
-  //     }
-  //     else if(zeta[0]>=MathematicalConstants::Pi/2.0 &&
-  //     zeta[0]<3.0*alpha+beta)
-  //     {
-  //       r[0] = -Half_side_length*tan(zeta[0]-MathematicalConstants::Pi/2.0);
-  //       r[1] = Half_side_length;
-  //     }
-  //     else if(zeta[0]>=3.0*alpha+beta && zeta[0]<3.0*alpha+2.0*beta)
-  //     {
-  //       // Note that here we consider the centre of the circle is the origin
-  //       r[0] = sqrt(Half_side_length*Half_side_length+
-  //       (Half_side_length-Radius)*(Half_side_length-Radius))*cos(3.0*alpha+beta+zeta[0]);
-  //       r[1] = sqrt(Half_side_length*Half_side_length+
-  //       (Half_side_length-Radius)*(Half_side_length-Radius))*sin(3.0*alpha+beta+zeta[0]);
-  //     }
-  //     else if(zeta[0]>=3.0*alpha+2.0*beta &&
-  //     zeta[0]<MathematicalConstants::Pi)
-  //     {
-  //       r[0] = -Half_side_length;
-  //       r[1] =
-  //       Half_side_length*tan(MathematicalConstants::Pi-zeta[0]-3.0*alpha+2.0*beta);
-  //     }
-  //   }
-
-
-  //   /// Position vector (dummy unsteady version returns steady version)
-  //   void position(const unsigned& t,
-  //                 const Vector<double>& zeta,
-  //                 Vector<double>& r) const
-  //   {
-  //     position(zeta, r);
-  //   }
-
-  //   /// How many items of Data does the shape of the object depend on?
-  //   virtual unsigned ngeom_data() const
-  //   {
-  //     return 0;
-  //   }
-
-  // private:
-  //   /// Half length of the sides of the square
-  //   double Half_side_length;
-
-  //   /// Radius of the rounded corners
-  //   double Radius;
-  // };
 
 
 } // namespace oomph
