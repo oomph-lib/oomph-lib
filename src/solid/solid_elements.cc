@@ -1501,8 +1501,15 @@ namespace oomph
         {
           // Get the "upper triangular" entries of the derivatives of the stress
           // tensor with respect to G
-          this->get_d_stress_dG_upper(
-            g, G, sigma, detG, interpolated_solid_p, d_stress_dG, d_detG_dG);
+          this->get_d_stress_dG_upper(ipt,
+                                      diag_entry,
+                                      g,
+                                      G,
+                                      sigma,
+                                      detG,
+                                      interpolated_solid_p,
+                                      d_stress_dG,
+                                      d_detG_dG);
         }
       }
       // Nearly incompressible: Compute the deviatoric part of the
@@ -1526,7 +1533,9 @@ namespace oomph
         {
           // Get the "upper triangular" entries of the derivatives of the stress
           // tensor with respect to G
-          this->get_d_stress_dG_upper(g,
+          this->get_d_stress_dG_upper(ipt,
+                                      diag_entry,
+                                      g,
                                       G,
                                       sigma,
                                       gen_dil,

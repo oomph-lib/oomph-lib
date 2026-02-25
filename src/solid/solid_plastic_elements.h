@@ -22,7 +22,7 @@
 namespace oomph
 {
   template<unsigned DIM>
-  class PlasticEquations : public virtual PVDEquations<DIM>
+  class PlasticEquationsBase : public virtual PVDEquationsBase<DIM>
   {
   protected:
     // If finite difference should be used for the plastic solve;
@@ -423,7 +423,11 @@ namespace oomph
                                        DenseMatrix<double>& Mbar)
     {
       return compute_mandel_stress_elastic(
-        invFp, FtF, Mbar, PlasticEquations<DIM>::Dummy_rankfourtensor, false);
+        invFp,
+        FtF,
+        Mbar,
+        PlasticEquationsBase<DIM>::Dummy_rankfourtensor,
+        false);
     }
 
     void compute_mandellike_kinematic_hardening(
@@ -436,7 +440,7 @@ namespace oomph
                                                 DenseMatrix<double>& bar_Mk)
     {
       return compute_mandellike_kinematic_hardening(
-        Fpks, bar_Mk, PlasticEquations<DIM>::Dummy_rankfourtensor, false);
+        Fpks, bar_Mk, PlasticEquationsBase<DIM>::Dummy_rankfourtensor, false);
     }
 
     void compute_mandellike_elastic_core(const DenseMatrix<double>& Fpcs,
@@ -448,7 +452,7 @@ namespace oomph
                                          DenseMatrix<double>& bar_Mc)
     {
       return compute_mandellike_elastic_core(
-        Fpcs, bar_Mc, PlasticEquations<DIM>::Dummy_rankfourtensor, false);
+        Fpcs, bar_Mc, PlasticEquationsBase<DIM>::Dummy_rankfourtensor, false);
     }
 
     void compute_mandel_stress_total(const DenseMatrix<double>& bar_M,
@@ -652,6 +656,11 @@ namespace oomph
     Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
     {
       return Plastic_data_pt[ipt][data_type];
+    }
+
+    double* plastic_dof_data_pt(const unsigned& ipt, const unsigned& ndof) const
+    {
+      return Plastic_dof_data_pt[ipt][ndof];
     }
 
     void enable_plastic_solve_by_fd()
@@ -1480,7 +1489,7 @@ namespace oomph
       }
     }
 
-    PlasticEquations() : PVDEquations<DIM>()
+    PlasticEquationsBase() : PVDEquationsBase<DIM>()
     {
       this->unity.resize(DIM, DIM, 0.0);
       for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
@@ -1489,14 +1498,14 @@ namespace oomph
       construct_plastic_data();
     }
 
-    ~PlasticEquations() {}
+    ~PlasticEquationsBase() {}
 
     virtual void set_internal_data_time_stepper(
       const unsigned& i,
       TimeStepper* const& time_stepper_pt,
       const bool& preserve_existing_data) override
     {
-      PVDEquations<DIM>::set_internal_data_time_stepper(
+      PVDEquationsBase<DIM>::set_internal_data_time_stepper(
         i, time_stepper_pt, preserve_existing_data);
 
       // We need to reassign plastic eqn numbers, after the data storage has
@@ -1608,11 +1617,48 @@ namespace oomph
       }
     }
 
+    /*!
+     * \brief compute the time derivative of an internal data item
+     */
+    double dinternal_data_dt(Data* data_pt, const unsigned value_idx) const
+    {
+      // Number of timsteps (past & present)
+      const TimeStepper* data_time_stepper_pt = data_pt->time_stepper_pt();
+      const unsigned n_time = data_time_stepper_pt->ntstorage();
+
+      double dxdt = 0.0;
+
+      // If the timestepper is not steady
+      if (!data_time_stepper_pt->is_steady())
+      {
+        // Loop over the additional time storage and add the appropriate
+        // contributions
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dxdt +=
+            data_time_stepper_pt->weight(1, t) * data_pt->value(t, value_idx);
+        }
+      }
+
+      return dxdt;
+    }
+  };
+
+
+  template<unsigned DIM>
+  class PlasticEquations : public virtual PlasticEquationsBase<DIM>,
+                           public virtual PVDEquations<DIM>
+  {
+  public:
+    PlasticEquations()
+      : PlasticEquationsBase<DIM>(), PVDEquations<DIM>()
+    {
+    }
     /// Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
     /// as calculated from the constitutive law: Pass the interpolation point,
     /// the diagonal value of g, the metric tensors in the stress free and
     /// current configurations and the current value of the the stress tensor.
-    inline void get_d_stress_dG_upper(
+    inline virtual void get_d_stress_dG_upper(
       const unsigned& ipt,
       const double& diag_entry,
       const DenseMatrix<double>& g,
@@ -1636,7 +1682,8 @@ namespace oomph
       Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
       for (unsigned i = 0; i < num_plastic_dof; i++)
       {
-        plastic_values_prior_to_fd[i] = *Plastic_dof_data_pt[ipt][i];
+        plastic_values_prior_to_fd[i] =
+          *this->plastic_dof_data_pt(ipt, i);
       }
 
       // Perform finite differencing g wrt F
@@ -1666,8 +1713,8 @@ namespace oomph
 
           // Need to call plastic solve to update the internal variables to the
           // new G
-          plastic_newton_solve(ipt, G_test);
-          calculate_g(ipt, diag_entry, G_test, g_new);
+          this->plastic_newton_solve(ipt, G_test);
+          this->calculate_g(ipt, diag_entry, G_test, g_new);
 
           // We can reduce this to only the upper (or lower?) triangular
           // elements
@@ -1690,7 +1737,7 @@ namespace oomph
       // Restore the values of the plastic variables
       for (unsigned i = 0; i < num_plastic_dof; i++)
       {
-        *Plastic_dof_data_pt[ipt][i] = plastic_values_prior_to_fd[i];
+        *this->plastic_dof_data_pt(ipt,i) = plastic_values_prior_to_fd[i];
       }
 
       ////////////////
@@ -1723,33 +1770,47 @@ namespace oomph
         }
       }
     }
+  };
 
-    /*!
-     * \brief compute the time derivative of an internal data item
-     */
-    double dinternal_data_dt(Data* data_pt, const unsigned value_idx) const
+  template<unsigned DIM>
+  class PlasticEquationswithPressure
+    : public virtual PlasticEquationsBase<DIM>,
+      public virtual PVDEquationsWithPressure<DIM>
+  {
+  public:
+    PlasticEquationswithPressure()
+      : PlasticEquationsBase<DIM>(), PVDEquationsWithPressure<DIM>()
     {
-      // Number of timsteps (past & present)
-      const TimeStepper* data_time_stepper_pt = data_pt->time_stepper_pt();
-      const unsigned n_time = data_time_stepper_pt->ntstorage();
+    }
 
-      double dxdt = 0.0;
+    inline virtual void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& gen_dil,
+      const double& inv_kappa,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_gen_dil_dG) override
+    {
+    }
 
-      // If the timestepper is not steady
-      if (!data_time_stepper_pt->is_steady())
-      {
-        // Loop over the additional time storage and add the appropriate
-        // contributions
-        for (unsigned t = 0; t < n_time; t++)
-        {
-          dxdt +=
-            data_time_stepper_pt->weight(1, t) * data_pt->value(t, value_idx);
-        }
-      }
-
-      return dxdt;
+    inline virtual void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& detG,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_detG_dG) override
+    {
     }
   };
+
 
   template<unsigned DIM, unsigned NNODE>
   class QPlasticPVDElement : public virtual SolidQElement<DIM, NNODE>,
@@ -1765,7 +1826,7 @@ namespace oomph
       // This is called at least twice per Newton solve but we only want one
       // So we only all when we compute residuals, NOT when we compute jacobian
       // since jacobian computation always follows a residual computation
-      PlasticEquations<DIM>::plastic_newton_solve();
+      PlasticEquationsBase<DIM>::plastic_newton_solve();
 
       PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
         residuals, GeneralisedElement::Dummy_matrix, 0);
@@ -1805,7 +1866,6 @@ namespace oomph
     }
   };
 
-
   template<unsigned NNODE_1D>
   class FaceGeometry<QPlasticPVDElement<2, NNODE_1D>>
     : public virtual SolidQElement<1, NNODE_1D>
@@ -1823,6 +1883,86 @@ namespace oomph
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidQElement<2, NNODE_1D>() {}
   };
+
+
+  template<unsigned DIM>
+  class QPlasticPVDElementWithPressure
+    : public virtual SolidQElement<DIM, 3>,
+      public virtual PlasticEquationswithPressure<DIM>
+  {
+  public:
+    QPlasticPVDElementWithPressure()
+      : SolidQElement<DIM, 3>(), PlasticEquationswithPressure<DIM>()
+    {
+    }
+
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // This is called at least twice per Newton solve but we only want one
+      // So we only all when we compute residuals, NOT when we compute jacobian
+      // since jacobian computation always follows a residual computation
+      PlasticEquationsBase<DIM>::plastic_newton_solve();
+
+      PVDEquationsWithPressure<DIM>::
+        fill_in_generic_contribution_to_residuals_pvd(
+          residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    /// Fill in contribution to Jacobian (either by FD or analytically,
+    /// control this via evaluate_jacobian_by_fd()
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      PVDEquationsWithPressure<
+        DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
+                                                            jacobian,
+                                                            1);
+    }
+
+    /// Output function
+    void output(std::ostream& outfile)
+    {
+      PVDEquationsWithPressure<DIM>::output(outfile);
+    }
+
+    /// Output function
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
+    }
+
+    /// C-style output function
+    void output(FILE* file_pt)
+    {
+      PVDEquationsWithPressure<DIM>::output(file_pt);
+    }
+
+    /// C-style output function
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      PVDEquationsWithPressure<DIM>::output(file_pt, n_plot);
+    }
+  };
+
+
+  template<>
+  class FaceGeometry<QPlasticPVDElementWithPressure<2>>
+    : public virtual SolidQElement<1, 3>
+  {
+  public:
+    /// Constructor must call the constructor of the underlying solid element
+    FaceGeometry() : SolidQElement<1, 3>() {}
+  };
+
+  template<>
+  class FaceGeometry<QPlasticPVDElementWithPressure<3>>
+    : public virtual SolidQElement<2, 3>
+  {
+  public:
+    /// Constructor must call the constructor of the underlying solid element
+    FaceGeometry() : SolidQElement<2, 3>() {}
+  };
+
 
   // We define in here the additional functions required to build child elements
   // We need to pass any flags to the child as well as build the data at the
@@ -1901,7 +2041,7 @@ namespace oomph
               psi_child[l];
             for (unsigned data_type = 0;
                  data_type <
-                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
               Data* data_pt = this->plastic_data_pt(ipt, data_type);
@@ -1956,7 +2096,7 @@ namespace oomph
       // This is called at least twice per Newton solve but we only want one
       // So we only all when we compute residuals, NOT when we compute jacobian
       // since jacobian computation always follows a residual computation
-      PlasticEquations<DIM>::plastic_newton_solve();
+      PlasticEquationsBase<DIM>::plastic_newton_solve();
 
       RefineablePVDEquations<DIM>::
         fill_in_generic_contribution_to_residuals_pvd(
@@ -1984,11 +2124,11 @@ namespace oomph
       {
         for (unsigned data_type = 0;
              data_type <
-             PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
           Data* data_pt =
-            PlasticEquations<DIM>::plastic_data_pt(ipt, data_type);
+            PlasticEquationsBase<DIM>::plastic_data_pt(ipt, data_type);
 
           const unsigned n_data_values = data_pt->nvalue();
           for (unsigned i = 0; i < n_data_values; i++)
@@ -1998,8 +2138,8 @@ namespace oomph
         }
       }
 
-      PlasticEquations<DIM>* cast_father_element_pt =
-        dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
+      PlasticEquationsBase<DIM>* cast_father_element_pt =
+        dynamic_cast<PlasticEquationsBase<DIM>*>(this->father_element_pt());
 
       const unsigned n_ipt_father =
         cast_father_element_pt->integral_pt()->nweight();
@@ -2035,7 +2175,7 @@ namespace oomph
               psi_father[l];
             for (unsigned data_type = 0;
                  data_type <
-                 PlasticEquations<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+                 PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
                  data_type++)
             {
               Data* data_pt = this->plastic_data_pt(ipt, data_type);

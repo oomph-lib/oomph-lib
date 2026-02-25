@@ -1300,6 +1300,29 @@ namespace oomph
         g, G, sigma_dev, Gcontra, detG);
     }
 
+    inline virtual void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& gen_dil,
+      const double& inv_kappa,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_gen_dil_dG)
+    {
+      this->get_d_stress_dG_upper(g,
+                                  G,
+                                  sigma,
+                                  gen_dil,
+                                  inv_kappa,
+                                  interpolated_solid_p,
+                                  d_sigma_dG,
+                                  d_gen_dil_dG);
+    }
+
+
     ///  Return the derivative of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the
     /// incompresible formulation. Also return
@@ -1331,6 +1354,21 @@ namespace oomph
       // Only bother with the symmetric part by passing false as last entry
       this->Constitutive_law_pt->calculate_d_second_piola_kirchhoff_stress_dG(
         g, G, sigma, detG, interpolated_solid_p, d_sigma_dG, d_detG_dG, false);
+    }
+
+    inline virtual void get_d_stress_dG_upper(
+      const unsigned& ipt,
+      const double& diag_entry,
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& detG,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_detG_dG)
+    {
+      this->get_d_stress_dG_upper(
+        g, G, sigma, detG, interpolated_solid_p, d_sigma_dG, d_detG_dG);
     }
   };
 

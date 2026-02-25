@@ -3,20 +3,20 @@
 using namespace oomph;
 
 template<unsigned DIM>
-const std::vector<std::string> PlasticEquations<DIM>::Plastic_data_names{
+const std::vector<std::string> PlasticEquationsBase<DIM>::Plastic_data_names{
   "Fe", "Fpks", "Fpcs", "H", "Lambda", "R"};
 
-template class PlasticEquations<2>;
+template class PlasticEquationsBase<2>;
 template class QPlasticPVDElement<2, 2>;
 
-template class PlasticEquations<3>;
+template class PlasticEquationsBase<3>;
 template class QPlasticPVDElement<3, 2>;
 
 /*
  * \details Computes the Caucystress using the plastic deformation gradient
  */
 template<unsigned DIM>
-void PlasticEquations<DIM>::get_cauchy_stress(unsigned ipt,
+void PlasticEquationsBase<DIM>::get_cauchy_stress(unsigned ipt,
                                               DenseMatrix<double>& sigma)
 {
   DenseMatrix<double> F(DIM);
@@ -70,7 +70,7 @@ void PlasticEquations<DIM>::get_cauchy_stress(unsigned ipt,
  * \brief computes R as a dependent variable R(H)
  */
 template<unsigned DIM>
-double PlasticEquations<DIM>::compute_r_plastic(const double& u,
+double PlasticEquationsBase<DIM>::compute_r_plastic(const double& u,
                                                 const double& delta_lambda,
                                                 const double& R_prev,
                                                 double& dRdLambda,
@@ -130,7 +130,7 @@ double PlasticEquations<DIM>::compute_r_plastic(const double& u,
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_mandel_stress_elastic(
+void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_elastic(
   const DenseMatrix<double>& invFp,
   const DenseMatrix<double>& FtF,
   DenseMatrix<double>& bar_M,
@@ -215,7 +215,7 @@ void oomph::PlasticEquations<DIM>::compute_mandel_stress_elastic(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_mandellike_kinematic_hardening(
+void oomph::PlasticEquationsBase<DIM>::compute_mandellike_kinematic_hardening(
   const DenseMatrix<double>& Fpks,
   DenseMatrix<double>& bar_Mk,
   RankFourTensor<double>& dbar_MkdFpks,
@@ -241,7 +241,7 @@ void oomph::PlasticEquations<DIM>::compute_mandellike_kinematic_hardening(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_mandellike_elastic_core(
+void oomph::PlasticEquationsBase<DIM>::compute_mandellike_elastic_core(
   const DenseMatrix<double>& Fpcs,
   DenseMatrix<double>& bar_Mc,
   RankFourTensor<double>& dbar_McdFpcs,
@@ -267,7 +267,7 @@ void oomph::PlasticEquations<DIM>::compute_mandellike_elastic_core(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_mandel_stress_total(
+void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_total(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& bar_Mk,
   const DenseMatrix<double>& bar_Mc,
@@ -343,7 +343,7 @@ void oomph::PlasticEquations<DIM>::compute_mandel_stress_total(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_barbar_N(
+void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
   const DenseMatrix<double>& barbar_M,
   const double& f,
   const DenseMatrix<double>& dfdM,
@@ -434,7 +434,7 @@ void oomph::PlasticEquations<DIM>::compute_barbar_N(
  * and its derivatives wrt. to barbarM and \bar_{M}
  */
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_bar_Lp(
+void oomph::PlasticEquationsBase<DIM>::compute_bar_Lp(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& barbar_N,
   const RankFourTensor<double>& dbarbar_N_dbarbar_M,
@@ -557,7 +557,7 @@ void oomph::PlasticEquations<DIM>::compute_bar_Lp(
  * and its derivatives wrt. to \bar{M}^\text{k} and \bar{M}
  */
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_bar_Lpkd(
+void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& bar_Mk,
   DenseMatrix<double>& bar_Lpkd,
@@ -637,7 +637,7 @@ void oomph::PlasticEquations<DIM>::compute_bar_Lpkd(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_hat_bar_Nc(
+void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
   const double& f_Mc,
   const DenseMatrix<double>& df_Mc_dMc,
   DenseMatrix<double>& hat_bar_Nc,
@@ -715,7 +715,7 @@ void oomph::PlasticEquations<DIM>::compute_hat_bar_Nc(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::compute_bar_Lpcd(
+void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& hat_bar_Nc,
   const double& Rc,
@@ -830,7 +830,7 @@ void oomph::PlasticEquations<DIM>::compute_bar_Lpcd(
 }
 
 template<unsigned DIM>
-double oomph::PlasticEquations<DIM>::compute_c_sigma(
+double oomph::PlasticEquationsBase<DIM>::compute_c_sigma(
   const DenseMatrix<double>& bar_bar_N,
   const DenseMatrix<double>& hat_bar_Nc,
   const RankFourTensor<double>& dbarbar_N_dbarbar_M,
@@ -879,7 +879,7 @@ double oomph::PlasticEquations<DIM>::compute_c_sigma(
 }
 
 template<unsigned DIM>
-double oomph::PlasticEquations<DIM>::compute_u(
+double oomph::PlasticEquationsBase<DIM>::compute_u(
   const double& u_in,
   const double& Rc,
   const double& c_sigma,
@@ -928,7 +928,7 @@ double oomph::PlasticEquations<DIM>::compute_u(
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::initialise_solve(const unsigned ipt)
+void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
 {
   for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
        data_type++)
@@ -953,7 +953,7 @@ void oomph::PlasticEquations<DIM>::initialise_solve(const unsigned ipt)
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquations<DIM>::set_intial_condition(const unsigned int ipt)
+void oomph::PlasticEquationsBase<DIM>::set_intial_condition(const unsigned int ipt)
 {
   for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
        data_type++)
@@ -1004,7 +1004,7 @@ void oomph::PlasticEquations<DIM>::set_intial_condition(const unsigned int ipt)
  *        2. varbarN : LL : sym(Ce barL) > 0
  */
 template<unsigned DIM>
-bool PlasticEquations<DIM>::is_there_plastic_deformation(const unsigned int ipt)
+bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(const unsigned int ipt)
 {
   // Yet another version. This time Eq. 193 from
   // https://doi.org/10.1007/s11831-018-9256-5
@@ -1178,7 +1178,7 @@ bool PlasticEquations<DIM>::is_there_plastic_deformation(const unsigned int ipt)
  * \Delta F^{\text{p} -1} = \dot{F}^{\text{p} -1} / \dot{\lambda} \Delta\lambda.
  */
 template<unsigned DIM>
-void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
+void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DoubleVector& residuals,
   DenseMatrix<double>& jacobian,
   const unsigned& ipt,
@@ -2014,7 +2014,7 @@ void PlasticEquations<DIM>::fill_in_generic_residual_and_jacobian_plastic(
 }
 
 template<unsigned DIM>
-void PlasticEquations<DIM>::compute_deformation_gradient_tensor(
+void PlasticEquationsBase<DIM>::compute_deformation_gradient_tensor(
   unsigned int t, unsigned int intpt, DenseMatrix<double>& F) const
 {
   // Find out how many nodes there are
