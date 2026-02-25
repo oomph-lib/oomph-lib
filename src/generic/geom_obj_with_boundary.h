@@ -323,27 +323,27 @@ namespace oomph
 
     /// Lagrangian coordinates on the boundary xi1_b(zeta),xi2_b(zeta)
     /// Note that zeta_global is from 0 to 2pi
-    virtual void boundary_lagrangian_coordinates(const double& zeta_global,
-                                      Vector<double>& lagr_coords) const
+    virtual void boundary_lagrangian_coordinates(
+      const double& zeta_global, Vector<double>& lagr_coords) const
     {
       // The number of the boundaries
       unsigned n_boundary = nboundary();
 
       // Loop over all boundary segments
-      for(unsigned b=0; b<n_boundary; b++)
+      for (unsigned b = 0; b < n_boundary; b++)
       {
-        // Flag indicating whether implements the process to obtain the 
+        // Flag indicating whether implements the process to obtain the
         // Lagriangian coordinates
         bool do_it = false;
 
         // Check if zeta_global is to the right of (or equal to)
         // the start of boundary segment b
-        if(zeta_global >= Zeta_global_boundary_start[b])
+        if (zeta_global >= Zeta_global_boundary_start[b])
         {
           // For all segments except the last one, require
           // zeta_global < Zeta_global_boundary_end[b]
           // so that segments are half-open intervals [start, end)
-          if (b<n_boundary-1)
+          if (b < n_boundary - 1)
           {
             if (zeta_global < Zeta_global_boundary_end[b])
             {
@@ -352,24 +352,25 @@ namespace oomph
           }
           // For the last boundary segment, accept all remaining values
           // (in particular, this includes the endpoint zeta_global = 2*pi)
-          else 
+          else
           {
             do_it = true;
           }
         }
-            
+
         // If the correct boundary segment has been identified
-        if (do_it==true)
+        if (do_it == true)
         {
           // Compute the linear mapping ratio between the global
           // zeta and the local boundary zeta
           double ratio =
-           (Zeta_boundary_end[b]-Zeta_boundary_start[b])/
-           (Zeta_global_boundary_end[b]-Zeta_global_boundary_start[b]);
+            (Zeta_boundary_end[b] - Zeta_boundary_start[b]) /
+            (Zeta_global_boundary_end[b] - Zeta_global_boundary_start[b]);
 
           // Map the global zeta to the local zeta on boundary segment b
-          double zeta_local = Zeta_boundary_start[b]+
-          ratio*(zeta_global-Zeta_global_boundary_start[b]);
+          double zeta_local =
+            Zeta_boundary_start[b] +
+            ratio * (zeta_global - Zeta_global_boundary_start[b]);
 
           // Obtain the Lagrangian coordinates corresponding to
           // boundary segment b at the local zeta
@@ -380,11 +381,9 @@ namespace oomph
         }
       }
     }
-  
-  
+
 
   protected:
-    
     /// Storage for initial value of 1D local boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_start;
@@ -406,7 +405,6 @@ namespace oomph
 
     /// Map to store zeta coordinates of points that identify regions
     std::map<unsigned, Vector<double>> Zeta_in_region;
-    
   };
 
 
@@ -652,7 +650,6 @@ namespace oomph
     /// Thickness of annular region (distance of internal boundary
     /// from outer edge of unit circle)
     double H_annulus;
-    
   };
 
 
