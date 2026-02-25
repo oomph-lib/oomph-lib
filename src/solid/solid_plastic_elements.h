@@ -1650,10 +1650,7 @@ namespace oomph
                            public virtual PVDEquations<DIM>
   {
   public:
-    PlasticEquations()
-      : PlasticEquationsBase<DIM>(), PVDEquations<DIM>()
-    {
-    }
+    PlasticEquations() : PlasticEquationsBase<DIM>(), PVDEquations<DIM>() {}
     /// Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
     /// as calculated from the constitutive law: Pass the interpolation point,
     /// the diagonal value of g, the metric tensors in the stress free and
@@ -1682,8 +1679,7 @@ namespace oomph
       Vector<double> plastic_values_prior_to_fd(num_plastic_dof, 0.0);
       for (unsigned i = 0; i < num_plastic_dof; i++)
       {
-        plastic_values_prior_to_fd[i] =
-          *this->plastic_dof_data_pt(ipt, i);
+        plastic_values_prior_to_fd[i] = *this->plastic_dof_data_pt(ipt, i);
       }
 
       // Perform finite differencing g wrt F
@@ -1737,7 +1733,7 @@ namespace oomph
       // Restore the values of the plastic variables
       for (unsigned i = 0; i < num_plastic_dof; i++)
       {
-        *this->plastic_dof_data_pt(ipt,i) = plastic_values_prior_to_fd[i];
+        *this->plastic_dof_data_pt(ipt, i) = plastic_values_prior_to_fd[i];
       }
 
       ////////////////

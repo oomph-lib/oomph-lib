@@ -17,7 +17,7 @@ template class QPlasticPVDElement<3, 2>;
  */
 template<unsigned DIM>
 void PlasticEquationsBase<DIM>::get_cauchy_stress(unsigned ipt,
-                                              DenseMatrix<double>& sigma)
+                                                  DenseMatrix<double>& sigma)
 {
   DenseMatrix<double> F(DIM);
   compute_deformation_gradient_tensor(ipt, F);
@@ -71,11 +71,11 @@ void PlasticEquationsBase<DIM>::get_cauchy_stress(unsigned ipt,
  */
 template<unsigned DIM>
 double PlasticEquationsBase<DIM>::compute_r_plastic(const double& u,
-                                                const double& delta_lambda,
-                                                const double& R_prev,
-                                                double& dRdLambda,
-                                                double& dRdu,
-                                                bool computeDerivative)
+                                                    const double& delta_lambda,
+                                                    const double& R_prev,
+                                                    double& dRdLambda,
+                                                    double& dRdu,
+                                                    bool computeDerivative)
 {
   const double Re =
     this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
@@ -953,7 +953,8 @@ void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
 }
 
 template<unsigned DIM>
-void oomph::PlasticEquationsBase<DIM>::set_intial_condition(const unsigned int ipt)
+void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
+  const unsigned int ipt)
 {
   for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
        data_type++)
@@ -1004,7 +1005,8 @@ void oomph::PlasticEquationsBase<DIM>::set_intial_condition(const unsigned int i
  *        2. varbarN : LL : sym(Ce barL) > 0
  */
 template<unsigned DIM>
-bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(const unsigned int ipt)
+bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
+  const unsigned int ipt)
 {
   // Yet another version. This time Eq. 193 from
   // https://doi.org/10.1007/s11831-018-9256-5
