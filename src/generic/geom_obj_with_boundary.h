@@ -47,9 +47,9 @@ namespace oomph
   /// any boundaries. This class specifies the boundaries by specifying
   /// a mapping from a 1D intrinsic boundary coordinate, zeta_bound,
   /// to the 2D intrinsic (Lagrangian) coordinates, zeta. Here, zeta_bound
-  /// is a local parameter defined on each boundary segment, while a new global 
-  /// boundary coordinate, zeta_global, is defined over the entire boundary of 
-  /// the object, taking values in [0, 2π]. The class also establishes a mapping 
+  /// is a local parameter defined on each boundary segment, while a new global
+  /// boundary coordinate, zeta_global, is defined over the entire boundary of
+  /// the object, taking values in [0, 2π]. The class also establishes a mapping
   /// between zeta_bound (local) and zeta_global.
   ///
   /// The class is made functional by provision (in the derived class!) of:
@@ -326,11 +326,11 @@ namespace oomph
     }
 
 
-    /// Lagrangian coordinates on the boundary (zeta_1(zeta_bound),zeta_2(zeta_bound))
-    /// As described in the class description, zeta_global is enforced to lie 
-    /// between 0 and 2pi
+    /// Lagrangian coordinates on the boundary
+    /// (zeta_1(zeta_bound),zeta_2(zeta_bound)) As described in the class
+    /// description, zeta_global is enforced to lie between 0 and 2pi
     virtual void boundary_lagrangian_coordinates(const double& zeta_global,
-                                      Vector<double>& zeta) const
+                                                 Vector<double>& zeta) const
     {
       // The number of the boundaries
       unsigned n_boundary = nboundary();
@@ -374,8 +374,9 @@ namespace oomph
             (Zeta_global_boundary_end[b] - Zeta_global_boundary_start[b]);
 
           // Map the global zeta to the zeta_bound (local) on boundary segment b
-          double zeta_bound = Zeta_boundary_start[b]+
-          ratio*(zeta_global-Zeta_global_boundary_start[b]);
+          double zeta_bound =
+            Zeta_boundary_start[b] +
+            ratio * (zeta_global - Zeta_global_boundary_start[b]);
 
           // Obtain the Lagrangian coordinates corresponding to
           // boundary segment b at the zeta_bound (local)
@@ -398,12 +399,12 @@ namespace oomph
     Vector<double> Zeta_boundary_end;
 
     /// Storage for initial value of 1D global boundary coordinate
-    /// As described in the class description, the global coordinate 
+    /// As described in the class description, the global coordinate
     /// is enforced to lie between 0 and 2pi
     Vector<double> Zeta_global_boundary_start;
 
     /// Storage for final value of 1D global boundary coordinate
-    /// As described in the class description, the global coordinate 
+    /// As described in the class description, the global coordinate
     /// is enforced to lie between 0 and 2pi
     Vector<double> Zeta_global_boundary_end;
 
