@@ -41,7 +41,7 @@ done
 
 # If we're still going here commit
 echo "About to commit..."
-svn commit $files_to_be_bumped -m "Bumped revision numbers in $files_to_be_bumped by running bin/bump_doc_txt.bash"
+svn commit $files_to_be_bumped -m "Bumped revision numbers in $files_to_be_bumped by running scripts/bump_doc_txt.bash"
 echo "...done"
 
 exit

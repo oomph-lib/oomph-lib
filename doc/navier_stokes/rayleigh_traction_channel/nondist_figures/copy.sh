@@ -19,7 +19,7 @@ find demo_drivers/navier_stokes/osc_plate/*/.svn \
 tar -cv -X excluded-files -f osc_plate.tar \
     doc/navier_stokes/osc_plate/ \
     demo_drivers/navier_stokes/osc_plate \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 

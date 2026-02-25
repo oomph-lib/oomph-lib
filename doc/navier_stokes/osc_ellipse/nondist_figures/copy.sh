@@ -19,7 +19,7 @@ find demo_drivers/navier_stokes/osc_quarter_circle/*/.svn \
 tar -cv -X excluded-files -f osc_quarter_circle.tar \
     doc/navier_stokes/osc_quarter_circle/ \
     demo_drivers/navier_stokes/osc_quarter_circle \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 
@@ -28,4 +28,4 @@ gzip -9 osc_quarter_circle.tar
 rm -rf excluded-files
 
 
-    
+

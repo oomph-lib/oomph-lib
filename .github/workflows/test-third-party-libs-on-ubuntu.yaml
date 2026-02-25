@@ -2,9 +2,24 @@
 
 name: Test third-party libraries (Ubuntu)
 
+concurrency:
+  # One active run per PR or per ref (branch), cancel older ones
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 # Test third-party libs building ONLY if we edited code in external_distributions/
 on:
   push:
+    paths:
+      - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "oomph_build.py"
+  pull_request:
+    # Run for PRs targeting main or development
+    branches:
+      - main
+      - development
     paths:
       - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
       - "external_distributions/CMakeLists.txt"
@@ -17,11 +32,29 @@ env:
   # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
   # more processors than are available
   OMPI_MCA_rmaps_base_oversubscribe: 1
+  MUMPS_UPSTREAM_VERSION: &mumps_upstream_version 5.8.1
 
 # ------------------------------------------------------------------------------
 
 jobs:
+  cache-mumps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Grab actions (only) from oomph-lib repository
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github
+          sparse-checkout-cone-mode: false
+          fetch-depth: 1
+
+      - name: Cache / download MUMPS tarball
+        uses: ./.github/actions/cache-mumps
+        with:
+          mumps-version: *mumps_upstream_version
+
   build:
+    needs: cache-mumps
     strategy:
       fail-fast: false
       matrix:
@@ -30,14 +63,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran ninja-build
+        run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build
 
       - name: Install MPI dependencies (if required)
         if: matrix.mpi == 'ON'
-        run: sudo apt-get install openmpi-bin libopenmpi-dev
+        run: sudo apt-get install -y openmpi-bin libopenmpi-dev
+
+      - name: Restore MUMPS tarball
+        uses: ./.github/actions/restore-mumps
+        with:
+          mumps-version: *mumps_upstream_version
 
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
@@ -48,12 +86,12 @@ jobs:
         run: cmake --version
 
       - name: Configure, build, and install
-
         id: build
         run: |
           python3 oomph_build.py \
             --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
             --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            --ext-OOMPH_MUMPS_TARBALL_PATH="${OOMPH_MUMPS_TARBALL_PATH}" \
             --no-build-oomph \
             --verbose
         continue-on-error: true

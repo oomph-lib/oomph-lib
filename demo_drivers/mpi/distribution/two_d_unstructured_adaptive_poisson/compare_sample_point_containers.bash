@@ -9,13 +9,13 @@ mkdir Compare_sample_point_containers
 #make check
 #mv Validation Compare_sample_point_containers/Validation_default
 
-../../../../bin/wrapper_for_validate.sh --ref_bin
+../../../../scripts/wrapper_for_validate.sh --ref_bin
 mv Validation Compare_sample_point_containers/Validation_ref_bin
 
-../../../../bin/wrapper_for_validate.sh --non_ref_bin
+../../../../scripts/wrapper_for_validate.sh --non_ref_bin
 mv Validation Compare_sample_point_containers/Validation_non_ref_bin
 
-../../../../bin/wrapper_for_validate.sh --cgal
+../../../../scripts/wrapper_for_validate.sh --cgal
 mv Validation Compare_sample_point_containers/Validation_cgal
 
 

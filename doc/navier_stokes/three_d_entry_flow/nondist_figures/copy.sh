@@ -18,15 +18,15 @@ find demo_drivers/navier_stokes/three_d_entry_flow/*/.svn \
 tar -cv -X excluded-files -f three_d_entry_flow.tar \
     doc/navier_stokes/three_d_entry_flow/ \
     demo_drivers/navier_stokes/three_d_entry_flow \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 #    config/makefile_templates/doc \
-#    configure.ac 
+#    configure.ac
 
 gzip -9 three_d_entry_flow.tar
 
 rm -rf excluded-files
 
 
-    
+
