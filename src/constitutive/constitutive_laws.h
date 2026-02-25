@@ -334,6 +334,16 @@ namespace oomph
     /// Virtual destructor
     virtual ~ModifiedNeoHookean() = default;
 
+    /// A helper function to compute the lame parameters from E and nu.
+    static void compute_lame_parameters(const double& E,
+                                        const double& nu,
+                                        double& lambda,
+                                        double& mu)
+    {
+      mu = 0.5 * E / (1 + nu);
+      lambda = nu / (1 - 2 * nu) * E / (1 + nu);
+    }
+
     /// Return the strain energy in terms of strain tensor
     double W(const DenseMatrix<double>& gamma)
     {
