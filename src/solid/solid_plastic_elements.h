@@ -741,13 +741,10 @@ namespace oomph
              data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
-          if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+          for (unsigned i = 0; i < n_value; i++)
           {
-            const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
-            for (unsigned i = 0; i < n_value; i++)
-            {
-              data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
-            }
+            data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
           }
         }
       }
@@ -761,13 +758,10 @@ namespace oomph
       for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
            data_type++)
       {
-        if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+        const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+        for (unsigned i = 0; i < n_value; i++)
         {
-          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
-          for (unsigned i = 0; i < n_value; i++)
-          {
-            data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
-          }
+          data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
         }
       }
     }
