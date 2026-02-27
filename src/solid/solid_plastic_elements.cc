@@ -6,11 +6,14 @@ template<unsigned DIM>
 const std::vector<std::string> PlasticEquationsBase<DIM>::Plastic_data_names{
   "Fe", "Fpks", "Fpcs", "H", "Lambda", "R"};
 
-template class PlasticEquationsBase<2>;
-template class QPlasticPVDElement<2, 2>;
+namespace oomph
+{
+  template class PlasticEquationsBase<2>;
+  template class QPlasticPVDElement<2, 2>;
 
-template class PlasticEquationsBase<3>;
-template class QPlasticPVDElement<3, 2>;
+  template class PlasticEquationsBase<3>;
+  template class QPlasticPVDElement<3, 2>;
+} // namespace oomph
 
 /*
  * \details Computes the Caucystress using the plastic deformation gradient
@@ -386,8 +389,8 @@ void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
 
   // First, compute N_{st} * [ ddf/(dM_{st}dM_kl) + ddf/(dM_{ts}dM_kl) ]
   RankFourTensor<double> ddfdMdM;
-  this->Plastic_consitutive_law_pt->compute_ddyield_surface_functiondMdM(
-    f, dfdM, ddfdMdM);
+  this->Plastic_consitutive_law_pt->yield_criterion_pt
+    ->surface_function_second_derivative(f, dfdM, ddfdMdM);
   DenseMatrix<double> N_ddfdMdM(DIM, DIM);
   for (unsigned int i = 0; i < DIM; i++)
   {
@@ -674,8 +677,8 @@ void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
   // For dN_ij_dhat_bar_Mc_{mn} one must just use the chain rule:
   // dN_ij/dhat_bar_Mc_{kl} = (dN_ij/dA_kl + N_ij N_mn dA_mn / dM_kl) / nMag
   RankFourTensor<double> dfdMcdMc;
-  this->Plastic_consitutive_law_pt->compute_ddyield_surface_functiondMdM(
-    f_Mc, df_Mc_dMc, dfdMcdMc);
+  this->Plastic_consitutive_law_pt->yield_criterion_pt
+    ->surface_function_second_derivative(f_Mc, df_Mc_dMc, dfdMcdMc);
 
   DenseMatrix<double> Nc_ddfdMcdMc(DIM, DIM);
   for (unsigned int k = 0; k < DIM; k++)
@@ -1084,7 +1087,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   // Compute Nbarbar_prev
   DenseMatrix<double> Nbarbar_prev_nsym(DIM);
   double yieldSurfaceStress_prev =
-    this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+    this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
       barbar_M_prev, Nbarbar_prev_nsym, true);
   MatrixHelpers::normalise(Nbarbar_prev_nsym);
 
@@ -1112,11 +1115,10 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
     // Check yield surface
     plasticDeformation =
-      this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
         Mbarbar_e, GeneralisedElement::Dummy_matrix, false) -
-        Re *
-          this->Plastic_consitutive_law_pt->isotropic_hardening_yield_function(
-            h_var) >
+        Re * this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+               ->yield_function(h_var) >
       0;
   }
   else
@@ -1126,7 +1128,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
     // Compute barbar_N
     DenseMatrix<double> Nbarbar_nsym(DIM);
     double yieldSurfaceStress =
-      this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
         barbar_M, Nbarbar_nsym, true);
     MatrixHelpers::normalise(Nbarbar_nsym);
 
@@ -1137,10 +1139,10 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
     else
     {
       plasticDeformation =
-        this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+        this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
           Mbarbar_e, GeneralisedElement::Dummy_matrix, false) -
-          Re * this->Plastic_consitutive_law_pt
-                 ->isotropic_hardening_yield_function(h_var) >
+          Re * this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+                 ->yield_function(h_var) >
         0;
     }
   }
@@ -1149,11 +1151,12 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   {
     // Compute R from the yield surface condition
     double R =
-      this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
         barbar_M, GeneralisedElement::Dummy_matrix, false) /
-      this->Plastic_consitutive_law_pt->isotropic_hardening_yield_function(
-        get_lambda(ipt) *
-        this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
+      this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+        ->yield_function(
+          get_lambda(ipt) *
+          this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
 
     set_r(ipt,
           std::max(
@@ -1272,7 +1275,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DenseMatrix<double> barbar_N(DIM);
   DenseMatrix<double> dfdM(DIM);
   double yieldSurfaceStress =
-    this->Plastic_consitutive_law_pt->compute_yield_surface_function(
+    this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
       barbar_M, dfdM, true);
 
   RankFourTensor<double> dbarbarN_dbarbar_M;
@@ -1482,8 +1485,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double disotropic_f_dH = 0.0;
 
   double isotropic_yield_stress =
-    this->Plastic_consitutive_law_pt->isotropic_hardening_yield_function(
-      h_var, disotropic_f_dH, flag);
+    this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+      ->yield_function(h_var, disotropic_f_dH, flag);
   residuals[row_lamda] = yieldSurfaceStress - R * isotropic_yield_stress;
 
   if (flag)
@@ -1722,7 +1725,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // Yield function of hat_bar_Mc
   DenseMatrix<double> df_Mc_dMc(DIM, DIM, 0.0);
   double f_hat_bar_Mc =
-    Plastic_consitutive_law_pt->compute_yield_surface_function(
+    Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
       hat_bar_Mc, df_Mc_dMc, true);
 
   // hat_bar_Mc

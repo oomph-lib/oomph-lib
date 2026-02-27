@@ -1,20 +1,89 @@
 #ifndef OOMPH_PLASTICITY_CONSTITUTIVE_HEADER
 #define OOMPH_PLASTICITY_CONSTITUTIVE_HEADER
 
-#include "constitutive_laws.h"
+#include "constitutive/constitutive_laws.h"
 #include "generic/matrix_helpers.h"
 
 namespace oomph
 {
-  class PlasticConstitutiveLaw
+
+  /// A base class for isotropic hardening laws to be used / stored by the
+  /// class PlasticConstitutiveLaw.
+  class IsotropicHardeningLaw
   {
   public:
+    virtual double yield_function(const double& H)
+    {
+      double a;
+      bool compute = false;
+      return yield_function(H, a, compute);
+    }
+
+    virtual double yield_function(const double& H,
+                                  double& dfdH,
+                                  const bool& computeDerivative) = 0;
+  };
+
+  /// An exponential isotropic hardening function, as described in Eq. 151 of
+  /// Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for Finite
+  /// Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch Computat
+  /// Methods Eng 26, 597–637 (2019). https://doi.org/10.1007/s11831-018-9256-5
+  class ExponentialIsotropicHardeningLaw : public IsotropicHardeningLaw
+  {
+  public:
+    ExponentialIsotropicHardeningLaw(double* f0_in_pt,
+                                     double* h1_in_pt,
+                                     double* h2_in_pt)
+      : IsotropicHardeningLaw(),
+        f0_pt(f0_in_pt),
+        h1_pt(h1_in_pt),
+        h2_pt(h2_in_pt)
+    {
+    }
+
+    double yield_function(const double& H,
+                          double& dfdH,
+                          const bool& computeDerivative) override
+    {
+      const double exp_val = std::exp(-(*h2_pt) * H);
+      if (computeDerivative)
+      {
+        dfdH = (*f0_pt) * (*h1_pt) * (*h2_pt) * exp_val;
+      }
+
+      return (*f0_pt) * (1 + (*h1_pt) * (1 - exp_val));
+    }
+
+  private:
+    double* f0_pt;
+    double* h1_pt;
+    double* h2_pt;
+  };
+
+  class YieldCriterion
+  {
+  public:
+    virtual double surface_function(const DenseMatrix<double>& M,
+                                    DenseMatrix<double>& dSigmavmdM,
+                                    const bool& computeDerivative) = 0;
+
+    virtual void surface_function_second_derivative(
+      const double& f,
+      const DenseMatrix<double>& dSigmavmdM,
+      RankFourTensor<double>& ddSigmavmdMdM) = 0;
+  };
+
+  class VonMisesYieldCriterion : public YieldCriterion
+  {
+  public:
+    VonMisesYieldCriterion() : YieldCriterion() {}
+
     /*!
      * Computes the von mises stress and its derivative wrt. M
      */
-    double compute_yield_surface_function(const DenseMatrix<double>& M,
-                                          DenseMatrix<double>& dSigmavmdM,
-                                          bool computeDerivative)
+    double surface_function(const DenseMatrix<double>& M,
+                            DenseMatrix<double>& dSigmavmdM,
+                            const bool& computeDerivative) override
     {
       // Calculate the trace of M
       double trace = 0.0;
@@ -76,10 +145,10 @@ namespace oomph
      * \param[in] dSigmavmdM: Its first derivative
      * \param[out] ddSigmavmdMdM: Its second derivative
      */
-    void compute_ddyield_surface_functiondMdM(
+    void surface_function_second_derivative(
       const double& f,
       const DenseMatrix<double>& dSigmavmdM,
-      RankFourTensor<double>& ddSigmavmdMdM)
+      RankFourTensor<double>& ddSigmavmdMdM) override
     {
       const unsigned int nrow = dSigmavmdM.nrow();
       const unsigned int ncol = dSigmavmdM.ncol();
@@ -137,28 +206,11 @@ namespace oomph
         }
       }
     }
+  };
 
-    double isotropic_hardening_yield_function(const double& H)
-    {
-      double a;
-      return isotropic_hardening_yield_function(H, a, false);
-    }
-
-    double isotropic_hardening_yield_function(const double& H,
-                                              double& dfdH,
-                                              bool computeDerivative)
-    {
-      const double exp_val = std::exp(-isotropic_hardening_h2 * H);
-      if (computeDerivative)
-      {
-        dfdH = isotropic_hardening_f0 * isotropic_hardening_h1 *
-               isotropic_hardening_h2 * exp_val;
-      }
-
-      return isotropic_hardening_f0 *
-             (1 + isotropic_hardening_h1 * (1 - exp_val));
-    }
-
+  class PlasticConstitutiveLaw
+  {
+  public:
     void mandel_like_kinematic_hardening_variable(
       const DenseMatrix<double>& Fpks,
       const DenseMatrix<double>& intermediateMetric,
@@ -318,7 +370,7 @@ namespace oomph
       }
 
       // Finally compute R
-      double Fh = isotropic_hardening_yield_function(H);
+      double Fh = isotropic_hardening_law_pt->yield_function(H);
 
       double denominator = 2. / 3. * Fh * Fh - term_McMc;
       double enumerator =
@@ -327,12 +379,8 @@ namespace oomph
       return enumerator / denominator;
     }
 
-
-    double isotropic_hardening_f0 = 500e6;
-
-    double isotropic_hardening_h1 = 0.8;
-
-    double isotropic_hardening_h2 = 0.50;
+    IsotropicHardeningLaw* isotropic_hardening_law_pt;
+    YieldCriterion* yield_criterion_pt;
 
     double eta_p = 0.0;
 

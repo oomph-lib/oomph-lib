@@ -1,15 +1,9 @@
-// #include "generic/generic.h"
-
 #include "constitutive/constitutive_laws.h"
 #include "constitutive/plastic_constitutive_laws.h"
 
-#include "solid/solid_elements.h"
 #include "solid/solid_plastic_elements.h"
 
-
 #include "solid_cubic_mesh.h"
-
-#include "meshes/rectangular_quadmesh.h"
 
 using namespace oomph;
 
@@ -67,8 +61,18 @@ private:
   double vOne = v / v0;
   double lOne = l / l0;
   double rhoOne = density / rho0;
+  double lameLambda = 0.0;
+  double lameMu = 0.0;
 
+  StrainEnergyFunction* elastic_strain_energy_function_pt;
   ConstitutiveLaw* constitutive_law_pt;
+
+  double isotropic_hardening_f0 = 500e6 / E0;
+  double isotropic_hardening_h1 = 0.8;
+  double isotropic_hardening_h2 = 50;
+  IsotropicHardeningLaw* isotropic_hardening_law_pt;
+  YieldCriterion* yield_criterion_pt;
+
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
 
   TimeStepper* my_time_stepper_pt;
@@ -122,12 +126,21 @@ private:
 
 
     // Create elastic constitutive law
-    constitutive_law_pt = new GeneralisedHookean(&nu, &EOne);
+    ModifiedNeoHookean::compute_lame_parameters(EOne, nu, lameLambda, lameMu);
+    elastic_strain_energy_function_pt =
+      new ModifiedNeoHookean(&lameLambda, &lameMu);
 
+    constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
+      elastic_strain_energy_function_pt);
+
+    // Now the plasic one
+    isotropic_hardening_law_pt = new ExponentialIsotropicHardeningLaw(&isotropic_hardening_f0, &isotropic_hardening_h1, &isotropic_hardening_h2);
     plastic_constitutive_law_pt = new PlasticConstitutiveLaw();
-    plastic_constitutive_law_pt->isotropic_hardening_f0 = 500e6 / E0;
-    plastic_constitutive_law_pt->isotropic_hardening_h1 = 0.8;
-    plastic_constitutive_law_pt->isotropic_hardening_h2 = 50;
+    plastic_constitutive_law_pt->isotropic_hardening_law_pt = isotropic_hardening_law_pt;
+
+    yield_criterion_pt = new VonMisesYieldCriterion();
+    plastic_constitutive_law_pt->yield_criterion_pt = yield_criterion_pt;
+
     plastic_constitutive_law_pt->normal_yield_ratio_constant_u = 200;
 
     plastic_constitutive_law_pt->normal_yield_ratio_elastic = 0.2;
@@ -200,10 +213,10 @@ private:
   {
     // Get Stress
     DenseMatrix<double> sigma;
-    getStress(sigma);
+    get_stress(sigma);
 
     // Get strain
-    double strain = getStrain();
+    double strain = get_strain();
 
     // Write to file
     stress_strain_file << time_pt()->time() << " " << strain << " "
@@ -332,7 +345,7 @@ private:
     }
   }
 
-  double getStrain()
+  double get_strain()
   {
     const unsigned nnode = plasticMesh->nboundary_node(moving_boundary);
     for (unsigned l = 0; l < nnode; l++)
@@ -346,7 +359,7 @@ private:
     return 0.0;
   }
 
-  void getStress(DenseMatrix<double>& sigma)
+  void get_stress(DenseMatrix<double>& sigma)
   {
     sigma.resize(DIM, DIM, 0.0);
     sigma.initialise(0.0);
@@ -380,7 +393,6 @@ private:
         exit(0);
       }
       elPt->check_initial_condition();
-      // exit(0);
     }
 
     unsigned int num_cycles = 3;
@@ -392,7 +404,7 @@ private:
       // 1. Ensure nodes are PINNED
       isLoading = true;
       lastStrainStartTime = time_pt()->time();
-      lastStartingStrain = getStrain();
+      lastStartingStrain = get_strain();
 
 
       double targetStrain = initialStrain;
@@ -400,7 +412,7 @@ private:
       {
         targetStrain = consecutiveStrain;
       }
-      while (getStrain() - lastStartingStrain < targetStrain)
+      while (get_strain() - lastStartingStrain < targetStrain)
       {
         solve_step();
 
@@ -421,7 +433,7 @@ private:
       oomph_info << "Cycle " << cycle + 1 << ": Unloading" << std::endl;
 
       isLoading = false;
-      lastStartingStrain = getStrain();
+      lastStartingStrain = get_strain();
       lastStrainStartTime = time_pt()->time();
 
       DenseMatrix<double> sigma;
@@ -442,7 +454,7 @@ private:
           output();
         }
 
-        getStress(sigma);
+        get_stress(sigma);
 
       } while (sigma(0, 0) > 0);
     }
@@ -473,8 +485,7 @@ public:
   {
     steady_solve = steady;
 
-    if (steady_solve)
-      oomph_info << "Steady solve activated." << std::endl;
+    if (steady_solve) oomph_info << "Steady solve activated." << std::endl;
     else
       oomph_info << "Unsteady solve activated." << std::endl;
   }

@@ -308,10 +308,10 @@ namespace oomph
   //=====================================================================
   /// A modified neo hookean strain energy function as presented in
   ///
-  /// Eq. 135 of Vladimirov, I.N., Pietryga, M.P. and Reese, S. (2008), On the
-  /// modelling of non-linear kinematic hardening at finite strains with
-  /// application to springback—Comparison of time integration algorithms. Int.
-  /// J. Numer. Meth. Engng., 75: 1-28. https://doi.org/10.1002/nme.2234
+  /// Eq. 135 of Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for
+  /// Finite Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch
+  /// Computat Methods Eng 26, 597–637 (2019).
+  /// https://doi.org/10.1007/s11831-018-9256-5
   ///
   /// Eq. 28 of Vladimirov, I.N., Pietryga, M.P. and Reese, S. (2008), On the
   /// modelling of non-linear kinematic hardening at finite strains with
