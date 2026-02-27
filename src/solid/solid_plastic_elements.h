@@ -1970,6 +1970,14 @@ namespace oomph
       public virtual PlasticEquations<DIM>,
       public virtual RefineableSolidElement
   {
+  public:
+    RefineablePlasticEquations()
+      : InterpolateFromIntegralPointsBase(),
+        PlasticEquations<DIM>(),
+        RefineableSolidElement()
+    {
+    }
+
   protected:
     // We need to get the plastic data from the children at the integral points
     void rebuild_from_sons()
@@ -2044,13 +2052,20 @@ namespace oomph
               Data* data_father_pt =
                 child_pt->plastic_data_pt(ipt_child, data_type);
 
+              // We expect both data types to share the same number of history
+              // values
+              const unsigned ntstorage = data_pt->ntstorage();
+
               const unsigned n_data_values = data_pt->nvalue();
               for (unsigned i = 0; i < n_data_values; i++)
               {
-                const double value = data_pt->value(i);
+                for (unsigned t = 0; t < ntstorage; t++)
+                {
+                  const double value = data_pt->value(t, i);
 
-                data_pt->set_value(
-                  i, value + interp_weight * data_father_pt->value(i));
+                  data_pt->set_value(
+                    t, i, value + interp_weight * data_father_pt->value(i));
+                }
               }
             }
           }
@@ -2085,6 +2100,7 @@ namespace oomph
         RefineableQPVDElement<DIM, NNODE>(),
         PlasticEquations<DIM>()
     {
+      this->compute_ipt_to_node_mapping();
     }
 
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -2134,8 +2150,9 @@ namespace oomph
         }
       }
 
-      PlasticEquationsBase<DIM>* cast_father_element_pt =
-        dynamic_cast<PlasticEquationsBase<DIM>*>(this->father_element_pt());
+      RefineableQPlasticPVDElement<DIM, NNODE>* cast_father_element_pt =
+        dynamic_cast<RefineableQPlasticPVDElement<DIM, NNODE>*>(
+          this->father_element_pt());
 
       const unsigned n_ipt_father =
         cast_father_element_pt->integral_pt()->nweight();
@@ -2178,13 +2195,20 @@ namespace oomph
               Data* data_father_pt =
                 cast_father_element_pt->plastic_data_pt(ipt_father, data_type);
 
+              // We expect both data types to share the same number of history
+              // values
+              const unsigned ntstorage = data_pt->ntstorage();
+
               const unsigned n_data_values = data_pt->nvalue();
               for (unsigned i = 0; i < n_data_values; i++)
               {
-                const double value = data_pt->value(i);
+                for (unsigned t = 0; t < ntstorage; t++)
+                {
+                  const double value = data_pt->value(t, i);
 
-                data_pt->set_value(
-                  i, value + interp_weight * data_father_pt->value(i));
+                  data_pt->set_value(
+                    t, i, value + interp_weight * data_father_pt->value(t, i));
+                }
               }
             }
           }
