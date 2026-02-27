@@ -22,7 +22,8 @@
 namespace oomph
 {
   template<unsigned DIM>
-  class PlasticEquationsBase : public virtual PVDEquationsBase<DIM>
+  class PlasticEquationsBase : public virtual InterpolateFromIntegralPointsBase,
+                               public virtual PVDEquationsBase<DIM>
   {
   protected:
     // If finite difference should be used for the plastic solve;
@@ -714,7 +715,9 @@ namespace oomph
           {
             for (unsigned i = 0; i < n_value; i++)
             {
-              str_str << " " << Plastic_data_eqn_number[ipt][data_type][i];
+              str_str << " " << Plastic_data_eqn_number[ipt][data_type][i]
+                      << " " << plastic_data_pt(ipt, data_type)->value(i)
+                      << ", ";
             }
             str_str << ", ";
           }
@@ -726,6 +729,112 @@ namespace oomph
         str_str << std::endl;
       }
       return str_str.str();
+    }
+
+    // Serialise all the plastic data from the integral points in order
+    void serialise_all_plastic_data(Vector<double>& data,
+                                    const unsigned& t = 0) const
+    {
+      for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+      {
+        for (unsigned data_type = 0;
+             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type++)
+        {
+          if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+          {
+            const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+            for (unsigned i = 0; i < n_value; i++)
+            {
+              data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
+            }
+          }
+        }
+      }
+    }
+
+    // Serialise the plastic data from a specific integral point
+    void serialise_plastic_data(Vector<double>& data,
+                                const unsigned& ipt,
+                                const unsigned& t = 0) const
+    {
+      for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+           data_type++)
+      {
+        if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+        {
+          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+          for (unsigned i = 0; i < n_value; i++)
+          {
+            data.push_back(plastic_data_pt(ipt, data_type)->value(t, i));
+          }
+        }
+      }
+    }
+
+    // Serialise the plastic data interpolated at a given point in the element
+    void interpolate_plastic_data_serialised(Vector<double>& data,
+                                             Vector<double>& s,
+                                             const unsigned& t = 0)
+    {
+      const unsigned n_node = this->nnode();
+      Shape psi(n_node);
+      shape(s, psi);
+
+      const unsigned n_ipt = this->integral_pt()->nweight();
+      Vector<Vector<double>> ipt_data(n_ipt);
+      for (unsigned ipt = 0; ipt < n_ipt; ipt++)
+      {
+        serialise_plastic_data(ipt_data[ipt], ipt);
+      }
+
+      const unsigned n_data = ipt_data[0].size();
+#ifdef PARANOID
+      for (unsigned ipt = 1; ipt < n_ipt; ipt++)
+      {
+        if (ipt_data[ipt].size() != n_data)
+        {
+          throw OomphLibError("Size of data at ipts does not match",
+                              OOMPH_EXCEPTION_LOCATION,
+                              OOMPH_CURRENT_FUNCTION)
+        }
+      }
+#endif
+
+      data.resize(n_data, 0.0);
+      for (unsigned ipt = 0; ipt < n_ipt; ipt++)
+      {
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          const double interp_weight =
+            this->integral_point_to_node_weight(ipt, l) * psi[l];
+          for (unsigned i = 0; i < n_data; i++)
+          {
+            data[i] += interp_weight * ipt_data[ipt][i];
+          }
+        }
+      }
+    }
+
+    // Assign the plastic data to a specific integral point
+    void assign_plastic_data_serialised(const Vector<double>& data,
+                                        const unsigned& ipt,
+                                        const unsigned& t = 0)
+    {
+      unsigned data_count = 0;
+      for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+           data_type++)
+      {
+        if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+        {
+          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+          for (unsigned i = 0; i < n_value; i++)
+          {
+            plastic_data_pt(ipt, data_type)
+              ->set_value(t, i, data[data_count++]);
+          }
+        }
+      }
     }
 
     /// Return the plastic constitutive law pointer
@@ -1489,7 +1598,8 @@ namespace oomph
       }
     }
 
-    PlasticEquationsBase() : PVDEquationsBase<DIM>()
+    PlasticEquationsBase()
+      : InterpolateFromIntegralPointsBase(), PVDEquationsBase<DIM>()
     {
       this->unity.resize(DIM, DIM, 0.0);
       for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
@@ -1815,6 +1925,7 @@ namespace oomph
   public:
     QPlasticPVDElement() : SolidQElement<DIM, NNODE>(), PlasticEquations<DIM>()
     {
+      this->compute_ipt_to_node_mapping();
     }
 
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -1890,6 +2001,7 @@ namespace oomph
     QPlasticPVDElementWithPressure()
       : SolidQElement<DIM, 3>(), PlasticEquationswithPressure<DIM>()
     {
+      this->compute_ipt_to_node_mapping();
     }
 
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -1965,16 +2077,12 @@ namespace oomph
   // integral points, to do this we interpolate from the integral points to the
   // nodes first then interpolate to the child integral points
   template<unsigned DIM>
-  class RefineablePlasticEquations
-    : public virtual InterpolateFromIntegralPointsBase,
-      public virtual PlasticEquations<DIM>,
-      public virtual RefineableSolidElement
+  class RefineablePlasticEquations : public virtual PlasticEquations<DIM>,
+                                     public virtual RefineableSolidElement
   {
   public:
     RefineablePlasticEquations()
-      : InterpolateFromIntegralPointsBase(),
-        PlasticEquations<DIM>(),
-        RefineableSolidElement()
+      : PlasticEquations<DIM>(), RefineableSolidElement()
     {
     }
 
@@ -2025,45 +2133,15 @@ namespace oomph
           dynamic_cast<RefineablePlasticEquations<DIM>*>(
             this->tree_pt()->son_pt(child_num)->object_pt());
 
-        const unsigned n_node_child = child_pt->nnode();
-
-        // Father element shape functions
-        Shape psi_child(n_node_child);
-        child_pt->shape(s_child, psi_child);
-
-        // Interpolate from the child integral points to local integral
-        for (unsigned data_type = 0;
-             data_type <
-             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
+        // For the more general case where we may have a different time-stepper
+        // for each of the plastic dofs we need a serialise function which
+        // serialises previous time-step data too
+        const unsigned ntstorage = this->plastic_data_pt(0, 0)->ntstorage();
+        for (unsigned t = 0; t < ntstorage; t++)
         {
-          Data* data_pt = this->plastic_data_pt(ipt, data_type);
-          const unsigned n_data_values = data_pt->nvalue();
-          for (unsigned i = 0; i < n_data_values; i++)
-          {
-            // We expect both data types to share the same number of
-            // history values
-            const unsigned ntstorage = data_pt->ntstorage();
-            for (unsigned t = 0; t < ntstorage; t++)
-            {
-              double value = 0.0;
-              const unsigned n_ipt_child = child_pt->integral_pt()->nweight();
-              for (unsigned ipt_child = 0; ipt_child < n_ipt_child; ipt_child++)
-              {
-                Data* data_child_pt =
-                  child_pt->plastic_data_pt(ipt_child, data_type);
-                for (unsigned l = 0; l < n_node_child; l++)
-                {
-                  const double interp_weight =
-                    child_pt->integral_point_to_node_weight(ipt_child, l) *
-                    psi_child[l];
-
-                  value += interp_weight * data_child_pt->value(t, i);
-                }
-              }
-              data_pt->set_value(t, i, value);
-            }
-          }
+          Vector<double> child_data;
+          child_pt->interpolate_plastic_data_serialised(child_data, s_child, t);
+          this->assign_plastic_data_serialised(child_data, ipt, t);
         }
       }
     }
@@ -2148,48 +2226,17 @@ namespace oomph
         Vector<double> s_father(DIM, 0.0);
         this->get_father_s(s, s_father);
 
-        const unsigned n_node_father = cast_father_element_pt->nnode();
-
-        // Father element shape functions
-        Shape psi_father(n_node_father);
-        cast_father_element_pt->shape(s_father, psi_father);
-
-        const unsigned n_ipt_father =
-          cast_father_element_pt->integral_pt()->nweight();
-        // Interpolate from the father integral points to local integral point
-        for (unsigned data_type = 0;
-             data_type <
-             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
+        // For the more general case where we may have a different time-stepper
+        // for each
+        // of the plastic dofs we need a serialise function which serialises
+        // previous time-step data too
+        const unsigned ntstorage = this->plastic_data_pt(0, 0)->ntstorage();
+        for (unsigned t = 0; t < ntstorage; t++)
         {
-          Data* data_pt = this->plastic_data_pt(ipt, data_type);
-          const unsigned n_data_values = data_pt->nvalue();
-          for (unsigned i = 0; i < n_data_values; i++)
-          {
-            // We expect both data types to share the same number of
-            // history values
-            const unsigned ntstorage = data_pt->ntstorage();
-            for (unsigned t = 0; t < ntstorage; t++)
-            {
-              double value = 0.0;
-              for (unsigned ipt_father = 0; ipt_father < n_ipt_father;
-                   ipt_father++)
-              {
-                Data* data_father_pt = cast_father_element_pt->plastic_data_pt(
-                  ipt_father, data_type);
-                for (unsigned l = 0; l < n_node_father; l++)
-                {
-                  const double interp_weight =
-                    cast_father_element_pt->integral_point_to_node_weight(
-                      ipt_father, l) *
-                    psi_father[l];
-
-                  value += interp_weight * data_father_pt->value(t, i);
-                }
-              }
-              data_pt->set_value(t, i, value);
-            }
-          }
+          Vector<double> father_data;
+          cast_father_element_pt->interpolate_plastic_data_serialised(
+            father_data, s_father, t);
+          this->assign_plastic_data_serialised(father_data, ipt, t);
         }
       }
     }
