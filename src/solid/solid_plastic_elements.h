@@ -1978,13 +1978,11 @@ namespace oomph
     {
     }
 
-  protected:
     // We need to get the plastic data from the children at the integral points
-    void rebuild_from_sons()
+    void rebuild_from_sons(Mesh*& mesh_pt) override
     {
-      const unsigned nipt = this->integral_pt()->nweight();
-
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      const unsigned n_ipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < n_ipt; ipt++)
       {
         // get the local coordinate of the integral point
         Vector<double> s(DIM);
@@ -1994,7 +1992,7 @@ namespace oomph
         }
 
         // Determine what child element the integral point is within
-        // Abd get the local cooordinate within that element
+        // and get the local cooordinate within that element
         unsigned child_num = 0;
         Vector<double> s_child(DIM, 0.0);
 
@@ -2025,7 +2023,7 @@ namespace oomph
 
         RefineablePlasticEquations<DIM>* child_pt =
           dynamic_cast<RefineablePlasticEquations<DIM>*>(
-            this->tree_pt()->son_pt(child_num));
+            this->tree_pt()->son_pt(child_num)->object_pt());
 
         const unsigned n_node_child = child_pt->nnode();
 
@@ -2033,47 +2031,44 @@ namespace oomph
         Shape psi_child(n_node_child);
         child_pt->shape(s_child, psi_child);
 
-        const unsigned n_ipt_child = child_pt->integral_pt()->nweight();
-
-        // Interpolate from the father integral points to local integral
-        for (unsigned ipt_child = 0; ipt_child < n_ipt_child; ipt_child++)
+        // Interpolate from the child integral points to local integral
+        for (unsigned data_type = 0;
+             data_type <
+             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type++)
         {
-          for (unsigned l = 0; l < n_node_child; l++)
+          Data* data_pt = this->plastic_data_pt(ipt, data_type);
+          const unsigned n_data_values = data_pt->nvalue();
+          for (unsigned i = 0; i < n_data_values; i++)
           {
-            const double interp_weight =
-              child_pt->integral_point_to_node_weight(ipt_child, l) *
-              psi_child[l];
-            for (unsigned data_type = 0;
-                 data_type <
-                 PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-                 data_type++)
+            // We expect both data types to share the same number of
+            // history values
+            const unsigned ntstorage = data_pt->ntstorage();
+            for (unsigned t = 0; t < ntstorage; t++)
             {
-              Data* data_pt = this->plastic_data_pt(ipt, data_type);
-              Data* data_father_pt =
-                child_pt->plastic_data_pt(ipt_child, data_type);
-
-              // We expect both data types to share the same number of history
-              // values
-              const unsigned ntstorage = data_pt->ntstorage();
-
-              const unsigned n_data_values = data_pt->nvalue();
-              for (unsigned i = 0; i < n_data_values; i++)
+              double value = 0.0;
+              const unsigned n_ipt_child = child_pt->integral_pt()->nweight();
+              for (unsigned ipt_child = 0; ipt_child < n_ipt_child; ipt_child++)
               {
-                for (unsigned t = 0; t < ntstorage; t++)
+                Data* data_child_pt =
+                  child_pt->plastic_data_pt(ipt_child, data_type);
+                for (unsigned l = 0; l < n_node_child; l++)
                 {
-                  const double value = data_pt->value(t, i);
+                  const double interp_weight =
+                    child_pt->integral_point_to_node_weight(ipt_child, l) *
+                    psi_child[l];
 
-                  data_pt->set_value(
-                    t, i, value + interp_weight * data_father_pt->value(i));
+                  value += interp_weight * data_child_pt->value(t, i);
                 }
               }
+              data_pt->set_value(t, i, value);
             }
           }
         }
       }
     }
 
-    void further_build()
+    void further_build() override
     {
       PlasticEquations<DIM>* cast_father_element_pt =
         dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
@@ -2103,6 +2098,11 @@ namespace oomph
       this->compute_ipt_to_node_mapping();
     }
 
+    void rebuild_from_sons(Mesh*& mesh_pt) override
+    {
+      RefineablePlasticEquations<DIM>::rebuild_from_sons(mesh_pt);
+    }
+
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // This is called at least twice per Newton solve but we only want one
@@ -2126,90 +2126,68 @@ namespace oomph
                                                             1);
     }
 
-    void further_build()
+    void further_build() override
     {
       RefineableQPVDElement<DIM, NNODE>::further_build();
       RefineablePlasticEquations<DIM>::further_build();
-
-      // Zero all plastic data values first
-      for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
-      {
-        for (unsigned data_type = 0;
-             data_type <
-             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
-        {
-          Data* data_pt =
-            PlasticEquationsBase<DIM>::plastic_data_pt(ipt, data_type);
-
-          const unsigned n_data_values = data_pt->nvalue();
-          for (unsigned i = 0; i < n_data_values; i++)
-          {
-            data_pt->set_value(i, 0.0);
-          }
-        }
-      }
 
       RefineableQPlasticPVDElement<DIM, NNODE>* cast_father_element_pt =
         dynamic_cast<RefineableQPlasticPVDElement<DIM, NNODE>*>(
           this->father_element_pt());
 
-      const unsigned n_ipt_father =
-        cast_father_element_pt->integral_pt()->nweight();
-      const unsigned n_node_father = cast_father_element_pt->nnode();
       const unsigned n_ipt = this->integral_pt()->nweight();
-
-      // Now construct the plastic data values from the father element
       for (unsigned ipt = 0; ipt < n_ipt; ipt++)
       {
-        // Get the local coordinate of the integral point
+        // get the local coordinate of the integral point
         Vector<double> s(DIM);
         for (unsigned i = 0; i < DIM; i++)
         {
           s[i] = this->integral_pt()->knot(ipt, i);
         }
 
-        // Get the local coordinate in the father element
-        Vector<double> s_father(DIM);
+        Vector<double> s_father(DIM, 0.0);
         this->get_father_s(s, s_father);
+
+        const unsigned n_node_father = cast_father_element_pt->nnode();
 
         // Father element shape functions
         Shape psi_father(n_node_father);
         cast_father_element_pt->shape(s_father, psi_father);
 
-        // Interpolate from the father integral points to local integral points
-        for (unsigned ipt_father = 0; ipt_father < n_ipt_father; ipt_father++)
+        const unsigned n_ipt_father =
+          cast_father_element_pt->integral_pt()->nweight();
+        // Interpolate from the father integral points to local integral point
+        for (unsigned data_type = 0;
+             data_type <
+             PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type++)
         {
-          for (unsigned l = 0; l < n_node_father; l++)
+          Data* data_pt = this->plastic_data_pt(ipt, data_type);
+          const unsigned n_data_values = data_pt->nvalue();
+          for (unsigned i = 0; i < n_data_values; i++)
           {
-            const double interp_weight =
-              cast_father_element_pt->integral_point_to_node_weight(ipt_father,
-                                                                    l) *
-              psi_father[l];
-            for (unsigned data_type = 0;
-                 data_type <
-                 PlasticEquationsBase<DIM>::NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-                 data_type++)
+            // We expect both data types to share the same number of
+            // history values
+            const unsigned ntstorage = data_pt->ntstorage();
+            for (unsigned t = 0; t < ntstorage; t++)
             {
-              Data* data_pt = this->plastic_data_pt(ipt, data_type);
-              Data* data_father_pt =
-                cast_father_element_pt->plastic_data_pt(ipt_father, data_type);
-
-              // We expect both data types to share the same number of history
-              // values
-              const unsigned ntstorage = data_pt->ntstorage();
-
-              const unsigned n_data_values = data_pt->nvalue();
-              for (unsigned i = 0; i < n_data_values; i++)
+              double value = 0.0;
+              for (unsigned ipt_father = 0; ipt_father < n_ipt_father;
+                   ipt_father++)
               {
-                for (unsigned t = 0; t < ntstorage; t++)
+                Data* data_father_pt = cast_father_element_pt->plastic_data_pt(
+                  ipt_father, data_type);
+                for (unsigned l = 0; l < n_node_father; l++)
                 {
-                  const double value = data_pt->value(t, i);
+                  const double interp_weight =
+                    cast_father_element_pt->integral_point_to_node_weight(
+                      ipt_father, l) *
+                    psi_father[l];
 
-                  data_pt->set_value(
-                    t, i, value + interp_weight * data_father_pt->value(t, i));
+                  value += interp_weight * data_father_pt->value(t, i);
                 }
               }
+              data_pt->set_value(t, i, value);
             }
           }
         }

@@ -2585,7 +2585,7 @@ namespace oomph
             // Local node number
             jnod = i0 + n_p * i1 + n_p * n_p * i2;
 
-            for (unsigned i = 0; i < 2; i++)
+            for (unsigned i = 0; i < 3; i++)
             {
               s_father[i] += psi[jnod] * s_node_father[i];
             }
