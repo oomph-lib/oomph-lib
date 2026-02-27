@@ -398,10 +398,10 @@ namespace oomph
     // Calculate the determinant of the matrix
     const double det = M(0, 0);
 
-//     // Report if Matrix is singular or negative
-// #ifdef PARANOID
-//     check_jacobian(det);
-// #endif
+    //     // Report if Matrix is singular or negative
+    // #ifdef PARANOID
+    //     check_jacobian(det);
+    // #endif
 
     // Calculate the inverse --- trivial in 1D
     inverse_M(0, 0) = 1.0 / M(0, 0);
@@ -421,9 +421,9 @@ namespace oomph
     const double det = M(0, 0) * M(1, 1) - M(0, 1) * M(1, 0);
 
     // Report if Matrix is singular or negative
-// #ifdef PARANOID
-//     check_jacobian(det);
-// #endif
+    // #ifdef PARANOID
+    //     check_jacobian(det);
+    // #endif
 
     // Calculate the inverset of the 2x2 matrix
     inverse_M(0, 0) = M(1, 1) / det;
@@ -449,10 +449,10 @@ namespace oomph
       M(0, 2) * M(1, 0) * M(2, 1) - M(0, 0) * M(1, 2) * M(2, 1) -
       M(0, 1) * M(1, 0) * M(2, 2) - M(0, 2) * M(1, 1) * M(2, 0);
 
-//     // Report if Matrix is singular or negative
-// #ifdef PARANOID
-//     check_jacobian(det);
-// #endif
+    //     // Report if Matrix is singular or negative
+    // #ifdef PARANOID
+    //     check_jacobian(det);
+    // #endif
 
     // Calculate the inverse of the 3x3 matrix
     inverse_M(0, 0) = (M(1, 1) * M(2, 2) - M(1, 2) * M(2, 1)) / det;
