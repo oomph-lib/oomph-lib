@@ -69,7 +69,7 @@ The remaining quantities can be computed from these 5.
 Following Hashiguchi's derivation, we can state the time derivatives
 \f[
     \begin{split}
-        &\dot{\mathbf{F}}_\mathrm{p} =  \atensor{L}_\text{p}\vec{F}_\text{p},\\
+        &\dot{\mathbf{F}}_\mathrm{p} =  \atensor{L}_\text{p}\mathbf{F}_\text{p},\\
         &\dot{\mathbf{F}}_\mathrm{pks} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pkd}\right) \mathbf{F}_\mathrm{pks},\\
         &\dot{\mathbf{F}}_\mathrm{pcs}, \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right) \mathbf{F}_\mathrm{pcs},\\
         &\dot{H} = f^\mathrm{H}\dot{\bar{\lambda}},\\
@@ -142,4 +142,17 @@ Being able to compute the stress using only the quantity
     \ctensor{B}_\text{pcs}^{-1} = \mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1}
 \f]
 reduces the number of components, which needs to be solved fore. While \f$\mathbf{F}_\text{pcs}\f$ has 9 independent components, \f$\ctensor{B}_\text{pcs}^{-1}\f$ is symmetric and hence has only 6 independent components to be solved for.
+
+There are two equations, where the term \f$\mathbf{F}_\text{pcs}\f$ enters the equations. The Mandel-like variable is obtained as above,
+\f[
+    \atensor{M}_\text{pcs} = \mathbf{S}(\ctensor{B}_\text{pcs}^{-1},\,\mathbf{1}).
+\f]
+The time derivative of \f$\mathbf{F}_\text{pcs}\f$ can be used to write
+\f[
+    \dot{\ctensor{B}}_\text{pcs} = \left(\mathbf{F}_\text{pcs}\mathbf{F}_\text{pcs}^\text{T}\right)^{\cdot} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)\ctensor{B}_\text{pcs} + \ctensor{B}_\text{pcs}\left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)^\text{T},
+\f]
+from which we can obtain
+\f[
+    \dot{\ctensor{B}}{}_\text{pcs}^{-1} = \ctensor{B}_\text{pcs}^{-1}\left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right) + \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)^\text{T}\ctensor{B}_\text{pcs}^{-1},
+\f]
 \subsection The PlasticEquations class

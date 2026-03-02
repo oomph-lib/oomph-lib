@@ -598,10 +598,16 @@ namespace oomph
     virtual ~ConstitutiveLaw() {}
 
 
-    /// Calculate the contravariant 2nd Piola Kirchhoff
-    /// stress tensor. Arguments are the
-    /// covariant undeformed and deformed metric tensor and the
-    /// matrix in which to return the stress tensor
+    /// Calculate the contravariant 2nd Piola-Kirchhoff
+    /// stress tensor in the reference configuration.
+    ///
+    /// Arguments:
+    /// g: The undeformed Right Cauchy-Green tensor.
+    ///    (The metric of the undeformed frame pulled back to the reference
+    ///    frame).
+    /// G: The total Right Cauchy-Green tensor.
+    ///    (The metric of the deformed frame pulled back to the reference
+    ///    frame).
     virtual void calculate_second_piola_kirchhoff_stress(
       const DenseMatrix<double>& g,
       const DenseMatrix<double>& G,
