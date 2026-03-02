@@ -12,6 +12,11 @@ namespace oomph
   class IsotropicHardeningLaw
   {
   public:
+    IsotropicHardeningLaw(double* isotropic_hardening_factor_in_pt)
+      : isotropic_hardening_factor_pt(isotropic_hardening_factor_in_pt)
+    {
+    }
+
     virtual double yield_function(const double& H)
     {
       double a;
@@ -22,6 +27,14 @@ namespace oomph
     virtual double yield_function(const double& H,
                                   double& dfdH,
                                   const bool& computeDerivative) = 0;
+
+    double get_isotropic_hardening_factor()
+    {
+      return *isotropic_hardening_factor_pt;
+    }
+
+  private:
+    double* isotropic_hardening_factor_pt;
   };
 
   /// An exponential isotropic hardening function, as described in Eq. 151 of
@@ -31,10 +44,11 @@ namespace oomph
   class ExponentialIsotropicHardeningLaw : public IsotropicHardeningLaw
   {
   public:
-    ExponentialIsotropicHardeningLaw(double* f0_in_pt,
+    ExponentialIsotropicHardeningLaw(double* isotropic_hardening_factor_in_pt,
+                                     double* f0_in_pt,
                                      double* h1_in_pt,
                                      double* h2_in_pt)
-      : IsotropicHardeningLaw(),
+      : IsotropicHardeningLaw(isotropic_hardening_factor_in_pt),
         f0_pt(f0_in_pt),
         h1_pt(h1_in_pt),
         h2_pt(h2_in_pt)
@@ -315,11 +329,6 @@ namespace oomph
      * normal_yield_ratio_constant_u
      */
     double normal_yield_ratio_constant_u = 200;
-
-    /*!
-     * \brief f^\text{H} from the formulas
-     */
-    double isotropic_hardening_factor = std::sqrt(3.0 / 2.0);
 
     /*!
      * \brief \eta^\text{pk}

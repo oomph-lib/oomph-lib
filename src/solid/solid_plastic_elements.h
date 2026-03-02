@@ -1502,7 +1502,8 @@ namespace oomph
         // Because h is not solved for, it will be updated here
         set_h(ipt,
               get_lambda(ipt) *
-                this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
+                this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+                  ->get_isotropic_hardening_factor());
 
         nIter++;
       } while (maxres > Plastic_Newton_Solver_Tolerance);

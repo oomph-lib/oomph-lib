@@ -67,6 +67,7 @@ private:
   StrainEnergyFunction* elastic_strain_energy_function_pt;
   ConstitutiveLaw* constitutive_law_pt;
 
+  double isotropic_hardening_factor = std::sqrt(3.0 / 2.0);
   double isotropic_hardening_f0 = 500e6 / E0;
   double isotropic_hardening_h1 = 0.8;
   double isotropic_hardening_h2 = 50;
@@ -147,7 +148,8 @@ private:
 
     // Now the plasic one
     isotropic_hardening_law_pt =
-      new ExponentialIsotropicHardeningLaw(&isotropic_hardening_f0,
+      new ExponentialIsotropicHardeningLaw(&isotropic_hardening_factor,
+                                           &isotropic_hardening_f0,
                                            &isotropic_hardening_h1,
                                            &isotropic_hardening_h2);
     plastic_constitutive_law_pt = new PlasticConstitutiveLaw();
