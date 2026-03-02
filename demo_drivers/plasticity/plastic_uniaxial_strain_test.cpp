@@ -82,6 +82,9 @@ private:
   StrainEnergyFunction* elastic_core_strain_energy_function_pt;
   ConstitutiveLaw* elastic_core_law_pt;
 
+  double normal_yield_ratio_elastic = 0.2;
+  NormalYieldRatioLaw* normal_yield_ratio_law_pt;
+
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
 
   TimeStepper* my_time_stepper_pt;
@@ -143,24 +146,37 @@ private:
       elastic_strain_energy_function_pt);
 
     // Now the plasic one
-    isotropic_hardening_law_pt = new ExponentialIsotropicHardeningLaw(&isotropic_hardening_f0, &isotropic_hardening_h1, &isotropic_hardening_h2);
+    isotropic_hardening_law_pt =
+      new ExponentialIsotropicHardeningLaw(&isotropic_hardening_f0,
+                                           &isotropic_hardening_h1,
+                                           &isotropic_hardening_h2);
     plastic_constitutive_law_pt = new PlasticConstitutiveLaw();
-    plastic_constitutive_law_pt->isotropic_hardening_law_pt = isotropic_hardening_law_pt;
+    plastic_constitutive_law_pt->isotropic_hardening_law_pt =
+      isotropic_hardening_law_pt;
 
     yield_criterion_pt = new VonMisesYieldCriterion();
     plastic_constitutive_law_pt->yield_criterion_pt = yield_criterion_pt;
 
-    kinematic_hardening_strain_energy_function_pt = new ModifiedNeoHookean(&zero, &kinematic_hardening_stress_c);
-    kinematic_hardening_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(kinematic_hardening_strain_energy_function_pt);
-    plastic_constitutive_law_pt->kinematic_hardening_law_pt = kinematic_hardening_law_pt;
+    kinematic_hardening_strain_energy_function_pt =
+      new ModifiedNeoHookean(&zero, &kinematic_hardening_stress_c);
+    kinematic_hardening_law_pt =
+      new IsotropicStrainEnergyFunctionConstitutiveLaw(
+        kinematic_hardening_strain_energy_function_pt);
+    plastic_constitutive_law_pt->kinematic_hardening_law_pt =
+      kinematic_hardening_law_pt;
 
-    elastic_core_strain_energy_function_pt = new ModifiedNeoHookean(&zero, &elastic_core_stress_c);
-    elastic_core_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(elastic_core_strain_energy_function_pt);
+    elastic_core_strain_energy_function_pt =
+      new ModifiedNeoHookean(&zero, &elastic_core_stress_c);
+    elastic_core_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
+      elastic_core_strain_energy_function_pt);
     plastic_constitutive_law_pt->elastic_core_law_pt = elastic_core_law_pt;
 
-    plastic_constitutive_law_pt->normal_yield_ratio_constant_u = 200;
+    normal_yield_ratio_law_pt =
+      new NormalYieldRatioLaw(&normal_yield_ratio_elastic);
+    plastic_constitutive_law_pt->normal_yield_ratio_law_pt =
+      normal_yield_ratio_law_pt;
 
-    plastic_constitutive_law_pt->normal_yield_ratio_elastic = 0.2;
+    plastic_constitutive_law_pt->normal_yield_ratio_constant_u = 200;
 
     plastic_constitutive_law_pt->eta_p = 0.5;
 

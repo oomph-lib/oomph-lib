@@ -690,22 +690,6 @@ namespace oomph
      */
     void get_cauchy_stress(unsigned ipt, DenseMatrix<double>& sigma);
 
-    double compute_r_plastic(const double& u,
-                             const double& delta_lambda,
-                             const double& R_prev)
-    {
-      double derivative;
-      return compute_r_plastic(
-        u, delta_lambda, R_prev, derivative, derivative, 0);
-    }
-
-    double compute_r_plastic(const double& u,
-                             const double& delta_lambda,
-                             const double& R_prev,
-                             double& dRdLambda,
-                             double& dRdu,
-                             bool computeDerivative);
-
     std::string detail_plastic_dofs() const
     {
       std::stringstream str_str;
@@ -846,7 +830,8 @@ namespace oomph
 
     void assign_default_values_based_on_constitutive_law()
     {
-      double Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+      double Re =
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
       for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         set_r(ipt, Re);
@@ -1241,7 +1226,8 @@ namespace oomph
     double get_r(const unsigned t, const unsigned& ipt) const
     {
       if (Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->ntstorage() < t + 1)
-        return this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+        return this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+          ->get_re();
       return Plastic_data_pt[ipt][R_INDEX]->value(t, 0);
     }
 

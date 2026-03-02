@@ -69,69 +69,6 @@ void PlasticEquationsBase<DIM>::get_cauchy_stress(unsigned ipt,
   }
 }
 
-/*!
- * \brief computes R as a dependent variable R(H)
- */
-template<unsigned DIM>
-double PlasticEquationsBase<DIM>::compute_r_plastic(const double& u,
-                                                    const double& delta_lambda,
-                                                    const double& R_prev,
-                                                    double& dRdLambda,
-                                                    double& dRdu,
-                                                    bool computeDerivative)
-{
-  const double Re =
-    this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
-
-  // Initialize derivatives
-  if (computeDerivative)
-  {
-    dRdLambda = 0.0;
-    dRdu = 0.0;
-  }
-
-  if (std::abs(1.0 - Re) < 1.0e-12) return 1.0;
-
-  const double OneMinusRe = 1.0 - Re;
-  const double preFactor = (2.0 * OneMinusRe) / MathematicalConstants::Pi;
-  const double preFactorArg = MathematicalConstants::Pi / (2.0 * OneMinusRe);
-
-  // Compute the argument of cos^{-1}
-  // We do not need a max around R_prev - Re, since R_prev >= Re by definition
-  double inner_arg = std::cos(preFactorArg * (R_prev - Re)) *
-                     std::exp(-u * preFactorArg * delta_lambda);
-
-  // Limit the arg. This has two effects, it prevents the acos to take wierd
-  // numbers and makes the derivative always not infinite.
-  const double TOLERANCE = 1.0e-12;
-  const double MAX_ARG = std::sqrt(1.0 - TOLERANCE);
-
-  if (inner_arg > MAX_ARG) inner_arg = MAX_ARG;
-  if (inner_arg < -MAX_ARG) inner_arg = -MAX_ARG;
-
-  // Compute R
-  double R = preFactor * std::acos(inner_arg) + Re;
-
-  if (computeDerivative)
-  {
-    // Calculate dR/dLambda and dR/du for Jacobian
-    double denom_sq = 1.0 - inner_arg * inner_arg;
-
-    // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
-    double inv_sqrt = -1.0 / std::sqrt(denom_sq);
-
-    // df/dLambda = f * (-u * preFactorArg)
-    double dWdLambda = inner_arg * (-u * preFactorArg);
-    dRdLambda = preFactor * inv_sqrt * dWdLambda;
-
-    // df/du = f * (-preFactorArg * delta_lambda)
-    double dWdu = inner_arg * (-preFactorArg * delta_lambda);
-    dRdu = preFactor * inv_sqrt * dWdu;
-  }
-
-  return R;
-}
-
 template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_elastic(
   const DenseMatrix<double>& invFp,
@@ -1001,7 +938,8 @@ void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
       double Re = 0.0;
       if (this->Plastic_consitutive_law_pt)
       {
-        Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+        Re =
+          this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
       }
       data_pt->set_value(0, Re);
     }
@@ -1111,7 +1049,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   // Compute Mbarbar_e = barbar_M - Re Mbark_prev - (1 - Re) Mbarc_prev
   double Re = 1.0;
 
-  Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic;
+  Re = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
 
   DenseMatrix<double> Mbarbar_e(DIM);
   for (unsigned int i = 0; i < DIM; i++)
@@ -1175,9 +1113,11 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
           get_lambda(ipt) *
           this->Plastic_consitutive_law_pt->isotropic_hardening_factor);
 
-    set_r(ipt,
-          std::max(
-            R, this->Plastic_consitutive_law_pt->normal_yield_ratio_elastic));
+    set_r(
+      ipt,
+      std::max(
+        R,
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re()));
   }
 
   return plasticDeformation;
@@ -2051,7 +1991,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double dRdLambda;
   double dRdu;
   double computed_R =
-    compute_r_plastic(u, delta_lambda, R_prev, dRdLambda, dRdu, flag);
+    this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+      ->compute_r_plastic(u, delta_lambda, R_prev, dRdLambda, dRdu, flag);
 
   const unsigned int row_r = this->plastic_r_eqn_number(ipt);
   residuals[row_r] = get_r(ipt) - computed_R;

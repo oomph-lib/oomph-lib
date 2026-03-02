@@ -208,81 +208,95 @@ namespace oomph
     }
   };
 
+  class NormalYieldRatioLaw
+  {
+  public:
+    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt)
+      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt)
+    {
+    }
+
+    double compute_r_plastic(const double& u,
+                             const double& delta_lambda,
+                             const double& R_prev)
+    {
+      double derivative;
+      return compute_r_plastic(
+        u, delta_lambda, R_prev, derivative, derivative, 0);
+    }
+
+    double compute_r_plastic(const double& u,
+                             const double& delta_lambda,
+                             const double& R_prev,
+                             double& dRdLambda,
+                             double& dRdu,
+                             bool computeDerivative)
+    {
+      const double Re = (*normal_yield_ratio_elastic_pt);
+
+      // Initialize derivatives
+      if (computeDerivative)
+      {
+        dRdLambda = 0.0;
+        dRdu = 0.0;
+      }
+
+      if (std::abs(1.0 - Re) < 1.0e-12) return 1.0;
+
+      const double OneMinusRe = 1.0 - Re;
+      const double preFactor = (2.0 * OneMinusRe) / MathematicalConstants::Pi;
+      const double preFactorArg =
+        MathematicalConstants::Pi / (2.0 * OneMinusRe);
+
+      // Compute the argument of cos^{-1}
+      // We do not need a max around R_prev - Re, since R_prev >= Re by
+      // definition
+      double inner_arg = std::cos(preFactorArg * (R_prev - Re)) *
+                         std::exp(-u * preFactorArg * delta_lambda);
+
+      // Limit the arg. This has two effects, it prevents the acos to take wierd
+      // numbers and makes the derivative always not infinite.
+      const double TOLERANCE = 1.0e-12;
+      const double MAX_ARG = std::sqrt(1.0 - TOLERANCE);
+
+      if (inner_arg > MAX_ARG) inner_arg = MAX_ARG;
+      if (inner_arg < -MAX_ARG) inner_arg = -MAX_ARG;
+
+      // Compute R
+      double R = preFactor * std::acos(inner_arg) + Re;
+
+      if (computeDerivative)
+      {
+        // Calculate dR/dLambda and dR/du for Jacobian
+        double denom_sq = 1.0 - inner_arg * inner_arg;
+
+        // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
+        double inv_sqrt = -1.0 / std::sqrt(denom_sq);
+
+        // df/dLambda = f * (-u * preFactorArg)
+        double dWdLambda = inner_arg * (-u * preFactorArg);
+        dRdLambda = preFactor * inv_sqrt * dWdLambda;
+
+        // df/du = f * (-preFactorArg * delta_lambda)
+        double dWdu = inner_arg * (-preFactorArg * delta_lambda);
+        dRdu = preFactor * inv_sqrt * dWdu;
+      }
+
+      return R;
+    }
+
+    double get_re()
+    {
+      return *normal_yield_ratio_elastic_pt;
+    }
+
+  private:
+    double* normal_yield_ratio_elastic_pt;
+  };
+
   class PlasticConstitutiveLaw
   {
   public:
-    /*!
-     * \brief computes the yield ratio based on the equation f(Mbarbar') = R
-     * F(H)
-     */
-    double compute_R_elastic(const DenseMatrix<double>& bar_M,
-                             const DenseMatrix<double>& bar_Mk,
-                             const DenseMatrix<double>& bar_Mc,
-                             const double& H)
-    {
-      // Compute tilde_bar_M and hat_bar_Mc
-      DenseMatrix<double> tilde_bar_M(bar_M.nrow(), bar_M.ncol(), 0.0),
-        hat_bar_Mc(bar_M.nrow(), bar_M.ncol(), 0.0);
-
-      // Variables to store the trace (sum of diagonals)
-      double trace_tilde = 0.0;
-      double trace_hat = 0.0;
-
-      for (unsigned int i = 0; i < bar_M.nrow(); i++)
-      {
-        for (unsigned int j = 0; j < bar_M.ncol(); j++)
-        {
-          tilde_bar_M(i, j) = bar_M(i, j) - bar_Mc(i, j);
-          hat_bar_Mc(i, j) = bar_Mc(i, j) - bar_Mk(i, j);
-
-          // Accumulate trace
-          if (i == j)
-          {
-            trace_tilde += tilde_bar_M(i, j);
-            trace_hat += hat_bar_Mc(i, j);
-          }
-        }
-      }
-
-      // Divide by 3 here even for DIM=2, because stress is 3D
-      double mean_tilde = trace_tilde / 3;
-      double mean_hat = trace_hat / 3;
-
-      double term_MM = 0.0; // tilde_bar_M : tilde_bar_M
-      double term_MMc = 0.0; // tilde_bar_M : hat_bar_Mc
-      double term_McMc = 0.0; // hat_bar_Mc  : hat_bar_Mc (needed for norm)
-
-      for (unsigned int i = 0; i < bar_M.nrow(); i++)
-      {
-        for (unsigned int j = 0; j < bar_M.ncol(); j++)
-        {
-          if (i == j)
-          {
-            // Compute deviatoric part
-            tilde_bar_M(i, j) -= mean_tilde;
-            hat_bar_Mc(i, j) -= mean_hat;
-          }
-
-          double m_val = tilde_bar_M(i, j);
-          double mc_val = hat_bar_Mc(i, j);
-
-          // Compute the contractions
-          term_MM += m_val * m_val;
-          term_MMc += m_val * mc_val;
-          term_McMc += mc_val * mc_val;
-        }
-      }
-
-      // Finally compute R
-      double Fh = isotropic_hardening_law_pt->yield_function(H);
-
-      double denominator = 2. / 3. * Fh * Fh - term_McMc;
-      double enumerator =
-        term_MMc + std::sqrt(term_MMc * term_MMc + denominator * term_MM);
-
-      return enumerator / denominator;
-    }
-
     IsotropicHardeningLaw* isotropic_hardening_law_pt;
     YieldCriterion* yield_criterion_pt;
 
@@ -292,12 +306,10 @@ namespace oomph
     // Elastic core law
     ConstitutiveLaw* elastic_core_law_pt;
 
-    double eta_p = 0.0;
+    // For computing the normal yield ratio
+    NormalYieldRatioLaw* normal_yield_ratio_law_pt;
 
-    /*!
-     * \brief R^\text{e}
-     */
-    double normal_yield_ratio_elastic = 0.5;
+    double eta_p = 0.0;
 
     /*!
      * normal_yield_ratio_constant_u
