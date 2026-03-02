@@ -366,8 +366,8 @@ namespace oomph
     }
 
     unsigned plastic_invBpks_eqn_number(const unsigned& ipt,
-                                     const unsigned& i,
-                                     const unsigned& j) const
+                                        const unsigned& i,
+                                        const unsigned& j) const
     {
       return Plastic_data_eqn_number[ipt][invBpks_INDEX][i * DIM + j];
     }
@@ -437,11 +437,14 @@ namespace oomph
       RankFourTensor<double>& dbar_MkdinvBpks,
       bool computeDerivative);
 
-    void compute_mandellike_kinematic_hardening(const DenseMatrix<double>& invBpks,
-                                                DenseMatrix<double>& bar_Mk)
+    void compute_mandellike_kinematic_hardening(
+      const DenseMatrix<double>& invBpks, DenseMatrix<double>& bar_Mk)
     {
       return compute_mandellike_kinematic_hardening(
-        invBpks, bar_Mk, PlasticEquationsBase<DIM>::Dummy_rankfourtensor, false);
+        invBpks,
+        bar_Mk,
+        PlasticEquationsBase<DIM>::Dummy_rankfourtensor,
+        false);
     }
 
     void compute_mandellike_elastic_core(const DenseMatrix<double>& Fpcs,
@@ -988,16 +991,16 @@ namespace oomph
     }
 
     double get_invBpks(const unsigned& ipt,
-                    const unsigned& i,
-                    const unsigned& j) const
+                       const unsigned& i,
+                       const unsigned& j) const
     {
       return get_invBpks(0, ipt, i, j);
     }
 
     double get_invBpks(const unsigned int t,
-                    const unsigned& ipt,
-                    const unsigned& i,
-                    const unsigned& j) const
+                       const unsigned& ipt,
+                       const unsigned& i,
+                       const unsigned& j) const
     {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
       return Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
@@ -1009,8 +1012,8 @@ namespace oomph
     }
 
     void get_invBpks_matrix(const unsigned int t,
-                         const unsigned int& ipt,
-                         DenseMatrix<double>& invBpks)
+                            const unsigned int& ipt,
+                            DenseMatrix<double>& invBpks)
     {
       invBpks.resize(DIM);
 
@@ -1018,7 +1021,8 @@ namespace oomph
       {
         for (unsigned int j = 0; j < DIM; j++)
         {
-          invBpks(i, j) = Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
+          invBpks(i, j) =
+            Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
         }
       }
     }
@@ -1028,7 +1032,8 @@ namespace oomph
      * gradient as a matrix
      * \details Uses the data's time stepper to compute the derivative
      */
-    void get_dot_invBpks_matrix(const unsigned& ipt, DenseMatrix<double>& dotinvBpks)
+    void get_dot_invBpks_matrix(const unsigned& ipt,
+                                DenseMatrix<double>& dotinvBpks)
     {
       dotinvBpks.resize(DIM);
 
@@ -1048,7 +1053,7 @@ namespace oomph
      * the difference between the current timestep and the initial value.
      */
     void get_delta_invBpks_matrix(const unsigned& ipt,
-                               DenseMatrix<double>& delta_invBpks)
+                                  DenseMatrix<double>& delta_invBpks)
     {
       const TimeStepper* invBpks_time_stepper_pt =
         Plastic_data_pt[ipt][invBpks_INDEX]->time_stepper_pt();
@@ -1061,7 +1066,8 @@ namespace oomph
         {
           for (unsigned int j = 0; j < DIM; j++)
           {
-            delta_invBpks(i, j) = get_invBpks(0, ipt, i, j) - get_invBpks(1, ipt, i, j);
+            delta_invBpks(i, j) =
+              get_invBpks(0, ipt, i, j) - get_invBpks(1, ipt, i, j);
           }
         }
       }
@@ -1079,8 +1085,8 @@ namespace oomph
       }
     }
 
-    void get_dot_or_delta_invBpks_matrix(const unsigned& ipt,
-                                      DenseMatrix<double>& dot_or_delta_invBpks)
+    void get_dot_or_delta_invBpks_matrix(
+      const unsigned& ipt, DenseMatrix<double>& dot_or_delta_invBpks)
     {
       const TimeStepper* invBpks_time_stepper_pt =
         Plastic_data_pt[ipt][invBpks_INDEX]->time_stepper_pt();
@@ -1308,9 +1314,9 @@ namespace oomph
     }
 
     void set_invBpks(const unsigned& ipt,
-                  const unsigned& i,
-                  const unsigned& j,
-                  const double& val)
+                     const unsigned& i,
+                     const unsigned& j,
+                     const double& val)
     {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
       Plastic_data_pt[ipt][invBpks_INDEX]->set_value(i * DIM + j, val);
@@ -1448,10 +1454,11 @@ namespace oomph
         //           << std::endl;
         // if (Plastic_data_has_been_built[invBpks_INDEX])
         // {
-        //   std::cout << "   invBpks: " << this->plastic_invBpks_eqn_number(ipt, 0,
-        //   0)
+        //   std::cout << "   invBpks: " <<
+        //   this->plastic_invBpks_eqn_number(ipt, 0, 0)
         //             << " to "
-        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM - 1)
+        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM -
+        //             1)
         //             << std::endl;
         // }
         // if (Plastic_data_has_been_built[R_INDEX])

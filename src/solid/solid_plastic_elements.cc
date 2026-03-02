@@ -1664,7 +1664,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             // invBpks_{aj} dbar_Lp_ia / dinvBpks_kl
             // - invBpks_{aj} dbar_Lpks_ia / dinvBpks_kl
             // dbar_Lp_ai / dinvBpks_kl * invBpks_{aj}
-            // - dbar_Lpks_ai / dinvBpks_kl * invBpks_{aj} 
+            // - dbar_Lpks_ai / dinvBpks_kl * invBpks_{aj}
             //
             // invFp term:
             // invBpks_{aj} dbar_Lp_ia / dinvFp_kl
