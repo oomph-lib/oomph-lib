@@ -34,8 +34,8 @@ Given appropriate strain energy functions \f$\psi_\mathrm{e}\left(\atensor{C}_\m
 \f[
     \begin{split}        
         \atensor{M} &= \atensor{C}_\mathrm{e}\atensor{S} = 2 \atensor{C}_\mathrm{e}\frac{\partial\psi_\mathrm{e}\left(\atensor{C}_\mathrm{e}\right)}{\partial\atensor{C}_\mathrm{e}} \left(\neq \atensor{M}^\mathrm{T}\right),\\
-        \atensor{M}_\mathrm{k} &= \ctensor{C}_\mathrm{pks}\atensor{S}_\mathrm{k} = \atensor{S}_\mathrm{k} = 2 \mathbf{F}_\mathrm{pks} \frac{\partial\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)}{\partial{\ctensor{C}}_\mathrm{pks}} \mathbf{F}_\mathrm{pks}^\mathrm{T} \left(= \atensor{M}_\mathrm{k}^\mathrm{T}\right),\\
-        \atensor{M}_\mathrm{c} &= \dtensor{C}_\mathrm{pcs}\atensor{S}_\mathrm{c} = \atensor{S}_\mathrm{c} = 2 \mathbf{F}_\mathrm{pcs} \frac{\partial\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)}{\partial{\dtensor{C}}_\mathrm{pcs}} \mathbf{F}_\mathrm{pcs}^\mathrm{T} \left(= \atensor{M}_\mathrm{c}^\mathrm{T}\right)
+        \atensor{M}_\mathrm{k} &= \atensor{C}_\mathrm{pks}\atensor{S}_\mathrm{k} = \atensor{S}_\mathrm{k} = 2 \mathbf{F}_\mathrm{pks} \frac{\partial\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)}{\partial{\ctensor{C}}_\mathrm{pks}} \mathbf{F}_\mathrm{pks}^\mathrm{T} \left(= \atensor{M}_\mathrm{k}^\mathrm{T}\right),\\
+        \atensor{M}_\mathrm{c} &= \atensor{C}_\mathrm{pcs}\atensor{S}_\mathrm{c} = \atensor{S}_\mathrm{c} = 2 \mathbf{F}_\mathrm{pcs} \frac{\partial\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)}{\partial{\dtensor{C}}_\mathrm{pcs}} \mathbf{F}_\mathrm{pcs}^\mathrm{T} \left(= \atensor{M}_\mathrm{c}^\mathrm{T}\right)
     \end{split}
 \f]
 and further Mandel-like variables
@@ -115,6 +115,7 @@ Further, we need the tensors
     \end{split}
 \f]
 for the calculations above. 
+\subsection Simplifications
 \subsection material Material functions
 \subsection solving Solving for the plastic parameters
 In order to solve for the plastic parameters, we can make a few observations. The time derivative of \f$ H \f$ differs from \f$ \dot{\bar{\lambda}} \f$ just by a constant, hence we can write
@@ -125,4 +126,20 @@ The time derivative of R is hard to solve for numerically, since the function \f
 \f[
     R(t) = \frac{2}{\pi} (1 - R_\text{e}) \arccos\left[\cos\left(\frac{\pi}{2}\frac{R_{t_0} - R_\text{e}}{1 - R_\text{e}}\right)\exp\left(-u\frac{\pi}{2}\frac{\bar{\lambda}(t) - \bar{\lambda}(t_0)}{1-R_\text{e}}\right)\right] + R_\text{e}. 
 \f]
-\section implementationm Implementation: The PlasticEquations class
+\section implementation Implementation
+\subsection internal_vars Internal variables
+To compute the Mandel-like variables and the stresses, we can rely on already existing functionality in oomph-lib. The class ConstitutiveLaw contains a function calculate_second_piola_kirchhoff_stress \f$ \mathbf{S}(\mathbf{g},\,\mathbf{G}) \f$, which takes two arguments: \f$\mathbf{g}\f$, the metric of the undeformed space pulled back to a reference frame and \f$\mathbf{G}\f$, the metric of the deformed space pulled back to the same reference frame. The function computes the corresponding stress between the deformed and the undeformes space, pulled back to the reference frame. Hence, to compute, e.g. \f$\atensor{S}_\text{c}\f$, we can write
+\f[
+    \begin{split}
+    \atensor{S}_\text{pcs} &= \mathbf{F}_\text{pcs} \mathbf{S}(\mathbf{1},\,\mathbf{F}_\text{pcs}^\text{T}\mathbf{F}_\text{pcs}) \mathbf{F}_\text{pcs}^\text{T} \\
+                         &= \mathbf{S}(\mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1},\,\mathbf{1}).
+    \end{split}
+\f]
+I the first line, we used the function \f$\mathbf{S}\f$ to compute the stress within the frame \f$\ctensor{\cdot}\f$ and then pushed it forward to the frame \f$\atensor{\cdot}\f$. In the second line, we instead shifted the reference of the arguments to be in the frame \f$\atensor{\cdot}\f$. Hence, the resulting stress is computed in the target frame and no further pull-back or push-forward operation is neccesary.
+
+Being able to compute the stress using only the quantity
+\f[
+    \ctensor{B}_\text{pcs}^{-1} = \mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1}
+\f]
+reduces the number of components, which needs to be solved fore. While \f$\mathbf{F}_\text{pcs}\f$ has 9 independent components, \f$\ctensor{B}_\text{pcs}^{-1}\f$ is symmetric and hence has only 6 independent components to be solved for.
+\subsection The PlasticEquations class
