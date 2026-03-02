@@ -211,55 +211,6 @@ namespace oomph
   class PlasticConstitutiveLaw
   {
   public:
-    void mandel_like_kinematic_hardening_variable(
-      const DenseMatrix<double>& Fpks,
-      const DenseMatrix<double>& intermediateMetric,
-      DenseMatrix<double>& Mbark,
-      RankFourTensor<double>& dbar_Mk_dFpks,
-      bool computeDerivative)
-    {
-      const unsigned int nrow = Fpks.nrow();
-      const unsigned int ncol = Fpks.ncol();
-      Mbark.resize(nrow, nrow);
-
-      for (unsigned int i = 0; i < nrow; i++)
-      {
-        for (unsigned int j = 0; j < nrow; j++)
-        {
-          double FpksFpksT_ij = 0;
-          for (unsigned int m = 0; m < ncol; m++)
-          {
-            FpksFpksT_ij += Fpks(i, m) * Fpks(j, m);
-          }
-          Mbark(i, j) = kinematic_hardening_stress_c *
-                        (FpksFpksT_ij - intermediateMetric(i, j));
-        }
-      }
-
-      if (!computeDerivative) return;
-
-      dbar_Mk_dFpks.resize(nrow, nrow, nrow, ncol, 0.0);
-      dbar_Mk_dFpks.initialise(0.0);
-
-      // dM_ik / dF_kl = c * (F_jl \delta_ik + F_il \delta_jk)
-      for (unsigned int i = 0; i < nrow; i++)
-      {
-        for (unsigned int j = 0; j < nrow; j++)
-        {
-          for (unsigned int l = 0; l < ncol; l++)
-          {
-            // Contribution i == k
-            dbar_Mk_dFpks(i, j, i, l) +=
-              kinematic_hardening_stress_c * Fpks(j, l);
-
-            // Contribution j == k
-            dbar_Mk_dFpks(i, j, j, l) +=
-              kinematic_hardening_stress_c * Fpks(i, l);
-          }
-        }
-      }
-    }
-
     void mandel_like_elastic_core_variable(
       const DenseMatrix<double>& Fpcs,
       const DenseMatrix<double>& intermediateMetric,
@@ -382,6 +333,9 @@ namespace oomph
     IsotropicHardeningLaw* isotropic_hardening_law_pt;
     YieldCriterion* yield_criterion_pt;
 
+    // Kinematic harening law
+    ConstitutiveLaw* kinematic_hardening_law_pt;
+
     double eta_p = 0.0;
 
     /*!
@@ -408,11 +362,6 @@ namespace oomph
      * \brief b^\text{pk}
      */
     double kinematic_hardening_b = 2.0;
-
-    /*!
-     * \brief C^\text{k}
-     */
-    double kinematic_hardening_stress_c = 1.0;
 
     /*!
      * \brief \eta^\text{pc}

@@ -38,7 +38,7 @@ namespace oomph
     enum Plastic_Variables_Indexes
     {
       invFp_INDEX,
-      Fpks_INDEX,
+      invBpks_INDEX,
       Fpcs_INDEX,
       Lambda_INDEX,
       R_INDEX,
@@ -226,23 +226,23 @@ namespace oomph
       }
     }
 
-    void construct_fpks_internal_data()
+    void construct_invBpks_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Data* data_pt = new Data(DIM * DIM);
-        Plastic_data_pt[ipt][Fpks_INDEX] = data_pt;
+        Plastic_data_pt[ipt][invBpks_INDEX] = data_pt;
         (void)this->add_internal_data(data_pt, false);
         for (unsigned i = 0; i < DIM * DIM; i++)
         {
           // Pin the plastic degree of freedom
-          Plastic_data_pt[ipt][Fpks_INDEX]->pin(i);
+          Plastic_data_pt[ipt][invBpks_INDEX]->pin(i);
           // By default the plastic data is not pinned
-          Plastic_data_pinned_status[ipt][Fpks_INDEX].push_back(false);
+          Plastic_data_pinned_status[ipt][invBpks_INDEX].push_back(false);
           // But we have to initialise the eqn number to something so it may as
           // well be a safe value
-          Plastic_data_eqn_number[ipt][Fpks_INDEX].push_back(-1);
+          Plastic_data_eqn_number[ipt][invBpks_INDEX].push_back(-1);
           // We initialise the plastic deformation gradient tensors to the
           // identity
           if (i % (DIM + 1) == 0)
@@ -344,7 +344,7 @@ namespace oomph
       resize_plastic_dof_numbers();
 
       construct_inv_fp_internal_data();
-      construct_fpks_internal_data();
+      construct_invBpks_internal_data();
       construct_fpcs_internal_data();
       construct_r_internal_data();
       construct_lambda_internal_data();
@@ -365,11 +365,11 @@ namespace oomph
       return Plastic_data_eqn_number[ipt][invFp_INDEX][i * DIM + j];
     }
 
-    unsigned plastic_fpks_eqn_number(const unsigned& ipt,
+    unsigned plastic_invBpks_eqn_number(const unsigned& ipt,
                                      const unsigned& i,
                                      const unsigned& j) const
     {
-      return Plastic_data_eqn_number[ipt][Fpks_INDEX][i * DIM + j];
+      return Plastic_data_eqn_number[ipt][invBpks_INDEX][i * DIM + j];
     }
 
     unsigned plastic_fpcs_eqn_number(const unsigned& ipt,
@@ -432,16 +432,16 @@ namespace oomph
     }
 
     void compute_mandellike_kinematic_hardening(
-      const DenseMatrix<double>& Fpks,
+      const DenseMatrix<double>& invBpks,
       DenseMatrix<double>& bar_Mk,
-      RankFourTensor<double>& dbar_MkdFpks,
+      RankFourTensor<double>& dbar_MkdinvBpks,
       bool computeDerivative);
 
-    void compute_mandellike_kinematic_hardening(const DenseMatrix<double>& Fpks,
+    void compute_mandellike_kinematic_hardening(const DenseMatrix<double>& invBpks,
                                                 DenseMatrix<double>& bar_Mk)
     {
       return compute_mandellike_kinematic_hardening(
-        Fpks, bar_Mk, PlasticEquationsBase<DIM>::Dummy_rankfourtensor, false);
+        invBpks, bar_Mk, PlasticEquationsBase<DIM>::Dummy_rankfourtensor, false);
     }
 
     void compute_mandellike_elastic_core(const DenseMatrix<double>& Fpcs,
@@ -987,38 +987,38 @@ namespace oomph
       return get_dot_inv_fp_matrix(ipt, dot_or_delta_invFp);
     }
 
-    double get_fpks(const unsigned& ipt,
+    double get_invBpks(const unsigned& ipt,
                     const unsigned& i,
                     const unsigned& j) const
     {
-      return get_fpks(0, ipt, i, j);
+      return get_invBpks(0, ipt, i, j);
     }
 
-    double get_fpks(const unsigned int t,
+    double get_invBpks(const unsigned int t,
                     const unsigned& ipt,
                     const unsigned& i,
                     const unsigned& j) const
     {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
-      return Plastic_data_pt[ipt][Fpks_INDEX]->value(t, i * DIM + j);
+      return Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
     }
 
-    void get_fpks_matrix(const unsigned& ipt, DenseMatrix<double>& Fpks)
+    void get_invBpks_matrix(const unsigned& ipt, DenseMatrix<double>& invBpks)
     {
-      return get_fpks_matrix(0, ipt, Fpks);
+      return get_invBpks_matrix(0, ipt, invBpks);
     }
 
-    void get_fpks_matrix(const unsigned int t,
+    void get_invBpks_matrix(const unsigned int t,
                          const unsigned int& ipt,
-                         DenseMatrix<double>& Fpks)
+                         DenseMatrix<double>& invBpks)
     {
-      Fpks.resize(DIM);
+      invBpks.resize(DIM);
 
       for (unsigned int i = 0; i < DIM; i++)
       {
         for (unsigned int j = 0; j < DIM; j++)
         {
-          Fpks(i, j) = Plastic_data_pt[ipt][Fpks_INDEX]->value(t, i * DIM + j);
+          invBpks(i, j) = Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
         }
       }
     }
@@ -1028,16 +1028,16 @@ namespace oomph
      * gradient as a matrix
      * \details Uses the data's time stepper to compute the derivative
      */
-    void get_dot_fpks_matrix(const unsigned& ipt, DenseMatrix<double>& dotFpks)
+    void get_dot_invBpks_matrix(const unsigned& ipt, DenseMatrix<double>& dotinvBpks)
     {
-      dotFpks.resize(DIM);
+      dotinvBpks.resize(DIM);
 
       for (unsigned int i = 0; i < DIM; i++)
       {
         for (unsigned int j = 0; j < DIM; j++)
         {
-          dotFpks(i, j) = this->dinternal_data_dt(
-            Plastic_data_pt[ipt][Fpks_INDEX], i * DIM + j);
+          dotinvBpks(i, j) = this->dinternal_data_dt(
+            Plastic_data_pt[ipt][invBpks_INDEX], i * DIM + j);
         }
       }
     }
@@ -1047,21 +1047,21 @@ namespace oomph
      * timestep. If the timestepper does not contain history, it will return
      * the difference between the current timestep and the initial value.
      */
-    void get_delta_fpks_matrix(const unsigned& ipt,
-                               DenseMatrix<double>& delta_Fpks)
+    void get_delta_invBpks_matrix(const unsigned& ipt,
+                               DenseMatrix<double>& delta_invBpks)
     {
-      const TimeStepper* fpks_time_stepper_pt =
-        Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt();
+      const TimeStepper* invBpks_time_stepper_pt =
+        Plastic_data_pt[ipt][invBpks_INDEX]->time_stepper_pt();
 
-      delta_Fpks.resize(DIM);
+      delta_invBpks.resize(DIM);
 
-      if (fpks_time_stepper_pt->ntstorage() > 1)
+      if (invBpks_time_stepper_pt->ntstorage() > 1)
       {
         for (unsigned int i = 0; i < DIM; i++)
         {
           for (unsigned int j = 0; j < DIM; j++)
           {
-            delta_Fpks(i, j) = get_fpks(0, ipt, i, j) - get_fpks(1, ipt, i, j);
+            delta_invBpks(i, j) = get_invBpks(0, ipt, i, j) - get_invBpks(1, ipt, i, j);
           }
         }
       }
@@ -1071,26 +1071,26 @@ namespace oomph
         {
           for (unsigned int j = 0; j < DIM; j++)
           {
-            delta_Fpks(i, j) = get_fpks(0, ipt, i, j);
+            delta_invBpks(i, j) = get_invBpks(0, ipt, i, j);
 
-            if (i == j) delta_Fpks(i, j) -= 1;
+            if (i == j) delta_invBpks(i, j) -= 1;
           }
         }
       }
     }
 
-    void get_dot_or_delta_fpks_matrix(const unsigned& ipt,
-                                      DenseMatrix<double>& dot_or_delta_Fpks)
+    void get_dot_or_delta_invBpks_matrix(const unsigned& ipt,
+                                      DenseMatrix<double>& dot_or_delta_invBpks)
     {
-      const TimeStepper* fpks_time_stepper_pt =
-        Plastic_data_pt[ipt][Fpks_INDEX]->time_stepper_pt();
+      const TimeStepper* invBpks_time_stepper_pt =
+        Plastic_data_pt[ipt][invBpks_INDEX]->time_stepper_pt();
 
-      if (fpks_time_stepper_pt->is_steady())
+      if (invBpks_time_stepper_pt->is_steady())
       {
-        return get_delta_fpks_matrix(ipt, dot_or_delta_Fpks);
+        return get_delta_invBpks_matrix(ipt, dot_or_delta_invBpks);
       }
 
-      return get_dot_fpks_matrix(ipt, dot_or_delta_Fpks);
+      return get_dot_invBpks_matrix(ipt, dot_or_delta_invBpks);
     }
 
     double get_fpcs(const unsigned& ipt,
@@ -1307,13 +1307,13 @@ namespace oomph
       }
     }
 
-    void set_fpks(const unsigned& ipt,
+    void set_invBpks(const unsigned& ipt,
                   const unsigned& i,
                   const unsigned& j,
                   const double& val)
     {
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
-      Plastic_data_pt[ipt][Fpks_INDEX]->set_value(i * DIM + j, val);
+      Plastic_data_pt[ipt][invBpks_INDEX]->set_value(i * DIM + j, val);
     }
     void set_fpcs(const unsigned& ipt,
                   const unsigned& i,
@@ -1446,12 +1446,12 @@ namespace oomph
         //           << this->plastic_inv_fp_eqn_number(ipt, 0, 0) << " to "
         //           << this->plastic_inv_fp_eqn_number(ipt, DIM - 1, DIM - 1)
         //           << std::endl;
-        // if (Plastic_data_has_been_built[Fpks_INDEX])
+        // if (Plastic_data_has_been_built[invBpks_INDEX])
         // {
-        //   std::cout << "   Fpks: " << this->plastic_fpks_eqn_number(ipt, 0,
+        //   std::cout << "   invBpks: " << this->plastic_invBpks_eqn_number(ipt, 0,
         //   0)
         //             << " to "
-        //             << this->plastic_fpks_eqn_number(ipt, DIM - 1, DIM - 1)
+        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM - 1)
         //             << std::endl;
         // }
         // if (Plastic_data_has_been_built[R_INDEX])
@@ -1658,18 +1658,18 @@ namespace oomph
       oomph_info << "invFp(2): " << std::endl
                  << MatrixHelpers::format(invFp) << std::endl;
 
-      DenseMatrix<double> Fpks;
-      get_inv_fp_matrix(0, ipt, Fpks);
-      oomph_info << "Fpks(0): " << std::endl
-                 << MatrixHelpers::format(Fpks) << std::endl;
+      DenseMatrix<double> invBpks;
+      get_inv_fp_matrix(0, ipt, invBpks);
+      oomph_info << "invBpks(0): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
 
-      get_inv_fp_matrix(1, ipt, Fpks);
-      oomph_info << "Fpks(1): " << std::endl
-                 << MatrixHelpers::format(Fpks) << std::endl;
+      get_inv_fp_matrix(1, ipt, invBpks);
+      oomph_info << "invBpks(1): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
 
-      get_inv_fp_matrix(2, ipt, Fpks);
-      oomph_info << "Fpks(2): " << std::endl
-                 << MatrixHelpers::format(Fpks) << std::endl;
+      get_inv_fp_matrix(2, ipt, invBpks);
+      oomph_info << "invBpks(2): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
 
       oomph_info << "H(0) = " << get_h(0, ipt) << " H(1) = " << get_h(1, ipt)
                  << " H(2) = " << get_h(2, ipt) << std::endl;
