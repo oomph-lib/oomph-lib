@@ -78,6 +78,10 @@ private:
   StrainEnergyFunction* kinematic_hardening_strain_energy_function_pt;
   ConstitutiveLaw* kinematic_hardening_law_pt;
 
+  double elastic_core_stress_c = 1e8 / E0;
+  StrainEnergyFunction* elastic_core_strain_energy_function_pt;
+  ConstitutiveLaw* elastic_core_law_pt;
+
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
 
   TimeStepper* my_time_stepper_pt;
@@ -150,6 +154,10 @@ private:
     kinematic_hardening_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(kinematic_hardening_strain_energy_function_pt);
     plastic_constitutive_law_pt->kinematic_hardening_law_pt = kinematic_hardening_law_pt;
 
+    elastic_core_strain_energy_function_pt = new ModifiedNeoHookean(&zero, &elastic_core_stress_c);
+    elastic_core_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(elastic_core_strain_energy_function_pt);
+    plastic_constitutive_law_pt->elastic_core_law_pt = elastic_core_law_pt;
+
     plastic_constitutive_law_pt->normal_yield_ratio_constant_u = 200;
 
     plastic_constitutive_law_pt->normal_yield_ratio_elastic = 0.2;
@@ -159,7 +167,6 @@ private:
     plastic_constitutive_law_pt->kinematic_hardening_b = 0.1;
     plastic_constitutive_law_pt->kinematic_hardening_eta = 0.5;
 
-    plastic_constitutive_law_pt->elastic_core_stress_c = 1e8 / E0;
     plastic_constitutive_law_pt->elastic_core_x = 0.1;
     plastic_constitutive_law_pt->elastic_core_eta = 0.5;
 

@@ -211,52 +211,6 @@ namespace oomph
   class PlasticConstitutiveLaw
   {
   public:
-    void mandel_like_elastic_core_variable(
-      const DenseMatrix<double>& Fpcs,
-      const DenseMatrix<double>& intermediateMetric,
-      DenseMatrix<double>& Mbarc,
-      RankFourTensor<double>& dbar_Mk_dFpcs,
-      bool computeDerivative)
-    {
-      const unsigned int nrow = Fpcs.nrow();
-      const unsigned int ncol = Fpcs.ncol();
-      Mbarc.resize(nrow, nrow);
-
-      for (unsigned int i = 0; i < nrow; i++)
-      {
-        for (unsigned int j = 0; j < nrow; j++)
-        {
-          double FpcsFpcsT_ij = 0;
-          for (unsigned int m = 0; m < ncol; m++)
-          {
-            FpcsFpcsT_ij += Fpcs(i, m) * Fpcs(j, m);
-          }
-          Mbarc(i, j) =
-            elastic_core_stress_c * (FpcsFpcsT_ij - intermediateMetric(i, j));
-        }
-      }
-
-      if (!computeDerivative) return;
-
-      dbar_Mk_dFpcs.resize(nrow, nrow, nrow, ncol, 0.0);
-      dbar_Mk_dFpcs.initialise(0.0);
-
-      // dM_ik / dF_kl = c * (F_jl \delta_ik + F_il \delta_jk)
-      for (unsigned int i = 0; i < nrow; i++)
-      {
-        for (unsigned int j = 0; j < nrow; j++)
-        {
-          for (unsigned int l = 0; l < ncol; l++)
-          {
-            // Contribution i == k
-            dbar_Mk_dFpcs(i, j, i, l) += elastic_core_stress_c * Fpcs(j, l);
-
-            // Contribution j == k
-            dbar_Mk_dFpcs(i, j, j, l) += elastic_core_stress_c * Fpcs(i, l);
-          }
-        }
-      }
-    }
 
     /*!
      * \brief computes the yield ratio based on the equation f(Mbarbar') = R
@@ -336,6 +290,9 @@ namespace oomph
     // Kinematic harening law
     ConstitutiveLaw* kinematic_hardening_law_pt;
 
+    // Elastic core law
+    ConstitutiveLaw* elastic_core_law_pt;
+
     double eta_p = 0.0;
 
     /*!
@@ -372,11 +329,6 @@ namespace oomph
      * \brief X
      */
     double elastic_core_x = 1.0;
-
-    /*!
-     * \brief C^\text{c}
-     */
-    double elastic_core_stress_c = 1.0;
 
     /*!
      * \brief u_c
