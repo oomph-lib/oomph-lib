@@ -211,7 +211,6 @@ namespace oomph
   class PlasticConstitutiveLaw
   {
   public:
-
     /*!
      * \brief computes the yield ratio based on the equation f(Mbarbar') = R
      * F(H)
