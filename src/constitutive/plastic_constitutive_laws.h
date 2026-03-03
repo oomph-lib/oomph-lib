@@ -225,8 +225,12 @@ namespace oomph
   class NormalYieldRatioLaw
   {
   public:
-    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt)
-      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt)
+    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt,
+                        double* u_in_pt,
+                        double* elastic_core_u_in_pt)
+      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt),
+        u_pt(u_in_pt),
+        elastic_core_u_pt(elastic_core_u_in_pt)
     {
     }
 
@@ -299,13 +303,170 @@ namespace oomph
       return R;
     }
 
+    double compute_u_with_elastic_core(
+      const double& Rc,
+      const DenseMatrix<double>& barbar_N,
+      const DenseMatrix<double>& hat_bar_Nc,
+      const RankFourTensor<double>& dbarbarN_dbarbar_M,
+      const double& dbarbar_M_dbar_Mk,
+      const double& dbarbar_M_dbar_Mc,
+      const DenseMatrix<double>& dbarbar_M_dR,
+      const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
+      const DenseMatrix<double>& dRc_dhatbar_Mc,
+      const double& dRc_dh,
+      DenseMatrix<double>& du_dbar_M,
+      DenseMatrix<double>& du_dbar_Mk,
+      DenseMatrix<double>& du_dbar_Mc,
+      double& du_dh,
+      double& du_dR,
+      bool computeDerivative
+
+    )
+    {
+      DenseMatrix<double> dC_dbar_M, dC_dbar_Mk, dC_dbar_Mc;
+      double dCdR;
+
+      double c_sigma = compute_c_sigma(barbar_N,
+                                       hat_bar_Nc,
+                                       dbarbarN_dbarbar_M,
+                                       dbarbar_M_dbar_Mk,
+                                       dbarbar_M_dbar_Mc,
+                                       dbarbar_M_dR,
+                                       dhatbar_Nc_dhatbar_Mc,
+                                       dC_dbar_M,
+                                       dC_dbar_Mk,
+                                       dC_dbar_Mc,
+                                       dCdR,
+                                       computeDerivative);
+
+      return compute_u_with_elastic_core_from_c(Rc,
+                                                c_sigma,
+                                                dRc_dhatbar_Mc,
+                                                dRc_dh,
+                                                dC_dbar_M,
+                                                dC_dbar_Mk,
+                                                dC_dbar_Mc,
+                                                dCdR,
+                                                du_dbar_M,
+                                                du_dbar_Mk,
+                                                du_dbar_Mc,
+                                                du_dh,
+                                                du_dR,
+                                                computeDerivative);
+    }
+
     double get_re()
     {
       return *normal_yield_ratio_elastic_pt;
     }
 
+    double get_u()
+    {
+      return *u_pt;
+    }
+
+  protected:
+    double compute_u_with_elastic_core_from_c(
+      const double& Rc,
+      const double& c_sigma,
+      const DenseMatrix<double>& dRc_dhatbar_Mc,
+      const double& dRc_dh,
+      const DenseMatrix<double>& dc_sigma_dbar_M,
+      const DenseMatrix<double>& dc_sigma_dbar_Mk,
+      const DenseMatrix<double>& dc_sigma_dbar_Mc,
+      const double& dc_sigma_dR,
+      DenseMatrix<double>& du_dbar_M,
+      DenseMatrix<double>& du_dbar_Mk,
+      DenseMatrix<double>& du_dbar_Mc,
+      double& du_dh,
+      double& du_dR,
+      bool computeDerivative)
+    {
+      const double uc = (*elastic_core_u_pt);
+      const double u_out = (*u_pt) * std::exp(uc * Rc * c_sigma);
+
+      if (computeDerivative)
+      {
+        const double prefactor_dc_sigma = uc * u_out * Rc;
+        const double prefactor_drc = uc * u_out * c_sigma;
+
+        const unsigned DIM = dRc_dhatbar_Mc.ncol();
+        du_dbar_M.resize(DIM, DIM);
+        du_dbar_Mk.resize(DIM, DIM);
+        du_dbar_Mc.resize(DIM, DIM);
+
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            du_dbar_M(i, j) = prefactor_dc_sigma * dc_sigma_dbar_M(i, j);
+            du_dbar_Mk(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mk(i, j) -
+                               prefactor_drc * dRc_dhatbar_Mc(i, j);
+            du_dbar_Mc(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mc(i, j) +
+                               prefactor_drc * dRc_dhatbar_Mc(i, j);
+          }
+        }
+
+        du_dh = prefactor_drc * dRc_dh;
+        du_dR = prefactor_dc_sigma * dc_sigma_dR;
+      }
+
+      return u_out;
+    }
+
+    double compute_c_sigma(const DenseMatrix<double>& bar_bar_N,
+                           const DenseMatrix<double>& hat_bar_Nc,
+                           const RankFourTensor<double>& dbarbar_N_dbarbar_M,
+                           const double& dbarbar_M_dbar_Mk,
+                           const double& dbarbar_M_dbar_Mc,
+                           const DenseMatrix<double>& dbarbarM_dR,
+                           const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
+                           DenseMatrix<double>& dC_dbar_M,
+                           DenseMatrix<double>& dC_dbar_Mk,
+                           DenseMatrix<double>& dC_dbar_Mc,
+                           double& dCdR,
+                           bool computeDerivative)
+    {
+      if (computeDerivative)
+      {
+        const unsigned DIM = bar_bar_N.ncol();
+        dC_dbar_M.resize(DIM, DIM);
+        dC_dbar_Mk.resize(DIM, DIM);
+        dC_dbar_Mc.resize(DIM, DIM);
+        dCdR = 0.0;
+
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            double term1_sum = 0.0;
+            double term2_sum = 0.0;
+            for (unsigned int a = 0; a < DIM; a++)
+            {
+              for (unsigned int b = 0; b < DIM; b++)
+              {
+                term1_sum += dbarbar_N_dbarbar_M(a, b, i, j) * hat_bar_Nc(a, b);
+                term2_sum +=
+                  bar_bar_N(a, b) * dhatbar_Nc_dhatbar_Mc(a, b, i, j);
+              }
+            }
+
+            dCdR += term1_sum * dbarbarM_dR(i, j);
+
+            dC_dbar_M(i, j) = term1_sum;
+            dC_dbar_Mk(i, j) = term1_sum * dbarbar_M_dbar_Mk - term2_sum;
+            dC_dbar_Mc(i, j) = term1_sum * dbarbar_M_dbar_Mc + term2_sum;
+          }
+        }
+      }
+
+      return MatrixHelpers::reduce(bar_bar_N, hat_bar_Nc);
+    }
+
   private:
     double* normal_yield_ratio_elastic_pt;
+    double* u_pt;
+    double* elastic_core_u_pt;
   };
 
   class PlasticConstitutiveLaw
@@ -326,11 +487,6 @@ namespace oomph
     double eta_p = 0.0;
 
     /*!
-     * normal_yield_ratio_constant_u
-     */
-    double normal_yield_ratio_constant_u = 200;
-
-    /*!
      * \brief \eta^\text{pk}
      */
     double kinematic_hardening_eta = 0.0;
@@ -349,11 +505,6 @@ namespace oomph
      * \brief X
      */
     double elastic_core_x = 1.0;
-
-    /*!
-     * \brief u_c
-     */
-    double elasic_core_u = 1.0;
   };
 } // namespace oomph
 #endif

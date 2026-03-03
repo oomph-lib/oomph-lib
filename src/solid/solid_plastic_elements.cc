@@ -787,104 +787,6 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
 }
 
 template<unsigned DIM>
-double oomph::PlasticEquationsBase<DIM>::compute_c_sigma(
-  const DenseMatrix<double>& bar_bar_N,
-  const DenseMatrix<double>& hat_bar_Nc,
-  const RankFourTensor<double>& dbarbar_N_dbarbar_M,
-  const double& dbarbar_M_dbar_Mk,
-  const double& dbarbar_M_dbar_Mc,
-  const DenseMatrix<double>& dbarbarM_dR,
-  const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
-  DenseMatrix<double>& dC_dbar_M,
-  DenseMatrix<double>& dC_dbar_Mk,
-  DenseMatrix<double>& dC_dbar_Mc,
-  double& dCdR,
-  bool computeDerivative)
-{
-  if (computeDerivative)
-  {
-    dC_dbar_M.resize(DIM, DIM);
-    dC_dbar_Mk.resize(DIM, DIM);
-    dC_dbar_Mc.resize(DIM, DIM);
-    dCdR = 0.0;
-
-    for (unsigned int i = 0; i < DIM; i++)
-    {
-      for (unsigned int j = 0; j < DIM; j++)
-      {
-        double term1_sum = 0.0;
-        double term2_sum = 0.0;
-        for (unsigned int a = 0; a < DIM; a++)
-        {
-          for (unsigned int b = 0; b < DIM; b++)
-          {
-            term1_sum += dbarbar_N_dbarbar_M(a, b, i, j) * hat_bar_Nc(a, b);
-            term2_sum += bar_bar_N(a, b) * dhatbar_Nc_dhatbar_Mc(a, b, i, j);
-          }
-        }
-
-        dCdR += term1_sum * dbarbarM_dR(i, j);
-
-        dC_dbar_M(i, j) = term1_sum;
-        dC_dbar_Mk(i, j) = term1_sum * dbarbar_M_dbar_Mk - term2_sum;
-        dC_dbar_Mc(i, j) = term1_sum * dbarbar_M_dbar_Mc + term2_sum;
-      }
-    }
-  }
-
-  return MatrixHelpers::reduce(bar_bar_N, hat_bar_Nc);
-}
-
-template<unsigned DIM>
-double oomph::PlasticEquationsBase<DIM>::compute_u(
-  const double& u_in,
-  const double& Rc,
-  const double& c_sigma,
-  const DenseMatrix<double>& dRc_dhatbar_Mc,
-  const double& dRc_dh,
-  const DenseMatrix<double>& dc_sigma_dbar_M,
-  const DenseMatrix<double>& dc_sigma_dbar_Mk,
-  const DenseMatrix<double>& dc_sigma_dbar_Mc,
-  const double& dc_sigma_dR,
-  DenseMatrix<double>& du_dbar_M,
-  DenseMatrix<double>& du_dbar_Mk,
-  DenseMatrix<double>& du_dbar_Mc,
-  double& du_dh,
-  double& du_dR,
-  bool computeDerivative)
-{
-  const double uc = this->Plastic_consitutive_law_pt->elasic_core_u;
-  const double u_out = u_in * std::exp(uc * Rc * c_sigma);
-
-  if (computeDerivative)
-  {
-    const double prefactor_dc_sigma = uc * u_out * Rc;
-    const double prefactor_drc = uc * u_out * c_sigma;
-
-    du_dbar_M.resize(DIM, DIM);
-    du_dbar_Mk.resize(DIM, DIM);
-    du_dbar_Mc.resize(DIM, DIM);
-
-    for (unsigned int i = 0; i < DIM; i++)
-    {
-      for (unsigned int j = 0; j < DIM; j++)
-      {
-        du_dbar_M(i, j) = prefactor_dc_sigma * dc_sigma_dbar_M(i, j);
-        du_dbar_Mk(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mk(i, j) -
-                           prefactor_drc * dRc_dhatbar_Mc(i, j);
-        du_dbar_Mc(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mc(i, j) +
-                           prefactor_drc * dRc_dhatbar_Mc(i, j);
-      }
-    }
-
-    du_dh = prefactor_drc * dRc_dh;
-    du_dR = prefactor_dc_sigma * dc_sigma_dR;
-  }
-
-  return u_out;
-}
-
-template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
 {
   for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
@@ -1698,7 +1600,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // The residual for invBpcs: -\dot{invBpcs} = invBpcs (\bar Lp - \bar Lpkd) //
   // + (\bar Lp - \bar Lpkd)^T invBpcs                                        //
   //////////////////////////////////////////////////////////////////////////////
-  double u = this->Plastic_consitutive_law_pt->normal_yield_ratio_constant_u;
+  double yield_ratio_u =
+    this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_u();
   DenseMatrix<double> du_dbar_M, du_dbar_Mk, du_dbar_Mc;
   double du_dh = 0, du_dR = 0;
 
@@ -1957,37 +1860,23 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   }
 
   // The remainder is relevant for R below.
-  DenseMatrix<double> dC_dbar_M, dC_dbar_Mk, dC_dbar_Mc;
-  double dCdR;
-
-  double c_sigma = compute_c_sigma(barbar_N,
-                                   hat_bar_Nc,
-                                   dbarbarN_dbarbar_M,
-                                   dbarbar_M_dMk,
-                                   dbarbar_M_dMc,
-                                   dbarbar_M_dR,
-                                   dhat_bar_Nc_dMc,
-                                   dC_dbar_M,
-                                   dC_dbar_Mk,
-                                   dC_dbar_Mc,
-                                   dCdR,
-                                   flag);
-
-  u = compute_u(u,
-                Rc,
-                c_sigma,
-                dRc_dMc,
-                dRcdH,
-                dC_dbar_M,
-                dC_dbar_Mk,
-                dC_dbar_Mc,
-                dCdR,
-                du_dbar_M,
-                du_dbar_Mk,
-                du_dbar_Mc,
-                du_dh,
-                du_dR,
-                flag);
+  yield_ratio_u = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+                    ->compute_u_with_elastic_core(Rc,
+                                                  barbar_N,
+                                                  hat_bar_Nc,
+                                                  dbarbarN_dbarbar_M,
+                                                  dbarbar_M_dMk,
+                                                  dbarbar_M_dMc,
+                                                  dbarbar_M_dR,
+                                                  dhat_bar_Nc_dMc,
+                                                  dRc_dMc,
+                                                  dRcdH,
+                                                  du_dbar_M,
+                                                  du_dbar_Mk,
+                                                  du_dbar_Mc,
+                                                  du_dh,
+                                                  du_dR,
+                                                  flag);
 
   //////////////////////////////////////////////////////////////////////////////
   // The residual for R //
@@ -1998,7 +1887,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double dRdu;
   double computed_R =
     this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
-      ->compute_r_plastic(u, delta_lambda, R_prev, dRdLambda, dRdu, flag);
+      ->compute_r_plastic(
+        yield_ratio_u, delta_lambda, R_prev, dRdLambda, dRdu, flag);
 
   const unsigned int row_r = this->plastic_r_eqn_number(ipt);
   residuals[row_r] = get_r(ipt) - computed_R;

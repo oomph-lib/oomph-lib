@@ -84,6 +84,8 @@ private:
   ConstitutiveLaw* elastic_core_law_pt;
 
   double normal_yield_ratio_elastic = 0.2;
+  double normal_yield_ratio_constant_u = 200;
+  double normal_yield_ratio_elasic_core_u = 1.0;
   NormalYieldRatioLaw* normal_yield_ratio_law_pt;
 
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
@@ -174,11 +176,11 @@ private:
     plastic_constitutive_law_pt->elastic_core_law_pt = elastic_core_law_pt;
 
     normal_yield_ratio_law_pt =
-      new NormalYieldRatioLaw(&normal_yield_ratio_elastic);
+      new NormalYieldRatioLaw(&normal_yield_ratio_elastic,
+                              &normal_yield_ratio_constant_u,
+                              &normal_yield_ratio_elasic_core_u);
     plastic_constitutive_law_pt->normal_yield_ratio_law_pt =
       normal_yield_ratio_law_pt;
-
-    plastic_constitutive_law_pt->normal_yield_ratio_constant_u = 200;
 
     plastic_constitutive_law_pt->eta_p = 0.5;
 

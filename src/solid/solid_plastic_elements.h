@@ -608,35 +608,6 @@ namespace oomph
                        false);
     }
 
-    double compute_c_sigma(const DenseMatrix<double>& bar_bar_N,
-                           const DenseMatrix<double>& hat_bar_Nc,
-                           const RankFourTensor<double>& dbarbar_N_dbarbar_M,
-                           const double& dbarbar_M_dbar_Mk,
-                           const double& dbarbar_M_dbar_Mc,
-                           const DenseMatrix<double>& dbarbarM_dR,
-                           const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
-                           DenseMatrix<double>& dC_dbar_M,
-                           DenseMatrix<double>& dC_dbar_Mk,
-                           DenseMatrix<double>& dC_dbar_Mc,
-                           double& dCdR,
-                           bool computeDerivative);
-
-    double compute_u(const double& u_in,
-                     const double& Rc,
-                     const double& c_sigma,
-                     const DenseMatrix<double>& dRc_dhatbar_Mc,
-                     const double& dRc_dh,
-                     const DenseMatrix<double>& dc_sigma_dbar_M,
-                     const DenseMatrix<double>& dc_sigma_dbar_Mk,
-                     const DenseMatrix<double>& dc_sigma_dbar_Mc,
-                     const double& dc_sigma_dR,
-                     DenseMatrix<double>& du_dbar_M,
-                     DenseMatrix<double>& du_dbar_Mk,
-                     DenseMatrix<double>& du_dbar_Mc,
-                     double& du_dh,
-                     double& du_dR,
-                     bool computeDerivative);
-
     /*!
      * \brief Initialised the plastic parameters after the global deformation
      * has been updated
