@@ -1488,8 +1488,15 @@ namespace oomph
     void plastic_newton_solve()
     {
       const unsigned nipt = this->integral_pt()->nweight();
+      Vector<double> s(DIM);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
+        // Assign the values of s
+        for (unsigned i = 0; i < DIM; ++i)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
         // FIRST WE CALCULATE G (C)
 
         // Find out how many nodes there are
@@ -1504,6 +1511,9 @@ namespace oomph
 
         // Call the derivatives of the shape functions (ignore Jacobian)
         (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
+
+        // Storage for Lagrangian coordinates (initialised to zero)
+        Vector<double> interpolated_xi(DIM, 0.0);
 
         // Calculate interpolated values of the derivative of global position
         // wrt lagrangian coordinates
@@ -1527,6 +1537,10 @@ namespace oomph
             // Loop over displacement components (deformed position)
             for (unsigned i = 0; i < DIM; i++)
             {
+              // Calculate the lagrangian coordinates and the accelerations
+              interpolated_xi[i] +=
+                this->lagrangian_position_gen(l, k, i) * psi(l, k);
+
               // Loop over derivative directions
               for (unsigned j = 0; j < DIM; j++)
               {
@@ -1557,6 +1571,18 @@ namespace oomph
           for (unsigned j = 0; j < i; j++)
           {
             G(i, j) = G(j, i);
+          }
+        }
+
+        // Push forward G using the isotropic growth term
+        double gamma;
+        this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
+        double diag_entry = pow(gamma, 2.0 / double(DIM));
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            G(i, j) = G(i, j) / diag_entry;
           }
         }
 
@@ -1680,6 +1706,7 @@ namespace oomph
       DenseMatrix<double> Fp(DIM, DIM, 0.0);
       MatrixHelpers::invert_matrix<DIM>(invFp, Fp);
 
+      // Calculate and pull back Fp^TFp to get g
       g.resize(DIM, DIM, 0.0);
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -1766,8 +1793,9 @@ namespace oomph
       {
         for (unsigned j = i; j < DIM; j++)
         {
-          G_test(i, j) = G(i, j);
-          G_test(j, i) = G(j, i);
+          // Divide by diag entry to push forward G
+          G_test(i, j) = G(i, j) / diag_entry;
+          G_test(j, i) = G(j, i) / diag_entry;
         }
       }
 
@@ -1775,8 +1803,11 @@ namespace oomph
       {
         for (unsigned j = i; j < DIM; j++)
         {
-          const double saved_value = G(i, j);
-          G_test(i, j) += FiniteElement::Default_fd_jacobian_step;
+          const double saved_value = G_test(i, j);
+          // Perturb G in the reference state, hence the default step needs
+          // to be pushed forward
+          G_test(i, j) += FiniteElement::Default_fd_jacobian_step / diag_entry; 
+
           if (i != j)
           {
             G_test(j, i) = G_test(i, j);
