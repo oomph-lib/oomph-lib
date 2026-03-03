@@ -88,6 +88,13 @@ private:
   double normal_yield_ratio_elasic_core_u = 1.0;
   NormalYieldRatioLaw* normal_yield_ratio_law_pt;
 
+  double eta_p_pt = 0.5;
+
+  double kinematic_hardening_b_pt = 0.1;
+  double kinematic_hardening_eta_pt = 0.5;
+
+  double elastic_core_x_pt = 0.1;
+  double elastic_core_eta_pt = 0.5;
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
 
   TimeStepper* my_time_stepper_pt;
@@ -182,13 +189,13 @@ private:
     plastic_constitutive_law_pt->normal_yield_ratio_law_pt =
       normal_yield_ratio_law_pt;
 
-    plastic_constitutive_law_pt->eta_p = 0.5;
+    plastic_constitutive_law_pt->eta_p_pt = &eta_p_pt;
 
-    plastic_constitutive_law_pt->kinematic_hardening_b = 0.1;
-    plastic_constitutive_law_pt->kinematic_hardening_eta = 0.5;
+    plastic_constitutive_law_pt->kinematic_hardening_b_pt = &kinematic_hardening_b_pt;
+    plastic_constitutive_law_pt->kinematic_hardening_eta_pt = &kinematic_hardening_eta_pt;
 
-    plastic_constitutive_law_pt->elastic_core_x = 0.1;
-    plastic_constitutive_law_pt->elastic_core_eta = 0.5;
+    plastic_constitutive_law_pt->elastic_core_x_pt = &elastic_core_x_pt;
+    plastic_constitutive_law_pt->elastic_core_eta_pt = &elastic_core_eta_pt;
 
     Max_newton_iterations = 50;
     Newton_solver_tolerance = 1e-8;

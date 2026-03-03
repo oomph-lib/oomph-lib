@@ -484,27 +484,27 @@ namespace oomph
     // For computing the normal yield ratio
     NormalYieldRatioLaw* normal_yield_ratio_law_pt;
 
-    double eta_p = 0.0;
+    double* eta_p_pt;
 
     /*!
      * \brief \eta^\text{pk}
      */
-    double kinematic_hardening_eta = 0.0;
+    double* kinematic_hardening_eta_pt = nullptr;
 
     /*!
      * \brief b^\text{pk}
      */
-    double kinematic_hardening_b = 2.0;
+    double* kinematic_hardening_b_pt = nullptr;
 
     /*!
      * \brief \eta^\text{pc}
      */
-    double elastic_core_eta = 0.0;
+    double* elastic_core_eta_pt = nullptr;
 
     /*!
      * \brief X
      */
-    double elastic_core_x = 1.0;
+    double* elastic_core_x_pt = nullptr;
   };
 } // namespace oomph
 #endif

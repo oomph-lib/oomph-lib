@@ -400,7 +400,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lp(
   RankFourTensor<double>& dbar_Lp_dbar_M,
   bool computeDerivative)
 {
-  const double eta = this->Plastic_consitutive_law_pt->eta_p;
+  const double eta = (*this->Plastic_consitutive_law_pt->eta_p_pt);
 
   // Lp = barbar_N (if eta = 0)
   bar_Lp.resize(DIM, DIM);
@@ -524,7 +524,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
 {
   bar_Lpkd.resize(DIM, DIM);
   const double inv_bk =
-    1.0 / this->Plastic_consitutive_law_pt->kinematic_hardening_b;
+    1.0 / (*this->Plastic_consitutive_law_pt->kinematic_hardening_b_pt);
   for (unsigned int i = 0; i < DIM; i++)
   {
     for (unsigned int j = 0; j < DIM; j++)
@@ -533,7 +533,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
     }
   }
 
-  const double eta = this->Plastic_consitutive_law_pt->kinematic_hardening_eta;
+  const double eta = *this->Plastic_consitutive_law_pt->kinematic_hardening_eta_pt;
   const double invbk_Eta = eta * inv_bk;
   if (eta != 0.0)
   {
@@ -687,9 +687,9 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
 {
   bar_Lpcd.resize(DIM, DIM);
 
-  const double invX = 1 / this->Plastic_consitutive_law_pt->elastic_core_x;
+  const double invX = 1 / (*this->Plastic_consitutive_law_pt->elastic_core_x_pt);
   const double Rc_by_X = Rc * invX;
-  const double eta = this->Plastic_consitutive_law_pt->elastic_core_eta;
+  const double eta = (*this->Plastic_consitutive_law_pt->elastic_core_eta_pt);
   const double eta_prefactor = Rc_by_X * eta;
 
   // Really, we compute Lpcd / Rc; Rc is muliplited to it after the derivative
