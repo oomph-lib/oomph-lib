@@ -1806,7 +1806,7 @@ namespace oomph
           const double saved_value = G_test(i, j);
           // Perturb G in the reference state, hence the default step needs
           // to be pushed forward
-          G_test(i, j) += FiniteElement::Default_fd_jacobian_step / diag_entry; 
+          G_test(i, j) += FiniteElement::Default_fd_jacobian_step / diag_entry;
 
           if (i != j)
           {

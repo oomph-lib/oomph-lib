@@ -539,7 +539,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
-  // Compute the undeformed metric tensor at a given integration point pulled 
+  // Compute the undeformed metric tensor at a given integration point pulled
   // back to the reference configuration
   template<unsigned DIM>
   void PVDEquationsBase<DIM>::calculate_g(const unsigned& ipt,
