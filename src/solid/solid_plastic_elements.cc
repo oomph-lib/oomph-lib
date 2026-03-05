@@ -1061,7 +1061,6 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double dot_or_delta_lambda_time_step_weight = 1.0;
   double invBpks_time_step_weight = 1.0;
   double invBpcs_time_step_weight = 1.0;
-  double r_time_step_weight = 1.0;
 
   if (!Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->is_steady())
   {
@@ -1082,11 +1081,6 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   {
     invBpcs_time_step_weight =
       Plastic_data_pt[ipt][invBpcs_INDEX]->time_stepper_pt()->weight(1, 0);
-  }
-  if (!Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->is_steady())
-  {
-    r_time_step_weight =
-      Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->weight(1, 0);
   }
 
   // Retreive dot_or_delta_lambda
