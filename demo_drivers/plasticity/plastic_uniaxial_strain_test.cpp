@@ -1,3 +1,8 @@
+///
+/// \file plastic_uniaxial_strain_test.cpp
+/// \brief A fully working demo of uniaxial strain using the plasticity model.
+///
+
 #include "constitutive/constitutive_laws.h"
 #include "constitutive/plastic_constitutive_laws.h"
 
@@ -12,6 +17,14 @@ using namespace oomph;
 // Define Dimension here (2 or 3)
 #define DIM 3
 
+///
+/// \brief A simple problem class to test uniaxial strain with plasticity
+/// \details A simple cube is tensioned uniaxially and cyclically: Upon reaching
+/// a defined maximum strain, the strain is reduced until the stress returns to
+/// zero. Afterwards the cycle repeats such that in total num_cycles are done.
+/// The output of the simulation is visualisation data as well as a file
+/// containing stress, strain and the number of newton iterations needed.
+///
 template<class ELEMENT>
 class PlasticUniaxialStrainTestProblem : public Problem
 {
@@ -111,6 +124,7 @@ private:
   double lastStrainStartTime = 0;
   double initialStrain = 0.05;
   double consecutiveStrain = 0.25 * initialStrain;
+  unsigned int num_cycles = 3;
 
   bool steady_solve = false;
 
@@ -147,6 +161,7 @@ private:
                << " elements in " << DIM << "D." << std::endl;
 
 
+    //! [Elastic constitutive law]
     // Create elastic constitutive law
     ModifiedNeoHookean::compute_lame_parameters(EOne, nu, lameLambda, lameMu);
     elastic_strain_energy_function_pt =
@@ -154,7 +169,9 @@ private:
 
     constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
       elastic_strain_energy_function_pt);
+    //! [Elastic constitutive law]
 
+    //! [Plastic constitutive law]
     // Now the plasic one
     isotropic_hardening_law_pt =
       new ExponentialIsotropicHardeningLaw(&isotropic_hardening_factor,
@@ -191,11 +208,14 @@ private:
 
     plastic_constitutive_law_pt->eta_p_pt = &eta_p_pt;
 
-    plastic_constitutive_law_pt->kinematic_hardening_b_pt = &kinematic_hardening_b_pt;
-    plastic_constitutive_law_pt->kinematic_hardening_eta_pt = &kinematic_hardening_eta_pt;
+    plastic_constitutive_law_pt->kinematic_hardening_b_pt =
+      &kinematic_hardening_b_pt;
+    plastic_constitutive_law_pt->kinematic_hardening_eta_pt =
+      &kinematic_hardening_eta_pt;
 
     plastic_constitutive_law_pt->elastic_core_x_pt = &elastic_core_x_pt;
     plastic_constitutive_law_pt->elastic_core_eta_pt = &elastic_core_eta_pt;
+    //! [Plastic constitutive law]
 
     Max_newton_iterations = 50;
     Newton_solver_tolerance = 1e-8;
@@ -213,13 +233,21 @@ private:
       el_pt->constitutive_law_pt() = constitutive_law_pt;
 
 #ifdef PLASTIC
+      //! [Assgin constitutive law]
+      // Assign the plastic constitutive law
       el_pt->plastic_constitutive_law_pt() = plastic_constitutive_law_pt;
 
+      // Assign initial values. This call is needed because, e.g. the initial
+      // value of R depends on R_e
       el_pt->assign_default_values_based_on_constitutive_law();
 
+      // Set the tolerance for the plastic solve
       el_pt->plastic_newton_solver_tolerance() = Newton_solver_tolerance;
 
+      // Optionally fd can be enabled to solve for the plastic varivables. The
+      // default implementation uses analytical jacobians
       // el_pt->enable_plastic_solve_by_fd();
+      //! [Assgin constitutive law]
 #endif
       el_pt->lambda_sq_pt() = &rhoOne;
     }
@@ -436,8 +464,6 @@ private:
       }
       elPt->check_initial_condition();
     }
-
-    unsigned int num_cycles = 3;
 
     for (unsigned int cycle = 0; cycle < num_cycles; cycle++)
     {
