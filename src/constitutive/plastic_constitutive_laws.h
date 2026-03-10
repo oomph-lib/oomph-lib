@@ -330,12 +330,15 @@ namespace oomph
           double inv_sqrt = -1.0 / std::sqrt(denom_sq);
 
           // df/dLambda = f * (-u * preFactorArg)
-          double dWdLambda = inner_arg * (-u * preFactorArg);
-          dRdLambda = preFactor * inv_sqrt * dWdLambda;
+          // dRdLambda = preFactor * inv_sqrt * df/dLambda
+          // preFactor * preFactorArg = 1
+          // Hence: dR/dLambda = - u * f * inv_sqrt
+          dRdLambda = - u * inner_arg * inv_sqrt;
 
           // df/du = f * (-preFactorArg * delta_lambda)
-          double dWdu = inner_arg * (-preFactorArg * delta_lambda);
-          dRdu = preFactor * inv_sqrt * dWdu;
+          // dR/du = preFactor * inv_sqrt * dfdu
+          //       = - f * inv_sqrt * delta_lambda
+          dRdu = -inner_arg * inv_sqrt * delta_lambda;
         }
       }
 
