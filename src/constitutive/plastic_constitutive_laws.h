@@ -333,7 +333,7 @@ namespace oomph
           // dRdLambda = preFactor * inv_sqrt * df/dLambda
           // preFactor * preFactorArg = 1
           // Hence: dR/dLambda = - u * f * inv_sqrt
-          dRdLambda = - u * inner_arg * inv_sqrt;
+          dRdLambda = -u * inner_arg * inv_sqrt;
 
           // df/du = f * (-preFactorArg * delta_lambda)
           // dR/du = preFactor * inv_sqrt * dfdu
