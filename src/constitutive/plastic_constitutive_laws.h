@@ -3,6 +3,7 @@
 
 #include "constitutive/constitutive_laws.h"
 #include "generic/matrix_helpers.h"
+#include "generic/elements.h"
 
 namespace oomph
 {
@@ -234,6 +235,18 @@ namespace oomph
     {
     }
 
+
+    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt,
+                        double* u_in_pt,
+                        double* elastic_core_u_in_pt,
+                        double* fd_step_in_pt)
+      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt),
+        u_pt(u_in_pt),
+        elastic_core_u_pt(elastic_core_u_in_pt),
+        fd_step_pt(fd_step_in_pt)
+    {
+    }
+
     double compute_r_plastic(const double& u,
                              const double& delta_lambda,
                              const double& R_prev)
@@ -277,27 +290,53 @@ namespace oomph
       const double TOLERANCE = 1.0e-12;
       const double MAX_ARG = std::sqrt(1.0 - TOLERANCE);
 
-      if (inner_arg > MAX_ARG) inner_arg = MAX_ARG;
-      if (inner_arg < -MAX_ARG) inner_arg = -MAX_ARG;
+      bool is_clamped = false;
+      if (inner_arg > MAX_ARG)
+      {
+        inner_arg = MAX_ARG;
+        is_clamped = true;
+      }
+      if (inner_arg < -MAX_ARG)
+      {
+        inner_arg = -MAX_ARG;
+        is_clamped = true;
+      }
 
       // Compute R
       double R = preFactor * std::acos(inner_arg) + Re;
 
       if (computeDerivative)
       {
-        // Calculate dR/dLambda and dR/du for Jacobian
-        double denom_sq = 1.0 - inner_arg * inner_arg;
+        // If inner arg was clamped, the analytical derivative does not make
+        // sense. Hence, we fall back to a numerical derivative
+        if (is_clamped)
+        {
+          // dR/dLambda
+          double R_lambda_plus =
+            compute_r_plastic(u, delta_lambda + (*fd_step_pt), R_prev);
+          dRdLambda = (R_lambda_plus - R) / (*fd_step_pt);
 
-        // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
-        double inv_sqrt = -1.0 / std::sqrt(denom_sq);
+          // dR/du
+          double R_u_plus =
+            compute_r_plastic(u + (*fd_step_pt), delta_lambda, R_prev);
+          dRdu = (R_u_plus - R) / (*fd_step_pt);
+        }
+        else
+        {
+          // Calculate dR/dLambda and dR/du for Jacobian analytically
+          double denom_sq = 1.0 - inner_arg * inner_arg;
 
-        // df/dLambda = f * (-u * preFactorArg)
-        double dWdLambda = inner_arg * (-u * preFactorArg);
-        dRdLambda = preFactor * inv_sqrt * dWdLambda;
+          // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
+          double inv_sqrt = -1.0 / std::sqrt(denom_sq);
 
-        // df/du = f * (-preFactorArg * delta_lambda)
-        double dWdu = inner_arg * (-preFactorArg * delta_lambda);
-        dRdu = preFactor * inv_sqrt * dWdu;
+          // df/dLambda = f * (-u * preFactorArg)
+          double dWdLambda = inner_arg * (-u * preFactorArg);
+          dRdLambda = preFactor * inv_sqrt * dWdLambda;
+
+          // df/du = f * (-preFactorArg * delta_lambda)
+          double dWdu = inner_arg * (-preFactorArg * delta_lambda);
+          dRdu = preFactor * inv_sqrt * dWdu;
+        }
       }
 
       return R;
@@ -467,6 +506,8 @@ namespace oomph
     double* normal_yield_ratio_elastic_pt;
     double* u_pt;
     double* elastic_core_u_pt;
+
+    double* fd_step_pt = &FiniteElement::Default_fd_jacobian_step;
   };
 
   class PlasticConstitutiveLaw
