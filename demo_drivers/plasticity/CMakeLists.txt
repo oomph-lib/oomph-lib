@@ -25,10 +25,5 @@ oomph_add_executable(
   SOURCES plastic_uniaxial_strain_test.cpp
   LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
 
-oomph_add_executable(
-  NAME plasticity_solid_elements_test
-  SOURCES plasticity_solid_elements_test.cpp
-  LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
-
 message(VERBOSE "Leaving plasticity subdirectory")
 # ------------------------------------------------------------------------------
