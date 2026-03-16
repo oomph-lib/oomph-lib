@@ -1,3 +1,4 @@
+#pragma once
 #include "generic/matrices.h"
 
 namespace oomph
