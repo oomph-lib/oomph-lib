@@ -259,9 +259,23 @@ function(oomph_add_test)
   file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
   file(APPEND "${TEST_SCRIPT}" "fi\n\n")
 
+  # Clean up?
+  file(APPEND "${TEST_SCRIPT}" "# If we're here the test has passed\n")
+  file(APPEND "${TEST_SCRIPT}" "cp ${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log . \n")
+  file(APPEND "${TEST_SCRIPT}" "dir=\"${CMAKE_CURRENT_BINARY_DIR}/Validation\"\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ \"$OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST\" = \"yes\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "   echo \" \" >> validation.log\n")
+  file(APPEND "${TEST_SCRIPT}" "   echo \"Deleting: \n\n   \"$dir\"\n\nto save disk space because \" >> validation.log\n")
+  file(APPEND "${TEST_SCRIPT}" "   echo \"   (i)  the test passed \" >> validation.log\n")
+  file(APPEND "${TEST_SCRIPT}" "   echo \"   (ii) the environment variable OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST was set to \"yes\"\" >> validation.log\n")
+  file(APPEND "${TEST_SCRIPT}" "   echo \" \" >> validation.log\n")
+  file(APPEND "${TEST_SCRIPT}" "   rm -rf $dir\n")     
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
   # Append validation.log to top-level validation.log
   file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
-  file(APPEND "${TEST_SCRIPT}" "cat \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" >> \"${CMAKE_BINARY_DIR}/validation.log\"\n")
+  file(APPEND "${TEST_SCRIPT}" "cat \"${CMAKE_CURRENT_BINARY_DIR}/validation.log\" >> \"${CMAKE_BINARY_DIR}/validation.log\"\n")
+
 
   # Make the script executable
   file(CHMOD "${TEST_SCRIPT}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
