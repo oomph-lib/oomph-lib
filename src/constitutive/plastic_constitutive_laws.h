@@ -5,100 +5,241 @@
 #include "generic/matrix_helpers.h"
 #include "generic/elements.h"
 
+/// Within this file, Hashiguchi (2019) refers to
+///  Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for Finite
+///  Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch Computat
+///  Methods Eng 26, 597–637 (2019). https://doi.org/10.1007/s11831-018-9256-5
 namespace oomph
 {
 
-  /// A base class for isotropic hardening laws to be used / stored by the
-  /// class PlasticConstitutiveLaw.
+  // ===========================================================================
+  /// \short A purely virtual class for isotropic hardening laws to be used /
+  /// stored by the class PlasticConstitutiveLaw.
+  // ===========================================================================
   class IsotropicHardeningLaw
   {
   public:
-    IsotropicHardeningLaw(double* isotropic_hardening_factor_in_pt)
-      : isotropic_hardening_factor_pt(isotropic_hardening_factor_in_pt)
+    // =========================================================================
+    /// \short Constructor: Initializes the isotropic hardening law.
+    ///
+    /// \param isotropic_hardening_factor_pt Pointer to the parameter
+    /// that describes the relation between the derivatives of
+    /// isotropic hardening and the plastic multiplier (lambda).
+    /// For mathematical details, see Eq. (152) of Hashiguchi (2019).
+    // =========================================================================
+    IsotropicHardeningLaw(double* isotropic_hardening_factor_pt)
+      : Isotropic_hardening_factor_pt(isotropic_hardening_factor_pt)
     {
     }
 
-    virtual double yield_function(const double& H)
+    // =========================================================================
+    /// \short A virtual destructor to prevent potential memory leaks.
+    // =========================================================================
+    virtual ~IsotropicHardeningLaw() = default;
+
+    // =========================================================================
+    /// \short Computes the (isotropic) yield function.
+    /// This is a convenience wrapper that calls the purely virtual
+    /// version of yield_function, disabling the derivative computation.
+    /// This function is included to enable a simpler function call
+    /// when derivatives are not needed.
+    ///
+    /// \param h The isotropic hardening value.
+    /// \returns The isotropic yield surface stress.
+    // =========================================================================
+    virtual double yield_function(const double& h)
     {
       double a;
       bool compute = false;
-      return yield_function(H, a, compute);
+      return yield_function(h, a, compute);
     }
 
-    virtual double yield_function(const double& H,
-                                  double& dfdH,
-                                  const bool& computeDerivative) = 0;
+    // =========================================================================
+    /// \short Computes the (isotropic) yield function and its derivative.
+    /// This purely virtual function must be overridden by derived classes
+    /// to define the specific yield surface stress and, if requested,
+    /// its derivative with respect to the hardening parameter.
+    ///
+    /// \param[in] h The isotropic hardening value.
+    /// \param[out] dfdh The derivative of the yield surface stress w.r.t. h.
+    /// \param[in] compute_derivative A flag to indicate whether dfdh
+    /// should be computed.
+    /// \returns The isotropic yield surface stress.
+    // =========================================================================
+    virtual double yield_function(const double& h,
+                                  double& dfdh,
+                                  const bool& compute_derivative) = 0;
 
-    double get_isotropic_hardening_factor()
+    // =========================================================================
+    /// \returns The pointer to the isotropic_hardening_factor.
+    // =========================================================================
+    double*& isotropic_hardening_factor_pt()
     {
-      return *isotropic_hardening_factor_pt;
+      return Isotropic_hardening_factor_pt;
+    }
+
+    // =========================================================================
+    /// \returns The isotropic_hardening_factor.
+    // =========================================================================
+    double isotropic_hardening_factor()
+    {
+      return *Isotropic_hardening_factor_pt;
     }
 
   private:
-    double* isotropic_hardening_factor_pt;
+    /// A pointer to the the isotropic hardening factor. It describes the
+    /// relation between the derivatives of isotropic hardening and the plastic
+    /// multiplier (lambda). For mathematical details, see Eq. (152) of
+    /// Hashiguchi (2019).
+    double* Isotropic_hardening_factor_pt;
   };
 
-  /// An exponential isotropic hardening function, as described in Eq. 151 of
-  /// Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for Finite
-  /// Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch Computat
-  /// Methods Eng 26, 597–637 (2019). https://doi.org/10.1007/s11831-018-9256-5
+  // ===========================================================================
+  /// \short An exponential isotropic hardening class, where the hardening is
+  /// described by Eq. (151) of Hashiguchi (2019):
+  /// \f[ f(H) = f_0 \left( 1 + h_1 \left[ 1 - \exp (-h_2 H) \right] \right) \f]
+  // ===========================================================================
   class ExponentialIsotropicHardeningLaw : public IsotropicHardeningLaw
   {
   public:
-    ExponentialIsotropicHardeningLaw(double* isotropic_hardening_factor_in_pt,
-                                     double* f0_in_pt,
-                                     double* h1_in_pt,
-                                     double* h2_in_pt)
-      : IsotropicHardeningLaw(isotropic_hardening_factor_in_pt),
-        f0_pt(f0_in_pt),
-        h1_pt(h1_in_pt),
-        h2_pt(h2_in_pt)
+    // =========================================================================
+    /// \short Constructor: Initializes the exponential isotropic hardening law.
+    ///
+    /// \param isotropic_hardening_factor_pt \see IsotropicHardeningLaw
+    /// \param f0_pt The initial isotropic yield stress.
+    /// \param h1_pt A constant describing the evolution of the isotropic stress
+    /// with the isotropic hardening value.
+    /// \param h2_pt A constant describing the evolution of the isotropic stress
+    /// with the isotropic hardening value.
+    // =========================================================================
+    ExponentialIsotropicHardeningLaw(double* isotropic_hardening_factor_pt,
+                                     double* f0_pt,
+                                     double* h1_pt,
+                                     double* h2_pt)
+      : IsotropicHardeningLaw(isotropic_hardening_factor_pt),
+        F0_pt(f0_pt),
+        H1_pt(h1_pt),
+        H2_pt(h2_pt)
     {
     }
 
-    double yield_function(const double& H,
-                          double& dfdH,
-                          const bool& computeDerivative) override
+    // =========================================================================
+    /// \short Implements the exponential hardening law.
+    /// For a description of the equation \see ExponentialIsotropicHardeningLaw.
+    /// For a description of the arguments \see
+    /// IsotropicHardeningLaw::yield_function
+    // =========================================================================
+    double yield_function(const double& h,
+                          double& dfdh,
+                          const bool& compute_derivative) override
     {
-      const double exp_val = std::exp(-(*h2_pt) * H);
-      if (computeDerivative)
+      const double exp_val = std::exp(-(*H2_pt) * h);
+      if (compute_derivative)
       {
-        dfdH = (*f0_pt) * (*h1_pt) * (*h2_pt) * exp_val;
+        dfdh = (*F0_pt) * (*H1_pt) * (*H2_pt) * exp_val;
       }
 
-      return (*f0_pt) * (1 + (*h1_pt) * (1 - exp_val));
+      return (*F0_pt) * (1 + (*H1_pt) * (1 - exp_val));
+    }
+
+    // =========================================================================
+    /// \short Access function to the initial isotropic yield stress pointer.
+    // =========================================================================
+    double* f0_pt() const
+    {
+      return F0_pt;
+    }
+
+    // =========================================================================
+    /// \short Access function to the h1 parameter pointer.
+    // =========================================================================
+    double* h1_pt() const
+    {
+      return H1_pt;
+    }
+
+    // =========================================================================
+    /// \short Access function to the h2 parameter pointer.
+    // =========================================================================
+    double* h2_pt() const
+    {
+      return H2_pt;
     }
 
   private:
-    double* f0_pt;
-    double* h1_pt;
-    double* h2_pt;
+    // A pointer to the initial isotropic yield stress.
+    double* F0_pt;
+
+    /// Pointer to a value describing the evolution of the isotropic stress
+    /// with the isotropic hardening value.
+    double* H1_pt;
+
+    /// Pointer to a value describing the evolution of the isotropic stress
+    /// with the isotropic hardening value.
+    double* H2_pt;
   };
 
+  // ===========================================================================
+  /// \short A purely virtual class for the yield criterion.
+  // ===========================================================================
   class YieldCriterion
   {
   public:
-    virtual double surface_function(const DenseMatrix<double>& M,
-                                    DenseMatrix<double>& dSigmavmdM,
-                                    const bool& computeDerivative) = 0;
+    // =========================================================================
+    /// \short A virtual destructor to prevent potential memory leaks.
+    // =========================================================================
+    virtual ~YieldCriterion() = default;
 
+    // =========================================================================
+    /// \short A purely virtual function to compute the scalar yield function
+    /// value and its derivative w.r.t. M (if requested).
+    ///
+    /// \param[in] M The Mandel stress.
+    /// \param[out] dsigmadM The derivative of the yield function value.
+    /// \param[in] compute_derivative Whether to compute dsigmadM.
+    /// \returns The yield function value.
+    // =========================================================================
+    virtual double surface_function(const DenseMatrix<double>& M,
+                                    DenseMatrix<double>& dsigmadM,
+                                    const bool& compute_derivative) = 0;
+
+    // =========================================================================
+    /// \short A purely virtual function to compute the second derivative of the
+    /// scalar yield function value w.r.t. M.
+    ///
+    /// \param[in] f The yield function value.
+    /// \param[in] dsigmadM The derivative of the yield function value.
+    /// \param[out] ddsigmadMdM The second derivative of the yield function
+    /// value.
+    // =========================================================================
     virtual void surface_function_second_derivative(
       const double& f,
-      const DenseMatrix<double>& dSigmavmdM,
-      RankFourTensor<double>& ddSigmavmdMdM) = 0;
+      const DenseMatrix<double>& dsigmadM,
+      RankFourTensor<double>& ddsigmadMdM) = 0;
   };
 
+
+  // ===========================================================================
+  /// \short A class for the von Mises yield criterion (see Eq. 150 of
+  /// Hashiguchi (2019)):
+  /// \f[ f(M) = \sqrt{\frac{3.0}{2.0}} ||M^\prime|| \f]
+  // ===========================================================================
   class VonMisesYieldCriterion : public YieldCriterion
   {
   public:
+    // =========================================================================
+    /// \brief Empty constructor: This class does not have any internal
+    /// variables.
+    // =========================================================================
     VonMisesYieldCriterion() : YieldCriterion() {}
 
-    /*!
-     * Computes the von mises stress and its derivative wrt. M
-     */
+    // =========================================================================
+    /// \short Computes the von Mises yield function. For a description of the
+    /// arguments \see YieldCriterion::surface_function.
+    // =========================================================================
     double surface_function(const DenseMatrix<double>& M,
-                            DenseMatrix<double>& dSigmavmdM,
-                            const bool& computeDerivative) override
+                            DenseMatrix<double>& dsigmadM,
+                            const bool& compute_derivative) override
     {
       // Calculate the trace of M
       double trace = 0.0;
@@ -123,9 +264,9 @@ namespace oomph
       // The function value
       double f = std::sqrt(3.0 / 2.0 * dev_mag_sq);
 
-      if (computeDerivative)
+      if (compute_derivative)
       {
-        dSigmavmdM.resize(M.nrow(), M.ncol(), 0.0);
+        dsigmadM.resize(M.nrow(), M.ncol(), 0.0);
         if (f > 1e-15)
         {
           // The derivative reads as
@@ -139,39 +280,37 @@ namespace oomph
             {
               double val = M(i, j);
               if (i == j) val -= mean_stress;
-              dSigmavmdM(i, j) = val * scale_factor;
+              dsigmadM(i, j) = val * scale_factor;
             }
           }
         }
         else
         {
-          dSigmavmdM.initialise(0.0);
+          dsigmadM.initialise(0.0);
         }
       }
 
-      // Return Von Mises Equivalent Stress
+      // Return von Mises equivalent Stress
       return f;
     }
 
-    /*!
-     * \brief computes the second derivative of the con mises yield surface
-     * function
-     * \param[in] f: The yield surface function value
-     * \param[in] dSigmavmdM: Its first derivative
-     * \param[out] ddSigmavmdMdM: Its second derivative
-     */
+    // =========================================================================
+    /// \short Computes the second derivative of the von Mises yield function.
+    /// For a description of the arguments \see
+    /// YieldCriterion::surface_function_second_derivative.
+    // =========================================================================
     void surface_function_second_derivative(
       const double& f,
-      const DenseMatrix<double>& dSigmavmdM,
-      RankFourTensor<double>& ddSigmavmdMdM) override
+      const DenseMatrix<double>& dsigmadM,
+      RankFourTensor<double>& ddsigmadMdM) override
     {
-      const unsigned int nrow = dSigmavmdM.nrow();
-      const unsigned int ncol = dSigmavmdM.ncol();
-      ddSigmavmdMdM.resize(nrow, ncol, nrow, ncol);
+      const unsigned int nrow = dsigmadM.nrow();
+      const unsigned int ncol = dsigmadM.ncol();
+      ddsigmadMdM.resize(nrow, ncol, nrow, ncol);
 
       if (f < 1e-15)
       {
-        ddSigmavmdMdM.initialise(0.0);
+        ddsigmadMdM.initialise(0.0);
         return;
       }
 
@@ -187,12 +326,12 @@ namespace oomph
       {
         for (unsigned j = 0; j < ncol; j++)
         {
-          double dSigmavmdM_ij_invf = -dSigmavmdM(i, j) * invf;
+          double dSigmavmdM_ij_invf = -dsigmadM(i, j) * invf;
           for (unsigned k = 0; k < nrow; k++)
           {
             for (unsigned l = 0; l < ncol; l++)
             {
-              ddSigmavmdMdM(i, j, k, l) = dSigmavmdM(k, l) * dSigmavmdM_ij_invf;
+              ddsigmadMdM(i, j, k, l) = dsigmadM(k, l) * dSigmavmdM_ij_invf;
             }
           }
         }
@@ -205,7 +344,7 @@ namespace oomph
       {
         for (unsigned j = 0; j < ncol; j++)
         {
-          ddSigmavmdMdM(i, j, i, j) += delta_ik_delta_jl_factor;
+          ddsigmadMdM(i, j, i, j) += delta_ik_delta_jl_factor;
         }
       }
 
@@ -217,7 +356,7 @@ namespace oomph
       {
         for (unsigned j = 0; j < min_dim; j++)
         {
-          ddSigmavmdMdM(i, i, j, j) -= delta_ij_delta_kl_factor;
+          ddsigmadMdM(i, i, j, j) -= delta_ij_delta_kl_factor;
         }
       }
     }

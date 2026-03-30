@@ -967,7 +967,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
   double h_var = get_lambda(ipt) *
                  this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                   ->get_isotropic_hardening_factor();
+                   ->isotropic_hardening_factor();
   bool plasticDeformation = false;
   if (MatrixHelpers::reduce(Nbarbar_prev_nsym, deltaMTrial) >= 0)
   {
@@ -1017,7 +1017,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
         ->yield_function(
           get_lambda(ipt) *
           this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-            ->get_isotropic_hardening_factor());
+            ->isotropic_hardening_factor());
 
     set_r(
       ipt,
@@ -1339,7 +1339,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   //////////////////////////////////////////////////////////////////////////////
   double h_var = this->get_lambda(ipt) *
                  this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                   ->get_isotropic_hardening_factor();
+                   ->isotropic_hardening_factor();
 
   const unsigned int row_lamda = this->plastic_lambda_eqn_number(ipt);
 
@@ -1356,7 +1356,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     jacobian(row_lamda, row_lamda) -=
       disotropic_f_dH *
       this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-        ->get_isotropic_hardening_factor() *
+        ->isotropic_hardening_factor() *
       R;
 
 
@@ -1850,7 +1850,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         jacobian(row_eq_invBpcs, lambda_col) -=
           dot_or_delta_lambda * sum_lambda *
           this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-            ->get_isotropic_hardening_factor();
+            ->isotropic_hardening_factor();
       }
     }
   }
@@ -1898,7 +1898,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     jacobian(row_r, lambda_col) -=
       dRdLambda + dRdu * du_dh *
                     this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                      ->get_isotropic_hardening_factor();
+                      ->isotropic_hardening_factor();
 
     // Now the remaining derivatives of u:
     // If invBpcs has not been built, this would all be 0.

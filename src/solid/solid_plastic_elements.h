@@ -1474,7 +1474,7 @@ namespace oomph
         set_h(ipt,
               get_lambda(ipt) *
                 this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                  ->get_isotropic_hardening_factor());
+                  ->isotropic_hardening_factor());
 
         nIter++;
       } while (maxres > Plastic_Newton_Solver_Tolerance);
