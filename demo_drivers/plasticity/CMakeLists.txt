@@ -25,5 +25,10 @@ oomph_add_executable(
   SOURCES plastic_uniaxial_strain_test.cpp
   LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
 
+oomph_add_executable(
+  NAME hanging_cube
+  SOURCES hanging_cube.cc
+  LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
+
 message(VERBOSE "Leaving plasticity subdirectory")
 # ------------------------------------------------------------------------------

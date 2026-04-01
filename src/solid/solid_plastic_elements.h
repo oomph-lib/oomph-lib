@@ -155,8 +155,8 @@ namespace oomph
     // Assign the time-stepper for the plastic data only.
     // It should be preffered to call the function
     // set_internal_data_time_stepper
-    void assign_plastic_timestepper(TimeStepper* time_stepper_pt,
-                                    const bool& preserve_existing_data)
+    void assign_plastic_timestepper_pt(TimeStepper* time_stepper_pt,
+                                       const bool& preserve_existing_data)
     {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
@@ -946,7 +946,7 @@ namespace oomph
       Vector<Vector<double>> ipt_data(n_ipt);
       for (unsigned ipt = 0; ipt < n_ipt; ipt++)
       {
-        serialise_plastic_data(ipt_data[ipt], ipt);
+        serialise_plastic_data(ipt_data[ipt], ipt, t);
       }
 
       const unsigned n_data = ipt_data[0].size();
@@ -957,7 +957,7 @@ namespace oomph
         {
           throw OomphLibError("Size of data at ipts does not match",
                               OOMPH_EXCEPTION_LOCATION,
-                              OOMPH_CURRENT_FUNCTION)
+                              OOMPH_CURRENT_FUNCTION);
         }
       }
 #endif
@@ -1550,6 +1550,7 @@ namespace oomph
       return x0;
     }
 
+  public:
     Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
     {
       return Plastic_data_pt[ipt][data_type];
@@ -1560,6 +1561,7 @@ namespace oomph
       return Plastic_dof_data_pt[ipt][ndof];
     }
 
+  protected:
     /// Stores, if finite difference should be used for the plastic solve.
     bool Plastic_solve_use_fd = false;
 
@@ -2020,6 +2022,8 @@ namespace oomph
 
     void further_build() override
     {
+      RefineableSolidElement::further_build();
+
       PlasticEquations<DIM>* cast_father_element_pt =
         dynamic_cast<PlasticEquations<DIM>*>(this->father_element_pt());
 
@@ -2027,6 +2031,10 @@ namespace oomph
         cast_father_element_pt->get_plastic_solve_by_fd();
       this->Plastic_consitutive_law_pt =
         cast_father_element_pt->plastic_constitutive_law_pt();
+
+      // Set the plastic timestepper
+      this->assign_plastic_timestepper_pt(
+        cast_father_element_pt->plastic_data_pt(0, 0)->time_stepper_pt(), true);
     }
   };
 
