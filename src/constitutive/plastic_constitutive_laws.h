@@ -402,14 +402,13 @@ namespace oomph
                              double& drdu,
                              const bool& compute_derivative)
     {
-      
       // Initialize derivatives
       if (compute_derivative)
       {
         drdlambda = 0.0;
         drdu = 0.0;
       }
-      
+
       // Retreive the minimum value of R
       const double Re = (*Normal_yield_ratio_elastic_pt);
 
