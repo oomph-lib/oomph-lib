@@ -69,11 +69,6 @@ namespace oomph
     Vector<Vector<Data*>> Plastic_data_pt;
 
     // [Number of ipts, number of types of plastic data, number of variables in
-    // that data type] Different to the data pinned status. That is always true
-    // because we don't want to use the data in the normal way.
-    Vector<Vector<std::vector<bool>>> Plastic_data_pinned_status;
-
-    // [Number of ipts, number of types of plastic data, number of variables in
     // that data type]
     Vector<Vector<Vector<int>>> Plastic_data_eqn_number;
 
@@ -90,64 +85,6 @@ namespace oomph
     // The solver tolerance for the plastic newton solve
     double Plastic_Newton_Solver_Tolerance = 1.0e-8;
 
-    // Pin the plastic dof of type data_type at the integral point, if index<0
-    // then pin all plastic data of that type, otherwise pin the value specified
-    void pin_plastic_dof(const unsigned& ipt,
-                         const unsigned& data_type,
-                         const int& index = -1)
-    {
-      if (index < 0)
-      {
-        const unsigned nvalue =
-          Plastic_data_pinned_status[ipt][data_type].size();
-        for (unsigned i = 0; i < nvalue; i++)
-        {
-          Plastic_data_pinned_status[ipt][data_type][i] = true;
-        }
-      }
-      else
-      {
-#ifdef PARANOID
-        // Check if the index makes sense
-        if (index > Plastic_data_pinned_status[ipt][data_type].size() - 1)
-        {
-          throw OomphLibError("Plastic data index is too large",
-                              OOMPH_EXCEPTION_LOCATION,
-                              OOMPH_CURRENT_FUNCTION);
-        }
-#endif
-        Plastic_data_pinned_status[ipt][data_type][index] = true;
-      }
-    }
-
-    void unpin_plastic_dof(const unsigned& ipt,
-                           const unsigned& data_type,
-                           const int& index = -1)
-    {
-      if (index < 0)
-      {
-        const unsigned nvalue =
-          Plastic_data_pinned_status[ipt][data_type].size();
-        for (unsigned i = 0; i < nvalue; i++)
-        {
-          Plastic_data_pinned_status[ipt][data_type][i] = false;
-        }
-      }
-      else
-      {
-#ifdef PARANOID
-        // Check if the index makes sense
-        if (index > Plastic_data_pinned_status[ipt][data_type].size() - 1)
-        {
-          throw OomphLibError("Plastic data index is too large",
-                              OOMPH_EXCEPTION_LOCATION,
-                              OOMPH_CURRENT_FUNCTION);
-        }
-#endif
-        Plastic_data_pinned_status[ipt][data_type][index] = false;
-      }
-    }
-
     // Change to not have an argument - in fact if we're always building all
     // plastic data then we don't need thi Collapse all building plastic data
     // into a single function
@@ -158,14 +95,11 @@ namespace oomph
       const unsigned nipt = this->integral_pt()->nweight();
 
       Plastic_data_pt.resize(nipt);
-      Plastic_data_pinned_status.resize(nipt);
       Plastic_data_eqn_number.resize(nipt);
       Plastic_dof_data_pt.resize(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
         Plastic_data_pt[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
-        Plastic_data_pinned_status[ipt].resize(
-          NUMBER_OF_PLASTIC_VARIABLE_TYPES);
         Plastic_data_eqn_number[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
       }
       Plastic_dof_nunbers_has_been_resized = true;
@@ -193,11 +127,8 @@ namespace oomph
           for (unsigned i = 0; i < nvalue; i++)
           {
             Plastic_data_eqn_number[ipt][data_type][i] = -1;
-            if (!Plastic_data_pinned_status[ipt][data_type][i])
-            {
-              Plastic_data_eqn_number[ipt][data_type][i] = eqn_count++;
-              Plastic_dof_data_pt[ipt].push_back(data_pt->value_pt(i));
-            }
+            Plastic_data_eqn_number[ipt][data_type][i] = eqn_count++;
+            Plastic_dof_data_pt[ipt].push_back(data_pt->value_pt(i));
           }
         }
       }
@@ -215,8 +146,6 @@ namespace oomph
         {
           // Pin the plastic degree of freedom
           Plastic_data_pt[ipt][invFp_INDEX]->pin(i);
-          // By default the plastic data is not pinned
-          Plastic_data_pinned_status[ipt][invFp_INDEX].push_back(false);
           // But we have to initialise the eqn number to something so it may as
           // well be a safe value
           Plastic_data_eqn_number[ipt][invFp_INDEX].push_back(-1);
@@ -242,8 +171,6 @@ namespace oomph
         {
           // Pin the plastic degree of freedom
           Plastic_data_pt[ipt][invBpks_INDEX]->pin(i);
-          // By default the plastic data is not pinned
-          Plastic_data_pinned_status[ipt][invBpks_INDEX].push_back(false);
           // But we have to initialise the eqn number to something so it may as
           // well be a safe value
           Plastic_data_eqn_number[ipt][invBpks_INDEX].push_back(-1);
@@ -269,8 +196,6 @@ namespace oomph
         {
           // Pin the plastic degree of freedom
           Plastic_data_pt[ipt][invBpcs_INDEX]->pin(i);
-          // By default the plastic data is not pinned
-          Plastic_data_pinned_status[ipt][invBpcs_INDEX].push_back(false);
           // But we have to initialise the eqn number to something so it may as
           // well be a safe value
           Plastic_data_eqn_number[ipt][invBpcs_INDEX].push_back(-1);
@@ -294,8 +219,6 @@ namespace oomph
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
         Plastic_data_pt[ipt][R_INDEX]->pin(0);
-        // By default the plastic data is not pinned
-        Plastic_data_pinned_status[ipt][R_INDEX].push_back(false);
         // But we have to initialise the eqn number to something so it may as
         // well be a safe value
         Plastic_data_eqn_number[ipt][R_INDEX].push_back(-1);
@@ -314,8 +237,6 @@ namespace oomph
         (void)this->add_internal_data(data_pt, false);
         // Pin the plastic degree of freedom
         Plastic_data_pt[ipt][Lambda_INDEX]->pin(0);
-        // By default the plastic data is not pinned
-        Plastic_data_pinned_status[ipt][Lambda_INDEX].push_back(false);
         // But we have to initialise the eqn number to something so it may as
         // well be a safe value
         Plastic_data_eqn_number[ipt][Lambda_INDEX].push_back(-1);
