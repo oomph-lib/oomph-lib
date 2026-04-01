@@ -87,7 +87,7 @@ namespace oomph
     }
 
   private:
-    /// A pointer to the the isotropic hardening factor. It describes the
+    /// A pointer to the isotropic hardening factor. It describes the
     /// relation between the derivatives of isotropic hardening and the plastic
     /// multiplier (lambda). For mathematical details, see Eq. (152) of
     /// Hashiguchi (2019).
@@ -167,7 +167,7 @@ namespace oomph
     }
 
   private:
-    // A pointer to the initial isotropic yield stress.
+    /// A pointer to the initial isotropic yield stress.
     double* F0_pt;
 
     /// Pointer to a value describing the evolution of the isotropic stress
@@ -228,7 +228,7 @@ namespace oomph
   {
   public:
     // =========================================================================
-    /// \brief Empty constructor: This class does not have any internal
+    /// \short Empty constructor: This class does not have any internal
     /// variables.
     // =========================================================================
     VonMisesYieldCriterion() : YieldCriterion() {}
@@ -308,6 +308,8 @@ namespace oomph
       const unsigned int ncol = dsigmadM.ncol();
       ddsigmadMdM.resize(nrow, ncol, nrow, ncol);
 
+      // If f is too small, e.g., 0, the derivative would explode, so we skip
+      // it.
       if (f < 1e-15)
       {
         ddsigmadMdM.initialise(0.0);
@@ -318,7 +320,7 @@ namespace oomph
       // d^2f/(dM_ij dM_kl) = 1 / f *
       //           [ 3 / 2 (\delta_ik \delta_jl - 1 / 3 \delta_ij \delta_kl)
       //             - df/dM_kl * df/dM_ij]
-      double invf = 1 / f;
+      double invf = 1.0 / f;
 
       // We will split this in three parts to avoid the if statements
       // The first part - df/dM_kl * df/dM_ij / f
@@ -362,9 +364,27 @@ namespace oomph
     }
   };
 
+  // ===========================================================================
+  /// \short A class which describes the behaviour of the normal-yield ratio
+  /// \f$ R \f$ defined in Eq. (65) of Hashiguchi (2019).
+  ///
+  /// This class implements the whole evolution as described in sections 7.1
+  /// (Eqs. (65) to (69)) and 8.6 (Eqs. (111) and (112)) of Hashiguchi (2019).
+  // ===========================================================================
   class NormalYieldRatioLaw
   {
   public:
+    // =========================================================================
+    /// \short Constructor: Initializes the normal-yield ratio law.
+    ///
+    /// \param[in] normal_yield_ratio_elastic_pt The elastic/initial value
+    /// of the normal-yield ratio.
+    /// \param[in] u_pt An evolution constant. This is \f$ u \f$ from Eq. (68)
+    /// or \f$ \bar{u} \f$ from Eq. (111).
+    /// \param[in] elastic_core_u_pt Another evolution constant. See Eq. (111).
+    /// \param[in] regularization_constant_pt A regularization constant, which
+    /// is used to prevent division by zero.
+    // =========================================================================
     NormalYieldRatioLaw(double* normal_yield_ratio_elastic_pt,
                         double* u_pt,
                         double* elastic_core_u_pt,
@@ -376,6 +396,11 @@ namespace oomph
     {
     }
 
+    // =========================================================================
+    /// \short A convenience constructor.
+    ///
+    /// For a description of the parameters see the called constructor.
+    // =========================================================================
     NormalYieldRatioLaw(double* normal_yield_ratio_elastic_pt,
                         double* u_pt,
                         double* elastic_core_u_pt)
@@ -385,6 +410,17 @@ namespace oomph
                             &FiniteElement::Tolerance_for_singular_jacobian)
     {
     }
+
+    // =========================================================================
+    /// \short A convenience function to compute r (Eq. (68)) in the plastic
+    /// case without computing any derivative.
+    ///
+    /// \param[in] u The value of the evolution constant.
+    /// \param[in] delta_lambda The increase of the plastic multiplier since a
+    /// reference step.
+    /// \param[in] r_prev The value of r at the reference step.
+    /// \returns The new value for r.
+    // =========================================================================
     double compute_r_plastic(const double& u,
                              double delta_lambda,
                              const double& r_prev)
@@ -395,6 +431,19 @@ namespace oomph
         u, delta_lambda, r_prev, derivative, derivative, compute_derivative);
     }
 
+    // =========================================================================
+    /// \short A function to compute r (Eq. (68)) in the plastic case
+    ///
+    /// \param[in] u The value of the evolution constant.
+    /// \param[in] delta_lambda The increase of the plastic multiplier since a
+    /// reference step.
+    /// \param[in] r_prev The value of r at the reference step.
+    /// \param[out] drdlambda The derivative of r w.r.t. lambda.
+    /// \param[out] drdu The derivative of r w.r.t. u.
+    /// \param[in] compute_derivative Whether the derivatives should be
+    /// computed.
+    /// \returns The new value for r.
+    // =========================================================================
     double compute_r_plastic(const double& u,
                              double delta_lambda,
                              const double& R_prev,
@@ -459,94 +508,194 @@ namespace oomph
       return R;
     }
 
+    // =========================================================================
+    /// \short A function to compute the evolution variable u using Eqs.
+    /// (111) and (112).
+    ///
+    /// \param[in] rc The value of rc (Eq. (105)).
+    /// \param[in] barbar_N The value of bar_bar_N (Eq. (107)).
+    /// \param[in] hat_bar_Nc The value of hat_bar_Nc (Eq. (110)).
+    /// The following input arguments will only be used if compute_derivative is
+    /// true.
+    /// \param[in] dbarbar_N_dbarbar_M The derivative of bar_bar_N w.r.t.
+    /// bar_bar_M
+    /// \param[in] dbarbar_M_dbar_Mk The derivative of bar_bar_M w.r.t. bar_Mk.
+    /// \param[in] dbarbar_M_dbar_Mc The derivative of bar_bar_M w.r.t. bar_Mc.
+    /// \param[in] dc_sigma_dbar_Mk The derivative of c_sigma w.r.t. bar_Mk.
+    /// \param[in] dc_sigma_dbar_Mc The derivative of c_sigma w.r.t. bar_Mc.
+    /// \param[in] dbarbar_M_dr The derivative of bar_bar_M w.r.t. R.
+    /// \param[in] dhatbar_Nc_dhatbar_Mc The derivative of bar_bar_M w.r.t.
+    /// \param[in] drc_dhatbar_Mc The derivative of r_c w.r.t. hat_bar_Mc
+    /// \param[in] drc_dh The derivative of rc w.r.t. h.
+    /// The following output arguments will only be resized and initialised, if
+    /// compute_derivative is true.
+    /// \param[out] du_dbar_M The derivative of u w.r.t. bar_M.
+    /// \param[out] du_dbar_Mk The derivative of u w.r.t. bar_Mk.
+    /// \param[out] du_dbar_Mc The derivative of u w.r.t. bar_Mc.
+    /// \param[out] du_dh The derivative of u w.r.t. h.
+    /// \param[out] du_dr The derivative of u w.r.t. r.
+    /// \param[in] compute_derivative Whether the derivatives should be
+    /// computed.
+    /// \returns The new value for u.
+    // =========================================================================
     double compute_u_with_elastic_core(
-      const double& Rc,
+      const double& rc,
       const DenseMatrix<double>& barbar_N,
       const DenseMatrix<double>& hat_bar_Nc,
-      const RankFourTensor<double>& dbarbarN_dbarbar_M,
+      const RankFourTensor<double>& dbarbar_N_dbarbar_M,
       const double& dbarbar_M_dbar_Mk,
       const double& dbarbar_M_dbar_Mc,
-      const DenseMatrix<double>& dbarbar_M_dR,
+      const DenseMatrix<double>& dbarbar_M_dr,
       const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
-      const DenseMatrix<double>& dRc_dhatbar_Mc,
-      const double& dRc_dh,
+      const DenseMatrix<double>& drc_dhatbar_Mc,
+      const double& drc_dh,
       DenseMatrix<double>& du_dbar_M,
       DenseMatrix<double>& du_dbar_Mk,
       DenseMatrix<double>& du_dbar_Mc,
       double& du_dh,
-      double& du_dR,
-      bool computeDerivative
+      double& du_dr,
+      bool compute_derivative
 
     )
     {
-      DenseMatrix<double> dC_dbar_M, dC_dbar_Mk, dC_dbar_Mc;
-      double dCdR;
+      DenseMatrix<double> dc_dbar_M, dc_dbar_Mk, dc_dbar_Mc;
+      double dcdr = 0;
 
       double c_sigma = compute_c_sigma(barbar_N,
                                        hat_bar_Nc,
-                                       dbarbarN_dbarbar_M,
+                                       dbarbar_N_dbarbar_M,
                                        dbarbar_M_dbar_Mk,
                                        dbarbar_M_dbar_Mc,
-                                       dbarbar_M_dR,
+                                       dbarbar_M_dr,
                                        dhatbar_Nc_dhatbar_Mc,
-                                       dC_dbar_M,
-                                       dC_dbar_Mk,
-                                       dC_dbar_Mc,
-                                       dCdR,
-                                       computeDerivative);
+                                       dc_dbar_M,
+                                       dc_dbar_Mk,
+                                       dc_dbar_Mc,
+                                       dcdr,
+                                       compute_derivative);
 
-      return compute_u_with_elastic_core_from_c(Rc,
+      return compute_u_with_elastic_core_from_c(rc,
                                                 c_sigma,
-                                                dRc_dhatbar_Mc,
-                                                dRc_dh,
-                                                dC_dbar_M,
-                                                dC_dbar_Mk,
-                                                dC_dbar_Mc,
-                                                dCdR,
+                                                drc_dhatbar_Mc,
+                                                drc_dh,
+                                                dc_dbar_M,
+                                                dc_dbar_Mk,
+                                                dc_dbar_Mc,
+                                                dcdr,
                                                 du_dbar_M,
                                                 du_dbar_Mk,
                                                 du_dbar_Mc,
                                                 du_dh,
-                                                du_dR,
-                                                computeDerivative);
+                                                du_dr,
+                                                compute_derivative);
     }
 
+    // =========================================================================
+    /// \returns The elastic/initial value of the normal-yield ratio.
+    // =========================================================================
     double get_re()
     {
       return *Normal_yield_ratio_elastic_pt;
     }
 
+    // =========================================================================
+    /// \returns The evolution parameter u.
+    // =========================================================================
     double get_u()
     {
       return *U_pt;
     }
 
+    // =========================================================================
+    /// \short Access to the elastic/initial value of the normal-yield ratio Re,
+    /// as in Eq. (68).
+    // =========================================================================
+    double*& normal_yield_ratio_elastic_pt()
+    {
+      return Normal_yield_ratio_elastic_pt;
+    }
+
+    // =========================================================================
+    /// \short Access to the evolution parameter u parameter. (bar{u} in Eq.
+    /// (111); u in Eq. (68), if there was no elastic core)
+    // =========================================================================
+    double*& u_pt()
+    {
+      return U_pt;
+    }
+
+    // =========================================================================
+    /// \short Access to the elastic core u parameter. (u_c in Eq. (111))
+    // =========================================================================
+    double*& elastic_core_u_pt()
+    {
+      return Elastic_core_u_pt;
+    }
+
+    // =========================================================================
+    /// \short Access to the regularization constant.
+    // =========================================================================
+    double*& regularization_constant_pt()
+    {
+      return Regularization_constant_pt;
+    }
+
   protected:
+    // =========================================================================
+    /// \short A function to compute the evolution variable u from c using Eq.
+    /// (111):
+    /// \f[ u = \bar{u} \mathrm{exp}
+    ///           \left(u_\mathrm{c} \mathcal{R}_\mathrm{c0} C_\sigma\right) \f]
+    ///
+    /// \param[in] rc The value of \f$ R_\mathrm{c} \f$ (Eq. 105).
+    /// \param[in] c_sigma The value of \f$ C_\sigma \f$ (Eq. 112).
+    /// \param[in] r_prev The value of r at the reference step.
+    /// The following input arguments will only be used if compute_derivative is
+    /// true.
+    /// \param[in] drc_dhatbar_Mc The derivative of r_c w.r.t. hat_bar_Mc
+    /// \param[in] drc_dh The derivative of rc w.r.t. h.
+    /// \param[in] dc_sigma_dbar_M The derivative of c_sigma w.r.t. bar_M.
+    /// \param[in] dc_sigma_dbar_Mk The derivative of c_sigma w.r.t. bar_Mk.
+    /// \param[in] dc_sigma_dbar_Mc The derivative of c_sigma w.r.t. bar_Mc.
+    /// \param[in] dc_sigma_dr The derivative of c_sigma w.r.t. r.
+    /// The following output arguments will only be resized and initialised, if
+    /// compute_derivative is true.
+    /// \param[out] du_dbar_M The derivative of u w.r.t. bar_M.
+    /// \param[out] du_dbar_Mk The derivative of u w.r.t. bar_Mk.
+    /// \param[out] du_dbar_Mc The derivative of u w.r.t. bar_Mc.
+    /// \param[out] du_dh The derivative of u w.r.t. h.
+    /// \param[out] du_dr The derivative of u w.r.t. r.
+    /// \param[in] compute_derivative Whether the derivatives should be
+    /// computed.
+    /// \returns The new value for u.
+    // =========================================================================
     double compute_u_with_elastic_core_from_c(
-      const double& Rc,
+      const double& rc,
       const double& c_sigma,
-      const DenseMatrix<double>& dRc_dhatbar_Mc,
-      const double& dRc_dh,
+      const DenseMatrix<double>& drc_dhatbar_Mc,
+      const double& drc_dh,
       const DenseMatrix<double>& dc_sigma_dbar_M,
       const DenseMatrix<double>& dc_sigma_dbar_Mk,
       const DenseMatrix<double>& dc_sigma_dbar_Mc,
-      const double& dc_sigma_dR,
+      const double& dc_sigma_dr,
       DenseMatrix<double>& du_dbar_M,
       DenseMatrix<double>& du_dbar_Mk,
       DenseMatrix<double>& du_dbar_Mc,
       double& du_dh,
-      double& du_dR,
-      bool computeDerivative)
+      double& du_dr,
+      bool compute_derivative)
     {
+      // Compute Eq. 111
       const double uc = (*Elastic_core_u_pt);
-      const double u_out = (*U_pt) * std::exp(uc * Rc * c_sigma);
+      const double u_out = (*U_pt) * std::exp(uc * rc * c_sigma);
 
-      if (computeDerivative)
+      // Compute derivative of Eq. 111 with simple chain rules
+      if (compute_derivative)
       {
-        const double prefactor_dc_sigma = uc * u_out * Rc;
+        const double prefactor_dc_sigma = uc * u_out * rc;
         const double prefactor_drc = uc * u_out * c_sigma;
 
-        const unsigned DIM = dRc_dhatbar_Mc.ncol();
+        const unsigned DIM = drc_dhatbar_Mc.ncol();
         du_dbar_M.resize(DIM, DIM);
         du_dbar_Mk.resize(DIM, DIM);
         du_dbar_Mc.resize(DIM, DIM);
@@ -557,39 +706,66 @@ namespace oomph
           {
             du_dbar_M(i, j) = prefactor_dc_sigma * dc_sigma_dbar_M(i, j);
             du_dbar_Mk(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mk(i, j) -
-                               prefactor_drc * dRc_dhatbar_Mc(i, j);
+                               prefactor_drc * drc_dhatbar_Mc(i, j);
             du_dbar_Mc(i, j) = prefactor_dc_sigma * dc_sigma_dbar_Mc(i, j) +
-                               prefactor_drc * dRc_dhatbar_Mc(i, j);
+                               prefactor_drc * drc_dhatbar_Mc(i, j);
           }
         }
 
-        du_dh = prefactor_drc * dRc_dh;
-        du_dR = prefactor_dc_sigma * dc_sigma_dR;
+        du_dh = prefactor_drc * drc_dh;
+        du_dr = prefactor_dc_sigma * dc_sigma_dr;
       }
 
       return u_out;
     }
 
+    // =========================================================================
+    /// \short A function to compute the c_sigma using Eq. (112):
+    /// \f[ C_\sigma = \bar{\bar{N}} \colon \hat{\bar{N}}_\mathrm{c} \f]
+    ///
+    /// \param[in] bar_bar_N The value of bar_bar_N (Eq. 107).
+    /// \param[in] hat_bar_Nc The value of hat_bar_Nc (Eq. 110).
+    /// The following input arguments will only be used if compute_derivative is
+    /// true.
+    /// \param[in] dbarbar_N_dbarbar_M The derivative of bar_bar_N w.r.t.
+    /// bar_bar_M
+    /// \param[in] dbarbar_M_dbar_Mk The derivative of bar_bar_M w.r.t. bar_Mk.
+    /// \param[in] dbarbar_M_dbar_Mc The derivative of bar_bar_M w.r.t. bar_Mc.
+    /// \param[in] dbarbar_M_dr The derivative of bar_bar_M w.r.t. R.
+    /// \param[in] dhatbar_Nc_dhatbar_Mc The derivative of bar_bar_M w.r.t.
+    /// hat_bar_Mc.
+    /// The following output arguments will only be resized and initialised, if
+    /// compute_derivative is true.
+    /// \param[out] dc_dbar_M The derivative of c_sigma w.r.t. bar_M.
+    /// \param[out] dc_dbar_Mk The derivative of c_sigma w.r.t. bar_Mk.
+    /// \param[out] dc_dbar_Mc The derivative of c_sigma w.r.t. bar_Mc.
+    /// \param[out] dcdr The derivative of c_sigma w.r.t. h.
+    /// \param[in] compute_derivative Whether the derivatives should be
+    /// computed.
+    /// \returns The new value of c_sigma.
+    // =========================================================================
     double compute_c_sigma(const DenseMatrix<double>& bar_bar_N,
                            const DenseMatrix<double>& hat_bar_Nc,
                            const RankFourTensor<double>& dbarbar_N_dbarbar_M,
                            const double& dbarbar_M_dbar_Mk,
                            const double& dbarbar_M_dbar_Mc,
-                           const DenseMatrix<double>& dbarbarM_dR,
+                           const DenseMatrix<double>& dbarbar_M_dr,
                            const RankFourTensor<double>& dhatbar_Nc_dhatbar_Mc,
-                           DenseMatrix<double>& dC_dbar_M,
-                           DenseMatrix<double>& dC_dbar_Mk,
-                           DenseMatrix<double>& dC_dbar_Mc,
-                           double& dCdR,
-                           bool computeDerivative)
+                           DenseMatrix<double>& dc_dbar_M,
+                           DenseMatrix<double>& dc_dbar_Mk,
+                           DenseMatrix<double>& dc_dbar_Mc,
+                           double& dcdr,
+                           bool compute_derivative)
     {
-      if (computeDerivative)
+      // The reduction is c_sigma = bar_bar_N(i, j) hat_bar_N_c(i, j). The
+      // derivative can be obtained by applying product and chain rules.
+      if (compute_derivative)
       {
         const unsigned DIM = bar_bar_N.ncol();
-        dC_dbar_M.resize(DIM, DIM);
-        dC_dbar_Mk.resize(DIM, DIM);
-        dC_dbar_Mc.resize(DIM, DIM);
-        dCdR = 0.0;
+        dc_dbar_M.resize(DIM, DIM);
+        dc_dbar_Mk.resize(DIM, DIM);
+        dc_dbar_Mc.resize(DIM, DIM);
+        dcdr = 0.0;
 
         for (unsigned int i = 0; i < DIM; i++)
         {
@@ -607,11 +783,11 @@ namespace oomph
               }
             }
 
-            dCdR += term1_sum * dbarbarM_dR(i, j);
+            dcdr += term1_sum * dbarbar_M_dr(i, j);
 
-            dC_dbar_M(i, j) = term1_sum;
-            dC_dbar_Mk(i, j) = term1_sum * dbarbar_M_dbar_Mk - term2_sum;
-            dC_dbar_Mc(i, j) = term1_sum * dbarbar_M_dbar_Mc + term2_sum;
+            dc_dbar_M(i, j) = term1_sum;
+            dc_dbar_Mk(i, j) = term1_sum * dbarbar_M_dbar_Mk - term2_sum;
+            dc_dbar_Mc(i, j) = term1_sum * dbarbar_M_dbar_Mc + term2_sum;
           }
         }
       }
@@ -620,48 +796,61 @@ namespace oomph
     }
 
   private:
+    /// Pointer to the elastic/initial value of the normal-yield ratio Re, as in
+    /// Eq. (68).
     double* Normal_yield_ratio_elastic_pt;
+
+    /// Pointer the evolution parameter u parameter. (bar{u} in Eq. (111); u in
+    /// Eq. (68), if there was no elastic core).
     double* U_pt;
+
+    /// Pointer to the elastic core u parameter. (u_c in Eq. (111)).
     double* Elastic_core_u_pt;
 
+    /// Pointer to a regularization constant regularizing the division by 0.
     double* Regularization_constant_pt;
   };
 
+  // ===========================================================================
+  /// \short A container class to store the pointers to laws for the individual
+  /// plasticity parameters as well as to some base parameters. An instance of
+  /// this class is required by \ref PlasticEquationsBase.
+  // ===========================================================================
   class PlasticConstitutiveLaw
   {
   public:
+    /// The isotropic hardening law, \see IsotropicHardeningLaw.
     IsotropicHardeningLaw* isotropic_hardening_law_pt;
+
+    /// The yield criterion, \see YieldCriterion.
     YieldCriterion* yield_criterion_pt;
 
-    // Kinematic harening law
+    /// The kinematic hardening law describing the relationship between the
+    /// kinematic hardening deformation gradient tensor and the associated
+    /// stress. See, e.g., Eq. (33).
     ConstitutiveLaw* kinematic_hardening_law_pt;
 
-    // Elastic core law
+    /// The elastic core law describing the relationship between the elastic
+    /// core deformation gradient tensor and the associated stress. See, e.g.,
+    /// Eqs. (96) and (97).
     ConstitutiveLaw* elastic_core_law_pt;
 
-    // For computing the normal yield ratio
+    /// The normal yield ratio law, \see NormalYieldRatioLaw.
     NormalYieldRatioLaw* normal_yield_ratio_law_pt;
 
+    /// A pointer to eta_p, see. Eq. (114).
     double* eta_p_pt;
 
-    /*!
-     * \brief \eta^\text{pk}
-     */
+    /// A pointer to eta_pk, see. Eq. (114).
     double* kinematic_hardening_eta_pt = nullptr;
 
-    /*!
-     * \brief b^\text{pk}
-     */
+    /// A pointer to b_k, see. Eq. (114).
     double* kinematic_hardening_b_pt = nullptr;
 
-    /*!
-     * \brief \eta^\text{pc}
-     */
+    /// A pointer to eta_pc, see. Eq. (114).
     double* elastic_core_eta_pt = nullptr;
 
-    /*!
-     * \brief X
-     */
+    /// A pointer to X, see. Eq. (114).
     double* elastic_core_x_pt = nullptr;
   };
 } // namespace oomph
