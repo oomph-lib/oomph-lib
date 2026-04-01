@@ -1392,18 +1392,21 @@ namespace oomph
         fill_in_jacobian_plastic(residuals, jacobian, ipt, C);
 
         // std::cout << "Residuals are " << std::endl
-        //           << "   invFp: " << this->plastic_inv_fp_eqn_number(ipt, 0, 0)
+        //           << "   invFp: " << this->plastic_inv_fp_eqn_number(ipt, 0,
+        //           0)
         //           << " to "
         //           << this->plastic_inv_fp_eqn_number(ipt, DIM - 1, DIM - 1)
         //           << std::endl;
         // {
         //   std::cout << "   invBpks: "
         //             << this->plastic_invBpks_eqn_number(ipt, 0, 0) << " to "
-        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM - 1)
+        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM -
+        //             1)
         //             << std::endl;
         // }
         // {
-        //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt) << std::endl;
+        //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt) <<
+        //   std::endl;
         // }
         // {
         //   std::cout << "   YieldSurface: "
