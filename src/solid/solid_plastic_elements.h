@@ -29,6 +29,11 @@ namespace oomph
     // If finite difference should be used for the plastic solve;
     bool Plastic_solve_use_fd = false;
 
+    /// The step used to determine the jacobina, if plastic Plastic_solve_use_fd
+    /// is set to true.
+    double* Plastic_fd_jacobian_step_pt =
+      &FiniteElement::Default_fd_jacobian_step;
+
     // A pointer to the plastic constitutive law
     PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
 
@@ -625,6 +630,14 @@ namespace oomph
     const bool get_plastic_solve_by_fd() const
     {
       return Plastic_solve_use_fd;
+    }
+
+    // =========================================================================
+    /// \short Access function to \ref Plastic_fd_jacobian_step_pt
+    // =========================================================================
+    double*& plastic_fd_jacobian_step_pt()
+    {
+      return Plastic_fd_jacobian_step_pt;
     }
 
     /*!
@@ -1299,7 +1312,7 @@ namespace oomph
         {
           const double record_val = *Plastic_dof_data_pt[ipt][local_unknown];
           *Plastic_dof_data_pt[ipt][local_unknown] +=
-            FiniteElement::Default_fd_jacobian_step;
+            *Plastic_fd_jacobian_step_pt;
 
           fill_in_residuals_plastic(test_residuals, ipt, C);
           for (unsigned local_eqn = 0; local_eqn < get_num_plastic_dofs(ipt);
@@ -1307,7 +1320,7 @@ namespace oomph
           {
             jacobian(local_eqn, local_unknown) =
               (test_residuals[local_eqn] - residuals[local_eqn]) /
-              FiniteElement::Default_fd_jacobian_step;
+              (*Plastic_fd_jacobian_step_pt);
           }
           *Plastic_dof_data_pt[ipt][local_unknown] = record_val;
         }
@@ -1379,29 +1392,22 @@ namespace oomph
         fill_in_jacobian_plastic(residuals, jacobian, ipt, C);
 
         // std::cout << "Residuals are " << std::endl
-        //           << "   invFp: "
-        //           << this->plastic_inv_fp_eqn_number(ipt, 0, 0) << " to "
+        //           << "   invFp: " << this->plastic_inv_fp_eqn_number(ipt, 0, 0)
+        //           << " to "
         //           << this->plastic_inv_fp_eqn_number(ipt, DIM - 1, DIM - 1)
         //           << std::endl;
-        // if (Plastic_data_has_been_built[invBpks_INDEX])
         // {
-        //   std::cout << "   invBpks: " <<
-        //   this->plastic_invBpks_eqn_number(ipt, 0, 0)
-        //             << " to "
-        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM -
-        //             1)
+        //   std::cout << "   invBpks: "
+        //             << this->plastic_invBpks_eqn_number(ipt, 0, 0) << " to "
+        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM - 1)
         //             << std::endl;
         // }
-        // if (Plastic_data_has_been_built[R_INDEX])
         // {
-        //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt)
-        //             << std::endl;
+        //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt) << std::endl;
         // }
-        // if (Plastic_data_has_been_built[Lambda_INDEX])
         // {
-        //   std::cout << "   YieldSurface: " <<
-        //   this->plastic_lambda_eqn_number(ipt)
-        //             << std::endl;
+        //   std::cout << "   YieldSurface: "
+        //             << this->plastic_lambda_eqn_number(ipt) << std::endl;
         // }
 
         // std::cout << "\t\tResiduals:" << std::endl;

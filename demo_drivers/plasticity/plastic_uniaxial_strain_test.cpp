@@ -110,6 +110,9 @@ private:
   double elastic_core_eta_pt = 0.5;
   PlasticConstitutiveLaw* plastic_constitutive_law_pt;
 
+
+  double Plastic_fd_jacobian_step = 1e-12;
+
   TimeStepper* my_time_stepper_pt;
 
   std::ofstream stress_strain_file;
@@ -247,6 +250,8 @@ private:
       // Optionally fd can be enabled to solve for the plastic varivables. The
       // default implementation uses analytical jacobians
       // el_pt->enable_plastic_solve_by_fd();
+      // If we solve by fd, usually also the step has to be chosen tiny.
+      // el_pt->plastic_fd_jacobian_step_pt() = &Plastic_fd_jacobian_step;
       //! [Assgin constitutive law]
 #endif
       el_pt->lambda_sq_pt() = &rhoOne;
