@@ -796,6 +796,8 @@ void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
+    TimeStepper* data_time_stepper = data_pt->time_stepper_pt();
+
     // If there is not enough history, just initiallise all data with their
     // initial condition
     if (data_pt->time_stepper_pt()->ntstorage() < 2)
@@ -803,13 +805,29 @@ void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
       set_intial_condition(ipt);
       return;
     }
-
-    // Otherwise, use the value from the last timestep
-    const unsigned nval = data_pt->nvalue();
-    for (unsigned i = 0; i < nval; i++)
+    // If it is steady initialise to the previous value
+    else if (data_time_stepper->is_steady())
     {
-      data_pt->set_value(i, data_pt->value(1, i));
+      const unsigned nval = data_pt->nvalue();
+      for (unsigned i = 0; i < nval; i++)
+      {
+        data_pt->set_value(i, data_pt->value(1, i));
+      }
     }
+    // Else, initialise such that the derivative is zero
+    else
+    {
+      const unsigned nval = data_pt->nvalue();
+      for (unsigned i = 0; i < nval; i++)
+      {
+        data_pt->set_value(
+          i, compute_internal_data_from_time_derivative(data_pt, i, 0.0));
+      }
+
+      // Make sure that R has a valid value
+      enforce_boundaries_of_r(ipt);
+    }
+
   }
 }
 

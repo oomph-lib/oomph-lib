@@ -1207,6 +1207,21 @@ namespace oomph
       return this->dinternal_data_dt(Plastic_data_pt[ipt][R_INDEX], 0);
     }
 
+    void enforce_boundaries_of_r(const unsigned& ipt)
+    {
+      const double r = get_r(ipt);
+      const double re =
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+      if (r < re)
+      {
+        set_r(ipt, re);
+      }
+      else if (r > 1.0)
+      {
+        set_r(ipt, 1.0);
+      }
+    }
+
     double get_lambda(const unsigned& ipt) const
     {
       return get_lambda(0, ipt);
@@ -1745,6 +1760,33 @@ namespace oomph
       }
 
       return dxdt;
+    }
+
+    double compute_internal_data_from_time_derivative(Data* data_pt,
+                                                      const unsigned value_idx,
+                                                      const double dxdt) const
+    {
+      // Number of timsteps (past & present)
+      const TimeStepper* data_time_stepper_pt = data_pt->time_stepper_pt();
+      const unsigned n_time = data_time_stepper_pt->ntstorage();
+
+      // Initialize the return value
+      double x0 = 0;
+
+      // If the timestepper is not steady
+      if (!data_time_stepper_pt->is_steady())
+      {
+        double sum_remaining_steps = 0;
+        for (unsigned t = 1; t < n_time; t++)
+        {
+          sum_remaining_steps +=
+            data_time_stepper_pt->weight(1, t) * data_pt->value(t, value_idx);
+        }
+
+        x0 = (dxdt - sum_remaining_steps) / data_time_stepper_pt->weight(1, 0);
+      }
+
+      return x0;
     }
   };
 
