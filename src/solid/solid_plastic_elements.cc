@@ -827,7 +827,6 @@ void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
       // Make sure that R has a valid value
       enforce_boundaries_of_r(ipt);
     }
-
   }
 }
 
