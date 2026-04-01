@@ -365,120 +365,96 @@ namespace oomph
   class NormalYieldRatioLaw
   {
   public:
-    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt,
-                        double* u_in_pt,
-                        double* elastic_core_u_in_pt)
-      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt),
-        u_pt(u_in_pt),
-        elastic_core_u_pt(elastic_core_u_in_pt)
+    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_pt,
+                        double* u_pt,
+                        double* elastic_core_u_pt,
+                        double* regularization_constant_pt)
+      : Normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_pt),
+        U_pt(u_pt),
+        Elastic_core_u_pt(elastic_core_u_pt),
+        Regularization_constant_pt(regularization_constant_pt)
     {
     }
 
-
-    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_in_pt,
-                        double* u_in_pt,
-                        double* elastic_core_u_in_pt,
-                        double* fd_step_in_pt)
-      : normal_yield_ratio_elastic_pt(normal_yield_ratio_elastic_in_pt),
-        u_pt(u_in_pt),
-        elastic_core_u_pt(elastic_core_u_in_pt),
-        fd_step_pt(fd_step_in_pt)
+    NormalYieldRatioLaw(double* normal_yield_ratio_elastic_pt,
+                        double* u_pt,
+                        double* elastic_core_u_pt)
+      : NormalYieldRatioLaw(normal_yield_ratio_elastic_pt,
+                            u_pt,
+                            elastic_core_u_pt,
+                            &FiniteElement::Tolerance_for_singular_jacobian)
     {
     }
-
     double compute_r_plastic(const double& u,
-                             const double& delta_lambda,
-                             const double& R_prev)
+                             double delta_lambda,
+                             const double& r_prev)
     {
-      double derivative;
+      double derivative = 0;
+      const bool compute_derivative = 0;
       return compute_r_plastic(
-        u, delta_lambda, R_prev, derivative, derivative, 0);
+        u, delta_lambda, r_prev, derivative, derivative, compute_derivative);
     }
 
     double compute_r_plastic(const double& u,
-                             const double& delta_lambda,
+                             double delta_lambda,
                              const double& R_prev,
-                             double& dRdLambda,
-                             double& dRdu,
-                             bool computeDerivative)
+                             double& drdlambda,
+                             double& drdu,
+                             const bool& compute_derivative)
     {
-      const double Re = (*normal_yield_ratio_elastic_pt);
-
+      
       // Initialize derivatives
-      if (computeDerivative)
+      if (compute_derivative)
       {
-        dRdLambda = 0.0;
-        dRdu = 0.0;
+        drdlambda = 0.0;
+        drdu = 0.0;
       }
+      
+      // Retreive the minimum value of R
+      const double Re = (*Normal_yield_ratio_elastic_pt);
 
-      if (std::abs(1.0 - Re) < 1.0e-12) return 1.0;
+      // Early exit if Re is 1.0 (the maximum value allowed for R)
+      if (std::abs(1.0 - Re) < *Regularization_constant_pt) return 1.0;
 
+      // Precompute some constants
       const double OneMinusRe = 1.0 - Re;
       const double preFactor = (2.0 * OneMinusRe) / MathematicalConstants::Pi;
       const double preFactorArg =
         MathematicalConstants::Pi / (2.0 * OneMinusRe);
 
+
       // Compute the argument of cos^{-1}
       // We do not need a max around R_prev - Re, since R_prev >= Re by
       // definition
       double inner_arg = std::cos(preFactorArg * (R_prev - Re)) *
-                         std::exp(-u * preFactorArg * delta_lambda);
+                         std::exp(-u * preFactorArg * (delta_lambda));
 
-      // Limit the arg. This has two effects, it prevents the acos to take wierd
-      // numbers and makes the derivative always not infinite.
-      const double TOLERANCE = 1.0e-12;
-      const double MAX_ARG = std::sqrt(1.0 - TOLERANCE);
+      // Hard clamp strictly for the safety of std::acos to prevent NaNs
+      // from standard floating-point overshoot.
+      if (inner_arg > 1.0) inner_arg = 1.0;
+      if (inner_arg < -1.0) inner_arg = -1.0;
 
-      bool is_clamped = false;
-      if (inner_arg > MAX_ARG)
-      {
-        inner_arg = MAX_ARG;
-        is_clamped = true;
-      }
-      if (inner_arg < -MAX_ARG)
-      {
-        inner_arg = -MAX_ARG;
-        is_clamped = true;
-      }
-
-      // Compute R
+      // Compute R - Eq. (68)
       double R = preFactor * std::acos(inner_arg) + Re;
 
-      if (computeDerivative)
+      // Calculate dR/dLambda and dR/du for Jacobian analytically
+      if (compute_derivative)
       {
-        // If inner arg was clamped, the analytical derivative does not make
-        // sense. Hence, we fall back to a numerical derivative
-        if (is_clamped)
-        {
-          // dR/dLambda
-          double R_lambda_plus =
-            compute_r_plastic(u, delta_lambda + (*fd_step_pt), R_prev);
-          dRdLambda = (R_lambda_plus - R) / (*fd_step_pt);
+        // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
+        double denom_sq = 1.0 - inner_arg * inner_arg;
+        double inv_sqrt =
+          -1.0 / std::sqrt(denom_sq + (*Regularization_constant_pt));
 
-          // dR/du
-          double R_u_plus =
-            compute_r_plastic(u + (*fd_step_pt), delta_lambda, R_prev);
-          dRdu = (R_u_plus - R) / (*fd_step_pt);
-        }
-        else
-        {
-          // Calculate dR/dLambda and dR/du for Jacobian analytically
-          double denom_sq = 1.0 - inner_arg * inner_arg;
+        // df/dLambda = f * (-u * preFactorArg)
+        // dRdLambda = preFactor * inv_sqrt * df/dLambda
+        // preFactor * preFactorArg = 1
+        // Hence: dR/dLambda = - u * f * inv_sqrt
+        drdlambda = -u * inner_arg * inv_sqrt;
 
-          // d/dx(acos(f(x))) = -1 / sqrt(1 - f(x)^2) * df/dx
-          double inv_sqrt = -1.0 / std::sqrt(denom_sq);
-
-          // df/dLambda = f * (-u * preFactorArg)
-          // dRdLambda = preFactor * inv_sqrt * df/dLambda
-          // preFactor * preFactorArg = 1
-          // Hence: dR/dLambda = - u * f * inv_sqrt
-          dRdLambda = -u * inner_arg * inv_sqrt;
-
-          // df/du = f * (-preFactorArg * delta_lambda)
-          // dR/du = preFactor * inv_sqrt * dfdu
-          //       = - f * inv_sqrt * delta_lambda
-          dRdu = -inner_arg * inv_sqrt * delta_lambda;
-        }
+        // df/du = f * (-preFactorArg * delta_lambda)
+        // dR/du = preFactor * inv_sqrt * dfdu
+        //       = - f * inv_sqrt * delta_lambda
+        drdu = -inner_arg * inv_sqrt * delta_lambda;
       }
 
       return R;
@@ -538,12 +514,12 @@ namespace oomph
 
     double get_re()
     {
-      return *normal_yield_ratio_elastic_pt;
+      return *Normal_yield_ratio_elastic_pt;
     }
 
     double get_u()
     {
-      return *u_pt;
+      return *U_pt;
     }
 
   protected:
@@ -563,8 +539,8 @@ namespace oomph
       double& du_dR,
       bool computeDerivative)
     {
-      const double uc = (*elastic_core_u_pt);
-      const double u_out = (*u_pt) * std::exp(uc * Rc * c_sigma);
+      const double uc = (*Elastic_core_u_pt);
+      const double u_out = (*U_pt) * std::exp(uc * Rc * c_sigma);
 
       if (computeDerivative)
       {
@@ -645,11 +621,11 @@ namespace oomph
     }
 
   private:
-    double* normal_yield_ratio_elastic_pt;
-    double* u_pt;
-    double* elastic_core_u_pt;
+    double* Normal_yield_ratio_elastic_pt;
+    double* U_pt;
+    double* Elastic_core_u_pt;
 
-    double* fd_step_pt = &FiniteElement::Default_fd_jacobian_step;
+    double* Regularization_constant_pt;
   };
 
   class PlasticConstitutiveLaw
