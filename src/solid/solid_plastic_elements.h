@@ -42,11 +42,11 @@ namespace oomph
     // considerably when searching for plastic data.
     enum Plastic_Variables_Indexes
     {
+      Lambda_INDEX,
       invFp_INDEX,
       invBpks_INDEX,
-      invBpcs_INDEX,
-      Lambda_INDEX,
       R_INDEX,
+      invBpcs_INDEX,
       NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
       NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
     };
