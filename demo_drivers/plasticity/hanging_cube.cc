@@ -32,7 +32,7 @@ public:
 
 namespace Parameters
 {
-  const double max_loading_height = 4.0;
+  const double max_loading_height = 2.0;
   const unsigned n_step_loading = 20;
   const unsigned n_step_unloading = 100;
   const unsigned print_freq = 2;
@@ -43,11 +43,10 @@ namespace Parameters
   const unsigned dirichlet_boundary_bottom = 5;
   const double dt = 0.1;
 
-  double Lambda_sq = 1.0;
-  double E = 100;
+  double E = 1.0;
   double nu = 0.3;
-  double mu = 0.5 * E / (1 + nu);
-  double lambda = nu / (1 - 2 * nu) * E / (1 + nu);
+  double mu = 0.384615;
+  double lambda = 0.576923;
 
   StrainEnergyFunction* elastic_strain_energy_function_pt =
     new ModifiedNeoHookean(&lambda, &mu);
@@ -55,29 +54,27 @@ namespace Parameters
     new IsotropicStrainEnergyFunctionConstitutiveLaw(
       elastic_strain_energy_function_pt);
 
-  double E0 = E;
-
   double isotropic_hardening_factor = std::sqrt(3.0 / 2.0);
-  double isotropic_hardening_f0 = 500e6 / E0;
+  double isotropic_hardening_f0 = 500e-3;
   double isotropic_hardening_h1 = 0.8;
   double isotropic_hardening_h2 = 50;
 
   double zero = 0.0;
-  double kinematic_hardening_stress_c = 10 / E0;
+  double kinematic_hardening_stress_c = 0.1;
 
-  double elastic_core_stress_c = 1e8 / E0;
+  double elastic_core_stress_c = 0.1;
 
   double normal_yield_ratio_elastic = 0.2;
   double normal_yield_ratio_constant_u = 200;
   double normal_yield_ratio_elasic_core_u = 1.0;
 
-  double eta_p_pt = 0.5;
+  double eta_p = 0.5;
 
-  double kinematic_hardening_b_pt = 0.1;
-  double kinematic_hardening_eta_pt = 0.5;
+  double kinematic_hardening_b = 0.1;
+  double kinematic_hardening_eta = 0.5;
 
-  double elastic_core_x_pt = 0.1;
-  double elastic_core_eta_pt = 0.5;
+  double elastic_core_x = 0.1;
+  double elastic_core_eta = 0.5;
 
   PlasticConstitutiveLaw* plastic_constitutive_law_pt =
     new PlasticConstitutiveLaw();
@@ -128,15 +125,15 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
     new NormalYieldRatioLaw(&Parameters::normal_yield_ratio_elastic,
                             &Parameters::normal_yield_ratio_constant_u,
                             &Parameters::normal_yield_ratio_elasic_core_u);
-  Parameters::plastic_constitutive_law_pt->eta_p_pt = &Parameters::eta_p_pt;
+  Parameters::plastic_constitutive_law_pt->eta_p_pt = &Parameters::eta_p;
   Parameters::plastic_constitutive_law_pt->kinematic_hardening_b_pt =
-    &Parameters::kinematic_hardening_b_pt;
+    &Parameters::kinematic_hardening_b;
   Parameters::plastic_constitutive_law_pt->kinematic_hardening_eta_pt =
-    &Parameters::kinematic_hardening_eta_pt;
+    &Parameters::kinematic_hardening_eta;
   Parameters::plastic_constitutive_law_pt->elastic_core_x_pt =
-    &Parameters::elastic_core_x_pt;
+    &Parameters::elastic_core_x;
   Parameters::plastic_constitutive_law_pt->elastic_core_eta_pt =
-    &Parameters::elastic_core_eta_pt;
+    &Parameters::elastic_core_eta;
   // END Finish setting up the plastic constitutive law
 
 
@@ -151,8 +148,6 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
       Parameters::plastic_constitutive_law_pt;
 
     el_pt->assign_default_values_based_on_constitutive_law();
-
-    el_pt->lambda_sq_pt() = &Parameters::Lambda_sq;
 
     el_pt->assign_plastic_timestepper_pt(Problem::time_stepper_pt(), true);
   }
@@ -261,9 +256,9 @@ void CubicAnisotropicSolidProblem<ELEMENT>::doc_solution(const unsigned& label)
 
 int main()
 {
-  unsigned nx = 5;
-  unsigned ny = 5;
-  unsigned nz = 6;
+  unsigned nx = 2;
+  unsigned ny = 2;
+  unsigned nz = 2;
 
   CubicAnisotropicSolidProblem<QPlasticPVDElement<3, 2>> problem(nx, ny, nz);
 
