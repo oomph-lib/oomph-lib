@@ -464,6 +464,10 @@ namespace oomph
       // Early exit if Re is 1.0 (the maximum value allowed for R)
       if (std::abs(1.0 - Re) < *Regularization_constant_pt) return 1.0;
 
+      // Also Exit early, if the previous R value as already 1.0. R can only
+      // increase in plastic solve (\dot\lambda >= 0).
+      if (std::abs(1.0 - R_prev) < *Regularization_constant_pt) return 1.0;
+
       // Precompute some constants
       const double OneMinusRe = 1.0 - Re;
       const double preFactor = (2.0 * OneMinusRe) / MathematicalConstants::Pi;
