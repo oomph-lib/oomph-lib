@@ -43,8 +43,7 @@ namespace oomph
       Lambda_INDEX,
       R_INDEX,
       NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
-      H_INDEX = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
-      NUMBER_OF_PLASTIC_VARIABLE_TYPES
+      NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
     };
 
   private:
@@ -280,26 +279,6 @@ namespace oomph
       }
     }
 
-    void construct_h_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(1);
-        Plastic_data_pt[ipt][H_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        // Pin the plastic degree of freedom
-        Plastic_data_pt[ipt][H_INDEX]->pin(0);
-        // By default the plastic data is not pinned
-        Plastic_data_pinned_status[ipt][H_INDEX].push_back(false);
-        // But we have to initialise the eqn number to something so it may as
-        // well be a safe value
-        Plastic_data_eqn_number[ipt][H_INDEX].push_back(-1);
-        // What default value to set?
-        data_pt->set_value(0, 0.0);
-      }
-    }
-
     void construct_r_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -349,9 +328,6 @@ namespace oomph
       construct_r_internal_data();
       construct_lambda_internal_data();
 
-      // No longer really neccesary
-      construct_h_internal_data();
-
       // We assign the equation numbers now because the user will likely want
       // all plastic data unpinned. If they pin any then they will need to call
       // assign_plastic_eqn_numbers again
@@ -377,11 +353,6 @@ namespace oomph
                                         const unsigned& j) const
     {
       return Plastic_data_eqn_number[ipt][invBpcs_INDEX][i * DIM + j];
-    }
-
-    unsigned plastic_h_eqn_number(const unsigned& ipt) const
-    {
-      return Plastic_data_eqn_number[ipt][H_INDEX][0];
     }
 
     unsigned plastic_r_eqn_number(const unsigned& ipt) const
@@ -1169,26 +1140,6 @@ namespace oomph
       return get_dot_invBpcs_matrix(ipt, dot_or_delta_invBpcs);
     }
 
-    double get_h(const unsigned& ipt) const
-    {
-      return get_h(0, ipt);
-    }
-
-    double get_h(const unsigned t, const unsigned& ipt) const
-    {
-      return Plastic_data_pt[ipt][H_INDEX]->value(t, 0);
-    }
-
-    double get_dot_h(const unsigned& ipt) const
-    {
-      return this->dinternal_data_dt(Plastic_data_pt[ipt][H_INDEX], 0);
-    }
-
-    void set_h(const unsigned& ipt, const double& val) const
-    {
-      return Plastic_data_pt[ipt][H_INDEX]->set_value(0, val);
-    }
-
     double get_r(const unsigned& ipt) const
     {
       return get_r(0, ipt);
@@ -1446,11 +1397,6 @@ namespace oomph
         //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt)
         //             << std::endl;
         // }
-        // if (Plastic_data_has_been_built[H_INDEX])
-        // {
-        //   std::cout << "   H: " << this->plastic_h_eqn_number(ipt)
-        //             << std::endl;
-        // }
         // if (Plastic_data_has_been_built[Lambda_INDEX])
         // {
         //   std::cout << "   YieldSurface: " <<
@@ -1484,12 +1430,6 @@ namespace oomph
         {
           *Plastic_dof_data_pt[ipt][i] -= dx_pt[i];
         }
-
-        // Because h is not solved for, it will be updated here
-        set_h(ipt,
-              get_lambda(ipt) *
-                this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                  ->isotropic_hardening_factor());
 
         nIter++;
       } while (maxres > Plastic_Newton_Solver_Tolerance);
@@ -1684,9 +1624,6 @@ namespace oomph
       get_inv_fp_matrix(2, ipt, invBpks);
       oomph_info << "invBpks(2): " << std::endl
                  << MatrixHelpers::format(invBpks) << std::endl;
-
-      oomph_info << "H(0) = " << get_h(0, ipt) << " H(1) = " << get_h(1, ipt)
-                 << " H(2) = " << get_h(2, ipt) << std::endl;
 
       oomph_info << "lambda(0) = " << get_lambda(0, ipt)
                  << " lambda(1) = " << get_lambda(1, ipt)
