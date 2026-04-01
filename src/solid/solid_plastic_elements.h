@@ -6,290 +6,504 @@
 #include "refineable_solid_elements.h"
 #include "generic/interpolate_from_integral_points.h"
 
-// We initially implement the simplified plasticity model with no elastic core
-// and no plastic dissipation
-
-// At some point it may be worth using composition to store the plastic data
-// within a sub element This will give us the ability to manage the data with
-// the oomph-lib functions such as add_internal_data and
-// assign_internal_eqn_numbers etc without the normal oomph-lib behaviour
-// trampling over it all. This will be useful because we can then delete a good
-// portion of the code below and it will allow us to handle pinning and
-// unpinning our plastic data without having to keep track of the eqn numbers
-// ourselves. The downside is that we will no longer benefit from the oomph-lib
-// automatic time shifting.
-
 namespace oomph
 {
   template<unsigned DIM>
+
+  // ===========================================================================
+  /// \short This class implements the extended subloading surface model as
+  /// described in
+  /// Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for Finite
+  /// Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch Computat
+  /// Methods Eng 26, 597–637 (2019). https://doi.org/10.1007/s11831-018-9256-5.
+  // ===========================================================================
   class PlasticEquationsBase : public virtual InterpolateFromIntegralPointsBase,
                                public virtual PVDEquationsBase<DIM>
   {
-  protected:
-    // If finite difference should be used for the plastic solve;
-    bool Plastic_solve_use_fd = false;
-
-    /// The step used to determine the jacobina, if plastic Plastic_solve_use_fd
-    /// is set to true.
-    double* Plastic_fd_jacobian_step_pt =
-      &FiniteElement::Default_fd_jacobian_step;
-
-    // A pointer to the plastic constitutive law
-    PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
-
-    // We use an enum to define the indices in the vectors at which the
-    // different types of plastic data are stored. This simplifies things
-    // considerably when searching for plastic data.
-    enum Plastic_Variables_Indexes
+  public:
+    PlasticEquationsBase()
+      : InterpolateFromIntegralPointsBase(), PVDEquationsBase<DIM>()
     {
-      Lambda_INDEX,
-      invFp_INDEX,
-      invBpks_INDEX,
-      R_INDEX,
-      invBpcs_INDEX,
-      NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
-      NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
-    };
+      this->unity.resize(DIM, DIM, 0.0);
+      for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
 
-  private:
-    const static std::vector<std::string> Plastic_data_names;
-    // We store a vector of indices of the plastic data in internal data
-    // so we can assign timesteppers etc more easily
-    // We resize this every time we build a new set of plastic internal data but
-    // since we only do this once when the element is constructed this shouldn't
-    // be a problem - we can't do this at construction of this class because
-    // the number of integral points is defined by derived classes
-
-    // We store a separate set of plastic: internal data indices, pinned status,
-    // and eqn numbers per integral point in the element.
-
-    // [Number of ipts, number of types of plastic data]
-    // Pointer to the plastic data at the given integral point and of the given
-    // type.
-    Vector<Vector<Data*>> Plastic_data_pt;
-
-    // [Number of ipts, number of types of plastic data, number of variables in
-    // that data type]
-    Vector<Vector<Vector<int>>> Plastic_data_eqn_number;
-
-    // [Number of ipts, number of data to be finite differenced]
-    // We store pointers to all the plastic data which are to be finite
-    // differenced
-    Vector<Vector<double*>> Plastic_dof_data_pt;
-
-    // Keeps track of if data for the  plastic dof numbers has been allocated
-    // We do it within this function because this allows us to reliably zero the
-    // counters Num_plastic_Dofs and Num_plastic_residuals
-    bool Plastic_dof_nunbers_has_been_resized = false;
-
-    // The solver tolerance for the plastic newton solve
-    double Plastic_Newton_Solver_Tolerance = 1.0e-8;
-
-    // Change to not have an argument - in fact if we're always building all
-    // plastic data then we don't need thi Collapse all building plastic data
-    // into a single function
-    void resize_plastic_dof_numbers()
-    {
-      if (Plastic_dof_nunbers_has_been_resized) return;
-
-      const unsigned nipt = this->integral_pt()->nweight();
-
-      Plastic_data_pt.resize(nipt);
-      Plastic_data_eqn_number.resize(nipt);
-      Plastic_dof_data_pt.resize(nipt);
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Plastic_data_pt[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
-        Plastic_data_eqn_number[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
-      }
-      Plastic_dof_nunbers_has_been_resized = true;
+      // Construct all plastic data
+      construct_plastic_data();
     }
 
-  protected:
-    // We need a dummy double matrix for the plastic residual fill in
-    DenseMatrix<double> unity;
+    ~PlasticEquationsBase() {}
 
-    // Assign plastic eqn numbers for each of the integral points individually
-    // Add pointers to all values which are not pinned to Plastic_dof_data_pt
-    void assign_plastic_eqn_numbers()
+    /*!
+     * \brief returns the Cauchy stress for an integration point
+     */
+    void get_cauchy_stress(unsigned ipt, DenseMatrix<double>& sigma);
+
+    std::string detail_plastic_dofs() const
+    {
+      std::stringstream str_str;
+      for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+      {
+        str_str << "Integral point " << ipt << ": ";
+        for (unsigned data_type = 0;
+             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type++)
+        {
+          str_str << "[" << Plastic_data_names[data_type] << "]:";
+          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+          if (data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE)
+          {
+            for (unsigned i = 0; i < n_value; i++)
+            {
+              str_str << " " << Plastic_data_eqn_number[ipt][data_type][i]
+                      << " " << plastic_data_pt(ipt, data_type)->value(i)
+                      << ", ";
+            }
+            str_str << ", ";
+          }
+          else
+          {
+            str_str << " not solved through newton solve";
+          }
+        }
+        str_str << std::endl;
+      }
+      return str_str.str();
+    }
+
+    void check_initial_condition()
+    {
+      // Now check the initial values
+      unsigned ipt = 0;
+      DenseMatrix<double> invFp;
+      get_inv_fp_matrix(0, ipt, invFp);
+      oomph_info << "invFp(0): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
+
+      get_inv_fp_matrix(1, ipt, invFp);
+      oomph_info << "invFp(1): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
+
+      get_inv_fp_matrix(2, ipt, invFp);
+      oomph_info << "invFp(2): " << std::endl
+                 << MatrixHelpers::format(invFp) << std::endl;
+
+      DenseMatrix<double> invBpks;
+      get_inv_fp_matrix(0, ipt, invBpks);
+      oomph_info << "invBpks(0): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
+
+      get_inv_fp_matrix(1, ipt, invBpks);
+      oomph_info << "invBpks(1): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
+
+      get_inv_fp_matrix(2, ipt, invBpks);
+      oomph_info << "invBpks(2): " << std::endl
+                 << MatrixHelpers::format(invBpks) << std::endl;
+
+      oomph_info << "lambda(0) = " << get_lambda(0, ipt)
+                 << " lambda(1) = " << get_lambda(1, ipt)
+                 << " lambda(2) = " << get_lambda(2, ipt) << std::endl;
+
+      oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
+                 << " R(2) = " << get_r(2, ipt) << std::endl;
+    }
+
+    void enable_plastic_solve_by_fd()
+    {
+      Plastic_solve_use_fd = true;
+    }
+    void disable_plastic_solve_by_fd()
+    {
+      Plastic_solve_use_fd = false;
+    }
+
+    const bool get_plastic_solve_by_fd() const
+    {
+      return Plastic_solve_use_fd;
+    }
+
+    // =========================================================================
+    /// \short Access function to \ref Plastic_fd_jacobian_step_pt
+    // =========================================================================
+    double*& plastic_fd_jacobian_step_pt()
+    {
+      return Plastic_fd_jacobian_step_pt;
+    }
+
+    /// Return the plastic constitutive law pointer
+    PlasticConstitutiveLaw*& plastic_constitutive_law_pt()
+    {
+      return Plastic_consitutive_law_pt;
+    }
+
+    void assign_default_values_based_on_constitutive_law()
+    {
+      double Re =
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+      for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+      {
+        set_r(ipt, Re);
+      }
+    }
+
+    /// Return the plastic newton solver tolerance
+    double& plastic_newton_solver_tolerance()
+    {
+      return Plastic_Newton_Solver_Tolerance;
+    }
+
+    // Assign the time-stepper for the plastic data only.
+    // It should be preffered to call the function
+    // set_internal_data_time_stepper
+    void assign_plastic_timestepper(TimeStepper* time_stepper_pt,
+                                    const bool& preserve_existing_data)
     {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
-        Plastic_dof_data_pt[ipt].clear();
-
-        unsigned eqn_count = 0;
         for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE;
+             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
              data_type++)
         {
+          // Could swap the loops, slightly more efficient but we only do this
+          // once per element
           Data* data_pt = Plastic_data_pt[ipt][data_type];
-          const unsigned nvalue = data_pt->nvalue();
-          for (unsigned i = 0; i < nvalue; i++)
-          {
-            Plastic_data_eqn_number[ipt][data_type][i] = -1;
-            Plastic_data_eqn_number[ipt][data_type][i] = eqn_count++;
-            Plastic_dof_data_pt[ipt].push_back(data_pt->value_pt(i));
-          }
+          // We want to preserve the existing data hence true
+          data_pt->set_time_stepper(time_stepper_pt, preserve_existing_data);
         }
       }
-    }
 
-    void construct_inv_fp_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(DIM * DIM);
-        Plastic_data_pt[ipt][invFp_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        for (unsigned i = 0; i < DIM * DIM; i++)
-        {
-          // Pin the plastic degree of freedom
-          Plastic_data_pt[ipt][invFp_INDEX]->pin(i);
-          // But we have to initialise the eqn number to something so it may as
-          // well be a safe value
-          Plastic_data_eqn_number[ipt][invFp_INDEX].push_back(-1);
-          // We initialise the plastic deformation gradient tensors to the
-          // identity
-          if (i % (DIM + 1) == 0)
-          {
-            data_pt->set_value(i, 1.0);
-          }
-        }
-      }
-    }
-
-    void construct_invBpks_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(DIM * DIM);
-        Plastic_data_pt[ipt][invBpks_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        for (unsigned i = 0; i < DIM * DIM; i++)
-        {
-          // Pin the plastic degree of freedom
-          Plastic_data_pt[ipt][invBpks_INDEX]->pin(i);
-          // But we have to initialise the eqn number to something so it may as
-          // well be a safe value
-          Plastic_data_eqn_number[ipt][invBpks_INDEX].push_back(-1);
-          // We initialise the plastic deformation gradient tensors to the
-          // identity
-          if (i % (DIM + 1) == 0)
-          {
-            data_pt->set_value(i, 1.0);
-          }
-        }
-      }
-    }
-
-    void construct_invBpcs_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(DIM * DIM);
-        Plastic_data_pt[ipt][invBpcs_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        for (unsigned i = 0; i < DIM * DIM; i++)
-        {
-          // Pin the plastic degree of freedom
-          Plastic_data_pt[ipt][invBpcs_INDEX]->pin(i);
-          // But we have to initialise the eqn number to something so it may as
-          // well be a safe value
-          Plastic_data_eqn_number[ipt][invBpcs_INDEX].push_back(-1);
-          // We initialise the plastic deformation gradient tensors to the
-          // identity
-          if (i % (DIM + 1) == 0)
-          {
-            data_pt->set_value(i, 1.0);
-          }
-        }
-      }
-    }
-
-    void construct_r_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(1);
-        Plastic_data_pt[ipt][R_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        // Pin the plastic degree of freedom
-        Plastic_data_pt[ipt][R_INDEX]->pin(0);
-        // But we have to initialise the eqn number to something so it may as
-        // well be a safe value
-        Plastic_data_eqn_number[ipt][R_INDEX].push_back(-1);
-        // What default value to set?
-        data_pt->set_value(0, 0.0);
-      }
-    }
-
-    void construct_lambda_internal_data()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        Data* data_pt = new Data(1);
-        Plastic_data_pt[ipt][Lambda_INDEX] = data_pt;
-        (void)this->add_internal_data(data_pt, false);
-        // Pin the plastic degree of freedom
-        Plastic_data_pt[ipt][Lambda_INDEX]->pin(0);
-        // But we have to initialise the eqn number to something so it may as
-        // well be a safe value
-        Plastic_data_eqn_number[ipt][Lambda_INDEX].push_back(-1);
-        data_pt->set_value(0, 0.0);
-      }
-    }
-
-    void construct_plastic_data()
-    {
-      resize_plastic_dof_numbers();
-
-      construct_inv_fp_internal_data();
-      construct_invBpks_internal_data();
-      construct_invBpcs_internal_data();
-      construct_r_internal_data();
-      construct_lambda_internal_data();
-
-      // We assign the equation numbers now because the user will likely want
-      // all plastic data unpinned. If they pin any then they will need to call
-      // assign_plastic_eqn_numbers again
+      // Need to reassign eqn numbers because pointers may have changed.
       assign_plastic_eqn_numbers();
     }
 
-    unsigned plastic_inv_fp_eqn_number(const unsigned& ipt,
-                                       const unsigned& i,
-                                       const unsigned& j) const
+  protected:
+    ////////////////////////////////////////////////////////////////////////////
+    // overriden functions
+    ////////////////////////////////////////////////////////////////////////////
+    virtual void set_internal_data_time_stepper(
+      const unsigned& i,
+      TimeStepper* const& time_stepper_pt,
+      const bool& preserve_existing_data) override
     {
-      return Plastic_data_eqn_number[ipt][invFp_INDEX][i * DIM + j];
+      PVDEquationsBase<DIM>::set_internal_data_time_stepper(
+        i, time_stepper_pt, preserve_existing_data);
+
+      // We need to reassign plastic eqn numbers, after the data storage has
+      // changed to update possibly old pointers
+      assign_plastic_eqn_numbers();
     }
 
-    unsigned plastic_invBpks_eqn_number(const unsigned& ipt,
-                                        const unsigned& i,
-                                        const unsigned& j) const
+    void calculate_g(const unsigned& ipt,
+                     const double& diag_entry,
+                     const DenseMatrix<double>& G,
+                     DenseMatrix<double>& g) const override
     {
-      return Plastic_data_eqn_number[ipt][invBpks_INDEX][i * DIM + j];
+      // Compute the undeformed coordinates from the deformed ones
+      // Solve the plastic equations
+      // Could we just assume that the plastic data is consistent with G?
+      // This will be the case after the combined (plastic and elastic) Newton
+      // solve has converged so shouldn't affect outputting
+      // this->plastic_newton_solve(ipt, G);
+
+      DenseMatrix<double> invFp(DIM, DIM, 0.0);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          invFp(i, j) = get_inv_fp(ipt, i, j);
+        }
+      }
+
+      // Calculate Fp
+      DenseMatrix<double> Fp(DIM, DIM, 0.0);
+      MatrixHelpers::invert_matrix<DIM>(invFp, Fp);
+
+      // Calculate and pull back Fp^TFp to get g
+      g.resize(DIM, DIM, 0.0);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          for (unsigned k = 0; k < DIM; k++)
+          {
+            g(i, j) += Fp(k, i) * Fp(k, j);
+          }
+          g(i, j) *= diag_entry;
+        }
+      }
     }
 
-    unsigned plastic_invBpcs_eqn_number(const unsigned& ipt,
-                                        const unsigned& i,
-                                        const unsigned& j) const
+    ////////////////////////////////////////////////////////////////////////////
+    // Functions directly involved in the plastic solve
+    ////////////////////////////////////////////////////////////////////////////
+
+    void plastic_newton_solve()
     {
-      return Plastic_data_eqn_number[ipt][invBpcs_INDEX][i * DIM + j];
+      const unsigned nipt = this->integral_pt()->nweight();
+      Vector<double> s(DIM);
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        // Assign the values of s
+        for (unsigned i = 0; i < DIM; ++i)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // FIRST WE CALCULATE G (C)
+
+        // Find out how many nodes there are
+        unsigned n_node = this->nnode();
+
+        // Find out how many positional dofs there are
+        unsigned n_position_type = this->nnodal_position_type();
+
+        // Set up memory for the shape functions
+        Shape psi(n_node, n_position_type);
+        DShape dpsidxi(n_node, n_position_type, DIM);
+
+        // Call the derivatives of the shape functions (ignore Jacobian)
+        (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
+
+        // Storage for Lagrangian coordinates (initialised to zero)
+        Vector<double> interpolated_xi(DIM, 0.0);
+
+        // Calculate interpolated values of the derivative of global position
+        // wrt lagrangian coordinates
+        DenseMatrix<double> interpolated_G(DIM);
+
+        // Initialise to zero
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          for (unsigned j = 0; j < DIM; j++)
+          {
+            interpolated_G(i, j) = 0.0;
+          }
+        }
+
+        // Calculate displacements and derivatives
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over positional dofs
+          for (unsigned k = 0; k < n_position_type; k++)
+          {
+            // Loop over displacement components (deformed position)
+            for (unsigned i = 0; i < DIM; i++)
+            {
+              // Calculate the lagrangian coordinates and the accelerations
+              interpolated_xi[i] +=
+                this->lagrangian_position_gen(l, k, i) * psi(l, k);
+
+              // Loop over derivative directions
+              for (unsigned j = 0; j < DIM; j++)
+              {
+                interpolated_G(j, i) +=
+                  this->nodal_position_gen(l, k, i) * dpsidxi(l, k, j);
+              }
+            }
+          }
+        }
+        // Declare and calculate the deformed metric tensor
+        DenseMatrix<double> G(DIM);
+
+        // Assign values of G
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          // Do upper half of matrix
+          for (unsigned j = i; j < DIM; j++)
+          {
+            // Initialise G(i,j) to zero
+            G(i, j) = 0.0;
+            // Now calculate the dot product
+            for (unsigned k = 0; k < DIM; k++)
+            {
+              G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
+            }
+          }
+          // Matrix is symmetric so just copy lower half
+          for (unsigned j = 0; j < i; j++)
+          {
+            G(i, j) = G(j, i);
+          }
+        }
+
+        // Push forward G using the isotropic growth term
+        double gamma;
+        this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
+        double diag_entry = pow(gamma, 2.0 / double(DIM));
+        for (unsigned int i = 0; i < DIM; i++)
+        {
+          for (unsigned int j = 0; j < DIM; j++)
+          {
+            G(i, j) = G(i, j) / diag_entry;
+          }
+        }
+
+        // THEN WE SOLVE THE PLASTIC EQUATIONS
+        plastic_newton_solve(ipt, G);
+      }
     }
 
-    unsigned plastic_r_eqn_number(const unsigned& ipt) const
+    // Change this to solve for a specific integral point - this will make
+    // finite differencing wrt C much easier
+    void plastic_newton_solve(const unsigned& ipt, const DenseMatrix<double>& C)
     {
-      return Plastic_data_eqn_number[ipt][R_INDEX][0];
+      // Plastic deformation depends on the previous solution. So if the
+      // intermediate steps in newton solve were outide, it should be
+      // reconsidered.
+      initialise_solve(ipt);
+
+      if (!is_there_plastic_deformation(ipt))
+      {
+        return;
+      }
+
+      // For now we just build the linear algebra distribution and the solver
+      // each time we solve:
+      OomphCommunicator* communicator_pt = new OomphCommunicator();
+
+      // Create the linear algebra distribution - do not distribute it
+      LinearAlgebraDistribution* lin_alg_dist_pt =
+        new LinearAlgebraDistribution(
+          communicator_pt, this->get_num_plastic_dofs(ipt), false);
+
+      // Create the linear solver and pass to the matrix
+      DenseLU* solver_pt = new DenseLU;
+
+      DoubleVector residuals(lin_alg_dist_pt);
+      DenseDoubleMatrix jacobian(this->get_num_plastic_dofs(ipt));
+
+      jacobian.linear_solver_pt() = solver_pt;
+
+      double maxres;
+      unsigned int nIter = 0;
+      do
+      {
+        // Get the residuals only
+        this->fill_in_residuals_plastic(residuals, ipt, C);
+
+        maxres = residuals.max();
+
+        // need to initialise the jacobian to 0
+        jacobian.initialise(0.0);
+        // get jacobian
+        fill_in_jacobian_plastic(residuals, jacobian, ipt, C);
+
+        // compute delta for plastic degrees of freedom
+        DoubleVector resid(residuals);
+        jacobian.solve(resid, residuals);
+
+        // update values
+        double* dx_pt = residuals.values_pt();
+        for (unsigned i = 0; i < this->get_num_plastic_dofs(ipt); i++)
+        {
+          *Plastic_dof_data_pt[ipt][i] -= dx_pt[i];
+        }
+
+        nIter++;
+      } while (maxres > Plastic_Newton_Solver_Tolerance);
+
+      delete lin_alg_dist_pt;
+      delete solver_pt;
+      delete communicator_pt;
     }
 
-    unsigned plastic_lambda_eqn_number(const unsigned& ipt) const
+    virtual void fill_in_generic_residual_and_jacobian_plastic(
+      DoubleVector& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& ipt,
+      const DenseMatrix<double>& C,
+      const unsigned& flag);
+
+    void fill_in_residuals_plastic(DoubleVector& residuals,
+                                   const unsigned& ipt,
+                                   const DenseMatrix<double>& C)
     {
-      return Plastic_data_eqn_number[ipt][Lambda_INDEX][0];
+      fill_in_generic_residual_and_jacobian_plastic(
+        residuals, GeneralisedElement::Dummy_matrix, ipt, C, 0);
     }
+
+    // By default we finite difference for the jacobian
+    virtual void fill_in_jacobian_plastic(DoubleVector& residuals,
+                                          DenseMatrix<double>& jacobian,
+                                          const unsigned& ipt,
+                                          const DenseMatrix<double>& C)
+    {
+      if (Plastic_solve_use_fd)
+      {
+        fill_in_residuals_plastic(residuals, ipt, C);
+
+        DoubleVector test_residuals(residuals);
+
+        // Begin finite differencing wrt the plastic dofs
+        for (unsigned local_unknown = 0;
+             local_unknown < get_num_plastic_dofs(ipt);
+             local_unknown++)
+        {
+          const double record_val = *Plastic_dof_data_pt[ipt][local_unknown];
+          *Plastic_dof_data_pt[ipt][local_unknown] +=
+            *Plastic_fd_jacobian_step_pt;
+
+          fill_in_residuals_plastic(test_residuals, ipt, C);
+          for (unsigned local_eqn = 0; local_eqn < get_num_plastic_dofs(ipt);
+               local_eqn++)
+          {
+            jacobian(local_eqn, local_unknown) =
+              (test_residuals[local_eqn] - residuals[local_eqn]) /
+              (*Plastic_fd_jacobian_step_pt);
+          }
+          *Plastic_dof_data_pt[ipt][local_unknown] = record_val;
+        }
+      }
+      else
+      {
+        fill_in_generic_residual_and_jacobian_plastic(
+          residuals, jacobian, ipt, C, 1);
+      }
+    }
+
+    /*!
+     * \brief Initialised the plastic parameters after the global deformation
+     * has been updated
+     * \details Assumes, all but the elastic parameters are equal to the ones
+     * from the last time step. invFp is updated assuming all deformation was
+     * purely elastic.
+     */
+    void initialise_solve(const unsigned int ipt);
+
+    /*!
+     * \brief Sets the values of the current plastic variables to their
+     * respective initial values
+     */
+    void set_intial_condition(const unsigned int ipt);
+
+
+    void enforce_boundaries_of_r(const unsigned& ipt)
+    {
+      const double r = get_r(ipt);
+      const double re =
+        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+      if (r < re)
+      {
+        set_r(ipt, re);
+      }
+      else if (r > 1.0)
+      {
+        set_r(ipt, 1.0);
+      }
+    }
+
+    /*!
+     * \brief Determins, if there is plastic deformation and the plastic solve
+     * routine has to be called.
+     * \details Checks if the elastic stress is contained by the yield surface
+     * and if the plastic multiplier is positive.
+     */
+    bool is_there_plastic_deformation(const unsigned int ipt);
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Mathematical functions involved in computing the plastic residuals or
+    // similar
+    ////////////////////////////////////////////////////////////////////////////
 
     /*!
      * \brief Computes the deformation gradient tensor at a given integration
@@ -505,98 +719,184 @@ namespace oomph
                        false);
     }
 
-    /*!
-     * \brief Initialised the plastic parameters after the global deformation
-     * has been updated
-     * \details Assumes, all but the elastic parameters are equal to the ones
-     * from the last time step. invFp is updated assuming all deformation was
-     * purely elastic.
-     */
-    void initialise_solve(const unsigned int ipt);
+    ////////////////////////////////////////////////////////////////////////////
+    // Functions for constructing the plastic data below                      //
+    ////////////////////////////////////////////////////////////////////////////
 
-    /*!
-     * \brief Sets the values of the current plastic variables to their
-     * respective initial values
-     */
-    void set_intial_condition(const unsigned int ipt);
-
-    /*!
-     * \brief Determins, if there is plastic deformation and the plastic solve
-     * routine has to be called.
-     * \details Checks if the elastic stress is contained by the yield surface
-     * and if the plastic multiplier is positive.
-     */
-    bool is_there_plastic_deformation(const unsigned int ipt);
-
-  public:
-    Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
+    void construct_plastic_data()
     {
-      return Plastic_data_pt[ipt][data_type];
+      resize_plastic_dof_numbers();
+
+      construct_inv_fp_internal_data();
+      construct_invBpks_internal_data();
+      construct_invBpcs_internal_data();
+      construct_r_internal_data();
+      construct_lambda_internal_data();
+
+      // We assign the equation numbers now because the user will likely want
+      // all plastic data unpinned. If they pin any then they will need to call
+      // assign_plastic_eqn_numbers again
+      assign_plastic_eqn_numbers();
     }
 
-    double* plastic_dof_data_pt(const unsigned& ipt, const unsigned& ndof) const
+    // Change to not have an argument - in fact if we're always building all
+    // plastic data then we don't need thi Collapse all building plastic data
+    // into a single function
+    void resize_plastic_dof_numbers()
     {
-      return Plastic_dof_data_pt[ipt][ndof];
+      if (Plastic_dof_nunbers_has_been_resized) return;
+
+      const unsigned nipt = this->integral_pt()->nweight();
+
+      Plastic_data_pt.resize(nipt);
+      Plastic_data_eqn_number.resize(nipt);
+      Plastic_dof_data_pt.resize(nipt);
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Plastic_data_pt[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
+        Plastic_data_eqn_number[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
+      }
+      Plastic_dof_nunbers_has_been_resized = true;
     }
 
-    void enable_plastic_solve_by_fd()
+    // Assign plastic eqn numbers for each of the integral points individually
+    // Add pointers to all values which are not pinned to Plastic_dof_data_pt
+    void assign_plastic_eqn_numbers()
     {
-      Plastic_solve_use_fd = true;
-    }
-    void disable_plastic_solve_by_fd()
-    {
-      Plastic_solve_use_fd = false;
-    }
-
-    const bool get_plastic_solve_by_fd() const
-    {
-      return Plastic_solve_use_fd;
-    }
-
-    // =========================================================================
-    /// \short Access function to \ref Plastic_fd_jacobian_step_pt
-    // =========================================================================
-    double*& plastic_fd_jacobian_step_pt()
-    {
-      return Plastic_fd_jacobian_step_pt;
-    }
-
-    /*!
-     * \brief returns the Cauchy stress for an integration point
-     */
-    void get_cauchy_stress(unsigned ipt, DenseMatrix<double>& sigma);
-
-    std::string detail_plastic_dofs() const
-    {
-      std::stringstream str_str;
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
-        str_str << "Integral point " << ipt << ": ";
+        Plastic_dof_data_pt[ipt].clear();
+
+        unsigned eqn_count = 0;
         for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
+             data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE;
              data_type++)
         {
-          str_str << "[" << Plastic_data_names[data_type] << "]:";
-          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
-          if (data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE)
+          Data* data_pt = Plastic_data_pt[ipt][data_type];
+          const unsigned nvalue = data_pt->nvalue();
+          for (unsigned i = 0; i < nvalue; i++)
           {
-            for (unsigned i = 0; i < n_value; i++)
-            {
-              str_str << " " << Plastic_data_eqn_number[ipt][data_type][i]
-                      << " " << plastic_data_pt(ipt, data_type)->value(i)
-                      << ", ";
-            }
-            str_str << ", ";
-          }
-          else
-          {
-            str_str << " not solved through newton solve";
+            Plastic_data_eqn_number[ipt][data_type][i] = -1;
+            Plastic_data_eqn_number[ipt][data_type][i] = eqn_count++;
+            Plastic_dof_data_pt[ipt].push_back(data_pt->value_pt(i));
           }
         }
-        str_str << std::endl;
       }
-      return str_str.str();
     }
+
+    void construct_inv_fp_internal_data()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Data* data_pt = new Data(DIM * DIM);
+        Plastic_data_pt[ipt][invFp_INDEX] = data_pt;
+        (void)this->add_internal_data(data_pt, false);
+        for (unsigned i = 0; i < DIM * DIM; i++)
+        {
+          // Pin the plastic degree of freedom
+          Plastic_data_pt[ipt][invFp_INDEX]->pin(i);
+          // But we have to initialise the eqn number to something so it may as
+          // well be a safe value
+          Plastic_data_eqn_number[ipt][invFp_INDEX].push_back(-1);
+          // We initialise the plastic deformation gradient tensors to the
+          // identity
+          if (i % (DIM + 1) == 0)
+          {
+            data_pt->set_value(i, 1.0);
+          }
+        }
+      }
+    }
+
+    void construct_invBpks_internal_data()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Data* data_pt = new Data(DIM * DIM);
+        Plastic_data_pt[ipt][invBpks_INDEX] = data_pt;
+        (void)this->add_internal_data(data_pt, false);
+        for (unsigned i = 0; i < DIM * DIM; i++)
+        {
+          // Pin the plastic degree of freedom
+          Plastic_data_pt[ipt][invBpks_INDEX]->pin(i);
+          // But we have to initialise the eqn number to something so it may as
+          // well be a safe value
+          Plastic_data_eqn_number[ipt][invBpks_INDEX].push_back(-1);
+          // We initialise the plastic deformation gradient tensors to the
+          // identity
+          if (i % (DIM + 1) == 0)
+          {
+            data_pt->set_value(i, 1.0);
+          }
+        }
+      }
+    }
+
+    void construct_invBpcs_internal_data()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Data* data_pt = new Data(DIM * DIM);
+        Plastic_data_pt[ipt][invBpcs_INDEX] = data_pt;
+        (void)this->add_internal_data(data_pt, false);
+        for (unsigned i = 0; i < DIM * DIM; i++)
+        {
+          // Pin the plastic degree of freedom
+          Plastic_data_pt[ipt][invBpcs_INDEX]->pin(i);
+          // But we have to initialise the eqn number to something so it may as
+          // well be a safe value
+          Plastic_data_eqn_number[ipt][invBpcs_INDEX].push_back(-1);
+          // We initialise the plastic deformation gradient tensors to the
+          // identity
+          if (i % (DIM + 1) == 0)
+          {
+            data_pt->set_value(i, 1.0);
+          }
+        }
+      }
+    }
+
+    void construct_r_internal_data()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Data* data_pt = new Data(1);
+        Plastic_data_pt[ipt][R_INDEX] = data_pt;
+        (void)this->add_internal_data(data_pt, false);
+        // Pin the plastic degree of freedom
+        Plastic_data_pt[ipt][R_INDEX]->pin(0);
+        // But we have to initialise the eqn number to something so it may as
+        // well be a safe value
+        Plastic_data_eqn_number[ipt][R_INDEX].push_back(-1);
+        // What default value to set?
+        data_pt->set_value(0, 0.0);
+      }
+    }
+
+    void construct_lambda_internal_data()
+    {
+      const unsigned nipt = this->integral_pt()->nweight();
+      for (unsigned ipt = 0; ipt < nipt; ipt++)
+      {
+        Data* data_pt = new Data(1);
+        Plastic_data_pt[ipt][Lambda_INDEX] = data_pt;
+        (void)this->add_internal_data(data_pt, false);
+        // Pin the plastic degree of freedom
+        Plastic_data_pt[ipt][Lambda_INDEX]->pin(0);
+        // But we have to initialise the eqn number to something so it may as
+        // well be a safe value
+        Plastic_data_eqn_number[ipt][Lambda_INDEX].push_back(-1);
+        data_pt->set_value(0, 0.0);
+      }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Functions used by the refineable elements
+    ////////////////////////////////////////////////////////////////////////////
 
     // Serialise all the plastic data from the integral points in order
     void serialise_all_plastic_data(Vector<double>& data,
@@ -698,33 +998,46 @@ namespace oomph
       }
     }
 
-    /// Return the plastic constitutive law pointer
-    PlasticConstitutiveLaw*& plastic_constitutive_law_pt()
-    {
-      return Plastic_consitutive_law_pt;
-    }
-
-    void assign_default_values_based_on_constitutive_law()
-    {
-      double Re =
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
-      for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
-      {
-        set_r(ipt, Re);
-      }
-    }
-
-    /// Return the plastic newton solver tolerance
-    double& plastic_newton_solver_tolerance()
-    {
-      return Plastic_Newton_Solver_Tolerance;
-    }
+    ////////////////////////////////////////////////////////////////////////////
+    // Access functions to plastic and associated data
+    ////////////////////////////////////////////////////////////////////////////
 
     // Get the number of plastic data at the given ipt which is not pinned and
     // is to be solved for
     unsigned get_num_plastic_dofs(const unsigned& ipt)
     {
       return Plastic_dof_data_pt[ipt].size();
+    }
+
+    unsigned plastic_inv_fp_eqn_number(const unsigned& ipt,
+                                       const unsigned& i,
+                                       const unsigned& j) const
+    {
+      return Plastic_data_eqn_number[ipt][invFp_INDEX][i * DIM + j];
+    }
+
+    unsigned plastic_invBpks_eqn_number(const unsigned& ipt,
+                                        const unsigned& i,
+                                        const unsigned& j) const
+    {
+      return Plastic_data_eqn_number[ipt][invBpks_INDEX][i * DIM + j];
+    }
+
+    unsigned plastic_invBpcs_eqn_number(const unsigned& ipt,
+                                        const unsigned& i,
+                                        const unsigned& j) const
+    {
+      return Plastic_data_eqn_number[ipt][invBpcs_INDEX][i * DIM + j];
+    }
+
+    unsigned plastic_r_eqn_number(const unsigned& ipt) const
+    {
+      return Plastic_data_eqn_number[ipt][R_INDEX][0];
+    }
+
+    unsigned plastic_lambda_eqn_number(const unsigned& ipt) const
+    {
+      return Plastic_data_eqn_number[ipt][Lambda_INDEX][0];
     }
 
     // Access the plasticity variable values
@@ -1092,21 +1405,6 @@ namespace oomph
       return this->dinternal_data_dt(Plastic_data_pt[ipt][R_INDEX], 0);
     }
 
-    void enforce_boundaries_of_r(const unsigned& ipt)
-    {
-      const double r = get_r(ipt);
-      const double re =
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
-      if (r < re)
-      {
-        set_r(ipt, re);
-      }
-      else if (r > 1.0)
-      {
-        set_r(ipt, 1.0);
-      }
-    }
-
     double get_lambda(const unsigned& ipt) const
     {
       return get_lambda(0, ipt);
@@ -1199,410 +1497,6 @@ namespace oomph
       Plastic_data_pt[ipt][R_INDEX]->set_value(0, val);
     }
 
-    virtual void fill_in_generic_residual_and_jacobian_plastic(
-      DoubleVector& residuals,
-      DenseMatrix<double>& jacobian,
-      const unsigned& ipt,
-      const DenseMatrix<double>& C,
-      const unsigned& flag);
-
-    void fill_in_residuals_plastic(DoubleVector& residuals,
-                                   const unsigned& ipt,
-                                   const DenseMatrix<double>& C)
-    {
-      fill_in_generic_residual_and_jacobian_plastic(
-        residuals, GeneralisedElement::Dummy_matrix, ipt, C, 0);
-    }
-
-    // By default we finite difference for the jacobian
-    virtual void fill_in_jacobian_plastic(DoubleVector& residuals,
-                                          DenseMatrix<double>& jacobian,
-                                          const unsigned& ipt,
-                                          const DenseMatrix<double>& C)
-    {
-      if (Plastic_solve_use_fd)
-      {
-        fill_in_residuals_plastic(residuals, ipt, C);
-
-        DoubleVector test_residuals(residuals);
-
-        // Begin finite differencing wrt the plastic dofs
-        for (unsigned local_unknown = 0;
-             local_unknown < get_num_plastic_dofs(ipt);
-             local_unknown++)
-        {
-          const double record_val = *Plastic_dof_data_pt[ipt][local_unknown];
-          *Plastic_dof_data_pt[ipt][local_unknown] +=
-            *Plastic_fd_jacobian_step_pt;
-
-          fill_in_residuals_plastic(test_residuals, ipt, C);
-          for (unsigned local_eqn = 0; local_eqn < get_num_plastic_dofs(ipt);
-               local_eqn++)
-          {
-            jacobian(local_eqn, local_unknown) =
-              (test_residuals[local_eqn] - residuals[local_eqn]) /
-              (*Plastic_fd_jacobian_step_pt);
-          }
-          *Plastic_dof_data_pt[ipt][local_unknown] = record_val;
-        }
-      }
-      else
-      {
-        fill_in_generic_residual_and_jacobian_plastic(
-          residuals, jacobian, ipt, C, 1);
-      }
-    }
-
-    // Change this to solve for a specific integral point - this will make
-    // finite differencing wrt C much easier
-    void plastic_newton_solve(const unsigned& ipt, const DenseMatrix<double>& C)
-    {
-      // // std::cout << detail_plastic_dofs() << std::endl;
-      // // std::cout << "Entering plastic Newton solve" << std::endl;
-      // for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
-      // {
-      // Plastic deformation depends on the previous solution. So if the
-      // intermediate steps in newton solve were outide, it should be
-      // reconsidered.
-      initialise_solve(ipt);
-
-      if (!is_there_plastic_deformation(ipt))
-      {
-        // oomph_info << "The deformation is purely elastic, continue"
-        //            << std::endl;
-        return;
-      }
-
-      // std::cout << "\tIntegral point: " << ipt << std::endl;
-      // For now we just build the linear algebra distribution and the solver
-      // each time we solve:
-
-      OomphCommunicator* communicator_pt = new OomphCommunicator();
-
-      // Create the linear algebra distribution - do not distribute it
-      LinearAlgebraDistribution* lin_alg_dist_pt =
-        new LinearAlgebraDistribution(
-          communicator_pt, this->get_num_plastic_dofs(ipt), false);
-
-      // Create the linear solver and pass to the matrix
-      DenseLU* solver_pt = new DenseLU;
-
-      DoubleVector residuals(lin_alg_dist_pt);
-      DenseDoubleMatrix jacobian(this->get_num_plastic_dofs(ipt));
-
-      jacobian.linear_solver_pt() = solver_pt;
-
-      double maxres;
-      unsigned int nIter = 0;
-      do
-      {
-        // Get the residuals only
-        this->fill_in_residuals_plastic(residuals, ipt, C);
-
-        maxres = residuals.max();
-
-        // oomph_info << "Maximum residual: " << maxres << std::endl;
-        // if (Plastic_data_has_been_built[R_INDEX])
-        // {
-        //   oomph_info << "R = " << get_r(ipt) << std::endl;
-        // }
-
-        // need to initialise the jacobian to 0
-        jacobian.initialise(0.0);
-        // get jacobian
-        fill_in_jacobian_plastic(residuals, jacobian, ipt, C);
-
-        // std::cout << "Residuals are " << std::endl
-        //           << "   invFp: " << this->plastic_inv_fp_eqn_number(ipt, 0,
-        //           0)
-        //           << " to "
-        //           << this->plastic_inv_fp_eqn_number(ipt, DIM - 1, DIM - 1)
-        //           << std::endl;
-        // {
-        //   std::cout << "   invBpks: "
-        //             << this->plastic_invBpks_eqn_number(ipt, 0, 0) << " to "
-        //             << this->plastic_invBpks_eqn_number(ipt, DIM - 1, DIM -
-        //             1)
-        //             << std::endl;
-        // }
-        // {
-        //   std::cout << "   R: " << this->plastic_r_eqn_number(ipt) <<
-        //   std::endl;
-        // }
-        // {
-        //   std::cout << "   YieldSurface: "
-        //             << this->plastic_lambda_eqn_number(ipt) << std::endl;
-        // }
-
-        // std::cout << "\t\tResiduals:" << std::endl;
-        // for (unsigned i = 0; i < this->get_num_plastic_dofs(ipt); i++)
-        // {
-        //   std::cout << "\t\t\t" << residuals[i] << std::endl;
-        // }
-        // std::cout << "\t\tJacobian:" << std::endl;
-        // for (unsigned i = 0; i < this->get_num_plastic_dofs(ipt); i++)
-        // {
-        //   std::cout << "\t\t\t";
-        //   for (unsigned j = 0; j < this->get_num_plastic_dofs(ipt); j++)
-        //   {
-        //     std::cout << jacobian(i, j) << " ";
-        //   }
-        //   std::cout << std::endl;
-        // }
-
-        // compute delta for plastic degrees of freedom
-        DoubleVector resid(residuals);
-        jacobian.solve(resid, residuals);
-
-        // update values
-        double* dx_pt = residuals.values_pt();
-        for (unsigned i = 0; i < this->get_num_plastic_dofs(ipt); i++)
-        {
-          *Plastic_dof_data_pt[ipt][i] -= dx_pt[i];
-        }
-
-        nIter++;
-      } while (maxres > Plastic_Newton_Solver_Tolerance);
-
-      delete lin_alg_dist_pt;
-      delete solver_pt;
-      delete communicator_pt;
-      // }
-    }
-
-    void plastic_newton_solve()
-    {
-      const unsigned nipt = this->integral_pt()->nweight();
-      Vector<double> s(DIM);
-      for (unsigned ipt = 0; ipt < nipt; ipt++)
-      {
-        // Assign the values of s
-        for (unsigned i = 0; i < DIM; ++i)
-        {
-          s[i] = this->integral_pt()->knot(ipt, i);
-        }
-
-        // FIRST WE CALCULATE G (C)
-
-        // Find out how many nodes there are
-        unsigned n_node = this->nnode();
-
-        // Find out how many positional dofs there are
-        unsigned n_position_type = this->nnodal_position_type();
-
-        // Set up memory for the shape functions
-        Shape psi(n_node, n_position_type);
-        DShape dpsidxi(n_node, n_position_type, DIM);
-
-        // Call the derivatives of the shape functions (ignore Jacobian)
-        (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
-
-        // Storage for Lagrangian coordinates (initialised to zero)
-        Vector<double> interpolated_xi(DIM, 0.0);
-
-        // Calculate interpolated values of the derivative of global position
-        // wrt lagrangian coordinates
-        DenseMatrix<double> interpolated_G(DIM);
-
-        // Initialise to zero
-        for (unsigned i = 0; i < DIM; i++)
-        {
-          for (unsigned j = 0; j < DIM; j++)
-          {
-            interpolated_G(i, j) = 0.0;
-          }
-        }
-
-        // Calculate displacements and derivatives
-        for (unsigned l = 0; l < n_node; l++)
-        {
-          // Loop over positional dofs
-          for (unsigned k = 0; k < n_position_type; k++)
-          {
-            // Loop over displacement components (deformed position)
-            for (unsigned i = 0; i < DIM; i++)
-            {
-              // Calculate the lagrangian coordinates and the accelerations
-              interpolated_xi[i] +=
-                this->lagrangian_position_gen(l, k, i) * psi(l, k);
-
-              // Loop over derivative directions
-              for (unsigned j = 0; j < DIM; j++)
-              {
-                interpolated_G(j, i) +=
-                  this->nodal_position_gen(l, k, i) * dpsidxi(l, k, j);
-              }
-            }
-          }
-        }
-        // Declare and calculate the deformed metric tensor
-        DenseMatrix<double> G(DIM);
-
-        // Assign values of G
-        for (unsigned i = 0; i < DIM; i++)
-        {
-          // Do upper half of matrix
-          for (unsigned j = i; j < DIM; j++)
-          {
-            // Initialise G(i,j) to zero
-            G(i, j) = 0.0;
-            // Now calculate the dot product
-            for (unsigned k = 0; k < DIM; k++)
-            {
-              G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
-            }
-          }
-          // Matrix is symmetric so just copy lower half
-          for (unsigned j = 0; j < i; j++)
-          {
-            G(i, j) = G(j, i);
-          }
-        }
-
-        // Push forward G using the isotropic growth term
-        double gamma;
-        this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
-        double diag_entry = pow(gamma, 2.0 / double(DIM));
-        for (unsigned int i = 0; i < DIM; i++)
-        {
-          for (unsigned int j = 0; j < DIM; j++)
-          {
-            G(i, j) = G(i, j) / diag_entry;
-          }
-        }
-
-        // THEN WE SOLVE THE PLASTIC EQUATIONS
-        plastic_newton_solve(ipt, G);
-      }
-    }
-
-    PlasticEquationsBase()
-      : InterpolateFromIntegralPointsBase(), PVDEquationsBase<DIM>()
-    {
-      this->unity.resize(DIM, DIM, 0.0);
-      for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
-
-      // Construct all plastic data
-      construct_plastic_data();
-    }
-
-    ~PlasticEquationsBase() {}
-
-    virtual void set_internal_data_time_stepper(
-      const unsigned& i,
-      TimeStepper* const& time_stepper_pt,
-      const bool& preserve_existing_data) override
-    {
-      PVDEquationsBase<DIM>::set_internal_data_time_stepper(
-        i, time_stepper_pt, preserve_existing_data);
-
-      // We need to reassign plastic eqn numbers, after the data storage has
-      // changed to update possibly old pointers
-      assign_plastic_eqn_numbers();
-    }
-
-    // Assign the time-stepper for the plastic data only.
-    // It should be preffered to call the function
-    // set_internal_data_time_stepper
-    void assign_plastic_timestepper(TimeStepper* time_stepper_pt,
-                                    const bool& preserve_existing_data)
-    {
-      for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
-      {
-        for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
-        {
-          // Could swap the loops, slightly more efficient but we only do this
-          // once per element
-          Data* data_pt = Plastic_data_pt[ipt][data_type];
-          // We want to preserve the existing data hence true
-          data_pt->set_time_stepper(time_stepper_pt, preserve_existing_data);
-        }
-      }
-
-      // Need to reassign eqn numbers because pointers may have changed.
-      assign_plastic_eqn_numbers();
-    }
-
-    void check_initial_condition()
-    {
-      // Now check the initial values
-      unsigned ipt = 0;
-      DenseMatrix<double> invFp;
-      get_inv_fp_matrix(0, ipt, invFp);
-      oomph_info << "invFp(0): " << std::endl
-                 << MatrixHelpers::format(invFp) << std::endl;
-
-      get_inv_fp_matrix(1, ipt, invFp);
-      oomph_info << "invFp(1): " << std::endl
-                 << MatrixHelpers::format(invFp) << std::endl;
-
-      get_inv_fp_matrix(2, ipt, invFp);
-      oomph_info << "invFp(2): " << std::endl
-                 << MatrixHelpers::format(invFp) << std::endl;
-
-      DenseMatrix<double> invBpks;
-      get_inv_fp_matrix(0, ipt, invBpks);
-      oomph_info << "invBpks(0): " << std::endl
-                 << MatrixHelpers::format(invBpks) << std::endl;
-
-      get_inv_fp_matrix(1, ipt, invBpks);
-      oomph_info << "invBpks(1): " << std::endl
-                 << MatrixHelpers::format(invBpks) << std::endl;
-
-      get_inv_fp_matrix(2, ipt, invBpks);
-      oomph_info << "invBpks(2): " << std::endl
-                 << MatrixHelpers::format(invBpks) << std::endl;
-
-      oomph_info << "lambda(0) = " << get_lambda(0, ipt)
-                 << " lambda(1) = " << get_lambda(1, ipt)
-                 << " lambda(2) = " << get_lambda(2, ipt) << std::endl;
-
-      oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
-                 << " R(2) = " << get_r(2, ipt) << std::endl;
-    }
-
-    void calculate_g(const unsigned& ipt,
-                     const double& diag_entry,
-                     const DenseMatrix<double>& G,
-                     DenseMatrix<double>& g) const override
-    {
-      // Compute the undeformed coordinates from the deformed ones
-      // Solve the plastic equations
-      // Could we just assume that the plastic data is consistent with G?
-      // This will be the case after the combined (plastic and elastic) Newton
-      // solve has converged so shouldn't affect outputting
-      // this->plastic_newton_solve(ipt, G);
-
-      DenseMatrix<double> invFp(DIM, DIM, 0.0);
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          invFp(i, j) = get_inv_fp(ipt, i, j);
-        }
-      }
-
-      // Calculate Fp
-      DenseMatrix<double> Fp(DIM, DIM, 0.0);
-      MatrixHelpers::invert_matrix<DIM>(invFp, Fp);
-
-      // Calculate and pull back Fp^TFp to get g
-      g.resize(DIM, DIM, 0.0);
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          for (unsigned k = 0; k < DIM; k++)
-          {
-            g(i, j) += Fp(k, i) * Fp(k, j);
-          }
-          g(i, j) *= diag_entry;
-        }
-      }
-    }
-
     /*!
      * \brief compute the time derivative of an internal data item
      */
@@ -1655,6 +1549,77 @@ namespace oomph
 
       return x0;
     }
+
+    Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
+    {
+      return Plastic_data_pt[ipt][data_type];
+    }
+
+    double* plastic_dof_data_pt(const unsigned& ipt, const unsigned& ndof) const
+    {
+      return Plastic_dof_data_pt[ipt][ndof];
+    }
+
+    /// Stores, if finite difference should be used for the plastic solve.
+    bool Plastic_solve_use_fd = false;
+
+    /// The step used to determine the jacobian, if plastic Plastic_solve_use_fd
+    /// is set to true.
+    double* Plastic_fd_jacobian_step_pt =
+      &FiniteElement::Default_fd_jacobian_step;
+
+    /// A pointer to the plastic constitutive law
+    PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
+
+    // We need a dummy double matrix for the plastic residual fill in
+    DenseMatrix<double> unity;
+
+    /// We use an enum to define the indices in the vectors at which the
+    /// different types of plastic data are stored. This simplifies things
+    /// considerably when searching for plastic data.
+    enum Plastic_Variables_Indexes
+    {
+      Lambda_INDEX,
+      invFp_INDEX,
+      invBpks_INDEX,
+      R_INDEX,
+      invBpcs_INDEX,
+      NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
+      NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
+    };
+
+    const static std::vector<std::string> Plastic_data_names;
+    // We store a vector of indices of the plastic data in internal data
+    // so we can assign timesteppers etc more easily
+    // We resize this every time we build a new set of plastic internal data but
+    // since we only do this once when the element is constructed this shouldn't
+    // be a problem - we can't do this at construction of this class because
+    // the number of integral points is defined by derived classes
+
+    // We store a separate set of plastic: internal data indices, pinned status,
+    // and eqn numbers per integral point in the element.
+
+    // [Number of ipts, number of types of plastic data]
+    // Pointer to the plastic data at the given integral point and of the given
+    // type.
+    Vector<Vector<Data*>> Plastic_data_pt;
+
+    // [Number of ipts, number of types of plastic data, number of variables in
+    // that data type]
+    Vector<Vector<Vector<int>>> Plastic_data_eqn_number;
+
+    // [Number of ipts, number of data to be finite differenced]
+    // We store pointers to all the plastic data which are to be finite
+    // differenced
+    Vector<Vector<double*>> Plastic_dof_data_pt;
+
+    // Keeps track of if data for the  plastic dof numbers has been allocated
+    // We do it within this function because this allows us to reliably zero the
+    // counters Num_plastic_Dofs and Num_plastic_residuals
+    bool Plastic_dof_nunbers_has_been_resized = false;
+
+    // The solver tolerance for the plastic newton solve
+    double Plastic_Newton_Solver_Tolerance = 1.0e-8;
   };
 
 
