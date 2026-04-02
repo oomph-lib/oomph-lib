@@ -309,103 +309,10 @@ namespace oomph
     void plastic_newton_solve()
     {
       const unsigned nipt = this->integral_pt()->nweight();
-      Vector<double> s(DIM);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
-        // Assign the values of s
-        for (unsigned i = 0; i < DIM; ++i)
-        {
-          s[i] = this->integral_pt()->knot(ipt, i);
-        }
-
-        // FIRST WE CALCULATE G (C)
-
-        // Find out how many nodes there are
-        unsigned n_node = this->nnode();
-
-        // Find out how many positional dofs there are
-        unsigned n_position_type = this->nnodal_position_type();
-
-        // Set up memory for the shape functions
-        Shape psi(n_node, n_position_type);
-        DShape dpsidxi(n_node, n_position_type, DIM);
-
-        // Call the derivatives of the shape functions (ignore Jacobian)
-        (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
-
-        // Storage for Lagrangian coordinates (initialised to zero)
-        Vector<double> interpolated_xi(DIM, 0.0);
-
-        // Calculate interpolated values of the derivative of global position
-        // wrt lagrangian coordinates
-        DenseMatrix<double> interpolated_G(DIM);
-
-        // Initialise to zero
-        for (unsigned i = 0; i < DIM; i++)
-        {
-          for (unsigned j = 0; j < DIM; j++)
-          {
-            interpolated_G(i, j) = 0.0;
-          }
-        }
-
-        // Calculate displacements and derivatives
-        for (unsigned l = 0; l < n_node; l++)
-        {
-          // Loop over positional dofs
-          for (unsigned k = 0; k < n_position_type; k++)
-          {
-            // Loop over displacement components (deformed position)
-            for (unsigned i = 0; i < DIM; i++)
-            {
-              // Calculate the lagrangian coordinates and the accelerations
-              interpolated_xi[i] +=
-                this->lagrangian_position_gen(l, k, i) * psi(l, k);
-
-              // Loop over derivative directions
-              for (unsigned j = 0; j < DIM; j++)
-              {
-                interpolated_G(j, i) +=
-                  this->nodal_position_gen(l, k, i) * dpsidxi(l, k, j);
-              }
-            }
-          }
-        }
-        // Declare and calculate the deformed metric tensor
         DenseMatrix<double> G(DIM);
-
-        // Assign values of G
-        for (unsigned i = 0; i < DIM; i++)
-        {
-          // Do upper half of matrix
-          for (unsigned j = i; j < DIM; j++)
-          {
-            // Initialise G(i,j) to zero
-            G(i, j) = 0.0;
-            // Now calculate the dot product
-            for (unsigned k = 0; k < DIM; k++)
-            {
-              G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
-            }
-          }
-          // Matrix is symmetric so just copy lower half
-          for (unsigned j = 0; j < i; j++)
-          {
-            G(i, j) = G(j, i);
-          }
-        }
-
-        // Push forward G using the isotropic growth term
-        double gamma;
-        this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
-        double diag_entry = pow(gamma, 2.0 / double(DIM));
-        for (unsigned int i = 0; i < DIM; i++)
-        {
-          for (unsigned int j = 0; j < DIM; j++)
-          {
-            G(i, j) = G(i, j) / diag_entry;
-          }
-        }
+        compute_total_right_cauchy_green_deformation_tensor(0, ipt, G);
 
         // THEN WE SOLVE THE PLASTIC EQUATIONS
         plastic_newton_solve(ipt, G);
@@ -626,18 +533,37 @@ namespace oomph
       }
     }
 
-    /*!
-     * \brief Determins, if there is plastic deformation and the plastic solve
-     * routine has to be called.
-     * \details Checks if the elastic stress is contained by the yield surface
-     * and if the plastic multiplier is positive.
-     */
+    // =========================================================================
+    /// \short Determins if the deformation is plastic or elastic.
+    ///
+    /// Internally, this function computes the global right Cuachy-Green
+    /// deformation tensor from the current nodal positions. It is intended, to
+    /// not make this an input argument. That way, the finite differencing of g
+    /// uses the same deformation type (elastic or plastic) for all
+    /// computations.
+    ///
+    /// \param[in] ipt The integrationpoint to operate on.
+    // =========================================================================
     bool is_there_plastic_deformation(const unsigned int ipt);
 
     ////////////////////////////////////////////////////////////////////////////
     // Mathematical functions involved in computing the plastic residuals or
     // similar
     ////////////////////////////////////////////////////////////////////////////
+
+    // =========================================================================
+    /// \short This function computes the right Cauchy-Green deformation tensor
+    /// pushed forward to the undeformed frame (of the plasticity model). It
+    /// takes into account the current (t=0) isotropic growth.
+    ///
+    /// \param[in] t The time step, at which to compute the tensor
+    /// \param[in] ipt The integration point
+    /// \param[out] C The final Cauchy-Green deformation tensor
+    // =========================================================================
+    void compute_total_right_cauchy_green_deformation_tensor(
+      const unsigned int& t,
+      const unsigned int& ipt,
+      DenseMatrix<double>& C) const;
 
     /*!
      * \brief Computes the deformation gradient tensor at a given integration

@@ -903,14 +903,12 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   // Get R
   double R = get_r(ipt);
 
-  // Retrieve deformation gradient tensor
-  DenseMatrix<double> F(DIM), C_Total(DIM, DIM, 0.0);
-  compute_deformation_gradient_tensor(0, ipt, F);
-  MatrixHelpers::transpose_multiply(F, F, C_Total);
+  DenseMatrix<double> C_total(DIM);
+  compute_total_right_cauchy_green_deformation_tensor(0, ipt, C_total);
 
   // Now compute the elastic Mandel stress
   DenseMatrix<double> bar_M(DIM, DIM, 0.0);
-  compute_mandel_stress_elastic(invFp, C_Total, bar_M);
+  compute_mandel_stress_elastic(invFp, C_total, bar_M);
 
   // Compute bar_Mk and bar_Mc
   DenseMatrix<double> bar_Mk(DIM, DIM, 0.0), bar_Mc(DIM, DIM, 0.0);
@@ -920,11 +918,9 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   DenseMatrix<double> barbar_M(DIM, DIM, 0.0);
   compute_mandel_stress_total(bar_M, bar_Mk, bar_Mc, R, barbar_M);
 
-  // Now compute the previous value - the only thing that has changed if F
-  // Get previous F
-  DenseMatrix<double> F_prev(DIM), C_Total_prev(DIM, DIM, 0.0);
-  compute_deformation_gradient_tensor(1, ipt, F_prev);
-  MatrixHelpers::transpose_multiply(F_prev, F_prev, C_Total_prev);
+  // Now compute the previous value - the only thing that has changed if C
+  DenseMatrix<double> C_Total_prev(DIM, DIM, 0.0);
+  compute_total_right_cauchy_green_deformation_tensor(1, ipt, C_Total_prev);
 
   // Previous bar_M
   DenseMatrix<double> bar_M_prev(DIM, DIM, 0.0);
@@ -1949,6 +1945,123 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         jacobian(row_r, col_bar_Mk_ij) -= dRdu * contrib_Mk;
         jacobian(row_r, col_bar_Mc_ij) -= dRdu * contrib_Mc;
       }
+    }
+  }
+}
+
+template<unsigned DIM>
+void PlasticEquationsBase<DIM>::
+  compute_total_right_cauchy_green_deformation_tensor(
+    const unsigned int& t,
+    const unsigned int& ipt,
+    DenseMatrix<double>& G) const
+{
+  Vector<double> s(DIM);
+
+  // Assign the values of s
+  for (unsigned i = 0; i < DIM; ++i)
+  {
+    s[i] = this->integral_pt()->knot(ipt, i);
+  }
+
+  // FIRST WE CALCULATE G (C)
+
+  // Find out how many nodes there are
+  unsigned n_node = this->nnode();
+
+  // Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+
+  // Set up memory for the shape functions
+  Shape psi(n_node, n_position_type);
+  DShape dpsidxi(n_node, n_position_type, DIM);
+
+  // Call the derivatives of the shape functions (ignore Jacobian)
+  (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
+
+  // Storage for Lagrangian coordinates (initialised to zero)
+  Vector<double> interpolated_xi(DIM, 0.0);
+
+  // Calculate interpolated values of the derivative of global position
+  // wrt lagrangian coordinates
+  DenseMatrix<double> interpolated_G(DIM);
+
+  // Initialise to zero
+  for (unsigned i = 0; i < DIM; i++)
+  {
+    for (unsigned j = 0; j < DIM; j++)
+    {
+      interpolated_G(i, j) = 0.0;
+    }
+  }
+
+  // Calculate displacements and derivatives
+  for (unsigned l = 0; l < n_node; l++)
+  {
+    // Check if the node has enough history for the requested time t.
+    // If not, we will take the lagrangian positions to compute F.
+    // \todo Really, we could also just use unity in that case.
+    bool has_enough_history =
+      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
+
+    // Loop over positional dofs
+    for (unsigned k = 0; k < n_position_type; k++)
+    {
+      // Loop over displacement components (deformed position)
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Calculate the lagrangian coordinates and the accelerations
+        interpolated_xi[i] +=
+          this->lagrangian_position_gen(l, k, i) * psi(l, k);
+
+        // Loop over derivative directions
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          if (has_enough_history)
+          {
+            interpolated_G(j, i) +=
+              this->nodal_position_gen(t, l, k, i) * dpsidxi(l, k, j);
+          }
+          else
+          {
+            interpolated_G(j, i) +=
+              this->lagrangian_position_gen(l, k, i) * dpsidxi(l, k, j);
+          }
+        }
+      }
+    }
+  }
+
+  // Assign values of G
+  for (unsigned i = 0; i < DIM; i++)
+  {
+    // Do upper half of matrix
+    for (unsigned j = i; j < DIM; j++)
+    {
+      // Initialise G(i,j) to zero
+      G(i, j) = 0.0;
+      // Now calculate the dot product
+      for (unsigned k = 0; k < DIM; k++)
+      {
+        G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
+      }
+    }
+    // Matrix is symmetric so just copy lower half
+    for (unsigned j = 0; j < i; j++)
+    {
+      G(i, j) = G(j, i);
+    }
+  }
+
+  // Push forward G using the isotropic growth term
+  double gamma;
+  this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
+  double diag_entry = pow(gamma, 2.0 / double(DIM));
+  for (unsigned int i = 0; i < DIM; i++)
+  {
+    for (unsigned int j = 0; j < DIM; j++)
+    {
+      G(i, j) = G(i, j) / diag_entry;
     }
   }
 }
