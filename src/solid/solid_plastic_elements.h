@@ -419,8 +419,8 @@ namespace oomph
     /// r is updated.
     ///
     /// \param[in] ipt The integration point
-    /// \param[out] C The global deformation gradient in the undeformed frame of
-    /// the plasticity model.
+    /// \param[out] C The global right Cauchy Green tensor in the undeformed
+    /// frame of the plasticity model.
     // =========================================================================
     void plastic_newton_solve(const unsigned& ipt, const DenseMatrix<double>& C)
     {
@@ -498,7 +498,7 @@ namespace oomph
     /// \param[out] jacobian The derivatives of the residuals w.r.t to the
     /// plastic quantities.
     /// \param[in] ipt The integration point.
-    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    /// \param[in] C The right Cauchy Green tensor in the undeformed frame.
     /// \param[in] flag Wheter the jacobian shall be computed.
     // =========================================================================
     virtual void fill_in_generic_residual_and_jacobian_plastic(
@@ -515,7 +515,7 @@ namespace oomph
     ///
     /// \param[out] residuals The residuals computed.
     /// \param[in] ipt The integration point.
-    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    /// \param[in] C The right Cauchy Green tensor in the undeformed frame.
     // =========================================================================
     void fill_in_residuals_plastic(DoubleVector& residuals,
                                    const unsigned& ipt,
@@ -537,7 +537,7 @@ namespace oomph
     /// \param[out] jacobian The derivatives of the residuals w.r.t to the
     /// plastic quantities.
     /// \param[in] ipt The integration point.
-    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    /// \param[in] C The right Cauchy Green tensor in the undeformed frame.
     // =========================================================================
     virtual void fill_in_jacobian_plastic(DoubleVector& residuals,
                                           DenseMatrix<double>& jacobian,
