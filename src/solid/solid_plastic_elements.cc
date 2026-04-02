@@ -19,8 +19,8 @@ namespace oomph
  * \details Computes the Caucystress using the plastic deformation gradient
  */
 template<unsigned DIM>
-void PlasticEquationsBase<DIM>::get_cauchy_stress(unsigned ipt,
-                                                  DenseMatrix<double>& sigma)
+void PlasticEquationsBase<DIM>::get_cauchy_stress(
+  const unsigned& ipt, DenseMatrix<double>& sigma) const
 {
   DenseMatrix<double> F(DIM);
   compute_deformation_gradient_tensor(ipt, F);
