@@ -21,6 +21,10 @@ namespace oomph
                                public virtual PVDEquationsBase<DIM>
   {
   public:
+    // =========================================================================
+    /// \short Constructor: this initialises the unity matrix and the plastic
+    /// data.
+    // =========================================================================
     PlasticEquationsBase()
       : InterpolateFromIntegralPointsBase(), PVDEquationsBase<DIM>()
     {
@@ -31,13 +35,23 @@ namespace oomph
       construct_plastic_data();
     }
 
-    ~PlasticEquationsBase() {}
+    // =========================================================================
+    /// \short Virtual default destructor
+    // =========================================================================
+    virtual ~PlasticEquationsBase() = default;
 
-    /*!
-     * \brief returns the Cauchy stress for an integration point
-     */
-    void get_cauchy_stress(unsigned ipt, DenseMatrix<double>& sigma);
+    // =========================================================================
+    /// \short returns the Cauchy stress for an integration point
+    /// \param[in] ipt The integration point.
+    /// \param[out] sigma The computed Cauchy stress.
+    // =========================================================================
+    void get_cauchy_stress(const unsigned& ipt,
+                           DenseMatrix<double>& sigma) const;
 
+    // =========================================================================
+    /// \short Prepares a string describing the plastic dofs.
+    /// \returns The description.
+    // =========================================================================
     std::string detail_plastic_dofs() const
     {
       std::stringstream str_str;
@@ -70,6 +84,10 @@ namespace oomph
       return str_str.str();
     }
 
+    // =========================================================================
+    /// \short A function used for debugging which writes the initial condition
+    /// to oomph_info.
+    // =========================================================================
     void check_initial_condition()
     {
       // Now check the initial values
@@ -108,15 +126,27 @@ namespace oomph
                  << " R(2) = " << get_r(2, ipt) << std::endl;
     }
 
+    // =========================================================================
+    /// \short Enables the plastic solve through finite difference.
+    /// Note: It is reccomended to rely on the analytical jacobian, whenever
+    /// possible.
+    // =========================================================================
     void enable_plastic_solve_by_fd()
     {
       Plastic_solve_use_fd = true;
     }
+
+    // =========================================================================
+    /// \short Disables the plastic solve through finite difference.
+    // =========================================================================
     void disable_plastic_solve_by_fd()
     {
       Plastic_solve_use_fd = false;
     }
 
+    // =========================================================================
+    /// \returns if plastic solve is done by finite differencing.
+    // =========================================================================
     const bool get_plastic_solve_by_fd() const
     {
       return Plastic_solve_use_fd;
@@ -130,12 +160,21 @@ namespace oomph
       return Plastic_fd_jacobian_step_pt;
     }
 
-    /// Return the plastic constitutive law pointer
+    // =========================================================================
+    /// \short Access function to the \ref Plastic_consitutive_law_pt
+    // =========================================================================
     PlasticConstitutiveLaw*& plastic_constitutive_law_pt()
     {
       return Plastic_consitutive_law_pt;
     }
 
+    // =========================================================================
+    /// \short Assigns the fefault values of the plastic data based on the
+    /// constitutive law. It is reccomended to call this function on every
+    /// element, after the consitutive law has been set.
+    ///
+    /// This sets r to re.
+    // =========================================================================
     void assign_default_values_based_on_constitutive_law()
     {
       double Re =
@@ -146,15 +185,23 @@ namespace oomph
       }
     }
 
-    /// Return the plastic newton solver tolerance
+    // =========================================================================
+    /// \returns the plastic newton solver tolerance
+    // =========================================================================
     double& plastic_newton_solver_tolerance()
     {
       return Plastic_Newton_Solver_Tolerance;
     }
 
-    // Assign the time-stepper for the plastic data only.
-    // It should be preffered to call the function
-    // set_internal_data_time_stepper
+    // =========================================================================
+    /// \short Assigns the time-stepper for the plastic data only. It should be
+    /// preffered to call the function set_internal_data_time_stepper when
+    /// possible.
+    ///
+    /// \param[in] time_stepper_pt The time stepper to set.
+    /// \param[in] preserve_existing_data Wether the internal data should be
+    /// copied over to the new structure.
+    // =========================================================================
     void assign_plastic_timestepper_pt(TimeStepper* time_stepper_pt,
                                        const bool& preserve_existing_data)
     {
@@ -180,6 +227,15 @@ namespace oomph
     ////////////////////////////////////////////////////////////////////////////
     // overriden functions
     ////////////////////////////////////////////////////////////////////////////
+
+    // =========================================================================
+    /// \short An Overridden version of the parent function \ref
+    /// PVDEquationsBase<DIM>::set_internal_data_time_stepper. In addition to
+    /// the parent function, this calls \ref assign_plastic_eqn_numbers.
+    ///
+    /// For a description of the arguments \see
+    /// PVDEquationsBase<DIM>::set_internal_data_time_stepper
+    // =========================================================================
     virtual void set_internal_data_time_stepper(
       const unsigned& i,
       TimeStepper* const& time_stepper_pt,
@@ -193,6 +249,14 @@ namespace oomph
       assign_plastic_eqn_numbers();
     }
 
+    // =========================================================================
+    /// \short An Overridden version of the parent function \ref
+    /// PVDEquationsBase<DIM>::calculate_g. This function calculates g while
+    /// taking the current plastic deformation into account.
+    ///
+    /// For a description of the arguments \see
+    /// PVDEquationsBase<DIM>::calculate_g
+    // =========================================================================
     void calculate_g(const unsigned& ipt,
                      const double& diag_entry,
                      const DenseMatrix<double>& G,
@@ -237,6 +301,11 @@ namespace oomph
     // Functions directly involved in the plastic solve
     ////////////////////////////////////////////////////////////////////////////
 
+    // =========================================================================
+    /// \short This function solves for the plastic variables of all integration
+    /// points. For that, it first computes the global deformation and then
+    /// calls the plastic_newton_solve on every data point.
+    // =========================================================================
     void plastic_newton_solve()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -343,19 +412,26 @@ namespace oomph
       }
     }
 
-    // Change this to solve for a specific integral point - this will make
-    // finite differencing wrt C much easier
+    // =========================================================================
+    /// \short This function solves for the plastic variables of one integration
+    /// point. For that, it first checks, whether there is plastic deformation.
+    /// If there is, it performs an internal newton solve. If there is not, only
+    /// r is updated.
+    ///
+    /// \param[in] ipt The integration point
+    /// \param[out] C The global deformation gradient in the undeformed frame of
+    /// the plasticity model.
+    // =========================================================================
     void plastic_newton_solve(const unsigned& ipt, const DenseMatrix<double>& C)
     {
-      // Plastic deformation depends on the previous solution. So if the
-      // intermediate steps in newton solve were outide, it should be
-      // reconsidered.
+      // Initialize all plastic variable such that their derivative is 0.
+      // In any case, r is clamped to its validity range [Re, 1].
       initialise_solve(ipt);
 
-      if (!is_there_plastic_deformation(ipt))
-      {
-        return;
-      }
+      // Check if there is any plastic deformation. If not, r is automatically
+      // updated to fullfill the yield surface equation.
+      if (!is_there_plastic_deformation(ipt)) return;
+
 
       // For now we just build the linear algebra distribution and the solver
       // each time we solve:
@@ -368,27 +444,24 @@ namespace oomph
 
       // Create the linear solver and pass to the matrix
       DenseLU* solver_pt = new DenseLU;
-
       DoubleVector residuals(lin_alg_dist_pt);
       DenseDoubleMatrix jacobian(this->get_num_plastic_dofs(ipt));
 
       jacobian.linear_solver_pt() = solver_pt;
 
-      double maxres;
       unsigned int nIter = 0;
-      do
+
+      // Get the residuals only
+      this->fill_in_residuals_plastic(residuals, ipt, C);
+      double maxres = residuals.max();
+
+      while (maxres > Plastic_Newton_Solver_Tolerance);
       {
-        // Get the residuals only
-        this->fill_in_residuals_plastic(residuals, ipt, C);
-
-        maxres = residuals.max();
-
-        // need to initialise the jacobian to 0
+        // Initialize and compute the jacobian.
         jacobian.initialise(0.0);
-        // get jacobian
         fill_in_jacobian_plastic(residuals, jacobian, ipt, C);
 
-        // compute delta for plastic degrees of freedom
+        // Solve for the step
         DoubleVector resid(residuals);
         jacobian.solve(resid, residuals);
 
@@ -399,14 +472,35 @@ namespace oomph
           *Plastic_dof_data_pt[ipt][i] -= dx_pt[i];
         }
 
+        // Compute the residual to determin the error
+        this->fill_in_residuals_plastic(residuals, ipt, C);
+        maxres = residuals.max();
+
         nIter++;
-      } while (maxres > Plastic_Newton_Solver_Tolerance);
+      }
 
       delete lin_alg_dist_pt;
       delete solver_pt;
       delete communicator_pt;
     }
 
+    // =========================================================================
+    /// \short This function does the actual computation of the time derivatives
+    /// of the individual plastic parameters and computes a residual and its
+    /// associated jacobian from that. The residuals are defined as
+    ///     \dot{inv_fp}_time_stepper - \dot{inv_fp}_analytical
+    ///     \dot{inv_bpks}_time_stepper - \dot{inv_bpks}_analytical
+    ///     \dot{inv_bpcs}_time_stepper - \dot{inv_bpcs}_analytical
+    ///     f(M) = R F(\lambda): The yield surface equation, Eq. (101)
+    ///     R - R_predicted, where R is predicted by \ref NormalYieldRatioLaw
+    ///
+    /// \param[out] residuals The residuals computed.
+    /// \param[out] jacobian The derivatives of the residuals w.r.t to the
+    /// plastic quantities.
+    /// \param[in] ipt The integration point.
+    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    /// \param[in] flag Wheter the jacobian shall be computed.
+    // =========================================================================
     virtual void fill_in_generic_residual_and_jacobian_plastic(
       DoubleVector& residuals,
       DenseMatrix<double>& jacobian,
@@ -414,6 +508,15 @@ namespace oomph
       const DenseMatrix<double>& C,
       const unsigned& flag);
 
+    // =========================================================================
+    /// \short A Convenience wrapper for the function \ref
+    /// fill_in_generic_residual_and_jacobian_plastic which does not compute any
+    /// derivative
+    ///
+    /// \param[out] residuals The residuals computed.
+    /// \param[in] ipt The integration point.
+    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    // =========================================================================
     void fill_in_residuals_plastic(DoubleVector& residuals,
                                    const unsigned& ipt,
                                    const DenseMatrix<double>& C)
@@ -422,7 +525,20 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, ipt, C, 0);
     }
 
-    // By default we finite difference for the jacobian
+    // =========================================================================
+    /// \short A function to compute both the redidual and the jacobian of the
+    /// plastic data.
+    /// If \ref Plastic_solve_use_fd is true, this function calles \ref
+    /// fill_in_residuals_plastic and to compute the plastic residual and it's
+    /// jacobian through finite difference. If Plastic_solve_use_fd is false, it
+    /// calls \ref fill_in_generic_residual_and_jacobian_plastic.
+    ///
+    /// \param[out] residuals The residuals computed.
+    /// \param[out] jacobian The derivatives of the residuals w.r.t to the
+    /// plastic quantities.
+    /// \param[in] ipt The integration point.
+    /// \param[in] C The deformation gradient tensor in the undeformed frame.
+    // =========================================================================
     virtual void fill_in_jacobian_plastic(DoubleVector& residuals,
                                           DenseMatrix<double>& jacobian,
                                           const unsigned& ipt,
@@ -461,22 +577,40 @@ namespace oomph
       }
     }
 
-    /*!
-     * \brief Initialised the plastic parameters after the global deformation
-     * has been updated
-     * \details Assumes, all but the elastic parameters are equal to the ones
-     * from the last time step. invFp is updated assuming all deformation was
-     * purely elastic.
-     */
+    // =========================================================================
+    /// \short Initialised the plastic parameters after the global deformation
+    /// has been updated
+    /// This function initialises all plastic data, assuming there is no plastic
+    /// deformation present. In the unsteady case this means, setting the
+    /// derivatives of the plastic data to 0. In the steady case this results in
+    /// either the last history value being copied, or, for zero history time
+    /// steppers, the initial condition being applied, \see
+    /// set_intial_condition.
+    ///
+    /// If the initialisation moves R outside its validity regime, it is moved
+    /// back \see enforce_boundaries_of_r.
+    ///
+    /// \param[in] ipt The integrationpoint to operate on.
+    // =========================================================================
     void initialise_solve(const unsigned int ipt);
 
-    /*!
-     * \brief Sets the values of the current plastic variables to their
-     * respective initial values
-     */
+    // =========================================================================
+    /// \short Sets the values of the current plastic variables to their
+    /// respective initial values
+    ///
+    /// The initial values are unit matrices for invFp, invBpks and invBpcs, Re
+    /// for R, and 0 for \lambda.
+    ///
+    /// \param[in] ipt The integrationpoint to operate on.
+    // =========================================================================
     void set_intial_condition(const unsigned int ipt);
 
-
+    // =========================================================================
+    /// \short Checks that R is within the range [Re, 1.0] and clamps it to the
+    /// range, if it is not.
+    ///
+    /// \param[in] ipt The integrationpoint to operate on.
+    // =========================================================================
     void enforce_boundaries_of_r(const unsigned& ipt)
     {
       const double r = get_r(ipt);
