@@ -69,17 +69,195 @@ void PlasticEquationsBase<DIM>::get_cauchy_stress(
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Mathematical functions involved in computing the plastic residuals or
+// similar
+////////////////////////////////////////////////////////////////////////////////
+
+template<unsigned DIM>
+void PlasticEquationsBase<DIM>::
+  compute_total_right_cauchy_green_deformation_tensor(
+    const unsigned int& t,
+    const unsigned int& ipt,
+    DenseMatrix<double>& G) const
+{
+  Vector<double> s(DIM);
+
+  // Assign the values of s
+  for (unsigned i = 0; i < DIM; ++i)
+  {
+    s[i] = this->integral_pt()->knot(ipt, i);
+  }
+
+  // FIRST WE CALCULATE G (C)
+
+  // Find out how many nodes there are
+  unsigned n_node = this->nnode();
+
+  // Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+
+  // Set up memory for the shape functions
+  Shape psi(n_node, n_position_type);
+  DShape dpsidxi(n_node, n_position_type, DIM);
+
+  // Call the derivatives of the shape functions (ignore Jacobian)
+  (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
+
+  // Storage for Lagrangian coordinates (initialised to zero)
+  Vector<double> interpolated_xi(DIM, 0.0);
+
+  // Calculate interpolated values of the derivative of global position
+  // wrt lagrangian coordinates
+  DenseMatrix<double> interpolated_G(DIM);
+
+  // Initialise to zero
+  for (unsigned i = 0; i < DIM; i++)
+  {
+    for (unsigned j = 0; j < DIM; j++)
+    {
+      interpolated_G(i, j) = 0.0;
+    }
+  }
+
+  // Calculate displacements and derivatives
+  for (unsigned l = 0; l < n_node; l++)
+  {
+    // Check if the node has enough history for the requested time t.
+    // If not, we will take the lagrangian positions to compute F.
+    // \todo Really, we could also just use unity in that case.
+    bool has_enough_history =
+      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
+
+    // Loop over positional dofs
+    for (unsigned k = 0; k < n_position_type; k++)
+    {
+      // Loop over displacement components (deformed position)
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Calculate the lagrangian coordinates and the accelerations
+        interpolated_xi[i] +=
+          this->lagrangian_position_gen(l, k, i) * psi(l, k);
+
+        // Loop over derivative directions
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          if (has_enough_history)
+          {
+            interpolated_G(j, i) +=
+              this->nodal_position_gen(t, l, k, i) * dpsidxi(l, k, j);
+          }
+          else
+          {
+            interpolated_G(j, i) +=
+              this->lagrangian_position_gen(l, k, i) * dpsidxi(l, k, j);
+          }
+        }
+      }
+    }
+  }
+
+  // Assign values of G
+  for (unsigned i = 0; i < DIM; i++)
+  {
+    // Do upper half of matrix
+    for (unsigned j = i; j < DIM; j++)
+    {
+      // Initialise G(i,j) to zero
+      G(i, j) = 0.0;
+      // Now calculate the dot product
+      for (unsigned k = 0; k < DIM; k++)
+      {
+        G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
+      }
+    }
+    // Matrix is symmetric so just copy lower half
+    for (unsigned j = 0; j < i; j++)
+    {
+      G(i, j) = G(j, i);
+    }
+  }
+
+  // Push forward G using the isotropic growth term
+  double gamma;
+  this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
+  double diag_entry = pow(gamma, 2.0 / double(DIM));
+  for (unsigned int i = 0; i < DIM; i++)
+  {
+    for (unsigned int j = 0; j < DIM; j++)
+    {
+      G(i, j) = G(i, j) / diag_entry;
+    }
+  }
+}
+
+template<unsigned DIM>
+void PlasticEquationsBase<DIM>::compute_deformation_gradient_tensor(
+  unsigned int t, unsigned int intpt, DenseMatrix<double>& F) const
+{
+  // Find out how many nodes there are
+  const unsigned n_node = this->nnode();
+
+  // Find out how many position types of dof there are
+  const unsigned n_position_type = this->nnodal_position_type();
+
+  // Set up memory for the shape functions
+  Shape psi(n_node, n_position_type);
+  DShape dpsidxi(n_node, n_position_type, DIM);
+
+  // Call the derivatives of the shape functions
+  double J = this->dshape_lagrangian_at_knot(intpt, psi, dpsidxi);
+
+  // Initialise to zero
+  F.initialise(0.0);
+
+  // Calculate displacements and derivatives and lagrangian coordinates
+  for (unsigned l = 0; l < n_node; l++)
+  {
+    // Check if the node has enough history for the requested time t.
+    // If not, we will take the lagrangian positions to compute F.
+    // \todo Really, we could also just use unity in that case.
+    bool has_enough_history =
+      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
+
+    // Loop over positional dofs
+    for (unsigned k = 0; k < n_position_type; k++)
+    {
+      // Loop over displacement components (deformed position)
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        double coordinate_val;
+
+        if (has_enough_history)
+        {
+          coordinate_val = this->nodal_position_gen(t, l, k, i);
+        }
+        else
+        {
+          coordinate_val = this->lagrangian_position_gen(l, k, i);
+        }
+
+        // Loop over derivative directions to build F_ij = d(x_i)/d(Xi_j)
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          F(i, j) += coordinate_val * dpsidxi(l, k, j);
+        }
+      }
+    }
+  }
+}
+
 template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_elastic(
   const DenseMatrix<double>& invFp,
-  const DenseMatrix<double>& FtF,
+  const DenseMatrix<double>& C,
   DenseMatrix<double>& bar_M,
   RankFourTensor<double>& dbar_M_dinvFp,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   // Compute GF^{p, -1} and Ce
   DenseMatrix<double> FtF_invFp(DIM, DIM, 0.0), Ce(DIM, DIM, 0.0);
-  MatrixHelpers::multiply(FtF, invFp, FtF_invFp);
+  MatrixHelpers::multiply(C, invFp, FtF_invFp);
   MatrixHelpers::transpose_multiply(invFp, FtF_invFp, Ce);
 
   // Now compute bar_M
@@ -90,7 +268,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_elastic(
   // The mandel stress
   MatrixHelpers::multiply(Ce, S, bar_M);
 
-  if (!computeDerivative) return;
+  if (!compute_derivative) return;
 
   // The derivative dSdC
   RankFourTensor<double> dSdC(DIM, DIM, DIM, DIM, 0.0);
@@ -158,32 +336,19 @@ template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::compute_mandellike_kinematic_hardening(
   const DenseMatrix<double>& invBpks,
   DenseMatrix<double>& bar_Mk,
-  RankFourTensor<double>& dbar_MkdinvBpks,
-  bool computeDerivative)
+  RankFourTensor<double>& dbar_Mk_dinvBpks,
+  const bool& compute_derivative)
 {
   bar_Mk.resize(DIM, DIM, 0.0);
-  // We now always build all plastic data. Do we need to check if we have pinned
-  // the data instead?
-  // if (!Plastic_data_has_been_built[invBpks_INDEX])
-  // {
-  //   bar_Mk.initialise(0.0);
-
-  //   if (computeDerivative)
-  //   {
-  //     dbar_MkdinvBpks.resize(DIM, DIM, DIM, DIM, 0.0);
-  //   }
-
-  //   return;
-  // }
 
   this->Plastic_consitutive_law_pt->kinematic_hardening_law_pt
     ->calculate_second_piola_kirchhoff_stress(invBpks, this->unity, bar_Mk);
 
-  if (computeDerivative)
+  if (compute_derivative)
   {
     this->Plastic_consitutive_law_pt->kinematic_hardening_law_pt
       ->calculate_d_second_piola_kirchhoff_stress_dg(
-        invBpks, this->unity, bar_Mk, dbar_MkdinvBpks);
+        invBpks, this->unity, bar_Mk, dbar_Mk_dinvBpks);
   }
 }
 
@@ -191,36 +356,20 @@ template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::compute_mandellike_elastic_core(
   const DenseMatrix<double>& invBpcs,
   DenseMatrix<double>& bar_Mc,
-  RankFourTensor<double>& dbar_McdinvBpcs,
-  bool computeDerivative)
+  RankFourTensor<double>& dbar_Mc_dinvBpcs,
+  const bool& compute_derivative)
 {
   bar_Mc.resize(DIM, DIM, 0.0);
-  // We now always build all plastic data. Do we need to check if we have pinned
-  // the data instead?
-  // if (!Plastic_data_has_been_built[invBpcs_INDEX])
-  // {
-  //   bar_Mc.initialise(0.0);
-
-  //   if (computeDerivative)
-  //   {
-  //     dbar_McdinvBpcs.resize(DIM, DIM, DIM, DIM, 0.0);
-  //   }
-
-  //   return;
-  // }
 
   this->Plastic_consitutive_law_pt->elastic_core_law_pt
     ->calculate_second_piola_kirchhoff_stress(invBpcs, this->unity, bar_Mc);
 
-  if (computeDerivative)
+  if (compute_derivative)
   {
     this->Plastic_consitutive_law_pt->elastic_core_law_pt
       ->calculate_d_second_piola_kirchhoff_stress_dg(
-        invBpcs, this->unity, bar_Mc, dbar_McdinvBpcs);
+        invBpcs, this->unity, bar_Mc, dbar_Mc_dinvBpcs);
   }
-
-  // this->Plastic_consitutive_law_pt->mandel_like_elastic_core_variable(
-  //   invBpcs, this->unity, bar_Mc, dbar_McdinvBpcs, computeDerivative);
 }
 
 template<unsigned DIM>
@@ -228,15 +377,15 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_total(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& bar_Mk,
   const DenseMatrix<double>& bar_Mc,
-  const double& R,
+  const double& r,
   DenseMatrix<double>& barbar_M,
   double& dbarbar_M_dMk,
   double& dbarbar_M_dMc,
-  DenseMatrix<double>& dbarbar_M_dR,
-  bool computeJacobian)
+  DenseMatrix<double>& dbarbar_M_dr,
+  bool compute_jacobian)
 {
   barbar_M.resize(DIM, DIM);
-  if (computeJacobian) dbarbar_M_dR.resize(DIM, DIM);
+  if (compute_jacobian) dbarbar_M_dr.resize(DIM, DIM);
   // We now always build all plastic data. Do we need to check if we have pinned
   // the data instead?
   // if (Plastic_data_has_been_built[invBpcs_INDEX] &&
@@ -246,57 +395,22 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_total(
   {
     for (unsigned int j = 0; j < DIM; j++)
     {
-      barbar_M(i, j) = bar_M(i, j) - R * bar_Mk(i, j) - (1 - R) * bar_Mc(i, j);
+      barbar_M(i, j) = bar_M(i, j) - r * bar_Mk(i, j) - (1 - r) * bar_Mc(i, j);
 
-      if (computeJacobian)
+      if (compute_jacobian)
       {
-        dbarbar_M_dR(i, j) = -bar_Mk(i, j) + bar_Mc(i, j);
+        dbarbar_M_dr(i, j) = -bar_Mk(i, j) + bar_Mc(i, j);
       }
     }
   }
 
-  if (computeJacobian)
+  if (compute_jacobian)
   {
-    dbarbar_M_dMk = -R;
-    dbarbar_M_dMc = R - 1;
+    dbarbar_M_dMk = -r;
+    dbarbar_M_dMc = r - 1;
   }
 
   return;
-  // }
-  // else if (Plastic_data_has_been_built[invBpks_INDEX])
-  // {
-  //   for (unsigned int i = 0; i < DIM; i++)
-  //   {
-  //     for (unsigned int j = 0; j < DIM; j++)
-  //     {
-  //       barbar_M(i, j) = bar_M(i, j) - bar_Mk(i, j);
-  //     }
-  //   }
-
-  //   if (computeJacobian)
-  //   {
-  //     dbarbar_M_dMk = -1.0;
-  //     dbarbar_M_dMc = 0.0;
-  //   }
-  // }
-  // else
-  // {
-  //   for (unsigned int i = 0; i < DIM; i++)
-  //   {
-  //     for (unsigned int j = 0; j < DIM; j++)
-  //     {
-  //       barbar_M(i, j) = bar_M(i, j);
-  //     }
-  //   }
-
-  //   if (computeJacobian)
-  //   {
-  //     dbarbar_M_dMk = 0.0;
-  //     dbarbar_M_dMc = 0.0;
-  //   }
-  // }
-
-  // dbarbar_M_dR.initialise(0.0);
 }
 
 template<unsigned DIM>
@@ -306,7 +420,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
   const DenseMatrix<double>& dfdM,
   DenseMatrix<double>& barbar_N,
   RankFourTensor<double>& dbarbar_N_dbarbar_M,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   barbar_N.resize(DIM, DIM, 0.0);
 
@@ -317,7 +431,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
   if (nMag < 1.0e-15)
   {
     barbar_N.initialise(0.0);
-    if (computeDerivative)
+    if (compute_derivative)
     {
       dbarbar_N_dbarbar_M.resize(DIM, DIM, DIM, DIM, 0.0);
     }
@@ -333,7 +447,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
     }
   }
 
-  if (!computeDerivative) return;
+  if (!compute_derivative) return;
   // The derivative is
   // dN_{ij}/dM_{kl} = [\delta_{is}\delta_{jt} - N_{ij}N_{st}] *
   // [ ddf/(dM_{st}dM_kl) + ddf/(dM_{ts}dM_kl) ] / (2 nMag)
@@ -1944,179 +2058,6 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         jacobian(row_r, col_bar_M_ij) -= dRdu * contrib_M;
         jacobian(row_r, col_bar_Mk_ij) -= dRdu * contrib_Mk;
         jacobian(row_r, col_bar_Mc_ij) -= dRdu * contrib_Mc;
-      }
-    }
-  }
-}
-
-template<unsigned DIM>
-void PlasticEquationsBase<DIM>::
-  compute_total_right_cauchy_green_deformation_tensor(
-    const unsigned int& t,
-    const unsigned int& ipt,
-    DenseMatrix<double>& G) const
-{
-  Vector<double> s(DIM);
-
-  // Assign the values of s
-  for (unsigned i = 0; i < DIM; ++i)
-  {
-    s[i] = this->integral_pt()->knot(ipt, i);
-  }
-
-  // FIRST WE CALCULATE G (C)
-
-  // Find out how many nodes there are
-  unsigned n_node = this->nnode();
-
-  // Find out how many positional dofs there are
-  unsigned n_position_type = this->nnodal_position_type();
-
-  // Set up memory for the shape functions
-  Shape psi(n_node, n_position_type);
-  DShape dpsidxi(n_node, n_position_type, DIM);
-
-  // Call the derivatives of the shape functions (ignore Jacobian)
-  (void)this->dshape_lagrangian_at_knot(ipt, psi, dpsidxi);
-
-  // Storage for Lagrangian coordinates (initialised to zero)
-  Vector<double> interpolated_xi(DIM, 0.0);
-
-  // Calculate interpolated values of the derivative of global position
-  // wrt lagrangian coordinates
-  DenseMatrix<double> interpolated_G(DIM);
-
-  // Initialise to zero
-  for (unsigned i = 0; i < DIM; i++)
-  {
-    for (unsigned j = 0; j < DIM; j++)
-    {
-      interpolated_G(i, j) = 0.0;
-    }
-  }
-
-  // Calculate displacements and derivatives
-  for (unsigned l = 0; l < n_node; l++)
-  {
-    // Check if the node has enough history for the requested time t.
-    // If not, we will take the lagrangian positions to compute F.
-    // \todo Really, we could also just use unity in that case.
-    bool has_enough_history =
-      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
-
-    // Loop over positional dofs
-    for (unsigned k = 0; k < n_position_type; k++)
-    {
-      // Loop over displacement components (deformed position)
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        // Calculate the lagrangian coordinates and the accelerations
-        interpolated_xi[i] +=
-          this->lagrangian_position_gen(l, k, i) * psi(l, k);
-
-        // Loop over derivative directions
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          if (has_enough_history)
-          {
-            interpolated_G(j, i) +=
-              this->nodal_position_gen(t, l, k, i) * dpsidxi(l, k, j);
-          }
-          else
-          {
-            interpolated_G(j, i) +=
-              this->lagrangian_position_gen(l, k, i) * dpsidxi(l, k, j);
-          }
-        }
-      }
-    }
-  }
-
-  // Assign values of G
-  for (unsigned i = 0; i < DIM; i++)
-  {
-    // Do upper half of matrix
-    for (unsigned j = i; j < DIM; j++)
-    {
-      // Initialise G(i,j) to zero
-      G(i, j) = 0.0;
-      // Now calculate the dot product
-      for (unsigned k = 0; k < DIM; k++)
-      {
-        G(i, j) += interpolated_G(i, k) * interpolated_G(j, k);
-      }
-    }
-    // Matrix is symmetric so just copy lower half
-    for (unsigned j = 0; j < i; j++)
-    {
-      G(i, j) = G(j, i);
-    }
-  }
-
-  // Push forward G using the isotropic growth term
-  double gamma;
-  this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
-  double diag_entry = pow(gamma, 2.0 / double(DIM));
-  for (unsigned int i = 0; i < DIM; i++)
-  {
-    for (unsigned int j = 0; j < DIM; j++)
-    {
-      G(i, j) = G(i, j) / diag_entry;
-    }
-  }
-}
-
-template<unsigned DIM>
-void PlasticEquationsBase<DIM>::compute_deformation_gradient_tensor(
-  unsigned int t, unsigned int intpt, DenseMatrix<double>& F) const
-{
-  // Find out how many nodes there are
-  const unsigned n_node = this->nnode();
-
-  // Find out how many position types of dof there are
-  const unsigned n_position_type = this->nnodal_position_type();
-
-  // Set up memory for the shape functions
-  Shape psi(n_node, n_position_type);
-  DShape dpsidxi(n_node, n_position_type, DIM);
-
-  // Call the derivatives of the shape functions
-  double J = this->dshape_lagrangian_at_knot(intpt, psi, dpsidxi);
-
-  // Initialise to zero
-  F.initialise(0.0);
-
-  // Calculate displacements and derivatives and lagrangian coordinates
-  for (unsigned l = 0; l < n_node; l++)
-  {
-    // Check if the node has enough history for the requested time t.
-    // If not, we will take the lagrangian positions to compute F.
-    // \todo Really, we could also just use unity in that case.
-    bool has_enough_history =
-      (t < this->node_pt(l)->position_time_stepper_pt()->ntstorage());
-
-    // Loop over positional dofs
-    for (unsigned k = 0; k < n_position_type; k++)
-    {
-      // Loop over displacement components (deformed position)
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        double coordinate_val;
-
-        if (has_enough_history)
-        {
-          coordinate_val = this->nodal_position_gen(t, l, k, i);
-        }
-        else
-        {
-          coordinate_val = this->lagrangian_position_gen(l, k, i);
-        }
-
-        // Loop over derivative directions to build F_ij = d(x_i)/d(Xi_j)
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          F(i, j) += coordinate_val * dpsidxi(l, k, j);
-        }
       }
     }
   }

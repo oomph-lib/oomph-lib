@@ -565,49 +565,78 @@ namespace oomph
       const unsigned int& ipt,
       DenseMatrix<double>& C) const;
 
-    /*!
-     * \brief Computes the deformation gradient tensor at a given integration
-     * point
-     * \param[in] t The time, for which F should be computed. Note, dotF is
-     * computed only for t=0
-     * \param[in] inpt The integration point
-     * \param[out] F The resulting deformation gradient
-     * \param[out] dotF The first time derivative of F
-     */
+    // =========================================================================
+    /// \short Computes the deformation gradient tensor F
+    ///
+    /// \param[in] t The time, for which F should be computed.
+    /// \param[in] inpt The integration point
+    /// \param[out] F The resulting deformation gradient
+    // =========================================================================
     void compute_deformation_gradient_tensor(unsigned int t,
                                              unsigned int intpt,
                                              DenseMatrix<double>& F) const;
 
+    // =========================================================================
+    /// \short A convenience wrapper for \ref
+    /// compute_deformation_gradient_tensor(0, intpt, F).
+    // =========================================================================
     void compute_deformation_gradient_tensor(unsigned int intpt,
                                              DenseMatrix<double>& F) const
     {
       compute_deformation_gradient_tensor(0, intpt, F);
     }
 
+    // =========================================================================
+    /// \brief Computes the elastic mandel stress, Eq. (21), and its derivative.
+    ///
+    /// \param[in] invFp The inverse of the plastic deformation gradient.
+    /// \param[in] C The global right Cuachy-Green deformation tensor.
+    /// \param[out] bar_M The elastic mandel stress.
+    /// \param[out] dbar_M_dinvFp The derivative of bar_M w.r.t. invFp.
+    /// \param[in] compute_derivative Whether to compute the derivative.
+    // =========================================================================
     void compute_mandel_stress_elastic(const DenseMatrix<double>& invFp,
-                                       const DenseMatrix<double>& FtF,
-                                       DenseMatrix<double>& Mbar,
-                                       RankFourTensor<double>& dMbardinvFp,
-                                       bool computeDerivative);
+                                       const DenseMatrix<double>& C,
+                                       DenseMatrix<double>& bar_M,
+                                       RankFourTensor<double>& dbar_M_dinvFp,
+                                       const bool& compute_derivative);
 
+    // =========================================================================
+    /// \short A convenience wrapper which computed the elastic mandel stress,
+    /// Eq. (21).
+    // =========================================================================
     void compute_mandel_stress_elastic(const DenseMatrix<double>& invFp,
-                                       const DenseMatrix<double>& FtF,
-                                       DenseMatrix<double>& Mbar)
+                                       const DenseMatrix<double>& C,
+                                       DenseMatrix<double>& bar_M)
     {
       return compute_mandel_stress_elastic(
         invFp,
-        FtF,
-        Mbar,
+        C,
+        bar_M,
         PlasticEquationsBase<DIM>::Dummy_rankfourtensor,
         false);
     }
 
+    // =========================================================================
+    /// \brief Computes the mandel-like kinematic hardening stress, Eq. (33),
+    /// and its derivative.
+    ///
+    /// \param[in] invBpks The inverse of the left Cauchy-Green deformation
+    /// tensor describing the kinematic hardening.
+    /// \param[out] bar_Mk The mandel-like kinematic hardening stress.
+    /// \param[out] dbar_Mk_dinvBpks The derivative of bar_Mk w.r.t. invBpks.
+    /// \param[in] compute_derivative Whether to compute the derivative.
+    // =========================================================================
     void compute_mandellike_kinematic_hardening(
       const DenseMatrix<double>& invBpks,
       DenseMatrix<double>& bar_Mk,
-      RankFourTensor<double>& dbar_MkdinvBpks,
-      bool computeDerivative);
+      RankFourTensor<double>& dbar_Mk_dinvBpks,
+      const bool& compute_derivative);
 
+    // =========================================================================
+    /// \short A convenience wrapper which computes the mandel-like kinematic
+    /// hardening stress, Eq. (33).
+    // =========================================================================
     void compute_mandellike_kinematic_hardening(
       const DenseMatrix<double>& invBpks, DenseMatrix<double>& bar_Mk)
     {
@@ -618,12 +647,26 @@ namespace oomph
         false);
     }
 
+    // =========================================================================
+    /// \brief Computes the mandel-like elastic core stress, Eq. (94), and its
+    /// derivative.
+    ///
+    /// \param[in] invBpcs The inverse of the left Cauchy-Green deformation
+    /// tensor describing the kinematic hardening.
+    /// \param[out] bar_Mc The mandel-like elastic core stress.
+    /// \param[out] dbar_Mc_dinvBpcs The derivative of bar_Mc w.r.t. invBpcs.
+    /// \param[in] compute_derivative Whether to compute the derivative.
+    // =========================================================================
     void compute_mandellike_elastic_core(
       const DenseMatrix<double>& invBpcs,
       DenseMatrix<double>& bar_Mc,
-      RankFourTensor<double>& dbar_McdinvBpcs,
-      bool computeDerivative);
+      RankFourTensor<double>& dbar_Mc_dinvBpcs,
+      const bool& compute_derivative);
 
+    // =========================================================================
+    /// \short A convenience wrapper which computes the mandel-like elastic core
+    /// stress, Eq. (94).
+    // =========================================================================
     void compute_mandellike_elastic_core(const DenseMatrix<double>& invBpcs,
                                          DenseMatrix<double>& bar_Mc)
     {
@@ -634,41 +677,75 @@ namespace oomph
         false);
     }
 
+    // =========================================================================
+    /// \brief Computes the total mandel stress, Eq. (77) and its derivatives.
+    ///
+    /// \param[in] bar_M The elastic mandel stress.
+    /// \param[in] bar_Mk The mandel-like kinematic hardening stress.
+    /// \param[in] bar_Mc The mandel-like elastic core stress.
+    /// \param[in] r The normal yield ratio.
+    /// \param[out] barbar_M The resulting mandel stress.
+    /// \param[out] dbarbar_M_dMk The derivative of barbar_M w.r.t bar_Mk.
+    /// \param[out] dbarbar_M_dMc The derivative of barbar_M w.r.t bar_Mc.
+    /// \param[out] dbarbar_M_dr The derivative of barbar_M w.r.t r.
+    /// \param[in] compute_jacobian Whether to compute the derivative.
+    // =========================================================================
     void compute_mandel_stress_total(const DenseMatrix<double>& bar_M,
                                      const DenseMatrix<double>& bar_Mk,
                                      const DenseMatrix<double>& bar_Mc,
-                                     const double& R,
+                                     const double& r,
                                      DenseMatrix<double>& barbar_M,
                                      double& dbarbar_M_dMk,
                                      double& dbarbar_M_dMc,
-                                     DenseMatrix<double>& dbarbar_M_dR,
-                                     bool computeJacobian);
-
+                                     DenseMatrix<double>& dbarbar_M_dr,
+                                     bool compute_jacobian);
+    // =========================================================================
+    /// \brief A convenience wrapper to compute the total mandel stress,
+    /// Eq. (77).
+    // =========================================================================
     void compute_mandel_stress_total(const DenseMatrix<double>& bar_M,
                                      const DenseMatrix<double>& bar_Mk,
                                      const DenseMatrix<double>& bar_Mc,
-                                     const double& R,
+                                     const double& r,
                                      DenseMatrix<double>& barbar_M)
     {
-      double ddR = 0.0;
+      double dMdr = 0.0;
       compute_mandel_stress_total(bar_M,
                                   bar_Mk,
                                   bar_Mc,
-                                  R,
+                                  r,
                                   barbar_M,
-                                  ddR,
-                                  ddR,
+                                  dMdr,
+                                  dMdr,
                                   GeneralisedElement::Dummy_matrix,
                                   false);
     }
 
+    // =========================================================================
+    /// \short Computes a normalised and symmetrised tensor based on M and f(M),
+    /// see Eq. (107).
+    ///
+    /// \param[in] barbar_M The global mandel stress.
+    /// \param[in] f The yield-surface stress \see
+    /// YieldCriterion::surface_function.
+    /// \param[in] dfdM The derivative of the yield surface stress w.r.t.
+    /// barbar_M.
+    /// \param[out] barbar_N The normalised and symmetrised tensor.
+    /// \param[out] dbarbar_N_dbarba_M The derivative of barbar_N w.r.t.
+    /// barbar_M.
+    /// \param[in] compute_derivative Wether to compute the derivative
+    // =========================================================================
     void compute_barbar_N(const DenseMatrix<double>& barbar_M,
                           const double& f,
                           const DenseMatrix<double>& dfdM,
                           DenseMatrix<double>& barbar_N,
                           RankFourTensor<double>& dbarbar_N_dbarba_M,
-                          bool computeDerivative);
+                          const bool& compute_derivative);
 
+    // =========================================================================
+    /// \brief A convenience wrapper to compute a normalised and symmetrised
+    /// tensor based on M and f(M), see Eq. (107).
+    // =========================================================================
     void compute_barbar_N(const DenseMatrix<double>& barbar_M,
                           const double& f,
                           const DenseMatrix<double>& dfdM,

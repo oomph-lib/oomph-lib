@@ -558,7 +558,7 @@ namespace oomph
       DenseMatrix<double>& du_dbar_Mc,
       double& du_dh,
       double& du_dr,
-      bool compute_derivative
+      const bool& compute_derivative
 
     )
     {
@@ -687,7 +687,7 @@ namespace oomph
       DenseMatrix<double>& du_dbar_Mc,
       double& du_dh,
       double& du_dr,
-      bool compute_derivative)
+      const bool& compute_derivative)
     {
       // Compute Eq. 111
       const double uc = (*Elastic_core_u_pt);
@@ -759,7 +759,7 @@ namespace oomph
                            DenseMatrix<double>& dc_dbar_Mk,
                            DenseMatrix<double>& dc_dbar_Mc,
                            double& dcdr,
-                           bool compute_derivative)
+                           const bool& compute_derivative)
     {
       // The reduction is c_sigma = bar_bar_N(i, j) hat_bar_N_c(i, j). The
       // derivative can be obtained by applying product and chain rules.
