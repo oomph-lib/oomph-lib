@@ -1980,7 +1980,7 @@ namespace oomph
     /// shouldn't be a problem - we can't do this at construction of this class
     /// because the number of integral points is defined by derived classes
     const static std::vector<std::string> Plastic_data_names;
-  
+
 
     /// [Number of ipts, number of types of plastic data]
     /// Pointer to the plastic data at the given integral point and of the given
