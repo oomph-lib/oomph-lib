@@ -512,7 +512,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lp(
   DenseMatrix<double>& bar_Lp,
   RankFourTensor<double>& dbar_Lp_dbarbar_M,
   RankFourTensor<double>& dbar_Lp_dbar_M,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   const double eta = (*this->Plastic_consitutive_law_pt->eta_p_pt);
 
@@ -547,7 +547,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lp(
   }
 
   // The derivative.
-  if (computeDerivative)
+  if (compute_derivative)
   {
     // We do not need to initialize the value, it is done in the next for loop
     dbar_Lp_dbarbar_M.resize(DIM, DIM, DIM, DIM);
@@ -634,7 +634,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
   DenseMatrix<double>& bar_Lpkd,
   RankFourTensor<double>& dbar_Lpkd_dbar_M,
   RankFourTensor<double>& dbar_Lpkd_dbar_Mk,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   bar_Lpkd.resize(DIM, DIM);
   const double inv_bk =
@@ -666,7 +666,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
     }
   }
 
-  if (computeDerivative)
+  if (compute_derivative)
   {
     dbar_Lpkd_dbar_M.resize(DIM, DIM, DIM, DIM, 0.0);
     dbar_Lpkd_dbar_Mk.resize(DIM, DIM, DIM, DIM, 0.0);
@@ -714,7 +714,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
   const DenseMatrix<double>& df_Mc_dMc,
   DenseMatrix<double>& hat_bar_Nc,
   RankFourTensor<double>& dhat_bar_Nc_dMc,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   hat_bar_Nc.resize(DIM, DIM);
 
@@ -723,7 +723,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
   if (nMag < 1.0e-15)
   {
     hat_bar_Nc.initialise(0.0);
-    if (computeDerivative)
+    if (compute_derivative)
     {
       dhat_bar_Nc_dMc.resize(DIM, DIM, DIM, DIM, 0.0);
     }
@@ -739,7 +739,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
     }
   }
 
-  if (!computeDerivative) return;
+  if (!compute_derivative) return;
 
   // The derivative is (A = df_Mc_dMc)
   // dN_ij/dA_mn = (\delta_im \delta_jn - N_ij N_mn) / nMag
@@ -790,21 +790,21 @@ template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
   const DenseMatrix<double>& bar_M,
   const DenseMatrix<double>& hat_bar_Nc,
-  const double& Rc,
+  const double& rc,
   const RankFourTensor<double>& dhat_bar_Nc_dhat_bar_Mc,
-  const DenseMatrix<double>& dRc_dMc,
-  const double& dRc_dH,
+  const DenseMatrix<double>& drc_dMc,
+  const double& drc_dh,
   DenseMatrix<double>& bar_Lpcd,
   RankFourTensor<double>& dbar_Lpcd_dbar_M,
   RankFourTensor<double>& dbar_Lpcd_dhat_bar_Mc,
   DenseMatrix<double>& dbar_Lpcd_dh,
-  bool computeDerivative)
+  const bool& compute_derivative)
 {
   bar_Lpcd.resize(DIM, DIM);
 
   const double invX =
     1 / (*this->Plastic_consitutive_law_pt->elastic_core_x_pt);
-  const double Rc_by_X = Rc * invX;
+  const double Rc_by_X = rc * invX;
   const double eta = (*this->Plastic_consitutive_law_pt->elastic_core_eta_pt);
   const double eta_prefactor = Rc_by_X * eta;
 
@@ -828,7 +828,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
     }
   }
 
-  if (computeDerivative)
+  if (compute_derivative)
   {
     // dLpcs_ij/dbar_M_kl =
     //          Rc/X * eta (\delta_ik \hat\bar{Nc}_lj - \hat\bar{Nc}_ik
@@ -842,7 +842,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
     {
       for (unsigned int j = 0; j < DIM; j++)
       {
-        dbar_Lpcd_dh(i, j) = bar_Lpcd(i, j) * dRc_dH;
+        dbar_Lpcd_dh(i, j) = bar_Lpcd(i, j) * drc_dh;
 
         for (unsigned int k = 0; k < DIM; k++)
         {
@@ -864,7 +864,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
 
             // the total derivative
             dbar_Lpcd_dhat_bar_Mc(i, j, k, l) =
-              Rc_by_X * dNdMc + bar_Lpcd(i, j) * dRc_dMc(k, l);
+              Rc_by_X * dNdMc + bar_Lpcd(i, j) * drc_dMc(k, l);
           }
         }
       }
@@ -897,7 +897,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
   {
     for (unsigned int j = 0; j < DIM; j++)
     {
-      bar_Lpcd(i, j) = Rc * bar_Lpcd(i, j);
+      bar_Lpcd(i, j) = rc * bar_Lpcd(i, j);
     }
   }
 }

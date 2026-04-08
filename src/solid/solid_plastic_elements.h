@@ -199,7 +199,7 @@ namespace oomph
     /// possible.
     ///
     /// \param[in] time_stepper_pt The time stepper to set.
-    /// \param[in] preserve_existing_data Wether the internal data should be
+    /// \param[in] preserve_existing_data Whether the internal data should be
     /// copied over to the new structure.
     // =========================================================================
     void assign_plastic_timestepper_pt(TimeStepper* time_stepper_pt,
@@ -733,7 +733,7 @@ namespace oomph
     /// \param[out] barbar_N The normalised and symmetrised tensor.
     /// \param[out] dbarbar_N_dbarba_M The derivative of barbar_N w.r.t.
     /// barbar_M.
-    /// \param[in] compute_derivative Wether to compute the derivative
+    /// \param[in] compute_derivative Whether to compute the derivative.
     // =========================================================================
     void compute_barbar_N(const DenseMatrix<double>& barbar_M,
                           const double& f,
@@ -759,17 +759,36 @@ namespace oomph
                        false);
     }
 
-    /*!
-     * \brief This function computes \bar{L}^\text{p}/\dot{\bar{\lambda}}
-     */
+    // =========================================================================
+    /// \short this function computes Lp / \dot{lambda}. Lp is the velocity
+    /// gradient of the plastic deformation, see Eq. (114). \dot{lambda} is the
+    /// time derivative of the plastic multiplier.
+    ///
+    /// The division by \dot{lambda} is done to get a better separation. L_p is
+    /// linear in \dot{lambda}.
+    ///
+    /// \param[in] bar_M The elastic mandel stress
+    /// \param[in] barbar_N A a normalised and symmetrised (\see
+    /// compute_barbar_N).
+    /// \param[in] dbarbar_N_dbarbar_M The derivative of barbar_N w.r.t.
+    /// barbar_M.
+    /// \param[out] bar_Lp The velocity gradient (actually Lp / \dot{lambda}).
+    /// \param[out] dbar_Lp_dbarbar_M The derivative of bar_Lp w.r.t. barbar_M.
+    /// \param[out] dbar_Lp_dbar_M The derivative of bar_Lp w.r.t. bar_M.
+    /// \param[in] compute_derivative Whether to compute the derivatives.
+    // =========================================================================
     void compute_bar_Lp(const DenseMatrix<double>& bar_M,
                         const DenseMatrix<double>& barbar_N,
                         const RankFourTensor<double>& dbarbar_N_dbarbar_M,
                         DenseMatrix<double>& bar_Lp,
                         RankFourTensor<double>& dbar_Lp_dbarbar_M,
                         RankFourTensor<double>& dbar_Lp_dbar_M,
-                        bool computeDerivative);
+                        const bool& compute_derivative);
 
+    // =========================================================================
+    /// \brief A convenience wrapper to compute Lp, the velocity gradient of the
+    /// plastic deformation, see Eq. (114).
+    // =========================================================================
     void compute_bar_Lp(const DenseMatrix<double>& bar_M,
                         const DenseMatrix<double>& barbar_N,
                         DenseMatrix<double>& bar_Lp)
@@ -783,16 +802,29 @@ namespace oomph
                      false);
     }
 
-    /*!
-     * \brief This function computes \bar{L}^\text{pkd}/\dot{\bar{\lambda}}
-     */
+    // =========================================================================
+    /// \short this function computes Lpkd * \dot{lambda}. Lpkd is the velocity
+    /// gradient of the kinematic hardening variable, see Eq. (114).
+    ///
+    /// \param[in] bar_M The elastic mandel stress
+    /// \param[in] bar_Mk The mandel-like kinematic hardening variable.
+    /// \param[out] bar_Lpkd The velocity gradient (actually Lpkd /
+    /// \dot{lambda}).
+    /// \param[out] dbar_Lpkd_dbar_M The derivative of bar_Lpkd w.r.t. bar_M.
+    /// \param[out] dbar_Lpkd_dbar_Mk The derivative of bar_Lpkd w.r.t. bar_Mk.
+    /// \param[in] compute_derivative Whether to compute the derivatives.
+    // =========================================================================
     void compute_bar_Lpkd(const DenseMatrix<double>& bar_M,
                           const DenseMatrix<double>& bar_Mk,
                           DenseMatrix<double>& bar_Lpkd,
                           RankFourTensor<double>& dbar_Lpkd_dbar_M,
                           RankFourTensor<double>& dbar_Lpkd_dbar_Mk,
-                          bool computeDerivative);
+                          const bool& compute_derivative);
 
+    // =========================================================================
+    /// \brief A convenience wrapper to compute Lpkd, the velocity gradient of
+    /// the kinematic hardening variable, see Eq. (114).
+    // =========================================================================
     void compute_bar_Lpkd(const DenseMatrix<double>& bar_M,
                           const DenseMatrix<double>& bar_Mk,
                           DenseMatrix<double>& bar_Lpkd)
@@ -805,12 +837,26 @@ namespace oomph
                        false);
     }
 
+    // =========================================================================
+    /// \short This function computes hat_bar_Nc, a unit normal to the yield
+    /// surface defined by the elastic core Mandel-like variable (bar_Mc). For
+    /// details, see Eq. (100).
+    ///
+    /// \param[in] f_Mc The yield function evaluated at bar_Mc.
+    /// \param[in] df_Mc_dMc The derivative of f_Mc w.r.t Mc.
+    /// \param[out] hat_bar_Nc The unit normal.
+    /// \param[out] dhat_bar_Nc_dMc The derivative of hat_bar_Nc w.r.t. Mc.
+    /// \param[in] compute_derivative Whether to compute the derivative.
+    // =========================================================================
     void compute_hat_bar_Nc(const double& f_Mc,
                             const DenseMatrix<double>& df_Mc_dMc,
                             DenseMatrix<double>& hat_bar_Nc,
-                            RankFourTensor<double>& dhar_bar_Nc_dMc,
-                            bool computederivative);
+                            RankFourTensor<double>& dhat_bar_Nc_dMc,
+                            const bool& compute_derivative);
 
+    // =========================================================================
+    /// \brief A convenience wrapper to compute hat_bar_Nc, see Eq. (100).
+    // =========================================================================
     void compute_hat_bar_Nc(const double& f_Mc,
                             const DenseMatrix<double>& df_Mc_dMc,
                             DenseMatrix<double>& hat_bar_Nc)
@@ -822,21 +868,41 @@ namespace oomph
                          false);
     }
 
-    /*!
-     * \brief This function computes \bar{L}^\text{pcd}/\dot{\bar{\lambda}}
-     */
+    // =========================================================================
+    /// \short this function computes Lpcd * \dot{lambda}. Lpcd is the velocity
+    /// gradient of the elastic core variable, see Eq. (114).
+    ///
+    /// \param[in] bar_M The elastic mandel stress.
+    /// \param[in] hat_bar_Nc A unit normal, \see compute_hat_bar_Nc.
+    /// \param[in] rc The elastic core surface ratio, see Eq. (105).
+    /// \param[in] dhat_bar_Nc_dhat_bar_Mc The derivative of hat_bar_Nc w.r.t
+    /// hat_bar_Mc.
+    /// \param[in] drc_dMc The derivative of rc w.r.t. Mc.
+    /// \param[in] drc_dh The derivative of rc w.r.t h (the isotropic hardening
+    /// variable).
+    /// \param[out] bar_Lpcd The velocity gradient (actually Lpcd /
+    /// \dot{lambda}).
+    /// \param[out] dbar_Lpcd_dbar_M The derivative of bar_Lpcd w.r.t. bar_M.
+    /// \param[out] dbar_Lpcd_dhat_bar_Mc The derivative of bar_Lpcd w.r.t.
+    /// hat_bar_Mc.
+    /// \param[out] dbar_Lpcd_dh The derivative of bar_Lpcd w.r.t. h.
+    /// \param[in] compute_derivative Whether to compute the derivatives.
+    // =========================================================================
     void compute_bar_Lpcd(const DenseMatrix<double>& bar_M,
                           const DenseMatrix<double>& hat_bar_Nc,
-                          const double& Rc,
+                          const double& rc,
                           const RankFourTensor<double>& dhat_bar_Nc_dhat_bar_Mc,
-                          const DenseMatrix<double>& dRc_dMc,
-                          const double& dRc_dH,
+                          const DenseMatrix<double>& drc_dMc,
+                          const double& drc_dh,
                           DenseMatrix<double>& bar_Lpcd,
                           RankFourTensor<double>& dbar_Lpcd_dbar_M,
                           RankFourTensor<double>& dbar_Lpcd_dhat_bar_Mc,
                           DenseMatrix<double>& dbar_Lpcd_dh,
-                          bool computeDerivative);
+                          const bool& compute_derivative);
 
+    // =========================================================================
+    /// \brief A convenience wrapper to compute Lpcd, see Eq. (114).
+    // =========================================================================
     void compute_bar_Lpcd(const DenseMatrix<double>& bar_M,
                           const DenseMatrix<double>& hat_bar_Nc,
                           const double& Rc,
@@ -857,7 +923,7 @@ namespace oomph
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // Functions for constructing the plastic data below                      //
+    // Functions for constructing the plastic data below //
     ////////////////////////////////////////////////////////////////////////////
 
     void construct_plastic_data()
@@ -1234,8 +1300,8 @@ namespace oomph
     }
 
     /*!
-     * \brief returns the time derivative of the elastic deformation gradient as
-     * a matrix
+     * \brief returns the time derivative of the elastic deformation gradient
+     * as a matrix
      * \details Uses the data's time stepper to compute the derivative
      */
     void get_dot_inv_fp_matrix(const unsigned& ipt,
@@ -1343,8 +1409,8 @@ namespace oomph
     }
 
     /*!
-     * \brief returns the time derivative of the kinematic hardening deformation
-     * gradient as a matrix
+     * \brief returns the time derivative of the kinematic hardening
+     * deformation gradient as a matrix
      * \details Uses the data's time stepper to compute the derivative
      */
     void get_dot_invBpks_matrix(const unsigned& ipt,
@@ -1702,8 +1768,8 @@ namespace oomph
     /// Stores, if finite difference should be used for the plastic solve.
     bool Plastic_solve_use_fd = false;
 
-    /// The step used to determine the jacobian, if plastic Plastic_solve_use_fd
-    /// is set to true.
+    /// The step used to determine the jacobian, if plastic
+    /// Plastic_solve_use_fd is set to true.
     double* Plastic_fd_jacobian_step_pt =
       &FiniteElement::Default_fd_jacobian_step;
 
@@ -1730,13 +1796,13 @@ namespace oomph
     const static std::vector<std::string> Plastic_data_names;
     // We store a vector of indices of the plastic data in internal data
     // so we can assign timesteppers etc more easily
-    // We resize this every time we build a new set of plastic internal data but
-    // since we only do this once when the element is constructed this shouldn't
-    // be a problem - we can't do this at construction of this class because
-    // the number of integral points is defined by derived classes
+    // We resize this every time we build a new set of plastic internal data
+    // but since we only do this once when the element is constructed this
+    // shouldn't be a problem - we can't do this at construction of this class
+    // because the number of integral points is defined by derived classes
 
-    // We store a separate set of plastic: internal data indices, pinned status,
-    // and eqn numbers per integral point in the element.
+    // We store a separate set of plastic: internal data indices, pinned
+    // status, and eqn numbers per integral point in the element.
 
     // [Number of ipts, number of types of plastic data]
     // Pointer to the plastic data at the given integral point and of the given
@@ -1753,8 +1819,8 @@ namespace oomph
     Vector<Vector<double*>> Plastic_dof_data_pt;
 
     // Keeps track of if data for the  plastic dof numbers has been allocated
-    // We do it within this function because this allows us to reliably zero the
-    // counters Num_plastic_Dofs and Num_plastic_residuals
+    // We do it within this function because this allows us to reliably zero
+    // the counters Num_plastic_Dofs and Num_plastic_residuals
     bool Plastic_dof_nunbers_has_been_resized = false;
 
     // The solver tolerance for the plastic newton solve
