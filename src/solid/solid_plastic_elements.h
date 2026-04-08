@@ -587,7 +587,7 @@ namespace oomph
     }
 
     // =========================================================================
-    /// \brief Computes the elastic mandel stress, Eq. (21), and its derivative.
+    /// \short Computes the elastic mandel stress, Eq. (21), and its derivative.
     ///
     /// \param[in] invFp The inverse of the plastic deformation gradient.
     /// \param[in] C The global right Cuachy-Green deformation tensor.
@@ -618,7 +618,7 @@ namespace oomph
     }
 
     // =========================================================================
-    /// \brief Computes the mandel-like kinematic hardening stress, Eq. (33),
+    /// \short Computes the mandel-like kinematic hardening stress, Eq. (33),
     /// and its derivative.
     ///
     /// \param[in] invBpks The inverse of the left Cauchy-Green deformation
@@ -648,7 +648,7 @@ namespace oomph
     }
 
     // =========================================================================
-    /// \brief Computes the mandel-like elastic core stress, Eq. (94), and its
+    /// \short Computes the mandel-like elastic core stress, Eq. (94), and its
     /// derivative.
     ///
     /// \param[in] invBpcs The inverse of the left Cauchy-Green deformation
@@ -678,7 +678,7 @@ namespace oomph
     }
 
     // =========================================================================
-    /// \brief Computes the total mandel stress, Eq. (77) and its derivatives.
+    /// \short Computes the total mandel stress, Eq. (77) and its derivatives.
     ///
     /// \param[in] bar_M The elastic mandel stress.
     /// \param[in] bar_Mk The mandel-like kinematic hardening stress.
@@ -700,7 +700,7 @@ namespace oomph
                                      DenseMatrix<double>& dbarbar_M_dr,
                                      bool compute_jacobian);
     // =========================================================================
-    /// \brief A convenience wrapper to compute the total mandel stress,
+    /// \short A convenience wrapper to compute the total mandel stress,
     /// Eq. (77).
     // =========================================================================
     void compute_mandel_stress_total(const DenseMatrix<double>& bar_M,
@@ -743,7 +743,7 @@ namespace oomph
                           const bool& compute_derivative);
 
     // =========================================================================
-    /// \brief A convenience wrapper to compute a normalised and symmetrised
+    /// \short A convenience wrapper to compute a normalised and symmetrised
     /// tensor based on M and f(M), see Eq. (107).
     // =========================================================================
     void compute_barbar_N(const DenseMatrix<double>& barbar_M,
@@ -786,7 +786,7 @@ namespace oomph
                         const bool& compute_derivative);
 
     // =========================================================================
-    /// \brief A convenience wrapper to compute Lp, the velocity gradient of the
+    /// \short A convenience wrapper to compute Lp, the velocity gradient of the
     /// plastic deformation, see Eq. (114).
     // =========================================================================
     void compute_bar_Lp(const DenseMatrix<double>& bar_M,
@@ -822,7 +822,7 @@ namespace oomph
                           const bool& compute_derivative);
 
     // =========================================================================
-    /// \brief A convenience wrapper to compute Lpkd, the velocity gradient of
+    /// \short A convenience wrapper to compute Lpkd, the velocity gradient of
     /// the kinematic hardening variable, see Eq. (114).
     // =========================================================================
     void compute_bar_Lpkd(const DenseMatrix<double>& bar_M,
@@ -855,7 +855,7 @@ namespace oomph
                             const bool& compute_derivative);
 
     // =========================================================================
-    /// \brief A convenience wrapper to compute hat_bar_Nc, see Eq. (100).
+    /// \short A convenience wrapper to compute hat_bar_Nc, see Eq. (100).
     // =========================================================================
     void compute_hat_bar_Nc(const double& f_Mc,
                             const DenseMatrix<double>& df_Mc_dMc,
@@ -901,7 +901,7 @@ namespace oomph
                           const bool& compute_derivative);
 
     // =========================================================================
-    /// \brief A convenience wrapper to compute Lpcd, see Eq. (114).
+    /// \short A convenience wrapper to compute Lpcd, see Eq. (114).
     // =========================================================================
     void compute_bar_Lpcd(const DenseMatrix<double>& bar_M,
                           const DenseMatrix<double>& hat_bar_Nc,
@@ -926,25 +926,30 @@ namespace oomph
     // Functions for constructing the plastic data below //
     ////////////////////////////////////////////////////////////////////////////
 
+    // =========================================================================
+    /// \short This calls all neccesary functions to setup the memory for the
+    /// internal variables.
+    // =========================================================================
     void construct_plastic_data()
     {
+      // Allocate arrays for data pointer and eqn numbers
       resize_plastic_dof_numbers();
 
+      // Create the internal data containers
       construct_inv_fp_internal_data();
       construct_invBpks_internal_data();
       construct_invBpcs_internal_data();
       construct_r_internal_data();
       construct_lambda_internal_data();
 
-      // We assign the equation numbers now because the user will likely want
-      // all plastic data unpinned. If they pin any then they will need to call
-      // assign_plastic_eqn_numbers again
+      // Assign the equation numbers for plastic solve
       assign_plastic_eqn_numbers();
     }
 
-    // Change to not have an argument - in fact if we're always building all
-    // plastic data then we don't need thi Collapse all building plastic data
-    // into a single function
+    // =========================================================================
+    /// \short Allocates the space for pointers to the internal data and their
+    /// equation numbers for plastic solve.
+    // =========================================================================
     void resize_plastic_dof_numbers()
     {
       if (Plastic_dof_nunbers_has_been_resized) return;
@@ -962,8 +967,10 @@ namespace oomph
       Plastic_dof_nunbers_has_been_resized = true;
     }
 
-    // Assign plastic eqn numbers for each of the integral points individually
-    // Add pointers to all values which are not pinned to Plastic_dof_data_pt
+    // =========================================================================
+    /// \short Assign plastic eqn numbers for each of the integral points
+    /// individually.
+    // =========================================================================
     void assign_plastic_eqn_numbers()
     {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
@@ -987,6 +994,10 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short Adds an the internal data for storing inv_Fp. It pins the data as
+    /// seen by the global solve and assigns a unit matrix as initial value.
+    // =========================================================================
     void construct_inv_fp_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -1012,6 +1023,12 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short Adds an the internal data for storing inv_Bpks, the left
+    /// Cauchy-Green deformation tensor storing the kinematic hardening
+    /// information. It pins the data as seen by the global solve and assigns a
+    /// unit matrix as initial value.
+    // =========================================================================
     void construct_invBpks_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -1037,6 +1054,12 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short Adds an the internal data for storing inv_Bpcs, the left
+    /// Cauchy-Green deformation tensor storing the elastic core information. It
+    /// pins the data as seen by the global solve and assigns a unit matrix as
+    /// initial value.
+    // =========================================================================
     void construct_invBpcs_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -1062,6 +1085,11 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short Adds an the internal data for storing the yield surface ratio, r.
+    /// It pins the data as seen by the global solve and assigns 0 as initial
+    /// value.
+    // =========================================================================
     void construct_r_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -1080,6 +1108,11 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short Adds an the internal data for storing the plastic multiplier,
+    /// lambda. It pins the data as seen by the global solve and assigns a unit
+    /// matrix as initial value.
+    // =========================================================================
     void construct_lambda_internal_data()
     {
       const unsigned nipt = this->integral_pt()->nweight();
@@ -1101,7 +1134,10 @@ namespace oomph
     // Functions used by the refineable elements
     ////////////////////////////////////////////////////////////////////////////
 
-    // Serialise all the plastic data from the integral points in order
+    // =========================================================================
+    /// \short Serialise all the plastic data from the integral points in order.
+    /// This is needed for the refineable elements.
+    // =========================================================================
     void serialise_all_plastic_data(Vector<double>& data,
                                     const unsigned& t = 0) const
     {
@@ -1120,7 +1156,9 @@ namespace oomph
       }
     }
 
-    // Serialise the plastic data from a specific integral point
+    // =========================================================================
+    /// \short Serialise the plastic data from a specific integral point.
+    // =========================================================================
     void serialise_plastic_data(Vector<double>& data,
                                 const unsigned& ipt,
                                 const unsigned& t = 0) const
@@ -1136,7 +1174,10 @@ namespace oomph
       }
     }
 
-    // Serialise the plastic data interpolated at a given point in the element
+    // =========================================================================
+    /// \short Serialise the plastic data interpolated at a given point in the
+    /// element.
+    // =========================================================================
     void interpolate_plastic_data_serialised(Vector<double>& data,
                                              Vector<double>& s,
                                              const unsigned& t = 0)
@@ -1180,7 +1221,9 @@ namespace oomph
       }
     }
 
-    // Assign the plastic data to a specific integral point
+    // =========================================================================
+    /// \short Assign the plastic data to a specific integral point.
+    // =========================================================================
     void assign_plastic_data_serialised(const Vector<double>& data,
                                         const unsigned& ipt,
                                         const unsigned& t = 0)
@@ -1205,13 +1248,19 @@ namespace oomph
     // Access functions to plastic and associated data
     ////////////////////////////////////////////////////////////////////////////
 
-    // Get the number of plastic data at the given ipt which is not pinned and
-    // is to be solved for
+    // =========================================================================
+    /// \short Get the number of plastic data at the given ipt which is to be
+    /// solved for.
+    // =========================================================================
     unsigned get_num_plastic_dofs(const unsigned& ipt)
     {
       return Plastic_dof_data_pt[ipt].size();
     }
 
+    // =========================================================================
+    /// \short Returns the equation number for a given integration point and
+    /// component of inv_Fp.
+    // =========================================================================
     unsigned plastic_inv_fp_eqn_number(const unsigned& ipt,
                                        const unsigned& i,
                                        const unsigned& j) const
@@ -1219,6 +1268,10 @@ namespace oomph
       return Plastic_data_eqn_number[ipt][invFp_INDEX][i * DIM + j];
     }
 
+    // =========================================================================
+    /// \short Returns the equation number for a given integration point and
+    /// component of inv_Bpks.
+    // =========================================================================
     unsigned plastic_invBpks_eqn_number(const unsigned& ipt,
                                         const unsigned& i,
                                         const unsigned& j) const
@@ -1226,6 +1279,10 @@ namespace oomph
       return Plastic_data_eqn_number[ipt][invBpks_INDEX][i * DIM + j];
     }
 
+    // =========================================================================
+    /// \short Returns the equation number for a given integration point and
+    /// component of inv_Bpcs.
+    // =========================================================================
     unsigned plastic_invBpcs_eqn_number(const unsigned& ipt,
                                         const unsigned& i,
                                         const unsigned& j) const
@@ -1233,17 +1290,27 @@ namespace oomph
       return Plastic_data_eqn_number[ipt][invBpcs_INDEX][i * DIM + j];
     }
 
+    // =========================================================================
+    /// \short Returns the equation number of r for a given integration point.
+    // =========================================================================
     unsigned plastic_r_eqn_number(const unsigned& ipt) const
     {
       return Plastic_data_eqn_number[ipt][R_INDEX][0];
     }
 
+    // =========================================================================
+    /// \short Returns the equation number of lambda for a given integration
+    /// point.
+    // =========================================================================
     unsigned plastic_lambda_eqn_number(const unsigned& ipt) const
     {
       return Plastic_data_eqn_number[ipt][Lambda_INDEX][0];
     }
 
-    // Access the plasticity variable values
+    // =========================================================================
+    /// \short Returns the value of a specified component of inv_Fp for a given
+    /// integration point.
+    // =========================================================================
     double get_inv_fp(const unsigned& ipt,
                       const unsigned& i,
                       const unsigned& j) const
@@ -1251,7 +1318,15 @@ namespace oomph
       return get_inv_fp(0, ipt, i, j);
     }
 
-    // Access the plasticity variable values
+    // =========================================================================
+    /// \short Returns the value of a specified component of inv_Fp for a given
+    /// integration point and time.
+    ///
+    /// \param[in] t The time counter.
+    /// \param[in] ipt The integration point.
+    /// \param[in] i The first index of the tensor.
+    /// \param[in] j The second index of the tensor.
+    // =========================================================================
     double get_inv_fp(const unsigned& t,
                       const unsigned& ipt,
                       const unsigned& i,
@@ -1261,18 +1336,23 @@ namespace oomph
       return Plastic_data_pt[ipt][invFp_INDEX]->value(t, i * DIM + j);
     }
 
-    /*!
-     * \brief returns the elastic deformation gradient as a matrix
-     */
+    // =========================================================================
+    /// \short A convenience wrapper to obtain invFp as a matrix for a given
+    /// integration point at the current time.
+    // =========================================================================
     void get_inv_fp_matrix(const unsigned& ipt,
                            DenseMatrix<double>& invFp) const
     {
       get_inv_fp_matrix(0, ipt, invFp);
     }
 
-    /*!
-     * \brief returns the elastic deformation gradient as a matrix
-     */
+    // =========================================================================
+    /// \short Retreives inv_Fp as a matrix.
+    ///
+    /// \param[in] t The time counter.
+    /// \param[in] ipt The integration point.
+    /// \param[out] invFp The resulting matrix.
+    // =========================================================================
     void get_inv_fp_matrix(const unsigned& t,
                            const unsigned& ipt,
                            DenseMatrix<double>& invFp) const
@@ -1289,7 +1369,10 @@ namespace oomph
       }
     }
 
-    // Access the plasticity variable values
+    // =========================================================================
+    /// \short Computes the time derivative of invFp using \ref
+    /// dinternal_data_dt.
+    // =========================================================================
     double get_dot_inv_fp(const unsigned& ipt,
                           const unsigned& i,
                           const unsigned& j) const
@@ -1299,38 +1382,41 @@ namespace oomph
                                      i * DIM + j);
     }
 
-    /*!
-     * \brief returns the time derivative of the elastic deformation gradient
-     * as a matrix
-     * \details Uses the data's time stepper to compute the derivative
-     */
+    // =========================================================================
+    /// \short A convenience wrapper to obtain the time derivative of invFp as a
+    /// matrix.
+    ///
+    /// \param[in] ipt The integration point.
+    /// \param[out] The time derivative.
+    // =========================================================================
     void get_dot_inv_fp_matrix(const unsigned& ipt,
-                               DenseMatrix<double>& dotinvFp)
+                               DenseMatrix<double>& dot_invFp)
     {
-      dotinvFp.resize(DIM);
+      dot_invFp.resize(DIM);
 
       for (unsigned int i = 0; i < DIM; i++)
       {
         for (unsigned int j = 0; j < DIM; j++)
         {
-          dotinvFp(i, j) = this->dinternal_data_dt(
+          dot_invFp(i, j) = this->dinternal_data_dt(
             Plastic_data_pt[ipt][invFp_INDEX], i * DIM + j);
         }
       }
     }
 
-    /*!
-     * \details Returns the difference between the current and the previous
-     * timestep. If the timestepper does not contain history, it will return
-     * the difference between the current timestep and the initial value.
-     */
+    // =========================================================================
+    /// \short Computes the difference between the current value of invFp and
+    /// the one from the previous timestep. If the timestepper does not contain
+    /// history, it will return the difference between the current timestep and
+    /// the initial value.
+    // =========================================================================
     void get_delta_inv_fp_matrix(const unsigned& ipt,
-                                 DenseMatrix<double>& deltainvFp)
+                                 DenseMatrix<double>& delta_invFp)
     {
       const TimeStepper* invFp_time_stepper_pt =
         Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt();
 
-      deltainvFp.resize(DIM);
+      delta_invFp.resize(DIM);
 
       if (invFp_time_stepper_pt->ntstorage() > 1)
       {
@@ -1338,7 +1424,7 @@ namespace oomph
         {
           for (unsigned int j = 0; j < DIM; j++)
           {
-            deltainvFp(i, j) =
+            delta_invFp(i, j) =
               get_inv_fp(0, ipt, i, j) - get_inv_fp(1, ipt, i, j);
           }
         }
@@ -1349,14 +1435,20 @@ namespace oomph
         {
           for (unsigned int j = 0; j < DIM; j++)
           {
-            deltainvFp(i, j) = get_inv_fp(0, ipt, i, j);
+            delta_invFp(i, j) = get_inv_fp(0, ipt, i, j);
 
-            if (i == j) deltainvFp(i, j) -= 1;
+            if (i == j) delta_invFp(i, j) -= 1;
           }
         }
       }
     }
 
+    // =========================================================================
+    /// \short If the internal data for invFp have an unsteady timestepper
+    /// assigned, this function returns the time derivative of invFp, \see
+    /// get_dot_inv_fp_matrix. Otherwise it returns the difference to the
+    /// previous timestep, \see get_delta_inv_fp_matrix.
+    // =========================================================================
     void get_dot_or_delta_inv_fp_matrix(const unsigned& ipt,
                                         DenseMatrix<double>& dot_or_delta_invFp)
     {
@@ -1371,6 +1463,9 @@ namespace oomph
       return get_dot_inv_fp_matrix(ipt, dot_or_delta_invFp);
     }
 
+    // =========================================================================
+    /// \short Returns a the current value of invBpks(i, j).
+    // =========================================================================
     double get_invBpks(const unsigned& ipt,
                        const unsigned& i,
                        const unsigned& j) const
@@ -1378,6 +1473,9 @@ namespace oomph
       return get_invBpks(0, ipt, i, j);
     }
 
+    // =========================================================================
+    /// \short Returns a the value of invBpks(i, j) at a given time t.
+    // =========================================================================
     double get_invBpks(const unsigned int t,
                        const unsigned& ipt,
                        const unsigned& i,
@@ -1387,11 +1485,18 @@ namespace oomph
       return Plastic_data_pt[ipt][invBpks_INDEX]->value(t, i * DIM + j);
     }
 
+    // =========================================================================
+    /// \short Provides the current value of invBpks as a matrix.
+    // =========================================================================
     void get_invBpks_matrix(const unsigned& ipt, DenseMatrix<double>& invBpks)
     {
       return get_invBpks_matrix(0, ipt, invBpks);
     }
 
+    // =========================================================================
+    /// \short Provides the current value of invBpks as a matrix at a given time
+    /// t.
+    // =========================================================================
     void get_invBpks_matrix(const unsigned int t,
                             const unsigned int& ipt,
                             DenseMatrix<double>& invBpks)
@@ -1408,11 +1513,9 @@ namespace oomph
       }
     }
 
-    /*!
-     * \brief returns the time derivative of the kinematic hardening
-     * deformation gradient as a matrix
-     * \details Uses the data's time stepper to compute the derivative
-     */
+    // =========================================================================
+    /// \short Provides the time derivative of invBpks as a matrix.
+    // =========================================================================
     void get_dot_invBpks_matrix(const unsigned& ipt,
                                 DenseMatrix<double>& dotinvBpks)
     {
@@ -1428,11 +1531,11 @@ namespace oomph
       }
     }
 
-    /*!
-     * \details Returns the difference between the current and the previous
-     * timestep. If the timestepper does not contain history, it will return
-     * the difference between the current timestep and the initial value.
-     */
+    // =========================================================================
+    /// \short Returns the difference between the current and the previous
+    /// timestep. If the timestepper does not contain history, it will return
+    /// the difference between the current timestep and the initial value.
+    // =========================================================================
     void get_delta_invBpks_matrix(const unsigned& ipt,
                                   DenseMatrix<double>& delta_invBpks)
     {
@@ -1466,6 +1569,12 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short If the internal data for invBpks has a steady timestepper
+    /// assigned, this function returns the difference to the previous timestep,
+    /// \see get_delta_invBpks_matrix. Otherwise, it returns the time derivative
+    /// of invFp, \see get_dot_invBpks_matrix.
+    // =========================================================================
     void get_dot_or_delta_invBpks_matrix(
       const unsigned& ipt, DenseMatrix<double>& dot_or_delta_invBpks)
     {
@@ -1480,6 +1589,9 @@ namespace oomph
       return get_dot_invBpks_matrix(ipt, dot_or_delta_invBpks);
     }
 
+    // =========================================================================
+    /// \short Returns a the current value of invBpcs(i, j).
+    // =========================================================================
     double get_invBpcs(const unsigned& ipt,
                        const unsigned& i,
                        const unsigned& j) const
@@ -1487,6 +1599,9 @@ namespace oomph
       return get_invBpcs(0, ipt, i, j);
     }
 
+    // =========================================================================
+    /// \short Returns a the value of invBpcs(i, j) at a given time t.
+    // =========================================================================
     double get_invBpcs(const unsigned& t,
                        const unsigned& ipt,
                        const unsigned& i,
@@ -1496,12 +1611,19 @@ namespace oomph
       return Plastic_data_pt[ipt][invBpcs_INDEX]->value(t, i * DIM + j);
     }
 
+    // =========================================================================
+    /// \short Returns a the current value of invBpcs as a matrix.
+    // =========================================================================
     void get_invBpcs_matrix(const unsigned int& ipt,
                             DenseMatrix<double>& invBpcs)
     {
       get_invBpcs_matrix(0, ipt, invBpcs);
     }
 
+    // =========================================================================
+    /// \short Returns a the current value of invBpcs at a given time t as a
+    /// matrix.
+    // =========================================================================
     void get_invBpcs_matrix(const unsigned int t,
                             const unsigned int& ipt,
                             DenseMatrix<double>& invBpcs)
@@ -1518,11 +1640,9 @@ namespace oomph
       }
     }
 
-    /*!
-     * \brief returns the time derivative of the elastic core gradient as a
-     * matrix
-     * \details Uses the data's time stepper to compute the derivative
-     */
+    // =========================================================================
+    /// \short returns the time derivative of invBpcs as a matrix.
+    // =========================================================================
     void get_dot_invBpcs_matrix(const unsigned& ipt,
                                 DenseMatrix<double>& dotinvBpcs)
     {
@@ -1538,11 +1658,12 @@ namespace oomph
       }
     }
 
-    /*!
-     * \details Returns the difference between the current and the previous
-     * timestep. If the timestepper does not contain history, it will return
-     * the difference between the current timestep and the initial value.
-     */
+    // =========================================================================
+    /// \short Returns the difference between the value of invBpcs at the
+    /// current and the previous timestep. If the timestepper does not contain
+    /// history, it will return the difference between the current timestep and
+    /// the initial value.
+    // =========================================================================
     void get_delta_invBpcs_matrix(const unsigned& ipt,
                                   DenseMatrix<double>& delta_invBpcs)
     {
@@ -1576,6 +1697,12 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short If the internal data for invBpcs has a steady timestepper
+    /// assigned, this function returns the difference to the previous timestep,
+    /// \see get_delta_invBpcs_matrix. Otherwise, it returns the time derivative
+    /// of invFp, \see get_dot_invBpcs_matrix.
+    // =========================================================================
     void get_dot_or_delta_invBpcs_matrix(
       const unsigned& ipt, DenseMatrix<double>& dot_or_delta_invBpcs)
     {
@@ -1590,11 +1717,17 @@ namespace oomph
       return get_dot_invBpcs_matrix(ipt, dot_or_delta_invBpcs);
     }
 
+    // =========================================================================
+    /// \short Returns the current value of r.
+    // =========================================================================
     double get_r(const unsigned& ipt) const
     {
       return get_r(0, ipt);
     }
 
+    // =========================================================================
+    /// \short Returns r at a given time t.
+    // =========================================================================
     double get_r(const unsigned t, const unsigned& ipt) const
     {
       if (Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->ntstorage() < t + 1)
@@ -1603,26 +1736,45 @@ namespace oomph
       return Plastic_data_pt[ipt][R_INDEX]->value(t, 0);
     }
 
+    // =========================================================================
+    /// \short Returns the time derivative of r as calculated by the internal
+    /// timestepper.
+    // =========================================================================
     double get_dot_r(const unsigned& ipt) const
     {
       return this->dinternal_data_dt(Plastic_data_pt[ipt][R_INDEX], 0);
     }
 
+    // =========================================================================
+    /// \short Returns the current lambda.
+    // =========================================================================
     double get_lambda(const unsigned& ipt) const
     {
       return get_lambda(0, ipt);
     }
 
+    // =========================================================================
+    /// \short Returns lambda at a given time t.
+    // =========================================================================
     double get_lambda(const unsigned t, const unsigned& ipt) const
     {
       return Plastic_data_pt[ipt][Lambda_INDEX]->value(t, 0);
     }
 
+    // =========================================================================
+    /// \short Returns the time derivative of lambda.
+    // =========================================================================
     double get_dot_lambda(const unsigned& ipt) const
     {
       return this->dinternal_data_dt(Plastic_data_pt[ipt][Lambda_INDEX], 0);
     }
 
+    // =========================================================================
+    /// \short If the internal data for lambda has a steady timestepper
+    /// assigned, this function returns the difference to the previous timestep,
+    /// \see get_delta_lambda. Otherwise, it returns the time derivative
+    /// of invFp, \see get_dot_lambda.
+    // =========================================================================
     double get_dot_or_delta_lambda(const unsigned& ipt) const
     {
       const TimeStepper* lambda_time_stepper_pt =
@@ -1633,11 +1785,12 @@ namespace oomph
       return get_delta_lambda(ipt);
     }
 
-    /*!
-     * \details Returns the difference between the current and the previous
-     * timestep. If the timestepper does not contain history, it will return
-     * the difference between the current timestep and the initial value.
-     */
+    // =========================================================================
+    /// \short Returns the difference between the value of lambda at the current
+    /// and the previous timestep. If the timestepper does not contain history,
+    /// it will return the difference between the current timestep and the
+    /// initial value.
+    // =========================================================================
     double get_delta_lambda(const unsigned& ipt) const
     {
       const TimeStepper* lambda_time_stepper_pt =
@@ -1648,12 +1801,17 @@ namespace oomph
       return get_lambda(ipt);
     }
 
+    // =========================================================================
+    /// \short Set the current lambda
+    // =========================================================================
     void set_lambda(const unsigned& ipt, const double& val) const
     {
       return Plastic_data_pt[ipt][Lambda_INDEX]->set_value(0, val);
     }
 
-    // Set the plasticity variable values
+    // =========================================================================
+    /// \short A setter for invFp.
+    // =========================================================================
     void set_inv_fp(const unsigned& ipt,
                     const unsigned& i,
                     const unsigned& j,
@@ -1663,9 +1821,9 @@ namespace oomph
       Plastic_data_pt[ipt][invFp_INDEX]->set_value(i * DIM + j, val);
     }
 
-    /*!
-     * \brief returns the elastic deformation gradient as a matrix
-     */
+    // =========================================================================
+    /// \short A setter for invFp taking a matrix.
+    // =========================================================================
     void set_inv_fp_matrix(const unsigned& ipt,
                            const DenseMatrix<double>& invFp)
     {
@@ -1679,6 +1837,9 @@ namespace oomph
       }
     }
 
+    // =========================================================================
+    /// \short A setter for invBpks.
+    // =========================================================================
     void set_invBpks(const unsigned& ipt,
                      const unsigned& i,
                      const unsigned& j,
@@ -1687,6 +1848,10 @@ namespace oomph
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
       Plastic_data_pt[ipt][invBpks_INDEX]->set_value(i * DIM + j, val);
     }
+
+    // =========================================================================
+    /// \short A setter for invBpcs.
+    // =========================================================================
     void set_invBpcs(const unsigned& ipt,
                      const unsigned& i,
                      const unsigned& j,
@@ -1695,14 +1860,19 @@ namespace oomph
       MatrixHelpers::check_matrix_indices<DIM>(i, j);
       Plastic_data_pt[ipt][invBpcs_INDEX]->set_value(i * DIM + j, val);
     }
+
+    // =========================================================================
+    /// \short A setter for r.
+    // =========================================================================
     void set_r(const unsigned& ipt, const double& val)
     {
       Plastic_data_pt[ipt][R_INDEX]->set_value(0, val);
     }
 
-    /*!
-     * \brief compute the time derivative of an internal data item
-     */
+    // =========================================================================
+    /// \short compute the time derivative of an internal data item using its
+    /// time stepper.
+    // =========================================================================
     double dinternal_data_dt(Data* data_pt, const unsigned value_idx) const
     {
       // Number of timsteps (past & present)
@@ -1726,6 +1896,10 @@ namespace oomph
       return dxdt;
     }
 
+    // =========================================================================
+    /// \short Performs the inverse of dinternal_data_dt, returning a value such
+    /// that the time derivative matches dxdt.
+    // =========================================================================
     double compute_internal_data_from_time_derivative(Data* data_pt,
                                                       const unsigned value_idx,
                                                       const double dxdt) const
@@ -1753,12 +1927,18 @@ namespace oomph
       return x0;
     }
 
-  public:
+    // =========================================================================
+    /// \short Provides access to the plastic data using the data type
+    // =========================================================================
     Data* plastic_data_pt(const unsigned& ipt, const unsigned& data_type) const
     {
       return Plastic_data_pt[ipt][data_type];
     }
 
+    // =========================================================================
+    /// \short Provides direct access to the double pointer of a given plastic
+    /// dof.
+    // =========================================================================
     double* plastic_dof_data_pt(const unsigned& ipt, const unsigned& ndof) const
     {
       return Plastic_dof_data_pt[ipt][ndof];
@@ -1768,8 +1948,8 @@ namespace oomph
     /// Stores, if finite difference should be used for the plastic solve.
     bool Plastic_solve_use_fd = false;
 
-    /// The step used to determine the jacobian, if plastic
-    /// Plastic_solve_use_fd is set to true.
+    /// The step used to determine the jacobian, if plastic Plastic_solve_use_fd
+    /// is set to true.
     double* Plastic_fd_jacobian_step_pt =
       &FiniteElement::Default_fd_jacobian_step;
 
@@ -1793,34 +1973,32 @@ namespace oomph
       NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
     };
 
+    /// We store a vector of indices of the plastic data in internal data
+    /// so we can assign timesteppers etc more easily
+    /// We resize this every time we build a new set of plastic internal data
+    /// but since we only do this once when the element is constructed this
+    /// shouldn't be a problem - we can't do this at construction of this class
+    /// because the number of integral points is defined by derived classes
     const static std::vector<std::string> Plastic_data_names;
-    // We store a vector of indices of the plastic data in internal data
-    // so we can assign timesteppers etc more easily
-    // We resize this every time we build a new set of plastic internal data
-    // but since we only do this once when the element is constructed this
-    // shouldn't be a problem - we can't do this at construction of this class
-    // because the number of integral points is defined by derived classes
+  
 
-    // We store a separate set of plastic: internal data indices, pinned
-    // status, and eqn numbers per integral point in the element.
-
-    // [Number of ipts, number of types of plastic data]
-    // Pointer to the plastic data at the given integral point and of the given
-    // type.
+    /// [Number of ipts, number of types of plastic data]
+    /// Pointer to the plastic data at the given integral point and of the given
+    /// type.
     Vector<Vector<Data*>> Plastic_data_pt;
 
-    // [Number of ipts, number of types of plastic data, number of variables in
-    // that data type]
+    /// [Number of ipts, number of types of plastic data, number of variables in
+    /// that data type]
     Vector<Vector<Vector<int>>> Plastic_data_eqn_number;
 
-    // [Number of ipts, number of data to be finite differenced]
-    // We store pointers to all the plastic data which are to be finite
+    /// [Number of ipts, number of data to be finite differenced]
+    //// We store pointers to all the plastic data which are to be finite
     // differenced
     Vector<Vector<double*>> Plastic_dof_data_pt;
 
-    // Keeps track of if data for the  plastic dof numbers has been allocated
-    // We do it within this function because this allows us to reliably zero
-    // the counters Num_plastic_Dofs and Num_plastic_residuals
+    /// Keeps track of if data for the  plastic dof numbers has been allocated
+    /// We do it within this function because this allows us to reliably zero
+    /// the counters Num_plastic_Dofs and Num_plastic_residuals
     bool Plastic_dof_nunbers_has_been_resized = false;
 
     // The solver tolerance for the plastic newton solve
