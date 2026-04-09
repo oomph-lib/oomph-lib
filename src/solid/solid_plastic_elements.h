@@ -401,6 +401,15 @@ namespace oomph
     ///     f(M) = R F(\lambda): The yield surface equation, Eq. (101)
     ///     R - R_predicted, where R is predicted by \ref NormalYieldRatioLaw
     ///
+    /// If the time stepper is steady, no derivatives can be computed. Instead,
+    /// the residuals are computed based on finite increments of the plastic
+    /// variables compared to the previous values. If the time stepper does not
+    /// save any previous values, the default values are assumed as the previous
+    /// values. The increments are computed assuming backwards Euler
+    /// integration, e.g.,
+    /// \Delta F^{\text{p} -1}
+    ///                   = \dot{F}^{\text{p} -1} / \dot{\lambda} \Delta\lambda.
+    ///
     /// \param[out] residuals The residuals computed.
     /// \param[out] jacobian The derivatives of the residuals w.r.t to the
     /// plastic quantities.
@@ -534,9 +543,10 @@ namespace oomph
     }
 
     // =========================================================================
-    /// \short Determins if the deformation is plastic or elastic.
+    /// \short Determins if the deformation is plastic or elastic using Eq.
+    /// (193).
     ///
-    /// Internally, this function computes the global right Cuachy-Green
+    /// Internally, this function computes the global right Cauchy-Green
     /// deformation tensor from the current nodal positions. It is intended, to
     /// not make this an input argument. That way, the finite differencing of g
     /// uses the same deformation type (elastic or plastic) for all
