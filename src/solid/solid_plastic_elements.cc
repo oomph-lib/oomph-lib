@@ -50,9 +50,7 @@ void PlasticEquationsBase<DIM>::get_cauchy_stress(
   // compute cauchy stress
   // Standard formula: sigma = (1/J) * F * S_PK2 * F^T
   DenseMatrix<double> tmp(DIM, DIM, 0.0);
-  DenseMatrix<double> Ft;
-  MatrixHelpers::transpose(F, Ft);
-  MatrixHelpers::multiply(S_PK2, Ft, tmp); // tmp = S * F^T
+  MatrixHelpers::multiply_transpose(S_PK2, F, tmp); // tmp = S * F^T
 
   MatrixHelpers::multiply(F, tmp, sigma); // sigma = F * tmp
 
