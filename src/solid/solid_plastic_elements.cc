@@ -1996,9 +1996,10 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     // Contribution from lambda
     const unsigned lambda_col = this->plastic_lambda_eqn_number(ipt);
     jacobian(row_r, lambda_col) -=
-      dr_dlambda + drdu * du_dh *
-                    this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-                      ->isotropic_hardening_factor();
+      dr_dlambda +
+      drdu * du_dh *
+        this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+          ->isotropic_hardening_factor();
 
     // Now the remaining derivatives of u:
     // If invBpcs has not been built, this would all be 0.
