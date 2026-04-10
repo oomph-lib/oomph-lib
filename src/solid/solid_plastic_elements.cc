@@ -968,8 +968,8 @@ void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
       double re = 0.0;
       if (this->Plastic_constitutive_law_pt)
       {
-        re =
-          this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+        re = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
+               ->get_re();
       }
       data_pt->set_value(0, re);
     }
@@ -1154,11 +1154,10 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
             this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
               ->isotropic_hardening_factor());
 
-    set_r(
-      ipt,
-      std::max(
-        r,
-        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re()));
+    set_r(ipt,
+          std::max(r,
+                   this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
+                     ->get_re()));
   }
 
   return plastic_deformation;
