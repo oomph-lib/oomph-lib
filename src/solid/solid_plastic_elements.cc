@@ -381,8 +381,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_total(
   // Check the plastic model
   const bool solve_core =
     Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface;
-  const bool solve_r =
-    Plastic_model_type >= PlasticModel::SubloadingSurface;
+  const bool solve_r = Plastic_model_type >= PlasticModel::SubloadingSurface;
 
   barbar_M.resize(DIM, DIM);
   if (compute_jacobian) dbarbar_M_dr.resize(DIM, DIM);
@@ -920,7 +919,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
 template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
 {
-  for (unsigned data_type: active_plastic_data_indices)
+  for (unsigned data_type : active_plastic_data_indices)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
@@ -962,7 +961,7 @@ template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
   const unsigned int ipt)
 {
-  for (unsigned data_type: active_plastic_data_indices)
+  for (unsigned data_type : active_plastic_data_indices)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
@@ -1026,8 +1025,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
   // Get R
   double r = 1.0;
-  if (Plastic_model_type >= PlasticModel::SubloadingSurface)
-    r = get_r(ipt);
+  if (Plastic_model_type >= PlasticModel::SubloadingSurface) r = get_r(ipt);
 
   DenseMatrix<double> C_total(DIM, DIM, 0.0);
   compute_total_right_cauchy_green_deformation_tensor(0, ipt, C_total);
@@ -1148,8 +1146,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
     }
   }
 
-  if (!plastic_deformation &&
-      Plastic_model_type > PlasticModel::Conventional)
+  if (!plastic_deformation && Plastic_model_type > PlasticModel::Conventional)
   {
     // Compute R from the yield surface condition
     r = this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
@@ -1180,8 +1177,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // Check the plastic model
   const bool solve_core =
     Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface;
-  const bool solve_r =
-    Plastic_model_type >= PlasticModel::SubloadingSurface;
+  const bool solve_r = Plastic_model_type >= PlasticModel::SubloadingSurface;
 
   // Retreive the derivative weights associated with the current value of a
   // plastic variable.
@@ -1541,7 +1537,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         {
           const unsigned int invBpcs_ij_col =
             this->plastic_invBpcs_eqn_number(ipt, i, j);
-          jacobian(row_lambda, invBpcs_ij_col) += sum_invBpcs_ij * dbarbar_M_dMc;
+          jacobian(row_lambda, invBpcs_ij_col) +=
+            sum_invBpcs_ij * dbarbar_M_dMc;
         }
       }
     }
@@ -1844,7 +1841,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     }
 
     DenseMatrix<double> dot_or_delta_invBpcs_from_time_stepper;
-    get_dot_or_delta_invBpcs_matrix(ipt, dot_or_delta_invBpcs_from_time_stepper);
+    get_dot_or_delta_invBpcs_matrix(ipt,
+                                    dot_or_delta_invBpcs_from_time_stepper);
 
 
     for (unsigned int i = 0; i < DIM; i++)
@@ -2099,7 +2097,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
 
           if (solve_core)
           {
-            const unsigned int col_bar_Mc_ij = this->plastic_invBpcs_eqn_number(ipt, i, j);
+            const unsigned int col_bar_Mc_ij =
+              this->plastic_invBpcs_eqn_number(ipt, i, j);
             jacobian(row_r, col_bar_Mc_ij) -= drdu * contrib_Mc;
           }
         }
