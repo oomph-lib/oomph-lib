@@ -165,7 +165,7 @@ namespace oomph
     // =========================================================================
     PlasticConstitutiveLaw*& plastic_constitutive_law_pt()
     {
-      return Plastic_consitutive_law_pt;
+      return Plastic_constitutive_law_pt;
     }
 
     // =========================================================================
@@ -178,7 +178,7 @@ namespace oomph
     void assign_default_values_based_on_constitutive_law()
     {
       double Re =
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
       for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         set_r(ipt, Re);
@@ -531,7 +531,7 @@ namespace oomph
     {
       const double r = get_r(ipt);
       const double re =
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
       if (r < re)
       {
         set_r(ipt, re);
@@ -1741,7 +1741,7 @@ namespace oomph
     double get_r(const unsigned t, const unsigned& ipt) const
     {
       if (Plastic_data_pt[ipt][R_INDEX]->time_stepper_pt()->ntstorage() < t + 1)
-        return this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+        return this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
           ->get_re();
       return Plastic_data_pt[ipt][R_INDEX]->value(t, 0);
     }
@@ -1984,7 +1984,7 @@ namespace oomph
       &FiniteElement::Default_fd_jacobian_step;
 
     /// A pointer to the plastic constitutive law
-    PlasticConstitutiveLaw* Plastic_consitutive_law_pt;
+    PlasticConstitutiveLaw* Plastic_constitutive_law_pt;
 
     // We need a dummy double matrix for the plastic residual fill in
     DenseMatrix<double> unity;
@@ -2444,7 +2444,7 @@ namespace oomph
 
       this->Plastic_solve_use_fd =
         cast_father_element_pt->get_plastic_solve_by_fd();
-      this->Plastic_consitutive_law_pt =
+      this->Plastic_constitutive_law_pt =
         cast_father_element_pt->plastic_constitutive_law_pt();
 
       // Set the plastic timestepper

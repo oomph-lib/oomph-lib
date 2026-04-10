@@ -340,12 +340,12 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandellike_kinematic_hardening(
 {
   bar_Mk.resize(DIM, DIM, 0.0);
 
-  this->Plastic_consitutive_law_pt->kinematic_hardening_law_pt
+  this->Plastic_constitutive_law_pt->kinematic_hardening_law_pt
     ->calculate_second_piola_kirchhoff_stress(invBpks, this->unity, bar_Mk);
 
   if (compute_derivative)
   {
-    this->Plastic_consitutive_law_pt->kinematic_hardening_law_pt
+    this->Plastic_constitutive_law_pt->kinematic_hardening_law_pt
       ->calculate_d_second_piola_kirchhoff_stress_dg(
         invBpks, this->unity, bar_Mk, dbar_Mk_dinvBpks);
   }
@@ -360,12 +360,12 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandellike_elastic_core(
 {
   bar_Mc.resize(DIM, DIM, 0.0);
 
-  this->Plastic_consitutive_law_pt->elastic_core_law_pt
+  this->Plastic_constitutive_law_pt->elastic_core_law_pt
     ->calculate_second_piola_kirchhoff_stress(invBpcs, this->unity, bar_Mc);
 
   if (compute_derivative)
   {
-    this->Plastic_consitutive_law_pt->elastic_core_law_pt
+    this->Plastic_constitutive_law_pt->elastic_core_law_pt
       ->calculate_d_second_piola_kirchhoff_stress_dg(
         invBpcs, this->unity, bar_Mc, dbar_Mc_dinvBpcs);
   }
@@ -456,7 +456,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_barbar_N(
 
   // First, compute N_{st} * [ ddf/(dM_{st}dM_kl) + ddf/(dM_{ts}dM_kl) ]
   RankFourTensor<double> ddfdMdM;
-  this->Plastic_consitutive_law_pt->yield_criterion_pt
+  this->Plastic_constitutive_law_pt->yield_criterion_pt
     ->surface_function_second_derivative(f, dfdM, ddfdMdM);
   DenseMatrix<double> N_ddfdMdM(DIM, DIM);
   for (unsigned int i = 0; i < DIM; i++)
@@ -513,7 +513,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lp(
   RankFourTensor<double>& dbar_Lp_dbar_M,
   const bool& compute_derivative)
 {
-  const double eta = (*this->Plastic_consitutive_law_pt->eta_p_pt);
+  const double eta = (*this->Plastic_constitutive_law_pt->eta_p_pt);
 
   // Lp = barbar_N (if eta = 0)
   bar_Lp.resize(DIM, DIM);
@@ -633,7 +633,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
   //                     bar_Mk + etapk [\bar{M}, \bar{M}^\text{k}] / b^\text{k}
   bar_Lpkd.resize(DIM, DIM);
   const double inv_bk =
-    1.0 / (*this->Plastic_consitutive_law_pt->kinematic_hardening_b_pt);
+    1.0 / (*this->Plastic_constitutive_law_pt->kinematic_hardening_b_pt);
   for (unsigned int i = 0; i < DIM; i++)
   {
     for (unsigned int j = 0; j < DIM; j++)
@@ -643,7 +643,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpkd(
   }
 
   const double eta =
-    *this->Plastic_consitutive_law_pt->kinematic_hardening_eta_pt;
+    *this->Plastic_constitutive_law_pt->kinematic_hardening_eta_pt;
   const double invbk_Eta = eta * inv_bk;
   if (eta != 0.0)
   {
@@ -741,7 +741,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_hat_bar_Nc(
   // For dN_ij_dhat_bar_Mc_{mn} one must just use the chain rule:
   // dN_ij/dhat_bar_Mc_{kl} = (dN_ij/dA_kl + N_ij N_mn dA_mn / dM_kl) / nMag
   RankFourTensor<double> dfdMcdMc;
-  this->Plastic_consitutive_law_pt->yield_criterion_pt
+  this->Plastic_constitutive_law_pt->yield_criterion_pt
     ->surface_function_second_derivative(f_Mc, df_Mc_dMc, dfdMcdMc);
 
   DenseMatrix<double> Nc_ddfdMcdMc(DIM, DIM);
@@ -798,9 +798,9 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
   bar_Lpcd.resize(DIM, DIM);
 
   const double inv_x =
-    1 / (*this->Plastic_consitutive_law_pt->elastic_core_x_pt);
+    1 / (*this->Plastic_constitutive_law_pt->elastic_core_x_pt);
   const double rc_by_x = rc * inv_x;
-  const double eta = (*this->Plastic_consitutive_law_pt->elastic_core_eta_pt);
+  const double eta = (*this->Plastic_constitutive_law_pt->elastic_core_eta_pt);
   const double eta_prefactor = rc_by_x * eta;
 
   // Really, we compute Lpcd / Rc; Rc is muliplited to it after the derivative
@@ -966,10 +966,10 @@ void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
     else if (data_type == R_INDEX)
     {
       double re = 0.0;
-      if (this->Plastic_consitutive_law_pt)
+      if (this->Plastic_constitutive_law_pt)
       {
         re =
-          this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+          this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
       }
       data_pt->set_value(0, re);
     }
@@ -1069,13 +1069,13 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
   // Compute Nbarbar_prev
   DenseMatrix<double> barbar_N_prev_nsym(DIM, DIM, 0.0);
-  (void)this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+  (void)this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
     barbar_M_prev, barbar_N_prev_nsym, true);
   MatrixHelpers::normalise(barbar_N_prev_nsym);
 
   double re = 1.0;
   if ((*plastic_model_type_pt) >= PlasticModel::SubloadingSurface)
-    re = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
+    re = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
 
   // Compute Mbarbar_e = barbar_M - Re Mbark_prev - (1 - Re) Mbarc_prev
   DenseMatrix<double> Mbarbar_e(DIM, DIM, 0.0);
@@ -1102,7 +1102,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   }
 
   double h_var = get_lambda(ipt) *
-                 this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+                 this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
                    ->isotropic_hardening_factor();
   bool plastic_deformation = false;
   if (MatrixHelpers::reduce(barbar_N_prev_nsym, delta_M_trial) >= 0.0)
@@ -1111,9 +1111,9 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
     // Check yield surface
     plastic_deformation =
-      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+      this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
         Mbarbar_e, GeneralisedElement::Dummy_matrix, false) -
-        re * this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+        re * this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
                ->yield_function(h_var) >
       0;
   }
@@ -1123,16 +1123,16 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
     // Compute barbar_N
     DenseMatrix<double> barbar_N_nsym(DIM, DIM, 0.0);
-    (void)this->Plastic_consitutive_law_pt->yield_criterion_pt
+    (void)this->Plastic_constitutive_law_pt->yield_criterion_pt
       ->surface_function(barbar_M, barbar_N_nsym, true);
     MatrixHelpers::normalise(barbar_N_nsym);
 
     if (MatrixHelpers::reduce(barbar_N_nsym, delta_M_trial) > 0.0)
     {
       plastic_deformation =
-        this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+        this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
           Mbarbar_e, GeneralisedElement::Dummy_matrix, false) -
-          re * this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+          re * this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
                  ->yield_function(h_var) >
         0;
     }
@@ -1146,19 +1146,19 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
       (*plastic_model_type_pt) > PlasticModel::Conventional)
   {
     // Compute R from the yield surface condition
-    r = this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+    r = this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
           barbar_M, GeneralisedElement::Dummy_matrix, false) /
-        this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+        this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
           ->yield_function(
             get_lambda(ipt) *
-            this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+            this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
               ->isotropic_hardening_factor());
 
     set_r(
       ipt,
       std::max(
         r,
-        this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re()));
+        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re()));
   }
 
   return plastic_deformation;
@@ -1254,7 +1254,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   DenseMatrix<double> barbar_N(DIM);
   DenseMatrix<double> dfdM(DIM);
   double yield_surface_stress =
-    this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+    this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
       barbar_M, dfdM, true);
 
   RankFourTensor<double> dbarbarN_dbarbar_M;
@@ -1459,7 +1459,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // The residual for lambda and R                                            //
   //////////////////////////////////////////////////////////////////////////////
   double h_var = this->get_lambda(ipt) *
-                 this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+                 this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
                    ->isotropic_hardening_factor();
 
   const unsigned int row_lamda = this->plastic_lambda_eqn_number(ipt);
@@ -1467,7 +1467,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double disotropic_f_dh = 0.0;
 
   double isotropic_yield_stress =
-    this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+    this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
       ->yield_function(h_var, disotropic_f_dh, flag);
   residuals[row_lamda] = yield_surface_stress - r * isotropic_yield_stress;
 
@@ -1476,7 +1476,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     // Contribution from lambda
     jacobian(row_lamda, row_lamda) -=
       disotropic_f_dh *
-      this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+      this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
         ->isotropic_hardening_factor() *
       r;
 
@@ -1718,7 +1718,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // + (\bar Lp - \bar Lpkd)^T invBpcs                                        //
   //////////////////////////////////////////////////////////////////////////////
   double yield_ratio_u =
-    this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_u();
+    this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_u();
   DenseMatrix<double> du_dbar_M, du_dbar_Mk, du_dbar_Mc;
   double du_dh = 0, du_dr = 0;
 
@@ -1742,7 +1742,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   // Yield function of hat_bar_Mc
   DenseMatrix<double> df_Mc_dMc(DIM, DIM, 0.0);
   double f_hat_bar_Mc =
-    Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+    Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
       hat_bar_Mc, df_Mc_dMc, true);
 
   // hat_bar_Mc
@@ -1970,14 +1970,14 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
         }
         jacobian(row_eq_invBpcs, lambda_col) -=
           dot_or_delta_lambda * sum_lambda *
-          this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+          this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
             ->isotropic_hardening_factor();
       }
     }
   }
 
   // The remainder is relevant for R below.
-  yield_ratio_u = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+  yield_ratio_u = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
                     ->compute_u_with_elastic_core(rc,
                                                   barbar_N,
                                                   hat_bar_Nc,
@@ -2003,7 +2003,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   double dr_dlambda;
   double drdu;
   double computed_r =
-    this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt
+    this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
       ->compute_r_plastic(
         yield_ratio_u, delta_lambda, r_prev, dr_dlambda, drdu, flag);
 
@@ -2019,7 +2019,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     jacobian(row_r, lambda_col) -=
       dr_dlambda +
       drdu * du_dh *
-        this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+        this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
           ->isotropic_hardening_factor();
 
     // Now the remaining derivatives of u:
