@@ -6,11 +6,6 @@ template<unsigned DIM>
 const std::vector<std::string> PlasticEquationsBase<DIM>::Plastic_data_names{
   "Fe", "invBpks", "invBpcs", "H", "Lambda", "R"};
 
-template<unsigned DIM>
-typename PlasticEquationsBase<DIM>::PlasticModel
-  PlasticEquationsBase<DIM>::Full_plastic_model =
-    PlasticEquationsBase<DIM>::PlasticModel::ExtendedSubloadingSurface;
-
 namespace oomph
 {
   template class PlasticEquationsBase<2>;
@@ -383,30 +378,55 @@ void oomph::PlasticEquationsBase<DIM>::compute_mandel_stress_total(
   DenseMatrix<double>& dbarbar_M_dr,
   bool compute_jacobian)
 {
+  // Check the plastic model
+  const bool solve_core =
+    Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface;
+  const bool solve_r =
+    Plastic_model_type >= PlasticModel::SubloadingSurface;
+
   barbar_M.resize(DIM, DIM);
   if (compute_jacobian) dbarbar_M_dr.resize(DIM, DIM);
-  // We now always build all plastic data. Do we need to check if we have pinned
-  // the data instead?
-  // if (Plastic_data_has_been_built[invBpcs_INDEX] &&
-  //     Plastic_data_has_been_built[invBpks_INDEX])
-  // {
+
   for (unsigned int i = 0; i < DIM; i++)
   {
     for (unsigned int j = 0; j < DIM; j++)
     {
-      barbar_M(i, j) = bar_M(i, j) - r * bar_Mk(i, j) - (1 - r) * bar_Mc(i, j);
-
-      if (compute_jacobian)
+      if (solve_core)
       {
-        dbarbar_M_dr(i, j) = -bar_Mk(i, j) + bar_Mc(i, j);
+        barbar_M(i, j) =
+          bar_M(i, j) - r * bar_Mk(i, j) - (1 - r) * bar_Mc(i, j);
+      }
+      else
+      {
+        barbar_M(i, j) = bar_M(i, j) - bar_Mk(i, j);
+      }
+
+      if (compute_jacobian && solve_r)
+      {
+        if (solve_core)
+        {
+          dbarbar_M_dr(i, j) = -bar_Mk(i, j) + bar_Mc(i, j);
+        }
+        else
+        {
+          dbarbar_M_dr(i, j) = 0.0;
+        }
       }
     }
   }
 
   if (compute_jacobian)
   {
-    dbarbar_M_dMk = -r;
-    dbarbar_M_dMc = r - 1;
+    if (solve_core)
+    {
+      dbarbar_M_dMk = -r;
+      dbarbar_M_dMc = r - 1.0;
+    }
+    else
+    {
+      dbarbar_M_dMk = -1.0;
+      dbarbar_M_dMc = 0.0;
+    }
   }
 
   return;
@@ -900,8 +920,7 @@ void oomph::PlasticEquationsBase<DIM>::compute_bar_Lpcd(
 template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::initialise_solve(const unsigned ipt)
 {
-  for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-       data_type++)
+  for (unsigned data_type: active_plastic_data_indices)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
@@ -943,8 +962,7 @@ template<unsigned DIM>
 void oomph::PlasticEquationsBase<DIM>::set_intial_condition(
   const unsigned int ipt)
 {
-  for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-       data_type++)
+  for (unsigned data_type: active_plastic_data_indices)
   {
     Data* data_pt = Plastic_data_pt[ipt][data_type];
 
@@ -1003,12 +1021,12 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   get_inv_fp_matrix(ipt, invFp);
   get_invBpks_matrix(ipt, invBpks);
 
-  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  if (Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface)
     get_invBpcs_matrix(ipt, invBpcs);
 
   // Get R
   double r = 1.0;
-  if ((*plastic_model_type_pt) >= PlasticModel::SubloadingSurface)
+  if (Plastic_model_type >= PlasticModel::SubloadingSurface)
     r = get_r(ipt);
 
   DenseMatrix<double> C_total(DIM, DIM, 0.0);
@@ -1022,21 +1040,15 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   DenseMatrix<double> bar_Mk(DIM, DIM, 0.0), bar_Mc(DIM, DIM, 0.0);
   compute_mandellike_kinematic_hardening(invBpks, bar_Mk);
 
-  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  if (Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface)
   {
     compute_mandellike_elastic_core(invBpcs, bar_Mc);
   }
 
   // Get the total mandel stress
   DenseMatrix<double> barbar_M(DIM, DIM, 0.0);
-  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
-  {
-    compute_mandel_stress_total(bar_M, bar_Mk, bar_Mc, r, barbar_M);
-  }
-  else
-  {
-    compute_mandel_stress_total(bar_M, bar_Mk, bar_Mk, r, barbar_M);
-  }
+  // Takes care internally of the plasticity model
+  compute_mandel_stress_total(bar_M, bar_Mk, bar_Mc, r, barbar_M);
 
   // Now compute the previous value - the only thing that has changed if C
   DenseMatrix<double> C_total_prev(DIM, DIM, 0.0);
@@ -1048,14 +1060,8 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 
   // Compute Mbarbar_prev
   DenseMatrix<double> barbar_M_prev(DIM, DIM, 0.0);
-  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
-  {
-    compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mc, r, barbar_M_prev);
-  }
-  else
-  {
-    compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mk, r, barbar_M_prev);
-  }
+  // Takes care internally of the plasticity model
+  compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mc, r, barbar_M_prev);
 
   // Now we can calculate deltaMTrial = bar_M - bar_M_prev
   DenseMatrix<double> delta_M_trial(DIM, DIM, 0.0);
@@ -1074,12 +1080,12 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   MatrixHelpers::normalise(barbar_N_prev_nsym);
 
   double re = 1.0;
-  if ((*plastic_model_type_pt) >= PlasticModel::SubloadingSurface)
+  if (Plastic_model_type >= PlasticModel::SubloadingSurface)
     re = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
 
   // Compute Mbarbar_e = barbar_M - Re Mbark_prev - (1 - Re) Mbarc_prev
   DenseMatrix<double> Mbarbar_e(DIM, DIM, 0.0);
-  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  if (Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface)
   {
     for (unsigned int i = 0; i < DIM; i++)
     {
@@ -1143,7 +1149,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   }
 
   if (!plastic_deformation &&
-      (*plastic_model_type_pt) > PlasticModel::Conventional)
+      Plastic_model_type > PlasticModel::Conventional)
   {
     // Compute R from the yield surface condition
     r = this->Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
@@ -1171,8 +1177,11 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   const DenseMatrix<double>& C,
   const unsigned& flag)
 {
-  // Is the time-stepper steady?
-  Plastic_data_pt[ipt][invFp_INDEX]->time_stepper_pt()->is_steady();
+  // Check the plastic model
+  const bool solve_core =
+    Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface;
+  const bool solve_r =
+    Plastic_model_type >= PlasticModel::SubloadingSurface;
 
   // Retreive the derivative weights associated with the current value of a
   // plastic variable.
@@ -1196,7 +1205,10 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     invBpks_time_step_weight =
       Plastic_data_pt[ipt][invBpks_INDEX]->time_stepper_pt()->weight(1, 0);
   }
-  if (!Plastic_data_pt[ipt][invBpcs_INDEX]->time_stepper_pt()->is_steady())
+
+
+  if (solve_core &&
+      !Plastic_data_pt[ipt][invBpcs_INDEX]->time_stepper_pt()->is_steady())
   {
     invBpcs_time_step_weight =
       Plastic_data_pt[ipt][invBpcs_INDEX]->time_stepper_pt()->weight(1, 0);
@@ -1206,7 +1218,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   const double dot_or_delta_lambda = this->get_dot_or_delta_lambda(ipt);
 
   // Compute R
-  double r = get_r(ipt);
+  double r = 1.0;
+  if (solve_r) r = get_r(ipt);
 
 
   // Will be used to help with the computations
@@ -1226,7 +1239,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
 
   get_invBpks_matrix(ipt, invBpks);
 
-  get_invBpcs_matrix(ipt, invBpcs);
+  if (solve_core) get_invBpcs_matrix(ipt, invBpcs);
 
   // Compute bar_Mk and bar_Mc (kinematic hardening and elastic core mandel-like
   // quantity)
@@ -1234,11 +1247,13 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   RankFourTensor<double> dbar_Mk_dinvBpks, dbar_Mc_dinvBpcs;
   compute_mandellike_kinematic_hardening(
     invBpks, bar_Mk, dbar_Mk_dinvBpks, flag);
-  compute_mandellike_elastic_core(invBpcs, bar_Mc, dbar_Mc_dinvBpcs, flag);
+  if (solve_core)
+    compute_mandellike_elastic_core(invBpcs, bar_Mc, dbar_Mc_dinvBpcs, flag);
 
   DenseMatrix<double> barbar_M(DIM);
   double dbarbar_M_dMk, dbarbar_M_dMc;
   DenseMatrix<double> dbarbar_M_dr;
+  // This function internally takes care of the plasticity model
   compute_mandel_stress_total(bar_M,
                               bar_Mk,
                               bar_Mc,
@@ -1282,8 +1297,8 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   {
     dbar_Lp_dinv_Fp.resize(DIM, DIM, DIM, DIM);
     dbar_Lp_dinvBpks.resize(DIM, DIM, DIM, DIM);
-    dbar_Lp_dinvBpcs.resize(DIM, DIM, DIM, DIM);
-    dbar_Lp_dr.resize(DIM, DIM);
+    if (solve_r) dbar_Lp_dr.resize(DIM, DIM);
+    if (solve_core) dbar_Lp_dinvBpcs.resize(DIM, DIM, DIM, DIM);
 
     for (unsigned int i = 0; i < DIM; i++)
     {
@@ -1309,35 +1324,40 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
                 sum_invBpks +=
                   dbar_Lp_dbarbar_M_ijpq * dbar_Mk_dinvBpks(p, q, k, l);
 
-                sum_invBpcs +=
-                  dbar_Lp_dbarbar_M_ijpq * dbar_Mc_dinvBpcs(p, q, k, l);
+                if (solve_core)
+                  sum_invBpcs +=
+                    dbar_Lp_dbarbar_M_ijpq * dbar_Mc_dinvBpcs(p, q, k, l);
               }
             }
             dbar_Lp_dinv_Fp(i, j, k, l) = sum_invFp;
 
             dbar_Lp_dinvBpks(i, j, k, l) = sum_invBpks * dbarbar_M_dMk;
 
-            dbar_Lp_dinvBpcs(i, j, k, l) = sum_invBpcs * dbarbar_M_dMc;
+            if (solve_core)
+              dbar_Lp_dinvBpcs(i, j, k, l) = sum_invBpcs * dbarbar_M_dMc;
           }
         }
       }
     }
 
     // now we do the R derivative: dbar_Lp_dbar_M : dbarbar_M_dR
-    for (unsigned int i = 0; i < DIM; i++)
+    if (solve_r)
     {
-      for (unsigned int j = 0; j < DIM; j++)
+      for (unsigned int i = 0; i < DIM; i++)
       {
-        double sum_invFp_ij = 0;
-        for (unsigned int k = 0; k < DIM; k++)
+        for (unsigned int j = 0; j < DIM; j++)
         {
-          for (unsigned int l = 0; l < DIM; l++)
+          double sum_invFp_ij = 0;
+          for (unsigned int k = 0; k < DIM; k++)
           {
-            sum_invFp_ij += dbar_Lp_dbarbar_M(i, j, k, l) * dbarbar_M_dr(k, l);
+            for (unsigned int l = 0; l < DIM; l++)
+            {
+              sum_invFp_ij +=
+                dbar_Lp_dbarbar_M(i, j, k, l) * dbarbar_M_dr(k, l);
+            }
           }
+          dbar_Lp_dr(i, j) = sum_invFp_ij;
         }
-
-        dbar_Lp_dr(i, j) = sum_invFp_ij;
       }
     }
   }
@@ -1417,21 +1437,24 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
 
         // Contribution from
         // d(inv_Fp bar_Lp)_ij/dinvBpcs_kl = inv_Fp_ia, dL_{aj}/dinvBpcs_{kl}
-        for (unsigned int l = 0; l < DIM; l++)
+        if (solve_core)
         {
-          // Now the remainder
-          for (unsigned int k = 0; k < DIM; k++)
+          for (unsigned int l = 0; l < DIM; l++)
           {
-            double sum = 0.0;
-            for (unsigned int a = 0; a < DIM; a++)
+            // Now the remainder
+            for (unsigned int k = 0; k < DIM; k++)
             {
-              sum += invFp(i, a) * dbar_Lp_dinvBpcs(a, j, k, l);
-            }
-            // Derivative wrt. invFp
-            const unsigned int col_eq_invBpcs =
-              this->plastic_invBpcs_eqn_number(ipt, k, l);
+              double sum = 0.0;
+              for (unsigned int a = 0; a < DIM; a++)
+              {
+                sum += invFp(i, a) * dbar_Lp_dinvBpcs(a, j, k, l);
+              }
+              // Derivative wrt. invFp
+              const unsigned int col_eq_invBpcs =
+                this->plastic_invBpcs_eqn_number(ipt, k, l);
 
-            jacobian(row_eq, col_eq_invBpcs) += dot_or_delta_lambda * sum;
+              jacobian(row_eq, col_eq_invBpcs) += dot_or_delta_lambda * sum;
+            }
           }
         }
 
@@ -1442,14 +1465,17 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           minus_dotinvFp(i, j) * dot_or_delta_lambda_time_step_weight;
 
         // Derivative wrt. R
-        const unsigned int R_col = this->plastic_r_eqn_number(ipt);
-        double sum_r = 0.0;
-        for (unsigned int a = 0; a < DIM; a++)
+        if (solve_r)
         {
-          // invFp(i,a) * dbar_Lp_dR(a,j)
-          sum_r += invFp(i, a) * dbar_Lp_dr(a, j);
+          const unsigned int R_col = this->plastic_r_eqn_number(ipt);
+          double sum_r = 0.0;
+          for (unsigned int a = 0; a < DIM; a++)
+          {
+            // invFp(i,a) * dbar_Lp_dR(a,j)
+            sum_r += invFp(i, a) * dbar_Lp_dr(a, j);
+          }
+          jacobian(row_eq, R_col) += dot_or_delta_lambda * sum_r;
         }
-        jacobian(row_eq, R_col) += dot_or_delta_lambda * sum_r;
       }
     }
   }
@@ -1461,19 +1487,19 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
                  this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
                    ->isotropic_hardening_factor();
 
-  const unsigned int row_lamda = this->plastic_lambda_eqn_number(ipt);
+  const unsigned int row_lambda = this->plastic_lambda_eqn_number(ipt);
 
   double disotropic_f_dh = 0.0;
 
   double isotropic_yield_stress =
     this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
       ->yield_function(h_var, disotropic_f_dh, flag);
-  residuals[row_lamda] = yield_surface_stress - r * isotropic_yield_stress;
+  residuals[row_lambda] = yield_surface_stress - r * isotropic_yield_stress;
 
   if (flag)
   {
     // Contribution from lambda
-    jacobian(row_lamda, row_lamda) -=
+    jacobian(row_lambda, row_lambda) -=
       disotropic_f_dh *
       this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
         ->isotropic_hardening_factor() *
@@ -1498,37 +1524,44 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
 
             sum_invBpks_ij += dfdM_ab * dbar_Mk_dinvBpks(a, b, i, j);
 
-            sum_invBpcs_ij += dfdM_ab * dbar_Mc_dinvBpcs(a, b, i, j);
+            if (solve_core)
+              sum_invBpcs_ij += dfdM_ab * dbar_Mc_dinvBpcs(a, b, i, j);
           }
         }
 
         const unsigned int invFp_ij_col =
           this->plastic_inv_fp_eqn_number(ipt, i, j);
-        jacobian(row_lamda, invFp_ij_col) += sum_invFp_ij;
+        jacobian(row_lambda, invFp_ij_col) += sum_invFp_ij;
 
         const unsigned int invBpks_ij_col =
           this->plastic_invBpks_eqn_number(ipt, i, j);
-        jacobian(row_lamda, invBpks_ij_col) += sum_invBpks_ij * dbarbar_M_dMk;
+        jacobian(row_lambda, invBpks_ij_col) += sum_invBpks_ij * dbarbar_M_dMk;
 
-        const unsigned int invBpcs_ij_col =
-          this->plastic_invBpcs_eqn_number(ipt, i, j);
-        jacobian(row_lamda, invBpcs_ij_col) += sum_invBpcs_ij * dbarbar_M_dMc;
+        if (solve_core)
+        {
+          const unsigned int invBpcs_ij_col =
+            this->plastic_invBpcs_eqn_number(ipt, i, j);
+          jacobian(row_lambda, invBpcs_ij_col) += sum_invBpcs_ij * dbarbar_M_dMc;
+        }
       }
     }
 
-    const unsigned int r_col = this->plastic_r_eqn_number(ipt);
-    jacobian(row_lamda, r_col) -= isotropic_yield_stress;
-
-    // yieldSurfaceStress = f(barbarM) also depends on R
-    double sum_df_dr = 0.0;
-    for (unsigned int i = 0; i < DIM; i++)
+    if (solve_r)
     {
-      for (unsigned int j = 0; j < DIM; j++)
+      const unsigned int r_col = this->plastic_r_eqn_number(ipt);
+      jacobian(row_lambda, r_col) -= isotropic_yield_stress;
+
+      // yieldSurfaceStress = f(barbarM) also depends on R
+      double sum_df_dr = 0.0;
+      for (unsigned int i = 0; i < DIM; i++)
       {
-        sum_df_dr += dfdM(i, j) * dbarbar_M_dr(i, j);
+        for (unsigned int j = 0; j < DIM; j++)
+        {
+          sum_df_dr += dfdM(i, j) * dbarbar_M_dr(i, j);
+        }
       }
+      jacobian(row_lambda, r_col) += sum_df_dr;
     }
-    jacobian(row_lamda, r_col) += sum_df_dr;
   }
 
 
@@ -1557,15 +1590,15 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
     }
   }
 
-  DenseMatrix<double> dot_or_delta_invBpks_fromTimeStepper;
-  get_dot_or_delta_invBpks_matrix(ipt, dot_or_delta_invBpks_fromTimeStepper);
+  DenseMatrix<double> dot_or_delta_invBpks_from_time_stepper;
+  get_dot_or_delta_invBpks_matrix(ipt, dot_or_delta_invBpks_from_time_stepper);
 
   for (unsigned int i = 0; i < DIM; i++)
   {
     for (unsigned int j = 0; j < DIM; j++)
     {
       residuals[this->plastic_invBpks_eqn_number(ipt, i, j)] =
-        dot_or_delta_invBpks_fromTimeStepper(i, j) +
+        dot_or_delta_invBpks_from_time_stepper(i, j) +
         dot_or_delta_lambda * minus_dotinvBpks(i, j);
     }
   }
@@ -1598,7 +1631,7 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
               }
             }
             dbar_Lpkd_dinvFp(i, j, k, l) = sum_invFp;
-            dbar_Lpkd_dinvBpks(i, j, k, l) = sum_invBpks * dbarbar_M_dMk;
+            dbar_Lpkd_dinvBpks(i, j, k, l) = sum_invBpks;
           }
         }
       }
@@ -1643,9 +1676,6 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
             const unsigned int col_eq_invFp =
               this->plastic_inv_fp_eqn_number(ipt, k, l);
 
-            unsigned int col_eq_invBpcs = 0;
-            col_eq_invBpcs = this->plastic_invBpcs_eqn_number(ipt, k, l);
-
             // Remainder invBpks term:
             // invBpks_{ia} dbar_Lp_ia / dinvBpks_kl
             // - invBpks_{ia} dbar_Lpks_ia / dinvBpks_kl
@@ -1680,15 +1710,23 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
               invFp_sum += invBpks(a, j) * (dbar_Lp_dinv_Fp(a, i, k, l) -
                                             dbar_Lpkd_dinvFp(a, i, k, l));
 
-              invBpcs_sum += invBpks(i, a) * (dbar_Lp_dinvBpcs(a, j, k, l));
-              invBpcs_sum += invBpks(a, j) * (dbar_Lp_dinvBpcs(a, i, k, l));
+              if (solve_core)
+              {
+                invBpcs_sum += invBpks(i, a) * (dbar_Lp_dinvBpcs(a, j, k, l));
+                invBpcs_sum += invBpks(a, j) * (dbar_Lp_dinvBpcs(a, i, k, l));
+              }
             }
             jacobian(row_eq_invBpks, col_eq_invBpks) +=
               dot_or_delta_lambda * invBpks_sum;
             jacobian(row_eq_invBpks, col_eq_invFp) +=
               dot_or_delta_lambda * invFp_sum;
-            jacobian(row_eq_invBpks, col_eq_invBpcs) +=
-              dot_or_delta_lambda * invBpcs_sum;
+            if (solve_core)
+            {
+              unsigned int col_eq_invBpcs = 0;
+              col_eq_invBpcs = this->plastic_invBpcs_eqn_number(ipt, k, l);
+              jacobian(row_eq_invBpks, col_eq_invBpcs) +=
+                dot_or_delta_lambda * invBpcs_sum;
+            }
           }
         }
 
@@ -1699,14 +1737,17 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
           minus_dotinvBpks(i, j) * dot_or_delta_lambda_time_step_weight;
 
         // Derivative wrt. R
-        const unsigned int R_col = this->plastic_r_eqn_number(ipt);
-        double sum_r = 0.0;
-        for (unsigned int l = 0; l < DIM; l++)
+        if (solve_r)
         {
-          sum_r +=
-            invBpks(i, l) * dbar_Lp_dr(l, j) + dbar_Lp_dr(l, i) * invBpks(l, j);
+          const unsigned int R_col = this->plastic_r_eqn_number(ipt);
+          double sum_r = 0.0;
+          for (unsigned int l = 0; l < DIM; l++)
+          {
+            sum_r += invBpks(i, l) * dbar_Lp_dr(l, j) +
+                     dbar_Lp_dr(l, i) * invBpks(l, j);
+          }
+          jacobian(row_eq_invBpks, R_col) += dot_or_delta_lambda * sum_r;
         }
-        jacobian(row_eq_invBpks, R_col) += dot_or_delta_lambda * sum_r;
       }
     }
   }
@@ -1725,333 +1766,343 @@ void PlasticEquationsBase<DIM>::fill_in_generic_residual_and_jacobian_plastic(
   {
     du_dbar_M.resize(DIM, DIM, 0.0);
     du_dbar_Mk.resize(DIM, DIM, 0.0);
-    du_dbar_Mc.resize(DIM, DIM, 0.0);
+    if (solve_core) du_dbar_Mc.resize(DIM, DIM, 0.0);
   }
 
-  // First, we need to compute Mbarhat_c
-  DenseMatrix<double> hat_bar_Mc(DIM, DIM, 0.0);
-  for (unsigned int i = 0; i < DIM; i++)
+  if (solve_core)
   {
-    for (unsigned int j = 0; j < DIM; j++)
-    {
-      hat_bar_Mc(i, j) = bar_Mc(i, j) - bar_Mk(i, j);
-    }
-  }
-
-  // Yield function of hat_bar_Mc
-  DenseMatrix<double> df_Mc_dMc(DIM, DIM, 0.0);
-  double f_hat_bar_Mc =
-    Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
-      hat_bar_Mc, df_Mc_dMc, true);
-
-  // hat_bar_Mc
-  DenseMatrix<double> hat_bar_Nc;
-  RankFourTensor<double> dhat_bar_Nc_dMc;
-  compute_hat_bar_Nc(
-    f_hat_bar_Mc, df_Mc_dMc, hat_bar_Nc, dhat_bar_Nc_dMc, flag);
-
-  // Now compute Rc
-  double rc = f_hat_bar_Mc / isotropic_yield_stress;
-  double drcdh = 0;
-  DenseMatrix<double> drc_dMc;
-
-  if (flag)
-  {
-    drcdh = rc / isotropic_yield_stress * disotropic_f_dh;
-    drc_dMc.resize(DIM, DIM);
+    // First, we need to compute Mbarhat_c
+    DenseMatrix<double> hat_bar_Mc(DIM, DIM, 0.0);
     for (unsigned int i = 0; i < DIM; i++)
     {
       for (unsigned int j = 0; j < DIM; j++)
       {
-        drc_dMc(i, j) = df_Mc_dMc(i, j) / isotropic_yield_stress;
+        hat_bar_Mc(i, j) = bar_Mc(i, j) - bar_Mk(i, j);
       }
     }
-  }
 
-  // Compute bar_Lpcs
-  DenseMatrix<double> bar_Lpcd;
-  RankFourTensor<double> dbar_Lpcd_dbar_M, dbar_Lpcd_dhat_bar_Mc;
-  DenseMatrix<double> dbar_Lpcd_dh;
-  compute_bar_Lpcd(bar_M,
-                   hat_bar_Nc,
-                   rc,
-                   dhat_bar_Nc_dMc,
-                   drc_dMc,
-                   drcdh,
-                   bar_Lpcd,
-                   dbar_Lpcd_dbar_M,
-                   dbar_Lpcd_dhat_bar_Mc,
-                   dbar_Lpcd_dh,
-                   flag);
+    // Yield function of hat_bar_Mc
+    DenseMatrix<double> df_Mc_dMc(DIM, DIM, 0.0);
+    double f_hat_bar_Mc =
+      Plastic_constitutive_law_pt->yield_criterion_pt->surface_function(
+        hat_bar_Mc, df_Mc_dMc, true);
 
-  // Compute dot_invBpcs = (bar_Lp - bar_Lpcd) invBpcs
-  DenseMatrix<double> minus_dotinvBpcs(DIM, DIM);
-  for (unsigned int i = 0; i < DIM; i++)
-  {
-    for (unsigned int j = 0; j < DIM; j++)
+    // hat_bar_Mc
+    DenseMatrix<double> hat_bar_Nc;
+    RankFourTensor<double> dhat_bar_Nc_dMc;
+    compute_hat_bar_Nc(
+      f_hat_bar_Mc, df_Mc_dMc, hat_bar_Nc, dhat_bar_Nc_dMc, flag);
+
+    // Now compute Rc
+    double rc = f_hat_bar_Mc / isotropic_yield_stress;
+    double drcdh = 0;
+    DenseMatrix<double> drc_dMc;
+
+    if (flag)
     {
-      double sum = 0.0;
-      for (unsigned int a = 0; a < DIM; a++)
+      drcdh = rc / isotropic_yield_stress * disotropic_f_dh;
+      drc_dMc.resize(DIM, DIM);
+      for (unsigned int i = 0; i < DIM; i++)
       {
-        sum += invBpcs(i, a) * (bar_Lp(a, j) - bar_Lpcd(a, j)) +
-               (bar_Lp(a, i) - bar_Lpcd(a, i)) * invBpcs(a, j);
-      }
-      minus_dotinvBpcs(i, j) = sum;
-    }
-  }
-
-  DenseMatrix<double> dot_or_delta_invBpcs_fromTimeStepper;
-  get_dot_or_delta_invBpcs_matrix(ipt, dot_or_delta_invBpcs_fromTimeStepper);
-
-
-  for (unsigned int i = 0; i < DIM; i++)
-  {
-    for (unsigned int j = 0; j < DIM; j++)
-    {
-      residuals[this->plastic_invBpcs_eqn_number(ipt, i, j)] =
-        dot_or_delta_invBpcs_fromTimeStepper(i, j) +
-        dot_or_delta_lambda * minus_dotinvBpcs(i, j);
-    }
-  }
-
-  if (flag)
-  {
-    // Precompute some things
-    RankFourTensor<double> dbar_Lpcd_dinvFp(DIM, DIM, DIM, DIM),
-      dbar_Lpcd_dinvBpks(DIM, DIM, DIM, DIM),
-      dbar_Lpcd_dinvBpcs(DIM, DIM, DIM, DIM);
-
-    for (unsigned int i = 0; i < DIM; i++)
-    {
-      for (unsigned int j = 0; j < DIM; j++)
-      {
-        for (unsigned int k = 0; k < DIM; k++)
+        for (unsigned int j = 0; j < DIM; j++)
         {
-          for (unsigned int l = 0; l < DIM; l++)
+          drc_dMc(i, j) = df_Mc_dMc(i, j) / isotropic_yield_stress;
+        }
+      }
+    }
+
+    // Compute bar_Lpcs
+    DenseMatrix<double> bar_Lpcd;
+    RankFourTensor<double> dbar_Lpcd_dbar_M, dbar_Lpcd_dhat_bar_Mc;
+    DenseMatrix<double> dbar_Lpcd_dh;
+    compute_bar_Lpcd(bar_M,
+                     hat_bar_Nc,
+                     rc,
+                     dhat_bar_Nc_dMc,
+                     drc_dMc,
+                     drcdh,
+                     bar_Lpcd,
+                     dbar_Lpcd_dbar_M,
+                     dbar_Lpcd_dhat_bar_Mc,
+                     dbar_Lpcd_dh,
+                     flag);
+
+    // Compute dot_invBpcs = (bar_Lp - bar_Lpcd) invBpcs
+    DenseMatrix<double> minus_dotinvBpcs(DIM, DIM);
+    for (unsigned int i = 0; i < DIM; i++)
+    {
+      for (unsigned int j = 0; j < DIM; j++)
+      {
+        double sum = 0.0;
+        for (unsigned int a = 0; a < DIM; a++)
+        {
+          sum += invBpcs(i, a) * (bar_Lp(a, j) - bar_Lpcd(a, j)) +
+                 (bar_Lp(a, i) - bar_Lpcd(a, i)) * invBpcs(a, j);
+        }
+        minus_dotinvBpcs(i, j) = sum;
+      }
+    }
+
+    DenseMatrix<double> dot_or_delta_invBpcs_from_time_stepper;
+    get_dot_or_delta_invBpcs_matrix(ipt, dot_or_delta_invBpcs_from_time_stepper);
+
+
+    for (unsigned int i = 0; i < DIM; i++)
+    {
+      for (unsigned int j = 0; j < DIM; j++)
+      {
+        residuals[this->plastic_invBpcs_eqn_number(ipt, i, j)] =
+          dot_or_delta_invBpcs_from_time_stepper(i, j) +
+          dot_or_delta_lambda * minus_dotinvBpcs(i, j);
+      }
+    }
+
+    if (flag)
+    {
+      // Precompute some things
+      RankFourTensor<double> dbar_Lpcd_dinvFp(DIM, DIM, DIM, DIM),
+        dbar_Lpcd_dinvBpks(DIM, DIM, DIM, DIM),
+        dbar_Lpcd_dinvBpcs(DIM, DIM, DIM, DIM);
+
+      for (unsigned int i = 0; i < DIM; i++)
+      {
+        for (unsigned int j = 0; j < DIM; j++)
+        {
+          for (unsigned int k = 0; k < DIM; k++)
           {
-            double sum_invFp = 0.0;
-            double sum_invBpks = 0.0;
-            double sum_invBpcs = 0.0;
-            for (unsigned int p = 0; p < DIM; p++)
+            for (unsigned int l = 0; l < DIM; l++)
             {
-              for (unsigned int q = 0; q < DIM; q++)
+              double sum_invFp = 0.0;
+              double sum_invBpks = 0.0;
+              double sum_invBpcs = 0.0;
+              for (unsigned int p = 0; p < DIM; p++)
               {
-                sum_invFp +=
-                  dbar_Lpcd_dbar_M(i, j, p, q) * dbar_M_dinv_Fp(p, q, k, l);
+                for (unsigned int q = 0; q < DIM; q++)
+                {
+                  sum_invFp +=
+                    dbar_Lpcd_dbar_M(i, j, p, q) * dbar_M_dinv_Fp(p, q, k, l);
 
-                sum_invBpks -= dbar_Lpcd_dhat_bar_Mc(i, j, p, q) *
-                               dbar_Mk_dinvBpks(p, q, k, l);
+                  sum_invBpks -= dbar_Lpcd_dhat_bar_Mc(i, j, p, q) *
+                                 dbar_Mk_dinvBpks(p, q, k, l);
 
-                sum_invBpcs += dbar_Lpcd_dhat_bar_Mc(i, j, p, q) *
-                               dbar_Mc_dinvBpcs(p, q, k, l);
+                  sum_invBpcs += dbar_Lpcd_dhat_bar_Mc(i, j, p, q) *
+                                 dbar_Mc_dinvBpcs(p, q, k, l);
+                }
               }
+              dbar_Lpcd_dinvFp(i, j, k, l) = sum_invFp;
+              dbar_Lpcd_dinvBpks(i, j, k, l) = sum_invBpks;
+              dbar_Lpcd_dinvBpcs(i, j, k, l) = sum_invBpcs;
             }
-            dbar_Lpcd_dinvFp(i, j, k, l) = sum_invFp;
-            dbar_Lpcd_dinvBpks(i, j, k, l) = sum_invBpks;
-            dbar_Lpcd_dinvBpcs(i, j, k, l) = sum_invBpcs;
           }
         }
       }
-    }
 
-    for (unsigned int i = 0; i < DIM; i++)
-    {
-      for (unsigned int j = 0; j < DIM; j++)
+      for (unsigned int i = 0; i < DIM; i++)
       {
-        const unsigned int row_eq_invBpcs =
-          this->plastic_invBpcs_eqn_number(ipt, i, j);
-
-        // Contribution from the time stepper
-        jacobian(row_eq_invBpcs, row_eq_invBpcs) += invBpcs_time_step_weight;
-
-        // Derivative wrt. invFp, invBpks, invBpcs
-        // The delta terms
-        //  \delta_{ik}\delta{al} (Lp - Lpcd)_{aj}
-        //  \delta_{ak}\delta{jl} (Lp - Lpcd)_{ai}
-        for (unsigned int a = 0; a < DIM; a++)
+        for (unsigned int j = 0; j < DIM; j++)
         {
-          // \delta_{ik}\delta{al} (Lp - Lpcd)_{aj}
-          jacobian(row_eq_invBpcs,
-                   this->plastic_invBpcs_eqn_number(ipt, i, a)) +=
-            dot_or_delta_lambda * (bar_Lp(a, j) - bar_Lpcd(a, j));
+          const unsigned int row_eq_invBpcs =
+            this->plastic_invBpcs_eqn_number(ipt, i, j);
 
-          // \delta_{ak}\delta{jl} (Lp - Lpkd)_{ai}
-          jacobian(row_eq_invBpcs,
-                   this->plastic_invBpcs_eqn_number(ipt, a, j)) +=
-            dot_or_delta_lambda * (bar_Lp(a, i) - bar_Lpcd(a, i));
-        }
+          // Contribution from the time stepper
+          jacobian(row_eq_invBpcs, row_eq_invBpcs) += invBpcs_time_step_weight;
 
-        // The remainder
-        for (unsigned int k = 0; k < DIM; k++)
-        {
-          for (unsigned int l = 0; l < DIM; l++)
+          // Derivative wrt. invFp, invBpks, invBpcs
+          // The delta terms
+          //  \delta_{ik}\delta{al} (Lp - Lpcd)_{aj}
+          //  \delta_{ak}\delta{jl} (Lp - Lpcd)_{ai}
+          for (unsigned int a = 0; a < DIM; a++)
           {
-            const unsigned int col_eq_invBpks =
-              this->plastic_invBpks_eqn_number(ipt, k, l);
+            // \delta_{ik}\delta{al} (Lp - Lpcd)_{aj}
+            jacobian(row_eq_invBpcs,
+                     this->plastic_invBpcs_eqn_number(ipt, i, a)) +=
+              dot_or_delta_lambda * (bar_Lp(a, j) - bar_Lpcd(a, j));
 
-            const unsigned int col_eq_invFp =
-              this->plastic_inv_fp_eqn_number(ipt, k, l);
-
-            const unsigned int col_eq_invBpcs =
-              this->plastic_invBpcs_eqn_number(ipt, k, l);
-
-            const unsigned int r_col = this->plastic_r_eqn_number(ipt);
-
-            // Remainder invBpcs term:
-            // invBpcs_{aj} dbar_Lp_ia / dinvBpcs_kl
-            // - invBpcs_{aj} dbar_Lpcs_ia / dinvBpcs_kl
-            // dbar_Lp_ai / dinvBpcs_kl * invBpcs_{aj}
-            // - invBpcs__ai / dinvBpcs_kl * invBpcs_{aj}
-            //
-            // invBpks term:
-            // invBpcs_{aj} dbar_Lp_ia / dinvBpks_kl
-            // - invBpcs_{aj} dbar_Lpcs_ia / dinvBpks_kl
-            //
-            // invFp term:
-            // invBpcs_{aj} dbar_Lp_ia / dinvFp_kl
-            // - invBpcs_{aj} dbar_Lpcs_ia / dinvFp_kl
-
-            double invBpcs_sum = 0.0;
-            double invBpks_sum = 0.0;
-            double invFp_sum = 0.0;
-            for (unsigned int a = 0; a < DIM; a++)
-            {
-              invBpcs_sum += invBpcs(i, a) * (dbar_Lp_dinvBpcs(a, j, k, l) -
-                                              dbar_Lpcd_dinvBpcs(a, j, k, l));
-              invBpcs_sum += (dbar_Lp_dinvBpcs(a, i, k, l) -
-                              dbar_Lpcd_dinvBpcs(a, i, k, l)) *
-                             invBpcs(a, j);
-
-              invBpks_sum += invBpcs(i, a) * (dbar_Lp_dinvBpks(a, j, k, l) -
-                                              dbar_Lpcd_dinvBpks(a, j, k, l));
-              invBpks_sum += (dbar_Lp_dinvBpks(a, i, k, l) -
-                              dbar_Lpcd_dinvBpks(a, i, k, l)) *
-                             invBpcs(a, j);
-
-              invFp_sum += invBpcs(i, a) * (dbar_Lp_dinv_Fp(a, j, k, l) -
-                                            dbar_Lpcd_dinvFp(a, j, k, l));
-              invFp_sum +=
-                (dbar_Lp_dinv_Fp(a, i, k, l) - dbar_Lpcd_dinvFp(a, i, k, l)) *
-                invBpcs(a, j);
-            }
-
-            jacobian(row_eq_invBpcs, col_eq_invBpcs) +=
-              dot_or_delta_lambda * invBpcs_sum;
-            jacobian(row_eq_invBpcs, col_eq_invBpks) +=
-              dot_or_delta_lambda * invBpks_sum;
-            jacobian(row_eq_invBpcs, col_eq_invFp) +=
-              dot_or_delta_lambda * invFp_sum;
+            // \delta_{ak}\delta{jl} (Lp - Lpkd)_{ai}
+            jacobian(row_eq_invBpcs,
+                     this->plastic_invBpcs_eqn_number(ipt, a, j)) +=
+              dot_or_delta_lambda * (bar_Lp(a, i) - bar_Lpcd(a, i));
           }
-        }
 
-        // Derivative wrt. R
-        const unsigned int r_col = this->plastic_r_eqn_number(ipt);
-        double sum_r = 0.0;
-        for (unsigned int a = 0; a < DIM; a++)
-        {
-          sum_r +=
-            invBpcs(i, a) * dbar_Lp_dr(a, j) + dbar_Lp_dr(a, i) * invBpcs(a, j);
-        }
-        jacobian(row_eq_invBpcs, r_col) += dot_or_delta_lambda * sum_r;
+          // The remainder
+          for (unsigned int k = 0; k < DIM; k++)
+          {
+            for (unsigned int l = 0; l < DIM; l++)
+            {
+              const unsigned int col_eq_invBpks =
+                this->plastic_invBpks_eqn_number(ipt, k, l);
 
-        // Now the lambda contribution:
-        // - dotinvBpcs(i, j) - dot_lambda dotinvBpcs_dh * dh_dlambda
-        const unsigned int lambda_col = this->plastic_lambda_eqn_number(ipt);
-        jacobian(row_eq_invBpcs, lambda_col) +=
-          minus_dotinvBpcs(i, j) * dot_or_delta_lambda_time_step_weight;
+              const unsigned int col_eq_invFp =
+                this->plastic_inv_fp_eqn_number(ipt, k, l);
 
-        // The second part: (dot_invBpcs/dh)_{i, j} = - dLpcd_ia/h invBpcs_aj;
-        double sum_lambda = 0.0;
-        for (unsigned int a = 0; a < DIM; a++)
-        {
-          sum_lambda += invBpcs(i, a) * dbar_Lpcd_dh(a, j) +
-                        dbar_Lpcd_dh(a, i) * invBpcs(a, j);
+              const unsigned int col_eq_invBpcs =
+                this->plastic_invBpcs_eqn_number(ipt, k, l);
+
+              const unsigned int r_col = this->plastic_r_eqn_number(ipt);
+
+              // Remainder invBpcs term:
+              // invBpcs_{aj} dbar_Lp_ia / dinvBpcs_kl
+              // - invBpcs_{aj} dbar_Lpcs_ia / dinvBpcs_kl
+              // dbar_Lp_ai / dinvBpcs_kl * invBpcs_{aj}
+              // - invBpcs__ai / dinvBpcs_kl * invBpcs_{aj}
+              //
+              // invBpks term:
+              // invBpcs_{aj} dbar_Lp_ia / dinvBpks_kl
+              // - invBpcs_{aj} dbar_Lpcs_ia / dinvBpks_kl
+              //
+              // invFp term:
+              // invBpcs_{aj} dbar_Lp_ia / dinvFp_kl
+              // - invBpcs_{aj} dbar_Lpcs_ia / dinvFp_kl
+
+              double invBpcs_sum = 0.0;
+              double invBpks_sum = 0.0;
+              double invFp_sum = 0.0;
+              for (unsigned int a = 0; a < DIM; a++)
+              {
+                invBpcs_sum += invBpcs(i, a) * (dbar_Lp_dinvBpcs(a, j, k, l) -
+                                                dbar_Lpcd_dinvBpcs(a, j, k, l));
+                invBpcs_sum += (dbar_Lp_dinvBpcs(a, i, k, l) -
+                                dbar_Lpcd_dinvBpcs(a, i, k, l)) *
+                               invBpcs(a, j);
+
+                invBpks_sum += invBpcs(i, a) * (dbar_Lp_dinvBpks(a, j, k, l) -
+                                                dbar_Lpcd_dinvBpks(a, j, k, l));
+                invBpks_sum += (dbar_Lp_dinvBpks(a, i, k, l) -
+                                dbar_Lpcd_dinvBpks(a, i, k, l)) *
+                               invBpcs(a, j);
+
+                invFp_sum += invBpcs(i, a) * (dbar_Lp_dinv_Fp(a, j, k, l) -
+                                              dbar_Lpcd_dinvFp(a, j, k, l));
+                invFp_sum +=
+                  (dbar_Lp_dinv_Fp(a, i, k, l) - dbar_Lpcd_dinvFp(a, i, k, l)) *
+                  invBpcs(a, j);
+              }
+
+              jacobian(row_eq_invBpcs, col_eq_invBpcs) +=
+                dot_or_delta_lambda * invBpcs_sum;
+              jacobian(row_eq_invBpcs, col_eq_invBpks) +=
+                dot_or_delta_lambda * invBpks_sum;
+              jacobian(row_eq_invBpcs, col_eq_invFp) +=
+                dot_or_delta_lambda * invFp_sum;
+            }
+          }
+
+          // Derivative wrt. R
+          const unsigned int r_col = this->plastic_r_eqn_number(ipt);
+          double sum_r = 0.0;
+          for (unsigned int a = 0; a < DIM; a++)
+          {
+            sum_r += invBpcs(i, a) * dbar_Lp_dr(a, j) +
+                     dbar_Lp_dr(a, i) * invBpcs(a, j);
+          }
+          jacobian(row_eq_invBpcs, r_col) += dot_or_delta_lambda * sum_r;
+
+          // Now the lambda contribution:
+          // - dotinvBpcs(i, j) - dot_lambda dotinvBpcs_dh * dh_dlambda
+          const unsigned int lambda_col = this->plastic_lambda_eqn_number(ipt);
+          jacobian(row_eq_invBpcs, lambda_col) +=
+            minus_dotinvBpcs(i, j) * dot_or_delta_lambda_time_step_weight;
+
+          // The second part: (dot_invBpcs/dh)_{i, j} = - dLpcd_ia/h invBpcs_aj;
+          double sum_lambda = 0.0;
+          for (unsigned int a = 0; a < DIM; a++)
+          {
+            sum_lambda += invBpcs(i, a) * dbar_Lpcd_dh(a, j) +
+                          dbar_Lpcd_dh(a, i) * invBpcs(a, j);
+          }
+          jacobian(row_eq_invBpcs, lambda_col) -=
+            dot_or_delta_lambda * sum_lambda *
+            this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
+              ->isotropic_hardening_factor();
         }
-        jacobian(row_eq_invBpcs, lambda_col) -=
-          dot_or_delta_lambda * sum_lambda *
-          this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
-            ->isotropic_hardening_factor();
       }
     }
-  }
 
-  // The remainder is relevant for R below.
-  yield_ratio_u = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
-                    ->compute_u_with_elastic_core(rc,
-                                                  barbar_N,
-                                                  hat_bar_Nc,
-                                                  dbarbarN_dbarbar_M,
-                                                  dbarbar_M_dMk,
-                                                  dbarbar_M_dMc,
-                                                  dbarbar_M_dr,
-                                                  dhat_bar_Nc_dMc,
-                                                  drc_dMc,
-                                                  drcdh,
-                                                  du_dbar_M,
-                                                  du_dbar_Mk,
-                                                  du_dbar_Mc,
-                                                  du_dh,
-                                                  du_dr,
-                                                  flag);
+    // The remainder is relevant for R below.
+    yield_ratio_u = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
+                      ->compute_u_with_elastic_core(rc,
+                                                    barbar_N,
+                                                    hat_bar_Nc,
+                                                    dbarbarN_dbarbar_M,
+                                                    dbarbar_M_dMk,
+                                                    dbarbar_M_dMc,
+                                                    dbarbar_M_dr,
+                                                    dhat_bar_Nc_dMc,
+                                                    drc_dMc,
+                                                    drcdh,
+                                                    du_dbar_M,
+                                                    du_dbar_Mk,
+                                                    du_dbar_Mc,
+                                                    du_dh,
+                                                    du_dr,
+                                                    flag);
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // The residual for R //
   //////////////////////////////////////////////////////////////////////////////
-  const double delta_lambda = get_delta_lambda(ipt);
-  double r_prev = get_r(1, ipt);
-  double dr_dlambda;
-  double drdu;
-  double computed_r =
-    this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
-      ->compute_r_plastic(
-        yield_ratio_u, delta_lambda, r_prev, dr_dlambda, drdu, flag);
-
-  const unsigned int row_r = this->plastic_r_eqn_number(ipt);
-  residuals[row_r] = get_r(ipt) - computed_r;
-
-  if (flag)
+  if (solve_r)
   {
-    jacobian(row_r, row_r) += 1 - drdu * du_dr;
+    const double delta_lambda = get_delta_lambda(ipt);
+    double r_prev = get_r(1, ipt);
+    double dr_dlambda;
+    double drdu;
+    double computed_r =
+      this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
+        ->compute_r_plastic(
+          yield_ratio_u, delta_lambda, r_prev, dr_dlambda, drdu, flag);
 
-    // Contribution from lambda
-    const unsigned lambda_col = this->plastic_lambda_eqn_number(ipt);
-    jacobian(row_r, lambda_col) -=
-      dr_dlambda +
-      drdu * du_dh *
-        this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
-          ->isotropic_hardening_factor();
+    const unsigned int row_r = this->plastic_r_eqn_number(ipt);
+    residuals[row_r] = get_r(ipt) - computed_r;
 
-    // Now the remaining derivatives of u:
-    // If invBpcs has not been built, this would all be 0.
-    for (unsigned int i = 0; i < DIM; i++)
+    if (flag)
     {
-      for (unsigned int j = 0; j < DIM; j++)
+      jacobian(row_r, row_r) += 1 - drdu * du_dr;
+
+      // Contribution from lambda
+      const unsigned lambda_col = this->plastic_lambda_eqn_number(ipt);
+      jacobian(row_r, lambda_col) -=
+        dr_dlambda +
+        drdu * du_dh *
+          this->Plastic_constitutive_law_pt->isotropic_hardening_law_pt
+            ->isotropic_hardening_factor();
+
+      // Now the remaining derivatives of u:
+      // If invBpcs has not been built, this would all be 0.
+      for (unsigned int i = 0; i < DIM; i++)
       {
-        const unsigned int col_bar_M_ij =
-          this->plastic_inv_fp_eqn_number(ipt, i, j);
-
-        const unsigned int col_bar_Mk_ij =
-          this->plastic_invBpks_eqn_number(ipt, i, j);
-
-        const unsigned int col_bar_Mc_ij =
-          this->plastic_invBpcs_eqn_number(ipt, i, j);
-
-        double contrib_M = 0.0;
-        double contrib_Mk = 0.0;
-        double contrib_Mc = 0.0;
-        for (unsigned int a = 0; a < DIM; a++)
+        for (unsigned int j = 0; j < DIM; j++)
         {
-          for (unsigned int b = 0; b < DIM; b++)
+          const unsigned int col_bar_M_ij =
+            this->plastic_inv_fp_eqn_number(ipt, i, j);
+
+          const unsigned int col_bar_Mk_ij =
+            this->plastic_invBpks_eqn_number(ipt, i, j);
+
+          double contrib_M = 0.0;
+          double contrib_Mk = 0.0;
+          double contrib_Mc = 0.0;
+          for (unsigned int a = 0; a < DIM; a++)
           {
-            contrib_M += du_dbar_M(a, b) * dbar_M_dinv_Fp(a, b, i, j);
-            contrib_Mk += du_dbar_Mk(a, b) * dbar_Mk_dinvBpks(a, b, i, j);
-            contrib_Mc += du_dbar_Mc(a, b) * dbar_Mc_dinvBpcs(a, b, i, j);
+            for (unsigned int b = 0; b < DIM; b++)
+            {
+              contrib_M += du_dbar_M(a, b) * dbar_M_dinv_Fp(a, b, i, j);
+              contrib_Mk += du_dbar_Mk(a, b) * dbar_Mk_dinvBpks(a, b, i, j);
+              if (solve_core)
+                contrib_Mc += du_dbar_Mc(a, b) * dbar_Mc_dinvBpcs(a, b, i, j);
+            }
+          }
+
+          jacobian(row_r, col_bar_M_ij) -= drdu * contrib_M;
+          jacobian(row_r, col_bar_Mk_ij) -= drdu * contrib_Mk;
+
+
+          if (solve_core)
+          {
+            const unsigned int col_bar_Mc_ij = this->plastic_invBpcs_eqn_number(ipt, i, j);
+            jacobian(row_r, col_bar_Mc_ij) -= drdu * contrib_Mc;
           }
         }
-
-        jacobian(row_r, col_bar_M_ij) -= drdu * contrib_M;
-        jacobian(row_r, col_bar_Mk_ij) -= drdu * contrib_Mk;
-        jacobian(row_r, col_bar_Mc_ij) -= drdu * contrib_Mc;
       }
     }
   }

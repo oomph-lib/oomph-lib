@@ -237,6 +237,17 @@ private:
 
 #ifdef PLASTIC
       //! [Assgin constitutive law]
+      // Assign the plastic model - this is optional
+      // el_pt->plastic_model_type() =
+      //   oomph::PlasticEquationsBase<DIM>::PlasticModel::Conventional;
+      // el_pt->plastic_model_type() =
+      // oomph::PlasticEquationsBase<DIM>::PlasticModel::SubloadingSurface;
+      el_pt->plastic_model_type() = oomph::PlasticEquationsBase<
+        DIM>::PlasticModel::ExtendedSubloadingSurface;
+
+      // Construct the internal data based on the plastic model type
+      el_pt->construct_plastic_data();
+
       // Assign the plastic constitutive law
       el_pt->plastic_constitutive_law_pt() = plastic_constitutive_law_pt;
 

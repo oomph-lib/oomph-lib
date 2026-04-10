@@ -142,6 +142,9 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
   {
     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Problem::mesh_pt()->element_pt(i));
 
+    // Construct the internal data based on the plastic model type
+    el_pt->construct_plastic_data();
+
     el_pt->constitutive_law_pt() = Parameters::constitutive_law_pt;
 
     el_pt->plastic_constitutive_law_pt() =

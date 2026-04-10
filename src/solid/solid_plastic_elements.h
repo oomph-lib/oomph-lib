@@ -21,6 +21,21 @@ namespace oomph
                                public virtual PVDEquationsBase<DIM>
   {
   public:
+    // =============================================================
+    /// \short The plasticity model used. There are three options,
+    /// corresponding to the chapters 6, 7 and 8 of Hashiguchi 2019:
+    /// - Conventional: includes isotropic and kinematic hardening.
+    /// - SubloadingSurface: the onset of plasticity is gradual.
+    /// - ExtendedSubloadingSurface: the center of the subloading
+    ///   yield surface is allowed to move.
+    // =============================================================
+    enum class PlasticModel
+    {
+      Conventional,
+      SubloadingSurface,
+      ExtendedSubloadingSurface
+    };
+
     // =========================================================================
     /// \short Constructor: this initialises the unity matrix and the plastic
     /// data.
@@ -30,9 +45,6 @@ namespace oomph
     {
       this->unity.resize(DIM, DIM, 0.0);
       for (unsigned int i = 0; i < DIM; i++) this->unity(i, i) = 1;
-
-      // Construct all plastic data
-      construct_plastic_data();
     }
 
     // =========================================================================
@@ -58,9 +70,7 @@ namespace oomph
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
         str_str << "Integral point " << ipt << ": ";
-        for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
+        for (unsigned data_type : active_plastic_data_indices)
         {
           str_str << "[" << Plastic_data_names[data_type] << "]:";
           const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
@@ -122,8 +132,11 @@ namespace oomph
                  << " lambda(1) = " << get_lambda(1, ipt)
                  << " lambda(2) = " << get_lambda(2, ipt) << std::endl;
 
-      oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
-                 << " R(2) = " << get_r(2, ipt) << std::endl;
+      if (Plastic_model_type >= PlasticModel::SubloadingSurface)
+      {
+        oomph_info << "R(0) = " << get_r(0, ipt) << " R(1) = " << get_r(1, ipt)
+                   << " R(2) = " << get_r(2, ipt) << std::endl;
+      }
     }
 
     // =========================================================================
@@ -168,6 +181,11 @@ namespace oomph
       return Plastic_constitutive_law_pt;
     }
 
+    PlasticModel& plastic_model_type()
+    {
+      return Plastic_model_type;
+    }
+
     // =========================================================================
     /// \short Assigns the fefault values of the plastic data based on the
     /// constitutive law. It is reccomended to call this function on every
@@ -177,11 +195,14 @@ namespace oomph
     // =========================================================================
     void assign_default_values_based_on_constitutive_law()
     {
-      double Re =
-        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
-      for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+      if (Plastic_model_type >= PlasticModel::SubloadingSurface)
       {
-        set_r(ipt, Re);
+        double Re = this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt
+                      ->get_re();
+        for (unsigned int ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
+        {
+          set_r(ipt, Re);
+        }
       }
     }
 
@@ -207,9 +228,7 @@ namespace oomph
     {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
-        for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
+        for (unsigned data_type : active_plastic_data_indices)
         {
           // Could swap the loops, slightly more efficient but we only do this
           // once per element
@@ -220,6 +239,36 @@ namespace oomph
       }
 
       // Need to reassign eqn numbers because pointers may have changed.
+      assign_plastic_eqn_numbers();
+    }
+
+    // =========================================================================
+    /// \short This calls all neccesary functions to setup the memory for the
+    /// internal variables.
+    /// It should be called only after the Plasticity model has been selected.
+    // =========================================================================
+    void construct_plastic_data()
+    {
+      active_plastic_data_indices.clear();
+
+      // Allocate arrays for data pointer and eqn numbers
+      resize_plastic_dof_numbers();
+
+      // Create the internal data containers
+      construct_lambda_internal_data();
+      construct_inv_fp_internal_data();
+      construct_invBpks_internal_data();
+
+      if (Plastic_model_type >= PlasticModel::SubloadingSurface)
+      {
+        construct_r_internal_data();
+      }
+      if (Plastic_model_type >= PlasticModel::ExtendedSubloadingSurface)
+      {
+        construct_invBpcs_internal_data();
+      }
+
+      // Assign the equation numbers for plastic solve
       assign_plastic_eqn_numbers();
     }
 
@@ -529,16 +578,19 @@ namespace oomph
     // =========================================================================
     void enforce_boundaries_of_r(const unsigned& ipt)
     {
-      const double r = get_r(ipt);
-      const double re =
-        this->Plastic_constitutive_law_pt->normal_yield_ratio_law_pt->get_re();
-      if (r < re)
+      if (Plastic_model_type >= PlasticModel::SubloadingSurface)
       {
-        set_r(ipt, re);
-      }
-      else if (r > 1.0)
-      {
-        set_r(ipt, 1.0);
+        const double r = get_r(ipt);
+        const double re = this->Plastic_constitutive_law_pt
+                            ->normal_yield_ratio_law_pt->get_re();
+        if (r < re)
+        {
+          set_r(ipt, re);
+        }
+        else if (r > 1.0)
+        {
+          set_r(ipt, 1.0);
+        }
       }
     }
 
@@ -937,26 +989,6 @@ namespace oomph
     ////////////////////////////////////////////////////////////////////////////
 
     // =========================================================================
-    /// \short This calls all neccesary functions to setup the memory for the
-    /// internal variables.
-    // =========================================================================
-    void construct_plastic_data()
-    {
-      // Allocate arrays for data pointer and eqn numbers
-      resize_plastic_dof_numbers();
-
-      // Create the internal data containers
-      construct_inv_fp_internal_data();
-      construct_invBpks_internal_data();
-      construct_invBpcs_internal_data();
-      construct_r_internal_data();
-      construct_lambda_internal_data();
-
-      // Assign the equation numbers for plastic solve
-      assign_plastic_eqn_numbers();
-    }
-
-    // =========================================================================
     /// \short Allocates the space for pointers to the internal data and their
     /// equation numbers for plastic solve.
     // =========================================================================
@@ -971,7 +1003,7 @@ namespace oomph
       Plastic_dof_data_pt.resize(nipt);
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
-        Plastic_data_pt[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
+        Plastic_data_pt[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES, nullptr);
         Plastic_data_eqn_number[ipt].resize(NUMBER_OF_PLASTIC_VARIABLE_TYPES);
       }
       Plastic_dof_nunbers_has_been_resized = true;
@@ -988,9 +1020,7 @@ namespace oomph
         Plastic_dof_data_pt[ipt].clear();
 
         unsigned eqn_count = 0;
-        for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE;
-             data_type++)
+        for (unsigned data_type : active_plastic_data_indices)
         {
           Data* data_pt = Plastic_data_pt[ipt][data_type];
           const unsigned nvalue = data_pt->nvalue();
@@ -1010,6 +1040,13 @@ namespace oomph
     // =========================================================================
     void construct_inv_fp_internal_data()
     {
+      // Register this data type as active (if not already contained)
+      if (std::find(active_plastic_data_indices.begin(),
+                    active_plastic_data_indices.end(),
+                    invFp_INDEX) == active_plastic_data_indices.end())
+      {
+        active_plastic_data_indices.push_back(invFp_INDEX);
+      }
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -1041,6 +1078,14 @@ namespace oomph
     // =========================================================================
     void construct_invBpks_internal_data()
     {
+      // Register this data type as active (if not already contained)
+      if (std::find(active_plastic_data_indices.begin(),
+                    active_plastic_data_indices.end(),
+                    invBpks_INDEX) == active_plastic_data_indices.end())
+      {
+        active_plastic_data_indices.push_back(invBpks_INDEX);
+      }
+
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -1072,6 +1117,14 @@ namespace oomph
     // =========================================================================
     void construct_invBpcs_internal_data()
     {
+      // Register this data type as active (if not already contained)
+      if (std::find(active_plastic_data_indices.begin(),
+                    active_plastic_data_indices.end(),
+                    invBpcs_INDEX) == active_plastic_data_indices.end())
+      {
+        active_plastic_data_indices.push_back(invBpcs_INDEX);
+      }
+
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -1102,6 +1155,14 @@ namespace oomph
     // =========================================================================
     void construct_r_internal_data()
     {
+      // Register this data type as active (if not already contained)
+      if (std::find(active_plastic_data_indices.begin(),
+                    active_plastic_data_indices.end(),
+                    R_INDEX) == active_plastic_data_indices.end())
+      {
+        active_plastic_data_indices.push_back(R_INDEX);
+      }
+
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -1125,6 +1186,14 @@ namespace oomph
     // =========================================================================
     void construct_lambda_internal_data()
     {
+      // Register this data type as active (if not already contained)
+      if (std::find(active_plastic_data_indices.begin(),
+                    active_plastic_data_indices.end(),
+                    Lambda_INDEX) == active_plastic_data_indices.end())
+      {
+        active_plastic_data_indices.push_back(Lambda_INDEX);
+      }
+
       const unsigned nipt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nipt; ipt++)
       {
@@ -1153,9 +1222,7 @@ namespace oomph
     {
       for (unsigned ipt = 0; ipt < this->integral_pt()->nweight(); ipt++)
       {
-        for (unsigned data_type = 0;
-             data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-             data_type++)
+        for (unsigned data_type : active_plastic_data_indices)
         {
           const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
           for (unsigned i = 0; i < n_value; i++)
@@ -1173,8 +1240,7 @@ namespace oomph
                                 const unsigned& ipt,
                                 const unsigned& t = 0) const
     {
-      for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-           data_type++)
+      for (unsigned data_type : active_plastic_data_indices)
       {
         const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
         for (unsigned i = 0; i < n_value; i++)
@@ -1239,17 +1305,12 @@ namespace oomph
                                         const unsigned& t = 0)
     {
       unsigned data_count = 0;
-      for (unsigned data_type = 0; data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES;
-           data_type++)
+      for (unsigned data_type : active_plastic_data_indices)
       {
-        if (data_type < NUMBER_OF_PLASTIC_VARIABLE_TYPES)
+        const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
+        for (unsigned i = 0; i < n_value; i++)
         {
-          const unsigned n_value = Plastic_data_pt[ipt][data_type]->nvalue();
-          for (unsigned i = 0; i < n_value; i++)
-          {
-            plastic_data_pt(ipt, data_type)
-              ->set_value(t, i, data[data_count++]);
-          }
+          plastic_data_pt(ipt, data_type)->set_value(t, i, data[data_count++]);
         }
       }
     }
@@ -1954,25 +2015,6 @@ namespace oomph
       return Plastic_dof_data_pt[ipt][ndof];
     }
 
-    // Public variables
-  public:
-    // =============================================================
-    /// \short The plasticity model used. There are three options,
-    /// corresponding to the chapters 6, 7 and 8 of Hashiguchi 2019:
-    /// - Conventional: includes isotropic and kinematic hardening.
-    /// - SubloadingSurface: the onset of plasticity is gradual.
-    /// - ExtendedSubloadingSurface: the center of the subloading
-    ///   yield surface is allowed to move.
-    // =============================================================
-    enum class PlasticModel
-    {
-      Conventional,
-      SubloadingSurface,
-      ExtendedSubloadingSurface
-    };
-
-    static PlasticModel Full_plastic_model;
-
     // Protected variables
   protected:
     /// Stores, if finite difference should be used for the plastic solve.
@@ -2003,9 +2045,11 @@ namespace oomph
       NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
     };
 
+    /// A vector storing the plastic variable indices, which are solved for.
+    std::vector<unsigned> active_plastic_data_indices;
 
     /// The plastic model to use
-    PlasticModel* plastic_model_type_pt = &Full_plastic_model;
+    PlasticModel Plastic_model_type = PlasticModel::ExtendedSubloadingSurface;
 
     /// We store a vector of indices of the plastic data in internal data
     /// so we can assign timesteppers etc more easily
