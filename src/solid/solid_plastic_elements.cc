@@ -6,6 +6,11 @@ template<unsigned DIM>
 const std::vector<std::string> PlasticEquationsBase<DIM>::Plastic_data_names{
   "Fe", "invBpks", "invBpcs", "H", "Lambda", "R"};
 
+template<unsigned DIM>
+typename PlasticEquationsBase<DIM>::PlasticModel
+  PlasticEquationsBase<DIM>::Full_plastic_model =
+    PlasticEquationsBase<DIM>::PlasticModel::ExtendedSubloadingSurface;
+
 namespace oomph
 {
   template class PlasticEquationsBase<2>;
@@ -987,21 +992,26 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
 {
   // This implements Eq. 193 from
   // https://doi.org/10.1007/s11831-018-9256-5
+  //
+  // For the initial subloading surface model, bar_Mc = bar_Mk is assumed
+  // For the Conventional model, R = Re = 1.0 is assumed
 
   // Get the plastic quantities
   DenseMatrix<double> invFp(DIM, DIM, 0.0), invBpks(DIM, DIM, 0.0),
     invBpcs(DIM, DIM, 0.0);
 
   get_inv_fp_matrix(ipt, invFp);
-
   get_invBpks_matrix(ipt, invBpks);
 
-  get_invBpcs_matrix(ipt, invBpcs);
+  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+    get_invBpcs_matrix(ipt, invBpcs);
 
   // Get R
-  double r = get_r(ipt);
+  double r = 1.0;
+  if ((*plastic_model_type_pt) >= PlasticModel::SubloadingSurface)
+    r = get_r(ipt);
 
-  DenseMatrix<double> C_total(DIM);
+  DenseMatrix<double> C_total(DIM, DIM, 0.0);
   compute_total_right_cauchy_green_deformation_tensor(0, ipt, C_total);
 
   // Now compute the elastic Mandel stress
@@ -1011,23 +1021,41 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
   // Compute bar_Mk and bar_Mc
   DenseMatrix<double> bar_Mk(DIM, DIM, 0.0), bar_Mc(DIM, DIM, 0.0);
   compute_mandellike_kinematic_hardening(invBpks, bar_Mk);
-  compute_mandellike_elastic_core(invBpcs, bar_Mc);
+
+  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  {
+    compute_mandellike_elastic_core(invBpcs, bar_Mc);
+  }
 
   // Get the total mandel stress
   DenseMatrix<double> barbar_M(DIM, DIM, 0.0);
-  compute_mandel_stress_total(bar_M, bar_Mk, bar_Mc, r, barbar_M);
+  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  {
+    compute_mandel_stress_total(bar_M, bar_Mk, bar_Mc, r, barbar_M);
+  }
+  else
+  {
+    compute_mandel_stress_total(bar_M, bar_Mk, bar_Mk, r, barbar_M);
+  }
 
   // Now compute the previous value - the only thing that has changed if C
-  DenseMatrix<double> C_Total_prev(DIM, DIM, 0.0);
-  compute_total_right_cauchy_green_deformation_tensor(1, ipt, C_Total_prev);
+  DenseMatrix<double> C_total_prev(DIM, DIM, 0.0);
+  compute_total_right_cauchy_green_deformation_tensor(1, ipt, C_total_prev);
 
   // Previous bar_M
   DenseMatrix<double> bar_M_prev(DIM, DIM, 0.0);
-  compute_mandel_stress_elastic(invFp, C_Total_prev, bar_M_prev);
+  compute_mandel_stress_elastic(invFp, C_total_prev, bar_M_prev);
 
   // Compute Mbarbar_prev
-  DenseMatrix<double> barbar_M_prev(DIM);
-  compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mc, r, barbar_M_prev);
+  DenseMatrix<double> barbar_M_prev(DIM, DIM, 0.0);
+  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
+  {
+    compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mc, r, barbar_M_prev);
+  }
+  else
+  {
+    compute_mandel_stress_total(bar_M_prev, bar_Mk, bar_Mk, r, barbar_M_prev);
+  }
 
   // Now we can calculate deltaMTrial = bar_M - bar_M_prev
   DenseMatrix<double> delta_M_trial(DIM, DIM, 0.0);
@@ -1039,41 +1067,37 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
     }
   }
 
-  // In case only invBpks has been active
-  // We now always build all plastic data. Do we need to check if we have pinned
-  // the data instead?
-  // if (Plastic_data_has_been_built[invBpks_INDEX] &&
-  //     !Plastic_data_has_been_built[invBpcs_INDEX])
-  // {
-  //   bar_Mc.resize(DIM, DIM);
-  //   for (unsigned int i = 0; i < DIM; i++)
-  //   {
-  //     for (unsigned int j = 0; j < DIM; j++)
-  //     {
-  //       bar_Mc(i, j) = bar_Mk(i, j);
-  //     }
-  //   }
-  // }
-
   // Compute Nbarbar_prev
-  DenseMatrix<double> barbar_N_prev_nsym(DIM);
-  double yield_surface_stress_prev =
-    this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
-      barbar_M_prev, barbar_N_prev_nsym, true);
+  DenseMatrix<double> barbar_N_prev_nsym(DIM, DIM, 0.0);
+  (void)this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+    barbar_M_prev, barbar_N_prev_nsym, true);
   MatrixHelpers::normalise(barbar_N_prev_nsym);
 
-  // Compute Mbarbar_e = barbar_M - Re Mbark_prev - (1 - Re) Mbarc_prev
   double re = 1.0;
+  if ((*plastic_model_type_pt) >= PlasticModel::SubloadingSurface)
+    re = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
 
-  re = this->Plastic_consitutive_law_pt->normal_yield_ratio_law_pt->get_re();
-
-  DenseMatrix<double> Mbarbar_e(DIM);
-  for (unsigned int i = 0; i < DIM; i++)
+  // Compute Mbarbar_e = barbar_M - Re Mbark_prev - (1 - Re) Mbarc_prev
+  DenseMatrix<double> Mbarbar_e(DIM, DIM, 0.0);
+  if ((*plastic_model_type_pt) >= PlasticModel::ExtendedSubloadingSurface)
   {
-    for (unsigned int j = 0; j < DIM; j++)
+    for (unsigned int i = 0; i < DIM; i++)
     {
-      Mbarbar_e(i, j) =
-        bar_M(i, j) - re * bar_Mk(i, j) - (1 - re) * bar_Mc(i, j);
+      for (unsigned int j = 0; j < DIM; j++)
+      {
+        Mbarbar_e(i, j) =
+          bar_M(i, j) - re * bar_Mk(i, j) - (1.0 - re) * bar_Mc(i, j);
+      }
+    }
+  }
+  else
+  {
+    for (unsigned int i = 0; i < DIM; i++)
+    {
+      for (unsigned int j = 0; j < DIM; j++)
+      {
+        Mbarbar_e(i, j) = bar_M(i, j) - bar_Mk(i, j);
+      }
     }
   }
 
@@ -1081,7 +1105,7 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
                  this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
                    ->isotropic_hardening_factor();
   bool plastic_deformation = false;
-  if (MatrixHelpers::reduce(barbar_N_prev_nsym, delta_M_trial) >= 0)
+  if (MatrixHelpers::reduce(barbar_N_prev_nsym, delta_M_trial) >= 0.0)
   {
     // This is the case of forward loading
 
@@ -1098,17 +1122,12 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
     // Inverse loading
 
     // Compute barbar_N
-    DenseMatrix<double> barbar_N_nsym(DIM);
-    double yield_surface_stress =
-      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
-        barbar_M, barbar_N_nsym, true);
+    DenseMatrix<double> barbar_N_nsym(DIM, DIM, 0.0);
+    (void)this->Plastic_consitutive_law_pt->yield_criterion_pt
+      ->surface_function(barbar_M, barbar_N_nsym, true);
     MatrixHelpers::normalise(barbar_N_nsym);
 
-    if (MatrixHelpers::reduce(barbar_N_nsym, delta_M_trial) <= 0)
-    {
-      plastic_deformation = false;
-    }
-    else
+    if (MatrixHelpers::reduce(barbar_N_nsym, delta_M_trial) > 0.0)
     {
       plastic_deformation =
         this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
@@ -1117,19 +1136,23 @@ bool PlasticEquationsBase<DIM>::is_there_plastic_deformation(
                  ->yield_function(h_var) >
         0;
     }
+    else
+    {
+      plastic_deformation = false;
+    }
   }
 
-  if (!plastic_deformation)
+  if (!plastic_deformation &&
+      (*plastic_model_type_pt) > PlasticModel::Conventional)
   {
     // Compute R from the yield surface condition
-    double r =
-      this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
-        barbar_M, GeneralisedElement::Dummy_matrix, false) /
-      this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-        ->yield_function(
-          get_lambda(ipt) *
-          this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
-            ->isotropic_hardening_factor());
+    r = this->Plastic_consitutive_law_pt->yield_criterion_pt->surface_function(
+          barbar_M, GeneralisedElement::Dummy_matrix, false) /
+        this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+          ->yield_function(
+            get_lambda(ipt) *
+            this->Plastic_consitutive_law_pt->isotropic_hardening_law_pt
+              ->isotropic_hardening_factor());
 
     set_r(
       ipt,

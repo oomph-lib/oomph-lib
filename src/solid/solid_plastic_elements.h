@@ -1954,6 +1954,26 @@ namespace oomph
       return Plastic_dof_data_pt[ipt][ndof];
     }
 
+    // Public variables
+  public:
+    // =============================================================
+    /// \short The plasticity model used. There are three options,
+    /// corresponding to the chapters 6, 7 and 8 of Hashiguchi 2019:
+    /// - Conventional: includes isotropic and kinematic hardening.
+    /// - SubloadingSurface: the onset of plasticity is gradual.
+    /// - ExtendedSubloadingSurface: the center of the subloading
+    ///   yield surface is allowed to move.
+    // =============================================================
+    enum class PlasticModel
+    {
+      Conventional,
+      SubloadingSurface,
+      ExtendedSubloadingSurface
+    };
+
+    static PlasticModel Full_plastic_model;
+
+    // Protected variables
   protected:
     /// Stores, if finite difference should be used for the plastic solve.
     bool Plastic_solve_use_fd = false;
@@ -1982,6 +2002,10 @@ namespace oomph
       NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE,
       NUMBER_OF_PLASTIC_VARIABLE_TYPES = NUMBER_OF_PLASTIC_VARIABLES_TO_SOLVE
     };
+
+
+    /// The plastic model to use
+    PlasticModel* plastic_model_type_pt = &Full_plastic_model;
 
     /// We store a vector of indices of the plastic data in internal data
     /// so we can assign timesteppers etc more easily
