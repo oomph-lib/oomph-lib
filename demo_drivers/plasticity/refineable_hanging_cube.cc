@@ -82,7 +82,7 @@ namespace Parameters
   PlasticConstitutiveLaw* plastic_constitutive_law_pt =
     new PlasticConstitutiveLaw();
 
-  const unsigned max_adapt = 2;
+  const unsigned max_adapt = 1;
   const double min_error = 1e-3;
   const double max_error = 1e-1;
   Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
@@ -98,8 +98,6 @@ public:
   ~CubicAnisotropicSolidProblem() {}
   void actions_before_newton_solve();
   void actions_after_newton_solve();
-  void actions_before_adapt() {}
-  void actions_after_adapt();
   void unpin_bottom_boundary();
   void doc_solution(const unsigned& nplot);
 };
@@ -116,9 +114,12 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
   Problem::mesh_pt() =
     new ElasticSimpleCubicMesh<ELEMENT>(nx, ny, nz, Problem::time_stepper_pt());
 
-  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->spatial_error_estimator_pt() = Parameters::error_estimator_pt;
-  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->min_permitted_error() = Parameters::min_error;
-  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->max_permitted_error() = Parameters::max_error;
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())
+    ->spatial_error_estimator_pt() = Parameters::error_estimator_pt;
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())
+    ->min_permitted_error() = Parameters::min_error;
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())
+    ->max_permitted_error() = Parameters::max_error;
 
   // Finish setting up the plastic constitutive law
   Parameters::plastic_constitutive_law_pt->isotropic_hardening_law_pt =
@@ -156,6 +157,9 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
   {
     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Problem::mesh_pt()->element_pt(i));
 
+    el_pt->plastic_model_type() =
+      PlasticEquationsBase<3>::PlasticModel::Conventional;
+
     // Construct the internal data based on the plastic model type
     el_pt->construct_plastic_data();
 
@@ -167,6 +171,35 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
     el_pt->assign_default_values_based_on_constitutive_law();
 
     el_pt->assign_plastic_timestepper_pt(Problem::time_stepper_pt(), true);
+  }
+
+  // Apply boundary conditions - pin all of them on one side
+  unsigned n_bound_node =
+    Problem::mesh_pt()->nboundary_node(Parameters::dirichlet_boundary_top);
+  for (unsigned i = 0; i < n_bound_node; i++)
+  {
+    SolidNode* node_pt =
+      dynamic_cast<SolidNode*>(Problem::mesh_pt()->boundary_node_pt(
+        Parameters::dirichlet_boundary_top, i));
+
+    for (unsigned i = 0; i < 3; i++)
+    {
+      node_pt->pin_position(i);
+    }
+  }
+
+  n_bound_node =
+    Problem::mesh_pt()->nboundary_node(Parameters::dirichlet_boundary_bottom);
+  for (unsigned i = 0; i < n_bound_node; i++)
+  {
+    SolidNode* node_pt =
+      dynamic_cast<SolidNode*>(Problem::mesh_pt()->boundary_node_pt(
+        Parameters::dirichlet_boundary_bottom, i));
+
+    for (unsigned i = 0; i < 3; i++)
+    {
+      node_pt->pin_position(i);
+    }
   }
 
   initialise_dt(Parameters::dt);
@@ -202,12 +235,6 @@ void CubicAnisotropicSolidProblem<ELEMENT>::actions_after_newton_solve()
     node_pt->position_time_stepper_pt()->assign_initial_positions_impulsive(
       node_pt);
   }
-}
-
-template<class ELEMENT>
-void CubicAnisotropicSolidProblem<ELEMENT>::actions_after_adapt()
-{
-
 }
 
 template<class ELEMENT>
@@ -254,7 +281,8 @@ int main()
   unsigned ny = 2;
   unsigned nz = 2;
 
-  CubicAnisotropicSolidProblem<RefineableQPlasticPVDElement<3, 2>> problem(nx, ny, nz);
+  CubicAnisotropicSolidProblem<RefineableQPlasticPVDElement<3, 2>> problem(
+    nx, ny, nz);
 
   // Check whether the problem can be solved
   cout << "\n\n\nProblem self-test ";
@@ -280,14 +308,16 @@ int main()
     Parameters::Pinned_height =
       1.0 * (1.0 - s) + s * Parameters::max_loading_height;
 
-    problem.unsteady_newton_solve(Parameters::dt, Parameters::max_adapt, false, true);
+    problem.unsteady_newton_solve(
+      Parameters::dt, Parameters::max_adapt, false, true);
     if (i % Parameters::print_freq == 0) problem.doc_solution(out_num++);
   }
 
   problem.unpin_bottom_boundary();
   for (unsigned i = 0; i < Parameters::n_step_unloading; i++)
   {
-    problem.unsteady_newton_solve(Parameters::dt, Parameters::max_adapt, false, true);
+    problem.unsteady_newton_solve(
+      Parameters::dt, Parameters::max_adapt, false, true);
     if (i % Parameters::print_freq == 0) problem.doc_solution(out_num++);
   }
 }

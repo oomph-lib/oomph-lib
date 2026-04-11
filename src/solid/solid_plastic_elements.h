@@ -2262,7 +2262,7 @@ namespace oomph
       this->compute_ipt_to_node_mapping();
     }
 
-    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals) override
     {
       // This is called at least twice per Newton solve but we only want one
       // So we only all when we compute residuals, NOT when we compute jacobian
@@ -2275,8 +2275,8 @@ namespace oomph
 
     /// Fill in contribution to Jacobian (either by FD or analytically,
     /// control this via evaluate_jacobian_by_fd()
-    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                          DenseMatrix<double>& jacobian)
+    void fill_in_contribution_to_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) override
     {
       PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
         residuals, jacobian, 1);
@@ -2338,7 +2338,7 @@ namespace oomph
       this->compute_ipt_to_node_mapping();
     }
 
-    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals) override
     {
       // This is called at least twice per Newton solve but we only want one
       // So we only all when we compute residuals, NOT when we compute jacobian
@@ -2352,8 +2352,8 @@ namespace oomph
 
     /// Fill in contribution to Jacobian (either by FD or analytically,
     /// control this via evaluate_jacobian_by_fd()
-    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                          DenseMatrix<double>& jacobian)
+    void fill_in_contribution_to_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) override
     {
       PVDEquationsWithPressure<
         DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
@@ -2491,6 +2491,7 @@ namespace oomph
         cast_father_element_pt->get_plastic_solve_by_fd();
       this->Plastic_constitutive_law_pt =
         cast_father_element_pt->plastic_constitutive_law_pt();
+      this->plastic_model_type() = cast_father_element_pt->plastic_model_type();
 
       this->construct_plastic_data();
       // Set the plastic timestepper
@@ -2519,10 +2520,11 @@ namespace oomph
 
     void rebuild_from_sons(Mesh*& mesh_pt) override
     {
+      RefineableQPVDElement<DIM, NNODE>::rebuild_from_sons(mesh_pt);
       RefineablePlasticEquations<DIM>::rebuild_from_sons(mesh_pt);
     }
 
-    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals) override
     {
       // This is called at least twice per Newton solve but we only want one
       // So we only all when we compute residuals, NOT when we compute jacobian
@@ -2536,8 +2538,8 @@ namespace oomph
 
     /// Fill in contribution to Jacobian (either by FD or analytically,
     /// control this via evaluate_jacobian_by_fd()
-    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                          DenseMatrix<double>& jacobian)
+    void fill_in_contribution_to_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) override
     {
       RefineablePVDEquations<
         DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
