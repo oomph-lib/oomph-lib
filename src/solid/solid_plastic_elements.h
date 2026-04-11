@@ -411,7 +411,7 @@ namespace oomph
       this->fill_in_residuals_plastic(residuals, ipt, C);
       double maxres = residuals.max();
 
-      while (maxres > Plastic_Newton_Solver_Tolerance);
+      while (maxres > Plastic_Newton_Solver_Tolerance)
       {
         // Initialize and compute the jacobian.
         jacobian.initialise(0.0);
@@ -1998,6 +1998,7 @@ namespace oomph
       return x0;
     }
 
+  public:
     // =========================================================================
     /// \short Provides access to the plastic data using the data type
     // =========================================================================
@@ -2491,6 +2492,7 @@ namespace oomph
       this->Plastic_constitutive_law_pt =
         cast_father_element_pt->plastic_constitutive_law_pt();
 
+      this->construct_plastic_data();
       // Set the plastic timestepper
       this->assign_plastic_timestepper_pt(
         cast_father_element_pt->plastic_data_pt(0, 0)->time_stepper_pt(), true);

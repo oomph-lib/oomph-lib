@@ -30,5 +30,11 @@ oomph_add_executable(
   SOURCES hanging_cube.cc
   LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
 
+oomph_add_executable(
+  NAME refineable_hanging_cube
+  SOURCES refineable_hanging_cube.cc
+  LIBRARIES oomph::constitutive oomph::solid oomph::meshes oomph::generic)
+
+
 message(VERBOSE "Leaving plasticity subdirectory")
 # ------------------------------------------------------------------------------

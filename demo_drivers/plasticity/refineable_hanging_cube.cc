@@ -15,7 +15,8 @@ using namespace oomph;
 // Define the solid mesh
 template<class ELEMENT>
 class ElasticSimpleCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
-                               public virtual SolidMesh
+                               public virtual SolidMesh,
+                               public virtual RefineableBrickMesh<ELEMENT>
 {
 public:
   ElasticSimpleCubicMesh(
@@ -24,9 +25,11 @@ public:
     const unsigned nz,
     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     : SimpleCubicMesh<ELEMENT>(nx, ny, nz, 1.0, 1.0, 1.0, time_stepper_pt),
-      SolidMesh()
+      SolidMesh(),
+      RefineableBrickMesh<ELEMENT>()
   {
     set_lagrangian_nodal_coordinates();
+    this->setup_octree_forest();
   }
 };
 
@@ -78,6 +81,11 @@ namespace Parameters
 
   PlasticConstitutiveLaw* plastic_constitutive_law_pt =
     new PlasticConstitutiveLaw();
+
+  const unsigned max_adapt = 2;
+  const double min_error = 1e-3;
+  const double max_error = 1e-1;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
 } // namespace Parameters
 
 template<class ELEMENT>
@@ -90,6 +98,8 @@ public:
   ~CubicAnisotropicSolidProblem() {}
   void actions_before_newton_solve();
   void actions_after_newton_solve();
+  void actions_before_adapt() {}
+  void actions_after_adapt();
   void unpin_bottom_boundary();
   void doc_solution(const unsigned& nplot);
 };
@@ -105,6 +115,10 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
 
   Problem::mesh_pt() =
     new ElasticSimpleCubicMesh<ELEMENT>(nx, ny, nz, Problem::time_stepper_pt());
+
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->spatial_error_estimator_pt() = Parameters::error_estimator_pt;
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->min_permitted_error() = Parameters::min_error;
+  dynamic_cast<ElasticSimpleCubicMesh<ELEMENT>*>(Problem::mesh_pt())->max_permitted_error() = Parameters::max_error;
 
   // Finish setting up the plastic constitutive law
   Parameters::plastic_constitutive_law_pt->isotropic_hardening_law_pt =
@@ -155,35 +169,6 @@ CubicAnisotropicSolidProblem<ELEMENT>::CubicAnisotropicSolidProblem(
     el_pt->assign_plastic_timestepper_pt(Problem::time_stepper_pt(), true);
   }
 
-  // Apply boundary conditions - pin all of them on one side
-  unsigned n_bound_node =
-    Problem::mesh_pt()->nboundary_node(Parameters::dirichlet_boundary_top);
-  for (unsigned i = 0; i < n_bound_node; i++)
-  {
-    SolidNode* node_pt =
-      dynamic_cast<SolidNode*>(Problem::mesh_pt()->boundary_node_pt(
-        Parameters::dirichlet_boundary_top, i));
-
-    for (unsigned i = 0; i < 3; i++)
-    {
-      node_pt->pin_position(i);
-    }
-  }
-
-  n_bound_node =
-    Problem::mesh_pt()->nboundary_node(Parameters::dirichlet_boundary_bottom);
-  for (unsigned i = 0; i < n_bound_node; i++)
-  {
-    SolidNode* node_pt =
-      dynamic_cast<SolidNode*>(Problem::mesh_pt()->boundary_node_pt(
-        Parameters::dirichlet_boundary_bottom, i));
-
-    for (unsigned i = 0; i < 3; i++)
-    {
-      node_pt->pin_position(i);
-    }
-  }
-
   initialise_dt(Parameters::dt);
   assign_initial_values_impulsive(Parameters::dt);
 
@@ -220,6 +205,12 @@ void CubicAnisotropicSolidProblem<ELEMENT>::actions_after_newton_solve()
 }
 
 template<class ELEMENT>
+void CubicAnisotropicSolidProblem<ELEMENT>::actions_after_adapt()
+{
+
+}
+
+template<class ELEMENT>
 void CubicAnisotropicSolidProblem<ELEMENT>::unpin_bottom_boundary()
 {
   Parameters::controlling_height = false;
@@ -251,7 +242,7 @@ void CubicAnisotropicSolidProblem<ELEMENT>::doc_solution(const unsigned& label)
   npts = 5;
 
   // Output solution with specified number of plot points per element
-  sprintf(filename, "RESLT_CUBE_HANG/soln%i.dat", label);
+  sprintf(filename, "RESLT_REFINEABLE_CUBE_HANG/soln%i.dat", label);
   some_file.open(filename);
   Problem::mesh_pt()->output(some_file, npts);
   some_file.close();
@@ -263,7 +254,7 @@ int main()
   unsigned ny = 2;
   unsigned nz = 2;
 
-  CubicAnisotropicSolidProblem<QPlasticPVDElement<3, 2>> problem(nx, ny, nz);
+  CubicAnisotropicSolidProblem<RefineableQPlasticPVDElement<3, 2>> problem(nx, ny, nz);
 
   // Check whether the problem can be solved
   cout << "\n\n\nProblem self-test ";
@@ -289,14 +280,14 @@ int main()
     Parameters::Pinned_height =
       1.0 * (1.0 - s) + s * Parameters::max_loading_height;
 
-    problem.unsteady_newton_solve(Parameters::dt);
+    problem.unsteady_newton_solve(Parameters::dt, Parameters::max_adapt, false, true);
     if (i % Parameters::print_freq == 0) problem.doc_solution(out_num++);
   }
 
   problem.unpin_bottom_boundary();
   for (unsigned i = 0; i < Parameters::n_step_unloading; i++)
   {
-    problem.unsteady_newton_solve(Parameters::dt);
+    problem.unsteady_newton_solve(Parameters::dt, Parameters::max_adapt, false, true);
     if (i % Parameters::print_freq == 0) problem.doc_solution(out_num++);
   }
 }
