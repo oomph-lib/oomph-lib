@@ -2091,10 +2091,13 @@ namespace oomph
   {
   public:
     PlasticEquations() : PlasticEquationsBase<DIM>(), PVDEquations<DIM>() {}
-    /// Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
-    /// as calculated from the constitutive law: Pass the interpolation point,
-    /// the diagonal value of g, the metric tensors in the stress free and
-    /// current configurations and the current value of the the stress tensor.
+    // =========================================================================
+    /// \short Return the derivatives of the 2nd Piola Kirchhoff stress
+    /// tensor, as calculated from the constitutive law: Pass the interpolation
+    /// point, the diagonal value of g, the metric tensors in the stress free
+    /// and current configurations and the current value of the the stress
+    /// tensor.
+    // =========================================================================
     inline virtual void get_d_stress_dG_upper(
       const unsigned& ipt,
       const double& diag_entry,
@@ -2265,7 +2268,7 @@ namespace oomph
     void fill_in_contribution_to_residuals(Vector<double>& residuals) override
     {
       // This is called at least twice per Newton solve but we only want one
-      // So we only all when we compute residuals, NOT when we compute jacobian
+      // So we only call when we compute residuals, NOT when we compute jacobian
       // since jacobian computation always follows a residual computation
       PlasticEquationsBase<DIM>::plastic_newton_solve();
 
@@ -2341,7 +2344,7 @@ namespace oomph
     void fill_in_contribution_to_residuals(Vector<double>& residuals) override
     {
       // This is called at least twice per Newton solve but we only want one
-      // So we only all when we compute residuals, NOT when we compute jacobian
+      // So we only call when we compute residuals, NOT when we compute jacobian
       // since jacobian computation always follows a residual computation
       PlasticEquationsBase<DIM>::plastic_newton_solve();
 
@@ -2350,8 +2353,11 @@ namespace oomph
           residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// Fill in contribution to Jacobian (either by FD or analytically,
-    /// control this via evaluate_jacobian_by_fd()
+
+    // =========================================================================
+    /// \short Fill in contribution to Jacobian (either by FD or
+    /// analytically, control this via evaluate_jacobian_by_fd()
+    // =========================================================================
     void fill_in_contribution_to_jacobian(
       Vector<double>& residuals, DenseMatrix<double>& jacobian) override
     {
@@ -2361,25 +2367,33 @@ namespace oomph
                                                             1);
     }
 
-    /// Output function
+    // =========================================================================
+    /// \short Output function
+    // =========================================================================
     void output(std::ostream& outfile)
     {
       PVDEquationsWithPressure<DIM>::output(outfile);
     }
 
-    /// Output function
+    // =========================================================================
+    /// \short Output function
+    // =========================================================================
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
     }
 
-    /// C-style output function
+    // =========================================================================
+    /// \short C-style output function
+    // =========================================================================
     void output(FILE* file_pt)
     {
       PVDEquationsWithPressure<DIM>::output(file_pt);
     }
 
-    /// C-style output function
+    // =========================================================================
+    /// \short C-style output function
+    // =========================================================================
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       PVDEquationsWithPressure<DIM>::output(file_pt, n_plot);
@@ -2392,7 +2406,10 @@ namespace oomph
     : public virtual SolidQElement<1, 3>
   {
   public:
-    /// Constructor must call the constructor of the underlying solid element
+    // =========================================================================
+    /// \short Constructor must call the constructor of the underlying solid
+    /// element
+    // =========================================================================
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
@@ -2401,7 +2418,10 @@ namespace oomph
     : public virtual SolidQElement<2, 3>
   {
   public:
-    /// Constructor must call the constructor of the underlying solid element
+    // =========================================================================
+    /// \short Constructor must call the constructor of the underlying solid
+    /// element
+    // =========================================================================
     FaceGeometry() : SolidQElement<2, 3>() {}
   };
 
@@ -2420,7 +2440,11 @@ namespace oomph
     {
     }
 
-    // We need to get the plastic data from the children at the integral points
+    // =========================================================================
+    /// \short We need to get the plastic data from the children at the integral
+    /// points and interpolate to this element integral points
+    /// \param[in] mesh_pt The mesh the element lives in.
+    // =========================================================================
     void rebuild_from_sons(Mesh*& mesh_pt) override
     {
       const unsigned n_ipt = this->integral_pt()->nweight();
@@ -2458,10 +2482,14 @@ namespace oomph
           s_child[1] = (s[1] >= 0.0) ? (s[1] - 0.5) * 2.0 : (s[1] + 0.5) * 2.0;
           s_child[2] = (s[2] >= 0.0) ? (s[2] - 0.5) * 2.0 : (s[2] + 0.5) * 2.0;
         }
+#ifdef PARANOID
         else
         {
-          // Throw an error
+          throw OomphLibError("Element is not of dimension 2 or 3",
+                              OOMPH_EXCEPTION_LOCATION,
+                              OOMPH_CURRENT_FUNCTION);
         }
+#endif
 
         RefineablePlasticEquations<DIM>* child_pt =
           dynamic_cast<RefineablePlasticEquations<DIM>*>(
@@ -2480,6 +2508,11 @@ namespace oomph
       }
     }
 
+
+    // =========================================================================
+    /// \short get required variables from father and get plastic data at
+    /// integral points from father
+    // =========================================================================
     void further_build() override
     {
       RefineableSolidElement::further_build();
@@ -2497,63 +2530,10 @@ namespace oomph
       // Set the plastic timestepper
       this->assign_plastic_timestepper_pt(
         cast_father_element_pt->plastic_data_pt(0, 0)->time_stepper_pt(), true);
-    }
-  };
 
-  template<unsigned DIM, unsigned NNODE>
-  class RefineableQPlasticPVDElement
-    : public virtual RefineableQPVDElement<DIM, NNODE>,
-      public virtual RefineablePlasticEquations<DIM>
-  {
-  public:
-    RefineableQPlasticPVDElement()
-      : QPVDElement<DIM, NNODE>(),
-        RefineableElement(),
-        RefineableSolidElement(),
-        RefineablePVDEquations<DIM>(),
-        RefineableSolidQElement<DIM>(),
-        RefineableQPVDElement<DIM, NNODE>(),
-        PlasticEquations<DIM>()
-    {
-      this->compute_ipt_to_node_mapping();
-    }
 
-    void rebuild_from_sons(Mesh*& mesh_pt) override
-    {
-      RefineableQPVDElement<DIM, NNODE>::rebuild_from_sons(mesh_pt);
-      RefineablePlasticEquations<DIM>::rebuild_from_sons(mesh_pt);
-    }
-
-    void fill_in_contribution_to_residuals(Vector<double>& residuals) override
-    {
-      // This is called at least twice per Newton solve but we only want one
-      // So we only all when we compute residuals, NOT when we compute jacobian
-      // since jacobian computation always follows a residual computation
-      PlasticEquationsBase<DIM>::plastic_newton_solve();
-
-      RefineablePVDEquations<DIM>::
-        fill_in_generic_contribution_to_residuals_pvd(
-          residuals, GeneralisedElement::Dummy_matrix, 0);
-    }
-
-    /// Fill in contribution to Jacobian (either by FD or analytically,
-    /// control this via evaluate_jacobian_by_fd()
-    void fill_in_contribution_to_jacobian(
-      Vector<double>& residuals, DenseMatrix<double>& jacobian) override
-    {
-      RefineablePVDEquations<
-        DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
-                                                            jacobian,
-                                                            1);
-    }
-
-    void further_build() override
-    {
-      RefineableQPVDElement<DIM, NNODE>::further_build();
-      RefineablePlasticEquations<DIM>::further_build();
-
-      RefineableQPlasticPVDElement<DIM, NNODE>* cast_father_element_pt =
-        dynamic_cast<RefineableQPlasticPVDElement<DIM, NNODE>*>(
+      RefineablePlasticEquations<DIM>* refineable_cast_father_element_pt =
+        dynamic_cast<RefineablePlasticEquations<DIM>*>(
           this->father_element_pt());
 
       const unsigned n_ipt = this->integral_pt()->nweight();
@@ -2577,32 +2557,108 @@ namespace oomph
         for (unsigned t = 0; t < ntstorage; t++)
         {
           Vector<double> father_data;
-          cast_father_element_pt->interpolate_plastic_data_serialised(
+          refineable_cast_father_element_pt->interpolate_plastic_data_serialised(
             father_data, s_father, t);
           this->assign_plastic_data_serialised(father_data, ipt, t);
         }
       }
     }
+  };
 
-    /// Output function
+  template<unsigned DIM, unsigned NNODE>
+  class RefineableQPlasticPVDElement
+    : public virtual RefineableQPVDElement<DIM, NNODE>,
+      public virtual RefineablePlasticEquations<DIM>
+  {
+  public:
+    RefineableQPlasticPVDElement()
+      : QPVDElement<DIM, NNODE>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        RefineablePVDEquations<DIM>(),
+        RefineableSolidQElement<DIM>(),
+        RefineableQPVDElement<DIM, NNODE>(),
+        PlasticEquations<DIM>()
+    {
+      this->compute_ipt_to_node_mapping();
+    }
+
+
+    // =========================================================================
+    /// \short Call base class rebuilds
+    // =========================================================================
+    void rebuild_from_sons(Mesh*& mesh_pt) override
+    {
+      RefineableQPVDElement<DIM, NNODE>::rebuild_from_sons(mesh_pt);
+      RefineablePlasticEquations<DIM>::rebuild_from_sons(mesh_pt);
+    }
+
+
+    // =========================================================================
+    /// \short perform plastic solve and call the refineable fill in residuals
+    // =========================================================================
+    void fill_in_contribution_to_residuals(Vector<double>& residuals) override
+    {
+      // This is called at least twice per Newton solve but we only want one
+      // So we only call when we compute residuals, NOT when we compute jacobian
+      // since jacobian computation always follows a residual computation
+      PlasticEquationsBase<DIM>::plastic_newton_solve();
+
+      RefineablePVDEquations<DIM>::
+        fill_in_generic_contribution_to_residuals_pvd(
+          residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+
+    // =========================================================================
+    /// \short call refineable residual and jacobian fill in
+    // =========================================================================
+    void fill_in_contribution_to_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) override
+    {
+      RefineablePVDEquations<
+        DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
+                                                            jacobian,
+                                                            1);
+    }
+
+
+    // =========================================================================
+    /// \short get required variables from father
+    // =========================================================================
+    void further_build() override
+    {
+      RefineableQPVDElement<DIM, NNODE>::further_build();
+      RefineablePlasticEquations<DIM>::further_build();
+    }
+
+    // =========================================================================
+    /// \short Output function
+    // =========================================================================
     void output(std::ostream& outfile)
     {
       RefineableQPVDElement<DIM, NNODE>::output(outfile);
     }
 
-    /// Output function
+    // =========================================================================
+    /// \short Output function
+    // =========================================================================
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       RefineableQPVDElement<DIM, NNODE>::output(outfile, n_plot);
     }
 
-    /// C-style output function
+    // =========================================================================
+    /// \short C-style output function
+    // =========================================================================
     void output(FILE* file_pt)
     {
       RefineableQPVDElement<DIM, NNODE>::output(file_pt);
     }
 
-    /// C-style output function
+    // =========================================================================
+    /// \short C-style output function
+    // =========================================================================
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       RefineableQPVDElement<DIM, NNODE>::output(file_pt, n_plot);
@@ -2614,7 +2670,10 @@ namespace oomph
     : public virtual SolidQElement<1, NNODE_1D>
   {
   public:
-    /// Constructor must call the constructor of the underlying solid element
+    // =========================================================================
+    /// \short Constructor must call the constructor of the underlying solid
+    /// element
+    // =========================================================================
     FaceGeometry() : SolidQElement<1, NNODE_1D>() {}
   };
 
@@ -2623,7 +2682,10 @@ namespace oomph
     : public virtual SolidQElement<2, NNODE_1D>
   {
   public:
-    /// Constructor must call the constructor of the underlying solid element
+    // =========================================================================
+    /// \short Constructor must call the constructor of the underlying solid
+    /// element
+    // =========================================================================
     FaceGeometry() : SolidQElement<2, NNODE_1D>() {}
   };
 
