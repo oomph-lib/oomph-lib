@@ -2557,8 +2557,8 @@ namespace oomph
         for (unsigned t = 0; t < ntstorage; t++)
         {
           Vector<double> father_data;
-          refineable_cast_father_element_pt->interpolate_plastic_data_serialised(
-            father_data, s_father, t);
+          refineable_cast_father_element_pt
+            ->interpolate_plastic_data_serialised(father_data, s_father, t);
           this->assign_plastic_data_serialised(father_data, ipt, t);
         }
       }
