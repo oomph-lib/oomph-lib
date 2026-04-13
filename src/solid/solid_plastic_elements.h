@@ -2215,45 +2215,6 @@ namespace oomph
     }
   };
 
-  template<unsigned DIM>
-  class PlasticEquationswithPressure
-    : public virtual PlasticEquationsBase<DIM>,
-      public virtual PVDEquationsWithPressure<DIM>
-  {
-  public:
-    PlasticEquationswithPressure()
-      : PlasticEquationsBase<DIM>(), PVDEquationsWithPressure<DIM>()
-    {
-    }
-
-    inline virtual void get_d_stress_dG_upper(
-      const unsigned& ipt,
-      const double& diag_entry,
-      const DenseMatrix<double>& g,
-      const DenseMatrix<double>& G,
-      const DenseMatrix<double>& sigma,
-      const double& gen_dil,
-      const double& inv_kappa,
-      const double& interpolated_solid_p,
-      RankFourTensor<double>& d_sigma_dG,
-      DenseMatrix<double>& d_gen_dil_dG) override
-    {
-    }
-
-    inline virtual void get_d_stress_dG_upper(
-      const unsigned& ipt,
-      const double& diag_entry,
-      const DenseMatrix<double>& g,
-      const DenseMatrix<double>& G,
-      const DenseMatrix<double>& sigma,
-      const double& detG,
-      const double& interpolated_solid_p,
-      RankFourTensor<double>& d_sigma_dG,
-      DenseMatrix<double>& d_detG_dG) override
-    {
-    }
-  };
-
 
   template<unsigned DIM, unsigned NNODE>
   class QPlasticPVDElement : public virtual SolidQElement<DIM, NNODE>,
@@ -2329,14 +2290,19 @@ namespace oomph
   };
 
 
+  // TODO currently slow to converge because get_d_stress_dG_upper is not
+  // implemented
+  // After a while either diverges in elastic or fails to converge in plastic
+  // solve. Should the virtual plastic deformed intermediate state be
+  // incompressible somehow?
   template<unsigned DIM>
   class QPlasticPVDElementWithPressure
-    : public virtual SolidQElement<DIM, 3>,
-      public virtual PlasticEquationswithPressure<DIM>
+    : public virtual PlasticEquations<DIM>,
+      public virtual QPVDElementWithPressure<DIM>
   {
   public:
     QPlasticPVDElementWithPressure()
-      : SolidQElement<DIM, 3>(), PlasticEquationswithPressure<DIM>()
+      : PlasticEquations<DIM>(), QPVDElementWithPressure<DIM>()
     {
       this->compute_ipt_to_node_mapping();
     }
@@ -2348,11 +2314,12 @@ namespace oomph
       // since jacobian computation always follows a residual computation
       PlasticEquationsBase<DIM>::plastic_newton_solve();
 
-      PVDEquationsWithPressure<DIM>::
-        fill_in_generic_contribution_to_residuals_pvd(
-          residuals, GeneralisedElement::Dummy_matrix, 0);
+      QPVDElementWithPressure<DIM>::fill_in_contribution_to_residuals(
+        residuals);
     }
 
+    // TODO need to implement get_d_stress_dG_upper - convergence of elastic
+    // problem is slow
 
     // =========================================================================
     /// \short Fill in contribution to Jacobian (either by FD or
@@ -2361,10 +2328,8 @@ namespace oomph
     void fill_in_contribution_to_jacobian(
       Vector<double>& residuals, DenseMatrix<double>& jacobian) override
     {
-      PVDEquationsWithPressure<
-        DIM>::fill_in_generic_contribution_to_residuals_pvd(residuals,
-                                                            jacobian,
-                                                            1);
+      QPVDElementWithPressure<DIM>::fill_in_contribution_to_jacobian(residuals,
+                                                                     jacobian);
     }
 
     // =========================================================================
@@ -2372,7 +2337,7 @@ namespace oomph
     // =========================================================================
     void output(std::ostream& outfile)
     {
-      PVDEquationsWithPressure<DIM>::output(outfile);
+      QPVDElementWithPressure<DIM>::output(outfile);
     }
 
     // =========================================================================
@@ -2380,7 +2345,7 @@ namespace oomph
     // =========================================================================
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
-      PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
+      QPVDElementWithPressure<DIM>::output(outfile, n_plot);
     }
 
     // =========================================================================
@@ -2388,7 +2353,7 @@ namespace oomph
     // =========================================================================
     void output(FILE* file_pt)
     {
-      PVDEquationsWithPressure<DIM>::output(file_pt);
+      QPVDElementWithPressure<DIM>::output(file_pt);
     }
 
     // =========================================================================
@@ -2396,7 +2361,25 @@ namespace oomph
     // =========================================================================
     void output(FILE* file_pt, const unsigned& n_plot)
     {
-      PVDEquationsWithPressure<DIM>::output(file_pt, n_plot);
+      QPVDElementWithPressure<DIM>::output(file_pt, n_plot);
+    }
+
+    // All unique final overriders are from QPVDElementWithPressure<DIM>
+    // implementation
+    void get_stress(const Vector<double>& s,
+                    DenseMatrix<double>& sigma) override
+    {
+      QPVDElementWithPressure<DIM>::get_stress(s, sigma);
+    }
+    // Direct copy from QPVDElementWithPressure<DIM>
+    void unpin_elemental_solid_pressure_dofs() override
+    {
+      unsigned n_pres = this->npres_solid();
+      // loop over pressure dofs and unpin them
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        this->internal_data_pt(this->P_solid_internal_index)->unpin(l);
+      }
     }
   };
 
