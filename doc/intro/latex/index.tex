@@ -219,12 +219,12 @@ In general, the equations $r_k(U_1,...,U_M)$ are nonlinear and must be solved by
 Let us, briefly, examine the cost of the non-\/trivial steps involved in Newton\textquotesingle{}s method\+:
 \begin{DoxyItemize}
 \item Step 2 requires the evaluation of $M$ integrals over the domain to determine the discrete residuals $  r_k^{(i)} $ from (9). (We note that, in general, the integrals must be evaluated numerically.)
-\item Step 3 requires the computation of $M^2$ entries in the Jacobian matrix, each an integral of the form  \[ J_{kj} =   \int_{D} \frac{\partial }{\partial U_j}
+\item Step 4 requires the computation of $M^2$ entries in the Jacobian matrix, each an integral of the form  \[ J_{kj} =   \int_{D} \frac{\partial }{\partial U_j}
   {\cal R}\left(x_i;  \ \sum_{j=1}^{M} U_j 
   \psi_j(x_i)\right) \ \psi_k(x_i) 
   \ \mbox{d}x_1 \mbox{d}x_2 \mbox{\ \ \ for $j,k=1,...,M$.} \]
-\item Step 4 requires the solution of a $M \times M$ linear system.
-\end{DoxyItemize}In general, steps 3 and 4 will be very costly if $M$ is large. However, if the domain has a simple shape and the differential operator has a sufficiently simple structure, it is often possible to choose basis functions with suitable orthogonality properties that render the Jacobian matrix $J_{kj}$ sparse. As an example, we consider the application of Galerkin\textquotesingle{}s method in the 1D Poisson problem P1\+:
+\item Step 5 requires the solution of a $M \times M$ linear system.
+\end{DoxyItemize}In general, steps 4 and 5 will be very costly if $M$ is large. However, if the domain has a simple shape and the differential operator has a sufficiently simple structure, it is often possible to choose basis functions with suitable orthogonality properties that render the Jacobian matrix $J_{kj}$ sparse. As an example, we consider the application of Galerkin\textquotesingle{}s method in the 1D Poisson problem P1\+:
 
 \begin{center} {\bfseries{ Example\+: Galerkin method applied to the model problem P1 ~\newline
  }}\end{center}  We perform the usual integration by parts to derive the symmetric weak form of the problem\+: ~\newline
