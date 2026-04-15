@@ -647,7 +647,6 @@ namespace oomph
     /// FD step for the 2nd derivative (second-order central-difference)
     /// Defautly, the step size is set as 1.0e-4
     double SecondDerivativeDzeta = 1.0e-4;
-
   };
 
 
