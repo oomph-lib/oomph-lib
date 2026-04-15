@@ -321,6 +321,34 @@ namespace oomph
     }
 
 
+    // Set FD step for 1st derivative
+    void set_1st_derivative_FD_step(const double& dzeta)
+    {
+      FirstDerivativeDzeta = dzeta;
+    }
+
+
+    // Get FD step for 1st derivative
+    double get_1st_derivative_FD_step()
+    {
+      return FirstDerivativeDzeta;
+    }
+
+
+    // Set FD step for 2nd derivative
+    void set_2nd_derivative_FD_step(const double& dzeta)
+    {
+      SecondDerivativeDzeta = dzeta;
+    }
+
+
+    // Get FD step for 2nd derivative
+    double get_2nd_derivative_FD_step()
+    {
+      return SecondDerivativeDzeta;
+    }
+
+
     /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
@@ -329,8 +357,7 @@ namespace oomph
                            DenseMatrix<double>& drdzeta) const
     {
       // FD step
-      // The optimal step size is 1.0e-8
-      double dzeta = 1.0e-8;
+      double dzeta = FirstDerivativeDzeta;
 
       // Position at the current Lagrangian coordinate
       Vector<double> r(Ndim, 0.0);
@@ -375,9 +402,7 @@ namespace oomph
                             RankThreeTensor<double>& ddrdzeta) const
     {
       // FD step
-      // For double precision, the optimal second-order central-difference
-      // step size is 1.0e-5
-      double dzeta = 1.0e-5;
+      double dzeta = SecondDerivativeDzeta;
 
       // Position at the base Lagrangian coordinate
       Vector<double> r(Ndim, 0.0);
@@ -613,6 +638,16 @@ namespace oomph
     /// Timestepper (used to handle access to geometry
     /// at previous timesteps)
     TimeStepper* Geom_object_time_stepper_pt;
+
+  private:
+    /// FD step for the 1st derivative
+    /// Defautly, the step size is set as 1.0e-8
+    double FirstDerivativeDzeta = 1.0e-8;
+
+    /// FD step for the 2nd derivative (second-order central-difference)
+    /// Defautly, the step size is set as 1.0e-4
+    double SecondDerivativeDzeta = 1.0e-4;
+
   };
 
 
