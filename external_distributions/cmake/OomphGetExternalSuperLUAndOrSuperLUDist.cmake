@@ -18,8 +18,8 @@ set(PARMETIS_GIT_URL https://github.com/puneetmatharu/ParMETIS.git)
 set(SUPERLU_GIT_URL https://github.com/xiaoyeli/superlu.git)
 set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
 
-set(GKLIB_GIT_TAG 6e7951358fd896e2abed7887196b6871aac9f2f8)
-set(METIS_GIT_TAG a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)
+set(GKLIB_GIT_TAG e2856c2f595b153ca1ce9258c5301dbabc4f39f5)
+set(METIS_GIT_TAG dfded64f24664caa8809cacf416d378112e8867f)
 set(PARMETIS_GIT_TAG 83bb3d4f5b2af826d0683329cad1accc8d829de2)
 set(SUPERLU_GIT_TAG v6.0.1)
 set(SUPERLU_DIST_GIT_TAG v9.1.0)
@@ -63,7 +63,7 @@ if(NOT OOMPH_USE_GKLIB_FROM)
   set(GKLIB_CMAKE_ARGS
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
     -DNO_X86=${CONFIGURE_GKLIB_WITH_NO_X86}
-  )
+    -DCMAKE_INSTALL_LIBDIR=lib)
 
   oomph_get_external_project_helper(
     PROJECT_NAME gklib
@@ -112,11 +112,31 @@ if (OOMPH_BUILD_SUPERLU)
   set(TPL_METIS_INCLUDE_DIRS_FOR_SUPERLU ${METIS_INCLUDE_DIR} ${GKLIB_INCLUDE_DIR})
   set(TPL_METIS_LIBRARIES_FOR_SUPERLU ${METIS_LIBRARIES} ${GKLIB_LIBRARIES})
 
+  # For OpenBLAS we need the pthread library but the ordering of the libraries matters.
+  # If all are added, we need:
+  #        openblas_lib -> openmp_c_lib + openmp_c_lib -> thread_lib
+  find_package(Threads REQUIRED)
+  set(OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU "${CMAKE_THREAD_LIBS_INIT}")
+
+  # For the static build
+  if(NOT BUILD_SHARED_LIBS)
+    if (CMAKE_C_COMPILER_LOADED)
+      find_package(OpenMP QUIET COMPONENTS C)
+      list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU "${OpenMP_C_LIBRARIES}")
+    elseif(CMAKE_CXX_COMPILER_LOADED)
+      find_package(OpenMP QUIET COMPONENTS CXX)
+      list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU "${OpenMP_CXX_LIBRARIES}")
+    endif()
+  endif()
+
+  # Now add in OpenBLAS
+  list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU "${OpenBLAS_LIBRARIES}")
+
   # Create a list with an alternate separator e.g. pipe symbol due to the weird way
   # that SuperLU parses args
   string(REPLACE ";" "|" TPL_METIS_INCLUDE_DIRS_FOR_SUPERLU "${TPL_METIS_INCLUDE_DIRS_FOR_SUPERLU}")
   string(REPLACE ";" "|" TPL_METIS_LIBRARIES_FOR_SUPERLU "${TPL_METIS_LIBRARIES_FOR_SUPERLU}")
-  string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU "${OpenBLAS_LIBRARIES}")
+  string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU "${OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU}")
 
   set(SUPERLU_CMAKE_CONFIGURE_ARGS
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
@@ -124,6 +144,8 @@ if (OOMPH_BUILD_SUPERLU)
     -DTPL_METIS_INCLUDE_DIRS=${TPL_METIS_INCLUDE_DIRS_FOR_SUPERLU}
     -DTPL_METIS_LIBRARIES=${TPL_METIS_LIBRARIES_FOR_SUPERLU}
     -DTPL_BLAS_LIBRARIES=${TPL_BLAS_LIBRARIES_FOR_SUPERLU}
+    -Denable_examples=OFF
+    -Denable_tests=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
   )
 
   set(TEST_COMMAND)
@@ -181,10 +203,30 @@ if(OOMPH_ENABLE_MPI)
   set(TPL_PARMETIS_INCLUDE_DIRS_FOR_SUPERLU_DIST ${PARMETIS_INCLUDE_DIR} ${METIS_INCLUDE_DIR} ${GKLIB_INCLUDE_DIR})
   set(TPL_PARMETIS_LIBRARIES_FOR_SUPERLU_DIST ${PARMETIS_LIBRARIES} ${METIS_LIBRARIES} ${GKLIB_LIBRARIES})
 
+  # For OpenBLAS we need the pthread library but the ordering of the libraries matters.
+  # If all are added, we need:
+  #        openblas_lib -> openmp_c_lib + openmp_c_lib -> thread_lib
+  find_package(Threads REQUIRED)
+  set(OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU_DIST "${CMAKE_THREAD_LIBS_INIT}")
+
+  # For the static build
+  if(NOT BUILD_SHARED_LIBS)
+    if (CMAKE_C_COMPILER_LOADED)
+      find_package(OpenMP QUIET COMPONENTS C)
+      list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU_DIST "${OpenMP_C_LIBRARIES}")
+    elseif(CMAKE_CXX_COMPILER_LOADED)
+      find_package(OpenMP QUIET COMPONENTS CXX)
+      list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU_DIST "${OpenMP_CXX_LIBRARIES}")
+    endif()
+  endif()
+
+  # Now add in OpenBLAS
+  list(PREPEND OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU_DIST "${OpenBLAS_LIBRARIES}")
+
   # Create a list with an alternate separator e.g. pipe symbol
   string(REPLACE ";" "|" TPL_PARMETIS_INCLUDE_DIRS_FOR_SUPERLU_DIST "${TPL_PARMETIS_INCLUDE_DIRS_FOR_SUPERLU_DIST}")
   string(REPLACE ";" "|" TPL_PARMETIS_LIBRARIES_FOR_SUPERLU_DIST "${TPL_PARMETIS_LIBRARIES_FOR_SUPERLU_DIST}")
-  string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU_DIST "${OpenBLAS_LIBRARIES}")
+  string(REPLACE ";" "|" TPL_BLAS_LIBRARIES_FOR_SUPERLU_DIST "${OPENBLAS_LIBRARIES_AND_DEPS_FOR_SUPERLU_DIST}")
   string(REPLACE ";" "|" MPIEXEC_PREFLAGS_FOR_SUPERLU_DIST "--oversubscribe")
 
   # Build options

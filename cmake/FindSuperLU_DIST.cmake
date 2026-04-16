@@ -16,16 +16,17 @@ include(FindPackageHandleStandardArgs)
 find_library(
   SUPERLU_DIST_LIBRARIES
   NAMES superlu_dist
-  PATHS "${OOMPH_USE_SUPERLU_DIST_FROM}/lib" /usr/local /usr /opt/homebrew/opt
+  PATHS "${OOMPH_USE_SUPERLU_DIST_FROM}" /usr/local /usr /opt/homebrew/opt
         /usr/local/Cellar
-  NO_DEFAULT_PATH
+  PATH_SUFFIXES lib lib64
   DOC "SuperLU_DIST C libraries")
 
 find_path(
   SUPERLU_DIST_INCLUDES
   NAMES superlu_dist_config.h
-  PATHS "${OOMPH_USE_SUPERLU_DIST_FROM}/include" /usr/local /usr
-        /opt/homebrew/opt /usr/local/Cellar
+  PATHS "${OOMPH_USE_SUPERLU_DIST_FROM}" /usr/local /usr /opt/homebrew/opt
+        /usr/local/Cellar
+  PATH_SUFFIXES include
   DOC "SuperLU_DIST C header")
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so
