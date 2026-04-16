@@ -33,15 +33,21 @@ public:
 namespace Parameters
 {
   const double max_loading_height = 2.0;
-  const unsigned n_step_loading = 30;
-  const unsigned n_step_unloading = 120;
-  const unsigned print_freq = 2;
-
   double Pinned_height = 1.0;
   bool controlling_height = true;
+
   const unsigned dirichlet_boundary_top = 0;
   const unsigned dirichlet_boundary_bottom = 5;
+
   const double dt = 0.1;
+  
+  const double loading_duration = 3.0;
+  const unsigned n_step_loading = loading_duration / dt;
+  
+  const double unloading_duration = 12.0;
+  const unsigned n_step_unloading = unloading_duration / dt;
+  
+  const unsigned print_freq = 2;
 
   double E = 1.0;
   double nu = 0.3;
