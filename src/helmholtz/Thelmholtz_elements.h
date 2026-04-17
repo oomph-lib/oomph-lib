@@ -56,8 +56,8 @@ namespace oomph
   /// element edge. Inherits from TElement and HelmholtzEquations
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class THelmholtzElement : public TElement<DIM, NNODE_1D>,
-                            public HelmholtzEquations<DIM>,
+  class THelmholtzElement : public virtual TElement<DIM, NNODE_1D>,
+                            public virtual HelmholtzEquations<DIM>,
                             public virtual ElementWithZ2ErrorEstimator
   {
   public:

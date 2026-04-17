@@ -78,7 +78,7 @@ oomph_option(OOMPH_BUILD_CGAL "Build CGAL?" ON)
 oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ON)
 oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
 oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
-oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
+oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Enable testing when building the third-party libraries?" OFF)
 
 # Set the default installation path
 if(PROJECT_IS_TOP_LEVEL AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)

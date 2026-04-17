@@ -139,7 +139,12 @@ jobs:
       - name: Get dependency versions
         id: deps
         run: |
-          dpkg -s gfortran | grep Version | awk '{print "gfortran="$2}' > deps.txt
+          . /etc/os-release
+          printf "os=%s\nos_version=%s\narch=%s\n" "$ID" "$VERSION_ID" "$(uname -m)" > deps.txt
+          dpkg -s gfortran | grep Version | awk '{print "gfortran="$2}' >> deps.txt
+          cc --version | head -n1 >> deps.txt
+          c++ --version | head -n1 >> deps.txt
+          dpkg -s libc6 | grep Version | awk '{print "pthread="$2}' >> deps.txt
           if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
             dpkg -s openmpi-bin | grep Version | awk '{print "openmpi-bin="$2}' >> deps.txt
             dpkg -s libopenmpi-dev | grep Version | awk '{print "libopenmpi-dev="$2}' >> deps.txt
@@ -160,14 +165,16 @@ jobs:
       # They must NOT just pull from main/development otherwise the hash key won't change
       # and thus neither will the cache.
       - name: Cache third-party libraries artifacts
-        uses: actions/cache/restore@v4
         id: tpl-cache
-        with:
-          path: |
-            external_distributions/install
-            external_distributions/install/cmake_flags_for_oomph_lib.txt
-            external_distributions/install/cmake_flags_for_oomph_lib.json
-          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
+        run: echo "FIXME... disabled TPL cache"
+        # Currently the TPL caching is not stable enough to support Ubuntu. I'm not sure why yet.
+        # uses: actions/cache/restore@v4
+        # with:
+        #   path: |
+        #     external_distributions/install
+        #     external_distributions/install/cmake_flags_for_oomph_lib.txt
+        #     external_distributions/install/cmake_flags_for_oomph_lib.json
+        #   key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
       - name: Configure, build and install third-party libraries
         if: steps.tpl-cache.outputs.cache-hit != 'true'

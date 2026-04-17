@@ -57,8 +57,8 @@ namespace oomph
   /// TElement and PMLHelmholtzEquations
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class TPMLHelmholtzElement : public TElement<DIM, NNODE_1D>,
-                               public PMLHelmholtzEquations<DIM>,
+  class TPMLHelmholtzElement : public virtual TElement<DIM, NNODE_1D>,
+                               public virtual PMLHelmholtzEquations<DIM>,
                                public virtual ElementWithZ2ErrorEstimator
   {
   public:

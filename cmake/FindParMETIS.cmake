@@ -16,14 +16,16 @@ include(FindPackageHandleStandardArgs)
 find_library(
   PARMETIS_LIBRARIES
   NAMES parmetis
-  PATHS "${OOMPH_USE_PARMETIS_FROM}/lib"
+  PATHS "${OOMPH_USE_PARMETIS_FROM}"
+  PATH_SUFFIXES lib lib64
   NO_DEFAULT_PATH
   DOC "PARMETIS libraries")
 
 find_path(
   PARMETIS_INCLUDES
   NAMES parmetis.h
-  PATHS "${OOMPH_USE_PARMETIS_FROM}/include"
+  PATHS "${OOMPH_USE_PARMETIS_FROM}"
+  PATH_SUFFIXES include
   NO_DEFAULT_PATH
   DOC "PARMETIS header")
 
@@ -32,12 +34,14 @@ find_library(
   PARMETIS_LIBRARIES
   NAMES parmetis
   PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
+  PATH_SUFFIXES lib lib64
   DOC "PARMETIS libraries")
 
 find_path(
   PARMETIS_INCLUDES
   NAMES parmetis.h
   PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
+  PATH_SUFFIXES include
   DOC "PARMETIS header")
 
 # Handle standard package checks

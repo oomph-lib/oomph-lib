@@ -44,8 +44,8 @@ namespace oomph
   /// and internal flux dofs.
   //================================================================
   template<unsigned ORDER>
-  class TRaviartThomasDarcyElement : public TElement<2, 3>,
-                                     public DarcyEquations<2>
+  class TRaviartThomasDarcyElement : public virtual TElement<2, 3>,
+                                     public virtual DarcyEquations<2>
   {
   private:
     ///  Face index associated with edge flux degree of freedom

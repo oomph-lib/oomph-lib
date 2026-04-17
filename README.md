@@ -58,9 +58,9 @@
 - [Prerequisites](#prerequisites)
   - [CMake](#cmake)
   - [Ninja](#ninja)
-  - [[macOS only: OpenBLAS]](#macos-only-openblas)
+  - [\[macOS only: OpenBLAS\]](#macos-only-openblas)
   - [Compilers](#compilers)
-  - [Other tools (and how to install all the prerequisites)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
+  - [Other tools (and how to install all the prerequisites in one go)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
 - [Building, installing and uninstalling `oomph-lib`](#building-installing-and-uninstalling-oomph-lib)
   - [Required/optional third-party libraries](#requiredoptional-third-party-libraries)
   - [Step 1: Installing the third-party libraries](#step-1-installing-the-third-party-libraries)
@@ -120,15 +120,15 @@
     - [Autotools](#autotools-5)
     - [CMake](#cmake-6)
 - [Dos and Don'ts](#dos-and-donts)
-- [FAQs](#faq)
-  - [When configuring my driver code CMake can't find the package configuration file. Now what?](#when-configuring-my-driver-code-cmake-cant-find-the-package-configuration-file)
+- [FAQ](#faq)
+  - [When configuring my driver code CMake can't find the package configuration file](#when-configuring-my-driver-code-cmake-cant-find-the-package-configuration-file)
   - [Are there any complete worked examples of the build process?](#are-there-any-complete-worked-examples-of-the-build-process)
-  - [What happened to the `user_src` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-user_src-directory)
-  - [What happened to the `bin` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-bin-directory)
+  - [I'm used to the Autotools-based version of `oomph-lib`; what happened to the `user_src` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-user_src-directory)
+  - [I'm used to the Autotools-based version of `oomph-lib`; what happened to the `bin` directory?](#im-used-to-the-autotools-based-version-of-oomph-lib-what-happened-to-the-bin-directory)
 - [Additional information for developers](#additional-information-for-developers)
   - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
-  - [Paranoia and range checking are incompatible with Release mode](#paranoia-and-range-checking-are-deemed-to-be-incompatible-with-release-mode)
-  - [How to add additional compiler macros to `oomph-lib` (and to stand-alone driver codes)](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes)
+  - [Paranoia and range checking are deemed to be incompatible with Release mode](#paranoia-and-range-checking-are-deemed-to-be-incompatible-with-release-mode)
+  - [How to add additional compiler macros to oomph-lib (and to stand-alone driver codes)](#how-to-add-additional-compiler-macros-to-oomph-lib-and-to-stand-alone-driver-codes)
   - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
     - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
     - [Handling non-deterministic output](#handling-non-deterministic-output)
@@ -138,7 +138,7 @@
   - [CMake resources](#cmake-resources)
   - [Building CMake](#building-cmake)
     - [Ubuntu](#ubuntu)
-    - [macOS](#macos)
+  - [macOS](#macos)
 
 
 
@@ -200,6 +200,9 @@ sudo apt install ninja-build
 ```
 
 will do the trick.
+
+> [!CAUTION]
+> If you don't specify [Ninja](https://github.com/ninja-build/ninja) as the build system generator (see below for details), CMake will perform the build using Unix Makefiles. This typically results in a slower build, but worse, can also cause problems with the build of certain third-party libraries (METIS in particular) on older operating systems. Please use Ninja!
 
 ### [macOS only: OpenBLAS]
 
@@ -292,7 +295,19 @@ cmake --build build
 ```
 
 > [!TIP]
-> Make sure you delete the `build` directory if it already exists from a previous installation. Having it there can confuse `cmake`.
+>
+> Make sure you delete the `build` directory if it already exists from a previous installation. Having it there can result in problems with CMake.
+
+> [!CAUTION]
+>
+> You can omit the specification of [Ninja](https://github.com/ninja-build/ninja) as the build tool and replace the configure command by
+>
+> ```bash
+> # Configure the third party library build
+> cmake -B build
+> ```
+>
+> CMake will then perform the build using Unix Makefiles. This typically results in a slower build, but worse, can also cause problems with the build of certain third-party libraries (METIS in particular) on older operating systems, so we don't recommend this.
 
 At the end of the configure step you get a summary of the build options used, e.g.
 
@@ -559,12 +574,12 @@ Below is a list of the options and their purpose:
 > [!IMPORTANT]
 > When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run oomph_build.py `--oomph-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.)
 
-- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
+- **`--wipe-tpl`**, **`--wipe-oomph`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
 
   ```bash
   # Wipe the default build/installation directories used when building
   # the third-party libraries, root project, and documentation
-  python3 oomph_build.py --wipe-tpl --wipe-root --wipe-doc
+  python3 oomph_build.py --wipe-tpl --wipe-oomph --wipe-doc
   ```
 
   will delete the current `build/` directory and the `install/` directory (if they exist) before configuring a fresh build. `--wipe-doc` will remove the `doc/build/` directory. These options are useful if you suspect a previous build is causing issues or if you want to reclaim space and rebuild from scratch.
