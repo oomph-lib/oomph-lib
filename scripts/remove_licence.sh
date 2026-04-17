@@ -10,7 +10,7 @@
 # Find *.h and *.cc files in oomph-lib distribution (i.e. exclude
 # external_src)
 #--------------------------------------------------------------
-oomph_lib_h_and_cc_files=`find demo_drivers src user_src user_drivers self_test bin \( -name '*.h' -o -name '*.cc' \) -exec ls  {} \; `
+oomph_lib_h_and_cc_files=`find demo_drivers src user_src user_drivers self_test scripts \( -name '*.h' -o -name '*.cc' \) -exec ls  {} \; `
 
 
 #--------------------------------------------------------------
@@ -18,6 +18,6 @@ oomph_lib_h_and_cc_files=`find demo_drivers src user_src user_drivers self_test 
 #--------------------------------------------------------------
 for file in $oomph_lib_h_and_cc_files; do
     echo "Delicencing:" $file
-    gawk -f bin/remove_licence.awk $file > $file.delicenced
+    gawk -f scripts/remove_licence.awk $file > $file.delicenced
     mv -f $file.delicenced $file
 done

@@ -43,9 +43,6 @@ oomph_add_test(
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.multi_domain.turek_flag
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
-if(APPLE)
-  set_tests_properties(mpi.multi_domain.turek_flag PROPERTIES DISABLED FALSE)
-endif()
 
 message(VERBOSE "Leaving turek_flag subdirectory")
 # ------------------------------------------------------------------------------

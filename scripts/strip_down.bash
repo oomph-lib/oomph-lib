@@ -24,9 +24,9 @@ cop="cp "
 # A few helper functions
 #====================================================================
 # A little function 'borrowed' from the tecplot installation script...
-OptionPrompt() 
-{ 
- printf "%s " "$1" 
+OptionPrompt()
+{
+ printf "%s " "$1"
 }
 
 # Another little function 'borrowed' from the tecplot installation script...
@@ -38,9 +38,9 @@ OptionRead()
  fi
  echo $Opt
 }
-echo " " 
-echo "======================================================== " 
-echo " " 
+echo " "
+echo "======================================================== "
+echo " "
 echo "WARNING: This script strips out most of the distribution "
 echo "         and retains only the bare minimum (the build"
 echo "         machinery, src/generic and src/poisson) required"
@@ -50,17 +50,17 @@ echo " "
 echo "         [A backup of overwritten configuration files is"
 echo "         made; they can be recovered by the same script.]"
 echo " "
-echo "======================================================== " 
-echo " " 
+echo "======================================================== "
+echo " "
 echo " "
 echo "We are currently in: " $home_dir
-echo " " 
+echo " "
 echo " "
 echo " Do you want to strip down this distribution [y/n -- default: n]"
 reply=`OptionRead`
-if test "$reply" != "y" -a "$reply" != "Y" ; then 
+if test "$reply" != "y" -a "$reply" != "Y" ; then
     echo "Not doing it..."
-    echo " " 
+    echo " "
     echo " "
     if [ -e backed_up_stripped_out_files ]
     then
@@ -72,18 +72,18 @@ if test "$reply" != "y" -a "$reply" != "Y" ; then
         echo "Do you want to recover these overwritten files  [y/n -- default: n]"
         echo " "
         reply=`OptionRead`
-        if test "$reply" != "y" -a "$reply" != "Y" ; then 
+        if test "$reply" != "y" -a "$reply" != "Y" ; then
             echo "Not doing it..."
             exit 0
         else
-          $cop backed_up_stripped_out_files/Makefile.am.top_level $home_dir/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.bin $home_dir/bin/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.self_test $home_dir/self_test/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers $home_dir/demo_drivers/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.poisson $home_dir/demo_drivers/poisson/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi $home_dir/demo_drivers/mpi/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi.distribution $home_dir/demo_drivers/mpi/distribution/Makefile.am 
-          $cop backed_up_stripped_out_files/Makefile.am.src $home_dir/src/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.top_level $home_dir/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.bin $home_dir/scripts/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.self_test $home_dir/self_test/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers $home_dir/demo_drivers/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.poisson $home_dir/demo_drivers/poisson/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi $home_dir/demo_drivers/mpi/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi.distribution $home_dir/demo_drivers/mpi/distribution/Makefile.am
+          $cop backed_up_stripped_out_files/Makefile.am.src $home_dir/src/Makefile.am
           $cop backed_up_stripped_out_files/mesh_names.list $home_dir/src/meshes
           $cop backed_up_stripped_out_files/Makefile.am.meshes $home_dir/src/meshes/Makefile.am
           $cop backed_up_stripped_out_files/private.dir_list $home_dir/config/configure.ac_scripts
@@ -93,7 +93,7 @@ if test "$reply" != "y" -a "$reply" != "Y" ; then
           $cop backed_up_stripped_out_files/user_drivers.dir_list $home_dir/config/configure.ac_scripts
           $cop backed_up_stripped_out_files/core.dir_list $home_dir/config/configure.ac_scripts
           $cop backed_up_stripped_out_files/doc.dir_list $home_dir/config/configure.ac_scripts
-        fi          
+        fi
     fi
     exit 0
 else
@@ -106,7 +106,7 @@ if [ -e backed_up_stripped_out_files ]
 then
     echo " "
     echo "ERROR: Directory "
-    echo " " 
+    echo " "
     echo "       backed_up_stripped_out_files"
     echo " "
     echo "already exists. Please delete it and try again."
@@ -121,10 +121,10 @@ fi
 #========================
 
 # Update makefiles
-$cop Makefile.am backed_up_stripped_out_files/Makefile.am.top_level 
+$cop Makefile.am backed_up_stripped_out_files/Makefile.am.top_level
 $cop $home_dir/config/stripped_down_files/Makefile.am.top_level Makefile.am
-$cop bin/Makefile.am backed_up_stripped_out_files/Makefile.am.bin
-$cop $home_dir/config/stripped_down_files/Makefile.am.bin bin/Makefile.am
+$cop scripts/Makefile.am backed_up_stripped_out_files/Makefile.am.bin
+$cop $home_dir/config/stripped_down_files/Makefile.am.bin scripts/Makefile.am
 
 
 # Get rid of user src and drivers
@@ -178,7 +178,7 @@ cd poisson
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
 $cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers.poisson
 $del *
-mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt 
+mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.poisson Makefile.am
 cd ..
 
@@ -195,7 +195,7 @@ $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi Makefile.
 cd distribution
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
 $cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi.distribution
-$del * 
+$del *
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi.distribution Makefile.am
 
@@ -246,27 +246,27 @@ cd $home_dir
 cd config/configure.ac_scripts
 
 touch private.dir_list
-$cop private.dir_list $home_dir/backed_up_stripped_out_files/private.dir_list 
+$cop private.dir_list $home_dir/backed_up_stripped_out_files/private.dir_list
 $cop $home_dir/config/stripped_down_files/private.dir_list .
 
 touch private_user_drivers.dir_list
-$cop private_user_drivers.dir_list $home_dir/backed_up_stripped_out_files/private_user_drivers.dir_list 
+$cop private_user_drivers.dir_list $home_dir/backed_up_stripped_out_files/private_user_drivers.dir_list
 $cop $home_dir/config/stripped_down_files/private_user_drivers.dir_list .
 
 touch private_user_src.dir_list
-$cop private_user_src.dir_list $home_dir/backed_up_stripped_out_files/private_user_src.dir_list 
+$cop private_user_src.dir_list $home_dir/backed_up_stripped_out_files/private_user_src.dir_list
 $cop $home_dir/config/stripped_down_files/private_user_src.dir_list .
 
-$cop user_drivers.dir_list $home_dir/backed_up_stripped_out_files/user_drivers.dir_list 
+$cop user_drivers.dir_list $home_dir/backed_up_stripped_out_files/user_drivers.dir_list
 $cop $home_dir/config/stripped_down_files/user_drivers.dir_list .
 
-$cop user_src.dir_list $home_dir/backed_up_stripped_out_files/user_src.dir_list 
+$cop user_src.dir_list $home_dir/backed_up_stripped_out_files/user_src.dir_list
 $cop $home_dir/config/stripped_down_files/user_src.dir_list .
 
-$cop core.dir_list $home_dir/backed_up_stripped_out_files/core.dir_list 
+$cop core.dir_list $home_dir/backed_up_stripped_out_files/core.dir_list
 $cop $home_dir/config/stripped_down_files/core.dir_list .
 
-$cop doc.dir_list $home_dir/backed_up_stripped_out_files/doc.dir_list 
+$cop doc.dir_list $home_dir/backed_up_stripped_out_files/doc.dir_list
 $cop $home_dir/config/stripped_down_files/doc.dir_list .
 
 

@@ -12,13 +12,38 @@
 
 include(FindPackageHandleStandardArgs)
 
-# See if the user specified a custom GKLIB installation location using OOMPH_USE_GKLIB_FROM or GKLIBDIR
-find_library(GKLIB_C_LIBRARIES NAMES GKlib PATHS "${OOMPH_USE_GKLIB_FROM}/lib" NO_DEFAULT_PATH DOC "GKlib C libraries")
-find_path(GKLIB_C_INCLUDES NAMES GKlib.h PATHS "${OOMPH_USE_GKLIB_FROM}/include" NO_DEFAULT_PATH DOC "GKlib C header")
+# See if the user specified a custom GKLIB installation location using
+# OOMPH_USE_GKLIB_FROM or GKLIBDIR
+find_library(
+  GKLIB_C_LIBRARIES
+  NAMES GKlib
+  PATHS "${OOMPH_USE_GKLIB_FROM}"
+  PATH_SUFFIXES lib lib64
+  NO_DEFAULT_PATH
+  DOC "GKlib C libraries")
+
+find_path(
+  GKLIB_C_INCLUDES
+  NAMES GKlib.h
+  PATHS "${OOMPH_USE_GKLIB_FROM}"
+  PATH_SUFFIXES include
+  NO_DEFAULT_PATH
+  DOC "GKlib C header")
 
 # Try to find libraries and headers in the standard system paths
-find_library(GKLIB_C_LIBRARIES NAMES GKlib PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GKLIB C libraries")
-find_path(GKLIB_C_INCLUDES NAMES gmp.h PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GKLIB C header")
+find_library(
+  GKLIB_C_LIBRARIES
+  NAMES GKlib
+  PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
+  PATH_SUFFIXES lib lib64
+  DOC "GKLIB C libraries")
+
+find_path(
+  GKLIB_C_INCLUDES
+  NAMES GKlib.h
+  PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
+  PATH_SUFFIXES include
+  DOC "GKLIB C header")
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so
 # set ``GKLIB_FOUND``

@@ -37,10 +37,6 @@ oomph_add_test(
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.three_d_entry_flow
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
-if(APPLE)
-  set_tests_properties(mpi.distribution.three_d_entry_flow PROPERTIES DISABLED
-                                                                      FALSE)
-endif()
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")
 # ------------------------------------------------------------------------------

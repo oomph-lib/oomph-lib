@@ -26,8 +26,8 @@ fi
 current_dir=`pwd`
 
 
-full_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log"
-filtered_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
+full_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/scripts/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log"
+filtered_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/scripts/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
 test_logs_location="destruct_test/*/*/test_build.log"
 
 echo " "
@@ -37,7 +37,7 @@ echo "Destruct test script is currently customised for running on "
 echo "School of Maths linux system. Some variables need to be updated"
 echo "on other machines. A certain amount of self-checking is done"
 echo "to make sure the variables work. Check the \"Customised variables\""
-echo "section in the script if anything doesn't work out." 
+echo "section in the script if anything doesn't work out."
 echo "Names of compilers are currently hard-coded (for gcc/open-mpi)."
 echo " "
 echo "Full destruct test will require about 215G of diskspace and take "
@@ -49,14 +49,14 @@ echo "          $test_logs_location" # destruct_test/*/*/test_build.log"
 echo " "
 echo "and can be checked for errors using"
 echo " "
-echo "    $full_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log "
+echo "    $full_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/scripts/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log "
 echo " "
 echo "This will obviously complain about the buggy codes that were "
 echo "deliberately introduced to create warnings/errors (to test"
 echo "that the destruct test machinery itself works properly...). To omit"
 echo "these use "
 echo " "
-echo "    $filtered_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
+echo "    $filtered_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/scripts/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
 echo " "
 echo "instead. This should not show ANY errors/warnings."
 echo "  "
@@ -97,50 +97,50 @@ else
     echo "Managed to find"
     echo " "
     echo "    "$directory_with_mpi_dot_h"mpi.h"
-    echo 
+    echo
 fi
 
 #------------------------------------------------------
-# Name of trilinos tar file at 
+# Name of trilinos tar file at
 # https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 trilinos_tar_file=trilinos-11.8.1-Source.tar.gz
 
 #------------------------------------------------------
-# Name of hypre tar file at 
+# Name of hypre tar file at
 # https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 hypre_tar_file=hypre-2.0.0.tar.gz
 
 #------------------------------------------------------
-# Name of mumps tar file at 
+# Name of mumps tar file at
 # https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 mumps_tar_file=MUMPS_4.10.0.tar.gz
 
 #------------------------------------------------------
-# Name of scalapack tar file at 
+# Name of scalapack tar file at
 # https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 scalapack_tar_file=scalapack_installer.tgz
 
 
-echo " " 
+echo " "
 echo "CHECKING EXTERNAL DISTRIBUTIONS"
 echo "==============================="
-echo " " 
+echo " "
 
-full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$trilinos_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$trilinos_tar_file
 echo "Tar file: "
 echo " "
 echo "     "$full_url
 echo " "
 # This is from http://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting
-if curl --output /dev/null --silent --head --fail "$full_url" 
+if curl --output /dev/null --silent --head --fail "$full_url"
 then
     echo "...found!"
 else
@@ -149,13 +149,13 @@ else
 fi
 echo " "
 
-full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$hypre_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$hypre_tar_file
 echo "Tar file: "
 echo " "
 echo "     "$full_url
 echo " "
 # This is from http://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting
-if curl --output /dev/null --silent --head --fail "$full_url" 
+if curl --output /dev/null --silent --head --fail "$full_url"
 then
     echo "...found!"
 else
@@ -164,13 +164,13 @@ else
 fi
 echo " "
 
-full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$mumps_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$mumps_tar_file
 echo "Tar file: "
 echo " "
 echo "     "$full_url
 echo " "
 # This is from http://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting
-if curl --output /dev/null --silent --head --fail "$full_url" 
+if curl --output /dev/null --silent --head --fail "$full_url"
 then
     echo "...found!"
 else
@@ -179,13 +179,13 @@ else
 fi
 echo " "
 
-full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$scalapack_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$scalapack_tar_file
 echo "Tar file: "
 echo " "
 echo "     "$full_url
 echo " "
 # This is from http://stackoverflow.com/questions/2924422/how-do-i-determine-if-a-web-page-exists-with-shell-scripting
-if curl --output /dev/null --silent --head --fail "$full_url" 
+if curl --output /dev/null --silent --head --fail "$full_url"
 then
     echo "...found!"
 else
@@ -214,7 +214,7 @@ unpacked_dist_dir=`basename $tar_file .tar.gz`
 #------------------------------------------------------
 # Directory for destruct tests
 #------------------------------------------------------
-if [ -e destruct_test   ] 
+if [ -e destruct_test   ]
 then
    echo "Please delete directory destruct_test and try again"
    exit
@@ -228,95 +228,95 @@ cd destruct_test
 # MPI
 #------------------------------------------------------
 for do_mpi in 0 1; do
-    
-    
+
+
 #------------------------------------------------------
 # Paranoia
 #------------------------------------------------------
-    for do_paranoia in 0 1 2; do 
-        
-        
-        
+    for do_paranoia in 0 1 2; do
+
+
+
 #------------------------------------------------------
 # external distributions
 #------------------------------------------------------
         for do_ext_dist in 0 1; do
-            
-            
+
+
 #------------------------------------------------------
 # Create build script
 #------------------------------------------------------
             echo "#! /bin/bash" > build_script.bash
             chmod a+x build_script.bash
-            echo "tar xfz "$tar_file >> build_script.bash  
-            echo "cd "$unpacked_dist_dir >> build_script.bash 
+            echo "tar xfz "$tar_file >> build_script.bash
+            echo "cd "$unpacked_dist_dir >> build_script.bash
 
             if [ $do_ext_dist -eq 1 ]
                 then
 
                 # TRILINOS [update version number]
                 #---------------------------------
-                echo "cd external_distributions/trilinos/  " >> build_script.bash 
-                echo " wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$trilinos_tar_file >> build_script.bash 
-                echo "if [ ! -e $trilinos_tar_file ]; then  " >> build_script.bash 
-                echo "   echo \"Download of trilinos tar file failed\"  " >> build_script.bash 
-                echo "   exit  " >> build_script.bash 
-                echo "else  " >> build_script.bash   
-                echo "    echo \"trilinos tar file succesfully downloaded\" " >> build_script.bash 
-                echo "fi" >> build_script.bash 
-                echo "cd ../.." >> build_script.bash 
-                
+                echo "cd external_distributions/trilinos/  " >> build_script.bash
+                echo " wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$trilinos_tar_file >> build_script.bash
+                echo "if [ ! -e $trilinos_tar_file ]; then  " >> build_script.bash
+                echo "   echo \"Download of trilinos tar file failed\"  " >> build_script.bash
+                echo "   exit  " >> build_script.bash
+                echo "else  " >> build_script.bash
+                echo "    echo \"trilinos tar file succesfully downloaded\" " >> build_script.bash
+                echo "fi" >> build_script.bash
+                echo "cd ../.." >> build_script.bash
+
                 # HYPRE [updateversion number]
                 #-----------------------------
-                echo "cd external_distributions/hypre" >> build_script.bash 
-                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$hypre_tar_file >> build_script.bash 
-                echo "if [ ! -e $hypre_tar_file ]; then" >> build_script.bash 
-                echo "    echo \"Download of hypre tar file failed\" " >> build_script.bash 
-                echo "    exit" >> build_script.bash 
-                echo "else" >> build_script.bash 
-                echo "    echo \"hypre tar file succesfully downloaded\" " >> build_script.bash 
-                echo "fi" >> build_script.bash 
-                echo "cd ../.." >> build_script.bash 
-                
+                echo "cd external_distributions/hypre" >> build_script.bash
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$hypre_tar_file >> build_script.bash
+                echo "if [ ! -e $hypre_tar_file ]; then" >> build_script.bash
+                echo "    echo \"Download of hypre tar file failed\" " >> build_script.bash
+                echo "    exit" >> build_script.bash
+                echo "else" >> build_script.bash
+                echo "    echo \"hypre tar file succesfully downloaded\" " >> build_script.bash
+                echo "fi" >> build_script.bash
+                echo "cd ../.." >> build_script.bash
+
                 # MUMPS/SCALAPACK [update version number]
                 #----------------------------------------
-                echo "cd external_distributions/mumps_and_scalapack" >> build_script.bash 
-                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$scalapack_tar_file >> build_script.bash 
-                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$mumps_tar_file >> build_script.bash 
-                echo "if [ ! -e $mumps_tar_file ]; then" >> build_script.bash 
-                echo "    echo \"Download of mumps tar file failed\" " >> build_script.bash 
-                echo "    exit" >> build_script.bash 
-                echo "else" >> build_script.bash 
-                echo "    echo \"mumps tar file succesfully downloaded\" " >> build_script.bash 
-                echo "fi" >> build_script.bash 
-                echo "if [ ! -e $scalapack_tar_file ]; then" >> build_script.bash 
-                echo "   echo \"Download of scalapack installer tar file failed\" " >> build_script.bash 
-                echo "   exit" >> build_script.bash 
-                echo "else" >> build_script.bash 
-                echo "     echo \"scalapack installer tar file succesfully downloaded\" " >> build_script.bash 
-                echo "fi" >> build_script.bash 
-                echo "cd ../.." >> build_script.bash 
+                echo "cd external_distributions/mumps_and_scalapack" >> build_script.bash
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$scalapack_tar_file >> build_script.bash
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$mumps_tar_file >> build_script.bash
+                echo "if [ ! -e $mumps_tar_file ]; then" >> build_script.bash
+                echo "    echo \"Download of mumps tar file failed\" " >> build_script.bash
+                echo "    exit" >> build_script.bash
+                echo "else" >> build_script.bash
+                echo "    echo \"mumps tar file succesfully downloaded\" " >> build_script.bash
+                echo "fi" >> build_script.bash
+                echo "if [ ! -e $scalapack_tar_file ]; then" >> build_script.bash
+                echo "   echo \"Download of scalapack installer tar file failed\" " >> build_script.bash
+                echo "   exit" >> build_script.bash
+                echo "else" >> build_script.bash
+                echo "     echo \"scalapack installer tar file succesfully downloaded\" " >> build_script.bash
+                echo "fi" >> build_script.bash
+                echo "cd ../.." >> build_script.bash
             fi
 
 
-            echo "rm config/configure_options/current" >> build_script.bash 
-            echo "echo \"--enable-symbolic-links-for-headers\" >> config/configure_options/current" >> build_script.bash 
-            echo "echo \"--enable-multiple_teuchos_libraries\" >> config/configure_options/current" >> build_script.bash 
+            echo "rm config/configure_options/current" >> build_script.bash
+            echo "echo \"--enable-symbolic-links-for-headers\" >> config/configure_options/current" >> build_script.bash
+            echo "echo \"--enable-multiple_teuchos_libraries\" >> config/configure_options/current" >> build_script.bash
             echo "echo \"--enable-suppress-doc\" >> config/configure_options/current" >> build_script.bash  # hierher suppressing doc
 
             if [ $do_mpi -eq 1 ]
             then
-                echo "echo \"--enable-MPI\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"--with-mpi-self-tests=\\\"mpirun -np 2\\\"\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"--with-mpi-self-tests-variablenp=\\\"mpirun -np OOMPHNP\\\"\" >> config/configure_options/current" >> build_script.bash 
+                echo "echo \"--enable-MPI\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"--with-mpi-self-tests=\\\"mpirun -np 2\\\"\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"--with-mpi-self-tests-variablenp=\\\"mpirun -np OOMPHNP\\\"\" >> config/configure_options/current" >> build_script.bash
                 if [ $do_ext_dist -eq 1 ]
                 then
                     bla=
-                    echo "echo \"--with-mpi-include-directory=\\\""${directory_with_mpi_dot_h}"\\\"\"  >> config/configure_options/current" >> build_script.bash 
+                    echo "echo \"--with-mpi-include-directory=\\\""${directory_with_mpi_dot_h}"\\\"\"  >> config/configure_options/current" >> build_script.bash
                 fi
             fi
             case "$do_paranoia" in
-                
+
                 "0")
                     echo "echo \"CXXFLAGS=\\\"-Wall -O3\\\"\" >> config/configure_options/current " >> build_script.bash ;;
                 "1")
@@ -324,22 +324,22 @@ for do_mpi in 0 1; do
                 "2")
                     echo "echo \"CXXFLAGS=\\\"-Wall -g -DPARANOID -DRANGE_CHECKING \\\"\" >> config/configure_options/current " >> build_script.bash ;;
             esac
-            echo "echo \"CFLAGS=\\\"-O3\\\"\" >> config/configure_options/current" >> build_script.bash  
-            echo "echo \"FFLAGS=\\\"-O3\\\"\" >> config/configure_options/current" >> build_script.bash 
-            echo "echo \"FFLAGS_NO_OPT=\\\"-O0\\\"\" >> config/configure_options/current" >> build_script.bash  
+            echo "echo \"CFLAGS=\\\"-O3\\\"\" >> config/configure_options/current" >> build_script.bash
+            echo "echo \"FFLAGS=\\\"-O3\\\"\" >> config/configure_options/current" >> build_script.bash
+            echo "echo \"FFLAGS_NO_OPT=\\\"-O0\\\"\" >> config/configure_options/current" >> build_script.bash
 
             if [ $do_mpi -eq 1 ]
                 then
-                echo "echo \"CXX=mpic++\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"CC=mpicc\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"F77=mpif77\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"FC=mpif90\" >> config/configure_options/current" >> build_script.bash 
-                echo "echo \"LD=mpif77\" >> config/configure_options/current" >> build_script.bash 
+                echo "echo \"CXX=mpic++\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"CC=mpicc\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"F77=mpif77\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"FC=mpif90\" >> config/configure_options/current" >> build_script.bash
+                echo "echo \"LD=mpif77\" >> config/configure_options/current" >> build_script.bash
             fi
             # Build and run self tests
-            echo "./non_interactive_autogen.sh &> test_build.log  " >> build_script.bash            
-            echo "make -k check &>> test_build.log  " >> build_script.bash       
-            
+            echo "./non_interactive_autogen.sh &> test_build.log  " >> build_script.bash
+            echo "make -k check &>> test_build.log  " >> build_script.bash
+
 #------------------------------------------------------
 # Make the test directory and run tests
 #------------------------------------------------------
@@ -351,7 +351,7 @@ for do_mpi in 0 1; do
             echo "ABOUT TO RUN BUILD SCRIPT IN: "`pwd`
             ./build_script.bash &
             cd ..
-            
+
         done
     done
 done

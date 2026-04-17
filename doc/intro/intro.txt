@@ -575,17 +575,17 @@ in Newton's method:
   over the domain to determine
   the discrete residuals \f$  r_k^{(i)} \f$ from  (@R[(7)]@).
   (We note that, in general,  the integrals must be evaluated numerically.)
-- Step 3 requires the computation of \f$M^2\f$ entries
+- Step 4 requires the computation of \f$M^2\f$ entries
   in the Jacobian matrix, each an integral of the form 
   \f[ J_{kj} =   \int_{D} \frac{\partial }{\partial U_j}
   {\cal R}\left(x_i;  \ \sum_{j=1}^{M} U_j 
   \psi_j(x_i)\right) \ \psi_k(x_i) 
   \ \mbox{d}x_1 \mbox{d}x_2 \mbox{\ \ \ for $j,k=1,...,M$.} \f]
-- Step 4 requires the solution of a \f$M \times M\f$
+- Step 5 requires the solution of a \f$M \times M\f$
   linear system.
 .
  
-In general, steps 3 and 4 will be very costly if \f$M\f$ is 
+In general, steps 4 and 5 will be very costly if \f$M\f$ is 
 large. However, if the domain has a simple shape and the differential 
 operator has a sufficiently simple structure, it is often possible
 to choose basis functions with suitable orthogonality properties

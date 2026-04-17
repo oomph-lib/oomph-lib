@@ -19,7 +19,7 @@ find demo_drivers/navier_stokes/rayleigh_channel/*/.svn \
 tar -cv -X excluded-files -f rayleigh_channel.tar \
     doc/navier_stokes/rayleigh_channel/ \
     demo_drivers/navier_stokes/rayleigh_channel \
-    bin/txt2h.sh \
+    scripts/txt2h.sh \
     doc/oomph-lib_header.html \
     doc/figures/oomph_original.png \
 
@@ -28,4 +28,4 @@ gzip -9 rayleigh_channel.tar
 rm -rf excluded-files
 
 
-    
+

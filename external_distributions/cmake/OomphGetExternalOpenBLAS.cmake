@@ -68,6 +68,15 @@ if(APPLE)
 
 else()
 
+  # GitHub-hosted Linux runners are not guaranteed to expose the same CPU
+  # features from run to run. Build OpenBLAS with runtime dispatch so the cached
+  # archive remains portable across runner refreshes and vendor/model changes.
+  set(OPENBLAS_MAKE_ARGS
+      CXX=${CMAKE_CXX_COMPILER}
+      CC=${CMAKE_C_COMPILER}
+      FC=${CMAKE_Fortran_COMPILER}
+      DYNAMIC_ARCH=1)
+
   # Define how to configure/build/install the project
   oomph_get_external_project_helper(
     PROJECT_NAME openblas
@@ -75,8 +84,8 @@ else()
     GIT_TAG ${OPENBLAS_GIT_TAG}
     INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
     CONFIGURE_HANDLED_BY_BUILD
-    BUILD_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} FC=${CMAKE_Fortran_COMPILER}
-    INSTALL_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} PREFIX=${OPENBLAS_INSTALL_DIR} install)
+    BUILD_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} ${OPENBLAS_MAKE_ARGS}
+    INSTALL_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} ${OPENBLAS_MAKE_ARGS} PREFIX=${OPENBLAS_INSTALL_DIR} install)
 
 endif()
 

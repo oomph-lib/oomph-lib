@@ -12,12 +12,12 @@ include(FindPackageHandleStandardArgs)
 
 # cmake-format: off
 # See if the user specified a custom METIS installation location using OOMPH_USE_METIS_FROM or METISDIR
-find_library(METIS_LIBRARIES NAMES metis PATHS "${OOMPH_USE_METIS_FROM}/lib" NO_DEFAULT_PATH DOC "METIS library")
-find_path(METIS_INCLUDES NAMES metis.h PATHS "${OOMPH_USE_METIS_FROM}/include" NO_DEFAULT_PATH DOC "METIS header")
+find_library(METIS_LIBRARIES NAMES metis PATHS "${OOMPH_USE_METIS_FROM}" PATH_SUFFIXES lib lib64 NO_DEFAULT_PATH DOC "METIS library")
+find_path(METIS_INCLUDES NAMES metis.h PATHS "${OOMPH_USE_METIS_FROM}" PATH_SUFFIXES include NO_DEFAULT_PATH DOC "METIS header")
 
 # Try to find libraries and headers in the standard system paths
-find_library(METIS_LIBRARIES NAMES metis PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "METIS library")
-find_path(METIS_INCLUDES NAMES metis.h PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "METIS header")
+find_library(METIS_LIBRARIES NAMES metis PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar PATH_SUFFIXES lib lib64 DOC "METIS library")
+find_path(METIS_INCLUDES NAMES metis.h PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar PATH_SUFFIXES include DOC "METIS header")
 # cmake-format: on
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so

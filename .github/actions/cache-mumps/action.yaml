@@ -1,0 +1,48 @@
+--- # ------------------------------------------------------------------------------
+
+name: Cache MUMPS tarball
+description: Restore/download/cache MUMPS tarball
+inputs:
+  mumps-version:
+    description: MUMPS upstream version, e.g. 5.8.1
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Prepare tarball directory
+      shell: bash
+      run: mkdir -p external_distributions/tarballs
+
+    - name: Restore cached MUMPS tarball
+      id: mumps-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: external_distributions/tarballs
+        key: mumps-${{ inputs.mumps-version }}
+
+    - name: Download MUMPS tarball if missing
+      if: steps.mumps-cache.outputs.cache-hit != 'true'
+      shell: bash
+      env:
+        MUMPS_UPSTREAM_VERSION: ${{ inputs.mumps-version }}
+      run: |
+        set -e
+        FILE="MUMPS_${MUMPS_UPSTREAM_VERSION}.tar.gz"
+        DEST="external_distributions/tarballs/${FILE}"
+        URL="https://mumps-solver.org/${FILE}"
+
+        if [ -f "$DEST" ]; then
+          echo "Using existing MUMPS tarball at $DEST"
+        else
+          echo "Cache miss, downloading $URL to $DEST"
+          curl --fail --location --retry 5 --retry-delay 5 -o "$DEST" "$URL"
+        fi
+
+    - name: Save MUMPS tarball cache
+      if: steps.mumps-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: external_distributions/tarballs
+        key: ${{ steps.mumps-cache.outputs.cache-primary-key }}
+# ------------------------------------------------------------------------------

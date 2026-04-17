@@ -36,10 +36,6 @@ oomph_add_test(
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.hp_adaptive_driven_cavity
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
-if(APPLE)
-  set_tests_properties(mpi.distribution.hp_adaptive_driven_cavity
-                       PROPERTIES DISABLED FALSE)
-endif()
 
 message(VERBOSE "Leaving hp_adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

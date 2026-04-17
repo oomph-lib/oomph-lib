@@ -1,7 +1,7 @@
 #! /bin/bash
 
 compare_jacs.bash cr_jac.dat fd_jac.dat
-../../../bin/fpdiff.py in_both_file*.dat 1.0 1.0e-13 > diff.dat
+../../../scripts/fpdiff.py in_both_file*.dat 1.0 1.0e-13 > diff.dat
 
 rm -f offending_rows.dat
 rm -f offending_row_dofs.dat

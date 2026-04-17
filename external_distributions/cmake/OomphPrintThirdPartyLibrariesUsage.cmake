@@ -44,9 +44,6 @@ function(oomph_print_third_party_libraries_usage)
     list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"${name}\": \"${value}\"")
   endmacro()
 
-  # What's the build type?
-  _oomph_add_flag(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
-
   # Do we also need to build the main project with MPI?
   if (OOMPH_ENABLE_MPI)
     _oomph_add_flag(OOMPH_ENABLE_MPI "ON")

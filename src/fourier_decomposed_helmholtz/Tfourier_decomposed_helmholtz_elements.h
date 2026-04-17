@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -59,8 +59,8 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   class TFourierDecomposedHelmholtzElement
-    : public TElement<2, NNODE_1D>,
-      public FourierDecomposedHelmholtzEquations,
+    : public virtual TElement<2, NNODE_1D>,
+      public virtual FourierDecomposedHelmholtzEquations,
       public virtual ElementWithZ2ErrorEstimator
   {
   public:

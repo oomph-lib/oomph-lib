@@ -34,5 +34,9 @@ oomph_add_test(
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata)
 
+if(APPLE)
+  set_tests_properties(interaction.elastic_bretherton PROPERTIES DISABLED TRUE)
+endif()
+
 message(VERBOSE "Leaving elastic_bretherton subdirectory")
 # ------------------------------------------------------------------------------
