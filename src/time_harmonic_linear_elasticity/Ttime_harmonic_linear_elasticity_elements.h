@@ -60,8 +60,8 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   class TTimeHarmonicLinearElasticityElement
-    : public TElement<DIM, NNODE_1D>,
-      public TimeHarmonicLinearElasticityEquations<DIM>,
+    : public virtual TElement<DIM, NNODE_1D>,
+      public virtual TimeHarmonicLinearElasticityEquations<DIM>,
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
