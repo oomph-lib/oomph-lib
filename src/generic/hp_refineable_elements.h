@@ -48,7 +48,7 @@ namespace oomph
   //======================================================================
   template<unsigned INITIAL_NNODE_1D>
   class PRefineableQElement<1, INITIAL_NNODE_1D>
-    : public RefineableQElement<1>,
+    : public virtual RefineableQElement<1>,
       public virtual QElement<1, INITIAL_NNODE_1D>,
       public virtual PRefineableElement
   {
@@ -140,7 +140,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   class PRefineableQElement<2, INITIAL_NNODE_1D>
-    : public RefineableQElement<2>,
+    : public virtual RefineableQElement<2>,
       public virtual QElement<2, INITIAL_NNODE_1D>,
       public virtual PRefineableElement
   {
@@ -241,7 +241,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   class PRefineableQElement<3, INITIAL_NNODE_1D>
-    : public RefineableQElement<3>,
+    : public virtual RefineableQElement<3>,
       public virtual QElement<3, INITIAL_NNODE_1D>,
       public virtual PRefineableElement
   {
