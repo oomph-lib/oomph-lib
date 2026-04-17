@@ -10,7 +10,7 @@ set terminal pngcairo size 800,600
 set output sprintf("build/RESLT/plot_d2.png")
 
 # Read data file statistics to determine number of columns
-stats "build/RESLT/d2_difference.dat" nooutput
+stats "build/RESLT/second_derivs_difference.dat" nooutput
 n = STATS_columns
 
 # Set axis labels
@@ -27,4 +27,4 @@ set format x "1×10^{%L}"
 
 # Plot all columns (from column 2 to n) against column 1
 # Each column is plotted as a separate line
-plot for [i=2:n] "build/RESLT/d2_difference.dat" using 1:i with lines title sprintf("col %d", i-1)
+plot for [i=2:n] "build/RESLT/second_derivs_difference.dat" using 1:i with lines title sprintf("col %d", i-1)

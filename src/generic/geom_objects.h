@@ -324,28 +324,28 @@ namespace oomph
     // Set FD step for 1st derivative
     void set_1st_derivative_FD_step(const double& dzeta)
     {
-      FirstDerivativeDzeta = dzeta;
+      First_derivative_dzeta = dzeta;
     }
 
 
     // Get FD step for 1st derivative
     double get_1st_derivative_FD_step()
     {
-      return FirstDerivativeDzeta;
+      return First_derivative_dzeta;
     }
 
 
     // Set FD step for 2nd derivative
     void set_2nd_derivative_FD_step(const double& dzeta)
     {
-      SecondDerivativeDzeta = dzeta;
+      Second_derivative_dzeta = dzeta;
     }
 
 
     // Get FD step for 2nd derivative
     double get_2nd_derivative_FD_step()
     {
-      return SecondDerivativeDzeta;
+      return Second_derivative_dzeta;
     }
 
 
@@ -356,13 +356,12 @@ namespace oomph
     virtual void dposition(const Vector<double>& zeta,
                            DenseMatrix<double>& drdzeta) const
     {
-      // FD step
-      double dzeta = FirstDerivativeDzeta;
-
       // Position at the current Lagrangian coordinate
       Vector<double> r(Ndim, 0.0);
       position(zeta, r);
 
+      // Initialize the variables
+      
       // Position after an increment in one Lagrangian coordinate
       Vector<double> r_plus(Ndim, 0.0);
 
@@ -373,13 +372,13 @@ namespace oomph
       for (unsigned i = 0; i < NLagrangian; i++)
       {
         // Copy the base coordinate
-        for (unsigned k = 0; k < NLagrangian; k++)
+        for (unsigned l = 0; l < NLagrangian; l++)
         {
-          zeta_plus[k] = zeta[k];
+          zeta_plus[l] = zeta[l];
         }
 
         // Apply the increment in direction i
-        zeta_plus[i] = zeta_plus[i] + dzeta;
+        zeta_plus[i] += First_derivative_dzeta;
 
         // Evaluate position at the perturbed coordinate
         position(zeta_plus, r_plus);
@@ -387,7 +386,7 @@ namespace oomph
         // Compute the finite-difference derivative
         for (unsigned j = 0; j < Ndim; j++)
         {
-          drdzeta(i, j) = (r_plus[j] - r[j]) / dzeta;
+          drdzeta(i, j) = (r_plus[j] - r[j]) / First_derivative_dzeta;
         }
       }
     }
@@ -401,62 +400,40 @@ namespace oomph
     virtual void d2position(const Vector<double>& zeta,
                             RankThreeTensor<double>& ddrdzeta) const
     {
-      // FD step
-      double dzeta = SecondDerivativeDzeta;
-
       // Position at the base Lagrangian coordinate
       Vector<double> r(Ndim, 0.0);
       position(zeta, r);
+
+      // Initialize the variables
+
+      // Perturbed Lagrangian coordinate 
+      Vector<double> zeta_perturbed(NLagrangian, 0.0);
 
       // Get the position with Lagrangian coordinate increment
       // +h
       Vector<double> r_plus(Ndim, 0.0);
 
-      // Lagrangian coordinate increment
-      // +h
-      Vector<double> zeta_plus(NLagrangian, 0.0);
-
       // Get the position with Lagrangian coordinate decrement
       // -h
       Vector<double> r_minus(Ndim, 0.0);
-
-      // Lagrangian coordinate decrement
-      // -h
-      Vector<double> zeta_minus(NLagrangian, 0.0);
 
       // Get the position with two Lagrangian coordinate increments
       // +h in i and +h in j
       Vector<double> r_two_plus(Ndim, 0.0);
 
-      // Two Lagrangian coordinate increment
-      // +h in i and +h in j
-      Vector<double> zeta_two_plus(NLagrangian, 0.0);
-
       // Get the position with two Lagrangian coordinate decrements
       // -h in i and -h in j
       Vector<double> r_two_minus(Ndim, 0.0);
-
-      // Two Lagrangian coordinate decrement
-      // -h in i and -h in j
-      Vector<double> zeta_two_minus(NLagrangian, 0.0);
 
       // Get the position with Lagrangian coordinate increment
       // and decrement
       // +h in i, -h in j
       Vector<double> r_plus_minus(Ndim, 0.0);
 
-      // Lagrangian coordinate increment and decrement
-      // +h in i, -h in j
-      Vector<double> zeta_plus_minus(NLagrangian, 0.0);
-
       // Get the position with Lagrangian coordinate decrement
       // and increment
       // -h in i, +h in j
       Vector<double> r_minus_plus(Ndim, 0.0);
-
-      // Lagrangian coordinate increment and decrement
-      // -h in i, +h in j
-      Vector<double> zeta_minus_plus(NLagrangian, 0.0);
 
       // Loop over Lagrangian coordinates to compute the second derivatives
       for (unsigned i = 0; i < NLagrangian; i++)
@@ -466,74 +443,95 @@ namespace oomph
           // Case 1: Repeated second derivatives
           if (i == j)
           {
-            // Reset perturbed coordinates
-            for (unsigned k = 0; k < NLagrangian; k++)
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
             {
-              zeta_plus[k] = zeta[k];
-              zeta_minus[k] = zeta[k];
+              zeta_perturbed[l] = zeta[l];
             }
 
             // Apply +h perturbations
-            zeta_plus[i] = zeta_plus[i] + dzeta;
-
-            // Apply -h perturbations
-            zeta_minus[i] = zeta_minus[i] - dzeta;
+            zeta_perturbed[i] += Second_derivative_dzeta;
 
             // Evaluate positions with +h perturbations
-            position(zeta_plus, r_plus);
+            position(zeta_perturbed, r_plus);
+
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
+            {
+              zeta_perturbed[l] = zeta[l];
+            }
+
+            // Apply -h perturbations
+            zeta_perturbed[i] -= Second_derivative_dzeta;
 
             // Evaluate positions with -h perturbations
-            position(zeta_minus, r_minus);
+            position(zeta_perturbed, r_minus);
 
             // Loop over the dimensions
             for (unsigned k = 0; k < Ndim; k++)
             {
               // Second derivative via central difference
               ddrdzeta(i, j, k) =
-                (r_plus[k] - 2.0 * r[k] + r_minus[k]) / (dzeta * dzeta);
+                (r_plus[k] - 2.0 * r[k] + r_minus[k]) / 
+                (Second_derivative_dzeta * Second_derivative_dzeta);
             }
           }
           // Case 2: Mixed second derivatives
           else
           {
-            // Reset perturbed coordinates
-            for (unsigned k = 0; k < NLagrangian; k++)
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
             {
-              zeta_two_plus[k] = zeta[k];
-              zeta_two_minus[k] = zeta[k];
-              zeta_plus_minus[k] = zeta[k];
-              zeta_minus_plus[k] = zeta[k];
+              zeta_perturbed[l] = zeta[l];
             }
 
             // Apply perturbations: +h/+h
-            zeta_two_plus[i] = zeta_two_plus[i] + dzeta;
-            zeta_two_plus[j] = zeta_two_plus[j] + dzeta;
+            zeta_perturbed[i] += Second_derivative_dzeta;
+            zeta_perturbed[j] += Second_derivative_dzeta;
 
             // Get the position with two Lagrangian coordinate increments
-            position(zeta_two_plus, r_two_plus);
+            position(zeta_perturbed, r_two_plus);
+
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
+            {
+              zeta_perturbed[l] = zeta[l];
+            }
 
             // Apply perturbations: -h/-h
-            zeta_two_minus[i] = zeta_two_minus[i] - dzeta;
-            zeta_two_minus[j] = zeta_two_minus[j] - dzeta;
+            zeta_perturbed[i] -= Second_derivative_dzeta;
+            zeta_perturbed[j] -= Second_derivative_dzeta;
 
             // Get the position with two Lagrangian coordinate decrements
-            position(zeta_two_minus, r_two_minus);
+            position(zeta_perturbed, r_two_minus);
+
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
+            {
+              zeta_perturbed[l] = zeta[l];
+            }
 
             // Apply perturbations: +h/-h
-            zeta_plus_minus[i] = zeta_plus_minus[i] + dzeta;
-            zeta_plus_minus[j] = zeta_plus_minus[j] - dzeta;
+            zeta_perturbed[i] += Second_derivative_dzeta;
+            zeta_perturbed[j] -= Second_derivative_dzeta;
 
             // Get the position with Lagrangian coordinate increment
             // and decrement
-            position(zeta_plus_minus, r_plus_minus);
+            position(zeta_perturbed, r_plus_minus);
+
+            // Reset perturbed coordinates to zeta
+            for (unsigned l = 0; l < NLagrangian; l++)
+            {
+              zeta_perturbed[l] = zeta[l];
+            }
 
             // Apply perturbations: -h/+h
-            zeta_minus_plus[i] = zeta_minus_plus[i] - dzeta;
-            zeta_minus_plus[j] = zeta_minus_plus[j] + dzeta;
+            zeta_perturbed[i] -= Second_derivative_dzeta;
+            zeta_perturbed[j] += Second_derivative_dzeta;
 
             // Get the position with Lagrangian coordinate increment
             // and decrement
-            position(zeta_minus_plus, r_minus_plus);
+            position(zeta_perturbed, r_minus_plus);
 
             // Loop over the dimensions
             for (unsigned k = 0; k < Ndim; k++)
@@ -541,7 +539,7 @@ namespace oomph
               // Mixed second derivative via central difference stencil
               ddrdzeta(i, j, k) = (r_two_plus[k] - r_plus_minus[k] -
                                    r_minus_plus[k] + r_two_minus[k]) /
-                                  (4.0 * dzeta * dzeta);
+              (4.0 * Second_derivative_dzeta * Second_derivative_dzeta);
             }
           }
         }
@@ -642,11 +640,11 @@ namespace oomph
   private:
     /// FD step for the 1st derivative
     /// Defautly, the step size is set as 1.0e-8
-    double FirstDerivativeDzeta = 1.0e-8;
+    double First_derivative_dzeta = 1.0e-8;
 
     /// FD step for the 2nd derivative (second-order central-difference)
     /// Defautly, the step size is set as 1.0e-4
-    double SecondDerivativeDzeta = 1.0e-4;
+    double Second_derivative_dzeta = 1.0e-4;
   };
 
 
