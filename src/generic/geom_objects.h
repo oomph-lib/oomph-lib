@@ -361,7 +361,7 @@ namespace oomph
       position(zeta, r);
 
       // Initialize the variables
-      
+
       // Position after an increment in one Lagrangian coordinate
       Vector<double> r_plus(Ndim, 0.0);
 
@@ -406,7 +406,7 @@ namespace oomph
 
       // Initialize the variables
 
-      // Perturbed Lagrangian coordinate 
+      // Perturbed Lagrangian coordinate
       Vector<double> zeta_perturbed(NLagrangian, 0.0);
 
       // Get the position with Lagrangian coordinate increment
@@ -472,7 +472,7 @@ namespace oomph
             {
               // Second derivative via central difference
               ddrdzeta(i, j, k) =
-                (r_plus[k] - 2.0 * r[k] + r_minus[k]) / 
+                (r_plus[k] - 2.0 * r[k] + r_minus[k]) /
                 (Second_derivative_dzeta * Second_derivative_dzeta);
             }
           }
@@ -537,9 +537,10 @@ namespace oomph
             for (unsigned k = 0; k < Ndim; k++)
             {
               // Mixed second derivative via central difference stencil
-              ddrdzeta(i, j, k) = (r_two_plus[k] - r_plus_minus[k] -
-                                   r_minus_plus[k] + r_two_minus[k]) /
-              (4.0 * Second_derivative_dzeta * Second_derivative_dzeta);
+              ddrdzeta(i, j, k) =
+                (r_two_plus[k] - r_plus_minus[k] - r_minus_plus[k] +
+                 r_two_minus[k]) /
+                (4.0 * Second_derivative_dzeta * Second_derivative_dzeta);
             }
           }
         }
