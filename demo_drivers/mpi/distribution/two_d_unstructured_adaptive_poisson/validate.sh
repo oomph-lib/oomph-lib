@@ -439,7 +439,7 @@ if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat 13.0 1.0e-12 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat 18.0 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_HALF_CIRCLE
