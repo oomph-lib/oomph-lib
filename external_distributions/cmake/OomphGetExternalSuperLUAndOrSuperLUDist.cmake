@@ -21,8 +21,8 @@ set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
 set(GKLIB_GIT_TAG e2856c2f595b153ca1ce9258c5301dbabc4f39f5)
 set(METIS_GIT_TAG dfded64f24664caa8809cacf416d378112e8867f)
 set(PARMETIS_GIT_TAG 83bb3d4f5b2af826d0683329cad1accc8d829de2)
-set(SUPERLU_GIT_TAG v6.0.1)
-set(SUPERLU_DIST_GIT_TAG v9.1.0)
+set(SUPERLU_GIT_TAG v7.0.1)
+set(SUPERLU_DIST_GIT_TAG v9.2.1)
 
 # Set the default installation paths
 set(GKLIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/gklib")

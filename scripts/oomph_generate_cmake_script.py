@@ -56,7 +56,7 @@ OOMPHLIB_LIBRARIES = [
     "oomph_crbond_bessel",
     "oomph_triangle",
     "oomph_tetgen",
-    "oomph_superlu_6.0.1",
+    "oomph_superlu_7.0.1",
     "oomph_metis_from_parmetis_4.0.3",
     "generic",
     "meshes",
