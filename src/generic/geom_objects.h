@@ -321,7 +321,7 @@ namespace oomph
     }
 
     // Return a non-const reference to the FD step size
-    // for the first derivative, allowing modification 
+    // for the first derivative, allowing modification
     // of the value.
     double& first_derivative_fd_step()
     {
@@ -336,7 +336,7 @@ namespace oomph
     }
 
     // Return a non-const reference to the FD step size
-    // for the second derivative, allowing modification 
+    // for the second derivative, allowing modification
     // of the value.
     double& second_derivative_fd_step()
     {
@@ -408,7 +408,7 @@ namespace oomph
       Vector<double> r(Ndim, 0.0);
       position(zeta, r);
 
-      // Perturbed Lagrangian coordinate 
+      // Perturbed Lagrangian coordinate
       Vector<double> zeta_perturbed(NLagrangian, 0.0);
 
       // Copy the base coordinate
@@ -612,13 +612,13 @@ namespace oomph
   private:
     /// FD step for first derivatives.
     /// For a forward difference approximation, the optimal scaling follows
-    /// h ~ sqrt(epsilon_machine_precision), obtained by balancing truncation 
+    /// h ~ sqrt(epsilon_machine_precision), obtained by balancing truncation
     /// error O(h) and round-off error O(epsilon_machine_precision / h).
     double First_derivative_dzeta = 1.0e-8;
 
     /// FD step for second derivatives (central difference).
     /// The step size is chosen to balance truncation error O(h^2) and
-    /// round-off error O(epsilon_machine_precision / h^2), giving the optimal 
+    /// round-off error O(epsilon_machine_precision / h^2), giving the optimal
     /// scaling h ~ epsilon_machine_precision^{1/4}.
     double Second_derivative_dzeta = 1.0e-4;
   };
