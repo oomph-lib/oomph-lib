@@ -283,7 +283,7 @@ int main()
    {
      for (unsigned h = 0; h < nindex3; h++)
      {
-       file2_analytical_and_FD <<ddrdzeta_exact(j, k, h) << " " <<
+       file2_analytical_and_FD << ddrdzeta_exact(j, k, h) << " " <<
        ddrdzeta_FD(j, k, h) << std::endl;
      }
    }
