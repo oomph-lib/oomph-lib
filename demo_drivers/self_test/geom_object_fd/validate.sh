@@ -18,7 +18,7 @@ mkdir Validation
 #--------------------------------------------------------
 cd Validation
 
-echo "Running FD evaluation of dposition in GeomObjectvalidation "
+echo "Running FD evaluation of dposition in GeomObject validation "
 mkdir RESLT
 ../geom_object_fd > OUTPUT
 echo "done"

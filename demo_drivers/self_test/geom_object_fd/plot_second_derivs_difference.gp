@@ -1,3 +1,10 @@
+# This script plots the finite-difference derivative errors against the FD step size
+# in order to help identify the optimal step size for the derivative approximation.
+#
+# It is used for the second derivative. The corresponding section of the code 
+# (in geom_object_fd.cc) has been commented out. You must uncomment that section to 
+# generate the data files.
+
 reset
 
 # Set the output terminal and image size
@@ -25,6 +32,10 @@ set log y
 # of 10 (for log scale)
 set format x "1×10^{%L}"
 
-# Plot all columns (from column 2 to n) against column 1
-# Each column is plotted as a separate line
-plot for [i=2:n] "build/RESLT/second_derivs_difference.dat" using 1:i with lines title sprintf("col %d", i-1)
+# Plot absolute differences between paired columns
+# Each pair (2*i+2, 2*i+3) represents FD vs exact values
+# taking |FD - exact| to show magnitude of numerical error
+plot for [i=0:(n-3)/2] \
+    "build/RESLT/second_derivs_difference.dat" \
+    using 1:(abs(column(2*i+2) - column(2*i+3))) \
+    with lines lw 2 title sprintf("col %d", i+1)
