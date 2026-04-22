@@ -330,7 +330,7 @@ namespace oomph
 
     // Return a const reference to the FD step size
     // for the first derivative, providing read-only access.
-    const double& first_derivative_fd_step() const
+    double first_derivative_fd_step() const
     {
       return First_derivative_dzeta;
     }
@@ -345,7 +345,7 @@ namespace oomph
 
     // Return a const reference to the FD step size
     // for the second derivative, providing read-only access.
-    const double& second_derivative_fd_step() const
+    double second_derivative_fd_step() const
     {
       return Second_derivative_dzeta;
     }

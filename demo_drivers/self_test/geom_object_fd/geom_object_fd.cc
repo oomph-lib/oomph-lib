@@ -216,40 +216,40 @@ int main()
  // This part of the code is used to assess the optimal value of
  // the FD step
  // ------------------------------------------------------------------
- // // Open a file for plotting the difference between
- // // the analytical and FD results
- // std::ofstream file1("RESLT/first_derivs_difference.dat");
+ // Open a file for plotting the difference between
+ // the analytical and FD results
+ std::ofstream file1("RESLT/first_derivs_difference.dat");
 
- // // Loop over a range of finite difference step sizes
- // unsigned npts = 1000;
- // for (unsigned i = 0; i < npts; i++)
- // {
- //   // Define logarithmically spaced step size
- //   double exponent = -16.0 + 16.0 * double(i) / double(npts - 1);
- //   double dzeta = std::pow(10.0, exponent);
+ // Loop over a range of finite difference step sizes
+ unsigned npts = 1000;
+ for (unsigned i = 0; i < npts; i++)
+ {
+   // Define logarithmically spaced step size
+   double exponent = -16.0 + 16.0 * double(i) / double(npts - 1);
+   double dzeta = std::pow(10.0, exponent);
 
- //   // Output step size
- //   file1 << dzeta << " ";
+   // Output step size
+   file1 << dzeta << " ";
 
- //   // Set FD step for 1st derivative
- //   geom_object_pt->first_derivative_fd_step() = dzeta;
+   // Set FD step for 1st derivative
+   geom_object_pt->first_derivative_fd_step() = dzeta;
 
- //   // Compute FD 1st derivative
- //   DenseMatrix<double> drdzeta_FD(2, 3);
- //   geom_object_pt->GeomObject::dposition(zeta, drdzeta_FD);
+   // Compute FD 1st derivative
+   DenseMatrix<double> drdzeta_FD(2, 3);
+   geom_object_pt->GeomObject::dposition(zeta, drdzeta_FD);
 
- //   // Output the analytical and FD results
- //   for (unsigned j = 0; j < nrow; j++)
- //   {
- //     for (unsigned k = 0; k < ncol; k++)
- //     {
- //       file1 << drdzeta_FD(j, k) << " " << drdzeta_exact(j, k) << " ";
- //     }
- //   }
- //   file1 << std::endl;
- // }
- // // Close the file
- // file1.close();
+   // Output the analytical and FD results
+   for (unsigned j = 0; j < nrow; j++)
+   {
+     for (unsigned k = 0; k < ncol; k++)
+     {
+       file1 << drdzeta_FD(j, k) << " " << drdzeta_exact(j, k) << " ";
+     }
+   }
+   file1 << std::endl;
+ }
+ // Close the file
+ file1.close();
  // ------------------------------------------------------------------
 
  // -------------------------------
@@ -294,43 +294,42 @@ int main()
  // This part of the code is used to assess the optimal value of
  // the FD step
  // ------------------------------------------------------------------
- //  // Open a file
- //   std::ofstream file2("RESLT/second_derivs_difference.dat");
+ // Open a file
+ std::ofstream file2("RESLT/second_derivs_difference.dat");
 
- //   // Loop over a range of finite difference step sizes
- //   npts = 1000;
- //   for (unsigned i = 0; i < npts; i++)
- //   {
- //     // Define logarithmically spaced step size
- //     double exponent = -8.0 + 8.0 * double(i) / double(npts - 1);
- //     double dzeta = std::pow(10.0, exponent);
+ // Loop over a range of finite difference step sizes
+ npts = 1000;
+ for (unsigned i = 0; i < npts; i++)
+ {
+   // Define logarithmically spaced step size
+   double exponent = -8.0 + 8.0 * double(i) / double(npts - 1);
+   double dzeta = std::pow(10.0, exponent);
 
- //     // Output step size
- //     file2 << dzeta << " ";
+   // Output step size
+   file2 << dzeta << " ";
 
- //     // Set FD step for 2nd derivative
- //     geom_object_pt->second_derivative_fd_step() = dzeta;
+   // Set FD step for 2nd derivative
+   geom_object_pt->second_derivative_fd_step() = dzeta;
 
- //     // Compute FD 2nd derivative
- //     RankThreeTensor<double> ddrdzeta_FD(2, 2, 3);
- //     geom_object_pt->GeomObject::d2position(zeta, ddrdzeta_FD);
+   // Compute FD 2nd derivative
+   RankThreeTensor<double> ddrdzeta_FD(2, 2, 3);
+   geom_object_pt->GeomObject::d2position(zeta, ddrdzeta_FD);
 
- //     // Output the analytical and FD results
- //     for (unsigned j = 0; j < nindex1; j++)
- //     {
- //       for (unsigned k = 0; k < nindex2; k++)
- //       {
- //         for (unsigned h = 0; h < nindex3; h++)
- //         {
- //           file2 << ddrdzeta_FD(j, k, h) << " " << ddrdzeta_exact(j, k, h)
- //                 << " ";
- //         }
- //       }
- //     }
- //     file2 << std::endl;
- //   }
- //   // Close the file
- //   file2.close();
+   // Output the analytical and FD results
+   for (unsigned j = 0; j < nindex1; j++)
+   {
+     for (unsigned k = 0; k < nindex2; k++)
+     {
+       for (unsigned h = 0; h < nindex3; h++)
+       {
+         file2 << ddrdzeta_FD(j, k, h) << " " << ddrdzeta_exact(j, k, h) << " ";
+       }
+     }
+   }
+   file2 << std::endl;
+ }
+ // Close the file
+ file2.close();
  // ------------------------------------------------------------------
 
 
