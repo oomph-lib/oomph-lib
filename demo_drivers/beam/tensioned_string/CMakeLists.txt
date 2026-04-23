@@ -25,11 +25,16 @@ oomph_add_executable(
   SOURCES tensioned_string.cc
   LIBRARIES oomph::beam oomph::meshes oomph::generic)
 
+oomph_add_executable(
+  NAME tensioned_string2
+  SOURCES tensioned_string2.cc
+  LIBRARIES oomph::beam oomph::meshes oomph::generic)
+
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
   TEST_NAME beam.tensioned_string
-  DEPENDS_ON tensioned_string
+  DEPENDS_ON tensioned_string tensioned_string2
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata)
 
