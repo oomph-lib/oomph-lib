@@ -73,6 +73,14 @@ Inheritance diagram for oomph\+::Straight\+Line\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdt}})
 \begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1GeomObject_a73954a1aa1911f6b7ab6e062731df033}{first\+\_\+derivative\+\_\+fd\+\_\+step}} ()
+\begin{DoxyCompactList}\small\item\em Return a non-\/const reference to the FD step size for the first derivative, allowing modification of the value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1515c88970b693724f6f05f8cfd93819}{first\+\_\+derivative\+\_\+fd\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a const reference to the FD step size for the first derivative, providing read-\/only access. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1GeomObject_a233868d62dddb18051556ed13bb2b5d2}{second\+\_\+derivative\+\_\+fd\+\_\+step}} ()
+\begin{DoxyCompactList}\small\item\em Return a non-\/const reference to the FD step size for the second derivative, allowing modification of the value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GeomObject_ad37f9151ec8876097f48c9c260a8fd0c}{second\+\_\+derivative\+\_\+fd\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a const reference to the FD step size for the second derivative, providing read-\/only access. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}{locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
 \begin{DoxyCompactList}\small\item\em A geometric object may be composed of may sub-\/objects (e.\+g. a finite-\/element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-\/object and local coordinate within that sub-\/object at a given intrinsic coordinate, zeta. Note that only one sub-\/object can "{}cover"{} any given intrinsic position. If the position is at an "{}interface"{} between sub-\/objects, either one can be returned. The default implementation merely returns, the pointer to the "{}entire"{} \doxylink{classoomph_1_1GeomObject}{Geom\+Object} and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583}{interpolated\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
@@ -101,7 +109,7 @@ Inheritance diagram for oomph\+::Straight\+Line\+:\begin{figure}[H]
 
 \[ x = \zeta \] \[ y = H \] 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00451}{451}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00639}{639}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
@@ -123,11 +131,11 @@ Constructor\+: One item of geometric data\+:
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00458}{458}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00646}{646}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00617}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00805}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00815}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a90eb98ffdfc4fcfae90f49230bcd0603}\label{classoomph_1_1StraightLine_a90eb98ffdfc4fcfae90f49230bcd0603} 
 \index{oomph::StraightLine@{oomph::StraightLine}!StraightLine@{StraightLine}}
@@ -141,11 +149,11 @@ Constructor\+: Pass height (pinned by default)
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00486}{486}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00674}{674}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00815}{Must\+\_\+clean\+\_\+up}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a54dba203009b10ee30ba94681b7b311d}\label{classoomph_1_1StraightLine_a54dba203009b10ee30ba94681b7b311d} 
 \index{oomph::StraightLine@{oomph::StraightLine}!StraightLine@{StraightLine}}
@@ -169,11 +177,11 @@ Destructor\+: Clean up if necessary.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00513}{513}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00701}{701}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00815}{Must\+\_\+clean\+\_\+up}}.
 
 
 
@@ -194,7 +202,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490e
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00575}{575}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00763}{763}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 \Hypertarget{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64}\label{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64} 
 \index{oomph::StraightLine@{oomph::StraightLine}!d2position@{d2position}}
@@ -212,11 +220,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d448602
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00590}{590}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00778}{778}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1}\label{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1} 
 \index{oomph::StraightLine@{oomph::StraightLine}!dposition@{dposition}}
@@ -234,7 +242,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a29
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00563}{563}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00751}{751}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2}\label{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2} 
 \index{oomph::StraightLine@{oomph::StraightLine}!geom\_data\_pt@{geom\_data\_pt}}
@@ -252,15 +260,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00617}{617}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00805}{805}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00646}{Straight\+Line()}}.
 
 \Hypertarget{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca}\label{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca} 
 \index{oomph::StraightLine@{oomph::StraightLine}!ngeom\_data@{ngeom\_data}}
@@ -278,11 +286,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00610}{610}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00798}{798}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1StraightLine_ad53f05562c29bbaa8944d0f39195b3c6}\label{classoomph_1_1StraightLine_ad53f05562c29bbaa8944d0f39195b3c6} 
 \index{oomph::StraightLine@{oomph::StraightLine}!operator=@{operator=}}
@@ -310,11 +318,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00536}{536}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00724}{724}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884}\label{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884} 
 \index{oomph::StraightLine@{oomph::StraightLine}!position@{position}}
@@ -332,11 +340,11 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00525}{525}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00713}{713}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l00812}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
@@ -353,11 +361,11 @@ References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00624}{624}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00812}{812}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00590}{d2position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00617}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00610}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l00536}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00525}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00486}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00513}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00778}{d2position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00805}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00798}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l00724}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00713}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00674}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00646}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00701}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
 
 \Hypertarget{classoomph_1_1StraightLine_a945d35820dd54e51d2e7aa1086fe686f}\label{classoomph_1_1StraightLine_a945d35820dd54e51d2e7aa1086fe686f} 
 \index{oomph::StraightLine@{oomph::StraightLine}!Must\_clean\_up@{Must\_clean\_up}}
@@ -371,11 +379,11 @@ Do I need to clean up?
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00627}{627}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00815}{815}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00486}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00513}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00674}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00646}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00701}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
 
 
 

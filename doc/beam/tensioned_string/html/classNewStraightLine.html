@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: NewStraightLine Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classNewStraightLine-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">NewStraightLine Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Steady, straight 1D line in 2D space with stretch_ratio.  
+ <a href="classNewStraightLine.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for NewStraightLine:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classNewStraightLine.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6d828962b6ae0d3dabc70b8e14e628e1" id="r_a6d828962b6ae0d3dabc70b8e14e628e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a6d828962b6ae0d3dabc70b8e14e628e1">NewStraightLine</a> (const double &amp;stretch_ratio=1.0)</td></tr>
+<tr class="memdesc:a6d828962b6ae0d3dabc70b8e14e628e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor derives from GeomObject(1, 2) Pass stretch_ratio to this class (defaults to 1 in which case the Lagrangian coordinate is the arclength)  <br /></td></tr>
+<tr class="separator:a6d828962b6ae0d3dabc70b8e14e628e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a593fdb03e18a9c01652ad9b34cf9290c" id="r_a593fdb03e18a9c01652ad9b34cf9290c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a593fdb03e18a9c01652ad9b34cf9290c">NewStraightLine</a> (const <a class="el" href="classNewStraightLine.html">NewStraightLine</a> &amp;dummy)=delete</td></tr>
+<tr class="memdesc:a593fdb03e18a9c01652ad9b34cf9290c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a593fdb03e18a9c01652ad9b34cf9290c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40634d68fdf2f86de3f7223280246d52" id="r_a40634d68fdf2f86de3f7223280246d52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a40634d68fdf2f86de3f7223280246d52">operator=</a> (const <a class="el" href="classNewStraightLine.html">NewStraightLine</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a40634d68fdf2f86de3f7223280246d52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a40634d68fdf2f86de3f7223280246d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7f3e7b589cf8f6a5f4e05a411be348" id="r_aec7f3e7b589cf8f6a5f4e05a411be348"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#aec7f3e7b589cf8f6a5f4e05a411be348">position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:aec7f3e7b589cf8f6a5f4e05a411be348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Vector at Lagrangian coordinate zeta.  <br /></td></tr>
+<tr class="separator:aec7f3e7b589cf8f6a5f4e05a411be348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8661035acd50116eaf6ade7cf6def8b0" id="r_a8661035acd50116eaf6ade7cf6def8b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a8661035acd50116eaf6ade7cf6def8b0">dposition</a> (const Vector&lt; double &gt; &amp;zeta, DenseMatrix&lt; double &gt; &amp;drdzeta) const</td></tr>
+<tr class="memdesc:a8661035acd50116eaf6ade7cf6def8b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_102.png" width="19" height="19"/> = drdzeta(alpha,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a8661035acd50116eaf6ade7cf6def8b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64bcf2fc14025b65540f9890244ab26c" id="r_a64bcf2fc14025b65540f9890244ab26c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a64bcf2fc14025b65540f9890244ab26c">d2position</a> (const Vector&lt; double &gt; &amp;zeta, RankThreeTensor&lt; double &gt; &amp;ddrdzeta) const</td></tr>
+<tr class="memdesc:a64bcf2fc14025b65540f9890244ab26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_103.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a64bcf2fc14025b65540f9890244ab26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614b84c32e885f16c3f0f597876785dc" id="r_a614b84c32e885f16c3f0f597876785dc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#a614b84c32e885f16c3f0f597876785dc">d2position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r, DenseMatrix&lt; double &gt; &amp;drdzeta, RankThreeTensor&lt; double &gt; &amp;ddrdzeta) const</td></tr>
+<tr class="memdesc:a614b84c32e885f16c3f0f597876785dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posn Vector and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_102.png" width="19" height="19"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_103.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a614b84c32e885f16c3f0f597876785dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aacbb1dc071c73892647cfba5f08f054d" id="r_aacbb1dc071c73892647cfba5f08f054d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNewStraightLine.html#aacbb1dc071c73892647cfba5f08f054d">Stretch_ratio</a></td></tr>
+<tr class="memdesc:aacbb1dc071c73892647cfba5f08f054d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the length of the beam.  <br /></td></tr>
+<tr class="separator:aacbb1dc071c73892647cfba5f08f054d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Steady, straight 1D line in 2D space with stretch_ratio. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = \zeta stretch_ratio \]" src="form_100.png" width="98" height="13"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = 0  \]" src="form_101.png" width="29" height="11"/>
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00042">42</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6d828962b6ae0d3dabc70b8e14e628e1" name="a6d828962b6ae0d3dabc70b8e14e628e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d828962b6ae0d3dabc70b8e14e628e1">&#9670;&#160;</a></span>NewStraightLine() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NewStraightLine::NewStraightLine </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>stretch_ratio</em> = <code>1.0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor derives from GeomObject(1, 2) Pass stretch_ratio to this class (defaults to 1 in which case the Lagrangian coordinate is the arclength) </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00049">49</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensioned__string2_8cc_source.html#l00119">Stretch_ratio</a>.</p>
+
+</div>
+</div>
+<a id="a593fdb03e18a9c01652ad9b34cf9290c" name="a593fdb03e18a9c01652ad9b34cf9290c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a593fdb03e18a9c01652ad9b34cf9290c">&#9670;&#160;</a></span>NewStraightLine() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NewStraightLine::NewStraightLine </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNewStraightLine.html">NewStraightLine</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a64bcf2fc14025b65540f9890244ab26c" name="a64bcf2fc14025b65540f9890244ab26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64bcf2fc14025b65540f9890244ab26c">&#9670;&#160;</a></span>d2position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void NewStraightLine::d2position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RankThreeTensor&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2nd derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_103.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00083">83</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a614b84c32e885f16c3f0f597876785dc" name="a614b84c32e885f16c3f0f597876785dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a614b84c32e885f16c3f0f597876785dc">&#9670;&#160;</a></span>d2position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void NewStraightLine::d2position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RankThreeTensor&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Posn Vector and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_102.png" width="19" height="19"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_103.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00098">98</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensioned__string2_8cc_source.html#l00119">Stretch_ratio</a>.</p>
+
+</div>
+</div>
+<a id="a8661035acd50116eaf6ade7cf6def8b0" name="a8661035acd50116eaf6ade7cf6def8b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8661035acd50116eaf6ade7cf6def8b0">&#9670;&#160;</a></span>dposition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void NewStraightLine::dposition </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivative of position Vector w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_102.png" width="19" height="19"/> = drdzeta(alpha,i). Evaluated at current time. </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00071">71</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensioned__string2_8cc_source.html#l00119">Stretch_ratio</a>.</p>
+
+</div>
+</div>
+<a id="a40634d68fdf2f86de3f7223280246d52" name="a40634d68fdf2f86de3f7223280246d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40634d68fdf2f86de3f7223280246d52">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NewStraightLine::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNewStraightLine.html">NewStraightLine</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="aec7f3e7b589cf8f6a5f4e05a411be348" name="aec7f3e7b589cf8f6a5f4e05a411be348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec7f3e7b589cf8f6a5f4e05a411be348">&#9670;&#160;</a></span>position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NewStraightLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position Vector at Lagrangian coordinate zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00061">61</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tensioned__string2_8cc_source.html#l00119">Stretch_ratio</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aacbb1dc071c73892647cfba5f08f054d" name="aacbb1dc071c73892647cfba5f08f054d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacbb1dc071c73892647cfba5f08f054d">&#9670;&#160;</a></span>Stretch_ratio</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double NewStraightLine::Stretch_ratio</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Define the length of the beam. </p>
+
+<p class="definition">Definition at line <a class="el" href="tensioned__string2_8cc_source.html#l00119">119</a> of file <a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tensioned__string2_8cc_source.html#l00098">d2position()</a>, <a class="el" href="tensioned__string2_8cc_source.html#l00071">dposition()</a>, <a class="el" href="tensioned__string2_8cc_source.html#l00049">NewStraightLine()</a>, and <a class="el" href="tensioned__string2_8cc_source.html#l00061">position()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="tensioned__string2_8cc_source.html">tensioned_string2.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Apr 23 2026 15:09:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

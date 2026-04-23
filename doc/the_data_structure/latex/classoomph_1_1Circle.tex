@@ -75,10 +75,18 @@ Inheritance diagram for oomph\+::Circle\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdt}})
 \begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1GeomObject_a73954a1aa1911f6b7ab6e062731df033}{first\+\_\+derivative\+\_\+fd\+\_\+step}} ()
+\begin{DoxyCompactList}\small\item\em Return a non-\/const reference to the FD step size for the first derivative, allowing modification of the value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1515c88970b693724f6f05f8cfd93819}{first\+\_\+derivative\+\_\+fd\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a const reference to the FD step size for the first derivative, providing read-\/only access. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1GeomObject_a233868d62dddb18051556ed13bb2b5d2}{second\+\_\+derivative\+\_\+fd\+\_\+step}} ()
+\begin{DoxyCompactList}\small\item\em Return a non-\/const reference to the FD step size for the second derivative, allowing modification of the value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GeomObject_ad37f9151ec8876097f48c9c260a8fd0c}{second\+\_\+derivative\+\_\+fd\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a const reference to the FD step size for the second derivative, providing read-\/only access. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}{dposition}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. By default, the finite difference method is employed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em 2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. By default, we use a central-\/difference scheme. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}{locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
@@ -110,7 +118,7 @@ Inheritance diagram for oomph\+::Circle\+:\begin{figure}[H]
 
 \[ x = X_c + R \cos(\zeta)  \] \[ y = Y_c + R \sin(\zeta)  \] 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00872}{872}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01060}{1060}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
@@ -127,11 +135,11 @@ Constructor\+: Pass x and y-\/coords of centre and radius (all pinned)
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00876}{876}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01064}{1064}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01115}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01112}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l01077}{x\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01083}{y\+\_\+c()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01303}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01300}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l01265}{x\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01271}{y\+\_\+c()}}.
 
 \Hypertarget{classoomph_1_1Circle_a46c490c634039dc63c7eea5927b77c1c}\label{classoomph_1_1Circle_a46c490c634039dc63c7eea5927b77c1c} 
 \index{oomph::Circle@{oomph::Circle}!Circle@{Circle}}
@@ -145,11 +153,11 @@ Constructor\+: Pass x and y-\/coords of centre and radius (all pinned) \doxylink
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00915}{915}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01103}{1103}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced2700228225}{oomph\+::\+Time\+Stepper\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()}}, \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01115}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01112}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01077}{x\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01083}{y\+\_\+c()}}.
+References \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced2700228225}{oomph\+::\+Time\+Stepper\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()}}, \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01303}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01300}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01265}{x\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01271}{y\+\_\+c()}}.
 
 \Hypertarget{classoomph_1_1Circle_abd77e8dbddbdd21396e66a478dd978c1}\label{classoomph_1_1Circle_abd77e8dbddbdd21396e66a478dd978c1} 
 \index{oomph::Circle@{oomph::Circle}!Circle@{Circle}}
@@ -170,11 +178,11 @@ Constructor\+: Pass x and y-\/coords of centre and radius (all as \doxylink{clas
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00964}{964}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01152}{1152}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01102}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01115}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01112}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01290}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01303}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{geom__objects_8h_source_l01300}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1Circle_a2be122141abdd2b90ff487d05ecb5364}\label{classoomph_1_1Circle_a2be122141abdd2b90ff487d05ecb5364} 
 \index{oomph::Circle@{oomph::Circle}!Circle@{Circle}}
@@ -198,11 +206,11 @@ Destructor\+: Clean up if necessary.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01009}{1009}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01197}{1197}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geom__objects_8h_source_l01112}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l01095}{ngeom\+\_\+data()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geom__objects_8h_source_l01300}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l01283}{ngeom\+\_\+data()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
@@ -223,15 +231,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01102}{1102}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01290}{1290}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00964}{Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01152}{Circle()}}.
 
 \Hypertarget{classoomph_1_1Circle_a69d37777c2d4e7e13431a1a1e7f31ad5}\label{classoomph_1_1Circle_a69d37777c2d4e7e13431a1a1e7f31ad5} 
 \index{oomph::Circle@{oomph::Circle}!ngeom\_data@{ngeom\_data}}
@@ -249,15 +257,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01095}{1095}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01283}{1283}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01009}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01197}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
 
 \Hypertarget{classoomph_1_1Circle_a1737e24f15bbb177e9e67f10c279e3f0}\label{classoomph_1_1Circle_a1737e24f15bbb177e9e67f10c279e3f0} 
 \index{oomph::Circle@{oomph::Circle}!operator=@{operator=}}
@@ -285,11 +293,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01040}{1040}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01228}{1228}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01115}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{geom__objects_8h_source_l01024}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01089}{R()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l01303}{Is\+\_\+time\+\_\+dependent}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{geom__objects_8h_source_l01212}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01277}{R()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1Circle_a9a527de1361e8cb4c8445e3dd58e66f8}\label{classoomph_1_1Circle_a9a527de1361e8cb4c8445e3dd58e66f8} 
 \index{oomph::Circle@{oomph::Circle}!position@{position}}
@@ -307,15 +315,15 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01024}{1024}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01212}{1212}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l01089}{R()}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l01277}{R()}}.
 
 
 
-Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01040}{position()}}.
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01228}{position()}}.
 
 \Hypertarget{classoomph_1_1Circle_ae6b5559a13069f5b5f65ffb33687f807}\label{classoomph_1_1Circle_ae6b5559a13069f5b5f65ffb33687f807} 
 \index{oomph::Circle@{oomph::Circle}!R@{R}}
@@ -329,15 +337,15 @@ Access function to radius of circle.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01089}{1089}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01277}{1277}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01040}{position()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01024}{position()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01228}{position()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01212}{position()}}.
 
 \Hypertarget{classoomph_1_1Circle_a0bc0cc4d9d7af268d0e38b377f2ec26a}\label{classoomph_1_1Circle_a0bc0cc4d9d7af268d0e38b377f2ec26a} 
 \index{oomph::Circle@{oomph::Circle}!x\_c@{x\_c}}
@@ -351,15 +359,15 @@ Access function to x-\/coordinate of centre of circle.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01077}{1077}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01265}{1265}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00915}{Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01064}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01103}{Circle()}}.
 
 \Hypertarget{classoomph_1_1Circle_a10d5aaca30896238f38143243c1c874a}\label{classoomph_1_1Circle_a10d5aaca30896238f38143243c1c874a} 
 \index{oomph::Circle@{oomph::Circle}!y\_c@{y\_c}}
@@ -373,15 +381,15 @@ Access function to y-\/coordinate of centre of circle.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01083}{1083}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01271}{1271}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l01109}{Geom\+\_\+data\+\_\+pt}}.
+References \mbox{\hyperlink{geom__objects_8h_source_l01297}{Geom\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00915}{Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01064}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01103}{Circle()}}.
 
 
 
@@ -398,11 +406,11 @@ Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, and \
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01109}{1109}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01297}{1297}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00915}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00964}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01102}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01095}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l01040}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01024}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01089}{R()}}, \mbox{\hyperlink{geom__objects_8h_source_l01077}{x\+\_\+c()}}, \mbox{\hyperlink{geom__objects_8h_source_l01083}{y\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01009}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01064}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01103}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01152}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01290}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l01283}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l01228}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01212}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01277}{R()}}, \mbox{\hyperlink{geom__objects_8h_source_l01265}{x\+\_\+c()}}, \mbox{\hyperlink{geom__objects_8h_source_l01271}{y\+\_\+c()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01197}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
 
 \Hypertarget{classoomph_1_1Circle_a88486747f071c06caac4df74eab1d5ea}\label{classoomph_1_1Circle_a88486747f071c06caac4df74eab1d5ea} 
 \index{oomph::Circle@{oomph::Circle}!Is\_time\_dependent@{Is\_time\_dependent}}
@@ -416,11 +424,11 @@ Genuine time-\/dependence?
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01115}{1115}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01303}{1303}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00915}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00964}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01040}{position()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01064}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01103}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01152}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01228}{position()}}.
 
 \Hypertarget{classoomph_1_1Circle_a7defb16434b9f6f5126323ab49100a1b}\label{classoomph_1_1Circle_a7defb16434b9f6f5126323ab49100a1b} 
 \index{oomph::Circle@{oomph::Circle}!Must\_clean\_up@{Must\_clean\_up}}
@@ -434,11 +442,11 @@ Do I need to clean up?
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01112}{1112}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l01300}{1300}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00876}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00915}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00964}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01009}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l01064}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01103}{Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l01152}{Circle()}}, and \mbox{\hyperlink{geom__objects_8h_source_l01197}{\texorpdfstring{$\sim$}{\string~}\+Circle()}}.
 
 
 

@@ -374,13 +374,13 @@ The class also includes three private data members which store a pointer to a no
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ node\ whose\ displacement\ is\ documented}}
-\DoxyCodeLine{\textcolor{comment}{}\ Node*\ \mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}\ Node*\ \mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ (in\ terms\ of\ the\ Lagrangian\ coordinates)}}
 \DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ geometric\ object\ that\ represents\ the\ beam's\ undeformed\ shape}}
-\DoxyCodeLine{\textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\_beam\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{Undef\_beam\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
 
@@ -541,7 +541,7 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \DoxyCodeLine{\ \ \ \textcolor{comment}{//\ small\ wall\ thickness\ and\ pinned\ ends)}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ tangent\ of\ the\ angle\ beta}}
-\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ tanbeta\ =-\/2.0*\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}-\/>x(1)/\mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ tanbeta\ =-\/2.0*\mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}}-\/>x(1)/\mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ exact\_pressure\ =\ 0.0;}
 \DoxyCodeLine{\ \ \ \textcolor{comment}{//If\ the\ beam\ has\ deformed,\ calculate\ the\ pressure\ required}}
@@ -571,7 +571,7 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Write\ trace\ file:\ Pressure,\ displacement\ and\ exact\ solution}}
 \DoxyCodeLine{\ \ \ \textcolor{comment}{//\ (for\ string\ under\ tension)}}
 \DoxyCodeLine{\ \ \ trace\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}}\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ abs(\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}-\/>x(1))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ abs(\mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}}-\/>x(1))}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ exact\_pressure\ }
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ std::endl;}
 \DoxyCodeLine{\ \ \}}

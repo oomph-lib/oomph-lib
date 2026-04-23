@@ -1,0 +1,182 @@
+\doxysection{New\+Straight\+Line Class Reference}
+\hypertarget{classNewStraightLine}{}\label{classNewStraightLine}\index{NewStraightLine@{NewStraightLine}}
+
+
+Steady, straight 1D line in 2D space with stretch\+\_\+ratio.  
+
+
+Inheritance diagram for New\+Straight\+Line\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNewStraightLine}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNewStraightLine_a6d828962b6ae0d3dabc70b8e14e628e1}{New\+Straight\+Line}} (const double \&stretch\+\_\+ratio=1.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor derives from Geom\+Object(1, 2) Pass stretch\+\_\+ratio to this class (defaults to 1 in which case the Lagrangian coordinate is the arclength) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNewStraightLine_a593fdb03e18a9c01652ad9b34cf9290c}{New\+Straight\+Line}} (const \mbox{\hyperlink{classNewStraightLine}{New\+Straight\+Line}} \&dummy)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNewStraightLine_a40634d68fdf2f86de3f7223280246d52}{operator=}} (const \mbox{\hyperlink{classNewStraightLine}{New\+Straight\+Line}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNewStraightLine_aec7f3e7b589cf8f6a5f4e05a411be348}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNewStraightLine_a8661035acd50116eaf6ade7cf6def8b0}{dposition}} (const Vector$<$ double $>$ \&zeta, Dense\+Matrix$<$ double $>$ \&drdzeta) const
+\begin{DoxyCompactList}\small\item\em Derivative of position Vector w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNewStraightLine_a64bcf2fc14025b65540f9890244ab26c}{d2position}} (const Vector$<$ double $>$ \&zeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em 2nd derivative of position Vector w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNewStraightLine_a614b84c32e885f16c3f0f597876785dc}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em Posn Vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classNewStraightLine_aacbb1dc071c73892647cfba5f08f054d}{Stretch\+\_\+ratio}}
+\begin{DoxyCompactList}\small\item\em Define the length of the beam. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Steady, straight 1D line in 2D space with stretch\+\_\+ratio. 
+
+\[ x = \zeta stretch_ratio \] \[ y = 0  \] 
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00042}{42}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classNewStraightLine_a6d828962b6ae0d3dabc70b8e14e628e1}\label{classNewStraightLine_a6d828962b6ae0d3dabc70b8e14e628e1} 
+\index{NewStraightLine@{NewStraightLine}!NewStraightLine@{NewStraightLine}}
+\index{NewStraightLine@{NewStraightLine}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{NewStraightLine()}{NewStraightLine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily New\+Straight\+Line\+::\+New\+Straight\+Line (\begin{DoxyParamCaption}\item[{const double \&}]{stretch\+\_\+ratio = {\ttfamily 1.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor derives from Geom\+Object(1, 2) Pass stretch\+\_\+ratio to this class (defaults to 1 in which case the Lagrangian coordinate is the arclength) 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00049}{49}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string2_8cc_source_l00119}{Stretch\+\_\+ratio}}.
+
+\Hypertarget{classNewStraightLine_a593fdb03e18a9c01652ad9b34cf9290c}\label{classNewStraightLine_a593fdb03e18a9c01652ad9b34cf9290c} 
+\index{NewStraightLine@{NewStraightLine}!NewStraightLine@{NewStraightLine}}
+\index{NewStraightLine@{NewStraightLine}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{NewStraightLine()}{NewStraightLine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily New\+Straight\+Line\+::\+New\+Straight\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNewStraightLine}{New\+Straight\+Line}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classNewStraightLine_a64bcf2fc14025b65540f9890244ab26c}\label{classNewStraightLine_a64bcf2fc14025b65540f9890244ab26c} 
+\index{NewStraightLine@{NewStraightLine}!d2position@{d2position}}
+\index{d2position@{d2position}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void New\+Straight\+Line\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+2nd derivative of position Vector w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00083}{83}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+\Hypertarget{classNewStraightLine_a614b84c32e885f16c3f0f597876785dc}\label{classNewStraightLine_a614b84c32e885f16c3f0f597876785dc} 
+\index{NewStraightLine@{NewStraightLine}!d2position@{d2position}}
+\index{d2position@{d2position}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void New\+Straight\+Line\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn Vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00098}{98}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string2_8cc_source_l00119}{Stretch\+\_\+ratio}}.
+
+\Hypertarget{classNewStraightLine_a8661035acd50116eaf6ade7cf6def8b0}\label{classNewStraightLine_a8661035acd50116eaf6ade7cf6def8b0} 
+\index{NewStraightLine@{NewStraightLine}!dposition@{dposition}}
+\index{dposition@{dposition}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{dposition()}{dposition()}}
+{\footnotesize\ttfamily virtual void New\+Straight\+Line\+::dposition (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Derivative of position Vector w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00071}{71}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string2_8cc_source_l00119}{Stretch\+\_\+ratio}}.
+
+\Hypertarget{classNewStraightLine_a40634d68fdf2f86de3f7223280246d52}\label{classNewStraightLine_a40634d68fdf2f86de3f7223280246d52} 
+\index{NewStraightLine@{NewStraightLine}!operator=@{operator=}}
+\index{operator=@{operator=}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void New\+Straight\+Line\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNewStraightLine}{New\+Straight\+Line}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classNewStraightLine_aec7f3e7b589cf8f6a5f4e05a411be348}\label{classNewStraightLine_aec7f3e7b589cf8f6a5f4e05a411be348} 
+\index{NewStraightLine@{NewStraightLine}!position@{position}}
+\index{position@{position}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}}
+{\footnotesize\ttfamily void New\+Straight\+Line\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position Vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00061}{61}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string2_8cc_source_l00119}{Stretch\+\_\+ratio}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classNewStraightLine_aacbb1dc071c73892647cfba5f08f054d}\label{classNewStraightLine_aacbb1dc071c73892647cfba5f08f054d} 
+\index{NewStraightLine@{NewStraightLine}!Stretch\_ratio@{Stretch\_ratio}}
+\index{Stretch\_ratio@{Stretch\_ratio}!NewStraightLine@{NewStraightLine}}
+\doxysubsubsection{\texorpdfstring{Stretch\_ratio}{Stretch\_ratio}}
+{\footnotesize\ttfamily double New\+Straight\+Line\+::\+Stretch\+\_\+ratio\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Define the length of the beam. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string2_8cc_source_l00119}{119}} of file \mbox{\hyperlink{tensioned__string2_8cc_source}{tensioned\+\_\+string2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string2_8cc_source_l00098}{d2position()}}, \mbox{\hyperlink{tensioned__string2_8cc_source_l00071}{dposition()}}, \mbox{\hyperlink{tensioned__string2_8cc_source_l00049}{New\+Straight\+Line()}}, and \mbox{\hyperlink{tensioned__string2_8cc_source_l00061}{position()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tensioned__string2_8cc}{tensioned\+\_\+string2.\+cc}}\end{DoxyCompactItemize}

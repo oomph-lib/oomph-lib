@@ -89,13 +89,13 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00085}00085\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00086}00086\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00087}00087\ \textcolor{comment}{\ ///\ Pointer\ to\ the\ node\ whose\ displacement\ is\ documented}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00088}\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{00088}}\ \textcolor{comment}{}\ Node*\ \mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}};}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00088}\mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{00088}}\ \textcolor{comment}{}\ Node*\ \mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00089}00089\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00090}00090\ \textcolor{comment}{\ ///\ Length\ of\ domain\ (in\ terms\ of\ the\ Lagrangian\ coordinates)}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00091}\mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{00091}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00092}00092\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00093}00093\ \textcolor{comment}{\ ///\ Pointer\ to\ geometric\ object\ that\ represents\ the\ beam's\ undeformed\ shape}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00094}\mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{00094}}\ \textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\_beam\_pt}};}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00094}\mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{00094}}\ \textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{Undef\_beam\_pt}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00095}00095\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00096}00096\ \};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00097}00097\ }
@@ -107,13 +107,13 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&length)\ :\ Length(length)}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00104}00104\ \{}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00105}00105\ \ \textcolor{comment}{//\ Set\ the\ undeformed\ beam\ to\ be\ a\ straight\ line\ at\ y=0}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00106}00106\ \ \mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\_beam\_pt}}=\textcolor{keyword}{new}\ StraightLine(0.0);\ }
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00106}00106\ \ \mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{Undef\_beam\_pt}}=\textcolor{keyword}{new}\ StraightLine(0.0);\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00107}00107\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00108}00108\ \ \textcolor{comment}{//\ Create\ the\ (Lagrangian!)\ mesh,\ using\ the\ geometric\ object}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00109}00109\ \ \textcolor{comment}{//\ Undef\_beam\_pt\ to\ specify\ the\ initial\ (Eulerian)\ position\ of\ the}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00110}00110\ \ \textcolor{comment}{//\ nodes.}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00111}00111\ \ Problem::mesh\_pt()\ =\ }
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00112}00112\ \ \ \textcolor{keyword}{new}\ OneDLagrangianMesh<HermiteBeamElement>(n\_elem,length,\mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\_beam\_pt}});}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00112}00112\ \ \ \textcolor{keyword}{new}\ OneDLagrangianMesh<HermiteBeamElement>(n\_elem,length,\mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{Undef\_beam\_pt}});}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00113}00113\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00114}00114\ \ \textcolor{comment}{//\ Set\ the\ boundary\ conditions:\ Each\ end\ of\ the\ beam\ is\ fixed\ in\ space}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00115}00115\ \ \textcolor{comment}{//\ Loop\ over\ the\ boundaries\ (ends\ of\ the\ beam)}}
@@ -149,7 +149,7 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00145}00145\ \ \ \ elem\_pt-\/>load\_vector\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{Global\_Physical\_Variables::load}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00146}00146\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00147}00147\ \ \ \ \textcolor{comment}{//\ Set\ the\ undeformed\ shape\ for\ each\ element}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00148}00148\ \ \ \ elem\_pt-\/>undeformed\_beam\_pt()\ =\ \mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\_beam\_pt}};}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00148}00148\ \ \ \ elem\_pt-\/>undeformed\_beam\_pt()\ =\ \mbox{\hyperlink{classElasticBeamProblem_a2e8d3a507644613ea75f820acc1e27b1}{Undef\_beam\_pt}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00149}00149\ \ \ \}\ \textcolor{comment}{//\ end\ of\ loop\ over\ elements}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00150}00150\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00151}00151\ \ \textcolor{comment}{//\ Choose\ node\ at\ which\ displacement\ is\ documented\ (halfway\ along\ -\/-\/\ provided}}
@@ -162,7 +162,7 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00158}00158\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Warning:\ Even\ number\ of\ nodes\ "{}}\ <<\ n\_nod\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00159}00159\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Comparison\ with\ exact\ solution\ will\ be\ misleading..."{}}\ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00160}00160\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00161}00161\ \ \mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}=\mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}()-\/>node\_pt((n\_nod+1)/2-\/1);}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00161}00161\ \ \mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}}=\mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}()-\/>node\_pt((n\_nod+1)/2-\/1);}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00162}00162\ \ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00163}00163\ \ \textcolor{comment}{//\ Assign\ the\ global\ and\ local\ equation\ numbers}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00164}00164\ \ cout\ <<\ \textcolor{stringliteral}{"{}\#\ of\ dofs\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;}
@@ -218,7 +218,7 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00214}00214\ \ \ \ \textcolor{comment}{//\ small\ wall\ thickness\ and\ pinned\ ends)}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00215}00215\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00216}00216\ \ \ \ \textcolor{comment}{//\ The\ tangent\ of\ the\ angle\ beta}}
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00217}00217\ \ \ \ \textcolor{keywordtype}{double}\ tanbeta\ =-\/2.0*\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}-\/>x(1)/\mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00217}00217\ \ \ \ \textcolor{keywordtype}{double}\ tanbeta\ =-\/2.0*\mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}}-\/>x(1)/\mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}};}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00218}00218\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00219}00219\ \ \ \ \textcolor{keywordtype}{double}\ exact\_pressure\ =\ 0.0;}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00220}00220\ \ \ \ \textcolor{comment}{//If\ the\ beam\ has\ deformed,\ calculate\ the\ pressure\ required}}
@@ -248,7 +248,7 @@
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00244}00244\ \ \ \ \textcolor{comment}{//\ Write\ trace\ file:\ Pressure,\ displacement\ and\ exact\ solution}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00245}00245\ \ \ \ \textcolor{comment}{//\ (for\ string\ under\ tension)}}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00246}00246\ \ \ \ trace\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}}\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
-\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00247}00247\ \ \ \ \ \ \ \ \ \ <<\ abs(\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}-\/>x(1))}
+\DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00247}00247\ \ \ \ \ \ \ \ \ \ <<\ abs(\mbox{\hyperlink{classElasticBeamProblem_a5e544eae33e4c5d1d81df34227fc7078}{Doc\_node\_pt}}-\/>x(1))}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00248}00248\ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ exact\_pressure\ }
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00249}00249\ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
 \DoxyCodeLine{\Hypertarget{tensioned__string_8cc_source_l00250}00250\ \ \ \}}
