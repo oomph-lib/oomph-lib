@@ -210,6 +210,7 @@ int main()
      drdzeta_FD(j, k) << std::endl;
    }
  }
+ // Close the file
  file1_analytical_and_FD.close();
 
  // ------------------------------------------------------------------
@@ -288,6 +289,7 @@ int main()
      }
    }
  }
+ // Close the file
  file2_analytical_and_FD.close();
 
  // ------------------------------------------------------------------

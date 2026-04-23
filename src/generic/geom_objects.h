@@ -320,31 +320,31 @@ namespace oomph
       }
     }
 
-    // Return a non-const reference to the FD step size
-    // for the first derivative, allowing modification
-    // of the value.
+    /// Return a non-const reference to the FD step size
+    /// for the first derivative, allowing modification
+    /// of the value.
     double& first_derivative_fd_step()
     {
       return First_derivative_dzeta;
     }
 
-    // Return a const reference to the FD step size
-    // for the first derivative, providing read-only access.
+    /// Return a const reference to the FD step size
+    /// for the first derivative, providing read-only access.
     double first_derivative_fd_step() const
     {
       return First_derivative_dzeta;
     }
 
-    // Return a non-const reference to the FD step size
-    // for the second derivative, allowing modification
-    // of the value.
+    /// Return a non-const reference to the FD step size
+    /// for the second derivative, allowing modification
+    /// of the value.
     double& second_derivative_fd_step()
     {
       return Second_derivative_dzeta;
     }
 
-    // Return a const reference to the FD step size
-    // for the second derivative, providing read-only access.
+    /// Return a const reference to the FD step size
+    /// for the second derivative, providing read-only access.
     double second_derivative_fd_step() const
     {
       return Second_derivative_dzeta;
