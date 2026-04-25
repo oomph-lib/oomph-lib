@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="http://oomph-lib.maths.man.ac.uk">
+  <a href="https://oomph-lib.github.io/oomph-lib">
     <img alt="reviewdog" src="./doc/figures/oomph_logo.png">
   </a>
 </div>
