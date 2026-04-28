@@ -286,18 +286,15 @@ function(oomph_add_test)
   add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH}
                    clean_validation_dir_${PATH_HASH})
 
-  # Create the test to be run by CTest. When we run the test, it will call, e.g.
-  # 'ninja check_...' which will call the 'check_...' target defined above. As
-  # this target depends on the copy_... and build_targets_... targets, they will
-  # be called first, resulting in the required test files to be symlinked or
-  # copied to the build directory, and the targets the test depends on to get
-  # built. Once the data is in place and the executables have been built, the
-  # check_... commands will run, which will cause the validate.sh script or
-  # individual executables to be run. Finally, the test validation.log file will
-  # be appended to the root build directory validation.log file.
+  # Create the test to be run by CTest. When we run the test, it will call
+  # 'cmake --build ... --target check_...' which will call the check_... target
+  # defined above. Using cmake --build instead of calling the native build tool
+  # directly allows CMAKE_BUILD_PARALLEL_LEVEL to limit any compilation
+  # triggered while running tests.
   add_test(
     NAME ${TEST_NAME}
-    COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
+    COMMAND ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --target
+            check_${PATH_HASH}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 endfunction()
 # ------------------------------------------------------------------------------

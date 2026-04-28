@@ -641,6 +641,16 @@ cd build_for_demo_drivers
 ctest -j4
 ```
 
+When running self-tests on a low-powered machine, there are two separate
+parallelism controls. `ctest -j` (or `CTEST_PARALLEL_LEVEL`) controls how many
+tests CTest runs at the same time. `CMAKE_BUILD_PARALLEL_LEVEL` controls how
+many compile or link jobs CMake may start when a test has to build one or more
+driver executables before running. For example:
+
+```bash
+CMAKE_BUILD_PARALLEL_LEVEL=2 CTEST_PARALLEL_LEVEL=1 ctest
+```
+
 While `ctest` is running, we provide an overview of the progress and document the run-times of individual tests. Finally, a summary of the passed/failed tests is provided.
 
 Note that running the tests creates a large amount of data, so once all the tests have completed (successfully!) you can delete the build directory:
