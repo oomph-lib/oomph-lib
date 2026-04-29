@@ -129,23 +129,55 @@ function(oomph_add_pure_cpp_test)
   # ----------------------------------------------------------------------------
   # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets, run all of the dependent targets then append the validation.log
-  # output to the global one.. The VERBATIM argument is necessary here to ensure
-  # that the "mpirun ..." commands are correctly escaped
+  # output to the global one.
   set(RUN_COMMAND ${RUN_WITH} ./${DEPENDS_ON} ${TEST_ARGS})
   list(JOIN RUN_COMMAND " " RUN_COMMAND)
+  set(TEST_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/run_test_${TEST_NAME}.sh")
+
+  # cmake-format: off
+  file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Entering directory where this bash script lives\n")
+  file(APPEND "${TEST_SCRIPT}" "DIR=\"$(cd \"$(dirname \"\$\{BASH_SOURCE\[0\]\}\")\" && pwd)\"\n")
+  file(APPEND "${TEST_SCRIPT}" "cd \"\$\{DIR\}\"\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Run the validation command\n")
+  file(APPEND "${TEST_SCRIPT}" "${RUN_COMMAND}\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Store the exit code\n")
+  file(APPEND "${TEST_SCRIPT}" "EXIT_CODE=$?\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Define validation-log paths\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_DIR=\"${CMAKE_CURRENT_BINARY_DIR}/Validation\"\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_LOG=\"${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\"\n")
+  file(APPEND "${TEST_SCRIPT}" "GLOBAL_VALIDATION_LOG=\"${CMAKE_BINARY_DIR}/validation.log\"\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  cat \"$VALIDATION_LOG\" >> \"$GLOBAL_VALIDATION_LOG\" || exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if we exited with a non-zero exit code\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ $EXIT_CODE -ne 0 ]; then\n  echo \"Test stopped with exit code $EXIT_CODE!\"\n  exit $EXIT_CODE\nfi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if there's no validation log file\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' \"$VALIDATION_LOG\" 'Stopping here...'\n")
+  file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Optionally remove successful validation output to save disk space\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ \"$OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST\" = \"yes\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s\\n\\t%s\\n' 'Deleting successful Validation directory to save disk space:' \"$VALIDATION_DIR\" >> \"$GLOBAL_VALIDATION_LOG\"\n")
+  file(APPEND "${TEST_SCRIPT}" "  rm -rf \"$VALIDATION_DIR\"\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n")
+
+  file(CHMOD "${TEST_SCRIPT}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+  # cmake-format: on
+
   add_custom_target(
     check_${TEST_NAME}_${PATH_HASH}
-    # Run the executable
-    COMMAND ${BASH_PROGRAM} -c ${RUN_COMMAND}
-    # Check for the validation.log file
-    COMMAND
-      ${BASH_PROGRAM} -c
-      "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\" || ( \
-          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\\n\\nStopping here...\\n\\n\" && \
-          exit 1 )"
-    # Append validation.log to top-level validation.log
-    COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}" >>
-            "${CMAKE_BINARY_DIR}/validation.log"
+    COMMAND "${TEST_SCRIPT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
     DEPENDS ${DEPENDS_ON}_${PATH_HASH} copy_${PATH_HASH}
             clean_validation_dir_${PATH_HASH}

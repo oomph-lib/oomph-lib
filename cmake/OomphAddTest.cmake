@@ -248,20 +248,36 @@ function(oomph_add_test)
   file(APPEND "${TEST_SCRIPT}" "# Jump back to the original calling directory\n")
   file(APPEND "${TEST_SCRIPT}" "cd - > /dev/null\n\n")
 
+  # Define paths used by the post-test handling below
+  file(APPEND "${TEST_SCRIPT}" "# Define validation-log paths\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_DIR=\"${CMAKE_CURRENT_BINARY_DIR}/Validation\"\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_LOG=\"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\"\n")
+  file(APPEND "${TEST_SCRIPT}" "GLOBAL_VALIDATION_LOG=\"${CMAKE_BINARY_DIR}/validation.log\"\n\n")
+
+  # Append validation.log to top-level validation.log whenever it exists, even
+  # if the validation command failed.
+  file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  cat \"$VALIDATION_LOG\" >> \"$GLOBAL_VALIDATION_LOG\" || exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
   # Now exit if nonzero
   file(APPEND "${TEST_SCRIPT}" "# Stop here if we exited with a non-zero exit code\n")
   file(APPEND "${TEST_SCRIPT}" "if [ $EXIT_CODE -ne 0 ]; then\n  echo \"Test stopped with exit code $EXIT_CODE!\"\n  exit $EXIT_CODE\nfi\n\n")
 
   # Check for the validation.log file
   file(APPEND "${TEST_SCRIPT}" "# Stop here if there's no validation log file\n")
-  file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" ]; then\n")
-  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' '\"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\"' 'Stopping here...'\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' \"$VALIDATION_LOG\" 'Stopping here...'\n")
   file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
   file(APPEND "${TEST_SCRIPT}" "fi\n\n")
 
-  # Append validation.log to top-level validation.log
-  file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
-  file(APPEND "${TEST_SCRIPT}" "cat \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" >> \"${CMAKE_BINARY_DIR}/validation.log\"\n")
+  # Optionally delete the Validation/ directory after successful tests.
+  file(APPEND "${TEST_SCRIPT}" "# Optionally remove successful validation output to save disk space\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ \"$OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST\" = \"yes\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s\\n\\t%s\\n' 'Deleting successful Validation directory to save disk space:' \"$VALIDATION_DIR\" >> \"$GLOBAL_VALIDATION_LOG\"\n")
+  file(APPEND "${TEST_SCRIPT}" "  rm -rf \"$VALIDATION_DIR\"\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n")
 
   # Make the script executable
   file(CHMOD "${TEST_SCRIPT}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
