@@ -229,6 +229,8 @@ function(oomph_add_test)
 
   # The shebang
   file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
+  file(APPEND "${TEST_SCRIPT}" "# auto-generated script (created by cmake/OomphAddTest.cmake)\n")
+  file(APPEND "${TEST_SCRIPT}" "# Do not edit!\n\n")
 
   # Jump to the directory of the script
   file(APPEND "${TEST_SCRIPT}" "# Entering directory where this bash script lives\n")

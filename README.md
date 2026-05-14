@@ -541,6 +541,30 @@ The `oomph_build.py` script is provided as a convenient one-stop solution for bu
 > [!IMPORTANT]
 > In addition to the standard requirements (CMake and Ninja, as described above), you will need a working Python 3 installation to run `oomph_build.py`. Ensure that `python3` is available in your `PATH`. If you plan to use the script's documentation-building feature (described below), make sure `doxygen` is installed as well.
 
+> [!NOTE]
+> By default, Ninja may run more build jobs than there are CPU cores. On some
+> systems this can cause the build to overwhelm the machine. The
+> `oomph_build.py` script therefore limits the build stage for the third-party
+> libraries, the main project, and the documentation to two fewer jobs than the
+> number of CPU cores by default.
+>
+> You can override this value with the `-j`/`--parallel` flag, or use all CPU
+> cores by passing `--use-max-jobs`. The `--use-max-jobs` flag cannot be
+> combined with `-j`/`--parallel`.
+>
+> If you are using raw CMake commands rather than `oomph_build.py`, and you are
+> not sure that your system can handle Ninja's default parallelism, set
+> `CMAKE_BUILD_PARALLEL_LEVEL` before running a Ninja build. For example, the
+> following command limits CMake build steps to two fewer jobs than the number
+> of CPU cores:
+>
+> ```bash
+> export CMAKE_BUILD_PARALLEL_LEVEL=$(python3 -c "import os; n=os.cpu_count() or 1; print(max(1, n - 2))")
+> ```
+>
+> You can increase this value if your machine can handle a more aggressive
+> build.
+
 ### Using the script
 
 To use the build script, `cd` to the top-level `oomph-lib` directory (the same directory that contains `oomph_build.py`) and run it with Python. For example:
@@ -567,6 +591,9 @@ python3 oomph_build.py --help
 Below is a list of the options and their purpose:
 
 - **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will build the documentation (using Doxygen and LaTeX) as part of the build process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
+
+- **`-j`/`--parallel`**: Set the number of parallel build jobs used by the build stages. By default, this is two fewer than the number of CPU cores, with a lower limit of one.
+- **`--use-max-jobs`**: Use all available CPU cores for the build stages. This cannot be combined with `-j`/`--parallel`.
 
 - **`--oomph-CMAKE_INSTALL_PREFIX`**: Use this option when you intend to provide a custom installation location.
 - **`--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it in `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`. If you also specify `--oomph-CMAKE_INSTALL_PREFIX`, this flag will have no effect.)

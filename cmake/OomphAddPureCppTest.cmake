@@ -136,6 +136,8 @@ function(oomph_add_pure_cpp_test)
 
   # cmake-format: off
   file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
+  file(APPEND "${TEST_SCRIPT}" "# auto-generated script (created by cmake/OomphAddPureCppTest.cmake)\n")
+  file(APPEND "${TEST_SCRIPT}" "# Do not edit!\n\n")
 
   file(APPEND "${TEST_SCRIPT}" "# Entering directory where this bash script lives\n")
   file(APPEND "${TEST_SCRIPT}" "DIR=\"$(cd \"$(dirname \"\$\{BASH_SOURCE\[0\]\}\")\" && pwd)\"\n")
