@@ -188,13 +188,15 @@ function(oomph_add_pure_cpp_test)
 
   # Create the test to be run by CTest. When we run the test, it will call
   # 'cmake --build ... --target check_...' which will call the check_... target
-  # defined above. Using cmake --build instead of calling the native build tool
-  # directly allows CMAKE_BUILD_PARALLEL_LEVEL to limit any compilation
-  # triggered while running tests.
+  # defined above. We pin the inner build to a single job because parallelism
+  # belongs at the ctest level (ctest -j N runs N tests concurrently); without
+  # this, each of those N tests would spawn its own full-core sub-build and
+  # over-subscribe the machine. In the common case the inner build is a no-op
+  # because the main build has already produced everything it needs.
   add_test(
     NAME ${TEST_NAME}
     COMMAND ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --target
-            check_${TEST_NAME}_${PATH_HASH}
+            check_${TEST_NAME}_${PATH_HASH} --parallel 1
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 endfunction()
 # ------------------------------------------------------------------------------
