@@ -380,7 +380,7 @@ namespace oomph
       Tmp_mesh_pt = new TetgenScaffoldMesh(*this->Tetgenio_pt);
 
       // If any of the objects are different regions then we need to use
-      // the atributes
+      // the atributes. First check the internal surfaces
       bool regions_exist = false;
       {
         unsigned n_internal = internal_surface_pt.size();
@@ -397,6 +397,18 @@ namespace oomph
                 srf_pt->internal_point_identifies_region_for_tetgen(j);
             }
           }
+        }
+      }
+
+      // Now check the outer boundary; this can contain closed regions which are
+      // not enclosed by internal surfaces, since internal surfaces cannot share
+      // faces with the outer boundary
+      {
+        unsigned n_int_pts = Outer_boundary_pt->ninternal_point_for_tetgen();
+        for (unsigned j = 0; j < n_int_pts; j++)
+        {
+          regions_exist |=
+            Outer_boundary_pt->internal_point_identifies_region_for_tetgen(j);
         }
       }
 
@@ -434,7 +446,7 @@ namespace oomph
 
     /// Build tetgenio object from the TetMeshFacetedSurfaces
     void build_tetgenio(
-      TetMeshFacetedSurface* const& outer_boundary_pt,
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
       Vector<TetMeshFacetedSurface*>& internal_surface_pt,
       Vector<double>* const& target_element_volume_in_region_pt,
       tetgenio& tetgen_io)
@@ -600,13 +612,23 @@ namespace oomph
               ++tetgen_io.numberofholes;
             }
             // Otherwise it may be region
-            else
+            else if (srf_pt->internal_point_identifies_region_for_tetgen(j))
             {
-              if (srf_pt->internal_point_identifies_region_for_tetgen(j))
-              {
-                ++tetgen_io.numberofregions;
-              }
+              ++tetgen_io.numberofregions;
             }
+          }
+        }
+      }
+
+      // Also count the enclosed regions from the outer boundary
+      // (outer boundary cannot contain holes!)
+      {
+        unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
+        for (unsigned j = 0; j < n_int_pts; j++)
+        {
+          if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
+          {
+            ++tetgen_io.numberofregions;
           }
         }
       }
@@ -679,6 +701,41 @@ namespace oomph
 
               ++counter;
             }
+          }
+        }
+      }
+
+      // Also add any regions from the outer boundary
+      {
+        unsigned n_int_pts = outer_boundary_pt->ninternal_point_for_tetgen();
+        for (unsigned j = 0; j < n_int_pts; j++)
+        {
+          if (outer_boundary_pt->internal_point_identifies_region_for_tetgen(j))
+          {
+            for (unsigned i = 0; i < 3; ++i)
+            {
+              tetgen_io.regionlist[counter] =
+                outer_boundary_pt->internal_point_for_tetgen(j, i);
+              ++counter;
+            }
+            tetgen_io.regionlist[counter] =
+              static_cast<double>(outer_boundary_pt->region_id_for_tetgen(j));
+            ++counter;
+
+            // if there's no target volumes specified, default to zero
+            if (target_element_volume_in_region_pt == nullptr)
+            {
+              tetgen_io.regionlist[counter] = 0;
+            }
+            else
+            {
+              // deliberate integer division here to round down to the region
+              // number (five doubles per region)
+              tetgen_io.regionlist[counter] =
+                (*target_element_volume_in_region_pt)[unsigned(counter / 5)];
+            }
+
+            ++counter;
           }
         }
       }
