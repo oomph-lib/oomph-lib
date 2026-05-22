@@ -63,6 +63,35 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(HAVE_DEBUG_BUILD TRUE)
 endif()
 
+# Limit the parallelism in ninja? Note this needs to go before any targets are
+# created, otherwise ninja gets confused. Here this means it needs to go before
+# the inclusion of OomphConfigureCMakeInfoForProject
+if(CMAKE_GENERATOR MATCHES "Ninja")
+  # Note that this flag only gets defined below but cmake can sort this out!
+  if(OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS)
+    message(
+      STATUS
+        "Not limiting the number of parallel ninja jobs when building oomph-lib"
+    )
+  else()
+    message(
+      STATUS
+        "Limiting the number of parallel ninja jobs when building oomph-lib")
+    include(OomphLimitNinjaJobs)
+    include(ProcessorCount)
+    ProcessorCount(NPROC)
+    if(NPROC GREATER 2)
+      # By default, ninja uses nproc+2! Let's go the other way for safety
+      math(EXPR oomph_NJOBS "${NPROC} - 2")
+    else()
+      set(oomph_NJOBS 1)
+    endif()
+
+    # Do it (for oomph-lib main build only!)
+    oomph_limit_ninja_jobs(${oomph_NJOBS})
+  endif()
+endif()
+
 # Sort out config files
 include(OomphConfigureCMakeInfoForProject)
 
@@ -79,6 +108,15 @@ find_package(Python3 REQUIRED)
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
 include(OomphCustomOptions)
+
+# Flag to bypass our limits on ninja parallel jobs: default: do the
+# limiting because we don't want to melt innocent users' underpowered laptops.
+# Note that this limit is not automatically exported to
+# stand-alone projects that use oomph-lib. Users have to
+# explicitly call the relevant function to limit the number of ninja jobs
+# in their own CMakeLists.txt files. (We do this in our demo drivers
+# so have a look there to see how it's done.)
+option(OOMPH_DO_NOT_LIMIT_NINJA_PARALLEL_JOBS "Allow ninja to decide on the number of parallel jobs" OFF)
 
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
@@ -266,6 +304,9 @@ endif()
 if(OOMPH_EXTRA_COMPILE_DEFINES)
   oomph_add_cxx_compile_definitions(${OOMPH_EXTRA_COMPILE_DEFINES})
 endif()
+
+# Install ninja limiter script even if we're not building with ninja
+install(FILES cmake/OomphLimitNinjaJobs.cmake DESTINATION lib/cmake/oomphlib)
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
