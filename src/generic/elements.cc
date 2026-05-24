@@ -261,6 +261,12 @@ namespace oomph
   DenseMatrix<double> GeneralisedElement::Dummy_matrix;
 
   //========================================================================
+  /// Empty rank four tensor used as a dummy argument to combined value and
+  /// derivative functions in case when the derivative is not computed
+  //========================================================================
+  RankFourTensor<double> GeneralisedElement::Dummy_rankfourtensor;
+
+  //========================================================================
   /// Static storage used when pointers to the dofs are being assembled by
   /// add_global_eqn_numbers()
   //========================================================================

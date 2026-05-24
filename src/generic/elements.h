@@ -226,6 +226,10 @@ namespace oomph
     /// are being assembled
     static DenseMatrix<double> Dummy_matrix;
 
+    /// Empty dense matrix used as a dummy argument in case when the derivative
+    /// of a function is not needed
+    static RankFourTensor<double> Dummy_rankfourtensor;
+
     /// Static storage for deque used to add_global_equation_numbers
     /// when pointers to the dofs in each element are not required
     static std::deque<double*> Dof_pt_deque;
@@ -877,9 +881,10 @@ namespace oomph
 
     /// Set the timestepper associated with the i-th internal data
     /// object
-    void set_internal_data_time_stepper(const unsigned& i,
-                                        TimeStepper* const& time_stepper_pt,
-                                        const bool& preserve_existing_data)
+    virtual void set_internal_data_time_stepper(
+      const unsigned& i,
+      TimeStepper* const& time_stepper_pt,
+      const bool& preserve_existing_data)
     {
       this->internal_data_pt(i)->set_time_stepper(time_stepper_pt,
                                                   preserve_existing_data);

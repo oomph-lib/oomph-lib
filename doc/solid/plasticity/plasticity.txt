@@ -1,0 +1,198 @@
+\mainpage Multiplicative Hyperelastic-Based Plasticity: Theory and Implementation
+
+<HR>
+<HR>
+
+\section theory Theory: Extended Subloading Surface Model
+This section is intended to introduce / list all variables and equations neccesary to implement the plasticity model. For a thorough derivation of the model, see the comprehensive review by K. Hashiguchi: 
+"Multiplicative Hyperelastic-Based Plasticity for Finite Elastoplastic Deformation/Sliding: A Comprehensive Review" Arch Computat Methods Eng **26**, 597–637 (2019). [DOI: 10.1007/s11831-018-9256-5](https://doi.org/10.1007/s11831-018-9256-5).
+
+\subsection variables Introduction of variables
+We consider the deformation gradient tensor between
+\f[
+    \mathbf{F} = \frac{\mathrm{d}\mathbf{X}}{\mathrm{d} \mathbf{x}}
+\f]
+the deformed state \f$ \mathbf{X} \f$ and the undeformed one \f$ \mathbf{x} \f$. 
+We decompose it multiplicatively into an elastic deformation gradient \f$\mathbf{F}_\mathrm{e}\f$ and a plastic one \f$ \mathbf{F}_\mathrm{p} \f$:
+\f[
+    \mathbf{F} = \mathbf{F}_\mathrm{e}\mathbf{F}_\mathrm{p}
+\f]
+The plastic deformation gradient,
+\f[
+    \mathbf{F}_\mathrm{p} = \mathbf{F}_\mathrm{pks}\mathbf{F}_\mathrm{pkd} = \mathbf{F}_\mathrm{pcs}\mathbf{F}_\mathrm{pcd},
+\f]
+is further divided into the storage \f$\mathbf{F}_\mathrm{pks}\f$ and dissipative deformation gradient \f$\mathbf{F}_\mathrm{pkd}\f$ representing the kinematic hardening 
+and the plastic storage \f$\mathbf{F}_\mathrm{pcs}\f$ and dissipative deformation gradient \f$\mathbf{F}_\mathrm{pcd}\f$ which cause a translation of the elastic core.
+
+With the deformation gradient tensors introduced above, we define the right Cauchy-Green tensors
+\f[
+    \atensor{C}_\mathrm{e} \equiv \mathbf{F}_{\mathrm{e}}^{\mathrm{T}}\mathbf{F}_{\mathrm{e}};\quad
+    \ctensor{C}_\mathrm{pks} \equiv \mathbf{F}_{\mathrm{pks}}^{\mathrm{T}}\mathbf{F}_{\mathrm{pks}};\quad
+    \dtensor{C}_\mathrm{pcs} \equiv \mathbf{F}_{\mathrm{pcs}}^{\mathrm{T}}\mathbf{F}_{\mathrm{pcs}}.
+\f]
+Given appropriate strain energy functions \f$\psi_\mathrm{e}\left(\atensor{C}_\mathrm{e}\right)\f$, \f$\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)\f$ and \f$\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)\f$, we define the Mandel(-like) stresses
+\f[
+    \begin{split}        
+        \atensor{M} &= \atensor{C}_\mathrm{e}\atensor{S} = 2 \atensor{C}_\mathrm{e}\frac{\partial\psi_\mathrm{e}\left(\atensor{C}_\mathrm{e}\right)}{\partial\atensor{C}_\mathrm{e}} \left(\neq \atensor{M}^\mathrm{T}\right),\\
+        \atensor{M}_\mathrm{k} &= \atensor{C}_\mathrm{pks}\atensor{S}_\mathrm{k} = \atensor{S}_\mathrm{k} = 2 \mathbf{F}_\mathrm{pks} \frac{\partial\psi_\mathrm{k}\left({\ctensor{C}}_\mathrm{pks}\right)}{\partial{\ctensor{C}}_\mathrm{pks}} \mathbf{F}_\mathrm{pks}^\mathrm{T} \left(= \atensor{M}_\mathrm{k}^\mathrm{T}\right),\\
+        \atensor{M}_\mathrm{c} &= \atensor{C}_\mathrm{pcs}\atensor{S}_\mathrm{c} = \atensor{S}_\mathrm{c} = 2 \mathbf{F}_\mathrm{pcs} \frac{\partial\psi_\mathrm{c}\left({\dtensor{C}}_\mathrm{pcs}\right)}{\partial{\dtensor{C}}_\mathrm{pcs}} \mathbf{F}_\mathrm{pcs}^\mathrm{T} \left(= \atensor{M}_\mathrm{c}^\mathrm{T}\right)
+    \end{split}
+\f]
+and further Mandel-like variables
+\f[
+    \begin{split}  
+        \hat{\atensor{M}}_\mathrm{c} &= \atensor{M}_\mathrm{c} - \atensor{M}_\mathrm{k} \left(= \hat{\atensor{M}}{}_\mathrm{c}^\mathrm{T}\right),\\
+        \tilde{\atensor{M}} &= \atensor{M} - \atensor{M}_\mathrm{c} \left(\neq \tilde{\atensor{M}}{}^\mathrm{T}\right),\\
+        \btensor{M}_\mathrm{k} &= \atensor{M}_\mathrm{c} - R \hat{\atensor{M}}_\mathrm{c} \left(= \btensor{M}_\mathrm{k}^\mathrm{T}\right),\\
+        \btensor{M} &= \atensor{M} - \btensor{M}_\mathrm{k} = \tilde{\atensor{M}} - R \hat{\atensor{M}}_\mathrm{c} = \atensor{M} - (1 - R) \atensor{M}_\mathrm{c} - R\atensor{M}_\mathrm{k} \left(\neq \btensor{M}^\mathrm{T}\right).
+    \end{split}
+\f]
+Here, \f$ R \f$ is the normal-yield ratio, which enters the yield surface equation
+\f[
+    f\left(\btensor{M}\right) = R F(H),
+\f]
+where \f$ H \f$ is the isotropic hardening variable and \f$ F \f$ and \f$ f \f$ are functions describing the physical model.
+
+With \f$ R \f$ and \f$ H \f$, we have 5 variables defining the plastic state:
+\f[
+    \begin{split}
+        &\mathbf{F}_\mathrm{p}, \quad\text{Plastic deformation gradient}\\
+        &\mathbf{F}_\mathrm{pks}, \quad\text{Storage part of kinematic hardening}\\
+        &\mathbf{F}_\mathrm{pcs}, \quad\text{Storage part of elastic core}\\
+        &H, \quad\text{Isotropic hardening variable}\\
+        &R, \quad\text{Normal-yield ratio}
+    \end{split}
+\f]
+The remaining quantities can be computed from these 5.
+
+\subsection derivatives Time derivatives
+Following Hashiguchi's derivation, we can state the time derivatives
+\f[
+    \begin{split}
+        &\dot{\mathbf{F}}_\mathrm{p} =  \atensor{L}_\text{p}\mathbf{F}_\text{p},\\
+        &\dot{\mathbf{F}}_\mathrm{pks} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pkd}\right) \mathbf{F}_\mathrm{pks},\\
+        &\dot{\mathbf{F}}_\mathrm{pcs} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right) \mathbf{F}_\mathrm{pcs},\\
+        &\dot{H} = f^\mathrm{H}\dot{\bar{\lambda}},\\
+        &\dot{R} = U(R)\dot{\bar{\lambda}},
+    \end{split}
+\f]
+which are computed using the plastic flow rate \f$ \dot{\bar{\lambda}} \f$, the velocity gradients
+\f[
+    \begin{split}
+        &\atensor{L}_\text{p} = \dot{\atensor{\lambda}}\left[\btensor{N} + \eta_\text{p}\left(\atensor{M}\,\btensor{N}-\btensor{N}\,\atensor{M}\right)\right],\\
+        &\atensor{L}_\text{pkd} = \frac{1}{b_\text{k}}\dot{\atensor{\lambda}}\left[\atensor{M}_\text{k} + \eta_\text{pk}\left(\atensor{M}\,\atensor{M}_\text{k}-\atensor{M}_\text{k}\,\atensor{M}\right)\right],\\
+        &\atensor{L}_\text{pcd} = \frac{R_\text{c}}{\mathcal{X}}\dot{\atensor{\lambda}}\left[\hat{\atensor{N}}_\text{c} + \eta_\text{pc}\left(\atensor{M}\,\hat{\atensor{N}}_\text{c}-\hat{\atensor{N}}_\text{c}\,\atensor{M}\right)\right],
+    \end{split}
+\f]
+and the function
+\f[
+    U(R) = u \cot\left(\frac{\pi}{2}\frac{\langle R - R_\text{e}\rangle}{1 - R_\text{e}} \right).
+\f]
+Here, \f$ f^\mathrm{H} \f$, \f$ \eta_\text{p} \f$
+, \f$ b_\text{k} \f$
+, \f$ \eta_\text{pk} \f$
+, \f$ \mathcal{X} \f$
+, \f$ \eta_\text{pc} \f$
+and \f$ R_\text{e} \f$
+are material parameters. The parameter \f$ u \f$ is computed by
+\f[ 
+    \begin{split}
+        u = \bar{u} \mathrm{exp}(u_\text{c}\mathcal{R}_\text{c}C_{\sigma}),
+    \end{split}
+\f] 
+where \f$ \bar{u} \f$ and \f$ u_\text{c} \f$ are material parameters and 
+\f[ 
+    \begin{split}
+        &C_\sigma = \btensor{N} : \hat{\atensor{N}}_\text{c},\\
+        &\mathcal{R}_\text{c} = f(\hat{\atensor{M}}_\text{c}) / F(H).
+    \end{split}
+\f]
+Further, we need the tensors
+\f[ 
+    \begin{split}
+        &\btensor{N} = \mathrm{sym} \left[\frac{\partial f(\btensor{M})}{\partial\atensor{M}}\right] / \left|\mathrm{sym} \left[\frac{\partial f(\btensor{M})}{\partial\atensor{M}}\right]\right| = \btensor{N}^\text{T}\\
+        &\hat{\atensor{N}}_\text{c} = \left[\frac{\partial f(\hat{\atensor{M}}_\text{c})}{\partial\hat{\atensor{M}}_\text{c}}\right] / \left| \left[\frac{\partial f(\hat{\atensor{M}}_\text{c})}{\partial\hat{\atensor{M}}_\text{c}}\right]\right|
+    \end{split}
+\f]
+for the calculations above.
+\subsection elastic_deformation Elastic deformation
+If the deformation is purely elastic, most of the plastic parameters remain constant and only the normal yield ratio is updated, such that the yield surface condition, is fulfilled: If 
+\f[
+    R = \max \left(R_\text{e},\,\frac{f\left(\btensor{M}\right)}{F(H)}\right),  
+\f]
+Section *11 Loading Criterion in Return-Mapping for Subloading Surface Model* of Hashiguchi's paper describes, how to determin if a deformation is purely elastic.
+\subsection solving Plastic deformation: Solving for the plastic variables
+In order to solve for the plastic parameters, we can make a few observations. The time derivative of \f$ H \f$ differs from \f$ \dot{\bar{\lambda}} \f$ just by a constant. Hence we can write
+\f[
+    H(t) = \int_{t_0}^t f_\text{H}\dot{\bar{\lambda}}(t^\prime)\mathrm{d}t^\prime =  f_\text{H}\bar{\lambda}(t)
+\f]
+The time derivative of R is hard to solve for numerically, since the function \f$ \cot(\cdot) \f$ contains singularities. However, through analytical integration one can obtain the function
+\f[
+    R(\atensor{\lambda}) \equiv R(t) = \frac{2}{\pi} (1 - R_\text{e}) \arccos\left[\cos\left(\frac{\pi}{2}\frac{R_{t_0} - R_\text{e}}{1 - R_\text{e}}\right)\exp\left(-u\frac{\pi}{2}\frac{\bar{\lambda}(t) - \bar{\lambda}(t_0)}{1-R_\text{e}}\right)\right] + R_\text{e}. 
+\f]
+
+While we have the analytical time derivatives given above, one can also numerically compute the derivatives, e.g., \f$ \dot{\mathbf{F}}_\text{p}^\text{num} \f$. Using these time derivatives and the yield-surface condition, we can define the residual
+\f[
+    \mathbf{Y} = \begin{pmatrix}
+        \dot{\mathbf{F}}_\text{p}^\text{num} - \dot{\mathbf{F}}_\text{p}\\
+        \dot{\mathbf{F}}_\text{pks}^\text{num} - \dot{\mathbf{F}}_\text{pks}\\
+        \dot{\mathbf{F}}_\text{pcs}^\text{num} - \dot{\mathbf{F}}_\text{pcs}\\
+        R - R(\atensor{\lambda})\\
+        f\left(\btensor{M}\right) - R F(H)
+    \end{pmatrix}.
+\f]
+Hence, the plastic variables can be obtained, e.g., by Netwon-Raphson iterations. If one wants to obtain the plastic variables in a static scenario without time derivatives, the time derivatives can be replaced by increments (from the last step or from the initial case). Analytical increments can be obtained by replacing the term \f$ \dot{\atensor{\lambda}} \f$ with the increment \f$ \Delta{\atensor{\lambda}} \f$.
+
+\section implementation Implementation
+\subsection internal_vars Simplification of internal variables
+\subsubsection int_var_pl_def Plastic deformation gradient
+The base functionality of oomph-lib provides the global right Cauchy-Green deformation tensor \f$ \mathbf{C} \f$ (or rather the deformed metric pulled back to the undeformed space \f$ \mathbf{G} \f$). The elastic mandel stress is calculated from the elastic right Cauchy-Green tensor,
+\f[
+    \atensor{C}_\text{e} = \mathbf{F}_\text{p}^{-\text{T}} \mathbf{C} \mathbf{F}_\text{p}^{-1}.
+\f]
+Because this involves the inverse of the plastic deformation gradient, it makes sense to track the inverse only. It's derivative can be given as
+\f[
+    \dot{\mathbf{F}}_\text{p}^{-1} = - \mathbf{F}_\text{p}^{-1}\atensor{L}_\text{p}
+\f] 
+\subsubsection int_var_elastic_core Elastic core and kinematic hardening
+To compute the Mandel-like variables and the stresses, we can rely on already existing functionality in oomph-lib. The class ConstitutiveLaw contains a function calculate_second_piola_kirchhoff_stress \f$ \mathbf{S}(\mathbf{g},\,\mathbf{G}) \f$, which takes two arguments: \f$\mathbf{g}\f$, the metric of the undeformed space pulled back to a reference frame and \f$\mathbf{G}\f$, the metric of the deformed space pulled back to the same reference frame. The function computes the corresponding stress between the deformed and the undeformes space, pulled back to the reference frame. Hence, to compute, e.g. \f$\atensor{S}_\text{c}\f$, we can write
+\f[
+    \begin{split}
+    \atensor{S}_\text{pcs} &= \mathbf{F}_\text{pcs} \mathbf{S}(\mathbf{1},\,\mathbf{F}_\text{pcs}^\text{T}\mathbf{F}_\text{pcs}) \mathbf{F}_\text{pcs}^\text{T} \\
+                         &= \mathbf{S}(\mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1},\,\mathbf{1}).
+    \end{split}
+\f]
+I the first line, we used the function \f$\mathbf{S}\f$ to compute the stress within the frame \f$\ctensor{\cdot}\f$ and then pushed it forward to the frame \f$\atensor{\cdot}\f$. In the second line, we instead shifted the reference of the arguments to be in the frame \f$\atensor{\cdot}\f$. Hence, the resulting stress is computed in the target frame and no further pull-back or push-forward operation is necessary.
+
+Being able to compute the stress using only the quantity
+\f[
+    \ctensor{B}_\text{pcs}^{-1} = \mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1}
+\f]
+reduces the number of components, which needs to be solved fore. While \f$\mathbf{F}_\text{pcs}\f$ has 9 independent components, \f$\ctensor{B}_\text{pcs}^{-1}\f$ is symmetric and hence has only 6 independent components to be solved for.
+
+There are two equations, where the term \f$\mathbf{F}_\text{pcs}\f$ enters the equations. The Mandel-like variable is obtained as above,
+\f[
+    \atensor{M}_\text{pcs} = \mathbf{S}(\ctensor{B}_\text{pcs}^{-1},\,\mathbf{1}).
+\f]
+The time derivative of \f$\mathbf{F}_\text{pcs}\f$ can be used to write
+\f[
+    \dot{\ctensor{B}}_\text{pcs} = \left(\mathbf{F}_\text{pcs}\mathbf{F}_\text{pcs}^\text{T}\right)^{\cdot} = \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)\ctensor{B}_\text{pcs} + \ctensor{B}_\text{pcs}\left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)^\text{T},
+\f]
+from which we can obtain
+\f[
+    \dot{\ctensor{B}}{}_\text{pcs}^{-1} = -\ctensor{B}_\text{pcs}^{-1}\left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right) - \left(\atensor{L}_\text{p} - \atensor{L}_\text{pcd}\right)^\text{T}\ctensor{B}_\text{pcs}^{-1}.
+\f]
+
+A similar argument can be made for the kinematic hardening variable. Hence, the implementation should track the inverse left cauchy green variables
+\f$ \dot{\ctensor{B}}{}_\text{pcs}^{-1}=\mathbf{F}_\text{pcs}^{-\text{T}}\mathbf{F}_\text{pcs}^{-1}\f$
+and
+\f$ \dot{\btensor{B}}{}_\text{pks}^{-1}=\mathbf{F}_\text{pks}^{-\text{T}}\mathbf{F}_\text{pks}^{-1}\f$
+instead of the deformation gradient tensors.
+\subsection usage Using plasticity in solid simulations
+The usage of plasticity within any solid simulation is straight forward. First, the elastic constitutive law needs to be created as usual.
+\snippet plastic_uniaxial_strain_test.cpp Elastic constitutive law
+In the second step, the plastic constitutive law need to be created. This involves quite many operations due to the many parameters of the plasticity model.
+\snippet plastic_uniaxial_strain_test.cpp Plastic constitutive law
+Once both constitutive models are created, they can be assigned to each element.
+\snippet plastic_uniaxial_strain_test.cpp Assgin constitutive law
+A fully working demo with plastic elements can be found in the file \ref plastic_uniaxial_strain_test.cpp "plastic_uniaxial_strain_test.cpp"

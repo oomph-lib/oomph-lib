@@ -4,11 +4,11 @@ message(VERBOSE "Entered solid subdirectory")
 
 # Define the headers
 set(HEADERS solid_elements.h refineable_solid_elements.h
-    solid_traction_elements.h solid_preconditioners.h)
+    solid_traction_elements.h solid_preconditioners.h solid_plastic_elements.h)
 
 # Define the sources
 set(SOURCES solid_elements.cc refineable_solid_elements.cc
-    solid_preconditioners.cc)
+    solid_preconditioners.cc solid_plastic_elements.cc)
 
 # Set the name of the library
 set(LIBNAME solid)

@@ -158,6 +158,13 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& inverse_jacobian) const;
 
+    /// Get the local coordinate in the father element, s_father, of the local
+    /// coordinate s
+    /// We know the local fraction of each node in the daughter elements from
+    /// how we construct the daughter elements
+    virtual void get_father_s(const Vector<double>& s,
+                              Vector<double>& s_father) const;
+
   private:
     /// Storage for local equation numbers of hanging node variables
     /// (values stored at master nodes). It is

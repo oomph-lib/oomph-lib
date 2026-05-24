@@ -437,6 +437,95 @@ namespace oomph
     }
   }
 
+  void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dg(
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    const DenseMatrix<double>& sigma,
+    RankFourTensor<double>& d_sigma_dg,
+    const bool& symmetrize_tensor)
+  {
+    // Initial error checking
+#ifdef PARANOID
+    // Test that the matrices are of the same dimension
+    if (!are_matrices_of_equal_dimensions(g, G))
+    {
+      throw OomphLibError("Matrices passed are not of equal dimension",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Find the dimension of the matrix (assuming that it's square)
+    const unsigned dim = g.ncol();
+    d_sigma_dg.resize(dim, dim, dim, dim, 0.0);
+
+    // Find the dimension
+    // FD step
+    const double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+
+    // Advanced metric tensor
+    DenseMatrix<double> g_pls(dim, dim);
+    DenseMatrix<double> sigma_pls(dim, dim);
+
+    // Copy across the original value
+    for (unsigned i = 0; i < dim; i++)
+    {
+      for (unsigned j = 0; j < dim; j++)
+      {
+        g_pls(i, j) = g(i, j);
+      }
+    }
+
+    // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+    // NOTE: We exploit the symmetry of the stress and metric tensors
+    //       by incrementing g(i,j) and g(j,i) simultaenously and
+    //       only fill in the "upper" triangles without copying things
+    //       across the lower triangle. This is taken into account
+    //       in the solid mechanics codes.
+    for (unsigned i = 0; i < dim; i++)
+    {
+      for (unsigned j = i; j < dim; j++)
+      {
+        g_pls(i, j) += eps_fd;
+        g_pls(j, i) = g_pls(i, j);
+
+        // Get advanced stress
+        this->calculate_second_piola_kirchhoff_stress(g_pls, G, sigma_pls);
+
+        for (unsigned ii = 0; ii < dim; ii++)
+        {
+          for (unsigned jj = ii; jj < dim; jj++)
+          {
+            d_sigma_dg(ii, jj, i, j) =
+              (sigma_pls(ii, jj) - sigma(ii, jj)) / eps_fd;
+          }
+        }
+
+        // Reset
+        g_pls(i, j) = g(i, j);
+        g_pls(j, i) = g(j, i);
+      }
+    }
+
+    // If we are symmetrising the tensor, do so
+    if (symmetrize_tensor)
+    {
+      for (unsigned i = 0; i < dim; i++)
+      {
+        for (unsigned j = 0; j < i; j++)
+        {
+          for (unsigned ii = 0; ii < dim; ii++)
+          {
+            for (unsigned jj = 0; jj < ii; jj++)
+            {
+              d_sigma_dg(ii, jj, i, j) = d_sigma_dg(jj, ii, j, i);
+            }
+          }
+        }
+      }
+    }
+  }
+
 
   //=========================================================================
   /// Calculate the derivatives of the contravariant

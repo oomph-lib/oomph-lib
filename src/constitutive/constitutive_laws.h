@@ -305,6 +305,99 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////
 
 
+  //=====================================================================
+  /// A modified neo hookean strain energy function as presented in
+  ///
+  /// Eq. 135 of Hashiguchi, K. Multiplicative Hyperelastic-Based Plasticity for
+  /// Finite Elastoplastic Deformation/Sliding: A Comprehensive Review. Arch
+  /// Computat Methods Eng 26, 597–637 (2019).
+  /// https://doi.org/10.1007/s11831-018-9256-5
+  ///
+  /// Eq. 28 of Vladimirov, I.N., Pietryga, M.P. and Reese, S. (2008), On the
+  /// modelling of non-linear kinematic hardening at finite strains with
+  /// application to springback—Comparison of time integration algorithms. Int.
+  /// J. Numer. Meth. Engng., 75: 1-28. https://doi.org/10.1002/nme.2234
+  ///
+  /// The model takes the lame parameters \Lambda and \Mu as input
+  //====================================================================
+  class ModifiedNeoHookean : public StrainEnergyFunction
+  {
+  public:
+    /// Constructor takes the pointers to the constitutive parameters:
+    /// The first lame parameter (lambda) and the second one / the shear modulus
+    /// (mu).
+    ModifiedNeoHookean(double* lambda_pt, double* mu_pt)
+      : StrainEnergyFunction(), Lambda_pt(lambda_pt), Mu_pt(mu_pt)
+    {
+    }
+
+    /// Virtual destructor
+    virtual ~ModifiedNeoHookean() = default;
+
+    /// A helper function to compute the lame parameters from E and nu.
+    static void compute_lame_parameters(const double& E,
+                                        const double& nu,
+                                        double& lambda,
+                                        double& mu)
+    {
+      mu = 0.5 * E / (1 + nu);
+      lambda = nu / (1 - 2 * nu) * E / (1 + nu);
+    }
+
+    /// Return the strain energy in terms of strain tensor
+    double W(const DenseMatrix<double>& gamma)
+    {
+      return StrainEnergyFunction::W(gamma);
+    }
+
+
+    /// Return the strain energy in terms of the strain invariants
+    double W(const Vector<double>& I)
+    {
+      const double log_I3 = std::log(I[2]);
+
+      // Note log(sqrt(I_3)) = 0.5 log(I_3)
+      const double term1 = 0.5 * (*Mu_pt) * (I[0] - 3.0 - log_I3);
+      const double term2 = 0.25 * (*Lambda_pt) * (I[2] - 1.0 - log_I3);
+
+      return term1 + term2;
+    }
+
+
+    /// Return the derivatives of the strain energy function with
+    /// respect to the strain invariants
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
+    {
+      const double inv_I3 = 1.0 / I[2];
+      dWdI[0] = 0.5 * (*Mu_pt);
+      dWdI[1] = 0.0;
+      dWdI[2] = -0.5 * (*Mu_pt) * inv_I3 + 0.25 * (*Lambda_pt) * (1.0 - inv_I3);
+    }
+
+
+    /// Pure virtual function in which the user must declare if the
+    /// constitutive equation requires an incompressible formulation
+    /// in which the volume constraint is enforced explicitly.
+    /// Used as a sanity check in PARANOID mode. False.
+    bool requires_incompressibility_constraint()
+    {
+      return false;
+    }
+
+  private:
+    /// First lame constant
+    double* Lambda_pt = nullptr;
+
+    /// Second lame constant
+    double* Mu_pt = nullptr;
+  };
+
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+
   //===========================================================================
   /// A class for constitutive laws for elements that solve
   /// the equations of solid mechanics based upon the principle of virtual
@@ -505,10 +598,16 @@ namespace oomph
     virtual ~ConstitutiveLaw() {}
 
 
-    /// Calculate the contravariant 2nd Piola Kirchhoff
-    /// stress tensor. Arguments are the
-    /// covariant undeformed and deformed metric tensor and the
-    /// matrix in which to return the stress tensor
+    /// Calculate the contravariant 2nd Piola-Kirchhoff
+    /// stress tensor in the reference configuration.
+    ///
+    /// Arguments:
+    /// g: The undeformed Right Cauchy-Green tensor.
+    ///    (The metric of the undeformed frame pulled back to the reference
+    ///    frame).
+    /// G: The total Right Cauchy-Green tensor.
+    ///    (The metric of the deformed frame pulled back to the reference
+    ///    frame).
     virtual void calculate_second_piola_kirchhoff_stress(
       const DenseMatrix<double>& g,
       const DenseMatrix<double>& G,
@@ -531,6 +630,26 @@ namespace oomph
       const DenseMatrix<double>& G,
       const DenseMatrix<double>& sigma,
       RankFourTensor<double>& d_sigma_dG,
+      const bool& symmetrize_tensor = true);
+
+
+    /// Calculate the derivatives of the contravariant
+    /// 2nd Piola Kirchhoff stress tensor with respect to the undeformed metric
+    /// tensor. Arguments are the
+    /// covariant undeformed and deformed metric tensor, the current value of
+    /// the stress tensor and the
+    /// rank four tensor in which to return the derivatives of the stress tensor
+    /// The default implementation uses finite differences, but can be
+    /// overloaded for constitutive laws in which an analytic formulation
+    /// is possible.
+    /// If the boolean flag symmetrize_tensor is false, only the
+    /// "upper  triangular" entries of the tensor will be filled in. This is
+    /// a useful efficiency when using the derivatives in Jacobian calculations.
+    virtual void calculate_d_second_piola_kirchhoff_stress_dg(
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      RankFourTensor<double>& d_sigma_dg,
       const bool& symmetrize_tensor = true);
 
 

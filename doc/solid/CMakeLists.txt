@@ -9,6 +9,7 @@ set(SUBDIRS
     shock_disk
     airy_cantilever
     solid_theory
+    plasticity
     prescribed_displ_lagr_mult
     three_d_cantilever
     simple_shear

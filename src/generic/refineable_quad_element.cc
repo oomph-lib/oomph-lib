@@ -1827,6 +1827,108 @@ namespace oomph
     }
   }
 
+  //=================================================================
+  /// Get the local coordinate s_father in the father element
+  /// which corresponds to a local coordinate s in this element
+  //====================================================================
+  void RefineableQElement<2>::get_father_s(const Vector<double>& s,
+                                           Vector<double>& s_father) const
+  {
+    using namespace QuadTreeNames;
+    int son_type = this->quadtree_pt()->son_type();
+
+    Vector<double> s_lo(2);
+    Vector<double> s_hi(2);
+    Vector<double> x(2);
+
+    // Get the bounds extents of this element within the parent
+    switch (son_type)
+    {
+      case SW:
+        s_lo[0] = -1.0;
+        s_hi[0] = 0.0;
+        s_lo[1] = -1.0;
+        s_hi[1] = 0.0;
+        break;
+
+      case SE:
+        s_lo[0] = 0.0;
+        s_hi[0] = 1.0;
+        s_lo[1] = -1.0;
+        s_hi[1] = 0.0;
+        break;
+
+      case NE:
+        s_lo[0] = 0.0;
+        s_hi[0] = 1.0;
+        s_lo[1] = 0.0;
+        s_hi[1] = 1.0;
+        break;
+
+      case NW:
+        s_lo[0] = -1.0;
+        s_hi[0] = 0.0;
+        s_lo[1] = 0.0;
+        s_hi[1] = 1.0;
+        break;
+    }
+
+    // Pointer to my father (in element impersonation)
+    RefineableElement* father_el_pt =
+      this->quadtree_pt()->father_pt()->object_pt();
+
+    // If the father element hasn't been generated yet, we're stuck...
+    if (father_el_pt->node_pt(0) == 0)
+    {
+      throw OomphLibError("Father element hasn't been built, what?",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    else
+    {
+      for (unsigned i = 0; i < 2; i++)
+      {
+        s_father[i] = 0.0;
+      }
+
+      unsigned n_p = nnode_1d();
+      unsigned jnod = 0;
+      Vector<double> s_node_father(2);
+      Vector<double> s_node(2);
+
+      // Get the shape functions in this element
+      Shape psi(this->nnode());
+      this->shape(s, psi);
+
+      // Loop over the nodes in this element
+      for (unsigned i0 = 0; i0 < n_p; i0++)
+      {
+        // Get the local coordinate of the node in the direction of s[0] in the
+        // father element
+        s_node_father[0] =
+          s_lo[0] + (s_hi[0] - s_lo[0]) *
+                      father_el_pt->local_one_d_fraction_of_node(i0, 0);
+
+        for (unsigned i1 = 0; i1 < n_p; i1++)
+        {
+          // Get the local coordinate of the node in the direction of s[1] in
+          // the father element
+          s_node_father[1] =
+            s_lo[1] + (s_hi[1] - s_lo[1]) *
+                        father_el_pt->local_one_d_fraction_of_node(i1, 1);
+
+          // Local node number of the node in this element
+          jnod = i0 + n_p * i1;
+
+          for (unsigned i = 0; i < 2; i++)
+          {
+            s_father[i] += psi[jnod] * s_node_father[i];
+          }
+        }
+      }
+    }
+  }
+
 
   //=================================================================
   /// Check inter-element continuity of
