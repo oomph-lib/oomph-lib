@@ -46,7 +46,11 @@ namespace oomph
   /// 2D intrinsic (Lagrangian) coordinates, zeta, without reference to
   /// any boundaries. This class specifies the boundaries by specifying
   /// a mapping from a 1D intrinsic boundary coordinate, zeta_bound,
-  /// to the 2D intrinsic (Lagrangian) coordinates, zeta.
+  /// to the 2D intrinsic (Lagrangian) coordinates, zeta. Here, zeta_bound
+  /// is a local parameter defined on each boundary segment, while a new global
+  /// boundary coordinate, zeta_global, is defined over the entire boundary of
+  /// the object, taking values in [0, 2π]. The class also establishes a mapping
+  /// between zeta_bound (local) and zeta_global.
   ///
   /// The class is made functional by provision (in the derived class!) of:
   /// - a pointer to a GeomObject<1,2> that parametrises the 2D intrinisic
@@ -63,7 +67,7 @@ namespace oomph
   /// Class also provides broken virtual function to specify boundary triads,
   /// and various output functions.
   //===========================================================================
-  class DiskLikeGeomObjectWithBoundaries : public virtual GeomObject
+  class DiskLikeGeomObjectWithBoundaries : public GeomObject
   {
   public:
     /// Constructor
@@ -151,6 +155,18 @@ namespace oomph
     double zeta_boundary_end(const unsigned& b) const
     {
       return Zeta_boundary_end[b];
+    }
+
+    /// Initial value of 1D global boundary coordinate on boundary b
+    double zeta_global_boundary_start(const unsigned& b) const
+    {
+      return Zeta_global_boundary_start[b];
+    }
+
+    /// Final value of 1D global boundary coordinate on boundary b
+    double zeta_global_boundary_end(const unsigned& b) const
+    {
+      return Zeta_global_boundary_end[b];
     }
 
 
@@ -309,14 +325,88 @@ namespace oomph
       return Zeta_in_region;
     }
 
+
+    /// Lagrangian coordinates on the boundary
+    /// (zeta_1(zeta_bound),zeta_2(zeta_bound)) As described in the class
+    /// description, zeta_global is enforced to lie between 0 and 2pi
+    virtual void boundary_lagrangian_coordinates(const double& zeta_global,
+                                                 Vector<double>& zeta) const
+    {
+      // The number of the boundaries
+      unsigned n_boundary = nboundary();
+
+      // Loop over all boundary segments
+      for (unsigned b = 0; b < n_boundary; b++)
+      {
+        // Flag indicating whether implements the process to obtain the
+        // Lagriangian coordinates
+        bool do_it = false;
+
+        // Check if zeta_global is to the right of (or equal to)
+        // the start of boundary segment b
+        if (zeta_global >= Zeta_global_boundary_start[b])
+        {
+          // For all segments except the last one, require
+          // zeta_global < Zeta_global_boundary_end[b]
+          // so that segments are half-open intervals [start, end)
+          if (b < n_boundary - 1)
+          {
+            if (zeta_global < Zeta_global_boundary_end[b])
+            {
+              do_it = true;
+            }
+          }
+          // For the last boundary segment, accept all remaining values
+          // (in particular, this includes the endpoint zeta_global = 2*pi)
+          else
+          {
+            do_it = true;
+          }
+        }
+
+        // If the correct boundary segment has been identified
+        if (do_it == true)
+        {
+          // Compute the linear mapping ratio between the global
+          // zeta and the zeta_bound (local)
+          double ratio =
+            (Zeta_boundary_end[b] - Zeta_boundary_start[b]) /
+            (Zeta_global_boundary_end[b] - Zeta_global_boundary_start[b]);
+
+          // Map the global zeta to the zeta_bound (local) on boundary segment b
+          double zeta_bound =
+            Zeta_boundary_start[b] +
+            ratio * (zeta_global - Zeta_global_boundary_start[b]);
+
+          // Obtain the Lagrangian coordinates corresponding to
+          // boundary segment b at the zeta_bound (local)
+          zeta_on_boundary(b, zeta_bound, zeta);
+
+          // Exit the loop since the correct boundary segment is identified
+          break;
+        }
+      }
+    }
+
+
   protected:
-    /// Storage for initial value of 1D boundary coordinate
+    /// Storage for initial value of 1D local boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_start;
 
-    /// Storage for final value of 1D boundary coordinate
+    /// Storage for final value of 1D local boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_end;
+
+    /// Storage for initial value of 1D global boundary coordinate
+    /// As described in the class description, the global coordinate
+    /// is enforced to lie between 0 and 2pi
+    Vector<double> Zeta_global_boundary_start;
+
+    /// Storage for final value of 1D global boundary coordinate
+    /// As described in the class description, the global coordinate
+    /// is enforced to lie between 0 and 2pi
+    Vector<double> Zeta_global_boundary_end;
 
     /// Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b; essentially provides a wrapper to

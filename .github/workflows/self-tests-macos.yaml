@@ -59,6 +59,7 @@ on:
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
   MUMPS_UPSTREAM_VERSION: &mumps_upstream_version 5.8.1
+  OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST: "yes"
 
 # ------------------------------------------------------------------------------
 
@@ -235,6 +236,15 @@ jobs:
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
             --log-level=VERBOSE
 
+      - name: Print demo driver disk usage before self-tests
+        run: |
+          df -h .
+          if [ -d demo_drivers/build ]; then
+            echo "Largest entries in demo_drivers/build:"
+            du -sk demo_drivers/build/* 2>/dev/null | sort -n | tail -30 | awk '{printf "%10.1f MiB  %s\n", $1 / 1024, $2}'
+          fi
+        continue-on-error: true
+
       - name: Run demo driver self-tests
         id: demo_drivers
         run: |
@@ -243,6 +253,16 @@ jobs:
 
           # Print a test summary at the end
           python3 .github/generate_validation_log_summary.py validation.log
+        continue-on-error: true
+
+      - name: Print demo driver disk usage after self-tests
+        if: always()
+        run: |
+          df -h .
+          if [ -d demo_drivers/build ]; then
+            echo "Largest entries in demo_drivers/build:"
+            du -sk demo_drivers/build/* 2>/dev/null | sort -n | tail -30 | awk '{printf "%10.1f MiB  %s\n", $1 / 1024, $2}'
+          fi
         continue-on-error: true
 
       - name: Clean up after self-tests

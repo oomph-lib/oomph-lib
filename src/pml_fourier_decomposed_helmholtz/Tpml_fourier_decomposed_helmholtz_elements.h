@@ -59,8 +59,8 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   class TPMLFourierDecomposedHelmholtzElement
-    : public TElement<2, NNODE_1D>,
-      public PMLFourierDecomposedHelmholtzEquations,
+    : public virtual TElement<2, NNODE_1D>,
+      public virtual PMLFourierDecomposedHelmholtzEquations,
       public virtual ElementWithZ2ErrorEstimator
   {
   public:

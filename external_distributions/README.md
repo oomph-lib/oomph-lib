@@ -80,10 +80,10 @@ If you cannot obtain a recent enough version of CMake via your favourite package
 | Library        | Required/optional | Built by default (serial build)? | Built by default (MPI build)?  | Version |
 | ----           | ---               | -----                    | ---                    | ---     | 
 | `OpenBLAS`     | required by `oomph-lib`              | Yes (though not on macOS; see below) | Yes (though not on macOS; see below) |  [0.3.25](https://github.com/OpenMathLib/OpenBLAS/tree/v0.3.29)      |
-| `SuperLU`       | required by `oomph-lib`               | Yes | Yes | [v6.0.1](https://github.com/xiaoyeli/superlu/tree/v6.0.1) | 
+| `SuperLU`       | required by `oomph-lib`               | Yes | Yes | [v7.0.1](https://github.com/xiaoyeli/superlu/tree/v7.0.1) | 
 | `METIS`        | required by `oomph-lib` (via `SuperLU`) | Yes | Yes | [commit `a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2`](https://github.com/KarypisLab/METIS/tree/a6e6a2cfa92f93a3ee2971ebc9ddfc3b0b581ab2)  |              
 `GKlib`          | required by `oomph-lib` (via `METIS`)  | Yes | Yes | [commit `6e7951358fd896e2abed7887196b6871aac9f2f8`](https://github.com/KarypisLab/GKlib/tree/6e7951358fd896e2abed7887196b6871aac9f2f8)    |
-| `SuperLU_DIST` | required for `oomph-lib` MPI build                   | No | Yes | [v9.1.0](https://github.com/xiaoyeli/superlu_dist/tree/v9.1.0)  
+| `SuperLU_DIST` | required for `oomph-lib` MPI build                   | No | Yes | [v9.2.1](https://github.com/xiaoyeli/superlu_dist/tree/v9.2.1)  
 | `ParMETIS`     | required for `oomph-lib` MPI build (via `SuperLU_DIST`)                  | No | Yes | [commit `83bb3d4f5b2af826d0683329cad1accc8d829de2`](https://github.com/puneetmatharu/ParMETIS/tree/83bb3d4f5b2af826d0683329cad1accc8d829de2) | 
 | `CGAL`         | optional, highly recommended                        | Yes | Yes | [6.0.1](https://github.com/CGAL/cgal/tree/v6.0.1)                                                                 |
 | `Boost`        | required by `CGAL`                          | Yes | Yes | [1.83.0](https://github.com/boostorg/boost/tree/boost-1.83.0)                                                                             |

@@ -37,7 +37,7 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
   # SuperLU itself has been written properly so we can import it like a normal version CMake library
   find_package(GKlib REQUIRED GLOBAL)
   find_package(METIS REQUIRED GLOBAL)
-  find_package(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
+  find_package(superlu 7.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
   if(OOMPH_USE_SUPERLU_DIST_FROM)
     find_package(ParMETIS REQUIRED GLOBAL)
     find_package(SuperLU_DIST REQUIRED GLOBAL)

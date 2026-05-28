@@ -14,37 +14,34 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for demo poisson
-#----------------------------
+# Validation for FD evaluation of dposition in GeomObject
+#--------------------------------------------------------
 cd Validation
 
-echo "Running Spherical Shell Boussinesq Convection validation"
-mkdir RESLT_adapt
-../spherical_shell_convection lalala > OUTPUT_boussinesq_convection
+echo "Running FD evaluation of dposition in GeomObject validation "
+mkdir RESLT
+../geom_object_fd > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "Spherical Shell Boussinesq Convection validation" >> validation.log
-echo "-----------------------------------------------------------" >> validation.log
+echo "FD evaluation of dposition in GeomObject validation" >> validation.log
+echo "---------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_adapt/soln10_0.dat RESLT_adapt/soln2500_5.dat > sph_conv.dat
+cat  RESLT/first_derivs.dat RESLT/second_derivs.dat \
+ > results.dat
 
-
-if test "$2" = "no_fpdiff"; then
+if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/sph_conv.dat.gz   \
-    sph_conv.dat 0.2 5.0e-5  >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz  \
+         results.dat >> validation.log
 fi
 
-
-# Append output to global validation log file
-#--------------------------------------------
+# Append log to main validation log
 cat validation.log >> $OOMPH_ROOT_DIR/validation.log
-
 
 cd ..
 

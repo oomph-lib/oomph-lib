@@ -320,17 +320,79 @@ namespace oomph
       }
     }
 
+    /// Return a non-const reference to the FD step size
+    /// for the first derivative, allowing modification
+    /// of the value.
+    double& first_derivative_fd_step()
+    {
+      return First_derivative_dzeta;
+    }
+
+    /// Return a const reference to the FD step size
+    /// for the first derivative, providing read-only access.
+    double first_derivative_fd_step() const
+    {
+      return First_derivative_dzeta;
+    }
+
+    /// Return a non-const reference to the FD step size
+    /// for the second derivative, allowing modification
+    /// of the value.
+    double& second_derivative_fd_step()
+    {
+      return Second_derivative_dzeta;
+    }
+
+    /// Return a const reference to the FD step size
+    /// for the second derivative, providing read-only access.
+    double second_derivative_fd_step() const
+    {
+      return Second_derivative_dzeta;
+    }
 
     /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
+    /// By default, the finite difference method is employed.
     virtual void dposition(const Vector<double>& zeta,
                            DenseMatrix<double>& drdzeta) const
     {
-      throw OomphLibError(
-        "You must specify dposition() for your own object! \n",
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+      // Position at the current Lagrangian coordinate
+      Vector<double> r(Ndim, 0.0);
+      position(zeta, r);
+
+      // Initialize the variables
+
+      // Position after an increment in one Lagrangian coordinate
+      Vector<double> r_plus(Ndim, 0.0);
+
+      // Incremented Lagrangian coordinate
+      Vector<double> zeta_plus(NLagrangian, 0.0);
+
+      // Copy the base coordinate
+      for (unsigned l = 0; l < NLagrangian; l++)
+      {
+        zeta_plus[l] = zeta[l];
+      }
+
+      // Loop over Lagrangian coordinates
+      for (unsigned i = 0; i < NLagrangian; i++)
+      {
+        // Apply the increment in direction i
+        zeta_plus[i] += First_derivative_dzeta;
+
+        // Evaluate position at the perturbed coordinate
+        position(zeta_plus, r_plus);
+
+        // Restore only the modified component
+        zeta_plus[i] = zeta[i];
+
+        // Compute the finite-difference derivative
+        for (unsigned j = 0; j < Ndim; j++)
+        {
+          drdzeta(i, j) = (r_plus[j] - r[j]) / First_derivative_dzeta;
+        }
+      }
     }
 
 
@@ -338,13 +400,122 @@ namespace oomph
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
+    /// By default, we use a central-difference scheme.
     virtual void d2position(const Vector<double>& zeta,
                             RankThreeTensor<double>& ddrdzeta) const
     {
-      throw OomphLibError(
-        "You must specify d2position() for your own object! \n",
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+      // Position at the base Lagrangian coordinate
+      Vector<double> r(Ndim, 0.0);
+      position(zeta, r);
+
+      // Perturbed Lagrangian coordinate
+      Vector<double> zeta_perturbed(NLagrangian, 0.0);
+
+      // Copy the base coordinate
+      for (unsigned l = 0; l < NLagrangian; l++)
+      {
+        zeta_perturbed[l] = zeta[l];
+      }
+
+      // Initialize the variables
+
+      // Position at zeta + dzeta e_i
+      Vector<double> r_plus(Ndim, 0.0);
+
+      // Position at zeta - dzeta e_i
+      Vector<double> r_minus(Ndim, 0.0);
+
+      // Position at zeta + dzeta e_i + dzeta e_j
+      Vector<double> r_two_plus(Ndim, 0.0);
+
+      // Position at zeta - dzeta e_i - dzeta e_j
+      Vector<double> r_two_minus(Ndim, 0.0);
+
+      // Position at zeta + dzeta e_i - dzeta e_j
+      Vector<double> r_plus_minus(Ndim, 0.0);
+
+      // Position at zeta - dzeta e_i + dzeta e_j
+      Vector<double> r_minus_plus(Ndim, 0.0);
+
+      // Loop over Lagrangian coordinates to compute the second derivatives
+      for (unsigned i = 0; i < NLagrangian; i++)
+      {
+        for (unsigned j = 0; j < NLagrangian; j++)
+        {
+          // Case 1: Repeated second derivatives
+          if (i == j)
+          {
+            // Apply +dzeta e_i perturbations
+            zeta_perturbed[i] = zeta[i] + Second_derivative_dzeta;
+
+            // Evaluate positions with +dzeta e_i perturbations
+            position(zeta_perturbed, r_plus);
+
+            // Apply -dzeta e_i perturbations
+            zeta_perturbed[i] = zeta[i] - Second_derivative_dzeta;
+
+            // Evaluate positions with -dzeta e_i perturbations
+            position(zeta_perturbed, r_minus);
+
+            // Restore only the modified component
+            zeta_perturbed[i] = zeta[i];
+
+            // Loop over the dimensions
+            for (unsigned k = 0; k < Ndim; k++)
+            {
+              // Second derivative via central difference
+              ddrdzeta(i, j, k) =
+                (r_plus[k] - 2.0 * r[k] + r_minus[k]) /
+                (Second_derivative_dzeta * Second_derivative_dzeta);
+            }
+          }
+          // Case 2: Mixed second derivatives
+          else
+          {
+            // Apply perturbations: +dzeta e_i+dzeta e_j
+            zeta_perturbed[i] = zeta[i] + Second_derivative_dzeta;
+            zeta_perturbed[j] = zeta[j] + Second_derivative_dzeta;
+
+            // Evaluate positions with +dzeta e_i+dzeta e_j perturbations
+            position(zeta_perturbed, r_two_plus);
+
+            // Apply perturbations: -dzeta e_i-dzeta e_j
+            zeta_perturbed[i] = zeta[i] - Second_derivative_dzeta;
+            zeta_perturbed[j] = zeta[j] - Second_derivative_dzeta;
+
+            // Evaluate positions with -dzeta e_i-dzeta e_j perturbations
+            position(zeta_perturbed, r_two_minus);
+
+            // Apply perturbations: +dzeta e_i-dzeta e_j
+            zeta_perturbed[i] = zeta[i] + Second_derivative_dzeta;
+            zeta_perturbed[j] = zeta[j] - Second_derivative_dzeta;
+
+            // Evaluate positions with +dzeta e_i-dzeta e_j perturbations
+            position(zeta_perturbed, r_plus_minus);
+
+            // Apply perturbations: -dzeta e_i+dzeta e_j
+            zeta_perturbed[i] = zeta[i] - Second_derivative_dzeta;
+            zeta_perturbed[j] = zeta[j] + Second_derivative_dzeta;
+
+            // Evaluate positions with -dzeta e_i+dzeta e_j perturbations
+            position(zeta_perturbed, r_minus_plus);
+
+            // Restore only the modified components
+            zeta_perturbed[i] = zeta[i];
+            zeta_perturbed[j] = zeta[j];
+
+            // Loop over the dimensions
+            for (unsigned k = 0; k < Ndim; k++)
+            {
+              // Mixed second derivative via central difference stencil
+              ddrdzeta(i, j, k) =
+                (r_two_plus[k] - r_plus_minus[k] - r_minus_plus[k] +
+                 r_two_minus[k]) /
+                (4.0 * Second_derivative_dzeta * Second_derivative_dzeta);
+            }
+          }
+        }
+      }
     }
 
 
@@ -359,10 +530,14 @@ namespace oomph
                             DenseMatrix<double>& drdzeta,
                             RankThreeTensor<double>& ddrdzeta) const
     {
-      throw OomphLibError(
-        "You must specify d2position() for your own object! \n",
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+      // Get the position
+      position(zeta, r);
+
+      // Get the first derivative
+      dposition(zeta, drdzeta);
+
+      // Get the second derivatives
+      d2position(zeta, ddrdzeta);
     }
 
     /// A geometric object may be composed of may sub-objects (e.g.
@@ -433,6 +608,19 @@ namespace oomph
     /// Timestepper (used to handle access to geometry
     /// at previous timesteps)
     TimeStepper* Geom_object_time_stepper_pt;
+
+  private:
+    /// FD step for first derivatives.
+    /// For a forward difference approximation, the optimal scaling follows
+    /// h ~ sqrt(epsilon_machine_precision), obtained by balancing truncation
+    /// error O(h) and round-off error O(epsilon_machine_precision / h).
+    double First_derivative_dzeta = 1.0e-8;
+
+    /// FD step for second derivatives (central difference).
+    /// The step size is chosen to balance truncation error O(h^2) and
+    /// round-off error O(epsilon_machine_precision / h^2), giving the optimal
+    /// scaling h ~ epsilon_machine_precision^{1/4}.
+    double Second_derivative_dzeta = 1.0e-4;
   };
 
 
@@ -1237,6 +1425,7 @@ namespace oomph
     /// x-half axis
     double B;
   };
+
 
 } // namespace oomph
 

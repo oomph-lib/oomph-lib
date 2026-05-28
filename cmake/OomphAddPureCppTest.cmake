@@ -129,41 +129,74 @@ function(oomph_add_pure_cpp_test)
   # ----------------------------------------------------------------------------
   # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets, run all of the dependent targets then append the validation.log
-  # output to the global one.. The VERBATIM argument is necessary here to ensure
-  # that the "mpirun ..." commands are correctly escaped
+  # output to the global one.
   set(RUN_COMMAND ${RUN_WITH} ./${DEPENDS_ON} ${TEST_ARGS})
   list(JOIN RUN_COMMAND " " RUN_COMMAND)
+  set(TEST_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/run_test_${TEST_NAME}.sh")
+
+  # cmake-format: off
+  file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
+  file(APPEND "${TEST_SCRIPT}" "# auto-generated script (created by cmake/OomphAddPureCppTest.cmake)\n")
+  file(APPEND "${TEST_SCRIPT}" "# Do not edit!\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Entering directory where this bash script lives\n")
+  file(APPEND "${TEST_SCRIPT}" "DIR=\"$(cd \"$(dirname \"\$\{BASH_SOURCE\[0\]\}\")\" && pwd)\"\n")
+  file(APPEND "${TEST_SCRIPT}" "cd \"\$\{DIR\}\"\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Run the validation command\n")
+  file(APPEND "${TEST_SCRIPT}" "${RUN_COMMAND}\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Store the exit code\n")
+  file(APPEND "${TEST_SCRIPT}" "EXIT_CODE=$?\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Define validation-log paths\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_DIR=\"${CMAKE_CURRENT_BINARY_DIR}/Validation\"\n")
+  file(APPEND "${TEST_SCRIPT}" "VALIDATION_LOG=\"${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\"\n")
+  file(APPEND "${TEST_SCRIPT}" "GLOBAL_VALIDATION_LOG=\"${CMAKE_BINARY_DIR}/validation.log\"\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  cat \"$VALIDATION_LOG\" >> \"$GLOBAL_VALIDATION_LOG\" || exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if we exited with a non-zero exit code\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ $EXIT_CODE -ne 0 ]; then\n  echo \"Test stopped with exit code $EXIT_CODE!\"\n  exit $EXIT_CODE\nfi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if there's no validation log file\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"$VALIDATION_LOG\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' \"$VALIDATION_LOG\" 'Stopping here...'\n")
+  file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
+  file(APPEND "${TEST_SCRIPT}" "# Optionally remove successful validation output to save disk space\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ \"$OOMPH_DELETE_VALIDATION_DIRECTORY_AFTER_SUCCESSFUL_TEST\" = \"yes\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s\\n\\t%s\\n' 'Deleting successful Validation directory to save disk space:' \"$VALIDATION_DIR\" >> \"$GLOBAL_VALIDATION_LOG\"\n")
+  file(APPEND "${TEST_SCRIPT}" "  rm -rf \"$VALIDATION_DIR\"\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n")
+
+  file(CHMOD "${TEST_SCRIPT}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+  # cmake-format: on
+
   add_custom_target(
     check_${TEST_NAME}_${PATH_HASH}
-    # Run the executable
-    COMMAND ${BASH_PROGRAM} -c ${RUN_COMMAND}
-    # Check for the validation.log file
-    COMMAND
-      ${BASH_PROGRAM} -c
-      "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\" || ( \
-          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\\n\\nStopping here...\\n\\n\" && \
-          exit 1 )"
-    # Append validation.log to top-level validation.log
-    COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}" >>
-            "${CMAKE_BINARY_DIR}/validation.log"
+    COMMAND "${TEST_SCRIPT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
     DEPENDS ${DEPENDS_ON}_${PATH_HASH} copy_${PATH_HASH}
             clean_validation_dir_${PATH_HASH}
     VERBATIM)
   # ----------------------------------------------------------------------------
 
-  # Create the test to be run by CTest. When we run the test, it will call, e.g.
-  # 'ninja check_...' which will call the 'check_...' target defined above. As
-  # this target depends on the copy_... and build_targets_... targets, they will
-  # be called first, resulting in the required test files to be symlinked or
-  # copied to the build directory, and the targets the test depends on to get
-  # built. Once the data is in place and the executables have been built, the
-  # check_... commands will run, which will cause the individual executables to
-  # be run. Finally, the output validation.log file will be appended to the
-  # global validation.log file in the oomph-lib root directory.
+  # Create the test to be run by CTest. When we run the test, it will call
+  # 'cmake --build ... --target check_...' which will call the check_... target
+  # defined above. We pin the inner build to a single job because parallelism
+  # belongs at the ctest level (ctest -j N runs N tests concurrently); without
+  # this, each of those N tests would spawn its own full-core sub-build and
+  # over-subscribe the machine. In the common case the inner build is a no-op
+  # because the main build has already produced everything it needs.
   add_test(
     NAME ${TEST_NAME}
-    COMMAND ${CMAKE_MAKE_PROGRAM} check_${TEST_NAME}_${PATH_HASH}
+    COMMAND ${CMAKE_COMMAND} --build "${CMAKE_BINARY_DIR}" --target
+            check_${TEST_NAME}_${PATH_HASH} --parallel 1
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 endfunction()
 # ------------------------------------------------------------------------------

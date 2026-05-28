@@ -9,35 +9,29 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
 endif()
 # ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered self_test subdirectory")
+message(VERBOSE "Entered geom_object_fd subdirectory")
 
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
-project(self_test C CXX Fortran)
+project(geom_object_fd C CXX Fortran)
 
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 
 include(CTest)
 
-set(SUBDIRS
-    generic
-    navier_stokes
-    poisson
-    matrix_matrix_multiply
-    line_visualiser
-    deliberately_broken_code_for_self_test_test
-    locate_zeta
-    faceted_surface_vtu_output
-    geom_object_fd)
+oomph_add_executable(
+  NAME geom_object_fd
+  SOURCES geom_object_fd.cc
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
-if(OOMPH_HAS_MPI)
-  list(APPEND SUBDIRS mpi)
-endif()
+# ---------------------------------- TESTING ----------------------------------
 
-foreach(SUBDIR IN LISTS SUBDIRS)
-  add_subdirectory(${SUBDIR})
-endforeach()
+oomph_add_test(
+  TEST_NAME self_test.geom_object_fd
+  DEPENDS_ON geom_object_fd
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata)
 
-message(VERBOSE "Leaving self_test subdirectory")
+message(VERBOSE "Leaving geom_object_fd subdirectory")
 # ------------------------------------------------------------------------------
