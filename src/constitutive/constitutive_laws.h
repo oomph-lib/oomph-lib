@@ -304,6 +304,161 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
+  //===================================================================
+  /// Neo Hookean constitutive law in terms of Young's modulus and
+  /// Poisson ratio
+  //===================================================================
+  class NeoHookean : public StrainEnergyFunction
+  {
+  public:
+    /// The constructor takes the pointers to values of material parameters:
+    /// Poisson's ratio and Young's modulus.
+    NeoHookean(double* nu_pt, double* e_pt)
+      : StrainEnergyFunction(), Nu_pt(nu_pt), E_pt(e_pt), Must_delete_e(false)
+    {
+    }
+
+    /// The constructor takes the pointer to value of
+    /// Poisson's ratio. Young's modulus is set to E=1.0,
+    /// implying that all stresses have been non-dimensionalised
+    /// on on it.
+    NeoHookean(double* nu_pt)
+      : StrainEnergyFunction(),
+        Nu_pt(nu_pt),
+        E_pt(new double(1.0)),
+        Must_delete_e(true)
+    {
+    }
+
+    /// Virtual destructor
+    virtual ~NeoHookean()
+    {
+      if (Must_delete_e) delete E_pt;
+    }
+
+    /// Return the strain energy in terms of strain tensor
+    double W(const DenseMatrix<double>& gamma)
+    {
+      return StrainEnergyFunction::W(gamma);
+    }
+
+    /// Return the strain energy in terms of the strain invariants
+    double W(const Vector<double>& I)
+    {
+      double nu = *Nu_pt;
+      double e = *E_pt;
+      return 0.5 * e *
+             (0.5 * (I[0] - 3.0) - 0.5 * log(I[2]) +
+              (nu / (1.0 - 2.0 * nu)) * 0.25 * log(I[2]) * log(I[2])) /
+             (1.0 + nu);
+    }
+
+    /// Return the derivatives of the strain energy function with
+    /// respect to the strain invariants
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
+    {
+      double nu = *Nu_pt;
+      double e = *E_pt;
+      dWdI[0] = 0.25 * e / (1.0 + nu);
+      dWdI[1] = 0.0;
+      dWdI[2] = 0.5 * e * (-0.5 + (nu / (1.0 - 2.0 * nu)) * 0.5 * log(I[2])) /
+                ((1.0 + nu) * I[2]);
+    }
+
+    /// Pure virtual function in which the user must declare if the
+    /// constitutive equation requires an incompressible formulation
+    /// in which the volume constraint is enforced explicitly.
+    /// Used as a sanity check in PARANOID mode. False.
+    bool requires_incompressibility_constraint()
+    {
+      return false;
+    }
+
+  private:
+    /// Young's modulus
+    double* E_pt;
+
+    /// Poisson's ratio
+    double* Nu_pt;
+
+    /// Boolean indicating if Young's modulus must be deleted in destructor
+    bool Must_delete_e;
+  };
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  //=====================================================================
+  /// Neo Hookean constitutive law (incompressible version)
+  /// No argument for Poisson ratio here - it must be equal to 0.5
+  //====================================================================
+  class IncompressibleNeoHookean : public StrainEnergyFunction
+  {
+  public:
+    /// The constructor takes Young's modulus as an argument
+    IncompressibleNeoHookean(double* e_pt)
+      : StrainEnergyFunction(), E_pt(e_pt), Must_delete_e(false)
+    {
+    }
+
+    /// Argument-free constructor
+    IncompressibleNeoHookean()
+      : StrainEnergyFunction(), E_pt(new double(1.0)), Must_delete_e(true)
+    {
+    }
+
+    /// Virtual destructor
+    virtual ~IncompressibleNeoHookean()
+    {
+      if (Must_delete_e) delete E_pt;
+    }
+
+    /// Return the strain energy in terms of strain tensor
+    double W(const DenseMatrix<double>& gamma)
+    {
+      return StrainEnergyFunction::W(gamma);
+    }
+
+    /// Return the strain energy in terms of the strain invariants
+    double W(const Vector<double>& I)
+    {
+      double e = *E_pt;
+      double nu = 0.5;
+      return 0.25 * e * (I[0] - 3.0) / (1.0 + nu);
+    }
+
+    /// Return the derivatives of the strain energy function with
+    /// respect to the strain invariants
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
+    {
+      double e = *E_pt;
+      double nu = 0.5;
+      dWdI[0] = 0.25 * e / (1.0 + nu);
+      dWdI[1] = 0.0;
+      dWdI[2] = 0.0;
+    }
+
+    /// Pure virtual function in which the user must declare if the
+    /// constitutive equation requires an incompressible formulation
+    /// in which the volume constraint is enforced explicitly.
+    /// Used as a sanity check in PARANOID mode. True.
+    bool requires_incompressibility_constraint()
+    {
+      return true;
+    }
+
+  private:
+    /// Young's modulus
+    double* E_pt;
+
+    /// Boolean indicating if Young's modulus must be deleted in destructor
+    bool Must_delete_e;
+  };
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
   //===========================================================================
   /// A class for constitutive laws for elements that solve
