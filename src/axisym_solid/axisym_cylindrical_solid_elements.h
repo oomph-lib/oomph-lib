@@ -1,3 +1,29 @@
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+
 // Header file for axisymmetric solid mechanics elements
 #ifndef OOMPH_AXISYM_CYLINDRICAL_ELASTICITY_ELEMENTS_HEADER
 #define OOMPH_AXISYM_CYLINDRICAL_ELASTICITY_ELEMENTS_HEADER
@@ -18,9 +44,9 @@ namespace oomph
   //=====================================================================
   /// A class for elements that solve the equations of solid mechanics,
   /// based on the principle of virtual displacements in
-  /// an axisymmetric formulation. In this case x[0] is the component of
-  /// displacement in the radial direction and x[1] is that in the theta
-  /// direction.
+  /// an axisymmetric formulation. In this case, x[0] and x[1] are the
+  /// radial and vertical coordinates, respectively, in the deformed
+  /// configuration.
   //=====================================================================
   class AxisymmetricCylindricalPVDEquations : public virtual SolidFiniteElement
   {
@@ -401,7 +427,9 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      FiniteElement::output(outfile);
+      // If n_plot not provided, assume equal to 5 by default
+      const unsigned n_plot = 5;
+      output(outfile, n_plot);
     }
 
     /// Output function
@@ -410,6 +438,10 @@ namespace oomph
       Vector<double> x(2);
       Vector<double> xi(2);
       Vector<double> s(2);
+      DenseMatrix<double> strain(3);
+
+      // Tecplot header info
+      outfile << this->tecplot_zone_string(n_plot);
 
       // Loop over plot points
       unsigned num_plot_points = this->nplot_points(n_plot);
@@ -421,6 +453,9 @@ namespace oomph
         // Get Eulerian and Lagrangian coordinates
         this->interpolated_x(s, x);
         this->interpolated_xi(s, xi);
+
+        // Get the strain
+        get_strain(s, strain);
 
         // Output the r,z
         for (unsigned i = 0; i < 2; i++)
@@ -434,14 +469,23 @@ namespace oomph
           outfile << xi[i] << " ";
         }
 
+        // Output strain components
+        outfile << strain(0, 0) << " " << strain(1, 1) << " " << strain(0, 1)
+                << " " << strain(2, 2);
+
         outfile << std::endl;
       }
+
+      // Write tecplot footer (e.g. FE connectivity lists)
+      this->write_tecplot_zone_footer(outfile, n_plot);
     }
 
     /// Overload the output function
     void output(FILE* file_pt)
     {
-      FiniteElement::output(file_pt);
+      // If n_plot not provided, assume equal to 5 by default
+      const unsigned n_plot = 5;
+      output(file_pt, n_plot);
     }
 
     /// Output function
@@ -458,7 +502,7 @@ namespace oomph
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
-      return 4;
+      return 6;
     }
 
     /// Write values of the i-th scalar field at the plot points. Needs
@@ -473,6 +517,9 @@ namespace oomph
       // Container for strain
       DenseMatrix<double> strain(3);
 
+      // Container for Lagrangian coordinates
+      Vector<double> xi(2);
+
       // Loop over plot points
       unsigned num_plot_points = nplot_points_paraview(nplot);
       for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
@@ -480,23 +527,31 @@ namespace oomph
         // Get local coordinates of plot point
         get_s_plot(iplot, nplot, s, true);
 
+        // Get the lagrangian coordinates
+        interpolated_xi(s, xi);
+
         // Get the strain
         get_strain(s, strain);
 
+        // Output Lagrangian coordinates
+        if (i < 2)
+        {
+          file_out << xi[i] << std::endl;
+        }
         // Strain components
-        if (i == 0)
+        else if (i == 2)
         {
           file_out << strain(0, 0) << std::endl;
         }
-        else if (i == 1)
+        else if (i == 3)
         {
           file_out << strain(1, 1) << std::endl;
         }
-        else if (i == 2)
+        else if (i == 4)
         {
           file_out << strain(0, 1) << std::endl;
         }
-        else if (i == 3)
+        else if (i == 5)
         {
           file_out << strain(2, 2) << std::endl;
         }
@@ -506,7 +561,7 @@ namespace oomph
         {
 #ifdef PARANOID
           std::stringstream error_stream;
-          error_stream << "These elements only store " << 5 << " fields, "
+          error_stream << "These elements only output " << 6 << " fields, "
                        << "but i is currently  " << i << std::endl;
           throw OomphLibError(error_stream.str(),
                               OOMPH_CURRENT_FUNCTION,
@@ -521,22 +576,29 @@ namespace oomph
     /// overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
     {
-      // Velocities
+      // Lagrangian coordinates
       if (i == 0)
+      {
+        return "Lagrangian coord. r";
+      }
+      else if (i == 1)
+      {
+        return "Lagrangian coord. z";
+      }
+      // Strain components
+      else if (i == 2)
       {
         return "Strain r-r";
       }
-      // Concentration
-      else if (i == 1)
+      else if (i == 3)
       {
         return "Strain z-z";
       }
-      // Preussre
-      else if (i == 2)
+      else if (i == 4)
       {
         return "Strain r-z";
       }
-      else if (i == 3)
+      else if (i == 5)
       {
         return "Strain phi-phi";
       }
@@ -544,7 +606,7 @@ namespace oomph
       else
       {
         std::stringstream error_stream;
-        error_stream << "These elements only store " << 5 << "  fields,\n"
+        error_stream << "These elements only output " << 6 << "  fields,\n"
                      << "but i is currently  " << i << std::endl;
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -866,7 +928,7 @@ namespace oomph
 
 
   //============================================================================
-  /// FaceGeometry of a 2D TPVDElement element
+  /// FaceGeometry of a TAxisymCylindricalPVDElement
   //============================================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<TAxisymCylindricalPVDElement<NNODE_1D>>
@@ -879,9 +941,9 @@ namespace oomph
   };
 
 
-  //==============================================================
-  /// FaceGeometry of the FaceGeometry of the 2D TPVDElement
-  //==============================================================
+  //============================================================================
+  /// FaceGeometry of the FaceGeometry of the TAxisymCylindricalPVDElement
+  //============================================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<FaceGeometry<TAxisymCylindricalPVDElement<NNODE_1D>>>
     : public virtual PointElement

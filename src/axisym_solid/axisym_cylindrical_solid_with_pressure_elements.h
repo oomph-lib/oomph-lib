@@ -1,3 +1,29 @@
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+
 // Header file for axisymmetric solid mechanics elements
 #ifndef OOMPH_AXISYM_CYLINDRICAL_ELASTICITY_WITH_PRESSURE_ELEMENTS_HEADER
 #define OOMPH_AXISYM_CYLINDRICAL_ELASTICITY_WITH_PRESSURE_ELEMENTS_HEADER
@@ -550,7 +576,7 @@ namespace oomph
     virtual unsigned nsolid_pres() const = 0;
 
     /// Return the lth solid pressures
-    virtual double solid_p(const unsigned& l) = 0;
+    virtual double solid_p(const unsigned& l) const = 0;
 
     /// Return the index at which the solid pressure is stored
     virtual int solid_p_nodal_index() const
@@ -565,7 +591,7 @@ namespace oomph
       const unsigned& flag);
 
     /// Return the interpolated_solid_pressure
-    double interpolated_solid_p(const Vector<double>& s)
+    double interpolated_solid_p(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_solid_pres = nsolid_pres();
@@ -588,7 +614,9 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      FiniteElement::output(outfile);
+      // If n_plot is not provided, assume equal to 5 by default
+      const unsigned n_plot = 5;
+      output(outfile, n_plot);
     }
 
     /// Output function
@@ -598,6 +626,9 @@ namespace oomph
       Vector<double> xi(2);
       Vector<double> s(2);
       DenseMatrix<double> strain(3);
+
+      // Tecplot header info
+      outfile << this->tecplot_zone_string(n_plot);
 
       // Loop over plot points
       unsigned num_plot_points = this->nplot_points(n_plot);
@@ -630,16 +661,21 @@ namespace oomph
                 << " " << strain(2, 2) << " ";
 
         // Output the solid pressure
-        outfile << interpolated_solid_p(s) << " ";
+        outfile << interpolated_solid_p(s);
 
         outfile << std::endl;
       }
+
+      // Write tecplot footer (e.g. FE connectivity lists)
+      this->write_tecplot_zone_footer(outfile, n_plot);
     }
 
     /// Overload the output function
     void output(FILE* file_pt)
     {
-      FiniteElement::output(file_pt);
+      // If n_plot is not provided, assume equal to 5 by default
+      const unsigned n_plot = 5;
+      output(file_pt,n_plot);
     }
 
     /// Output function
@@ -656,7 +692,7 @@ namespace oomph
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
-      return 4;
+      return 7;
     }
 
     /// Write values of the i-th scalar field at the plot points. Needs
@@ -668,6 +704,9 @@ namespace oomph
       // Vector of local coordinates
       Vector<double> s(2);
 
+      // Lagrangian coordinates
+      Vector<double> xi(2);
+
       // Container for strain
       DenseMatrix<double> strain(3);
 
@@ -678,27 +717,39 @@ namespace oomph
         // Get local coordinates of plot point
         get_s_plot(iplot, nplot, s);
 
+        // Get the Lagrangian coordinate
+        interpolated_xi(s, xi);
+
         // Get the strain
         get_strain(s, strain);
 
+        // Output the Lagrangian coordinates
+        if (i < 2)
+        {
+          file_out << xi[i] << std::endl;
+        }
         // Strain components
-        if (i == 0)
+        else if (i == 2)
         {
           file_out << strain(0, 0) << std::endl;
         }
-        else if (i == 1)
+        else if (i == 3)
         {
           file_out << strain(1, 1) << std::endl;
         }
-        else if (i == 2)
+        else if (i == 4)
         {
           file_out << strain(0, 1) << std::endl;
         }
-        else if (i == 3)
+        else if (i == 5)
         {
           file_out << strain(2, 2) << std::endl;
         }
-
+        // Solid pressure
+        else if (i == 6)
+        {
+          file_out << interpolated_solid_p(s) << std::endl;
+        }
         // Never get here
         else
         {
@@ -719,30 +770,41 @@ namespace oomph
     /// overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
     {
-      // Velocities
       if (i == 0)
+      {
+        return "Lagrangian coord. r";
+      }
+      else if (i == 1)
+      {
+        return "Lagrangian coord. z";
+      }
+      // Strain components
+      else if (i == 2)
       {
         return "Strain r-r";
       }
-      // Concentration
-      else if (i == 1)
+      else if (i == 3)
       {
         return "Strain z-z";
       }
-      // Preussre
-      else if (i == 2)
+      else if (i == 4)
       {
         return "Strain r-z";
       }
-      else if (i == 3)
+      else if (i == 5)
       {
         return "Strain phi-phi";
+      }
+      // Solid pressure
+      else if (i == 6)
+      {
+        return "Solid pressure";
       }
       // Never get here
       else
       {
         std::stringstream error_stream;
-        error_stream << "These elements only store " << 5 << "  fields,\n"
+        error_stream << "These elements only output " << 7 << "  fields,\n"
                      << "but i is currently  " << i << std::endl;
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -958,7 +1020,7 @@ namespace oomph
 
     /// Return the l-th pressure value, make sure to use the hanging
     /// representation if there is one!
-    double solid_p(const unsigned& l)
+    double solid_p(const unsigned& l) const
     {
       return this->nodal_value(Pconv[l], this->solid_p_nodal_index());
     }
@@ -1125,7 +1187,7 @@ namespace oomph
 
     /// Return the l-th pressure value, make sure to use the hanging
     /// representation if there is one!
-    double solid_p(const unsigned& l)
+    double solid_p(const unsigned& l) const
     {
       return this->nodal_value(Pconv[l], this->solid_p_nodal_index());
     }
@@ -1207,7 +1269,7 @@ namespace oomph
     unsigned num_Z2_flux_terms()
     {
       // Six flux terms
-      return 6;
+      return 4;
     }
 
     /// Get 'flux' for Z2 error recovery:   Upper triangular entries
@@ -1215,7 +1277,7 @@ namespace oomph
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
-      unsigned num_entries = 6;
+      unsigned num_entries = 4;
       if (flux.size() != num_entries)
       {
         std::ostringstream error_message;
@@ -1238,21 +1300,12 @@ namespace oomph
       // Start with diagonal terms
       for (unsigned i = 0; i < 3; i++)
       {
-        if (!(i == 2))
-        {
-          flux[icount] = strain(i, i);
-        }
+        flux[icount] = strain(i, i);
         icount++;
       }
-      // Off diagonals row by row
-      for (unsigned i = 0; i < 3; i++)
-      {
-        for (unsigned j = i + 1; j < 3; j++)
-        {
-          flux[icount] = strain(i, j);
-          icount++;
-        }
-      }
+
+      // Only non-zero off-diagonal
+      flux[icount] = strain(0, 1);
     }
   };
 
@@ -1269,7 +1322,7 @@ namespace oomph
 
 
   //============================================================================
-  /// FaceGeometry of a 2D TAxisymCylindricalPVDElement element
+  /// FaceGeometry of a TAxisymCylindricalPVDElement
   //============================================================================
   template<>
   class FaceGeometry<TAxisymCylindricalPVDWithPressureElement>
@@ -1282,9 +1335,9 @@ namespace oomph
   };
 
 
-  //==============================================================
-  /// FaceGeometry of the FaceGeometry of the 2D TAxisymCylindricalPVDElement
-  //==============================================================
+  //============================================================================
+  /// FaceGeometry of the FaceGeometry of the TAxisymCylindricalPVDElement
+  //============================================================================
   template<>
   class FaceGeometry<FaceGeometry<TAxisymCylindricalPVDWithPressureElement>>
     : public virtual PointElement
