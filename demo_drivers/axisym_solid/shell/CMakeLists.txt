@@ -33,8 +33,8 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME axisym_solid.axisym_solid
-  DEPENDS_ON shell
+  TEST_NAME axisym_solid.shell
+  DEPENDS_ON shell shell_adaptive
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata)
 

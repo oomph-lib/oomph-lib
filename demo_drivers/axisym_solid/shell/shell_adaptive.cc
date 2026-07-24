@@ -54,7 +54,7 @@ namespace GlobalPhysicalVariables
 {
   // Poisson ratio - only used in the compressible case
   // (nu = 0.5 for incompressible material)
-  double nu = 0.49;
+  double nu = 0.4;
 
   // The external pressure
   double ext_pressure = 0.05;
