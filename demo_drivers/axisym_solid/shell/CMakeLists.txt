@@ -22,21 +22,21 @@ include(CTest)
 
 oomph_add_executable(
   NAME shell
-  SOURCES shell.cc
+  SOURCES shell.cc benchmark_elements.cc
   LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME shell_adaptive
-  SOURCES shell_adaptive.cc
+  SOURCES shell_adaptive.cc benchmark_elements.cc
   LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
-#oomph_add_test(
-#  TEST_NAME axisym_solid.axisym_solid
-#  DEPENDS_ON axisym_solid
-#  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-#  TEST_FILES validate.sh validata)
+oomph_add_test(
+  TEST_NAME axisym_solid.axisym_solid
+  DEPENDS_ON shell
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving axisym_solid subdirectory")
 # ------------------------------------------------------------------------------

@@ -55,6 +55,7 @@ namespace oomph
   private:
     /// Pointer to an imposed traction function
     void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& xi,
                             const Vector<double>& x,
                             const Vector<double>& n,
                             Vector<double>& result);
@@ -62,6 +63,7 @@ namespace oomph
   protected:
     /// Return the surface traction force
     void get_traction(const double& time,
+                      const Vector<double>& xi,
                       const Vector<double>& x,
                       const Vector<double>& n,
                       Vector<double>& result) const
@@ -79,7 +81,7 @@ namespace oomph
       // Otherwise call the function
       else
       {
-        (*Traction_fct_pt)(time, x, n, result);
+        (*Traction_fct_pt)(time, xi, x, n, result);
       }
     }
 
@@ -100,6 +102,7 @@ namespace oomph
 
     /// Return the imposed traction pointer
     void (*&traction_fct_pt())(const double&,
+                               const Vector<double>&,
                                const Vector<double>&,
                                const Vector<double>&,
                                Vector<double>&)
@@ -225,8 +228,11 @@ namespace oomph
       Vector<double> traction(2);
 
       // Normal is outwards
-      get_traction(
-        time_step_pt->time(), interpolated_x, interpolated_normal, traction);
+      get_traction(time_step_pt->time(),
+                   interpolated_xi,
+                   interpolated_x,
+                   interpolated_normal,
+                   traction);
 
       //=====LOAD TERMS  FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
 

@@ -1,3 +1,29 @@
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2026 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+
 // Driver code for benchmark of axisym non-linear solid equations
 // in cylindrical coordinates: Thick spherical shell with external pressure
 // Compare against analytical solution for an incompressible material
@@ -9,8 +35,11 @@
 // Axisymmetric non-linear solid equations in cylindrical coords
 #include "axisym_solid.h"
 
+// Elements used to solve an auxillary problem for benchmarking
+#include "benchmark_elements.h"
+
 // Constitutive laws
-#include "neo_hookean_constitutive.h"
+#include "constitutive.h"
 
 // The mesh: annular
 #include "meshes/annular_mesh.h"
@@ -23,7 +52,8 @@ using namespace oomph;
 //================================================================
 namespace GlobalPhysicalVariables
 {
-  // Poisson ratio, should be 0.5 since using incompressible formulation
+  // Poisson ratio - only used in the compressible case
+  // (nu = 0.5 for incompressible material)
   double nu = 0.49;
 
   // The external pressure
@@ -31,6 +61,7 @@ namespace GlobalPhysicalVariables
 
   // Traction function for appyling a pressure on the outer surface
   void external_pressure_fct(const double& time,
+                             const Vector<double>& xi,
                              const Vector<double>& x,
                              const Vector<double>& n,
                              Vector<double>& traction)
@@ -68,7 +99,12 @@ namespace GlobalSimSettings
 } // namespace GlobalSimSettings
 
 //======================start_mesh================================
-/// Upgrade the mesh to a solidmesh
+/// Upgrade the mesh to a solidmesh.
+/// Quarter-annulus in quadrant r>0, z>0
+/// ntheta - no. elements in theta direction
+/// nr - no. elements in the radial direction
+/// a - Inner radius of annulus
+/// h - thickness of annulus
 //================================================================
 template<class ELEMENT>
 class ElasticRefineableTwoDAnnularMesh
@@ -79,20 +115,29 @@ public:
   /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
   /// ones so that the initial configuration is the stress-free one.
   ElasticRefineableTwoDAnnularMesh<ELEMENT>(
-    const bool& periodic,
-    const double& azimuthal_fraction,
     const unsigned& ntheta,
     const unsigned& nr,
     const double& a,
     const double& h,
-    const double& phi,
     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     : RectangularQuadMesh<ELEMENT>(
-        ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
-      TwoDAnnularMesh<ELEMENT>(
-        periodic, azimuthal_fraction, ntheta, nr, a, h, phi, time_stepper_pt),
-      RefineableTwoDAnnularMesh<ELEMENT>(
-        periodic, azimuthal_fraction, ntheta, nr, a, h, phi, time_stepper_pt)
+        ntheta, nr, 1.0, 1.0, false, time_stepper_pt),
+      TwoDAnnularMesh<ELEMENT>(false,
+                               0.25,
+                               ntheta,
+                               nr,
+                               a,
+                               h,
+                               MathematicalConstants::Pi,
+                               time_stepper_pt),
+      RefineableTwoDAnnularMesh<ELEMENT>(false,
+                                         0.25,
+                                         ntheta,
+                                         nr,
+                                         a,
+                                         h,
+                                         MathematicalConstants::Pi,
+                                         time_stepper_pt)
   {
     // Make the current configuration the undeformed one by
     // setting the nodal Lagrangian coordinates to their current
@@ -101,7 +146,7 @@ public:
 
     // Set the undeformed domain
     Undeformed_domain_pt =
-      new AnnularDomain(azimuthal_fraction, ntheta, nr, a, h, phi);
+      new AnnularDomain(0.25, ntheta, nr, a, h, MathematicalConstants::Pi);
 
     // Loop over all elements and set the undeformed macro element pointer
     unsigned n_element = this->nelement();
@@ -129,7 +174,6 @@ public:
     delete Undeformed_domain_pt;
   }
 
-
 private:
   /// Pointer to "undeformed" Domain -- used to determine the
   /// Lagrangian coordinates of any newly created SolidNodes during
@@ -140,7 +184,7 @@ private:
 //==============start_problem=========================================
 /// Unstructured solid problem
 //====================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
+template<class ELEMENT>
 class ShellProblem : public Problem
 {
 public:
@@ -152,9 +196,6 @@ public:
 
   /// Doc the solution
   void doc_solution();
-
-  /// Compute pressure integral
-  void compute_pressure_integral();
 
 private:
   /// Create the boundary elements
@@ -215,16 +256,6 @@ private:
     }
     // Wipe the mesh
     Surface_mesh_pt->flush_element_and_node_storage();
-
-    n_element = Aux_surface_mesh_pt->nelement();
-    // Loop over the surface elements
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      // Kill surface element
-      delete Aux_surface_mesh_pt->element_pt(e);
-    }
-    // Wipe the mesh
-    Aux_surface_mesh_pt->flush_element_and_node_storage();
   } // end of delete_boundary_elements
 
   /// Bulk mesh
@@ -233,9 +264,6 @@ private:
   /// Pointer to the "surface" mesh
   Mesh* Surface_mesh_pt;
 
-  /// Pointer to auxillary surface mesh, which exists solely for post-processing
-  Mesh* Aux_surface_mesh_pt;
-
   // Pointer to error estimator
   Z2ErrorEstimator* error_estimator_pt;
 
@@ -243,44 +271,33 @@ private:
   ConstitutiveLaw* Constitutive_law_pt;
 
   // DocInfo object
-  DocInfo doc_info;
+  DocInfo Doc_info;
 };
 
 //===============start_constructor========================================
-/// Constructor for unstructured solid problem
+/// Axisymmetric compression of a finite thickness shell in cylindrical
+/// polar coordiantes
 //========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-ShellProblem<ELEMENT, INTERFACE_ELEMENT>::ShellProblem()
+template<class ELEMENT>
+ShellProblem<ELEMENT>::ShellProblem()
 {
-#ifdef OOMPH_HAS_MUMPS
-  // Use mumps if available
-  linear_solver_pt() = new MumpsSolver;
-#endif
-
   // Set output directory
-  doc_info.set_directory(GlobalSimSettings::result_folder);
+  Doc_info.set_directory(GlobalSimSettings::result_folder);
 
   // Initialise counter for solutions
-  doc_info.number() = 0;
+  Doc_info.number() = 0;
 
-  // Create the mesh: Use constuctor which allows rotation
-  bool periodic = false;
-  double azimuthal_fraction = 0.25;
-  double phi = MathematicalConstants::Pi;
+  // Create the mesh: Quarter-annulus in the quadrant r>0, z>0.
   Bulk_mesh_pt = new ElasticRefineableTwoDAnnularMesh<ELEMENT>(
-    periodic,
-    azimuthal_fraction,
     GlobalSimSettings::n_azimuthal,
     GlobalSimSettings::n_radial,
     GlobalSimSettings::a,
-    GlobalSimSettings::h,
-    phi);
+    GlobalSimSettings::h);
 
   // Create the "surface mesh" that will contain only the interface
   // elements. The constructor just creates the mesh without giving
   // it any elements, nodes, etc.
   Surface_mesh_pt = new Mesh;
-  Aux_surface_mesh_pt = new Mesh;
 
   // Create the boundary elements
   create_boundary_elements();
@@ -302,18 +319,17 @@ ShellProblem<ELEMENT, INTERFACE_ELEMENT>::ShellProblem()
 
   // Define a constitutive law from a strain energy density function.
   // Version depends on the incompressibility flag
-  StrainEnergyFunction* Strain_energy_function_pt;
+  StrainEnergyFunction* strain_energy_function_pt;
   if (GlobalSimSettings::incompressible)
   {
-    Strain_energy_function_pt =
-      new IncompressibleNeoHookean(&GlobalPhysicalVariables::nu);
+    strain_energy_function_pt = new IncompressibleNeoHookean();
   }
   else
   {
-    Strain_energy_function_pt = new NeoHookean(&GlobalPhysicalVariables::nu);
+    strain_energy_function_pt = new NeoHookean(&GlobalPhysicalVariables::nu);
   }
   Constitutive_law_pt =
-    new IsotropicStrainEnergyFunctionConstitutiveLaw(Strain_energy_function_pt);
+    new IsotropicStrainEnergyFunctionConstitutiveLaw(strain_energy_function_pt);
 
   // Complete the problem set up
   complete_problem_setup();
@@ -326,8 +342,8 @@ ShellProblem<ELEMENT, INTERFACE_ELEMENT>::ShellProblem()
 //========start_of_complete_problem_setup==================================
 /// Assign function/parameter pointers, set boundary conditions etc.
 //=========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::complete_problem_setup()
+template<class ELEMENT>
+void ShellProblem<ELEMENT>::complete_problem_setup()
 {
   // Determine number of bulk elements in mesh
   const unsigned n_element_bulk = Bulk_mesh_pt->nelement();
@@ -370,8 +386,9 @@ void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    INTERFACE_ELEMENT* el_pt =
-      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(e));
+    AxisymmetricCylindricalSolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<AxisymmetricCylindricalSolidTractionElement<ELEMENT>*>(
+        Surface_mesh_pt->element_pt(e));
 
     // Set the traction function for applying pressure
     el_pt->traction_fct_pt() = &GlobalPhysicalVariables::external_pressure_fct;
@@ -399,8 +416,8 @@ void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::complete_problem_setup()
 //============start_of_create_boundary_elements===============
 /// Create boundary elements
 //=======================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::create_boundary_elements()
+template<class ELEMENT>
+void ShellProblem<ELEMENT>::create_boundary_elements()
 {
   // Loop over elements on boundary 2
   unsigned n_element = Bulk_mesh_pt->nboundary_element(2);
@@ -415,120 +432,252 @@ void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::create_boundary_elements()
     int face_index = Bulk_mesh_pt->face_index_at_boundary(2, e);
 
     // Create the interface element
-    INTERFACE_ELEMENT* interface_element_pt =
-      new INTERFACE_ELEMENT(bulk_element_pt, face_index);
+    AxisymmetricCylindricalSolidTractionElement<ELEMENT>* interface_element_pt =
+      new AxisymmetricCylindricalSolidTractionElement<ELEMENT>(bulk_element_pt,
+                                                               face_index);
 
     // Add the interface element to the surface mesh
     this->Surface_mesh_pt->add_element_pt(interface_element_pt);
     interface_element_pt->set_boundary_number_in_bulk_mesh(2);
   }
-
-  // Loop over elements on boundary 1
-  n_element = Bulk_mesh_pt->nboundary_element(1);
-  for (unsigned e = 0; e < n_element; e++)
-  {
-    // Set a pointer to the bulk element we wish to our interface
-    // element to
-    ELEMENT* bulk_element_pt =
-      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(1, e));
-
-    // Find the index of the face of element e along boundary b
-    int face_index = Bulk_mesh_pt->face_index_at_boundary(1, e);
-
-    // Create the interface element
-    INTERFACE_ELEMENT* interface_element_pt =
-      new INTERFACE_ELEMENT(bulk_element_pt, face_index);
-
-    // Add the interface element to the surface mesh
-    this->Aux_surface_mesh_pt->add_element_pt(interface_element_pt);
-    interface_element_pt->set_boundary_number_in_bulk_mesh(1);
-  }
 } // end of create_boundary_elements
-
-//========================================================================
-/// Compute the integral which should equal the pressure
-//========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::compute_pressure_integral()
-{
-  // Effective shear modulus
-  double mu = 0.5 / (1.0 + GlobalPhysicalVariables::nu);
-
-  // Initialize integral
-  double intgrl = 0.0;
-
-  // Loop over elements in aux surface mesh
-  unsigned n_el = Aux_surface_mesh_pt->nelement();
-  for (unsigned e = 0; e < n_el; e++)
-  {
-    // Cast to element
-    INTERFACE_ELEMENT* el_pt =
-      dynamic_cast<INTERFACE_ELEMENT*>(Aux_surface_mesh_pt->element_pt(e));
-
-    // Loop over integration points
-    unsigned n_intpt = el_pt->integral_pt()->nweight();
-    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-    {
-      // Get the integral weight
-      double w = el_pt->integral_pt()->weight(ipt);
-
-      // Shape fns at integration point
-      Shape psi(el_pt->nnode());
-      el_pt->shape_at_knot(ipt, psi);
-
-      // Calculate the global position and lagrangian coordinate
-      Vector<double> interpolated_x(2, 0.0), interpolated_xi(2, 0.0);
-      for (unsigned l = 0; l < el_pt->nnode(); l++)
-      {
-        // Loop over the number of lagrangian coordinates (2)
-        for (unsigned i = 0; i < 2; i++)
-        {
-          // Calculate the global position
-          interpolated_x[i] += el_pt->nodal_position(l, i) * psi(l);
-          interpolated_xi[i] += el_pt->lagrangian_position(l, i) * psi(l);
-        }
-      }
-
-      // Calculate Jacobian of mapping and pre-multiply with integral weight
-      double J = el_pt->J_eulerian_at_knot(ipt);
-      double W = w * J;
-
-      // The principal stretch
-      double lambda = interpolated_x[0] / interpolated_xi[0];
-
-      // Add integral contributions
-      intgrl += (lambda - pow(lambda, -5.0)) / interpolated_xi[0] * W;
-    }
-  }
-
-  // Pressure
-  double p = -2.0 * mu * intgrl;
-
-  std::cout << "Computed pressure: " << p << std::endl;
-}
 
 //========================================================================
 /// Doc the solution
 //========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void ShellProblem<ELEMENT, INTERFACE_ELEMENT>::doc_solution()
+template<class ELEMENT>
+void ShellProblem<ELEMENT>::doc_solution()
 {
   ofstream some_file;
   char filename[100];
 
   // Number of plot points
-  unsigned npts = 2;
+  unsigned npts = 3;
 
   sprintf(filename,
-          "%s/bulk_soln%i.dat",
-          doc_info.directory().c_str(),
-          doc_info.number());
+          "%s/bulk_soln_nu_%g_pres_%g.dat",
+          Doc_info.directory().c_str(),
+          GlobalPhysicalVariables::nu,
+          GlobalPhysicalVariables::ext_pressure);
+  some_file.open(filename);
+  Bulk_mesh_pt->output(some_file, npts);
+  some_file.close();
+
+  sprintf(filename,
+          "%s/bulk_soln_nu_%g_pres_%g.vtu",
+          Doc_info.directory().c_str(),
+          GlobalPhysicalVariables::nu,
+          GlobalPhysicalVariables::ext_pressure);
+  some_file.open(filename);
+  Bulk_mesh_pt->output_paraview(some_file, npts);
+  some_file.close();
+
+  // Increment the counter
+  Doc_info.number()++;
+}
+
+
+//==============start_auxillary_problem===============================
+/// Axisymmetric compression of a finite thickness shell in cylindrical
+/// polar coordiantes
+//====================================================================
+class AuxiliaryShellProblem : public Problem
+{
+public:
+  /// Constructor:
+  AuxiliaryShellProblem();
+
+  /// Destructor
+  ~AuxiliaryShellProblem() {}
+
+  /// Doc the solution
+  void doc_solution();
+
+  /// Solve the auxiliary problem
+  void solve_auxiliary_problem();
+
+private:
+  /// Bulk mesh
+  OneDMesh<ShellBenchmarkElement<3>>* Bulk_mesh_pt;
+
+  /// Pointer to the "surface" mesh
+  Mesh* Surface_mesh_pt;
+
+  // DocInfo object
+  DocInfo Doc_info;
+};
+
+
+//===============start_constructor========================================
+/// Constructor for auxiliary 1D problem
+//========================================================================
+AuxiliaryShellProblem::AuxiliaryShellProblem()
+{
+  // Set output directory
+  Doc_info.set_directory(GlobalSimSettings::result_folder);
+
+  // Initialise counter for solutions
+  Doc_info.number() = 0;
+
+  // Create the mesh: use n_radial elements to match the 2D problem
+  double outer_coord = GlobalSimSettings::a + GlobalSimSettings::h;
+  Bulk_mesh_pt = new OneDMesh<ShellBenchmarkElement<3>>(
+    GlobalSimSettings::n_radial, GlobalSimSettings::a, outer_coord);
+
+  // Only complete the setup if the material is compressible. Otherwise,
+  // an analytical solution will be used.
+  if (!GlobalSimSettings::incompressible)
+  {
+    // Set the Poisson ratio in each element
+    unsigned n_el = Bulk_mesh_pt->nelement();
+    for (unsigned e = 0; e < n_el; e++)
+    {
+      // Cast to element
+      ShellBenchmarkElement<3>* el_pt =
+        dynamic_cast<ShellBenchmarkElement<3>*>(Bulk_mesh_pt->element_pt(e));
+
+      // Set the Poisson ratio
+      el_pt->nu_pt() = &GlobalPhysicalVariables::nu;
+    }
+
+    // Loop over nodes and set the initial guess in each node: r=R
+    unsigned n_node = Bulk_mesh_pt->nnode();
+    for (unsigned n = 0; n < n_node; n++)
+    {
+      double r = Bulk_mesh_pt->node_pt(n)->x(0);
+      Bulk_mesh_pt->node_pt(n)->set_value(0, r);
+    }
+
+    // Create the "surface mesh" for application of boundary pressure
+    Surface_mesh_pt = new Mesh;
+
+    // Cast to the right-most element in the mesh
+    ShellBenchmarkElement<3>* bulk_element_pt =
+      dynamic_cast<ShellBenchmarkElement<3>*>(
+        Bulk_mesh_pt->element_pt(GlobalSimSettings::n_radial - 1));
+
+    // Find the index of the face of element e (0) along boundary b (1)
+    int face_index = 1; // Bulk_mesh_pt->face_index_at_boundary(1, 0);
+
+    // Create the interface element
+    ShellBenchmarkPressureElement* interface_element_pt =
+      new ShellBenchmarkPressureElement(bulk_element_pt, face_index);
+
+    // Add the interface element to the surface mesh
+    this->Surface_mesh_pt->add_element_pt(interface_element_pt);
+    interface_element_pt->set_boundary_number_in_bulk_mesh(1);
+
+    // Set the pressure in the element
+    interface_element_pt->pressure_pt() =
+      &GlobalPhysicalVariables::ext_pressure;
+
+    // Add the two submeshes
+    add_sub_mesh(Bulk_mesh_pt);
+    add_sub_mesh(Surface_mesh_pt);
+
+    // Combine all sub-meshes into a single mesh
+    build_global_mesh();
+
+    // Assign eqn numbers
+    oomph_info << "Number of equations for auxiliary problem: "
+               << assign_eqn_numbers() << std::endl;
+  }
+} // end constructor
+
+//========================================================================
+/// Solve the auxiliary problem
+//========================================================================
+void AuxiliaryShellProblem::solve_auxiliary_problem()
+{
+  // If the material is incompressible, the problem can be solved
+  // analytically, but yields an algebriac equation which must still be
+  // solved numerically. This is done using a manual newton solve.
+  if (GlobalSimSettings::incompressible)
+  {
+    // Storage for residual and Jacobian
+    double residual, jacobian;
+
+    // Containers for undeformed and deformed inner/outer radii.
+    Vector<double> xi(2), r(2);
+    xi[0] = GlobalSimSettings::a;
+    xi[1] = GlobalSimSettings::a + GlobalSimSettings::h;
+
+    // Set the initial guess
+    r[0] = xi[0];
+    r[1] = xi[1];
+
+    // Derivative of outer coord. w.r.t. inner coord.
+    double dr1_dr0;
+
+    // Poisson ratio in incompressible case
+    const double nu = 0.5;
+
+    // Residual from the initial guess
+    r[1] = pow(pow(r[0], 3.0) + pow(xi[1], 3.0) - pow(xi[0], 3.0), 1.0 / 3.0);
+    residual =
+      (1.0 / (1.0 + nu)) * (0.25 * pow(xi[0] / r[0], 4.0) + xi[0] / r[0] -
+                            0.25 * pow(xi[1] / r[1], 4.0) - xi[1] / r[1]) -
+      GlobalPhysicalVariables::ext_pressure;
+
+    // Newton iteration loop
+    while (std::fabs(residual) > 1.0e-8)
+    {
+      // Calculate the Jacobian
+      dr1_dr0 =
+        pow(pow(r[0], 3.0) + pow(xi[1], 3.0) - pow(xi[0], 3.0), -2.0 / 3.0) *
+        r[0] * r[0];
+      jacobian = (1.0 / (1.0 + nu)) *
+                 (-1.0 * (pow(xi[0] / r[0], 4.0) + xi[0] / r[0]) / r[0] +
+                  (pow(xi[1] / r[1], 4.0) + xi[1] / r[1]) * dr1_dr0 / r[1]);
+      // Take a Newton step
+      r[0] = r[0] - residual / jacobian;
+
+      // Calculate the new residual
+      r[1] = pow(pow(r[0], 3.0) + pow(xi[1], 3.0) - pow(xi[0], 3.0), 1.0 / 3.0);
+      residual =
+        (1 / (1.0 + nu)) * (0.25 * pow(xi[0] / r[0], 4.0) + xi[0] / r[0] -
+                            0.25 * pow(xi[1] / r[1], 4.0) - xi[1] / r[1]) -
+        GlobalPhysicalVariables::ext_pressure;
+    }
+
+    // With the solution obtained, set nodal values from the analytic solution
+    unsigned n_node = Bulk_mesh_pt->nnode();
+    for (unsigned n = 0; n < n_node; n++)
+    {
+      double xi_tmp = Bulk_mesh_pt->node_pt(n)->x(0);
+      Bulk_mesh_pt->node_pt(n)->set_value(
+        0, pow(pow(r[0], 3.0) + pow(xi_tmp, 3.0) - pow(xi[0], 3.0), 1.0 / 3.0));
+    }
+  }
+  // Otherwise, perform a standard Newton solve using the benchmark elements.
+  else
+  {
+    newton_solve();
+  }
+}
+
+//========================================================================
+/// Doc the solution
+//========================================================================
+void AuxiliaryShellProblem::doc_solution()
+{
+  ofstream some_file;
+  char filename[100];
+
+  // Number of plot points
+  unsigned npts = 3;
+
+  sprintf(filename,
+          "%s/aux_soln_nu_%g_pres_%g.dat",
+          Doc_info.directory().c_str(),
+          GlobalPhysicalVariables::nu,
+          GlobalPhysicalVariables::ext_pressure);
   some_file.open(filename);
   Bulk_mesh_pt->output(some_file, npts);
   some_file.close();
 
   // Increment the counter
-  doc_info.number()++;
+  Doc_info.number()++;
 }
 
 //===========start_main===================================================
@@ -553,29 +702,59 @@ int main(int argc, char* argv[])
   CommandLineArgs::parse_and_assign();
   CommandLineArgs::doc_specified_flags();
 
+  // If the Poisson ratio has been set to 0.5, but the use_pressure_formulation
+  // and/or incompressible flags are 0, set them to 1
+  if (std::fabs(GlobalPhysicalVariables::nu - 0.5) < 1.0e-10 &&
+      !(GlobalSimSettings::incompressible &&
+        GlobalSimSettings::use_pressure_formulation))
+  {
+    std::string warning_message =
+      "Inconsistency: Poisson ratio has been set to 0.5 but the  \n"
+      "use_pressure_formulation and/or incompressible flags are 0. \n"
+      "Setting both of these to 1 to proceed.";
+    OomphLibWarning(
+      warning_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    GlobalSimSettings::use_pressure_formulation = 1;
+    GlobalSimSettings::incompressible = 1;
+  }
+
+  // If the incompressibility flag has been set, we must use the solid pressure
+  // formulation. The Poisson ratio will not be used in this case.
+  if (GlobalSimSettings::incompressible &&
+      !GlobalSimSettings::use_pressure_formulation)
+  {
+    std::string warning_message =
+      "Inconsistency: The incompressibility flag is 1 but we are not using \n"
+      "the solid pressure formulation. Setting use_solid_pressure to 1 to "
+      "proceed. \n";
+    OomphLibWarning(
+      warning_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    GlobalSimSettings::use_pressure_formulation = 1;
+  }
+
+  // End consistency checks
+
   // Create the problem
   if (GlobalSimSettings::use_pressure_formulation)
   {
     // Build the problem with an additional degree of freedom for pressure
-    ShellProblem<RefineableQAxisymmetricCylindricalPVDWithPressureElement,
-                 AxisymmetricCylindricalSolidTractionElement<
-                   RefineableQAxisymmetricCylindricalPVDWithPressureElement>>
+    ShellProblem<RefineableQAxisymmetricCylindricalPVDWithPressureElement>
       problem;
 
     problem.newton_solve(1);
     problem.doc_solution();
-    problem.compute_pressure_integral();
   }
   else
   {
     // Standard build
-    ShellProblem<RefineableQAxisymmetricCylindricalPVDElement<3>,
-                 AxisymmetricCylindricalSolidTractionElement<
-                   RefineableQAxisymmetricCylindricalPVDElement<3>>>
-      problem;
+    ShellProblem<RefineableQAxisymmetricCylindricalPVDElement<3>> problem;
 
     problem.newton_solve(1);
     problem.doc_solution();
-    problem.compute_pressure_integral();
   }
+
+  // Build and solve the auxiliary problem
+  AuxiliaryShellProblem aux_problem;
+  aux_problem.solve_auxiliary_problem();
+  aux_problem.doc_solution();
 } // end main
