@@ -575,6 +575,9 @@ int main(int argc, char* argv[])
   CommandLineArgs::specify_command_line_flag(
     "--poisson", &GlobalPhysicalVariables::nu, "Poisson");
 
+  CommandLineArgs::specify_command_line_flag(
+    "--Nsteps", &GlobalSimSettings::Nsteps, "Number of Steps");
+
   CommandLineArgs::parse_and_assign();
   CommandLineArgs::doc_specified_flags();
 

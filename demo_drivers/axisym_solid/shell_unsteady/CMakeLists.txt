@@ -27,11 +27,11 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-#oomph_add_test(
-#  TEST_NAME axisym_solid.axisym_solid
-#  DEPENDS_ON shell
-#  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-#  TEST_FILES validate.sh validata)
+oomph_add_test(
+  TEST_NAME axisym_solid.shell_unsteady
+  DEPENDS_ON shell_unsteady
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving axisym_solid subdirectory")
 # ------------------------------------------------------------------------------
