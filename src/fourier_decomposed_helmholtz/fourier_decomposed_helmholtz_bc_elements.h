@@ -317,15 +317,20 @@ namespace oomph
       // Get the shape functions
       dshape_local(s, psi, dpsi_ds);
 
-      // Set the test functions to be the same as the shape functions
-      for (unsigned i = 0; i < n_node; i++)
-      {
-        for (unsigned j = 0; j < 1; j++)
-        {
-          test[i] = psi[i];
-          dtest_ds(i, j) = dpsi_ds(i, j);
-        }
-      }
+      // Set the test functions equal to the shape functions
+      test = psi;
+      dtest_ds = dpsi_ds;
+      
+      // // Set the test functions to be the same as the shape functions
+      // for (unsigned i = 0; i < n_node; i++)
+      // {
+      //   for (unsigned j = 0; j < 1; j++)
+      //   {
+      //     test[i] = psi[i];
+      //     dtest_ds(i, j) = dpsi_ds(i, j);
+      //   }
+      // }
+      
       // Return the value of the jacobian
       return J_eulerian(s);
     }

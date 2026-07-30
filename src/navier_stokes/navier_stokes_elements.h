@@ -1964,9 +1964,11 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
+    
     // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
+    
     // Return the jacobian
     return J;
   }
@@ -1986,9 +1988,11 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    
     // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
+
     // Return the jacobian
     return J;
   }
@@ -2019,25 +2023,30 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 9; i++)
-    {
-      test[i] = psi[i];
+    // Set the test functions equal to the shape functions
+    test = psi;
+    dtestdx = dpsidx;
+    d_dtestdx_dX = d_dpsidx_dX;
 
-      for (unsigned k = 0; k < 2; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
+    // // Loop over the test functions and derivatives and set them equal to the
+    // // shape functions
+    // for (unsigned i = 0; i < 9; i++)
+    // {
+    //   test[i] = psi[i];
 
-        for (unsigned p = 0; p < 2; p++)
-        {
-          for (unsigned q = 0; q < 9; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    //   for (unsigned k = 0; k < 2; k++)
+    //   {
+    //     dtestdx(i, k) = dpsidx(i, k);
+
+    //     for (unsigned p = 0; p < 2; p++)
+    //     {
+    //       for (unsigned q = 0; q < 9; q++)
+    //       {
+    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
+    //       }
+    //     }
+    //   }
+    // }
 
     // Return the jacobian
     return J;
@@ -2069,25 +2078,30 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 27; i++)
-    {
-      test[i] = psi[i];
+    // Set the test functions equal to the shape functions
+    test = psi;
+    dtestdx = dpsidx;
+    d_dtestdx_dX = d_dpsidx_dX;
 
-      for (unsigned k = 0; k < 3; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
+    // // Loop over the test functions and derivatives and set them equal to the
+    // // shape functions
+    // for (unsigned i = 0; i < 27; i++)
+    // {
+    //   test[i] = psi[i];
 
-        for (unsigned p = 0; p < 3; p++)
-        {
-          for (unsigned q = 0; q < 27; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    //   for (unsigned k = 0; k < 3; k++)
+    //   {
+    //     dtestdx(i, k) = dpsidx(i, k);
+
+    //     for (unsigned p = 0; p < 3; p++)
+    //     {
+    //       for (unsigned q = 0; q < 27; q++)
+    //       {
+    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
+    //       }
+    //     }
+    //   }
+    // }
 
     // Return the jacobian
     return J;
@@ -2641,25 +2655,30 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 9; i++)
-    {
-      test[i] = psi[i];
+    // Set the test functions equal to the shape functions
+    test = psi;
+    dtestdx = dpsidx;
+    d_dtestdx_dX = d_dpsidx_dX;
 
-      for (unsigned k = 0; k < 2; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
+    // // Loop over the test functions and derivatives and set them equal to the
+    // // shape functions
+    // for (unsigned i = 0; i < 9; i++)
+    // {
+    //   test[i] = psi[i];
 
-        for (unsigned p = 0; p < 2; p++)
-        {
-          for (unsigned q = 0; q < 9; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    //   for (unsigned k = 0; k < 2; k++)
+    //   {
+    //     dtestdx(i, k) = dpsidx(i, k);
+
+    //     for (unsigned p = 0; p < 2; p++)
+    //     {
+    //       for (unsigned q = 0; q < 9; q++)
+    //       {
+    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
+    //       }
+    //     }
+    //   }
+    // }
 
     // Return the jacobian
     return J;
@@ -2690,25 +2709,30 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 27; i++)
-    {
-      test[i] = psi[i];
+    // Set the test functions equal to the shape functions
+    test = psi;
+    dtestdx = dpsidx;
+    d_dtestdx_dX = d_dpsidx_dX;
 
-      for (unsigned k = 0; k < 3; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
+    // // Loop over the test functions and derivatives and set them equal to the
+    // // shape functions
+    // for (unsigned i = 0; i < 27; i++)
+    // {
+    //   test[i] = psi[i];
 
-        for (unsigned p = 0; p < 3; p++)
-        {
-          for (unsigned q = 0; q < 27; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    //   for (unsigned k = 0; k < 3; k++)
+    //   {
+    //     dtestdx(i, k) = dpsidx(i, k);
+
+    //     for (unsigned p = 0; p < 3; p++)
+    //     {
+    //       for (unsigned q = 0; q < 27; q++)
+    //       {
+    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
+    //       }
+    //     }
+    //   }
+    // }
 
     // Return the jacobian
     return J;
