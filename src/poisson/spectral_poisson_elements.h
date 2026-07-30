@@ -193,18 +193,6 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
-    // // Loop over the test functions and derivatives and set them equal to the
-    // // shape functions
-    // unsigned nnod = this->nnode();
-    // for (unsigned i = 0; i < nnod; i++)
-    // {
-    //   test[i] = psi[i];
-    //   for (unsigned j = 0; j < DIM; j++)
-    //   {
-    //     dtestdx(i, j) = dpsidx(i, j);
-    //   }
-    // }
 
     // Return the jacobian
     return J;

@@ -676,14 +676,6 @@ namespace oomph
     dtestdx = dpsidx;
 
 
-    // // Loop over the test functions and derivatives and set them
-    // // equal to the shape functions
-    // for (unsigned i = 0; i < 9; i++)
-    // {
-    //   test[i] = psi[i];
-    //   dtestdx(i, 0) = dpsidx(i, 0);
-    //   dtestdx(i, 1) = dpsidx(i, 1);
-    // }
 
     // Return the Jacobian
     return J;
@@ -707,15 +699,6 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
-    // // Loop over the test functions and derivatives and set them
-    // // equal to the shape functions
-    // for (unsigned i = 0; i < 9; i++)
-    // {
-    //   test[i] = psi[i];
-    //   dtestdx(i, 0) = dpsidx(i, 0);
-    //   dtestdx(i, 1) = dpsidx(i, 1);
-    // }
 
     // Return the Jacobian
     return J;
@@ -939,15 +922,6 @@ namespace oomph
     test = psi;
     dtestdx = dpsidx;
 
-    // // Loop over the test functions and derivatives and set them
-    // // equal to the shape functions
-    // for (unsigned i = 0; i < 9; i++)
-    // {
-    //   test[i] = psi[i];
-    //   dtestdx(i, 0) = dpsidx(i, 0);
-    //   dtestdx(i, 1) = dpsidx(i, 1);
-    // }
-
     // Return the Jacobian
     return J;
   }
@@ -970,15 +944,6 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-
-    // // Loop over the test functions and derivatives and set them
-    // // equal to the shape functions
-    // for (unsigned i = 0; i < 9; i++)
-    // {
-    //   test[i] = psi[i];
-    //   dtestdx(i, 0) = dpsidx(i, 0);
-    //   dtestdx(i, 1) = dpsidx(i, 1);
-    // }
 
     // Return the Jacobian
     return J;

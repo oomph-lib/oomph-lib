@@ -416,26 +416,6 @@ namespace oomph
     test = psi;
     dtestdx = dpsidx;
     d_dtestdx_dX = d_dpsidx_dX;
-    
-    // // Loop over the test functions and derivatives and set them equal to the
-    // // shape functions
-    // for (unsigned i = 0; i < 9; i++)
-    // {
-    //   test[i] = psi[i];
-
-    //   for (unsigned k = 0; k < 2; k++)
-    //   {
-    //     dtestdx(i, k) = dpsidx(i, k);
-
-    //     for (unsigned p = 0; p < 2; p++)
-    //     {
-    //       for (unsigned q = 0; q < 9; q++)
-    //       {
-    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-    //       }
-    //     }
-    //   }
-    // }
 
     // Return the jacobian
     return J;
@@ -1276,26 +1256,6 @@ namespace oomph
     dtestdx = dpsidx;
     d_dtestdx_dX = d_dpsidx_dX;
  
-    // // Loop over the test functions and derivatives and set them equal to the
-    // // shape functions
-    // for (unsigned i = 0; i < 6; i++)
-    // {
-    //   test[i] = psi[i];
-
-    //   for (unsigned k = 0; k < 2; k++)
-    //   {
-    //     dtestdx(i, k) = dpsidx(i, k);
-
-    //     for (unsigned p = 0; p < 2; p++)
-    //     {
-    //       for (unsigned q = 0; q < 6; q++)
-    //       {
-    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-    //       }
-    //     }
-    //   }
-    // }
-
     // Return the jacobian
     return J;
   }
@@ -1329,26 +1289,6 @@ namespace oomph
     test = psi;
     dtestdx = dpsidx;
     d_dtestdx_dX = d_dpsidx_dX;
-
-    // // Loop over the test functions and derivatives and set them equal to the
-    // // shape functions
-    // for (unsigned i = 0; i < 10; i++)
-    // {
-    //   test[i] = psi[i];
-
-    //   for (unsigned k = 0; k < 3; k++)
-    //   {
-    //     dtestdx(i, k) = dpsidx(i, k);
-
-    //     for (unsigned p = 0; p < 3; p++)
-    //     {
-    //       for (unsigned q = 0; q < 10; q++)
-    //       {
-    //         d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-    //       }
-    //     }
-    //   }
-    // }
 
     // Return the jacobian
     return J;
