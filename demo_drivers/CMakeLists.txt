@@ -30,6 +30,7 @@ set(SUBDIRS
     axisym_linear_elasticity
     axisym_navier_stokes
     axisym_poroelasticity
+    axisym_solid
     beam
     bifurcation_tracking
     biharmonic

@@ -9,29 +9,24 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
 endif()
 # ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered shell_unsteady subdirectory")
+message(VERBOSE "Entered axisym_solid subdirectory")
 
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
-project(shell_unsteady C CXX Fortran)
+project(axisym_solid C CXX Fortran)
 
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
 endif()
 
 include(CTest)
 
-oomph_add_executable(
-  NAME shell_unsteady
-  SOURCES shell_unsteady.cc
-  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
+set(SUBDIRS
+    shell
+    shell_unsteady)
 
-# ---------------------------------- TESTING ----------------------------------
+foreach(SUBDIR IN LISTS SUBDIRS)
+  add_subdirectory(${SUBDIR})
+endforeach()
 
-oomph_add_test(
-  TEST_NAME axisym_solid.shell_unsteady
-  DEPENDS_ON shell_unsteady
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata)
-
-message(VERBOSE "Leaving shell_unsteady subdirectory")
+message(VERBOSE "Leaving axisym_solid subdirectory")
 # ------------------------------------------------------------------------------

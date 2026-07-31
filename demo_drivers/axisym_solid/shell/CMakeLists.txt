@@ -9,10 +9,10 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
 endif()
 # ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered axisym_solid subdirectory")
+message(VERBOSE "Entered shell subdirectory")
 
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
-project(axisym_solid C CXX Fortran)
+project(shell C CXX Fortran)
 
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
@@ -38,5 +38,5 @@ oomph_add_test(
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata)
 
-message(VERBOSE "Leaving axisym_solid subdirectory")
+message(VERBOSE "Leaving shell subdirectory")
 # ------------------------------------------------------------------------------
