@@ -80,10 +80,10 @@ namespace GlobalSimSettings
   string result_folder = "RESLT";
 
   /// Flag for using a pressure formulation
-  unsigned use_pressure_formulation = 0;
+  bool use_pressure_formulation = false;
 
   /// If using a pressure formulation, is the solid incompressible?
-  unsigned incompressible = 0;
+  bool incompressible = false;
 
   // Number of elements in radial direction
   unsigned n_radial = 10;
@@ -688,13 +688,13 @@ int main(int argc, char* argv[])
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
 
+  string str_temp_solid_pressure;
   CommandLineArgs::specify_command_line_flag(
-    "--use_solid_pressure",
-    &GlobalSimSettings::use_pressure_formulation,
-    "Use solid pressure");
+    "--use_solid_pressure", &str_temp_solid_pressure, "Use solid pressure");
 
+  string str_temp_incompressible;
   CommandLineArgs::specify_command_line_flag(
-    "--incompressible", &GlobalSimSettings::incompressible, "Incompressible");
+    "--incompressible", &str_temp_incompressible, "Incompressible");
 
   CommandLineArgs::specify_command_line_flag(
     "--poisson", &GlobalPhysicalVariables::nu, "Poisson");
@@ -702,20 +702,25 @@ int main(int argc, char* argv[])
   CommandLineArgs::parse_and_assign();
   CommandLineArgs::doc_specified_flags();
 
+  istringstream(str_temp_solid_pressure) >> std::boolalpha >>
+    GlobalSimSettings::use_pressure_formulation;
+  istringstream(str_temp_incompressible) >> std::boolalpha >>
+    GlobalSimSettings::incompressible;
+
   // If the Poisson ratio has been set to 0.5, but the use_pressure_formulation
-  // and/or incompressible flags are 0, set them to 1
+  // and/or incompressible flags are false, set them to true
   if (std::fabs(GlobalPhysicalVariables::nu - 0.5) < 1.0e-10 &&
       !(GlobalSimSettings::incompressible &&
         GlobalSimSettings::use_pressure_formulation))
   {
     std::string warning_message =
       "Inconsistency: Poisson ratio has been set to 0.5 but the  \n"
-      "use_pressure_formulation and/or incompressible flags are 0. \n"
-      "Setting both of these to 1 to proceed.";
+      "use_pressure_formulation and/or incompressible flags are false. \n"
+      "Setting both of these to true to proceed.";
     OomphLibWarning(
       warning_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    GlobalSimSettings::use_pressure_formulation = 1;
-    GlobalSimSettings::incompressible = 1;
+    GlobalSimSettings::use_pressure_formulation = true;
+    GlobalSimSettings::incompressible = true;
   }
 
   // If the incompressibility flag has been set, we must use the solid pressure
@@ -724,12 +729,20 @@ int main(int argc, char* argv[])
       !GlobalSimSettings::use_pressure_formulation)
   {
     std::string warning_message =
-      "Inconsistency: The incompressibility flag is 1 but we are not using \n"
-      "the solid pressure formulation. Setting use_solid_pressure to 1 to "
+      "Inconsistency: The incompressibility flag is true but we are not using "
+      "\n"
+      "the solid pressure formulation. Setting use_solid_pressure to true to "
       "proceed. \n";
     OomphLibWarning(
       warning_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    GlobalSimSettings::use_pressure_formulation = 1;
+    GlobalSimSettings::use_pressure_formulation = true;
+  }
+
+  // Set the Poisson ratio to 0.5 if incompressibility has been specified. This
+  // is solely for the purpose of output
+  if (GlobalSimSettings::incompressible)
+  {
+    GlobalPhysicalVariables::nu = 0.5;
   }
 
   // End consistency checks

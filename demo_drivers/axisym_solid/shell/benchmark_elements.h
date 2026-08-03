@@ -34,11 +34,8 @@
 namespace oomph
 {
   //=============================================================
-  /// A class for all isoparametric elements that solve the
-  /// Poisson equations.
-  /// \f[ \frac{\partial^2 u}{\partial x_i^2} = f(x_j) \f]
-  /// This contains the generic maths. Shape functions, geometric
-  /// mapping etc. must get implemented in derived class.
+  /// A class for elements to solve the 1D radial displacement ODE
+  /// in the spherical shell compression benchmark problem.
   //=============================================================
   template<unsigned N_NODE1D>
   class ShellBenchmarkElement : public virtual QElement<1, N_NODE1D>,
@@ -53,12 +50,6 @@ namespace oomph
 
     /// Broken assignment operator
     void operator=(const ShellBenchmarkElement&) = delete;
-
-    // /// Return the index at which the unknown value is stored
-    // virtual inline unsigned u_index_shell_benchmark() const
-    // {
-    //   return u_index_shell_benchmark;
-    // }
 
     ///  Required  # of `values' (pinned or dofs) at node n
     inline unsigned required_nvalue(const unsigned& n) const
@@ -130,10 +121,7 @@ namespace oomph
 
 
   //======================================================================
-  /// A class for elements that allow the imposition of an
-  /// applied flux on the boundaries of UnsteadyHeat elements.
-  /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
-  /// policy class.
+  /// Face elements for the application of an external pressure
   //======================================================================
   class ShellBenchmarkPressureElement : public virtual PointElement,
                                         public virtual FaceElement

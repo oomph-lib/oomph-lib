@@ -1,7 +1,7 @@
 \mainpage Nonlinear solid mechanics with axisymmetry
 
 \section theory Theory
-This example considers the solution of the PVD equations introduced in a 
+This example considers the solution of the PVD equations introduced in a
 <A HREF="../../solid/solid_theory/html/index.html">previous tutorial</A>, but
 in cylindrical coordinates and under the assumption of axisymmetry. In this case, 
 the undeformed and deformed position vectors, denoted by \f$\mathbf{r}(\xi^i,t)\f$ and
@@ -50,15 +50,15 @@ Recall the non-dimensional PVD equation, presented here with an additional mass 
 \f]
 
 Note that in the implementation of these equations \f$\eta_M = 0\f$ by default. 
-Remebering also the following property which holds due to symmetry of the
-second Piola stress tensor:
+The following property holds due to the definition of the Green-Lagrange strain tensor \f$\gamma_{ij}\f$
+and the symmetry of the second Piola stress tensor \f$\sigma^{ij}\f$:
 
 \f[
 \sigma^{ij}\delta\gamma_{ij} = \sigma^{ij}\delta\left[\frac{1}{2}(G_{ij} - g_{ij})\right]
- = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j},
+ = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j}.
 \f]
 
-the PVD equation becomes:
+Hence, the PVD equation becomes:
 
 \f[
 \begin{aligned}
@@ -84,8 +84,8 @@ material, the strain energy density (non-dimensionalised by the elastic modulus)
 \f[
 W = \frac{1}{4(1+\nu)}(I_1-3).
 \f]
-A generalization to the above, proposed by Attard ("Finite strain--isotropic hyperelasticity", Int. J. Solids Struct. 2003), 
-for compressible materials is:
+A generalization to the above, proposed by Attard ("Finite strain--isotropic hyperelasticity", International Journal of Solids
+and Structures 2003), for compressible materials is:
 \f[
 W = \frac{1}{2(1+\nu)}\left[\frac{1}{2}(I_1-3) - \frac{1}{2}\log(I_3) + \frac{\nu}{1-2\nu}\log\left(\sqrt{I_3}\right)^2\right].
 \f]
@@ -163,7 +163,7 @@ using 1D finite elements.
 The figure below shows plots of the deformed position \f$\hat{R}(\hat{r})\f$ against the undeformed position \f$\hat{r}\f$ 
 for a range of Poisson ratio and external pressure values. The solid blue lines were obtained using the 2D axisymmetric elements,
 while the dashed blue lines were obtained under the assumption of spherical symmetry, following the approach outlined in sections 
-\ref incompressible_case (for \f$\nu = 0.5\f$) and \ref compressible_case (for \f$\nu < 0.5\f$). Strong agreement between the two 
+\ref incompressible_case (for \f$\nu = 0.5\f$) and \ref compressible_case (for \f$\nu < 0.5\f$). Excellent agreement between the two 
 approaches is found across all parameter sets considered.
 
 @I w 0.75\textwidth benchmark "Results of the benchmark test for various Poisson ratio and external pressure values. "
@@ -218,9 +218,9 @@ at \f$r = 0\f$ and pinned axial position at \f$z = 0\f$.
 The driver code begins by specifying command line arguments for whether the solid pressure formulation is to be used, whether incompressibility should be enforced,
 the value of the material's Poisson ratio and the external pressure applied on the outer face of the shell.
 \skipline start_main
-\until CommandLineArgs::doc_specified_flags();
+\until GlobalSimSettings::incompressible;
 Following this, a number of consistency checks are made. For example, if incompressibility has been specified then a check is made that the solid pressure formulation
-has also been selected. If this is not the case, a warning is issued and the flag \c GlobalSimSettings::use_pressure_formulation is set to 1.
+has also been selected. If this is not the case, a warning is issued and the flag \c GlobalSimSettings::use_pressure_formulation is set to \c true.
 \skipline // If the Poisson ratio has been 
 \until // End consistency checks
 Finally, both the main and auxiliary problems are created and the Newton solve followed by output is done in each case.

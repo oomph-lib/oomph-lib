@@ -195,7 +195,7 @@ namespace GlobalSimSettings
   string result_folder = "RESLT";
 
   /// Flag for using a pressure formulation
-  unsigned use_pressure_formulation = 0;
+  bool use_pressure_formulation = false;
 
   // Number of elements in radial direction
   unsigned n_radial = 14;
@@ -567,10 +567,9 @@ int main(int argc, char* argv[])
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
 
+  string str_temp;
   CommandLineArgs::specify_command_line_flag(
-    "--use_solid_pressure",
-    &GlobalSimSettings::use_pressure_formulation,
-    "Use solid pressure");
+    "--use_solid_pressure", &str_temp, "Use solid pressure");
 
   CommandLineArgs::specify_command_line_flag(
     "--poisson", &GlobalPhysicalVariables::nu, "Poisson");
@@ -580,6 +579,9 @@ int main(int argc, char* argv[])
 
   CommandLineArgs::parse_and_assign();
   CommandLineArgs::doc_specified_flags();
+
+  istringstream(str_temp) >> std::boolalpha >>
+    GlobalSimSettings::use_pressure_formulation;
 
   // Create the problem
   if (GlobalSimSettings::use_pressure_formulation)

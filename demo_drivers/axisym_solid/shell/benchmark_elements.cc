@@ -30,14 +30,6 @@
 namespace oomph
 {
   //======================================================================
-  /// Set the data for the number of Variables at each node, always one
-  /// in every case
-  //======================================================================
-  // template<unsigned DIM, unsigned NNODE_1D>
-  // const unsigned QPoissonElement<DIM, NNODE_1D>::Initial_Nvalue = 1;
-
-
-  //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
   //======================================================================
   template<unsigned NNODE_1D>
