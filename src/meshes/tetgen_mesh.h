@@ -363,7 +363,9 @@ namespace oomph
       // If we can't split the boundaries add the flag
       if (can_boundaries_be_split == false)
       {
-        input_string << "Y";
+       input_string << "YY"; // Note that the second Y appears
+                             // to be required; determined by trial and
+                             // error. 
       }
 
       // Now convert to a C-style string
