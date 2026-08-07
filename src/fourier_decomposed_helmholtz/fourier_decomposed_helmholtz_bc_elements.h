@@ -320,7 +320,7 @@ namespace oomph
       // Set the test functions equal to the shape functions
       test = psi;
       dtest_ds = dpsi_ds;
-      
+
       // Return the value of the jacobian
       return J_eulerian(s);
     }

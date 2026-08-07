@@ -1387,7 +1387,7 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
-    
+
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
@@ -1673,7 +1673,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -1696,7 +1696,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
