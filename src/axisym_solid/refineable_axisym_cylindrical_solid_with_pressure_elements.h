@@ -53,7 +53,7 @@ namespace oomph
         ElementWithZ2ErrorEstimator()
     {
     }
-    
+
     /// Call the residuals including hanging node cases
     void fill_in_contribution_to_residuals_axisym_pvd_with_pressure(
       Vector<double>& residuals,
@@ -455,7 +455,7 @@ namespace oomph
   };
 
   //==============================================================
-  /// FaceGeometry of the 
+  /// FaceGeometry of the
   /// RefineableQAxisymmetricCylindricalPVDWithPressureElement
   //==============================================================
   template<>
