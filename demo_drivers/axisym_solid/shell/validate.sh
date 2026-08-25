@@ -22,8 +22,8 @@ mkdir RESLT
 ../shell >OUTPUT_axisym_solid
 echo "done"
 echo " " >>validation.log
-echo "Axisym solid demo validation" >>validation.log
-echo "----------------------------" >>validation.log
+echo "Axisym solid demo validation (adaptive and non-adaptive)" >>validation.log
+echo "--------------------------------------------------------" >>validation.log
 echo " " >>validation.log
 echo "Validation directory: " >>validation.log
 echo " " >>validation.log
@@ -35,13 +35,6 @@ cat RESLT/bulk_soln_nu_0.4_pres_0.05.dat > shell_results.dat
 echo "Running adaptive axisym solid validation"
 ../shell_adaptive >OUTPUT_axisym_solid
 echo "done"
-echo " " >>validation.log
-echo "Axisym solid demo validation" >>validation.log
-echo "----------------------------" >>validation.log
-echo " " >>validation.log
-echo "Validation directory: " >>validation.log
-echo " " >>validation.log
-echo "  " $(pwd) >>validation.log
 echo " " >>validation.log
 cat RESLT/bulk_soln_nu_0.4_pres_0.05.dat > shell_adaptive_results.dat
 

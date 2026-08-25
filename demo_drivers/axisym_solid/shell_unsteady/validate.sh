@@ -21,8 +21,8 @@ mkdir RESLT
 ../shell_unsteady --Nsteps 10 >OUTPUT_axisym_solid
 echo "done"
 echo " " >>validation.log
-echo "Axisym solid demo validation" >>validation.log
-echo "----------------------------" >>validation.log
+echo "Unsteady axisym solid demo validation" >>validation.log
+echo "-------------------------------------" >>validation.log
 echo " " >>validation.log
 echo "Validation directory: " >>validation.log
 echo " " >>validation.log
