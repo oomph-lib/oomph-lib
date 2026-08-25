@@ -20,9 +20,7 @@ endif()
 
 include(CTest)
 
-set(SUBDIRS
-    shell
-    shell_unsteady)
+set(SUBDIRS shell shell_unsteady)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})

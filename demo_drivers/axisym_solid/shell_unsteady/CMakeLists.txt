@@ -23,7 +23,8 @@ include(CTest)
 oomph_add_executable(
   NAME shell_unsteady
   SOURCES shell_unsteady.cc
-  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
+  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
