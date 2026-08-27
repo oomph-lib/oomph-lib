@@ -675,7 +675,7 @@ namespace oomph
     {
       // If n_plot is not provided, assume equal to 5 by default
       const unsigned n_plot = 5;
-      output(file_pt,n_plot);
+      output(file_pt, n_plot);
     }
 
     /// Output function

@@ -23,12 +23,14 @@ include(CTest)
 oomph_add_executable(
   NAME shell
   SOURCES shell.cc benchmark_elements.cc
-  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
+  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME shell_adaptive
   SOURCES shell_adaptive.cc benchmark_elements.cc
-  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes oomph::generic)
+  LIBRARIES oomph::axisym_solid oomph::constitutive oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

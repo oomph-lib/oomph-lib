@@ -4,17 +4,15 @@ message(VERBOSE "Entered axisym_solid subdirectory")
 
 # Define the headers
 set(HEADERS
-axisym_cylindrical_solid_elements.h
-refineable_axisym_cylindrical_solid_elements.h
-axisym_cylindrical_solid_with_pressure_elements.h
-refineable_axisym_cylindrical_solid_with_pressure_elements.h
-axisym_cylindrical_solid_traction_elements.h
-)
+    axisym_cylindrical_solid_elements.h
+    refineable_axisym_cylindrical_solid_elements.h
+    axisym_cylindrical_solid_with_pressure_elements.h
+    refineable_axisym_cylindrical_solid_with_pressure_elements.h
+    axisym_cylindrical_solid_traction_elements.h)
 
 # Define the sources
-set(SOURCES
-axisym_cylindrical_solid_elements.cc
-refineable_axisym_cylindrical_solid_elements.cc)
+set(SOURCES axisym_cylindrical_solid_elements.cc
+    refineable_axisym_cylindrical_solid_elements.cc)
 
 # Set the name of the library
 set(LIBNAME axisym_solid)
