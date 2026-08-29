@@ -1,0 +1,257 @@
+\mainpage Nonlinear solid mechanics with axisymmetry
+
+\section theory Theory
+This example considers the solution of the PVD equations introduced in a
+<A HREF="../../solid/solid_theory/html/index.html">previous tutorial</A>, but
+in cylindrical coordinates and under the assumption of axisymmetry. In this case, 
+the undeformed and deformed position vectors, denoted by \f$\mathbf{r}(\xi^i,t)\f$ and
+\f$\mathbf{R}(\xi^i,t)\f$ respectively, may be written as:
+
+\f[
+\mathbf{r}(\xi^{i},t) = \begin{bmatrix}
+\xi^0 \cos(\xi^2) \\
+\xi^0 \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}, \hspace{1cm}
+\mathbf{R}(\xi^{i},t) = \begin{bmatrix}
+R(\xi^0,\xi^1,t) \cos(\xi^2) \\
+Z(\xi^0,\xi^1,t) \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}.
+\f]
+
+The undeformed and deformed covariant metric tensors, \f$g_{ij}\f$ and \f$G_{ij}\f$
+respectively, are therefore:
+
+\f[
+g_{ij} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & {\xi^0}^2
+\end{bmatrix}, \hspace{1cm}
+G_{ij} = \begin{bmatrix}
+(\frac{\partial R}{\partial \xi^0})^2 + (\frac{\partial Z}{\partial \xi^0})^2 &
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} & 0 \\
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} &
+(\frac{\partial R}{\partial \xi^1})^2 + (\frac{\partial Z}{\partial \xi^1})^2 & 0 \\
+0 & 0 & R^2
+\end{bmatrix}
+\f]
+
+Recall the non-dimensional PVD equation, presented here with an additional mass damping term,
+\f$\eta_M \partial_t\mathbf{R}\f$:
+
+\f[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial{\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ @E[nondim_continuous_pdv]@
+\f]
+
+Note that in the implementation of these equations \f$\eta_M = 0\f$ by default. 
+The following property holds due to the definition of the Green-Lagrange strain tensor \f$\gamma_{ij}\f$
+and the symmetry of the second Piola stress tensor \f$\sigma^{ij}\f$:
+
+\f[
+\sigma^{ij}\delta\gamma_{ij} = \sigma^{ij}\delta\left[\frac{1}{2}(G_{ij} - g_{ij})\right]
+ = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j}.
+\f]
+
+Hence, the PVD equation becomes:
+
+\f[
+\begin{aligned}
+\int_{v} \left\{ \sum_{i,j=1}^2 \sigma^{ij}\left[\frac{\partial R}{\partial \xi^i}\frac{\partial(\delta R)}{\partial \xi^j}
+ + \frac{\partial Z}{\partial \xi^i}\frac{\partial(\delta Z)}{\partial \xi^j}\right] + \sigma^{33}R\delta R
+ - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial {\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} dv \\
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ @E[nondim_axisym_continuous_pdv]@
+\end{aligned}
+\f]
+
+The following example considers a steady state solution (\f$\partial \mathbf{R}/\partial t = \partial^2 \mathbf{R}/\partial t^2 = 0\f$)
+to these equations, though the solution to a time-dependent problem using the same underlying elements is 
+discussed <A HREF="../spherical_shell_unsteady/html/index.html">here</A>.
+
+\section spherical_shell_compression Demo problem: Compression of a hyperelastic spherical shell
+
+As a demonstration, we consider the compression of hyperelastic spherical shell which has an inner radius \f$a\f$ and thickness \f$h\f$
+when stress-free, under an external pressure \f$p_{ext}\f$. The shell is assumed to obey the Neo-Hookean consitutive law. For an incompressible
+material, the strain energy density (non-dimensionalised by the elastic modulus) is given by:
+\f[
+W = \frac{1}{4(1+\nu)}(I_1-3).
+\f]
+A generalization to the above, proposed by Attard ("Finite strain--isotropic hyperelasticity", International Journal of Solids
+and Structures 2003), for compressible materials is:
+\f[
+W = \frac{1}{2(1+\nu)}\left[\frac{1}{2}(I_1-3) - \frac{1}{2}\log(I_3) + \frac{\nu}{1-2\nu}\log\left(\sqrt{I_3}\right)^2\right].
+\f]
+In the above, \f$ \nu\f$ is the Poisson ratio and \f$(I_1,I_2,I_3)\f$ are the strain invariants introduced previously. The incompressible
+and compressible cases shall now be considered seperately.
+\subsection incompressible_case Incompressible case
+When the material is incompressible, some analytical progress can be made by imposing spherical symmetry.
+Denoting \f$(\hat{r},\theta,\phi)\f$ and \f$(\hat{R},\Theta,\Phi)\f$ as the spherical coordinates in the undeformed and deformed 
+configurations, respectively, the Cauchy principal stresses, denoted here as \f$S^{\hat{R}\hat{R}}\f$, \f$S^{\Theta\Theta}\f$ and \f$S^{\Phi\Phi}\f$ are given by:
+\f[
+S^{\hat{R}\hat{R}} = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 - p_s, \hspace{1cm}
+S^{\Theta\Theta} = S^{\Phi\Phi} = \frac{1}{2(1+\nu)}\lambda_{\Theta}^2 - p_s,
+\f]
+where \f$\lambda_{\hat{R}} = d\hat{R}/d\hat{r}\f$ and \f$\lambda_{\Theta} = \lambda_{\Phi} = \hat{R}/\hat{r}\f$ are the principal stretches
+and \f$p_s\f$ is the solid pressure, the Lagrange multiplier term introduced in the <A HREF="../../solid/solid_theory/html/index.html">solid theory tutorial</A>
+to enforce incompressibility. The incompressibility condition is \f$\lambda_{\hat{R}}\lambda_{\hat{\Theta}}^2 = 1\f$, from which the the dependence \f$\hat{R}(\hat{r})\f$ can
+be derived as:
+\f[
+  \hat{R}^2 d\hat{R} = \hat{r}^2 d\hat{r} \longrightarrow \hat{R}_{o}^3 - \hat{R}_{i}^3 = (a+h)^3 - a_{i}^3,
+\f]
+where \f$\hat{R}_{i}\f$ and \f$\hat{R}_{o}\f$ denote the outer and inner radii of the shell, respectively, when under compression.
+A second equation for the two unknowns \f$\hat{R}_{i}\f$, \f$\hat{R}_{o}\f$ can be derived by first obtaining an expression for
+the solid pressure \f$p_s\f$ from the equilibrium equation:
+\f[
+  \frac{d S^{\hat{R}\hat{R}}}{d\hat{R}} + \frac{2}{\hat{R}}(S^{\hat{R}\hat{R}} - S^{\Theta\Theta}) = 0 \longrightarrow
+  p_s = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 + \frac{1}{1+\nu}\int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R}
+\f]
+The integral can be evaluated by changing the integration variable to \f$\lambda_{\Theta}\f$ and using the
+incompressibility condition as follows:
+\f[
+  \int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R} = 
+  \int\left(\lambda_{\Theta}^{-4}-\lambda_{\Theta}^2\right)\left(\lambda_{\Theta}-\lambda_{\Theta}^4\right)^{-1}d\lambda_{\Theta} =
+  -\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\f]
+The radial principal Cauchy stress is therefore:
+\f[
+  S^{\hat{R}\hat{R}} = \frac{1}{1+\nu}\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\f]
+After applying the boundary conditions,
+\f$S^{\hat{R}\hat{R}} = 0\f$ on the inside face and \f$S^{\hat{R}\hat{R}} = -p_{ext}\f$ on the outside face, the second equation
+connecting \f$\hat{R}_{i}\f$ and \f$\hat{R}_{o}\f$ is found to be:
+\f[
+  p_{ext} = \frac{1}{1+\nu}\left[\frac{1}{4}\left(\frac{a}{\hat{R}_{i}}\right)^4 +
+   \frac{a}{\hat{R}_{i}}
+   -\frac{1}{4}\left(\frac{a+h}{\hat{R}_{o}}\right)^4 -\frac{a+h}{\hat{R}_{o}}\right].
+\f]
+In the driver code discussed below, \f$\hat{R}_{i}\f$ and \f$\hat{R}_{o}\f$ are found via Newton iteration.
+
+\subsection compressible_case Compressible case
+Although less analytical progress is possible in the compressible case, the problem can still be simplified down to
+a single ODE for \f$\hat{R}(\hat{r})\f$ using spherical symmetry. If the material obeys the compressible Neo-Hookean 
+constitutive law, then the Cauchy principal stresses are:
+\f[
+  S^{\hat{R}\hat{R}} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+  \hspace{0.5cm}
+  S^{\Theta\Theta} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{\Theta}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+\f]
+where \f$J = \sqrt{I_3} = \lambda_{\hat{R}}\lambda_{\Theta}^2\f$. Substituting these expressions into the equilibrium equation gives:
+\f[
+  \frac{d}{d\hat{R}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log J\right]\right\}
+  + \frac{2}{\hat{R}}\frac{1}{J}(\lambda_{\hat{R}}^2 - \lambda_{\Theta}^2) = 0.
+\f]
+In the undeformed frame, this equation reads:
+\f[
+\frac{d}{d\hat{r}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right]\right\}
++ \frac{2}{\hat{R}}\left[\left(\frac{\lambda_{\hat{R}}}{\lambda_{\Theta}}\right)^2-1\right] = 0
+  \ \ \ \ \ \ \ \ @E[spherical_symmetry_ODE]@
+\f]
+
+In this tutorial, a benchmark test is performed by solving equation (@R[spherical_symmetry_ODE]@) is solved seperately
+using 1D finite elements.
+
+\section results Results
+
+The figure below shows plots of the deformed position \f$\hat{R}(\hat{r})\f$ against the undeformed position \f$\hat{r}\f$ 
+for a range of Poisson ratio and external pressure values. The solid blue lines were obtained using the 2D axisymmetric elements,
+while the dashed blue lines were obtained under the assumption of spherical symmetry, following the approach outlined in sections 
+\ref incompressible_case (for \f$\nu = 0.5\f$) and \ref compressible_case (for \f$\nu < 0.5\f$). Excellent agreement between the two 
+approaches is found across all parameter sets considered.
+
+@I w 0.75\textwidth benchmark "Results of the benchmark test for various Poisson ratio and external pressure values. "
+
+\section namespaces Global parameters and functions
+
+As is standard, the namespaces \c GlobalPhysicalVariables and \c GlobalSimSettings
+are used to define the physical parameters and simulation parameters, respectively,
+for the problem.
+\dontinclude shell.cc
+\skipline start_namespace
+\until // namespace GlobalSimSettings
+
+\section meshing The mesh
+
+The mesh for this problem can be constructed simply by upgrading the existing \c TwoDAnnularMesh to a solid mesh.
+\skipline start_mesh
+\until // End mesh
+
+\section problem_class The problem class
+
+The driver contains two problem classes. The first is the main problem using the 2D axisymmetric elements, while the second is an
+auxiliary problem to solve equation (@R[spherical_symmetry_ODE]@) in the compressible case or find the unknowns \f$\hat{R}_{i}\f$ and 
+\f$\hat{R}_{o}\f$ in the incompressible case. Since the latter of these is relatively
+standard, only the former is documented here. The problem class declaration is shown below.
+\skipline start_problem
+\until };
+
+\section constructor The problem constructor
+The constructor begins with assigning the output directory and creating the bulk and surface meshes. The function \c create_boundary_elements()
+is then called to create traction elements on the outer boundary of the shell. 
+\skipline start_constructor
+\until build_global_mesh()
+
+Following this, a constitutive law is selected. Depending on the flag \c GlobalSimSettings::is_incompressible, this will either be the
+incompressible or compressible version of the NeoHookean constiutive law. The function \c complete_problem_setup() (discussed below) is then
+called and equation numbers are assigned.
+\skipline // Define a constitutive law 
+\until // end constructor
+
+\section complete Completing the problem setup
+To complete the problem setup, the pointer to the constitutive law is passed to each of the bulk elements. An attempt is made to cast to the version of 
+the bulk element that contains pressure degrees of freedom, the \c QAxisymmetricCylindricalPVDWithPressureElement. If this cast is successful, then
+the run is using the solid pressure formulation and, depending on the value of \c GlobalSimSettings::is_incompressible, incompressibility may be enforced
+using the element's member function \c set_incompressible(). The pointer to the external pressure function is then passed to each of the interface elements
+for application of the traction boundary condition on the outer surface. Finally, The Dirichlet boundary conditions for this problem are set: pinned radial position 
+at \f$r = 0\f$ and pinned axial position at \f$z = 0\f$.
+\skipline start_of_complete_problem_setup
+\until // End complete_problem_setup
+
+\section driver The driver code
+The driver code begins by specifying command line arguments for whether the solid pressure formulation is to be used, whether incompressibility should be enforced,
+the value of the material's Poisson ratio and the external pressure applied on the outer face of the shell.
+\skipline start_main
+\until GlobalSimSettings::incompressible;
+Following this, a number of consistency checks are made. For example, if incompressibility has been specified then a check is made that the solid pressure formulation
+has also been selected. If this is not the case, a warning is issued and the flag \c GlobalSimSettings::use_pressure_formulation is set to \c true.
+\skipline // If the Poisson ratio has been 
+\until // End consistency checks
+Finally, both the main and auxiliary problems are created and the Newton solve followed by output is done in each case.
+\skipline // Create the problem
+\until // end main
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/axisym_solid/shell/
+">
+demo_drivers/axisym_solid/shell/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/axisym_solid/shell/shell.cc
+">
+demo_drivers/axisym_solid/shell/shell.cc
+</A>
+</CENTER>
+- A refineable version of the driver code can be found at:
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/axisym_solid/shell/shell_adaptive.cc
+">
+demo_drivers/axisym_solid/shell/shell_adaptive.cc
+</A>
+</CENTER>

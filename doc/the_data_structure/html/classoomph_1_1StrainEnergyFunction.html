@@ -137,8 +137,10 @@ $(function() {
  <div class="center">
   <img src="classoomph_1_1StrainEnergyFunction.png" usemap="#oomph::StrainEnergyFunction_map" alt=""/>
   <map id="oomph::StrainEnergyFunction_map" name="oomph::StrainEnergyFunction_map">
-<area href="classoomph_1_1GeneralisedMooneyRivlin.html" title="Generalisation of Mooney Rivlin constitutive law to compressible media as suggested on p...." alt="oomph::GeneralisedMooneyRivlin" shape="rect" coords="0,56,200,80"/>
-<area href="classoomph_1_1MooneyRivlin.html" title="MooneyRivlin strain-energy function. with constitutive parameters C1 and C2:" alt="oomph::MooneyRivlin" shape="rect" coords="210,56,410,80"/>
+<area href="classoomph_1_1GeneralisedMooneyRivlin.html" title="Generalisation of Mooney Rivlin constitutive law to compressible media as suggested on p...." alt="oomph::GeneralisedMooneyRivlin" shape="rect" coords="0,56,212,80"/>
+<area href="classoomph_1_1IncompressibleNeoHookean.html" title="Neo Hookean constitutive law (incompressible version) No argument for Poisson ratio here - it must be..." alt="oomph::IncompressibleNeoHookean" shape="rect" coords="222,56,434,80"/>
+<area href="classoomph_1_1MooneyRivlin.html" title="MooneyRivlin strain-energy function. with constitutive parameters C1 and C2:" alt="oomph::MooneyRivlin" shape="rect" coords="444,56,656,80"/>
+<area href="classoomph_1_1NeoHookean.html" title="Neo Hookean constitutive law in terms of Young&#39;s modulus and Poisson ratio." alt="oomph::NeoHookean" shape="rect" coords="666,56,878,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -306,7 +308,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Return the derivatives of the strain energy function with respect to the strain invariants. Default version is to use finite differences. </p>
 
-<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#a01ff4e87c76813d6a9e528bd896a2bae">oomph::MooneyRivlin</a>, and <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#aa0ca6d085deb4758119ff68222a27a8b">oomph::GeneralisedMooneyRivlin</a>.</p>
+<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#a01ff4e87c76813d6a9e528bd896a2bae">oomph::MooneyRivlin</a>, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#aa0ca6d085deb4758119ff68222a27a8b">oomph::GeneralisedMooneyRivlin</a>, <a class="el" href="classoomph_1_1NeoHookean.html#a7265df6414c66f76f1aca6a658d47db9">oomph::NeoHookean</a>, and <a class="el" href="classoomph_1_1IncompressibleNeoHookean.html#ab3a2cba59caf49fd369b6eb4920aa266">oomph::IncompressibleNeoHookean</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00102">102</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
@@ -341,9 +343,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. </p>
 
-<p>Implemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#ad5cd489e1bc8f4cfe1f147135ffe21af">oomph::MooneyRivlin</a>, and <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2b41a132a90707ee2901787d398f45f8">oomph::GeneralisedMooneyRivlin</a>.</p>
+<p>Implemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#ad5cd489e1bc8f4cfe1f147135ffe21af">oomph::MooneyRivlin</a>, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2b41a132a90707ee2901787d398f45f8">oomph::GeneralisedMooneyRivlin</a>, <a class="el" href="classoomph_1_1NeoHookean.html#a69f52b7692141659eeb536b0410e633b">oomph::NeoHookean</a>, and <a class="el" href="classoomph_1_1IncompressibleNeoHookean.html#a315a1c03acb6a4e8cf3aa29866e84f9b">oomph::IncompressibleNeoHookean</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00861">oomph::IsotropicStrainEnergyFunctionConstitutiveLaw::requires_incompressibility_constraint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l01016">oomph::IsotropicStrainEnergyFunctionConstitutiveLaw::requires_incompressibility_constraint()</a>.</p>
 
 </div>
 </div>
@@ -373,11 +375,11 @@ Public Member Functions</h2></td></tr>
 
 <p>Return the strain energy in terms of the strain tensor. </p>
 
-<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#a9411c5fbb920d071e83a9e52fb8b60d1">oomph::MooneyRivlin</a>, and <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a91ff4fa7c19304c98f9a0017c22747a9">oomph::GeneralisedMooneyRivlin</a>.</p>
+<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#a9411c5fbb920d071e83a9e52fb8b60d1">oomph::MooneyRivlin</a>, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a91ff4fa7c19304c98f9a0017c22747a9">oomph::GeneralisedMooneyRivlin</a>, <a class="el" href="classoomph_1_1NeoHookean.html#aa14d28b0b4228333d5428fb42da9bc32">oomph::NeoHookean</a>, and <a class="el" href="classoomph_1_1IncompressibleNeoHookean.html#a9791c63737b52d1e644048687988628b">oomph::IncompressibleNeoHookean</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00058">58</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00102">derivatives()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00157">oomph::MooneyRivlin::W()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00248">oomph::GeneralisedMooneyRivlin::W()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00102">derivatives()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00157">oomph::MooneyRivlin::W()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00248">oomph::GeneralisedMooneyRivlin::W()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00340">oomph::NeoHookean::W()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00418">oomph::IncompressibleNeoHookean::W()</a>.</p>
 
 </div>
 </div>
@@ -407,7 +409,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Return the strain energy in terms of the strain invariants. </p>
 
-<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#aa610beb4e7b06dc3aa57bbc552ca0b80">oomph::MooneyRivlin</a>, and <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2edff387e97632febd90938b27a30a14">oomph::GeneralisedMooneyRivlin</a>.</p>
+<p>Reimplemented in <a class="el" href="classoomph_1_1MooneyRivlin.html#aa610beb4e7b06dc3aa57bbc552ca0b80">oomph::MooneyRivlin</a>, <a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2edff387e97632febd90938b27a30a14">oomph::GeneralisedMooneyRivlin</a>, <a class="el" href="classoomph_1_1NeoHookean.html#ad42240654bea3feac8a9a1c6d6d52860">oomph::NeoHookean</a>, and <a class="el" href="classoomph_1_1IncompressibleNeoHookean.html#a07e40853a91a7721adb6063e35bca4e3">oomph::IncompressibleNeoHookean</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00072">72</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
 
@@ -444,7 +446,7 @@ Public Member Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Tue May 19 2026 10:05:42
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Aug 29 2026 14:17:08
         </div>
       </div>
     </footer>

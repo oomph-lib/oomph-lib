@@ -1,0 +1,237 @@
+\doxysection{oomph\+::Incompressible\+Neo\+Hookean Class Reference}
+\hypertarget{classoomph_1_1IncompressibleNeoHookean}{}\label{classoomph_1_1IncompressibleNeoHookean}\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+
+
+Neo Hookean constitutive law (incompressible version) No argument for Poisson ratio here -\/ it must be equal to 0.\+5.  
+
+
+
+
+{\ttfamily \#include $<$constitutive\+\_\+laws.\+h$>$}
+
+Inheritance diagram for oomph\+::Incompressible\+Neo\+Hookean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1IncompressibleNeoHookean}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_aa43270ea542174c365b694cee0c3eb3a}{Incompressible\+Neo\+Hookean}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The constructor takes Young\textquotesingle{}s modulus as an argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a7b9c0e8260f3a6375b13211f8aa43b5c}{Incompressible\+Neo\+Hookean}} ()
+\begin{DoxyCompactList}\small\item\em Argument-\/free constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a2bc4229abf1f7aa1470768a70e6a38c3}{\texorpdfstring{$\sim$}{\string~}\+Incompressible\+Neo\+Hookean}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a9791c63737b52d1e644048687988628b}{W}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&gamma)
+\begin{DoxyCompactList}\small\item\em Return the strain energy in terms of strain tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a07e40853a91a7721adb6063e35bca4e3}{W}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&I)
+\begin{DoxyCompactList}\small\item\em Return the strain energy in terms of the strain invariants. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_ab3a2cba59caf49fd369b6eb4920aa266}{derivatives}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&I, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+WdI}})
+\begin{DoxyCompactList}\small\item\em Return the derivatives of the strain energy function with respect to the strain invariants. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a315a1c03acb6a4e8cf3aa29866e84f9b}{requires\+\_\+incompressibility\+\_\+constraint}} ()
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. True. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction}{oomph\+::\+Strain\+Energy\+Function}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a027b9babcedcefb3fd06a6deace8f6b6}{Strain\+Energy\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Constructor takes no arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a755d306f96fc59147c6cb148456e364e}{\texorpdfstring{$\sim$}{\string~}\+Strain\+Energy\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a467a3b01986940aba8c8aff2715bf086}{derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&gamma, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+Wdgamma}})
+\begin{DoxyCompactList}\small\item\em Return the derivatives of the strain energy function with respect to the components of the strain tensor (default is to use finite differences). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_a9ac8759097c4b95fbdc0b93415cc1201}{E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean_adea099948bc143735dea07cc3e36f1cc}{Must\+\_\+delete\+\_\+e}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating if Young\textquotesingle{}s modulus must be deleted in destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Neo Hookean constitutive law (incompressible version) No argument for Poisson ratio here -\/ it must be equal to 0.\+5. 
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00396}{396}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_aa43270ea542174c365b694cee0c3eb3a}\label{classoomph_1_1IncompressibleNeoHookean_aa43270ea542174c365b694cee0c3eb3a} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!IncompressibleNeoHookean@{IncompressibleNeoHookean}}
+\index{IncompressibleNeoHookean@{IncompressibleNeoHookean}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{IncompressibleNeoHookean()}{IncompressibleNeoHookean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Incompressible\+Neo\+Hookean\+::\+Incompressible\+Neo\+Hookean (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{e\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The constructor takes Young\textquotesingle{}s modulus as an argument. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00400}{400}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a7b9c0e8260f3a6375b13211f8aa43b5c}\label{classoomph_1_1IncompressibleNeoHookean_a7b9c0e8260f3a6375b13211f8aa43b5c} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!IncompressibleNeoHookean@{IncompressibleNeoHookean}}
+\index{IncompressibleNeoHookean@{IncompressibleNeoHookean}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{IncompressibleNeoHookean()}{IncompressibleNeoHookean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Incompressible\+Neo\+Hookean\+::\+Incompressible\+Neo\+Hookean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Argument-\/free constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00406}{406}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a2bc4229abf1f7aa1470768a70e6a38c3}\label{classoomph_1_1IncompressibleNeoHookean_a2bc4229abf1f7aa1470768a70e6a38c3} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!````~IncompressibleNeoHookean@{\texorpdfstring{$\sim$}{\string~}IncompressibleNeoHookean}}
+\index{````~IncompressibleNeoHookean@{\texorpdfstring{$\sim$}{\string~}IncompressibleNeoHookean}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IncompressibleNeoHookean()}{\string~IncompressibleNeoHookean()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Incompressible\+Neo\+Hookean\+::\texorpdfstring{$\sim$}{\string~}\+Incompressible\+Neo\+Hookean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00412}{412}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8h_source_l00453}{E\+\_\+pt}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00456}{Must\+\_\+delete\+\_\+e}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_ab3a2cba59caf49fd369b6eb4920aa266}\label{classoomph_1_1IncompressibleNeoHookean_ab3a2cba59caf49fd369b6eb4920aa266} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!derivatives@{derivatives}}
+\index{derivatives@{derivatives}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{derivatives()}{derivatives()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Incompressible\+Neo\+Hookean\+::derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{I,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{d\+WdI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the derivatives of the strain energy function with respect to the strain invariants. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a81ca7bb14cce217ffac9d308dba39756}{oomph\+::\+Strain\+Energy\+Function}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00433}{433}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00453}{E\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a315a1c03acb6a4e8cf3aa29866e84f9b}\label{classoomph_1_1IncompressibleNeoHookean_a315a1c03acb6a4e8cf3aa29866e84f9b} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}}
+\index{requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{requires\_incompressibility\_constraint()}{requires\_incompressibility\_constraint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Incompressible\+Neo\+Hookean\+::requires\+\_\+incompressibility\+\_\+constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. True. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a312fe03c070f5c45a99ae4e186936147}{oomph\+::\+Strain\+Energy\+Function}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00446}{446}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a9791c63737b52d1e644048687988628b}\label{classoomph_1_1IncompressibleNeoHookean_a9791c63737b52d1e644048687988628b} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!W@{W}}
+\index{W@{W}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{W()}{W()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Incompressible\+Neo\+Hookean\+::W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{gamma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the strain energy in terms of strain tensor. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a76cadaefaa89b93793c893f1302bd68a}{oomph\+::\+Strain\+Energy\+Function}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00418}{418}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8h_source_l00058}{oomph\+::\+Strain\+Energy\+Function\+::\+W()}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a07e40853a91a7721adb6063e35bca4e3}\label{classoomph_1_1IncompressibleNeoHookean_a07e40853a91a7721adb6063e35bca4e3} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!W@{W}}
+\index{W@{W}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{W()}{W()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Incompressible\+Neo\+Hookean\+::W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{I }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the strain energy in terms of the strain invariants. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction_a99df34610d4542568f65c568ae3a908f}{oomph\+::\+Strain\+Energy\+Function}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00424}{424}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00453}{E\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_a9ac8759097c4b95fbdc0b93415cc1201}\label{classoomph_1_1IncompressibleNeoHookean_a9ac8759097c4b95fbdc0b93415cc1201} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!E\_pt@{E\_pt}}
+\index{E\_pt@{E\_pt}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{E\_pt}{E\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Incompressible\+Neo\+Hookean\+::\+E\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00453}{453}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8h_source_l00433}{derivatives()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00424}{W()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00412}{\texorpdfstring{$\sim$}{\string~}\+Incompressible\+Neo\+Hookean()}}.
+
+\Hypertarget{classoomph_1_1IncompressibleNeoHookean_adea099948bc143735dea07cc3e36f1cc}\label{classoomph_1_1IncompressibleNeoHookean_adea099948bc143735dea07cc3e36f1cc} 
+\index{oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}!Must\_delete\_e@{Must\_delete\_e}}
+\index{Must\_delete\_e@{Must\_delete\_e}!oomph::IncompressibleNeoHookean@{oomph::IncompressibleNeoHookean}}
+\doxysubsubsection{\texorpdfstring{Must\_delete\_e}{Must\_delete\_e}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Incompressible\+Neo\+Hookean\+::\+Must\+\_\+delete\+\_\+e\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean indicating if Young\textquotesingle{}s modulus must be deleted in destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00456}{456}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8h_source_l00412}{\texorpdfstring{$\sim$}{\string~}\+Incompressible\+Neo\+Hookean()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{constitutive__laws_8h}{constitutive\+\_\+laws.\+h}}\end{DoxyCompactItemize}

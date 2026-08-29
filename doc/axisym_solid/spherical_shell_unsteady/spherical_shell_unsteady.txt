@@ -1,0 +1,129 @@
+\mainpage Axisymmetric solid mechanics: a time-dependent demo problem
+
+This example considers the application of the axisymmetric PVD equations introduced in a
+<A HREF="../../axisym_solid/shell/html/index.html">previous tutorial</A> toward a time-dependent problem.
+
+\section description Problem description
+The problem under consideration is a benchmark test using the method of manufactured solutions.
+Similar to the approach used in the previous tutorial, a solution in spherical symmetry is sought.
+The imposed displacment field is:
+\f[
+  u(\hat{r},t) = \hat{R}(\hat{r},t) - \hat{r} = A(t)\hat{r} + \frac{B(t)}{\hat{r}^2},
+\f]
+where the chosen time-dependence for \f$A(t)\f$ and \f$B(t)\f$ are:
+\f[
+  A(t) = A_0\sin(\omega t), \hspace{1cm} B(t) = B_0\sin(\omega t)
+\f]
+Using the same compressible Neo-Hookean constitutive law as previously, the body force required for the manufactured
+solution to be an exact solution is:
+\f[
+  \mathbf{b} = -\left\{\omega^2 u +
+  \mu\left[\frac{\partial \lambda_{\hat{R}}}{\partial \hat{r}} + \frac{2}{\hat{r}}(\lambda_{\hat{R}}-\lambda_{\Theta})\right]
+  + \frac{\lambda}{J\lambda_{\hat{R}}}\frac{\partial J}{\partial \hat{r}}
+  + \left[\frac{1}{\lambda_{\hat{R}}^2}\frac{\partial\lambda_{\hat{R}}}{\partial \hat{r}} + 
+  \frac{2}{\hat{r}}\left(\frac{1}{\lambda_{\Theta}}-\frac{1}{\lambda_{\hat{R}}}\right)\right]
+  (\mu-\lambda\log J)\right\}\mathbf{e}_{\hat{r}},
+  \ \ \ \ \ \ \ \ @E[body_force_fct]@
+\f]
+where \f$\mu = 1/[2(1+\nu)]\f$ and \f$\lambda = \nu/[(1+\nu)(1-2\nu)]\f$ are the dimensionless Lamé parameters (other symbols retain
+their meaning from the <A HREF="../../axisym_solid/shell/html/index.html">previous tutorial</A>).
+The required traction force on the inner and outer faces of the shell is:
+\f[
+  \mathbf{t} = \frac{1}{J}\left[\mu (\lambda_{\hat{R}}^2-1) + \lambda \log J\right]\mathbf{n},
+  \ \ \ \ \ \ \ \ @E[traction_force_fct]@
+\f]
+where \f$\mathbf{n}\f$ is the unit normal.
+
+\section results Results
+The predictions of the finite element simulation against the manufactured solution are shown below. An excellent agreement in the
+deformed inner and outer radii and is seen over the full oscillation period. 
+@I w \textwidth inner_outer_radii "The deformed inner and outer radii of the shell against time. "
+Also shown below are heatmaps of the components \f$\gamma_{rr}\f$ and \f$\gamma_{zz}\f$ of the Green-Lagrange strain tensor:
+@I w \textwidth rr_strain "The rr-component (cylindrical coordinates) of the Green-Lagrange strain. "
+@I w \textwidth zz_strain "The zz-component of the Green-Lagrange strain. "
+
+\section namespaces Global parameters and functions
+
+The namespace \c GlobalPhysicalVariables contains the material's Poisson ratio and the parameters \f$A_0\f$,
+\f$B_0\f$ and \f$\omega\f$ that parameterise the manufactured displacement solution. 
+The functions \c deformed_position_fct, \c deformed_velocity_fct and \c deformed_accel_fct are
+used to set the initial condition. The namespace also contains functions
+\c body_force_fct and \c traction_force_fct which
+define the forcing given by equations (@R[body_force_fct]@) and (@R[traction_force_fct]@), respectively.
+\dontinclude shell_unsteady.cc
+\skipline start_namespace
+\until // namespace GlobalPhysicalVariables
+
+A seperate namespace \c GlobalSimSettings then defines the simulation parameters such as the mesh dimensions,
+the number of timesteps in the run and the flag indicating if the solid pressure formulation is to be used.
+\skipline start_namespace
+\until // namespace GlobalSimSettings
+
+\section mesh The mesh
+As done in the <A HREF="../../axisym_solid/shell/html/index.html">previous tutorial</A>, the mesh is constructed
+by upgrading the existing \c TwoDAnnularMesh to a solid mesh.
+\skipline start_mesh
+\until };
+
+\section problem_class The problem class
+The problem class is relatively standard and is identical to the previous tutorial, execpt for the addition of
+the member functions \c set_initial_condition(), which sets the initial condition manually using functions
+provided in \c GlobalPhysicalVariables, and \c unsteady_run() which performs the time integration. 
+\skipline start_problem
+\until };
+
+\section constructor The problem constructor
+The constructor begins with assigning the output directory and setting \c Newmark<1> as the problem's
+timestepper. Following this, the bulk and surface meshes are created and the member function \c create_boundary_elements()
+is called to create traction elements on the outer boundary of the shell. \c complete_problem_setup() (discussed below) is
+called to complete the setup of the bulk and surface elements and assign Dirichlet boundary conditions. \c set_initial_condition()
+(also discussed below) is called to manually set an initial condition which is consistent with the manufactured solution.
+\skipline start_constructor
+\until // end constructor
+
+\section complete Completing the problem setup
+To complete the problem setup, the pointers for the constutive law and body force function are passed to each
+of the bulk elements. The pointer to the traction force is then passed to each of the interface elements. Finally,
+the Dirichlet boundary conditions for the problem are set.
+\skipline start_of_complete_problem_setup
+\until // end complete_problem_setup
+
+\section initial_condition Setting the initial condition
+Since this tutorial uses a manufactured solution, the nodal positions, velocities and accelerations are known at all times
+and so the initial condition can be set manually. The \c Newmark<1> timestepper stores the following values:
+  - 0: Displacement at time \f$ t \f$.
+  - 1: Displacement at time \f$ t-dt \f$.
+  - 2: Velocity at time \f$ t-dt \f$.
+  - 3: Acceleration at time \f$ t-dt \f$.
+
+These values are easily accessible using the functions \c deformed_position_fct, \c deformed_velocity_fct and
+\c deformed_accel_fct in the namespace \c GlobalPhysicalVariables.
+\skipline start_of_set_initial_condition
+\until // end set_initial_condition
+
+\section driver The driver code
+The driver code is relatively simple. Command line arguments for the material's Poisson ratio and the \c use_solid_pressure
+flag are specified. Following this, the problem is built and solved by calling the member function \c unsteady_run, 
+which simply perfoms the Newton solve and output within a timestepping loop.
+\skipline start_main
+\until // end main
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/
+">
+demo_drivers/axisym_solid/shell_unsteady/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/shell_unsteady.cc
+">
+demo_drivers/axisym_solid/shell_unsteady/shell_unsteady.cc
+</A>
+</CENTER>

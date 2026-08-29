@@ -19,6 +19,7 @@ set(SUBDIRS
     constitutive
     solid
     axisym_spherical_solid
+    axisym_solid
     beam
     shell
     multi_physics

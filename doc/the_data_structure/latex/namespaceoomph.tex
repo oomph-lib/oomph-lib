@@ -255,6 +255,12 @@ class \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepp
 \begin{DoxyCompactList}\small\item\em Axisym Foepplvon\+Karman\+Element elements are 1D Foeppl von Karman elements with isoparametric interpolation for the function. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}
 \begin{DoxyCompactList}\small\item\em A class for all isoparametric elements that solve the axis\+Ym Foeppl von Karman equations in a displacement based formulation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AxisymmetricCylindricalPVDEquations}{Axisymmetric\+Cylindrical\+PVDEquations}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in an axisymmetric formulation. In this case, x\mbox{[}0\mbox{]} and x\mbox{[}1\mbox{]} are the radial and vertical coordinates, respectively, in the deformed configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AxisymmetricCylindricalPVDWithPressureEquations}{Axisymmetric\+Cylindrical\+PVDWith\+Pressure\+Equations}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in an axisymmetric formulation. In this case x\mbox{[}0\mbox{]} is the component of displacement in the radial direction and x\mbox{[}1\mbox{]} is that in the theta direction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AxisymmetricCylindricalSolidTractionElement}{Axisymmetric\+Cylindrical\+Solid\+Traction\+Element}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of an applied traction in the principle of virtual displacements. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives}{Axisymmetric\+Derivatives}}
 \begin{DoxyCompactList}\small\item\em Class that establishes the surface derivative functions for Axisymmetric\+Interface\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityEquations}{Axisymmetric\+Linear\+Elasticity\+Equations}}
@@ -719,6 +725,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01NavierSto
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of these elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableAdvectionDiffusionReactionElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ ELEMENT $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableAxisymCylindricalPVDElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Axisym\+Cylindrical\+PVDElement$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableAxisymCylindricalPVDWithPressureElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Axisym\+Cylindrical\+PVDWith\+Pressure\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableAxisymLinearElasticityElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ ELEMENT $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableAxisymmetricCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ ELEMENT $>$ $>$ $>$}}
@@ -767,6 +777,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01Projectab
 \begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01PseudoSolidNodeUpdateElement_3_01BASIC_00_01SOLID_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Pseudo\+Solid\+Node\+Update\+Element$<$ BASIC, SOLID $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of these elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QAxisymmetricCylindricalPVDElement_3_01NNODE__1D_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ QAxisymmetric\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a QAxisym\+Cylindrical\+PVDElement. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QAxisymmetricCylindricalPVDWithPressureElement_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a QAxisym\+Cylindrical\+PVDElement. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QCrouzeixRaviartElement_3_012_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QCrouzeixRaviartElement_3_013_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 3 $>$ $>$ $>$}}
@@ -815,6 +829,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01Refineabl
 \begin{DoxyCompactList}\small\item\em Face geometry of face geometric of the refineable linearised axisym Taylor-\/\+Hood elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineablePseudoSolidNodeUpdateElement_3_01BASIC_00_01SOLID_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Refineable\+Pseudo\+Solid\+Node\+Update\+Element$<$ BASIC, SOLID $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of these elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQAxisymmetricCylindricalPVDElement_3_01NNODE__1D_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Refineable\+QAxisymmetric\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the Refineable\+QAxisymmetric\+PVDElement. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQAxisymmetricCylindricalPVDWithPressureElement_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Refineable\+QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1RefineableQAxisymmetricCylindricalPVDWithPressureElement}{Refineable\+QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQCrouzeixRaviartElement_3_01DIM_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Refineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the face geometry of the Refineable\+QCrouzeix\+Raviart\+Elements is the same as the Face geometry of the Face geometry of QCrouzeix\+Raviart\+Elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01RefineableQLinearElasticityElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Refineable\+QLinear\+Elasticity\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$ $>$}}
@@ -847,6 +865,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01Refineabl
 \begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 3D \doxylink{classoomph_1_1RefineableQTimeHarmonicLinearElasticityElement}{Refineable\+QTime\+Harmonic\+Linear\+Elasticity\+Element}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ Spine\+Element$<$ ELEMENT $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry for spine elements\+: The same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TAxisymCylindricalPVDElement_3_01NNODE__1D_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ TAxisym\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1TAxisymCylindricalPVDElement}{TAxisym\+Cylindrical\+PVDElement}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TAxisymCylindricalPVDWithPressureElement_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ TAxisym\+Cylindrical\+PVDWith\+Pressure\+Element $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1TAxisymCylindricalPVDElement}{TAxisym\+Cylindrical\+PVDElement}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TCrouzeixRaviartElement_3_012_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ TCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D Crouzeix\+Raviart elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TCrouzeixRaviartElement_3_013_01_4_01_4_01_4}{Face\+Geometry$<$ Face\+Geometry$<$ TCrouzeix\+Raviart\+Element$<$ 3 $>$ $>$ $>$}}
@@ -923,6 +945,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PolarTaylorHoodElement_01_
 \begin{DoxyCompactList}\small\item\em Face geometry of the 2D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableAdvectionDiffusionReactionElement_3_01ELEMENT_01_4_01_4}{Face\+Geometry$<$ Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableAxisymCylindricalPVDElement_3_01ELEMENT_01_4_01_4}{Face\+Geometry$<$ Projectable\+Axisym\+Cylindrical\+PVDElement$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableAxisymCylindricalPVDWithPressureElement_3_01ELEMENT_01_4_01_4}{Face\+Geometry$<$ Projectable\+Axisym\+Cylindrical\+PVDWith\+Pressure\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableAxisymLinearElasticityElement_3_01ELEMENT_01_4_01_4}{Face\+Geometry$<$ Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableAxisymmetricCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4}{Face\+Geometry$<$ Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element$<$ ELEMENT $>$ $>$}}
@@ -989,6 +1015,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAdvectionDiffusionReactio
 \begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ QAxisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
 \item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymmetricCylindricalPVDElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ QAxisymmetric\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a QAxisym\+Cylindrical\+PVDElement. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymmetricCylindricalPVDWithPressureElement_01_4}{Face\+Geometry$<$ QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a QAxisym\+Cylindrical\+PVDElement. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymmetricLinearElasticityElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ QAxisymmetric\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a linear \doxylink{classoomph_1_1QAxisymmetricLinearElasticityElement}{QAxisymmetric\+Linear\+Elasticity\+Element} element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QCrouzeixRaviartElement_3_012_01_4_01_4}{Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$}}
@@ -1147,6 +1177,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQAdvectionDiffus
 \begin{DoxyCompactList}\small\item\em Face geometry for the Refineable\+Quad\+Advection\+Diffusion\+Reaction\+Element elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ Refineable\+QAxisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+QAxisym\+Advection\+Diffusion\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQAxisymmetricCylindricalPVDElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ Refineable\+QAxisymmetric\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the Refineable\+QAxisymmetric\+PVDElement. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQAxisymmetricCylindricalPVDWithPressureElement_01_4}{Face\+Geometry$<$ Refineable\+QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1RefineableQAxisymmetricCylindricalPVDWithPressureElement}{Refineable\+QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQCrouzeixRaviartElement_3_01DIM_01_4_01_4}{Face\+Geometry$<$ Refineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the Refineable\+Quad\+QCrouzeix\+Raviart\+Elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ Refineable\+QGeneralised\+Advection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$ $>$}}
@@ -1217,6 +1251,10 @@ class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAdvectionDiffusionReactio
 \begin{DoxyCompactList}\small\item\em Face geometry for the 1D \doxylink{classoomph_1_1TAdvectionDiffusionReactionElement}{TAdvection\+Diffusion\+Reaction\+Element} elements\+: Point elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAdvectionDiffusionReactionElement_3_01NREAGENT_00_01DIM_00_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1TAdvectionDiffusionReactionElement}{TAdvection\+Diffusion\+Reaction\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAxisymCylindricalPVDElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ TAxisym\+Cylindrical\+PVDElement$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a \doxylink{classoomph_1_1TAxisymCylindricalPVDElement}{TAxisym\+Cylindrical\+PVDElement}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAxisymCylindricalPVDWithPressureElement_01_4}{Face\+Geometry$<$ TAxisym\+Cylindrical\+PVDWith\+Pressure\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a \doxylink{classoomph_1_1TAxisymCylindricalPVDElement}{TAxisym\+Cylindrical\+PVDElement}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAxisymmetricLinearElasticityElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ TAxisymmetric\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1TAxisymmetricLinearElasticityElement}{TAxisymmetric\+Linear\+Elasticity\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TAxisymmetricPoroelasticityElement_3_010_01_4_01_4}{Face\+Geometry$<$ TAxisymmetric\+Poroelasticity\+Element$<$ 0 $>$ $>$}}
@@ -1581,6 +1619,8 @@ class \mbox{\hyperlink{classoomph_1_1IMRBase}{IMRBase}}
 \begin{DoxyCompactList}\small\item\em Implicit midpoint rule base class for the two implementations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}}
 \begin{DoxyCompactList}\small\item\em Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \doxylink{classoomph_1_1BDF}{BDF} methods work. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1IncompressibleNeoHookean}{Incompressible\+Neo\+Hookean}}
+\begin{DoxyCompactList}\small\item\em Neo Hookean constitutive law (incompressible version) No argument for Poisson ratio here -\/ it must be equal to 0.\+5. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1InexactSubBiharmonicPreconditioner}{Inexact\+Sub\+Biharmonic\+Preconditioner}}
 \begin{DoxyCompactList}\small\item\em Sub\+Biharmonic \doxylink{classoomph_1_1Preconditioner}{Preconditioner} -\/ an inexact preconditioner for the 3x3 top left hand corner sub block matrix. Used as part of the Biharmonic\+Preconditioner$<$\+MATRIX$>$ \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1InnerIterationPreconditioner}{Inner\+Iteration\+Preconditioner}}
@@ -1735,6 +1775,8 @@ class \mbox{\hyperlink{classoomph_1_1NavierStokesTractionElement}{Navier\+Stokes
 \begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1NavierStokesWomersleyPressureControlElement}{Navier\+Stokes\+Womersley\+Pressure\+Control\+Element}}
 \begin{DoxyCompactList}\small\item\em An element to impose a fluid pressure obtained from a Womersley impedance tube at a boundary. This element is used in conjunction with a \doxylink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control} element, and is passed to the \doxylink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control} element\textquotesingle{}s constructor. The volume flux across the boundary is then an unknown of the problem. The constructor argument for this element is a suitable Womersley impedance tube to give the pressure via its get\+\_\+response(...) function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NeoHookean}{Neo\+Hookean}}
+\begin{DoxyCompactList}\small\item\em Neo Hookean constitutive law in terms of Young\textquotesingle{}s modulus and Poisson ratio. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}}
 \begin{DoxyCompactList}\small\item\em A class for an element that controls the net fluid flux across a boundary by the imposition of an unknown applied pressure to the Navier-\/\+Stokes equations. This element is used with a mesh of \doxylink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element} elements which are attached to the boundary. Note\+: \doxylink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()} does not calculate Jacobian contributions for this element as they are calculated by Navier\+Stokes\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...) \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}}
@@ -1945,6 +1987,10 @@ class \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator}{Problem\+B
 \begin{DoxyCompactList}\small\item\em Class for the shift invert operation. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}{Projectable\+Advection\+Diffusion\+Reaction\+Element}}
 \begin{DoxyCompactList}\small\item\em Advection\+Diffusion\+Reaction upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectableAxisymCylindricalPVDElement}{Projectable\+Axisym\+Cylindrical\+PVDElement}}
+\begin{DoxyCompactList}\small\item\em Axisym\+Cylindrical\+PVDElement upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectableAxisymCylindricalPVDWithPressureElement}{Projectable\+Axisym\+Cylindrical\+PVDWith\+Pressure\+Element}}
+\begin{DoxyCompactList}\small\item\em Axisym\+Cylindrical\+PVDWith\+Pressure\+Element upgraded to become projectable. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement}{Projectable\+Axisym\+Linear\+Elasticity\+Element}}
 \begin{DoxyCompactList}\small\item\em Axisym linear elasticity upgraded to become projectable. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricCrouzeixRaviartElement}{Projectable\+Axisymmetric\+Crouzeix\+Raviart\+Element}}
@@ -2035,6 +2081,10 @@ class \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvect
 \begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisym\+Advection\+Diffusion\+Element}}
 \begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisym\+Advection\+Diffusion\+Element} elements are linear/quadrilateral/brick-\/shaped Axisymmetric Advection Diffusion elements with isoparametric interpolation for the function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QAxisymmetricCylindricalPVDElement}{QAxisymmetric\+Cylindrical\+PVDElement}}
+\begin{DoxyCompactList}\small\item\em QElements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QAxisymmetricCylindricalPVDWithPressureElement}{QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element}}
+\begin{DoxyCompactList}\small\item\em QElements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1QAxisymmetricLinearElasticityElement}{QAxisymmetric\+Linear\+Elasticity\+Element}}
 \begin{DoxyCompactList}\small\item\em An Element that solves the equations of axisymmetric (in cylindrical polars) linear elasticity, using QElements for the geometry. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeix\+Raviart\+Element}}
@@ -2197,6 +2247,10 @@ class \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{Ref
 \begin{DoxyCompactList}\small\item\em Refineable version algebraic \doxylink{classoomph_1_1FSIDrivenCavityMesh}{FSIDriven\+Cavity\+Mesh}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableAxisymAdvectionDiffusionEquations}{Refineable\+Axisym\+Advection\+Diffusion\+Equations}}
 \begin{DoxyCompactList}\small\item\em A version of the Advection Diffusion in axisym coordinates equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+adv\+\_\+diff() function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricCylindricalPVDEquations}{Refineable\+Axisymmetric\+Cylindrical\+PVDEquations}}
+\begin{DoxyCompactList}\small\item\em Class for Refineable axisymmetric PVD equations in cylindrical coords. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricCylindricalPVDWithPressureEquations}{Refineable\+Axisymmetric\+Cylindrical\+PVDWith\+Pressure\+Equations}}
+\begin{DoxyCompactList}\small\item\em Class for Refineable axisymmetric PVD equations in cylindrical coords. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations}{Refineable\+Axisymmetric\+Navier\+Stokes\+Equations}}
 \begin{DoxyCompactList}\small\item\em Refineable version of the Axisymmetric Navier--Stokes equations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQCrouzeixRaviartElement}{Refineable\+Axisymmetric\+QCrouzeix\+Raviart\+Element}}
@@ -2315,6 +2369,10 @@ class \mbox{\hyperlink{classoomph_1_1RefineableQAdvectionDiffusionReactionElemen
 \begin{DoxyCompactList}\small\item\em Refineable version of \doxylink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}. Inherit from the standard \doxylink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element} and the appropriate refineable geometric element and the refineable equations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableQAxisymAdvectionDiffusionElement}{Refineable\+QAxisym\+Advection\+Diffusion\+Element}}
 \begin{DoxyCompactList}\small\item\em Refineable version of \doxylink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisym\+Advection\+Diffusion\+Element}. Inherit from the standard \doxylink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisym\+Advection\+Diffusion\+Element} and the appropriate refineable geometric element and the refineable equations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableQAxisymmetricCylindricalPVDElement}{Refineable\+QAxisymmetric\+Cylindrical\+PVDElement}}
+\begin{DoxyCompactList}\small\item\em Class for refineable \doxylink{classoomph_1_1QPVDElement}{QPVDElement} elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableQAxisymmetricCylindricalPVDWithPressureElement}{Refineable\+QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element}}
+\begin{DoxyCompactList}\small\item\em Class for refineable \doxylink{classoomph_1_1QPVDElement}{QPVDElement} elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement}{Refineable\+QCrouzeix\+Raviart\+Element}}
 \begin{DoxyCompactList}\small\item\em Refineable version of Crouzeix Raviart elements. Generic class definitions. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1RefineableQElement}{Refineable\+QElement}}
@@ -2631,6 +2689,10 @@ class \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{TAdvect
 \begin{DoxyCompactList}\small\item\em TAdvection\+Diffusion\+Reaction\+Element$<$\+NREAGENT,\+DIM,\+NNODE\+\_\+1\+D$>$ elements are isoparametric triangular DIM-\/dimensional Advection\+Diffusion\+Reaction elements with NNODE\+\_\+1D nodal points along each element edge. Inherits from \doxylink{classoomph_1_1TElement}{TElement} and \doxylink{classoomph_1_1AdvectionDiffusionReactionEquations}{Advection\+Diffusion\+Reaction\+Equations}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{Tanh\+Profile\+Constitutive\+Equation}}
 \begin{DoxyCompactList}\small\item\em A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a fluid following a tanh-\/profile. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TAxisymCylindricalPVDElement}{TAxisym\+Cylindrical\+PVDElement}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the axisymmetric solid mechanics equations, based on the principle of virtual displacements in cylindrical polar coordinates, using Solid\+TElements for the interpolation of the variable positions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TAxisymCylindricalPVDWithPressureElement}{TAxisym\+Cylindrical\+PVDWith\+Pressure\+Element}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the axisymmetric solid mechanics equations, based on the principle of virtual displacements in cylindrical polar coordinates, using Solid\+TElements for the interpolation of the variable positions. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1TAxisymmetricLinearElasticityElement}{TAxisymmetric\+Linear\+Elasticity\+Element}}
 \begin{DoxyCompactList}\small\item\em TAxisym\+Axisymmetric\+Linear\+Elasticity\+Element$<$\+NNODE\+\_\+1\+D$>$ elements are isoparametric triangular Axisymmetric\+Linear\+Elasticity elements with NNODE\+\_\+1D nodal points along each element edge. Inherits from \doxylink{classoomph_1_1TElement}{TElement} and \doxylink{classoomph_1_1AxisymmetricLinearElasticityEquations}{Axisymmetric\+Linear\+Elasticity\+Equations}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1TAxisymmetricPoroelasticityElement}{TAxisymmetric\+Poroelasticity\+Element}}
