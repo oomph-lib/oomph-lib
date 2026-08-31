@@ -31,11 +31,11 @@
 
 namespace oomph
 {
- 
- //Boolean to suppress warnings about assignment to shallow copies
- bool Shape::Suppress_warning_about_setting_values_in_shallow_copies = false;
 
- //Boolean to suppress warnings about assignment to shallow copies
- bool DShape::Suppress_warning_about_setting_values_in_shallow_copies = false;
+  // Boolean to suppress warnings about assignment to shallow copies
+  bool Shape::Suppress_warning_about_setting_values_in_shallow_copies = false;
+
+  // Boolean to suppress warnings about assignment to shallow copies
+  bool DShape::Suppress_warning_about_setting_values_in_shallow_copies = false;
 
 } // namespace oomph

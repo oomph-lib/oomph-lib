@@ -1769,8 +1769,10 @@ namespace oomph
 
   public:
     /// Empty constructor
-   RankFourTensor() : Tensordata(0), N(0), M(0), P(0), Q(0),
-                      Is_tensordata_a_copy(false) {}
+    RankFourTensor()
+      : Tensordata(0), N(0), M(0), P(0), Q(0), Is_tensordata_a_copy(false)
+    {
+    }
 
     /// Copy constructor: Deep copy
     RankFourTensor(const RankFourTensor& source_tensor)
@@ -1781,7 +1783,7 @@ namespace oomph
       P = source_tensor.nindex3();
       Q = source_tensor.nindex4();
       Is_tensordata_a_copy = false;
-      
+
       // Assign space for the data
       Tensordata = new T[N * M * P * Q];
 
@@ -1839,22 +1841,24 @@ namespace oomph
     }
 
 
-   ///Shallow copy of data from source_tensor
-   void shallow_copy_from(const RankFourTensor& source_tensor)
+    /// Shallow copy of data from source_tensor
+    void shallow_copy_from(const RankFourTensor& source_tensor)
     {
-     // Set row and column length
-     N = source_tensor.nindex1();
-     M = source_tensor.nindex2();
-     P = source_tensor.nindex3();
-     Q = source_tensor.nindex4();
-     //Delete existing data, if no already a copy
-     if(Is_tensordata_a_copy==false)
-      {delete[] Tensordata;}
-     //Set the pointer
-     Tensordata = source_tensor.Tensordata;
-     Is_tensordata_a_copy=true;
+      // Set row and column length
+      N = source_tensor.nindex1();
+      M = source_tensor.nindex2();
+      P = source_tensor.nindex3();
+      Q = source_tensor.nindex4();
+      // Delete existing data, if no already a copy
+      if (Is_tensordata_a_copy == false)
+      {
+        delete[] Tensordata;
+      }
+      // Set the pointer
+      Tensordata = source_tensor.Tensordata;
+      Is_tensordata_a_copy = true;
     }
-   
+
     /// One parameter constructor produces a  nxnxnxn tensor
     RankFourTensor(const unsigned long& n)
     {
@@ -1915,7 +1919,10 @@ namespace oomph
     /// Destructor: delete the pointers
     virtual ~RankFourTensor()
     {
-     if(Is_tensordata_a_copy==false) {delete[] Tensordata;}
+      if (Is_tensordata_a_copy == false)
+      {
+        delete[] Tensordata;
+      }
       Tensordata = 0;
     }
 
@@ -1978,14 +1985,14 @@ namespace oomph
         }
       }
       // Now kill storage for old tensor
-      if(Is_tensordata_a_copy==false)
-       {
+      if (Is_tensordata_a_copy == false)
+      {
         delete[] temp_tensor;
-       }
+      }
       else
-       {
-        Is_tensordata_a_copy=false;
-       }
+      {
+        Is_tensordata_a_copy = false;
+      }
     }
 
     /// Resize to a general tensor
@@ -2042,14 +2049,14 @@ namespace oomph
         }
       }
       // Now kill storage for old tensor
-      if(Is_tensordata_a_copy==false)
-       {
+      if (Is_tensordata_a_copy == false)
+      {
         delete[] temp_tensor;
-       }
+      }
       else
-       {
-        Is_tensordata_a_copy=false;
-       }
+      {
+        Is_tensordata_a_copy = false;
+      }
     }
 
     /// Initialise all values in the tensor to val
