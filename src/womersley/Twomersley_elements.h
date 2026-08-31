@@ -213,8 +213,8 @@ namespace oomph
 
     // Set the test functions equal to the shape functions
     //(sets internal pointers)
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the jacobian
     return J;

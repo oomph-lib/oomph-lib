@@ -424,9 +424,9 @@ namespace oomph
 
       double J = this->transform_basis(s, q_basis_local, psi, q_basis);
 
-      q_test = q_basis;
-      p_test = p_basis;
-      div_q_test_ds = div_q_basis_ds;
+      q_test.shallow_copy_from(q_basis);
+      p_test.shallow_copy_from(p_basis);
+      div_q_test_ds.shallow_copy_from(div_q_basis_ds);
 
       return J;
     }

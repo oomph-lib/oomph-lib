@@ -680,7 +680,7 @@ namespace oomph
     {
       // Read out the stored shape functions
       // Note this will copy the values by pointer (fast)
-      psi = (*Shape_stored_pt)[ipt];
+     psi.shallow_copy_from((*Shape_stored_pt)[ipt]);
     }
   }
 
@@ -702,8 +702,8 @@ namespace oomph
     {
       // Read out the stored shape functions
       // Set the internal pointers in psi and dpsids
-      psi = (*Shape_stored_pt)[ipt];
-      dpsids = (*DShape_local_stored_pt)[ipt];
+     psi.shallow_copy_from((*Shape_stored_pt)[ipt]);
+     dpsids.shallow_copy_from((*DShape_local_stored_pt)[ipt]);
     }
   }
 
@@ -725,9 +725,9 @@ namespace oomph
     {
       // Read out the stored shape functions
       // Set the internal pointers in psi, dpsids, and d2psids
-      psi = (*Shape_stored_pt)[ipt];
-      dpsids = (*DShape_local_stored_pt)[ipt];
-      d2psids = (*D2Shape_local_stored_pt)[ipt];
+     psi.shallow_copy_from((*Shape_stored_pt)[ipt]);
+     dpsids.shallow_copy_from((*DShape_local_stored_pt)[ipt]);
+     d2psids.shallow_copy_from((*D2Shape_local_stored_pt)[ipt]);
     }
   }
 
@@ -749,8 +749,8 @@ namespace oomph
     else
     {
       // Set internal pointers in the shape functions.
-      psi = (*Shape_stored_pt)[ipt];
-      dpsidx = (*DShape_eulerian_stored_pt)[ipt];
+     psi.shallow_copy_from((*Shape_stored_pt)[ipt]);
+     dpsidx.shallow_copy_from((*DShape_eulerian_stored_pt)[ipt]);
 
       // Return the stored value of the jacobian
       return ((*Jacobian_eulerian_stored_pt)[ipt]);
@@ -773,10 +773,10 @@ namespace oomph
     else
     {
       // Set internal pointers in the shape functions
-      psi = (*Shape_stored_pt)[ipt];
-      dpsidx = (*DShape_eulerian_stored_pt)[ipt];
-      d2psidx = (*D2Shape_eulerian_stored_pt)[ipt];
-
+     psi.shallow_copy_from((*Shape_stored_pt)[ipt]);
+     dpsidx.shallow_copy_from((*DShape_eulerian_stored_pt)[ipt]);
+     d2psidx.shallow_copy_from((*D2Shape_eulerian_stored_pt)[ipt]);
+     
       // Return the stored value of the jacobian
       return ((*Jacobian_eulerian_stored_pt)[ipt]);
     }
@@ -1127,8 +1127,8 @@ namespace oomph
     else
     {
       // Set the internal pointers in the shape functions
-      psi = shape_stored_pt(ipt);
-      dpsidxi = (*DShape_lagrangian_stored_pt)[ipt];
+     psi.shallow_copy_from(shape_stored_pt(ipt));
+     dpsidxi.shallow_copy_from((*DShape_lagrangian_stored_pt)[ipt]);
 
       // Return the stored value of the jacobian
       return ((*Jacobian_lagrangian_stored_pt)[ipt]);
@@ -1152,10 +1152,10 @@ namespace oomph
     else
     {
       // Set the internal values of the pointers in the Shape objects
-      psi = shape_stored_pt(ipt);
-      dpsidxi = (*DShape_lagrangian_stored_pt)[ipt];
-      d2psidxi = (*D2Shape_lagrangian_stored_pt)[ipt];
-
+     psi.shallow_copy_from(shape_stored_pt(ipt));
+     dpsidxi.shallow_copy_from((*DShape_lagrangian_stored_pt)[ipt]);
+     d2psidxi.shallow_copy_from((*D2Shape_lagrangian_stored_pt)[ipt]);
+     
       // Return the stored value of the jacobian
       return ((*Jacobian_lagrangian_stored_pt)[ipt]);
     }

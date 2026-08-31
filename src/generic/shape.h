@@ -39,6 +39,7 @@
 #include "mpi.h"
 #endif
 
+
 // oomph-lib includes
 #include "Vector.h"
 #include "matrices.h"
@@ -91,6 +92,12 @@ namespace oomph
     /// Size of the second index of the shape function
     unsigned Index2;
 
+    /// Boolean to indicate whether the data has been copied
+    bool Is_psi_copied;
+
+    /// Boolean to indicate whether the data is a copy
+    bool Is_psi_a_copy;
+   
     /// Private function that checks whether the index is in range
     void range_check(const unsigned& i, const unsigned& j) const
     {
@@ -114,16 +121,46 @@ namespace oomph
       }
     }
 
+   /// Private function that issues a warning if trying to assign data
+   /// to a shallow copy
+   void shallow_copy_check()
+    {
+     if((Is_psi_a_copy) &&
+        (!Suppress_warning_about_setting_values_in_shallow_copies))
+       {
+        std::ostringstream warning_stream;
+        warning_stream
+         << "Accessing data that is a shallow copy."
+         << std::endl
+         << "Assigning a new value will also change the original."
+         << std::endl
+         << "If you know what you are doing and want to suppress "
+         << std::endl
+         << "this warning then set the static boolean:"
+         << std::endl
+         << "Shape::Suppress_warning_about_setting_values_in_shallow_copies"
+         << std::endl
+         << " to true." << std::endl;
+
+        OomphLibWarning(
+          warning_stream.str(), OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+       }
+    }
+   
   public:
     /// Constructor for a single-index set of shape functions.
-    Shape(const unsigned& N) : Index1(N), Index2(1)
+   Shape(const unsigned& N) : Index1(N), Index2(1), Is_psi_copied(false),
+                              Is_psi_a_copy(false)
     {
       Allocated_storage = new double[N];
       Psi = Allocated_storage;
     }
 
     /// Constructor for a two-index set of shape functions.
-    Shape(const unsigned& N, const unsigned& M) : Index1(N), Index2(M)
+   Shape(const unsigned& N, const unsigned& M) : Index1(N), Index2(M),
+                                                 Is_psi_copied(false),
+                                                 Is_psi_a_copy(false)
     {
       Allocated_storage = new double[N * M];
       Psi = Allocated_storage;
@@ -134,49 +171,78 @@ namespace oomph
 
     /// Default constructor - just assigns a null pointers and zero index
     /// sizes.
-    Shape() : Psi(0), Allocated_storage(0), Index1(0), Index2(0) {}
+    Shape() : Psi(0), Allocated_storage(0), Index1(0), Index2(0),
+              Is_psi_copied(false), Is_psi_a_copy(false) {}
 
-    /// The assignment operator does a shallow copy
-    /// (resets the pointer to the data)
-    void operator=(const Shape& shape)
+    /// Broken assignment operator
+    void operator=(const Shape& shape) = delete;
+   
+   
+   /// This function makes a shallow copy
+   /// (sets the pointer to the allocated data to be from another Shape object)
+   void shallow_copy_from(Shape& shape)
     {
-#ifdef PARANOID
-      // Check the dimensions
-      if ((shape.Index1 != Index1) || (shape.Index2 != Index2))
-      {
-        std::ostringstream error_stream;
-        error_stream << "Cannot assign Shape object:" << std::endl
-                     << "Indices do not match "
-                     << "LHS: " << Index1 << " " << Index2
-                     << ", RHS: " << shape.Index1 << " " << shape.Index2
-                     << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      Psi = shape.Psi;
+     //Sets the indices of this object to be consistent with that
+     //being copied
+     Index1 = shape.nindex1();
+     Index2 = shape.nindex2();
+     //Set the pointer to the data to be that from the copied object
+     Psi = shape.Psi;
+     //Indicate that data has been copied
+     shape.Is_psi_copied=true;
+     Is_psi_a_copy=true;
+     //Delete own storage??
     }
 
-    /// The assignment operator does a shallow copy
-    /// (resets the pointer to the data)
-    void operator=(Shape* const& shape_pt)
+   
+    /// This function make a shallow copy
+    /// (sets the pointer to the allocated data to be from another Shape object)
+    void shallow_copy_from(Shape* const& shape_pt)
     {
-#ifdef PARANOID
-      // Check the dimensions
-      if ((shape_pt->Index1 != Index1) || (shape_pt->Index2 != Index2))
-      {
-        std::ostringstream error_stream;
-        error_stream << "Cannot assign Shape object:" << std::endl
-                     << "Indices do not match "
-                     << "LHS: " << Index1 << " " << Index2
-                     << ", RHS: " << shape_pt->Index1 << " " << shape_pt->Index2
-                     << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      Psi = shape_pt->Psi;
+     //Sets the indices of this object to be consistent with that
+     //being copied
+     Index1 = shape_pt->nindex1();
+     Index2 = shape_pt->nindex2();
+     //Set pointer 
+     Psi = shape_pt->Psi;
+     //Indicate that data has been copied
+     shape_pt->Is_psi_copied=true;
+     Is_psi_a_copy=true;
     }
+
+   /// This function makes a deep copy
+   /// (sets the value of the allocated data to those from another Shape object)
+   /*void deep_copy_from(Shape& shape)
+    {
+     //If the indices don't match need to reallocate storage
+     
+
+     
+     //Sets the indices of this object to be consistent with that
+     //being copied
+     Index1 = shape.nindex1();
+     Index2 = shape.nindex2();
+     for(unsigned i=0;i<(Index1*Index2);++i)
+      {
+       Psi[i] = shape.Psi[i];
+      }
+    }
+
+   
+   /// This function makes a deep copy
+   /// (sets the value of the allocated data to those from another Shape object)
+   void deep_copy_from(Shape* const& shape_pt)
+    {
+    //If the indicest don't match need to reallocate the storage
+     //Sets the indices of this object to be consistent with that
+     //being copied
+     Index1 = shape_pt->nindex1();
+     Index2 = shape_pt->nindex2();
+     for(unsigned i=0;i<(Index1*Index2);++i)
+      {
+       Psi[i] = shape_pt->Psi[i];
+      }
+      }*/
 
     /// Destructor, clear up the memory allocated by the object
     ~Shape()
@@ -185,10 +251,24 @@ namespace oomph
       Allocated_storage = 0;
     }
 
+  private:   
     /// Change the size of the storage
     void resize(const unsigned& N, const unsigned& M = 1)
     {
-      // Clear old storage
+#ifdef PARANOID
+     //If the storage is copied, do not allow a resize
+     if(Is_psi_copied)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Cannot resize an object whose storage has been copied."
+                    << std::endl
+                    << "This could lead to a dangling pointer in the copy."
+                    << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif     
+     // Clear old storage
       delete[] Allocated_storage;
       Allocated_storage = 0;
       Psi = 0;
@@ -200,11 +280,15 @@ namespace oomph
       Psi = Allocated_storage;
     }
 
+  public:   
     /// Overload the bracket operator to provide access to values.
     inline double& operator[](const unsigned& i)
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0);
+#endif
+#ifdef PARANOID
+      shallow_copy_check();
 #endif
       return Psi[i * Index2];
     }
@@ -224,6 +308,9 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, 0);
 #endif
+#ifdef PARANOID
+      shallow_copy_check();
+#endif
       return Psi[i * Index2];
     }
 
@@ -241,6 +328,9 @@ namespace oomph
     {
 #ifdef RANGE_CHECKING
       range_check(i, j);
+#endif
+#ifdef PARANOID
+      shallow_copy_check();
 #endif
       return Psi[i * Index2 + j];
     }
@@ -266,6 +356,9 @@ namespace oomph
     {
       return Index2;
     }
+
+   /// Boolean used to suppress warnings about assignment to shallow copies
+   static bool Suppress_warning_about_setting_values_in_shallow_copies;
   };
 
   //================================================================
@@ -296,6 +389,13 @@ namespace oomph
     /// Size of the third index of the shape function
     unsigned Index3;
 
+    /// Boolean to indicate whether the data has been copied
+    bool Is_dpsi_copied;
+
+    /// Boolean to indicate whether the data is a copy
+    bool Is_dpsi_a_copy;
+
+   
     /// Private function that checks whether the indices are in range
     void range_check(const unsigned& i,
                      const unsigned& j,
@@ -326,11 +426,39 @@ namespace oomph
       }
     }
 
+   /// Private function that issues a warning if trying to assign data
+   /// to a shallow copy
+   void shallow_copy_check()
+    {
+     if((Is_dpsi_a_copy) &&
+        (!Suppress_warning_about_setting_values_in_shallow_copies))
+       {
+        std::ostringstream warning_stream;
+        warning_stream
+         << "Accessing data that is a shallow copy."
+         << std::endl
+         << "Assigning a new value will also change the original."
+         << std::endl
+         << "If you know what you are doing and want to suppress "
+         << std::endl
+         << "this warning then set the static boolean:"
+         << std::endl
+         << "DShape::Suppress_warning_about_setting_values_in_shallow_copies"
+         << std::endl
+         << " to true." << std::endl;
 
+        OomphLibWarning(
+          warning_stream.str(), OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+       }
+    }
+    
+   
   public:
     /// Constructor with two parameters: a single-index shape function
     DShape(const unsigned& N, const unsigned& P)
-      : Index1(N), Index2(1), Index3(P)
+     : Index1(N), Index2(1), Index3(P), Is_dpsi_copied(false),
+       Is_dpsi_a_copy(false)
     {
       Allocated_storage = new double[N * P];
       DPsi = Allocated_storage;
@@ -338,7 +466,8 @@ namespace oomph
 
     /// Constructor with three paramters: a two-index shape function
     DShape(const unsigned& N, const unsigned& M, const unsigned& P)
-      : Index1(N), Index2(M), Index3(P)
+     : Index1(N), Index2(M), Index3(P), Is_dpsi_copied(false),
+       Is_dpsi_a_copy(false)
     {
       Allocated_storage = new double[N * M * P];
       DPsi = Allocated_storage;
@@ -346,54 +475,41 @@ namespace oomph
 
     /// Default constructor - just assigns a null pointers and zero index
     /// sizes.
-    DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0) {}
+   DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0),
+              Is_dpsi_copied(false), Is_dpsi_a_copy(false) {}
 
     /// Broken copy constructor
     DShape(const DShape& dshape) = delete;
 
-    /// The assignment operator does a shallow copy
-    /// (resets the pointer to the data)
-    void operator=(const DShape& dshape)
+   /// The assignment operator is broken
+   void operator=(const DShape& dshape) = delete;
+
+   /// This function does a shallow copy
+   /// (resets the pointer to the data)
+   void shallow_copy_from(DShape& dshape)
     {
-#ifdef PARANOID
-      // Check the dimensions
-      if ((dshape.Index1 != Index1) || (dshape.Index2 != Index2) ||
-          (dshape.Index3 != Index3))
-      {
-        std::ostringstream error_stream;
-        error_stream << "Cannot assign DShape object:" << std::endl
-                     << "Indices do not match "
-                     << "LHS: " << Index1 << " " << Index2 << " " << Index3
-                     << ", RHS: " << dshape.Index1 << " " << dshape.Index2
-                     << " " << dshape.Index3 << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
+     //Set the values of the indices from the source object
+     Index1 = dshape.nindex1();
+     Index2 = dshape.nindex2();
+     Index3 = dshape.nindex3();
+     //Copy the pointer and mark is as being a copy
       DPsi = dshape.DPsi;
+      Is_dpsi_a_copy = true;
+      dshape.Is_dpsi_copied=true;
     }
 
-    /// The assignment operator does a shallow copy
+    /// This function does a shallow copy
     /// (resets the pointer to the data)
-    void operator=(DShape* const& dshape_pt)
+    void shallow_copy_from(DShape* const& dshape_pt)
     {
-#ifdef PARANOID
-      // Check the dimensions
-      if ((dshape_pt->Index1 != Index1) || (dshape_pt->Index2 != Index2) ||
-          (dshape_pt->Index3 != Index3))
-      {
-        std::ostringstream error_stream;
-        error_stream << "Cannot assign Shape object:" << std::endl
-                     << "Indices do not match "
-                     << "LHS: " << Index1 << " " << Index2 << " " << Index3
-                     << ", RHS: " << dshape_pt->Index1 << " "
-                     << dshape_pt->Index2 << " " << dshape_pt->Index3
-                     << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      DPsi = dshape_pt->DPsi;
+     //Set values of the indices from the source object
+     Index1 = dshape_pt->nindex1();
+     Index2 = dshape_pt->nindex2();
+     Index3 = dshape_pt->nindex3();
+     //Copy pointer and mark object as being a copy
+     DPsi = dshape_pt->DPsi;
+     Is_dpsi_a_copy = true;
+     dshape_pt->Is_dpsi_copied = true;
     }
 
 
@@ -404,11 +520,26 @@ namespace oomph
       Allocated_storage = 0;
     }
 
+  private:
     /// Change the size of the storage. Note that (for some strange reason)
     /// index2 is the "optional" index, to conform with the existing
     /// constructor.
     void resize(const unsigned& N, const unsigned& P, const unsigned& M = 1)
     {
+#ifdef PARANOID
+     //If the storage is copied, do not allow a resize
+     if(Is_dpsi_copied)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Cannot resize an object whose storage has been copied."
+                    << std::endl
+                    << "This could lead to a dangling pointer in the copy."
+                    << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif     
+     
       // Clear old storage
       delete[] Allocated_storage;
       Allocated_storage = 0;
@@ -421,6 +552,7 @@ namespace oomph
       Allocated_storage = new double[N * M * P];
       DPsi = Allocated_storage;
     }
+  public:
 
     /// Overload the round bracket operator for access to the data
     inline double& operator()(const unsigned& i, const unsigned& k)
@@ -428,6 +560,10 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, 0, k);
 #endif
+#ifdef PARANOID
+      shallow_copy_check();
+#endif
+
       return DPsi[i * Index2 * Index3 + k];
     }
 
@@ -448,6 +584,10 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, j, k);
 #endif
+#ifdef PARANOID
+      shallow_copy_check();
+#endif
+
       return DPsi[(i * Index2 + j) * Index3 + k];
     }
 
@@ -468,7 +608,10 @@ namespace oomph
     /// problems.
     inline double& raw_direct_access(const unsigned long& i)
     {
-      return DPsi[i];
+#ifdef PARANOID
+     shallow_copy_check();
+#endif
+     return DPsi[i];
     }
 
     /// Direct access to internal storage of data in flat-packed C-style
@@ -507,45 +650,10 @@ namespace oomph
     {
       return Index3;
     }
-  };
 
-  //======================================================================
-  /// A shape function with a deep copy constructor. This allows for use with
-  /// stl
-  ///  operations (e.g. manipulating vectors of shape functions). A seperate
-  ///  class is needed because the basic shape function uses a shallow copy.
-  //======================================================================
-  class ShapeWithDeepCopy : public Shape
-  {
-  public:
-    /// Constructor for a single-index set of shape functions.
-    ShapeWithDeepCopy(const unsigned& N) : Shape(N) {}
+   /// Boolean used to suppress warnings about assignment to shallow copies
+   static bool Suppress_warning_about_setting_values_in_shallow_copies;
 
-    /// Constructor for a two-index set of shape functions.
-    ShapeWithDeepCopy(const unsigned& N, const unsigned& M) : Shape(N, M) {}
-
-    /// Default constructor
-    ShapeWithDeepCopy() : Shape() {}
-
-    /// Deep copy constructor
-    ShapeWithDeepCopy(const ShapeWithDeepCopy& old_shape)
-      : Shape(old_shape.Index1, old_shape.Index2)
-    {
-      for (unsigned i = 0; i < Index1 * Index2; i++)
-      {
-        Psi[i] = old_shape.Psi[i];
-      }
-    }
-
-    /// Broken assignment operator
-    void operator=(const ShapeWithDeepCopy& old_shape) = delete;
-
-    /// Destructor, clear up the memory allocated by the object
-    ~ShapeWithDeepCopy()
-    {
-      delete[] Allocated_storage;
-      Allocated_storage = 0;
-    }
   };
 
   ////////////////////////////////////////////////////////////////////
