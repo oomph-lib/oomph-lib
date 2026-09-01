@@ -34,9 +34,9 @@ namespace oomph
 
   /// Boolean used to suppress warning about assignment operator
   bool Shape::Suppress_warning_about_assignment = false;
- 
+
   /// Boolean used to suppress warning about assignment operator
   bool DShape::Suppress_warning_about_assignment = false;
-  
- 
+
+
 } // namespace oomph

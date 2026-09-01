@@ -156,51 +156,57 @@ namespace oomph
     /// Assignment operator, shallow copy (not recommended so warning given)
     void operator=(Shape& shape)
     {
-     if(!Suppress_warning_about_assignment)
+      if (!Suppress_warning_about_assignment)
       {
-       std::ostringstream warning_stream;
-       warning_stream
-          << "The assignment operator, =, makes a shallow copy." << std::endl
-          << "This can have unexpected consequences, so we" << std::endl
-          << "now recommend using the explicitly named function " << std::endl
-          << "Shape::shallow_copy_from(.)." << std::endl
-          << "If you want to suppress" << std::endl
-          << "this warning then set the static boolean:" << std::endl
-          << "Shape::Suppress_warning_about_assignment"
-          << std::endl
-          << " to true." << std::endl;
+        std::ostringstream warning_stream;
+        warning_stream << "The assignment operator, =, makes a shallow copy."
+                       << std::endl
+                       << "This can have unexpected consequences, so we"
+                       << std::endl
+                       << "now recommend using the explicitly named function "
+                       << std::endl
+                       << "Shape::shallow_copy_from(.)." << std::endl
+                       << "If you want to suppress" << std::endl
+                       << "this warning then set the static boolean:"
+                       << std::endl
+                       << "Shape::Suppress_warning_about_assignment"
+                       << std::endl
+                       << " to true." << std::endl;
 
-       throw OomphLibWarning(warning_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibWarning(warning_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
       }
-       
-     this->shallow_copy_from(shape);
+
+      this->shallow_copy_from(shape);
     }
 
-   /// Assignment operator, shallow copy (not recommended so warning given)
-    void operator=(Shape* const &shape_pt)
+    /// Assignment operator, shallow copy (not recommended so warning given)
+    void operator=(Shape* const& shape_pt)
     {
-     if(!Suppress_warning_about_assignment)
+      if (!Suppress_warning_about_assignment)
       {
-       std::ostringstream warning_stream;
-       warning_stream
-          << "The assignment operator, =, makes a shallow copy." << std::endl
-          << "This can have unexpected consequences, so we" << std::endl
-          << "now recommend using the explicitly named function " << std::endl
-          << "Shape::shallow_copy_from(.)." << std::endl
-          << "If you want to suppress" << std::endl
-          << "this warning then set the static boolean:" << std::endl
-          << "Shape::Suppress_warning_about_assignment"
-          << std::endl
-          << " to true." << std::endl;
+        std::ostringstream warning_stream;
+        warning_stream << "The assignment operator, =, makes a shallow copy."
+                       << std::endl
+                       << "This can have unexpected consequences, so we"
+                       << std::endl
+                       << "now recommend using the explicitly named function "
+                       << std::endl
+                       << "Shape::shallow_copy_from(.)." << std::endl
+                       << "If you want to suppress" << std::endl
+                       << "this warning then set the static boolean:"
+                       << std::endl
+                       << "Shape::Suppress_warning_about_assignment"
+                       << std::endl
+                       << " to true." << std::endl;
 
-       OomphLibWarning(warning_stream.str(),
+        OomphLibWarning(warning_stream.str(),
                         OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+                        OOMPH_EXCEPTION_LOCATION);
       }
-       
-     this->shallow_copy_from(shape_pt);
+
+      this->shallow_copy_from(shape_pt);
     }
 
     /// This function makes a shallow copy
@@ -374,8 +380,8 @@ namespace oomph
       return Index2;
     }
 
-   /// Boolean used to suppress warning about assignment operator
-   static bool Suppress_warning_about_assignment;
+    /// Boolean used to suppress warning about assignment operator
+    static bool Suppress_warning_about_assignment;
   };
 
   //================================================================
@@ -488,52 +494,58 @@ namespace oomph
     /// Assignment operator, shallow copy (not recommended so warning given)
     void operator=(DShape& dshape)
     {
-     if(!Suppress_warning_about_assignment)
+      if (!Suppress_warning_about_assignment)
       {
-       std::ostringstream warning_stream;
-       warning_stream
-        << "The assignment operator, =, makes a shallow copy." << std::endl
-        << "This can have unexpected consequences, so we" << std::endl
-        << "now recommend using the explicitly named function " << std::endl
-        << "DShape::shallow_copy_from(.)." << std::endl
-        << "If you want to suppress" << std::endl
-        << "this warning then set the static boolean:" << std::endl
-        << "DShape::Suppress_warning_about_assignment"
-        << std::endl
-        << " to true." << std::endl;
-       
-       OomphLibWarning(warning_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+        std::ostringstream warning_stream;
+        warning_stream << "The assignment operator, =, makes a shallow copy."
+                       << std::endl
+                       << "This can have unexpected consequences, so we"
+                       << std::endl
+                       << "now recommend using the explicitly named function "
+                       << std::endl
+                       << "DShape::shallow_copy_from(.)." << std::endl
+                       << "If you want to suppress" << std::endl
+                       << "this warning then set the static boolean:"
+                       << std::endl
+                       << "DShape::Suppress_warning_about_assignment"
+                       << std::endl
+                       << " to true." << std::endl;
+
+        OomphLibWarning(warning_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
       }
-       
-     this->shallow_copy_from(dshape);
+
+      this->shallow_copy_from(dshape);
     }
 
 
-   /// Assignment operator, shallow copy (not reccomended so warning given)
-   void operator=(DShape* const &dshape_pt)
+    /// Assignment operator, shallow copy (not reccomended so warning given)
+    void operator=(DShape* const& dshape_pt)
     {
-     if(!Suppress_warning_about_assignment)
+      if (!Suppress_warning_about_assignment)
       {
-       std::ostringstream warning_stream;
-       warning_stream
-        << "The assignment operator, =, makes a shallow copy." << std::endl
-        << "This can have unexpected consequences, so we" << std::endl
-        << "now recommend using the explicitly named function " << std::endl
-        << "DShape::shallow_copy_from(.)." << std::endl
-        << "If you want to suppress" << std::endl
-        << "this warning then set the static boolean:" << std::endl
-        << "DShape::Suppress_warning_about_assignment"
-        << std::endl
-        << " to true." << std::endl;
-       
-       OomphLibWarning(warning_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+        std::ostringstream warning_stream;
+        warning_stream << "The assignment operator, =, makes a shallow copy."
+                       << std::endl
+                       << "This can have unexpected consequences, so we"
+                       << std::endl
+                       << "now recommend using the explicitly named function "
+                       << std::endl
+                       << "DShape::shallow_copy_from(.)." << std::endl
+                       << "If you want to suppress" << std::endl
+                       << "this warning then set the static boolean:"
+                       << std::endl
+                       << "DShape::Suppress_warning_about_assignment"
+                       << std::endl
+                       << " to true." << std::endl;
+
+        OomphLibWarning(warning_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
       }
-       
-     this->shallow_copy_from(dshape_pt);
+
+      this->shallow_copy_from(dshape_pt);
     }
 
 
@@ -693,9 +705,8 @@ namespace oomph
       return Index3;
     }
 
-   /// Boolean used to suppress warning about assignment operator
-   static bool Suppress_warning_about_assignment;
-
+    /// Boolean used to suppress warning about assignment operator
+    static bool Suppress_warning_about_assignment;
   };
 
   ////////////////////////////////////////////////////////////////////
