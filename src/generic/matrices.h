@@ -1766,7 +1766,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
     }
-
+   
   public:
     /// Empty constructor
     RankFourTensor()
@@ -2101,6 +2101,7 @@ namespace oomph
 #ifdef RANGE_CHECKING
       this->range_check(i, j, k, l);
 #endif
+
       return Tensordata[Q * (P * (M * i + j) + k) + l];
     }
 
@@ -2122,7 +2123,7 @@ namespace oomph
     /// problems.
     inline T& raw_direct_access(const unsigned long& i)
     {
-      return Tensordata[i];
+     return Tensordata[i];
     }
 
     /// Direct access to internal storage of data in flat-packed C-style
@@ -2142,6 +2143,7 @@ namespace oomph
     {
       return (Q * (P * (M * i + j) + 0) + 0);
     }
+
   };
 
 

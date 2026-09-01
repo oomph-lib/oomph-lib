@@ -121,29 +121,6 @@ namespace oomph
       }
     }
 
-    /// Private function that issues a warning if trying to assign data
-    /// to a shallow copy
-    void shallow_copy_check()
-    {
-      if ((Is_psi_a_copy) &&
-          (!Suppress_warning_about_setting_values_in_shallow_copies))
-      {
-        std::ostringstream warning_stream;
-        warning_stream
-          << "Accessing data that is a shallow copy." << std::endl
-          << "Assigning a new value will also change the original." << std::endl
-          << "If you know what you are doing and want to suppress " << std::endl
-          << "this warning then set the static boolean:" << std::endl
-          << "Shape::Suppress_warning_about_setting_values_in_shallow_copies"
-          << std::endl
-          << " to true." << std::endl;
-
-        OomphLibWarning(warning_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-
   public:
     /// Constructor for a single-index set of shape functions.
     Shape(const unsigned& N)
@@ -176,9 +153,55 @@ namespace oomph
     {
     }
 
-    /// Broken assignment operator
-    void operator=(const Shape& shape) = delete;
+    /// Assignment operator, shallow copy (not recommended so warning given)
+    void operator=(Shape& shape)
+    {
+     if(!Suppress_warning_about_assignment)
+      {
+       std::ostringstream warning_stream;
+       warning_stream
+          << "The assignment operator, =, makes a shallow copy." << std::endl
+          << "This can have unexpected consequences, so we" << std::endl
+          << "now recommend using the explicitly named function " << std::endl
+          << "Shape::shallow_copy_from(.)." << std::endl
+          << "If you want to suppress" << std::endl
+          << "this warning then set the static boolean:" << std::endl
+          << "Shape::Suppress_warning_about_assignment"
+          << std::endl
+          << " to true." << std::endl;
 
+       throw OomphLibWarning(warning_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+       
+     this->shallow_copy_from(shape);
+    }
+
+   /// Assignment operator, shallow copy (not recommended so warning given)
+    void operator=(Shape* const &shape_pt)
+    {
+     if(!Suppress_warning_about_assignment)
+      {
+       std::ostringstream warning_stream;
+       warning_stream
+          << "The assignment operator, =, makes a shallow copy." << std::endl
+          << "This can have unexpected consequences, so we" << std::endl
+          << "now recommend using the explicitly named function " << std::endl
+          << "Shape::shallow_copy_from(.)." << std::endl
+          << "If you want to suppress" << std::endl
+          << "this warning then set the static boolean:" << std::endl
+          << "Shape::Suppress_warning_about_assignment"
+          << std::endl
+          << " to true." << std::endl;
+
+       OomphLibWarning(warning_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+       
+     this->shallow_copy_from(shape_pt);
+    }
 
     /// This function makes a shallow copy
     /// (sets the pointer to the allocated data to be from another Shape object)
@@ -290,9 +313,6 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, 0);
 #endif
-#ifdef PARANOID
-      shallow_copy_check();
-#endif
       return Psi[i * Index2];
     }
 
@@ -311,9 +331,6 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, 0);
 #endif
-#ifdef PARANOID
-      shallow_copy_check();
-#endif
       return Psi[i * Index2];
     }
 
@@ -331,9 +348,6 @@ namespace oomph
     {
 #ifdef RANGE_CHECKING
       range_check(i, j);
-#endif
-#ifdef PARANOID
-      shallow_copy_check();
 #endif
       return Psi[i * Index2 + j];
     }
@@ -360,8 +374,8 @@ namespace oomph
       return Index2;
     }
 
-    /// Boolean used to suppress warnings about assignment to shallow copies
-    static bool Suppress_warning_about_setting_values_in_shallow_copies;
+   /// Boolean used to suppress warning about assignment operator
+   static bool Suppress_warning_about_assignment;
   };
 
   //================================================================
@@ -429,29 +443,6 @@ namespace oomph
       }
     }
 
-    /// Private function that issues a warning if trying to assign data
-    /// to a shallow copy
-    void shallow_copy_check()
-    {
-      if ((Is_dpsi_a_copy) &&
-          (!Suppress_warning_about_setting_values_in_shallow_copies))
-      {
-        std::ostringstream warning_stream;
-        warning_stream
-          << "Accessing data that is a shallow copy." << std::endl
-          << "Assigning a new value will also change the original." << std::endl
-          << "If you know what you are doing and want to suppress " << std::endl
-          << "this warning then set the static boolean:" << std::endl
-          << "DShape::Suppress_warning_about_setting_values_in_shallow_copies"
-          << std::endl
-          << " to true." << std::endl;
-
-        OomphLibWarning(warning_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-
 
   public:
     /// Constructor with two parameters: a single-index shape function
@@ -494,8 +485,57 @@ namespace oomph
     /// Broken copy constructor
     DShape(const DShape& dshape) = delete;
 
-    /// The assignment operator is broken
-    void operator=(const DShape& dshape) = delete;
+    /// Assignment operator, shallow copy (not recommended so warning given)
+    void operator=(DShape& dshape)
+    {
+     if(!Suppress_warning_about_assignment)
+      {
+       std::ostringstream warning_stream;
+       warning_stream
+        << "The assignment operator, =, makes a shallow copy." << std::endl
+        << "This can have unexpected consequences, so we" << std::endl
+        << "now recommend using the explicitly named function " << std::endl
+        << "DShape::shallow_copy_from(.)." << std::endl
+        << "If you want to suppress" << std::endl
+        << "this warning then set the static boolean:" << std::endl
+        << "DShape::Suppress_warning_about_assignment"
+        << std::endl
+        << " to true." << std::endl;
+       
+       OomphLibWarning(warning_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+       
+     this->shallow_copy_from(dshape);
+    }
+
+
+   /// Assignment operator, shallow copy (not reccomended so warning given)
+   void operator=(DShape* const &dshape_pt)
+    {
+     if(!Suppress_warning_about_assignment)
+      {
+       std::ostringstream warning_stream;
+       warning_stream
+        << "The assignment operator, =, makes a shallow copy." << std::endl
+        << "This can have unexpected consequences, so we" << std::endl
+        << "now recommend using the explicitly named function " << std::endl
+        << "DShape::shallow_copy_from(.)." << std::endl
+        << "If you want to suppress" << std::endl
+        << "this warning then set the static boolean:" << std::endl
+        << "DShape::Suppress_warning_about_assignment"
+        << std::endl
+        << " to true." << std::endl;
+       
+       OomphLibWarning(warning_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+       
+     this->shallow_copy_from(dshape_pt);
+    }
+
 
     /// This function does a shallow copy
     /// (resets the pointer to the data)
@@ -573,10 +613,6 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, 0, k);
 #endif
-#ifdef PARANOID
-      shallow_copy_check();
-#endif
-
       return DPsi[i * Index2 * Index3 + k];
     }
 
@@ -597,10 +633,6 @@ namespace oomph
 #ifdef RANGE_CHECKING
       range_check(i, j, k);
 #endif
-#ifdef PARANOID
-      shallow_copy_check();
-#endif
-
       return DPsi[(i * Index2 + j) * Index3 + k];
     }
 
@@ -621,9 +653,6 @@ namespace oomph
     /// problems.
     inline double& raw_direct_access(const unsigned long& i)
     {
-#ifdef PARANOID
-      shallow_copy_check();
-#endif
       return DPsi[i];
     }
 
@@ -664,8 +693,9 @@ namespace oomph
       return Index3;
     }
 
-    /// Boolean used to suppress warnings about assignment to shallow copies
-    static bool Suppress_warning_about_setting_values_in_shallow_copies;
+   /// Boolean used to suppress warning about assignment operator
+   static bool Suppress_warning_about_assignment;
+
   };
 
   ////////////////////////////////////////////////////////////////////
