@@ -173,9 +173,9 @@ namespace oomph
                        << std::endl
                        << " to true." << std::endl;
 
-        throw OomphLibWarning(warning_stream.str(),
-                              OOMPH_CURRENT_FUNCTION,
-                              OOMPH_EXCEPTION_LOCATION);
+        OomphLibWarning(warning_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
       }
 
       this->shallow_copy_from(shape);
