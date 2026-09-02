@@ -831,8 +831,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
     // The test functions are equal to the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the Jacobian
     return J;
   }
@@ -854,8 +854,8 @@ namespace oomph
 
     // Loop over the test functions and derivatives and set them
     // equal to the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the Jacobian
     return J;
   }
@@ -1094,8 +1094,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
 
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the Jacobian
     return J;
@@ -1116,8 +1116,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
 
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the Jacobian
     return J;
