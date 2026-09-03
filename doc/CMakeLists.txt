@@ -91,6 +91,7 @@ set(SUBDIRS
     search_results
     shell
     solid
+    axisym_solid
     tar_files
     the_data_structure
     time_harmonic_fourier_decomposed_linear_elasticity
