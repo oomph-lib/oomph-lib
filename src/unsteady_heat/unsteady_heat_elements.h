@@ -603,16 +603,9 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < NNODE_1D; i++)
-    {
-      test[i] = psi[i];
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dtestdx(i, j) = dpsidx(i, j);
-      }
-    }
+    // Set the test functions equal to the shape functions
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the jacobian
     return J;
@@ -638,8 +631,8 @@ namespace oomph
 
     // Set the test functions equal to the shape functions
     //(sets internal pointers)
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the jacobian
     return J;

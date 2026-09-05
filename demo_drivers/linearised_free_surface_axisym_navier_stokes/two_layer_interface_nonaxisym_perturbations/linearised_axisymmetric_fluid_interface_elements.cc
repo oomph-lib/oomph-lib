@@ -277,8 +277,8 @@ namespace oomph
     this->dshape_local_at_knot(ipt,psif,dpsifds);
     
     // Set test functions equal to shape functions
-    testf = psif;
-    dtestfds = dpsifds;
+    testf.shallow_copy_from(psif);
+    dtestfds.shallow_copy_from(dpsifds);
     
     // Find the test functions and derivatives of the parent
     (void)bulk_el_pt->dshape_eulerian(s_parent,testf_parent,dtestfdx_parent);
