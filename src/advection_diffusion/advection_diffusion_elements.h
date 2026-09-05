@@ -728,8 +728,8 @@ namespace oomph
     double J = this->dshape_eulerian(s, psi, dpsidx);
 
     // Set the test functions equal to the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the jacobian
     return J;
@@ -754,8 +754,9 @@ namespace oomph
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
 
     // Set the test functions equal to the shape functions (pointer copy)
-    test = psi;
-    dtestdx = dpsidx;
+    // Shallow copy for speed
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the jacobian
     return J;
