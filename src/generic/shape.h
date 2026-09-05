@@ -241,41 +241,6 @@ namespace oomph
       Is_psi_a_copy = true;
     }
 
-    /// This function makes a deep copy
-    /// (sets the value of the allocated data to those from another Shape
-    /// object)
-    /*void deep_copy_from(Shape& shape)
-     {
-      //If the indices don't match need to reallocate storage
-
-
-
-      //Sets the indices of this object to be consistent with that
-      //being copied
-      Index1 = shape.nindex1();
-      Index2 = shape.nindex2();
-      for(unsigned i=0;i<(Index1*Index2);++i)
-       {
-        Psi[i] = shape.Psi[i];
-       }
-     }
-
-
-    /// This function makes a deep copy
-    /// (sets the value of the allocated data to those from another Shape
-    object) void deep_copy_from(Shape* const& shape_pt)
-     {
-     //If the indicest don't match need to reallocate the storage
-      //Sets the indices of this object to be consistent with that
-      //being copied
-      Index1 = shape_pt->nindex1();
-      Index2 = shape_pt->nindex2();
-      for(unsigned i=0;i<(Index1*Index2);++i)
-       {
-        Psi[i] = shape_pt->Psi[i];
-       }
-       }*/
-
     /// Destructor, clear up the memory allocated by the object
     ~Shape()
     {
