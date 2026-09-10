@@ -30,17 +30,22 @@ To give specific (almost-)copy-and-paste instructions, the example below uses th
 
 ## One-time Setup
 
-Check out a clean version of the `oomph-lib` repository
+For simplicity we recommend checking out a fresh local clone of the `oomph-lib` repository
 ```bash
 git clone git@github.com:oomph-lib/oomph-lib.git
 ```
 
-Add your fork as an additional remote in your local clone:
+Now add your fork as an additional remote in your local clone:
 
 ```bash
 cd oomph-lib
 git remote add myfork git@github.com:JosephineMaintainer/oomph-lib.git
 ```
+
+Note that if you're working with an existing local clone of `oomph-lib`, then you're quite likely to have your fork as a remote already, possibly under a different name (`upstream` is quite common). What matters is that one remote points to the main `oomph-lib` repository and another points to your own fork, so your local clone can access both:
+
+- the main `oomph-lib/oomph-lib` repository (to fetch the contributor's PR branch), and
+- your own fork of `oomph-lib` (to publish your review branch and create a PR-on-the-PR).
 
 Check your configuration:
 
