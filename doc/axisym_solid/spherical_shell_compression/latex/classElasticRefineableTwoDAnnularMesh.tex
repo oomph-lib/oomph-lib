@@ -1,0 +1,90 @@
+\doxysection{Elastic\+Refineable\+Two\+DAnnular\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classElasticRefineableTwoDAnnularMesh}{}\label{classElasticRefineableTwoDAnnularMesh}\index{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}}
+
+
+Upgrade the mesh to a solidmesh. Quarter-\/annulus in quadrant r\texorpdfstring{$>$}{>}0, z\texorpdfstring{$>$}{>}0 ntheta -\/ no. elements in theta direction nr -\/ no. elements in the radial direction a -\/ Inner radius of annulus h -\/ thickness of annulus.  
+
+
+Inheritance diagram for Elastic\+Refineable\+Two\+DAnnular\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.824104cm]{classElasticRefineableTwoDAnnularMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_a533a60af5986a1146ca10b36d56443f9}{Elastic\+Refineable\+Two\+DAnnular\+Mesh}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&a, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&h, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\+\_\+stepper\+\_\+pt}}=\&\mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{virtual}} \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_a5f1d9398c3389baa7b58006fe53234f2}{\texorpdfstring{$\sim$}{\string~}\+Elastic\+Refineable\+Two\+DAnnular\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill "{}undeformed"{} Domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{Undeformed\+\_\+domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to "{}undeformed"{} Domain -- used to determine the Lagrangian coordinates of any newly created Solid\+Nodes during Mesh refinement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}$>$\newline
+class Elastic\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$}
+Upgrade the mesh to a solidmesh. Quarter-\/annulus in quadrant r\texorpdfstring{$>$}{>}0, z\texorpdfstring{$>$}{>}0 ntheta -\/ no. elements in theta direction nr -\/ no. elements in the radial direction a -\/ Inner radius of annulus h -\/ thickness of annulus. 
+
+Definition at line \mbox{\hyperlink{shell__adaptive_8cc_source_l00110}{110}} of file \mbox{\hyperlink{shell__adaptive_8cc_source}{shell\+\_\+adaptive.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticRefineableTwoDAnnularMesh_a533a60af5986a1146ca10b36d56443f9}\label{classElasticRefineableTwoDAnnularMesh_a533a60af5986a1146ca10b36d56443f9} 
+\index{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}!ElasticRefineableTwoDAnnularMesh@{ElasticRefineableTwoDAnnularMesh}}
+\index{ElasticRefineableTwoDAnnularMesh@{ElasticRefineableTwoDAnnularMesh}!ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticRefineableTwoDAnnularMesh()}{ElasticRefineableTwoDAnnularMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{Elastic\+Refineable\+Two\+DAnnular\+Mesh}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{\+::\+Elastic\+Refineable\+Two\+DAnnular\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&}]{ntheta,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&}]{nr,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&}]{a,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&}]{h,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__adaptive_8cc_source_l00098}{98}} of file \mbox{\hyperlink{shell__adaptive_8cc_source}{shell\+\_\+adaptive.\+cc}}.
+
+\Hypertarget{classElasticRefineableTwoDAnnularMesh_a5f1d9398c3389baa7b58006fe53234f2}\label{classElasticRefineableTwoDAnnularMesh_a5f1d9398c3389baa7b58006fe53234f2} 
+\index{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}!````~ElasticRefineableTwoDAnnularMesh@{\texorpdfstring{$\sim$}{\string~}ElasticRefineableTwoDAnnularMesh}}
+\index{````~ElasticRefineableTwoDAnnularMesh@{\texorpdfstring{$\sim$}{\string~}ElasticRefineableTwoDAnnularMesh}!ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ElasticRefineableTwoDAnnularMesh()}{\string~ElasticRefineableTwoDAnnularMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{virtual}} \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{Elastic\+Refineable\+Two\+DAnnular\+Mesh}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{Elastic\+Refineable\+Two\+DAnnular\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Kill "{}undeformed"{} Domain. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__adaptive_8cc_source_l00098}{98}} of file \mbox{\hyperlink{shell__adaptive_8cc_source}{shell\+\_\+adaptive.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}\label{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928} 
+\index{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}!Undeformed\_domain\_pt@{Undeformed\_domain\_pt}}
+\index{Undeformed\_domain\_pt@{Undeformed\_domain\_pt}!ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$@{ElasticRefineableTwoDAnnularMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Undeformed\_domain\_pt}{Undeformed\_domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{Elastic\+Refineable\+Two\+DAnnular\+Mesh}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\+Undeformed\+\_\+domain\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to "{}undeformed"{} Domain -- used to determine the Lagrangian coordinates of any newly created Solid\+Nodes during Mesh refinement. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__adaptive_8cc_source_l00181}{181}} of file \mbox{\hyperlink{shell__adaptive_8cc_source}{shell\+\_\+adaptive.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{shell__adaptive_8cc}{shell\+\_\+adaptive.\+cc}}\end{DoxyCompactItemize}

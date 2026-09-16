@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Axisymmetric solid mechanics: a time-dependent demo problem</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Axisymmetric solid mechanics: a time-dependent demo problem </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This example considers the application of the axisymmetric PVD equations introduced in a <a href="../../axisym_solid/shell/html/index.html">previous tutorial</a> toward a time-dependent problem.</p>
+<h1><a class="anchor" id="description"></a>
+Problem description</h1>
+<p>The problem under consideration is a benchmark test using the method of manufactured solutions. Similar to the approach used in the previous tutorial, a solution in spherical symmetry is sought. The imposed displacment field is:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  u(\hat{r},t) = \hat{R}(\hat{r},t) - \hat{r} = A(t)\hat{r} + \frac{B(t)}{\hat{r}^2},
+\]" src="form_0.png" width="198" height="28"/>
+</p>
+<p> where the chosen time-dependence for <img class="formulaInl" alt="$A(t)$" src="form_1.png" width="24" height="14"/> and <img class="formulaInl" alt="$B(t)$" src="form_2.png" width="24" height="14"/> are:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  A(t) = A_0\sin(\omega t), \hspace{1cm} B(t) = B_0\sin(\omega t)
+\]" src="form_3.png" width="231" height="14"/>
+</p>
+<p> Using the same compressible Neo-Hookean constitutive law as previously, the body force required for the manufactured solution to be an exact solution is:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \mathbf{b} = -\left\{\omega^2 u +
+  \mu\left[\frac{\partial \lambda_{\hat{R}}}{\partial \hat{r}} + \frac{2}{\hat{r}}(\lambda_{\hat{R}}-\lambda_{\Theta})\right]
+  + \frac{\lambda}{J\lambda_{\hat{R}}}\frac{\partial J}{\partial \hat{r}}
+  + \left[\frac{1}{\lambda_{\hat{R}}^2}\frac{\partial\lambda_{\hat{R}}}{\partial \hat{r}} + 
+  \frac{2}{\hat{r}}\left(\frac{1}{\lambda_{\Theta}}-\frac{1}{\lambda_{\hat{R}}}\right)\right]
+  (\mu-\lambda\log J)\right\}\mathbf{e}_{\hat{r}},
+  \ \ \ \ \ \ \ \ (1)
+\]" src="form_4.png" width="579" height="39"/>
+</p>
+<p> where <img class="formulaInl" alt="$\mu = 1/[2(1+\nu)]$" src="form_5.png" width="88" height="14"/> and <img class="formulaInl" alt="$\lambda = \nu/[(1+\nu)(1-2\nu)]$" src="form_6.png" width="125" height="14"/> are the dimensionless Lamé parameters (other symbols retain their meaning from the <a href="../../axisym_solid/shell/html/index.html">previous tutorial</a>). The required traction force on the inner and outer faces of the shell is:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \mathbf{t} = \frac{1}{J}\left[\mu (\lambda_{\hat{R}}^2-1) + \lambda \log J\right]\mathbf{n},
+  \ \ \ \ \ \ \ \ (2)
+\]" src="form_7.png" width="215" height="26"/>
+</p>
+<p> where <img class="formulaInl" alt="$\mathbf{n}$" src="form_8.png" width="8" height="6"/> is the unit normal.</p>
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The predictions of the finite element simulation against the manufactured solution are shown below. An excellent agreement in the deformed inner and outer radii and is seen over the full oscillation period. </p><div class="image">
+<img src="inner_outer_radii.gif" alt=""/>
+<div class="caption">
+The deformed inner and outer radii of the shell against time. </div></div>
+<p>  Also shown below are heatmaps of the components <img class="formulaInl" alt="$\gamma_{rr}$" src="form_9.png" width="18" height="9"/> and <img class="formulaInl" alt="$\gamma_{zz}$" src="form_10.png" width="18" height="9"/> of the Green-Lagrange strain tensor: </p><div class="image">
+<img src="rr_strain.gif" alt=""/>
+<div class="caption">
+The rr-component (cylindrical coordinates) of the Green-Lagrange strain. </div></div>
+  <div class="image">
+<img src="zz_strain.gif" alt=""/>
+<div class="caption">
+The zz-component of the Green-Lagrange strain. </div></div>
+ <h1><a class="anchor" id="namespaces"></a>
+Global parameters and functions</h1>
+<p>The namespace <code><a class="el" href="namespaceGlobalPhysicalVariables.html" title="Global physical variables.">GlobalPhysicalVariables</a></code> contains the material's Poisson ratio and the parameters <img class="formulaInl" alt="$A_0$" src="form_11.png" width="15" height="13"/>, <img class="formulaInl" alt="$B_0$" src="form_12.png" width="14" height="13"/> and <img class="formulaInl" alt="$\omega$" src="form_13.png" width="9" height="6"/> that parameterise the manufactured displacement solution. The functions <code>deformed_position_fct</code>, <code>deformed_velocity_fct</code> and <code>deformed_accel_fct</code> are used to set the initial condition. The namespace also contains functions <code>body_force_fct</code> and <code>traction_force_fct</code> which define the forcing given by equations (1) and (2), respectively.  </p><div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global physical variables</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobalPhysicalVariables.html">GlobalPhysicalVariables</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Poisson ratio</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a> = 0.4;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Coefficient amplitudes for the manufactured solution</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> = 0.05;</div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> = 0.05;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Oscillation frequency</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> = 5.0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Get the principal stretches from the manufactured solution</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a0285d6216bd5382eb5860ffbf48ad962">get_principal_stretches</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>(2);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">A</a> = <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> = <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] = 1.0 + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">A</a> - 2.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -3.0);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] = 1.0 + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">A</a> + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -3.0);</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Get derivatives of prinicipal stretches w.r.t. r</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a08c57783b28735718a0681158009bf0c">get_principal_stretch_derivatives</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>(2);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> = <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[0] = 6.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, 4.0);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[1] = -3.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">B</a> / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, 4.0);</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate the deformed position</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a6d029936a1355675d8d9c7147c956a7a">deformed_position_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                             <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                             <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], 0.5);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">atan2</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0]);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>[0] =</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>[1] =</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] + (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate the deformed position</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#ab370e54f41dc8f5f179b9c41ab253e23">deformed_velocity_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                             <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                             <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_dot</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], 0.5);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">atan2</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0]);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_dot</a>[0] =</div>
+<div class="line">      <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_dot</a>[1] =</div>
+<div class="line">      <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Evaluate the deformed position</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a3d0741f668814641b31d8949164d6f3c">deformed_accel_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                          <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                          <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_ddot</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], 0.5);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">atan2</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0]);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_ddot</a>[0] = -1.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) *</div>
+<div class="line">                <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x_ddot</a>[1] = -1.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) *</div>
+<div class="line">                <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Body force function</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#afb184f3858eb55e33e0ce67e4d5b0197">body_force_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                      <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Calculate the radial coordinate</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], 0.5);</div>
+<div class="line">    <span class="comment">// Radial acceleration</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">accel</a> =</div>
+<div class="line">      -1.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">A0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">B0</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>, -2.0)) * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">omega</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>);</div>
+<div class="line">    <span class="comment">// Principal stretches</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a> = <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a0285d6216bd5382eb5860ffbf48ad962">get_principal_stretches</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>);</div>
+<div class="line">    <span class="comment">// Jacobian</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1];</div>
+<div class="line">    <span class="comment">// Derivative of radial principal stretch and Jacobian w.r.t. r</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a> = <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a08c57783b28735718a0681158009bf0c">get_principal_stretch_derivatives</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>);</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dJdr</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] +</div>
+<div class="line">                  2.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[1];</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Dimensionless Lame parameters</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">mu_L</a> = 1.0 / (2.0 * (1.0 + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>));</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda_L</a> = <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a> / ((1.0 + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>) * (1.0 - 2.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Evaluate the body force</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b_spher</a> =</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">accel</a> - <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">mu_L</a> * (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[0] + (2.0 / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>) * (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] - <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1])) -</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda_L</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dJdr</a> / (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0]) -</div>
+<div class="line">      (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">dlambda_dr</a>[0] / (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0]) +</div>
+<div class="line">       (2.0 / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>) * (1.0 / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] - 1.0 / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0])) *</div>
+<div class="line">        (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">mu_L</a> - <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda_L</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">log</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">atan2</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0]);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b</a>[0] = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b_spher</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">cos</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b</a>[1] = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">b_spher</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">sin</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">theta</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// External traction force function</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a89d0dd28995f587a136bca24656522d2">traction_force_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                          <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                          <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>,</div>
+<div class="line">                          <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>,</div>
+<div class="line">                          <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Calculate the (undeformed) radial coordinate</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">pow</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1], 0.5);</div>
+<div class="line">    <span class="comment">// Principal stretches</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a> = <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a0285d6216bd5382eb5860ffbf48ad962">get_principal_stretches</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">r</a>);</div>
+<div class="line">    <span class="comment">// Jacobian</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a> = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[1];</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Dimensionless Lame parameters</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">mu_L</a> = 1.0 / (2.0 * (1.0 + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>));</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda_L</a> = <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a> / ((1.0 + <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>) * (1.0 - 2.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Pressure required for the manufactured solution to work</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ext_pressure</a> =</div>
+<div class="line">      -1.0 * (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">mu_L</a> * (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda</a>[0] - 1.0) + <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">lambda_L</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">log</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a>)) / <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">J</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Return the traction</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>[0] = -1.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ext_pressure</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>[1] = -1.0 * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ext_pressure</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>[1];</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// namespace GlobalPhysicalVariables</span></div>
+<div class="ttc" id="aclassElasticTwoDAnnularMesh_html"><div class="ttname"><a href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a></div><div class="ttdoc">Upgrade the mesh to a solidmesh. Quarter-annulus in quadrant r&gt;0, z&gt;0 ntheta - no....</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00228">shell_unsteady.cc:230</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html">GlobalPhysicalVariables</a></div><div class="ttdoc">Global physical variables.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00051">shell_unsteady.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a0285d6216bd5382eb5860ffbf48ad962"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a0285d6216bd5382eb5860ffbf48ad962">GlobalPhysicalVariables::get_principal_stretches</a></div><div class="ttdeci">Vector&lt; double &gt; get_principal_stretches(const double &amp;time, const double &amp;r)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00064">shell_unsteady.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a08c57783b28735718a0681158009bf0c"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a08c57783b28735718a0681158009bf0c">GlobalPhysicalVariables::get_principal_stretch_derivatives</a></div><div class="ttdeci">Vector&lt; double &gt; get_principal_stretch_derivatives(const double &amp;time, const double &amp;r)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00075">shell_unsteady.cc:75</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a206a84ff2245d6473aa3a7a2dec39d53"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a206a84ff2245d6473aa3a7a2dec39d53">GlobalPhysicalVariables::B0</a></div><div class="ttdeci">double B0</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00058">shell_unsteady.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a3d0741f668814641b31d8949164d6f3c"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a3d0741f668814641b31d8949164d6f3c">GlobalPhysicalVariables::deformed_accel_fct</a></div><div class="ttdeci">void deformed_accel_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;x_ddot)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00112">shell_unsteady.cc:112</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a6d029936a1355675d8d9c7147c956a7a"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a6d029936a1355675d8d9c7147c956a7a">GlobalPhysicalVariables::deformed_position_fct</a></div><div class="ttdeci">void deformed_position_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;x)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00086">shell_unsteady.cc:86</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a6e33cd39f1b613eee985587ec2632653"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">GlobalPhysicalVariables::omega</a></div><div class="ttdeci">double omega</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00061">shell_unsteady.cc:61</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_a89d0dd28995f587a136bca24656522d2"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#a89d0dd28995f587a136bca24656522d2">GlobalPhysicalVariables::traction_force_fct</a></div><div class="ttdeci">void traction_force_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00161">shell_unsteady.cc:161</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_aa6f7e7ba10d24d328cb5885b22f55410"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a></div><div class="ttdeci">double nu</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00054">shell_unsteady.cc:54</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_ab370e54f41dc8f5f179b9c41ab253e23"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#ab370e54f41dc8f5f179b9c41ab253e23">GlobalPhysicalVariables::deformed_velocity_fct</a></div><div class="ttdeci">void deformed_velocity_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;x_dot)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00099">shell_unsteady.cc:99</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_aece54b22568f56774a8b220da37ee4a0"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#aece54b22568f56774a8b220da37ee4a0">GlobalPhysicalVariables::A0</a></div><div class="ttdeci">double A0</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00057">shell_unsteady.cc:57</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_afb184f3858eb55e33e0ce67e4d5b0197"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#afb184f3858eb55e33e0ce67e4d5b0197">GlobalPhysicalVariables::body_force_fct</a></div><div class="ttdeci">void body_force_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;b)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00125">shell_unsteady.cc:125</a></div></div>
+</div><!-- fragment --><p> A seperate namespace <code><a class="el" href="namespaceGlobalSimSettings.html" title="Global simulation settings.">GlobalSimSettings</a></code> then defines the simulation parameters such as the mesh dimensions, the number of timesteps in the run and the flag indicating if the solid pressure formulation is to be used. </p><div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global simulation settings</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobalSimSettings.html">GlobalSimSettings</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Folder for output</span></div>
+<div class="line">  <span class="keywordtype">string</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">result_folder</a> = <span class="stringliteral">&quot;RESLT&quot;</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Flag for using a pressure formulation</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">use_pressure_formulation</a> = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of elements in radial direction</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">n_radial</a> = 14;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of elements in azimuthal direction</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">n_azimuthal</a> = 14;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Inner radius</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">a</a> = 1.0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Thickness</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">h</a> = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of timesteps</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a346ca0d7817539534c4a5b2d734ab30e">Nsteps</a> = 120;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Size of the timestep</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">dt</a>;</div>
+<div class="line">} <span class="comment">// namespace GlobalSimSettings</span></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html"><div class="ttname"><a href="namespaceGlobalSimSettings.html">GlobalSimSettings</a></div><div class="ttdoc">Global simulation settings.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00192">shell_unsteady.cc:193</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a0193c69b05dae41104ccb2a41e6fbf83"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">GlobalSimSettings::n_azimuthal</a></div><div class="ttdeci">unsigned n_azimuthal</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00204">shell_unsteady.cc:204</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a346ca0d7817539534c4a5b2d734ab30e"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a346ca0d7817539534c4a5b2d734ab30e">GlobalSimSettings::Nsteps</a></div><div class="ttdeci">unsigned Nsteps</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00213">shell_unsteady.cc:213</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a35bec0251495dcf01e9650ca19efeb45"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">GlobalSimSettings::h</a></div><div class="ttdeci">double h</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00210">shell_unsteady.cc:210</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a476a2d8141475a4c7363fc4a41a08859"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">GlobalSimSettings::a</a></div><div class="ttdeci">double a</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00207">shell_unsteady.cc:207</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a5d909ebbb2dc3bc7e6ec6d00d83df6dc"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a></div><div class="ttdeci">double dt</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00216">shell_unsteady.cc:216</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a7f2abb69ed4837decee986408c2328b2"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">GlobalSimSettings::n_radial</a></div><div class="ttdeci">unsigned n_radial</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00201">shell_unsteady.cc:201</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_ae74221310839405c9b6f8ddfac9888d3"><div class="ttname"><a href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a></div><div class="ttdeci">bool use_pressure_formulation</div><div class="ttdoc">Flag for using a pressure formulation.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00198">shell_unsteady.cc:198</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_ae852721117b7f4638a608800ab6aa280"><div class="ttname"><a href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">GlobalSimSettings::result_folder</a></div><div class="ttdeci">string result_folder</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00195">shell_unsteady.cc:195</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="mesh"></a>
+The mesh</h1>
+<p>As done in the <a href="../../axisym_solid/shell/html/index.html">previous tutorial</a>, the mesh is constructed by upgrading the existing <code>TwoDAnnularMesh</code> to a solid mesh. </p><div class="fragment"><div class="line"><span class="comment">//======================start_mesh================================</span></div>
+<div class="line"><span class="comment">/// Upgrade the mesh to a solidmesh.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Quarter-annulus in quadrant r&gt;0, z&gt;0</span></div>
+<div class="line"><span class="comment">/// ntheta - no. elements in theta direction</span></div>
+<div class="line"><span class="comment">/// nr - no. elements in the radial direction</span></div>
+<div class="line"><span class="comment">/// a - Inner radius of annulus</span></div>
+<div class="line"><span class="comment">/// h - thickness of annulus</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> TwoDAnnularMesh&lt;ELEMENT&gt;,</div>
+<div class="line">                               <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Constructor: Build mesh and copy Eulerian coords to Lagrangian</span></div>
+<div class="line"><span class="comment">  /// ones so that the initial configuration is the stress-free one.</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>(</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h,</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">TimeStepper</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a> = &amp;<a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">Mesh::Default_TimeStepper</a>)</div>
+<div class="line">    : <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">RectangularQuadMesh</a>&lt;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;(</div>
+<div class="line">        <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>, 1.0, 1.0, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">false</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a>),</div>
+<div class="line">      TwoDAnnularMesh&lt;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">false</a>,</div>
+<div class="line">                               0.25,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>,</div>
+<div class="line">                               a,</div>
+<div class="line">                               h,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">MathematicalConstants</a>::<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Pi</a>,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Make the current configuration the undeformed one by</span></div>
+<div class="line">    <span class="comment">// setting the nodal Lagrangian coordinates to their current</span></div>
+<div class="line">    <span class="comment">// Eulerian ones</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">set_lagrangian_nodal_coordinates</a>();</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+<div class="ttc" id="aclassElasticTwoDAnnularMesh_html_a27c2f2221dd333e881698d3723aa5524"><div class="ttname"><a href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">ElasticTwoDAnnularMesh::ElasticTwoDAnnularMesh</a></div><div class="ttdeci">ElasticTwoDAnnularMesh(const unsigned &amp;ntheta, const unsigned &amp;nr, const double &amp;a, const double &amp;h, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration...</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00216">shell_unsteady.cc:234</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>The problem class is relatively standard and is identical to the previous tutorial, execpt for the addition of the member functions <code>set_initial_condition()</code>, which sets the initial condition manually using functions provided in <code><a class="el" href="namespaceGlobalPhysicalVariables.html" title="Global physical variables.">GlobalPhysicalVariables</a></code>, and <code>unsteady_run()</code> which performs the time integration. </p><div class="fragment"><div class="line"><span class="comment">//==============start_problem=========================================</span></div>
+<div class="line"><span class="comment">/// Axisymmetric compression of a finite thickness shell in cylindrical</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// polar coordiantes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classShellProblem.html">ShellProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Constructor:</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_function" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Destructor</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_function" href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">~ShellProblem</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Set the initial condition</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a1c2fbd7b8fbaee2808d5444f2558fe39">set_initial_condition</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Run through the timesteps</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#abb4716b05349a7bfcc60b7f642e1da94">unsteady_run</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Complete the problem setup (attach function/physical parameter pointers)</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">complete_problem_setup</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Create the boundary elements</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a10958621472472e01549a049d1278942">create_boundary_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Delete boundary elements and wipe the associated mesh</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">delete_boundary_elements</a>()</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element</a> = <a class="code hl_variable" href="classShellProblem.html#ac2377e6cfad4e5492a475b45c10fd6d7">Surface_mesh_pt</a>-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Loop over the surface elements</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Kill surface element</span></div>
+<div class="line">      <span class="keyword">delete</span> <a class="code hl_variable" href="classShellProblem.html#ac2377e6cfad4e5492a475b45c10fd6d7">Surface_mesh_pt</a>-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Wipe the mesh</span></div>
+<div class="line">    <a class="code hl_variable" href="classShellProblem.html#ac2377e6cfad4e5492a475b45c10fd6d7">Surface_mesh_pt</a>-&gt;flush_element_and_node_storage();</div>
+<div class="line">  } <span class="comment">// end of delete_boundary_elements</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Bulk mesh</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classShellProblem.html#a76c561add6b4cd52b058583c09006576">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Surface mesh for traction force</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Mesh</a>* <a class="code hl_variable" href="classShellProblem.html#ac2377e6cfad4e5492a475b45c10fd6d7">Surface_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ConstitutiveLaw</a>* <a class="code hl_variable" href="classShellProblem.html#aec9abc5db195469eb7e4ecb14c1795ba">Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// DocInfo object</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">DocInfo</a> <a class="code hl_variable" href="classShellProblem.html#a2f891d36692df03ae47e1e750564c17c">Doc_info</a>;</div>
+<div class="line">};</div>
+<div class="ttc" id="aclassShellProblem_html"><div class="ttname"><a href="classShellProblem.html">ShellProblem</a></div><div class="ttdoc">Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00263">shell_unsteady.cc:264</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a10958621472472e01549a049d1278942"><div class="ttname"><a href="classShellProblem.html#a10958621472472e01549a049d1278942">ShellProblem::create_boundary_elements</a></div><div class="ttdeci">void create_boundary_elements()</div><div class="ttdoc">Create the boundary elements.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00435">shell_unsteady.cc:435</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a1c2fbd7b8fbaee2808d5444f2558fe39"><div class="ttname"><a href="classShellProblem.html#a1c2fbd7b8fbaee2808d5444f2558fe39">ShellProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set the initial condition.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00470">shell_unsteady.cc:470</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a2f891d36692df03ae47e1e750564c17c"><div class="ttname"><a href="classShellProblem.html#a2f891d36692df03ae47e1e750564c17c">ShellProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00315">shell_unsteady.cc:315</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a33734a4a25df3436a58bd75c9356f3c5"><div class="ttname"><a href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">ShellProblem::complete_problem_setup</a></div><div class="ttdeci">void complete_problem_setup()</div><div class="ttdoc">Complete the problem setup (attach function/physical parameter pointers)</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00380">shell_unsteady.cc:380</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a6b16c0923d5f3023cb6cecf1ac3ce798"><div class="ttname"><a href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">ShellProblem::delete_boundary_elements</a></div><div class="ttdeci">void delete_boundary_elements()</div><div class="ttdoc">Delete boundary elements and wipe the associated mesh.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00289">shell_unsteady.cc:289</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a76c561add6b4cd52b058583c09006576"><div class="ttname"><a href="classShellProblem.html#a76c561add6b4cd52b058583c09006576">ShellProblem::Bulk_mesh_pt</a></div><div class="ttdeci">ElasticTwoDAnnularMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00306">shell_unsteady.cc:306</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a9981fcc355f178761268acf3cd5d6119"><div class="ttname"><a href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">ShellProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00534">shell_unsteady.cc:534</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_abb4716b05349a7bfcc60b7f642e1da94"><div class="ttname"><a href="classShellProblem.html#abb4716b05349a7bfcc60b7f642e1da94">ShellProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run()</div><div class="ttdoc">Run through the timesteps.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00517">shell_unsteady.cc:517</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_ac2377e6cfad4e5492a475b45c10fd6d7"><div class="ttname"><a href="classShellProblem.html#ac2377e6cfad4e5492a475b45c10fd6d7">ShellProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Surface mesh for traction force.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00309">shell_unsteady.cc:309</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_acf096f825635ae9c161c704969a5e21c"><div class="ttname"><a href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem::ShellProblem</a></div><div class="ttdeci">ShellProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00322">shell_unsteady.cc:322</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_aec9abc5db195469eb7e4ecb14c1795ba"><div class="ttname"><a href="classShellProblem.html#aec9abc5db195469eb7e4ecb14c1795ba">ShellProblem::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00312">shell_unsteady.cc:312</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_afb893165e8a3695d416f852bff5b3280"><div class="ttname"><a href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">ShellProblem::~ShellProblem</a></div><div class="ttdeci">~ShellProblem()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00270">shell_unsteady.cc:270</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The constructor begins with assigning the output directory and setting <code>Newmark&lt;1&gt;</code> as the problem's timestepper. Following this, the bulk and surface meshes are created and the member function <code>create_boundary_elements()</code> is called to create traction elements on the outer boundary of the shell. <code>complete_problem_setup()</code> (discussed below) is called to complete the setup of the bulk and surface elements and assign Dirichlet boundary conditions. <code>set_initial_condition()</code> (also discussed below) is called to manually set an initial condition which is consistent with the manufactured solution. </p><div class="fragment"><div class="line"><span class="comment">//===============start_constructor========================================</span></div>
+<div class="line"><span class="comment">/// Constructor for unstructured solid problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem&lt;ELEMENT&gt;::ShellProblem</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  Doc_info.set_directory(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">GlobalSimSettings::result_folder</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Initialise counter for solutions</span></div>
+<div class="line">  Doc_info.number() = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Allocate the timestepper</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">add_time_stepper_pt</a>(<span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Newmark&lt;1&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Calculate the timestep size</span></div>
+<div class="line">  <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a> =</div>
+<div class="line">    2.0 * <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">MathematicalConstants::Pi</a> /</div>
+<div class="line">    (<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#a6e33cd39f1b613eee985587ec2632653">GlobalPhysicalVariables::omega</a> * <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a346ca0d7817539534c4a5b2d734ab30e">GlobalSimSettings::Nsteps</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the mesh: Quarter-annulus in the quadrant r&gt;0, z&gt;0.</span></div>
+<div class="line">  Bulk_mesh_pt =</div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">GlobalSimSettings::n_azimuthal</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">GlobalSimSettings::n_radial</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">GlobalSimSettings::a</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">GlobalSimSettings::h</a>,</div>
+<div class="line">                                        <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a>());</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the surface mesh</span></div>
+<div class="line">  Surface_mesh_pt = <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Mesh</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the boundary elements</span></div>
+<div class="line">  create_boundary_elements();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Add the two submeshes</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">add_sub_mesh</a>(Bulk_mesh_pt);</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">add_sub_mesh</a>(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Combine all sub-meshes into a single mesh</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">build_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Define a constitutive law from a strain energy density function.</span></div>
+<div class="line">  <span class="comment">// Compressible Neo-Hookean</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">StrainEnergyFunction</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a> =</div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">NeoHookean</a>(&amp;<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a>);</div>
+<div class="line">  Constitutive_law_pt =</div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">IsotropicStrainEnergyFunctionConstitutiveLaw</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Complete the problem set up</span></div>
+<div class="line">  complete_problem_setup();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set the initial condition consistently</span></div>
+<div class="line">  set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Assign eqn numbers</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl;</div>
+<div class="line">} <span class="comment">// end constructor</span></div>
+</div><!-- fragment --> <h1><a class="anchor" id="complete"></a>
+Completing the problem setup</h1>
+<p>To complete the problem setup, the pointers for the constutive law and body force function are passed to each of the bulk elements. The pointer to the traction force is then passed to each of the interface elements. Finally, the Dirichlet boundary conditions for the problem are set. </p><div class="fragment"><div class="line"><span class="comment">//========start_of_complete_problem_setup==================================</span></div>
+<div class="line"><span class="comment">/// Assign function/parameter pointers, set boundary conditions etc.</span></div>
+<div class="line"><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">ShellProblem&lt;ELEMENT&gt;::complete_problem_setup</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Determine number of bulk elements in mesh</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element_bulk</a> = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over the bulk elements</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element_bulk</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the constitutive law</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the traction function for applying pressure</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>-&gt;body_force_fct_pt() = &amp;<a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#afb184f3858eb55e33e0ce67e4d5b0197">GlobalPhysicalVariables::body_force_fct</a>;</div>
+<div class="line">  } <span class="comment">// End of loop over bulk elements</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Determine number of 1D interface elements in mesh</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_interface_element</a> = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over the interface elements</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_interface_element</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">AxisymmetricCylindricalSolidTractionElement&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a> =</div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">AxisymmetricCylindricalSolidTractionElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">        Surface_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the traction function for applying pressure</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>-&gt;traction_fct_pt() = &amp;<a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a89d0dd28995f587a136bca24656522d2">GlobalPhysicalVariables::traction_force_fct</a>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of loop over interface elements</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set Dirichlet boundary conditions</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a> = Bulk_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Pin radial position on symmetry axis only</span></div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(1, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>)-&gt;pin_position(1);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a> = Bulk_mesh_pt-&gt;nboundary_node(3);</div>
+<div class="line">  <span class="comment">// Loop over nodes on fixed boundary</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Pin radial position on symmetry axis only</span></div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(3, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>)-&gt;pin_position(0);</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end complete_problem_setup</span></div>
+</div><!-- fragment --> <h1><a class="anchor" id="initial_condition"></a>
+Setting the initial condition</h1>
+<p>Since this tutorial uses a manufactured solution, the nodal positions, velocities and accelerations are known at all times and so the initial condition can be set manually. The <code>Newmark&lt;1&gt;</code> timestepper stores the following values:</p><ul>
+<li>0: Displacement at time <img class="formulaInl" alt="$ t $" src="form_14.png" width="5" height="9"/>.</li>
+<li>1: Displacement at time <img class="formulaInl" alt="$ t-dt $" src="form_15.png" width="31" height="10"/>.</li>
+<li>2: Velocity at time <img class="formulaInl" alt="$ t-dt $" src="form_15.png" width="31" height="10"/>.</li>
+<li>3: Acceleration at time <img class="formulaInl" alt="$ t-dt $" src="form_15.png" width="31" height="10"/>.</li>
+</ul>
+<p>These values are easily accessible using the functions <code>deformed_position_fct</code>, <code>deformed_velocity_fct</code> and <code>deformed_accel_fct</code> in the namespace <code><a class="el" href="namespaceGlobalPhysicalVariables.html" title="Global physical variables.">GlobalPhysicalVariables</a></code>. </p><div class="fragment"><div class="line"><span class="comment">//============start_of_set_initial_condition==============================</span></div>
+<div class="line"><span class="comment">/// Given the form of the manufactured solution, this really only needs</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// doing for the velocity</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a1c2fbd7b8fbaee2808d5444f2558fe39">ShellProblem&lt;ELEMENT&gt;::set_initial_condition</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// First initialize dt and set the weights</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">initialise_dt</a>(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over nodes</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_node</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Container for position/velocity/acceleration</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>(2);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Cast to (solid)node</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">SolidNode</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">SolidNode</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Get the undeformed position</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>(2), <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>(2);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[0] = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;lagrangian_position(0);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>[1] = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;lagrangian_position(1);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set values of deformed position at the present and previous times</span></div>
+<div class="line">    <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a6d029936a1355675d8d9c7147c956a7a">GlobalPhysicalVariables::deformed_position_fct</a>(0.0, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(0, 0) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(0, 1) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[1];</div>
+<div class="line">    <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a6d029936a1355675d8d9c7147c956a7a">GlobalPhysicalVariables::deformed_position_fct</a>(</div>
+<div class="line">      -1.0 * <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(1, 0) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(1, 1) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[1];</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the velocity at the previous time</span></div>
+<div class="line">    <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#ab370e54f41dc8f5f179b9c41ab253e23">GlobalPhysicalVariables::deformed_velocity_fct</a>(</div>
+<div class="line">      -1.0 * <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(2, 0) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(2, 1) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[1];</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the acceleration at the previous time</span></div>
+<div class="line">    <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#a3d0741f668814641b31d8949164d6f3c">GlobalPhysicalVariables::deformed_accel_fct</a>(</div>
+<div class="line">      -1.0 * <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a5d909ebbb2dc3bc7e6ec6d00d83df6dc">GlobalSimSettings::dt</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>);</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(3, 0) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nod_pt</a>-&gt;x(3, 1) = <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">value</a>[1];</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end set_initial_condition</span></div>
+</div><!-- fragment --> <h1><a class="anchor" id="driver"></a>
+The driver code</h1>
+<p>The driver code is relatively simple. Command line arguments for the material's Poisson ratio and the <code>use_solid_pressure</code> flag are specified. Following this, the problem is built and solved by calling the member function <code>unsteady_run</code>, which simply perfoms the Newton solve and output within a timestepping loop. </p><div class="fragment"><div class="line"><span class="comment">//===========start_main===================================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve an unstructured solid problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="shell__unsteady_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argc</a>, <span class="keywordtype">char</span>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argv</a>[])</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Store command line arguments</span></div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::setup</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argc</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argv</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">string</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp</a>;</div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--use_solid_pressure&quot;</span>, &amp;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp</a>, <span class="stringliteral">&quot;Use solid pressure&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--poisson&quot;</span>, &amp;<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a>, <span class="stringliteral">&quot;Poisson&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--Nsteps&quot;</span>, &amp;<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a346ca0d7817539534c4a5b2d734ab30e">GlobalSimSettings::Nsteps</a>, <span class="stringliteral">&quot;Number of Steps&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::parse_and_assign</a>();</div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::doc_specified_flags</a>();</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">istringstream</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp</a>) &gt;&gt; std::boolalpha &gt;&gt;</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the problem</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Build the problem with an additional degree of freedom for pressure</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ShellProblem&lt;QAxisymmetricCylindricalPVDWithPressureElement&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Perform time integration and docs</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.unsteady_run();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Standard build</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ShellProblem&lt;QAxisymmetricCylindricalPVDElement&lt;3&gt;</a>&gt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Perform time integration and docs</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.unsteady_run();</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end main</span></div>
+<div class="ttc" id="ashell__unsteady_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="shell__unsteady_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Demonstrate how to solve an unstructured solid problem.</div><div class="ttdef"><b>Definition</b> <a href="shell__unsteady_8cc_source.html#l00565">shell_unsteady.cc:565</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/
+">demo_drivers/axisym_solid/shell_unsteady/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/shell_unsteady.cc
+">demo_drivers/axisym_solid/shell_unsteady/shell_unsteady.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 16 2026 17:05:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

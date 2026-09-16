@@ -1,0 +1,46 @@
+\doxysection{shell\+\_\+adaptive.\+cc File Reference}
+\hypertarget{shell__adaptive_8cc}{}\label{shell__adaptive_8cc}\index{shell\_adaptive.cc@{shell\_adaptive.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{Elastic\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Upgrade the mesh to a solidmesh. Quarter-\/annulus in quadrant r\texorpdfstring{$>$}{>}0, z\texorpdfstring{$>$}{>}0 ntheta -\/ no. elements in theta direction nr -\/ no. elements in the radial direction a -\/ Inner radius of annulus h -\/ thickness of annulus. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classAuxiliaryShellProblem}{Auxiliary\+Shell\+Problem}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global physical variables. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobalSimSettings}{Global\+Sim\+Settings}}
+\begin{DoxyCompactList}\small\item\em Global simulation settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{Global\+Physical\+Variables\+::external\+\_\+pressure\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{shell__adaptive_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{shell__adaptive_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{shell__adaptive_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{shell\_adaptive.cc@{shell\_adaptive.cc}!main@{main}}
+\index{main@{main}!shell\_adaptive.cc@{shell\_adaptive.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__adaptive_8cc_source_l00686}{686}} of file \mbox{\hyperlink{shell__adaptive_8cc_source}{shell\+\_\+adaptive.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell_8cc_source_l00117}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+DAnnular\+Mesh()}}, \mbox{\hyperlink{shell_8cc_source_l00087}{Global\+Sim\+Settings\+::incompressible}}, \mbox{\hyperlink{shell_8cc_source_l00058}{Global\+Physical\+Variables\+::nu}}, and \mbox{\hyperlink{shell_8cc_source_l00084}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}}.
+

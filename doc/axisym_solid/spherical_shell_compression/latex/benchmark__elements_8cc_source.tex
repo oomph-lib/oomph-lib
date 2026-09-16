@@ -1,0 +1,181 @@
+\doxysection{benchmark\+\_\+elements.\+cc}
+\hypertarget{benchmark__elements_8cc_source}{}\label{benchmark__elements_8cc_source}\index{benchmark\_elements.cc@{benchmark\_elements.cc}}
+\mbox{\hyperlink{benchmark__elements_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2026\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00026}00026\ \textcolor{comment}{//\ Non-\/inline\ functions\ for\ Poisson\ elements}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{benchmark__elements_8h}{benchmark\_elements.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00030}\mbox{\hyperlink{namespaceoomph}{00030}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00032}00032\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00033}00033\ \textcolor{comment}{\ \ ///\ Compute\ element\ residual\ Vector\ and/or\ element\ Jacobian\ matrix}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00034}00034\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00035}00035\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00036}\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6}{00036}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6}{ShellBenchmarkElement<NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00037}00037\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6}{\ \ \ \ fill\_in\_generic\_residual\_contribution\_shell\_benchmark}}(}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00038}00038\ \ \ \ \ \ \ Vector<double>\&\ residuals)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00039}00039\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Find\ out\ how\ many\ nodes\ there\ are}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ nnode();}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ memory\ for\ the\ shape\ and\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00044}00044\ \ \ \ \ Shape\ psi(n\_node);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00045}00045\ \ \ \ \ DShape\ dpsidx(n\_node,\ 1);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Index\ at\ which\ the\ poisson\ unknown\ is\ stored}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ u\_nodal\_index\ =\ 0;\ \textcolor{comment}{//\ u\_index\_shell\_benchmark();}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ value\ of\ n\_intpt}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_intpt\ =\ integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ Integer\ to\ store\ local\ equation\ number}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{int}\ local\_eqn\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00056}00056\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ Poisson\ ratio}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{double}\ nu\_local\ =\ nu();}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00059}00059\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ipt\ =\ 0;\ ipt\ <\ n\_intpt;\ ipt++)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00061}00061\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00062}00062\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ integral\ weight}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00063}00063\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ w\ =\ integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00065}00065\ \ \ \ \ \ \ \textcolor{comment}{//\ Call\ the\ derivatives\ of\ the\ shape\ and\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00066}00066\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ dshape\_eulerian\_at\_knot(ipt,\ psi,\ dpsidx);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00068}00068\ \ \ \ \ \ \ \textcolor{comment}{//\ Premultiply\ the\ weights\ and\ the\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00069}00069\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ W\ =\ w\ *\ J;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00071}00071\ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ local\ values\ of\ unknown}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00072}00072\ \ \ \ \ \ \ \textcolor{comment}{//\ Allocate\ and\ initialise\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00073}00073\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_u\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00074}00074\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_x\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00075}00075\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_dudx\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00077}00077\ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ function\ value\ and\ derivatives:}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00078}00078\ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00079}00079\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ nodes}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00080}00080\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l\ =\ 0;\ l\ <\ n\_node;\ l++)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00081}00081\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ nodal\ value\ of\ the\ poisson\ unknown}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ u\_value\ =\ raw\_nodal\_value(l,\ u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00084}00084\ \ \ \ \ \ \ \ \ interpolated\_u\ +=\ u\_value\ *\ psi(l);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00085}00085\ \ \ \ \ \ \ \ \ interpolated\_dudx\ +=\ u\_value\ *\ dpsidx(l,\ 0);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00086}00086\ \ \ \ \ \ \ \ \ interpolated\_x\ +=\ raw\_nodal\_position(l,\ 0)\ *\ psi(l);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00087}00087\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00089}00089\ \ \ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ principal\ stretches,\ as\ well\ as\ the\ J\ term}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00090}00090\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lambda\_r\ =\ interpolated\_dudx;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00091}00091\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lambda\_t\ =\ interpolated\_u\ /\ interpolated\_x;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00092}00092\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ J\_vol\ =\ lambda\_r\ *\ lambda\_t\ *\ lambda\_t;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00093}00093\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tmp\ =\ 0.5\ /\ (1.0\ +\ nu\_local);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00094}00094\ \ \ \ \ \ \ \textcolor{comment}{//\ Assemble\ the\ A\ term}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00095}00095\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ A\ =\ tmp\ *}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (lambda\_r\ *\ lambda\_r\ -\/\ 1.0\ +}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((2.0\ *\ nu\_local)\ /\ (1.0\ -\/\ 2.0\ *\ nu\_local))\ *\ log(J\_vol))\ /}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ J\_vol;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00099}00099\ \ \ \ \ \ \ \textcolor{comment}{//\ Assemble\ B\ term}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00100}00100\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ B\ =}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00101}00101\ \ \ \ \ \ \ \ \ tmp\ *\ (2.0\ /\ interpolated\_u)\ *\ (pow(lambda\_r\ /\ lambda\_t,\ 2.0)\ -\/\ 1.0);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00103}00103\ \ \ \ \ \ \ \textcolor{comment}{//\ Assemble\ residuals\ (Jacobian\ is\ done\ by\ finite}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00104}00104\ \ \ \ \ \ \ \textcolor{comment}{//\ differences)}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00106}00106\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00107}00107\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l\ =\ 0;\ l\ <\ n\_node;\ l++)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00108}00108\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ local\ equation}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00110}00110\ \ \ \ \ \ \ \ \ local\_eqn\ =\ nodal\_local\_eqn(l,\ u\_nodal\_index);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ IF\ it's\ not\ a\ boundary\ condition}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00113}00113\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ contribution}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ residuals[local\_eqn]\ +=\ (-\/1.0\ *\ A\ *\ dpsidx(l,\ 0)\ +\ B\ *\ psi(l))\ *\ W;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00117}00117\ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00118}00118\ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ integration\ points}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00119}00119\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00122}00122\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00123}00123\ \textcolor{comment}{\ \ ///\ Output\ function}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00124}00124\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00125}00125\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00126}\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a3716ec703eefcc58bfdba3b87361fb24}{00126}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a3716ec703eefcc58bfdba3b87361fb24}{ShellBenchmarkElement<NNODE\_1D>::output}}(std::ostream\&\ outfile,}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nplot)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00128}00128\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00129}00129\ \ \ \ \ \textcolor{comment}{//\ Vector\ of\ local\ coordinates}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00130}00130\ \ \ \ \ Vector<double>\ s(1);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00132}00132\ \ \ \ \ \textcolor{comment}{//\ Tecplot\ header\ info}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00133}00133\ \ \ \ \ outfile\ <<\ tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ plot\ points}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00136}00136\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_plot\_points\ =\ nplot\_points(nplot);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00137}00137\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ iplot\ =\ 0;\ iplot\ <\ num\_plot\_points;\ iplot++)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00138}00138\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00139}00139\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ local\ coordinates\ of\ plot\ point}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00140}00140\ \ \ \ \ \ \ get\_s\_plot(iplot,\ nplot,\ s);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00141}00141\ \ \ \ \ \ \ outfile\ <<\ interpolated\_x(s,\ 0)\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00142}00142\ \ \ \ \ \ \ outfile\ <<\ interpolated\_u\_shell\_benchmark(s)\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00145}00145\ \ \ \ \ \textcolor{comment}{//\ Write\ tecplot\ footer\ (e.g.\ FE\ connectivity\ lists)}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00146}00146\ \ \ \ \ write\_tecplot\_zone\_footer(outfile,\ nplot);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00147}00147\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00149}00149\ \ \ \textcolor{comment}{//===========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00150}00150\ \textcolor{comment}{\ \ ///\ Compute\ the\ element's\ residual\ vector\ and\ the\ (zero)\ Jacobian\ matrix.}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00151}00151\ \textcolor{comment}{}\ \ \textcolor{comment}{//===========================================================================}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00152}\mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102}{00152}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102}{ShellBenchmarkPressureElement::}}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00153}00153\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102}{\ \ \ \ fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure}}(}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00154}00154\ \ \ \ \ \ \ Vector<double>\&\ residuals)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00155}00155\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00156}00156\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ pressure}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00157}00157\ \ \ \ \ \textcolor{keywordtype}{double}\ pressure\_local\ =\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_aa556b2c780d341ab382ad3402ea9b339}{pressure}}();}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00159}00159\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ local\ equation}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00160}00160\ \ \ \ \ \textcolor{keywordtype}{int}\ local\_eqn\ =\ nodal\_local\_eqn(0,\ 0);}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00162}00162\ \ \ \ \ \textcolor{comment}{//\ If\ a\ Dirichlet\ condition\ has\ not\ been\ set}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00164}00164\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00165}00165\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ contribution}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00166}00166\ \ \ \ \ \ \ residuals[local\_eqn]\ -\/=\ pressure\_local;}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00168}00168\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00170}00170\ \ \ \textcolor{comment}{//\ Instantiate\ required\ elements}}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00171}00171\ \ \ \textcolor{keyword}{template}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{ShellBenchmarkElement<2>}};}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00172}00172\ \ \ \textcolor{keyword}{template}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{ShellBenchmarkElement<3>}};}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00173}00173\ \ \ \textcolor{keyword}{template}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{ShellBenchmarkElement<4>}};}
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{benchmark__elements_8cc_source_l00175}00175\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+
+\end{DoxyCode}

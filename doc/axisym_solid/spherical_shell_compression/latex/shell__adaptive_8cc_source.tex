@@ -1,0 +1,779 @@
+\doxysection{shell\+\_\+adaptive.\+cc}
+\hypertarget{shell__adaptive_8cc_source}{}\label{shell__adaptive_8cc_source}\index{shell\_adaptive.cc@{shell\_adaptive.cc}}
+\mbox{\hyperlink{shell__adaptive_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2026\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00027}00027\ \textcolor{comment}{//\ Driver\ code\ for\ benchmark\ of\ axisym\ non-\/linear\ solid\ equations}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00028}00028\ \textcolor{comment}{//\ in\ cylindrical\ coordinates:\ Thick\ spherical\ shell\ with\ external\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00029}00029\ \textcolor{comment}{//\ Compare\ against\ analytical\ solution\ for\ an\ incompressible\ material}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00030}00030\ \textcolor{comment}{//\ (Adaptive\ version)}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00032}00032\ \textcolor{comment}{//\ Generic\ routines}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00035}00035\ \textcolor{comment}{//\ Axisymmetric\ non-\/linear\ solid\ equations\ in\ cylindrical\ coords}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}axisym\_solid.h"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00038}00038\ \textcolor{comment}{//\ Elements\ used\ to\ solve\ an\ auxillary\ problem\ for\ benchmarking}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00039}00039\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{benchmark__elements_8h}{benchmark\_elements.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00041}00041\ \textcolor{comment}{//\ Constitutive\ laws}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00042}00042\ \textcolor{preprocessor}{\#include\ "{}constitutive.h"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00044}00044\ \textcolor{comment}{//\ The\ mesh:\ annular}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00045}00045\ \textcolor{preprocessor}{\#include\ "{}meshes/annular\_mesh.h"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00047}00047\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00048}00048\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00050}00050\ \textcolor{comment}{//=======start\_namespace==========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00051}00051\ \textcolor{comment}{///\ Global\ physical\ variables}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00052}00052\ \textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00053}00053\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalPhysicalVariables}{GlobalPhysicalVariables}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00055}00055\ \ \ \textcolor{comment}{//\ Poisson\ ratio\ -\/\ only\ used\ in\ the\ compressible\ case}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00056}00056\ \ \ \textcolor{comment}{//\ (nu\ =\ 0.5\ for\ incompressible\ material)}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00057}00057\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ =\ 0.4;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00059}00059\ \ \ \textcolor{comment}{//\ The\ external\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00060}00060\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ =\ 0.05;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00062}00062\ \ \ \textcolor{comment}{//\ Traction\ function\ for\ appyling\ a\ pressure\ on\ the\ outer\ surface}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00063}00063\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{external\_pressure\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00068}00068\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[0]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[0];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[1]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[1];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00071}00071\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00072}00072\ \}\ \textcolor{comment}{//\ namespace\ GlobalPhysicalVariables}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00074}00074\ \textcolor{comment}{//=======start\_namespace==========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00075}00075\ \textcolor{comment}{///\ Global\ simulation\ settings}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00076}00076\ \textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00077}00077\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalSimSettings}{GlobalSimSettings}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00078}00078\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00079}00079\ \ \ \textcolor{comment}{//\ Folder\ for\ output}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00080}00080\ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{result\_folder}}\ =\ \textcolor{stringliteral}{"{}RESLT"{}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00081}00081\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00082}00082\ \textcolor{comment}{\ \ ///\ Flag\ for\ using\ a\ pressure\ formulation}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00083}00083\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{use\_pressure\_formulation}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00084}00084\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00085}00085\ \textcolor{comment}{\ \ ///\ If\ using\ a\ pressure\ formulation,\ is\ the\ solid\ incompressible?}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00086}00086\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{incompressible}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00088}00088\ \ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ radial\ direction}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00089}00089\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{n\_radial}}\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00091}00091\ \ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ azimuthal\ direction}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00092}00092\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{n\_azimuthal}}\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00094}00094\ \ \ \textcolor{comment}{//\ Inner\ radius}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00095}00095\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{a}}\ =\ 1.0;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00097}00097\ \ \ \textcolor{comment}{//\ Thickness}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00098}\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_a533a60af5986a1146ca10b36d56443f9}{00098}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{h}}\ =\ 0.5;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00099}00099\ \}\ \textcolor{comment}{//\ namespace\ GlobalSimSettings}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00101}00101\ \textcolor{comment}{//======================start\_mesh================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00102}00102\ \textcolor{comment}{///\ Upgrade\ the\ mesh\ to\ a\ solidmesh.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00103}00103\ \textcolor{comment}{///\ Quarter-\/annulus\ in\ quadrant\ r>0,\ z>0}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00104}00104\ \textcolor{comment}{///\ ntheta\ -\/\ no.\ elements\ in\ theta\ direction}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00105}00105\ \textcolor{comment}{///\ nr\ -\/\ no.\ elements\ in\ the\ radial\ direction}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00106}00106\ \textcolor{comment}{///\ a\ -\/\ Inner\ radius\ of\ annulus}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00107}00107\ \textcolor{comment}{///\ h\ -\/\ thickness\ of\ annulus}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00108}00108\ \textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00109}00109\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00110}\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{00110}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh}{ElasticRefineableTwoDAnnularMesh}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00111}00111\ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableTwoDAnnularMesh<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00113}00113\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00114}00114\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00115}00115\ \textcolor{comment}{\ \ ///\ Constructor:\ Build\ mesh\ and\ copy\ Eulerian\ coords\ to\ Lagrangian}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00116}00116\ \textcolor{comment}{\ \ ///\ ones\ so\ that\ the\ initial\ configuration\ is\ the\ stress-\/free\ one.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00117}00117\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticRefineableTwoDAnnularMesh<ELEMENT>}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00118}00118\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00119}00119\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00120}00120\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ a,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00121}00121\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ h,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00122}00122\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}\ =\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{Mesh::Default\_TimeStepper}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00123}00123\ \ \ \ \ :\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RectangularQuadMesh<ELEMENT>}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00124}00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},\ 1.0,\ 1.0,\ \textcolor{keyword}{false},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00125}00125\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{TwoDAnnularMesh<ELEMENT>}}(\textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{MathematicalConstants::Pi}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00133}00133\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RefineableTwoDAnnularMesh<ELEMENT>}}(\textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h,}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{MathematicalConstants::Pi}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00141}00141\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00142}00142\ \ \ \ \ \textcolor{comment}{//\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00143}00143\ \ \ \ \ \textcolor{comment}{//\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00144}00144\ \ \ \ \ \textcolor{comment}{//\ Eulerian\ ones}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00145}00145\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00147}00147\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ undeformed\ domain}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00148}00148\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{Undeformed\_domain\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00149}00149\ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AnnularDomain}}(0.25,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},\ a,\ h,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{MathematicalConstants::Pi}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00151}00151\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements\ and\ set\ the\ undeformed\ macro\ element\ pointer}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00152}00152\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}}\ =\ this-\/>\mbox{\hyperlink{classElasticTwoDAnnularMesh}{nelement}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00153}00153\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00154}00154\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00155}00155\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ full\ element\ type}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00156}00156\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\textcolor{keyword}{>}(this-\/>\mbox{\hyperlink{classElasticTwoDAnnularMesh}{element\_pt}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00158}00158\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ macro\ element\ so\ the\ curvlinear\ boundaries}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00159}00159\ \ \ \ \ \ \ \textcolor{comment}{//\ of\ the\ undeformed\ mesh/domain\ get\ picked\ up\ during\ adaptive}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00160}00160\ \ \ \ \ \ \ \textcolor{comment}{//\ mesh\ refinement}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00161}00161\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>set\_undeformed\_macro\_elem\_pt(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00162}00162\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{Undeformed\_domain\_pt}}-\/>macro\_element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00164}00164\ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ MacroElement\ representation\ for}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00165}00165\ \ \ \ \ \ \ \textcolor{comment}{//\ Lagrangian\ coordinates\ of\ newly\ created}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00166}00166\ \ \ \ \ \ \ \textcolor{comment}{//\ nodes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00167}00167\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>enable\_use\_of\_undeformed\_macro\_element\_for\_new\_lagrangian\_coords();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00169}00169\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00170}00170\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00171}00171\ \textcolor{comment}{\ \ ///\ Destructor:\ Kill\ "{}undeformed"{}\ Domain}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00172}00172\ \textcolor{comment}{}\ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{\string~ElasticRefineableTwoDAnnularMesh<ELEMENT>}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00173}00173\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00174}00174\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00175}00175\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00177}00177\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00178}00178\ \textcolor{comment}{\ \ ///\ Pointer\ to\ "{}undeformed"{}\ Domain\ -\/-\/\ used\ to\ determine\ the}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00179}00179\ \textcolor{comment}{\ \ ///\ Lagrangian\ coordinates\ of\ any\ newly\ created\ SolidNodes\ during}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00180}00180\ \textcolor{comment}{\ \ ///\ Mesh\ refinement}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00181}\mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{00181}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Domain}}*\ \mbox{\hyperlink{classElasticRefineableTwoDAnnularMesh_aec06d851c20c7ecdc634ed5c16e4d928}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00182}00182\ \};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00184}00184\ \textcolor{comment}{//==============start\_problem=========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00185}00185\ \textcolor{comment}{///\ Unstructured\ solid\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00186}00186\ \textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00187}00187\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00188}00188\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classShellProblem}{ShellProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00189}00189\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00190}00190\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00191}00191\ \textcolor{comment}{\ \ ///\ Constructor:}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00192}\mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{00192}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00193}00193\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00194}00194\ \textcolor{comment}{\ \ ///\ Destructor}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00195}\mbox{\hyperlink{classShellProblem_afb893165e8a3695d416f852bff5b3280}{00195}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_afb893165e8a3695d416f852bff5b3280}{\string~ShellProblem}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00196}00196\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00197}00197\ \textcolor{comment}{\ \ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00198}\mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{00198}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{doc\_solution}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00200}00200\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00201}00201\ \textcolor{comment}{\ \ ///\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00202}\mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{00202}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{create\_boundary\_elements}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00203}00203\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00204}00204\ \textcolor{comment}{\ \ ///\ Complete\ the\ problem\ setup\ (attach\ function/physical\ parameter\ pointers)}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00205}\mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{00205}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00206}00206\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00207}00207\ \textcolor{comment}{\ \ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ boundary\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00208}\mbox{\hyperlink{classShellProblem_a5eb5de98864d2bf915e584cf1111729c}{00208}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a5eb5de98864d2bf915e584cf1111729c}{actions\_before\_adapt}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00209}00209\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00210}00210\ \ \ \ \ \textcolor{comment}{//\ Kill\ the\ \ elements\ and\ wipe\ surface\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00211}00211\ \ \ \ \ \mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{delete\_boundary\_elements}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00213}00213\ \ \ \ \ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00214}00214\ \ \ \ \ this-\/>\mbox{\hyperlink{classElasticTwoDAnnularMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00215}00215\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00216}00216\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00217}00217\ \textcolor{comment}{\ \ ///\ Any\ actions\ after\ refining\ the\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00218}\mbox{\hyperlink{classShellProblem_abb1e71cbfac465586243ba7e8e15230f}{00218}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_abb1e71cbfac465586243ba7e8e15230f}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00219}00219\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00220}00220\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00221}00221\ \ \ \ \ \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{create\_boundary\_elements}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00223}00223\ \ \ \ \ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00224}00224\ \ \ \ \ this-\/>\mbox{\hyperlink{classElasticTwoDAnnularMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Setup\ the\ problem\ again}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00227}00227\ \ \ \ \ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00229}00229\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ and\ pin\ solid\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00230}00230\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_el}}\ =\ \mbox{\hyperlink{classShellProblem_a76c561add6b4cd52b058583c09006576}{Bulk\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_el}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00232}00232\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00233}00233\ \ \ \ \ \ \ \textcolor{comment}{//\ Cast\ to\ element\ with\ pressure\ dofs}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00234}00234\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RefineableQAxisymmetricCylindricalPVDWithPressureElement}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{RefineableQAxisymmetricCylindricalPVDWithPressureElement}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classShellProblem_a76c561add6b4cd52b058583c09006576}{Bulk\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00238}00238\ \ \ \ \ \ \ \textcolor{comment}{//\ Cast\ will\ only\ succeed\ if\ we're\ using\ the\ pressure\ formulation}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00239}00239\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00240}00240\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00241}00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>pin\_elemental\_redundant\_nodal\_solid\_pressures();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00242}00242\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00244}00244\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00245}00245\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00246}00246\ \textcolor{comment}{\ \ ///\ Delete\ boundary\ elements\ and\ wipe\ the\ associated\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00247}\mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{00247}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{delete\_boundary\_elements}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00248}00248\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00249}00249\ \ \ \ \ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00250}00250\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}}\ =\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00251}00251\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00253}00253\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00254}00254\ \ \ \ \ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00255}00255\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00256}00256\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00257}00257\ \ \ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00258}00258\ \ \ \ \ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00259}00259\ \ \ \}\ \textcolor{comment}{//\ end\ of\ delete\_boundary\_elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00260}00260\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00261}00261\ \textcolor{comment}{\ \ ///\ Bulk\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00262}\mbox{\hyperlink{classShellProblem_a8081de8e63caa360f8c7f00f37e513b0}{00262}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticRefineableTwoDAnnularMesh<ELEMENT>}}*\ \mbox{\hyperlink{classShellProblem_a8081de8e63caa360f8c7f00f37e513b0}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00263}00263\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00264}00264\ \textcolor{comment}{\ \ ///\ Pointer\ to\ the\ "{}surface"{}\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00265}00265\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}}*\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00267}00267\ \ \ \textcolor{comment}{//\ Pointer\ to\ error\ estimator}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00268}\mbox{\hyperlink{classShellProblem_a028bdec71976fb695c545431714104ec}{00268}}\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Z2ErrorEstimator}}*\ \mbox{\hyperlink{classShellProblem_a028bdec71976fb695c545431714104ec}{error\_estimator\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00269}00269\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00270}00270\ \textcolor{comment}{\ \ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00271}00271\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{classShellProblem_a896a5bc80642be89abfeb73de25f86a6}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00273}00273\ \ \ \textcolor{comment}{//\ DocInfo\ object}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00274}00274\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{DocInfo}}\ \mbox{\hyperlink{classShellProblem_a2f891d36692df03ae47e1e750564c17c}{Doc\_info}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00275}00275\ \};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00277}00277\ \textcolor{comment}{//===============start\_constructor========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00278}00278\ \textcolor{comment}{///\ Axisymmetric\ compression\ of\ a\ finite\ thickness\ shell\ in\ cylindrical}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00279}00279\ \textcolor{comment}{///\ polar\ coordiantes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00280}00280\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00281}00281\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00282}00282\ \mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem<ELEMENT>::ShellProblem}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00283}00283\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00284}00284\ \ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00285}00285\ \ \ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{GlobalSimSettings::result\_folder}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00287}00287\ \ \ \textcolor{comment}{//\ Initialise\ counter\ for\ solutions}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00288}00288\ \ \ Doc\_info.number()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00290}00290\ \ \ \textcolor{comment}{//\ Create\ the\ mesh:\ Quarter-\/annulus\ in\ the\ quadrant\ r>0,\ z>0.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00291}00291\ \ \ Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticRefineableTwoDAnnularMesh<ELEMENT>}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00292}00292\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{GlobalSimSettings::n\_azimuthal}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00293}00293\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{GlobalSimSettings::n\_radial}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00294}00294\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00295}00295\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{GlobalSimSettings::h}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00297}00297\ \ \ \textcolor{comment}{//\ Create\ the\ "{}surface\ mesh"{}\ that\ will\ contain\ only\ the\ interface}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00298}00298\ \ \ \textcolor{comment}{//\ elements.\ The\ constructor\ just\ creates\ the\ mesh\ without\ giving}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00299}00299\ \ \ \textcolor{comment}{//\ it\ any\ elements,\ nodes,\ etc.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00300}00300\ \ \ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00302}00302\ \ \ \textcolor{comment}{//\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00303}00303\ \ \ create\_boundary\_elements();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00305}00305\ \ \ \textcolor{comment}{//\ Add\ the\ two\ submeshes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00306}00306\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00307}00307\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00309}00309\ \ \ \textcolor{comment}{//\ Combine\ all\ sub-\/meshes\ into\ a\ single\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00310}00310\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00312}00312\ \ \ \textcolor{comment}{//\ Set\ error\ estimator\ for\ bulk\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00313}00313\ \ \ error\_estimator\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00315}00315\ \ \ \textcolor{comment}{//\ Set\ targets}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00316}00316\ \ \ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()\ =\ error\_estimator\_pt;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00317}00317\ \ \ Bulk\_mesh\_pt-\/>max\_permitted\_error()\ =\ 1.0e-\/4;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00318}00318\ \ \ Bulk\_mesh\_pt-\/>min\_permitted\_error()\ =\ 1.0e-\/5;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00320}00320\ \ \ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ from\ a\ strain\ energy\ density\ function.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00321}00321\ \ \ \textcolor{comment}{//\ Version\ depends\ on\ the\ incompressibility\ flag}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00322}00322\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00323}00323\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00324}00324\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00325}00325\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{IncompressibleNeoHookean}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00326}00326\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00327}00327\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00328}00328\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00329}00329\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{NeoHookean}}(\&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00330}00330\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00331}00331\ \ \ Constitutive\_law\_pt\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00332}00332\ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00334}00334\ \ \ \textcolor{comment}{//\ Complete\ the\ problem\ set\ up}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00335}00335\ \ \ complete\_problem\_setup();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00337}00337\ \ \ \textcolor{comment}{//\ Assign\ eqn\ numbers}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00338}00338\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00340}00340\ \}\ \textcolor{comment}{//\ end\ constructor}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00342}00342\ \textcolor{comment}{//========start\_of\_complete\_problem\_setup==================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00343}00343\ \textcolor{comment}{///\ Assign\ function/parameter\ pointers,\ set\ boundary\ conditions\ etc.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00344}00344\ \textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00345}00345\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00346}00346\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{ShellProblem<ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00347}00347\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00348}00348\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ bulk\ elements\ in\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00349}00349\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00351}00351\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00352}00352\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00353}00353\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00354}00354\ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00355}00355\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00357}00357\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00358}00358\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =\ Constitutive\_law\_pt;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00360}00360\ \ \ \ \ \textcolor{comment}{//\ Cast\ to\ element\ with\ pressure\ dofs}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00361}00361\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RefineableQAxisymmetricCylindricalPVDWithPressureElement}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00362}00362\ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{RefineableQAxisymmetricCylindricalPVDWithPressureElement}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00363}00363\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00365}00365\ \ \ \ \ \textcolor{comment}{//\ Cast\ will\ only\ succeed\ if\ we're\ using\ the\ pressure\ formulation}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00366}00366\ \ \ \ \ \textcolor{comment}{//\ Can\ set\ compressible/incompressible\ and\ pin\ any\ redundant\ solid\ pressures}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00367}00367\ \ \ \ \ \textcolor{comment}{//\ here}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00368}00368\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00369}00369\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00370}00370\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00371}00371\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00372}00372\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}-\/>set\_incompressible();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00373}00373\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00374}00374\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00375}00375\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00376}00376\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}-\/>set\_compressible();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00377}00377\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00378}00378\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}-\/>pin\_elemental\_redundant\_nodal\_solid\_pressures();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00379}00379\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00380}00380\ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ bulk\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00382}00382\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ 1D\ interface\ elements\ in\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00383}00383\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00385}00385\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ interface\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00386}00386\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00387}00387\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00388}00388\ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00389}00389\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00390}00390\ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00391}00391\ \ \ \ \ \ \ \ \ Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00393}00393\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ traction\ function\ for\ applying\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00394}00394\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>traction\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{GlobalPhysicalVariables::external\_pressure\_fct}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00396}00396\ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ interface\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00398}00398\ \ \ \textcolor{comment}{//\ Set\ the\ Dirichlet\ boundary\ conditions\ for\ this\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00399}00399\ \ \ \textcolor{comment}{//\ Find\ number\ of\ nodes\ on\ boundary\ 3}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00400}00400\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00401}00401\ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ fixed\ boundary}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00402}00402\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00403}00403\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00404}00404\ \ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00405}00405\ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(0);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00406}00406\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00407}00407\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00408}00408\ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ fixed\ boundary}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00409}00409\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00410}00410\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00411}00411\ \ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00412}00412\ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(1);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00413}00413\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00414}00414\ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00416}00416\ \textcolor{comment}{//============start\_of\_create\_boundary\_elements===============}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00417}00417\ \textcolor{comment}{///\ Create\ boundary\ elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00418}00418\ \textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00419}00419\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00420}00420\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{ShellProblem<ELEMENT>::create\_boundary\_elements}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00421}00421\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00422}00422\ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ on\ boundary\ 2}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00423}00423\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(2);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00424}00424\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00425}00425\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00426}00426\ \ \ \ \ \textcolor{comment}{//\ Set\ a\ pointer\ to\ the\ bulk\ element\ we\ wish\ to\ our\ interface}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00427}00427\ \ \ \ \ \textcolor{comment}{//\ element\ to}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00428}00428\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{bulk\_element\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00429}00429\ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>boundary\_element\_pt(2,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00431}00431\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00432}00432\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{face\_index}}\ =\ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(2,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00434}00434\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ interface\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00435}00435\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00436}00436\ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bulk\_element\_pt}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{face\_index}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00439}00439\ \ \ \ \ \textcolor{comment}{//\ Add\ the\ interface\ element\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00440}00440\ \ \ \ \ this-\/>Surface\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00441}00441\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}}-\/>set\_boundary\_number\_in\_bulk\_mesh(2);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00442}00442\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00443}00443\ \}\ \textcolor{comment}{//\ end\ of\ create\_boundary\_elements}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00445}00445\ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00446}00446\ \textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00447}00447\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00448}00448\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00449}00449\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{ShellProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00450}00450\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00451}00451\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ofstream}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00452}00452\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}}[100];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00454}00454\ \ \ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00455}00455\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{npts}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00457}00457\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sprintf}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%s/bulk\_soln\_nu\_\%g\_pres\_\%g.dat"{}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00462}00462\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00463}00463\ \ \ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{npts}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00464}00464\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.close();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00466}00466\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sprintf}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%s/bulk\_soln\_nu\_\%g\_pres\_\%g.vtu"{}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00471}00471\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00472}00472\ \ \ Bulk\_mesh\_pt-\/>output\_paraview(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{npts}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00473}00473\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.close();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00475}00475\ \ \ \textcolor{comment}{//\ Increment\ the\ counter}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00476}00476\ \ \ Doc\_info.number()++;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00477}00477\ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00480}00480\ \textcolor{comment}{//==============start\_auxillary\_problem===============================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00481}00481\ \textcolor{comment}{///\ Axisymmetric\ compression\ of\ a\ finite\ thickness\ shell\ in\ cylindrical}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00482}00482\ \textcolor{comment}{///\ polar\ coordiantes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00483}00483\ \textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00484}00484\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classAuxiliaryShellProblem}{AuxiliaryShellProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00485}00485\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00486}00486\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00487}00487\ \textcolor{comment}{\ \ ///\ Constructor:}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00488}\mbox{\hyperlink{classAuxiliaryShellProblem_a2751af6d93141621deb19e5a050420c7}{00488}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a2751af6d93141621deb19e5a050420c7}{AuxiliaryShellProblem}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00489}00489\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00490}00490\ \textcolor{comment}{\ \ ///\ Destructor}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00491}\mbox{\hyperlink{classAuxiliaryShellProblem_a05b0ccbf37a57016af00304adcaf485c}{00491}}\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a05b0ccbf37a57016af00304adcaf485c}{\string~AuxiliaryShellProblem}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00492}00492\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00493}00493\ \textcolor{comment}{\ \ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00494}\mbox{\hyperlink{classAuxiliaryShellProblem_a7eb46ba8abf018e616328d51d4f8ba9a}{00494}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAuxiliaryShellProblem_a7eb46ba8abf018e616328d51d4f8ba9a}{doc\_solution}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00495}00495\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00496}00496\ \textcolor{comment}{\ \ ///\ Solve\ the\ auxiliary\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00497}\mbox{\hyperlink{classAuxiliaryShellProblem_aeb30f59d27efc99f998a81b2d00970d1}{00497}}\ \textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAuxiliaryShellProblem_aeb30f59d27efc99f998a81b2d00970d1}{solve\_auxiliary\_problem}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00499}00499\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00500}00500\ \textcolor{comment}{\ \ ///\ Bulk\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00501}00501\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OneDMesh<ShellBenchmarkElement<3>}}>*\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00502}00502\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00503}00503\ \textcolor{comment}{\ \ ///\ Pointer\ to\ the\ "{}surface"{}\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00504}00504\ \textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}}*\ \mbox{\hyperlink{classAuxiliaryShellProblem_a265db028a8f4d4f88994b8973d6cf4be}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00506}00506\ \ \ \textcolor{comment}{//\ DocInfo\ object}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00507}00507\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{DocInfo}}\ \mbox{\hyperlink{classAuxiliaryShellProblem_abb2279099aa129298a50b26201bc257e}{Doc\_info}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00508}00508\ \};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00511}00511\ \textcolor{comment}{//===============start\_constructor========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00512}00512\ \textcolor{comment}{///\ Constructor\ for\ auxiliary\ 1D\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00513}00513\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00514}00514\ \mbox{\hyperlink{classAuxiliaryShellProblem_a2751af6d93141621deb19e5a050420c7}{AuxiliaryShellProblem::AuxiliaryShellProblem}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00515}00515\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00516}00516\ \ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00517}00517\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_abb2279099aa129298a50b26201bc257e}{Doc\_info}}.set\_directory(\mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{GlobalSimSettings::result\_folder}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00519}00519\ \ \ \textcolor{comment}{//\ Initialise\ counter\ for\ solutions}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00520}00520\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_abb2279099aa129298a50b26201bc257e}{Doc\_info}}.number()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00522}00522\ \ \ \textcolor{comment}{//\ Create\ the\ mesh:\ use\ n\_radial\ elements\ to\ match\ the\ 2D\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00523}00523\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{outer\_coord}}\ =\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}}\ +\ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{GlobalSimSettings::h}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00524}00524\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OneDMesh<ShellBenchmarkElement<3>}}>(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00525}00525\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{GlobalSimSettings::n\_radial}},\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{outer\_coord}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00527}00527\ \ \ \textcolor{comment}{//\ Only\ complete\ the\ setup\ if\ the\ material\ is\ compressible.\ Otherwise,}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00528}00528\ \ \ \textcolor{comment}{//\ an\ analytical\ solution\ will\ be\ used.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00529}00529\ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00530}00530\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00531}00531\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ Poisson\ ratio\ in\ each\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00532}00532\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_el}}\ =\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00533}00533\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_el}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00534}00534\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00535}00535\ \ \ \ \ \ \ \textcolor{comment}{//\ Cast\ to\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00536}00536\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellBenchmarkElement<3>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00537}00537\ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellBenchmarkElement<3>}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00539}00539\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ Poisson\ ratio}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00540}00540\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>nu\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00541}00541\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00543}00543\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ and\ set\ the\ initial\ guess\ in\ each\ node:\ r=R}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00544}00544\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}}\ =\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00545}00545\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00546}00546\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00547}00547\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>node\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00548}00548\ \ \ \ \ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>node\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>set\_value(0,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00549}00549\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00551}00551\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ "{}surface\ mesh"{}\ for\ application\ of\ boundary\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00552}00552\ \ \ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a265db028a8f4d4f88994b8973d6cf4be}{Surface\_mesh\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00554}00554\ \ \ \ \ \textcolor{comment}{//\ Cast\ to\ the\ right-\/most\ element\ in\ the\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00555}00555\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellBenchmarkElement<3>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{bulk\_element\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00556}00556\ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellBenchmarkElement<3>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00557}00557\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{GlobalSimSettings::n\_radial}}\ -\/\ 1));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00558}00558\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00559}00559\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ of\ the\ face\ of\ element\ e\ (0)\ along\ boundary\ b\ (1)}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00560}00560\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{face\_index}}\ =\ 1;\ \textcolor{comment}{//\ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(1,\ 0);}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00562}00562\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ interface\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00563}00563\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement}{ShellBenchmarkPressureElement}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00564}00564\ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement}{ShellBenchmarkPressureElement}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bulk\_element\_pt}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{face\_index}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00565}00565\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00566}00566\ \ \ \ \ \textcolor{comment}{//\ Add\ the\ interface\ element\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00567}00567\ \ \ \ \ this-\/>\mbox{\hyperlink{classAuxiliaryShellProblem_a265db028a8f4d4f88994b8973d6cf4be}{Surface\_mesh\_pt}}-\/>add\_element\_pt(interface\_element\_pt);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00568}00568\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}}-\/>set\_boundary\_number\_in\_bulk\_mesh(1);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00569}00569\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00570}00570\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pressure\ in\ the\ element}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00571}00571\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{interface\_element\_pt}}-\/>pressure\_pt()\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00572}00572\ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00574}00574\ \ \ \ \ \textcolor{comment}{//\ Add\ the\ two\ submeshes}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00575}00575\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(\mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00576}00576\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(\mbox{\hyperlink{classAuxiliaryShellProblem_a265db028a8f4d4f88994b8973d6cf4be}{Surface\_mesh\_pt}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00577}00577\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00578}00578\ \ \ \ \ \textcolor{comment}{//\ Combine\ all\ sub-\/meshes\ into\ a\ single\ mesh}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00579}00579\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00580}00580\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00581}00581\ \ \ \ \ \textcolor{comment}{//\ Assign\ eqn\ numbers}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00582}00582\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations\ for\ auxiliary\ problem:\ "{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00584}00584\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00585}00585\ \}\ \textcolor{comment}{//\ end\ constructor}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00587}00587\ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00588}00588\ \textcolor{comment}{///\ Solve\ the\ auxiliary\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00589}00589\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00590}00590\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAuxiliaryShellProblem_aeb30f59d27efc99f998a81b2d00970d1}{AuxiliaryShellProblem::solve\_auxiliary\_problem}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00591}00591\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00592}00592\ \ \ \textcolor{comment}{//\ If\ the\ material\ is\ incompressible,\ the\ problem\ can\ be\ solved}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00593}00593\ \ \ \textcolor{comment}{//\ analytically,\ but\ yields\ an\ algebriac\ equation\ which\ must\ still\ be}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00594}00594\ \ \ \textcolor{comment}{//\ solved\ numerically.\ This\ is\ done\ using\ a\ manual\ newton\ solve.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00595}00595\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00596}00596\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00597}00597\ \ \ \ \ \textcolor{comment}{//\ Storage\ for\ residual\ and\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00598}00598\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{residual}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{jacobian}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00600}00600\ \ \ \ \ \textcolor{comment}{//\ Containers\ for\ undeformed\ and\ deformed\ inner/outer\ radii.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00601}00601\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}(2),\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}(2);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00602}00602\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ =\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00603}00603\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ =\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}}\ +\ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{GlobalSimSettings::h}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00604}00604\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00605}00605\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ initial\ guess}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00606}00606\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00607}00607\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00609}00609\ \ \ \ \ \textcolor{comment}{//\ Derivative\ of\ outer\ coord.\ w.r.t.\ inner\ coord.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00610}00610\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dr1\_dr0}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00612}00612\ \ \ \ \ \textcolor{comment}{//\ Poisson\ ratio\ in\ incompressible\ case}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00613}00613\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ =\ 0.5;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00614}00614\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00615}00615\ \ \ \ \ \textcolor{comment}{//\ Residual\ from\ the\ initial\ guess}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00616}00616\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 3.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 3.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0],\ 3.0),\ 1.0\ /\ 3.0);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00617}00617\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{residual}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00618}00618\ \ \ \ \ \ \ (1.0\ /\ (1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}))\ *\ (0.25\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 4.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ -\/}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1],\ 4.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1])\ -\/}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00620}00620\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00622}00622\ \ \ \ \ \textcolor{comment}{//\ Newton\ iteration\ loop}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00623}00623\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::fabs(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{residual}})\ >\ 1.0e-\/8)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00624}00624\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00625}00625\ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ the\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00626}00626\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dr1\_dr0}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00627}00627\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 3.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 3.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0],\ 3.0),\ -\/2.0\ /\ 3.0)\ *}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00628}00628\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00629}00629\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{jacobian}}\ =\ (1.0\ /\ (1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}))\ *}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (-\/1.0\ *\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 4.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0])\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ +}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1],\ 4.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1])\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dr1\_dr0}}\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1]);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00632}00632\ \ \ \ \ \ \ \textcolor{comment}{//\ Take\ a\ Newton\ step}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00633}00633\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{residual}}\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{jacobian}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00635}00635\ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ the\ new\ residual}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00636}00636\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 3.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 3.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0],\ 3.0),\ 1.0\ /\ 3.0);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00637}00637\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{residual}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00638}00638\ \ \ \ \ \ \ \ \ (1\ /\ (1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}))\ *\ (0.25\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 4.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0]\ -\/}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00639}00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1],\ 4.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[1])\ -\/}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00640}00640\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00641}00641\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00642}00642\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00643}00643\ \ \ \ \ \textcolor{comment}{//\ With\ the\ solution\ obtained,\ set\ nodal\ values\ from\ the\ analytic\ solution}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00644}00644\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}}\ =\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00645}00645\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00646}00646\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00647}00647\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi\_tmp}}\ =\ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>node\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00648}00648\ \ \ \ \ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>node\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>set\_value(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00649}00649\ \ \ \ \ \ \ \ \ 0,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}[0],\ 3.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi\_tmp}},\ 3.0)\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0],\ 3.0),\ 1.0\ /\ 3.0));}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00650}00650\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00651}00651\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00652}00652\ \ \ \textcolor{comment}{//\ Otherwise,\ perform\ a\ standard\ Newton\ solve\ using\ the\ benchmark\ elements.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00653}00653\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00654}00654\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00655}00655\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{newton\_solve}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00656}00656\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00657}00657\ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00659}00659\ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00660}00660\ \textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00661}00661\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00662}00662\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAuxiliaryShellProblem_a7eb46ba8abf018e616328d51d4f8ba9a}{AuxiliaryShellProblem::doc\_solution}}()}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00663}00663\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00664}00664\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ofstream}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00665}00665\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}}[100];}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00666}00666\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00667}00667\ \ \ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00668}00668\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{npts}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00669}00669\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00670}00670\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sprintf}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%s/aux\_soln\_nu\_\%g\_pres\_\%g.dat"{}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_abb2279099aa129298a50b26201bc257e}{Doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00674}00674\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00675}00675\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{filename}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00676}00676\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_a47ae0a03788784bb04b6bfb63ae414a7}{Bulk\_mesh\_pt}}-\/>output(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{npts}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00677}00677\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{some\_file}}.close();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00679}00679\ \ \ \textcolor{comment}{//\ Increment\ the\ counter}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00680}00680\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem_abb2279099aa129298a50b26201bc257e}{Doc\_info}}.number()++;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00681}00681\ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00683}00683\ \textcolor{comment}{//===========start\_main===================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00684}00684\ \textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ an\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00685}00685\ \textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00686}\mbox{\hyperlink{shell__adaptive_8cc_a0ddf1224851353fc92bfbff6f499fa97}{00686}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{shell__adaptive_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}[])}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00687}00687\ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00688}00688\ \ \ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00689}00689\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00691}00691\ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00692}00692\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00693}00693\ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/use\_solid\_pressure"{}},\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}},\ \textcolor{stringliteral}{"{}Use\ solid\ pressure"{}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00694}00694\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00695}00695\ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00696}00696\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00697}00697\ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/incompressible"{}},\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}},\ \textcolor{stringliteral}{"{}Incompressible"{}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00698}00698\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00699}00699\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00700}00700\ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/poisson"{}},\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},\ \textcolor{stringliteral}{"{}Poisson"{}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00701}00701\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00702}00702\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::parse\_and\_assign}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00703}00703\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::doc\_specified\_flags}}();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00704}00704\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00705}00705\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{istringstream}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}})\ >>\ std::boolalpha\ >>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00706}00706\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00707}00707\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{istringstream}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}})\ >>\ std::boolalpha\ >>}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00708}00708\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00709}00709\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00710}00710\ \ \ \textcolor{comment}{//\ If\ the\ Poisson\ ratio\ has\ been\ set\ to\ 0.5,\ but\ the\ use\_pressure\_formulation}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00711}00711\ \ \ \textcolor{comment}{//\ and/or\ incompressible\ flags\ are\ false,\ set\ them\ to\ true}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00712}00712\ \ \ \textcolor{keywordflow}{if}\ (std::fabs(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}}\ -\/\ 0.5)\ <\ 1.0e-\/10\ \&\&}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00713}00713\ \ \ \ \ \ \ !(\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ \&\&}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00714}00714\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}))}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00715}00715\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00716}00716\ \ \ \ \ std::string\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00717}00717\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Inconsistency:\ Poisson\ ratio\ has\ been\ set\ to\ 0.5\ but\ the\ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00718}00718\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}use\_pressure\_formulation\ and/or\ incompressible\ flags\ are\ false.\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00719}00719\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Setting\ both\ of\ these\ to\ true\ to\ proceed."{}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00720}00720\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OomphLibWarning}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00721}00721\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00722}00722\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00723}00723\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00724}00724\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00725}00725\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00726}00726\ \ \ \textcolor{comment}{//\ If\ the\ incompressibility\ flag\ has\ been\ set,\ we\ must\ use\ the\ solid\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00727}00727\ \ \ \textcolor{comment}{//\ formulation.\ The\ Poisson\ ratio\ will\ not\ be\ used\ in\ this\ case.}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00728}00728\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ \&\&}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00729}00729\ \ \ \ \ \ \ !\mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00730}00730\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00731}00731\ \ \ \ \ std::string\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}}\ =}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00732}00732\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Inconsistency:\ The\ incompressibility\ flag\ is\ true\ but\ we\ are\ not\ using\ "{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00733}00733\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00734}00734\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}the\ solid\ pressure\ formulation.\ Setting\ use\_solid\_pressure\ to\ true\ to\ "{}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00735}00735\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}proceed.\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00736}00736\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OomphLibWarning}}(}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00737}00737\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00738}00738\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00739}00739\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00740}00740\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00741}00741\ \ \ \textcolor{comment}{//\ Set\ the\ Poisson\ ratio\ to\ 0.5\ if\ incompressibility\ has\ been\ specified.\ This}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00742}00742\ \ \ \textcolor{comment}{//\ is\ solely\ for\ the\ purpose\ of\ output}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00743}00743\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00744}00744\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00745}00745\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}}\ =\ 0.5;}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00746}00746\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00747}00747\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00748}00748\ \ \ \textcolor{comment}{//\ End\ consistency\ checks}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00749}00749\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00750}00750\ \ \ \textcolor{comment}{//\ Create\ the\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00751}00751\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}})}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00752}00752\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00753}00753\ \ \ \ \ \textcolor{comment}{//\ Build\ the\ problem\ with\ an\ additional\ degree\ of\ freedom\ for\ pressure}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00754}00754\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<RefineableQAxisymmetricCylindricalPVDWithPressureElement>}}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00755}00755\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00756}00756\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00757}00757\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.newton\_solve(1);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00758}00758\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.doc\_solution();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00759}00759\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00760}00760\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00761}00761\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00762}00762\ \ \ \ \ \textcolor{comment}{//\ Standard\ build}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00763}00763\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<RefineableQAxisymmetricCylindricalPVDElement<3>}}>\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00764}00764\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00765}00765\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.newton\_solve(1);}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00766}00766\ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.doc\_solution();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00767}00767\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00768}00768\ }
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00769}00769\ \ \ \textcolor{comment}{//\ Build\ and\ solve\ the\ auxiliary\ problem}}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00770}00770\ \ \ \mbox{\hyperlink{classAuxiliaryShellProblem}{AuxiliaryShellProblem}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}};}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00771}00771\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}}.solve\_auxiliary\_problem();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00772}00772\ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}}.doc\_solution();}
+\DoxyCodeLine{\Hypertarget{shell__adaptive_8cc_source_l00773}00773\ \}\ \textcolor{comment}{//\ end\ main}}
+
+\end{DoxyCode}

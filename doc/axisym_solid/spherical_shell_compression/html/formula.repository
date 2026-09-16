@@ -1,0 +1,127 @@
+\_form#0=36x15:$\mathbf{r}(\xi^i,t)$
+\_form#1=41x15:$\mathbf{R}(\xi^i,t)$
+\_form#2=341x46:\[
+\mathbf{r}(\xi^{i},t) = \begin{bmatrix}
+\xi^0 \cos(\xi^2) \\
+\xi^0 \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}, \hspace{1cm}
+\mathbf{R}(\xi^{i},t) = \begin{bmatrix}
+R(\xi^0,\xi^1,t) \cos(\xi^2) \\
+Z(\xi^0,\xi^1,t) \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}.
+\]
+\_form#3=15x10:$g_{ij}$
+\_form#4=18x14:$G_{ij}$
+\_form#5=413x49:\[
+g_{ij} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & {\xi^0}^2
+\end{bmatrix}, \hspace{1cm}
+G_{ij} = \begin{bmatrix}
+(\frac{\partial R}{\partial \xi^0})^2 + (\frac{\partial Z}{\partial \xi^0})^2 &
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} & 0 \\
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} &
+(\frac{\partial R}{\partial \xi^1})^2 + (\frac{\partial Z}{\partial \xi^1})^2 & 0 \\
+0 & 0 & R^2
+\end{bmatrix}
+\]
+\_form#6=40x13:$\eta_M \partial_t\mathbf{R}$
+\_form#7=443x33:\[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial{\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (1)
+\]
+\_form#8=41x11:$\eta_M = 0$
+\_form#9=15x10:$\gamma_{ij}$
+\_form#10=15x11:$\sigma^{ij}$
+\_form#11=253x31:\[
+\sigma^{ij}\delta\gamma_{ij} = \sigma^{ij}\delta\left[\frac{1}{2}(G_{ij} - g_{ij})\right]
+ = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j}.
+\]
+\_form#12=485x81:\[
+\begin{aligned}
+\int_{v} \left\{ \sum_{i,j=1}^2 \sigma^{ij}\left[\frac{\partial R}{\partial \xi^i}\frac{\partial(\delta R)}{\partial \xi^j}
+ + \frac{\partial Z}{\partial \xi^i}\frac{\partial(\delta Z)}{\partial \xi^j}\right] + \sigma^{33}R\delta R
+ - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial {\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} dv \\
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (2)
+\end{aligned}
+\]
+\_form#13=123x15:$\partial \mathbf{R}/\partial t = \partial^2 \mathbf{R}/\partial t^2 = 0$
+\_form#14=6x6:$a$
+\_form#15=8x10:$h$
+\_form#16=21x9:$p_{ext}$
+\_form#17=123x30:\[
+W = \frac{1}{4(1+\nu)}(I_1-3).
+\]
+\_form#18=329x31:\[
+W = \frac{1}{2(1+\nu)}\left[\frac{1}{2}(I_1-3) - \frac{1}{2}\log(I_3) + \frac{\nu}{1-2\nu}\log\left(\sqrt{I_3}\right)^2\right].
+\]
+\_form#19=6x6:$ \nu$
+\_form#20=53x14:$(I_1,I_2,I_3)$
+\_form#21=39x14:$(\hat{r},\theta,\phi)$
+\_form#22=48x16:$(\hat{R},\Theta,\Phi)$
+\_form#23=24x15:$S^{\hat{R}\hat{R}}$
+\_form#24=24x11:$S^{\Theta\Theta}$
+\_form#25=23x11:$S^{\Phi\Phi}$
+\_form#26=344x30:\[
+S^{\hat{R}\hat{R}} = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 - p_s, \hspace{1cm}
+S^{\Theta\Theta} = S^{\Phi\Phi} = \frac{1}{2(1+\nu)}\lambda_{\Theta}^2 - p_s,
+\]
+\_form#27=66x18:$\lambda_{\hat{R}} = d\hat{R}/d\hat{r}$
+\_form#28=85x16:$\lambda_{\Theta} = \lambda_{\Phi} = \hat{R}/\hat{r}$
+\_form#29=11x9:$p_s$
+\_form#30=53x18:$\lambda_{\hat{R}}\lambda_{\hat{\Theta}}^2 = 1$
+\_form#31=24x16:$\hat{R}(\hat{r})$
+\_form#32=236x16:\[
+  \hat{R}^2 d\hat{R} = \hat{r}^2 d\hat{r} \longrightarrow \hat{R}_{o}^3 - \hat{R}_{i}^3 = (a+h)^3 - a_{i}^3,
+\]
+\_form#33=13x15:$\hat{R}_{i}$
+\_form#34=14x15:$\hat{R}_{o}$
+\_form#35=443x39:\[
+  \frac{d S^{\hat{R}\hat{R}}}{d\hat{R}} + \frac{2}{\hat{R}}(S^{\hat{R}\hat{R}} - S^{\Theta\Theta}) = 0 \longrightarrow
+  p_s = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 + \frac{1}{1+\nu}\int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R}
+\]
+\_form#36=15x13:$\lambda_{\Theta}$
+\_form#37=474x39:\[
+  \int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R} = 
+  \int\left(\lambda_{\Theta}^{-4}-\lambda_{\Theta}^2\right)\left(\lambda_{\Theta}-\lambda_{\Theta}^4\right)^{-1}d\lambda_{\Theta} =
+  -\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\]
+\_form#38=199x33:\[
+  S^{\hat{R}\hat{R}} = \frac{1}{1+\nu}\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\]
+\_form#39=46x15:$S^{\hat{R}\hat{R}} = 0$
+\_form#40=70x16:$S^{\hat{R}\hat{R}} = -p_{ext}$
+\_form#41=305x39:\[
+  p_{ext} = \frac{1}{1+\nu}\left[\frac{1}{4}\left(\frac{a}{\hat{R}_{i}}\right)^4 +
+   \frac{a}{\hat{R}_{i}}
+   -\frac{1}{4}\left(\frac{a+h}{\hat{R}_{o}}\right)^4 -\frac{a+h}{\hat{R}_{o}}\right].
+\]
+\_form#42=510x31:\[
+  S^{\hat{R}\hat{R}} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+  \hspace{0.5cm}
+  S^{\Theta\Theta} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{\Theta}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+\]
+\_form#43=93x16:$J = \sqrt{I_3} = \lambda_{\hat{R}}\lambda_{\Theta}^2$
+\_form#44=304x31:\[
+  \frac{d}{d\hat{R}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log J\right]\right\}
+  + \frac{2}{\hat{R}}\frac{1}{J}(\lambda_{\hat{R}}^2 - \lambda_{\Theta}^2) = 0.
+\]
+\_form#45=368x39:\[
+\frac{d}{d\hat{r}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right]\right\}
++ \frac{2}{\hat{R}}\left[\left(\frac{\lambda_{\hat{R}}}{\lambda_{\Theta}}\right)^2-1\right] = 0
+  \ \ \ \ \ \ \ \ (3)
+\]
+\_form#46=8x10:$\hat{r}$
+\_form#47=39x9:$\nu = 0.5$
+\_form#48=39x10:$\nu < 0.5$
+\_form#49=30x9:$r = 0$
+\_form#50=29x9:$z = 0$

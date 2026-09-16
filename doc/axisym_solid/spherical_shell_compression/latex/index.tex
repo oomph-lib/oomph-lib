@@ -1,0 +1,531 @@
+\chapter{Nonlinear solid mechanics with axisymmetry}
+\hypertarget{index}{}\label{index}\index{Nonlinear solid mechanics with axisymmetry@{Nonlinear solid mechanics with axisymmetry}}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+This example considers the solution of the PVD equations introduced in a \href{../../solid/solid_theory/html/index.html}{\texttt{ previous tutorial}}, but in cylindrical coordinates and under the assumption of axisymmetry. In this case, the undeformed and deformed position vectors, denoted by $\mathbf{r}(\xi^i,t)$ and $\mathbf{R}(\xi^i,t)$ respectively, may be written as\+:
+
+\[
+\mathbf{r}(\xi^{i},t) = \begin{bmatrix}
+\xi^0 \cos(\xi^2) \\
+\xi^0 \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}, \hspace{1cm}
+\mathbf{R}(\xi^{i},t) = \begin{bmatrix}
+R(\xi^0,\xi^1,t) \cos(\xi^2) \\
+Z(\xi^0,\xi^1,t) \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}.
+\]
+
+The undeformed and deformed covariant metric tensors, $g_{ij}$ and $G_{ij}$ respectively, are therefore\+:
+
+\[
+g_{ij} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & {\xi^0}^2
+\end{bmatrix}, \hspace{1cm}
+G_{ij} = \begin{bmatrix}
+(\frac{\partial R}{\partial \xi^0})^2 + (\frac{\partial Z}{\partial \xi^0})^2 &
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} & 0 \\
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} &
+(\frac{\partial R}{\partial \xi^1})^2 + (\frac{\partial Z}{\partial \xi^1})^2 & 0 \\
+0 & 0 & R^2
+\end{bmatrix}
+\]
+
+Recall the non-\/dimensional PVD equation, presented here with an additional mass damping term, $\eta_M \partial_t\mathbf{R}$\+:
+
+\[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial{\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (1)
+\]
+
+Note that in the implementation of these equations $\eta_M = 0$ by default. The following property holds due to the definition of the Green-\/\+Lagrange strain tensor $\gamma_{ij}$ and the symmetry of the second Piola stress tensor $\sigma^{ij}$\+:
+
+\[
+\sigma^{ij}\delta\gamma_{ij} = \sigma^{ij}\delta\left[\frac{1}{2}(G_{ij} - g_{ij})\right]
+ = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j}.
+\]
+
+Hence, the PVD equation becomes\+:
+
+\[
+\begin{aligned}
+\int_{v} \left\{ \sum_{i,j=1}^2 \sigma^{ij}\left[\frac{\partial R}{\partial \xi^i}\frac{\partial(\delta R)}{\partial \xi^j}
+ + \frac{\partial Z}{\partial \xi^i}\frac{\partial(\delta Z)}{\partial \xi^j}\right] + \sigma^{33}R\delta R
+ - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial {\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} dv \\
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (2)
+\end{aligned}
+\]
+
+The following example considers a steady state solution ( $\partial \mathbf{R}/\partial t = \partial^2 \mathbf{R}/\partial t^2 = 0$) to these equations, though the solution to a time-\/dependent problem using the same underlying elements is discussed \href{../spherical_shell_unsteady/html/index.html}{\texttt{ here}}.\hypertarget{index_spherical_shell_compression}{}\doxysection{\texorpdfstring{Demo problem\+: Compression of a hyperelastic spherical shell}{Demo problem: Compression of a hyperelastic spherical shell}}\label{index_spherical_shell_compression}
+As a demonstration, we consider the compression of hyperelastic spherical shell which has an inner radius $a$ and thickness $h$ when stress-\/free, under an external pressure $p_{ext}$. The shell is assumed to obey the Neo-\/\+Hookean consitutive law. For an incompressible material, the strain energy density (non-\/dimensionalised by the elastic modulus) is given by\+:  \[
+W = \frac{1}{4(1+\nu)}(I_1-3).
+\] A generalization to the above, proposed by Attard ("{}\+Finite strain-\/-\/isotropic hyperelasticity"{}, International Journal of Solids and Structures 2003), for compressible materials is\+:  \[
+W = \frac{1}{2(1+\nu)}\left[\frac{1}{2}(I_1-3) - \frac{1}{2}\log(I_3) + \frac{\nu}{1-2\nu}\log\left(\sqrt{I_3}\right)^2\right].
+\] In the above, $ \nu$ is the Poisson ratio and $(I_1,I_2,I_3)$ are the strain invariants introduced previously. The incompressible and compressible cases shall now be considered seperately. \hypertarget{index_incompressible_case}{}\doxysubsection{\texorpdfstring{Incompressible case}{Incompressible case}}\label{index_incompressible_case}
+When the material is incompressible, some analytical progress can be made by imposing spherical symmetry. Denoting $(\hat{r},\theta,\phi)$ and $(\hat{R},\Theta,\Phi)$ as the spherical coordinates in the undeformed and deformed configurations, respectively, the Cauchy principal stresses, denoted here as $S^{\hat{R}\hat{R}}$, $S^{\Theta\Theta}$ and $S^{\Phi\Phi}$ are given by\+:  \[
+S^{\hat{R}\hat{R}} = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 - p_s, \hspace{1cm}
+S^{\Theta\Theta} = S^{\Phi\Phi} = \frac{1}{2(1+\nu)}\lambda_{\Theta}^2 - p_s,
+\] where $\lambda_{\hat{R}} = d\hat{R}/d\hat{r}$ and $\lambda_{\Theta} = \lambda_{\Phi} = \hat{R}/\hat{r}$ are the principal stretches and $p_s$ is the solid pressure, the Lagrange multiplier term introduced in the \href{../../solid/solid_theory/html/index.html}{\texttt{ solid theory tutorial}} to enforce incompressibility. The incompressibility condition is $\lambda_{\hat{R}}\lambda_{\hat{\Theta}}^2 = 1$, from which the the dependence $\hat{R}(\hat{r})$ can be derived as\+:  \[
+  \hat{R}^2 d\hat{R} = \hat{r}^2 d\hat{r} \longrightarrow \hat{R}_{o}^3 - \hat{R}_{i}^3 = (a+h)^3 - a_{i}^3,
+\] where $\hat{R}_{i}$ and $\hat{R}_{o}$ denote the outer and inner radii of the shell, respectively, when under compression. A second equation for the two unknowns $\hat{R}_{i}$, $\hat{R}_{o}$ can be derived by first obtaining an expression for the solid pressure $p_s$ from the equilibrium equation\+:  \[
+  \frac{d S^{\hat{R}\hat{R}}}{d\hat{R}} + \frac{2}{\hat{R}}(S^{\hat{R}\hat{R}} - S^{\Theta\Theta}) = 0 \longrightarrow
+  p_s = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 + \frac{1}{1+\nu}\int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R}
+\] The integral can be evaluated by changing the integration variable to $\lambda_{\Theta}$ and using the incompressibility condition as follows\+:  \[
+  \int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R} = 
+  \int\left(\lambda_{\Theta}^{-4}-\lambda_{\Theta}^2\right)\left(\lambda_{\Theta}-\lambda_{\Theta}^4\right)^{-1}d\lambda_{\Theta} =
+  -\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\] The radial principal Cauchy stress is therefore\+:  \[
+  S^{\hat{R}\hat{R}} = \frac{1}{1+\nu}\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\] After applying the boundary conditions, $S^{\hat{R}\hat{R}} = 0$ on the inside face and $S^{\hat{R}\hat{R}} = -p_{ext}$ on the outside face, the second equation connecting $\hat{R}_{i}$ and $\hat{R}_{o}$ is found to be\+:  \[
+  p_{ext} = \frac{1}{1+\nu}\left[\frac{1}{4}\left(\frac{a}{\hat{R}_{i}}\right)^4 +
+   \frac{a}{\hat{R}_{i}}
+   -\frac{1}{4}\left(\frac{a+h}{\hat{R}_{o}}\right)^4 -\frac{a+h}{\hat{R}_{o}}\right].
+\] In the driver code discussed below, $\hat{R}_{i}$ and $\hat{R}_{o}$ are found via Newton iteration.\hypertarget{index_compressible_case}{}\doxysubsection{\texorpdfstring{Compressible case}{Compressible case}}\label{index_compressible_case}
+Although less analytical progress is possible in the compressible case, the problem can still be simplified down to a single ODE for $\hat{R}(\hat{r})$ using spherical symmetry. If the material obeys the compressible Neo-\/\+Hookean constitutive law, then the Cauchy principal stresses are\+:  \[
+  S^{\hat{R}\hat{R}} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+  \hspace{0.5cm}
+  S^{\Theta\Theta} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{\Theta}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+\] where $J = \sqrt{I_3} = \lambda_{\hat{R}}\lambda_{\Theta}^2$. Substituting these expressions into the equilibrium equation gives\+:  \[
+  \frac{d}{d\hat{R}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log J\right]\right\}
+  + \frac{2}{\hat{R}}\frac{1}{J}(\lambda_{\hat{R}}^2 - \lambda_{\Theta}^2) = 0.
+\] In the undeformed frame, this equation reads\+:  \[
+\frac{d}{d\hat{r}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right]\right\}
++ \frac{2}{\hat{R}}\left[\left(\frac{\lambda_{\hat{R}}}{\lambda_{\Theta}}\right)^2-1\right] = 0
+  \ \ \ \ \ \ \ \ (3)
+\]
+
+In this tutorial, a benchmark test is performed by solving equation (3) is solved seperately using 1D finite elements.\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows plots of the deformed position $\hat{R}(\hat{r})$ against the undeformed position $\hat{r}$ for a range of Poisson ratio and external pressure values. The solid blue lines were obtained using the 2D axisymmetric elements, while the dashed blue lines were obtained under the assumption of spherical symmetry, following the approach outlined in sections \doxysectlink{index_incompressible_case}{Incompressible case}{2} (for $\nu = 0.5$) and \doxysectlink{index_compressible_case}{Compressible case}{2} (for $\nu < 0.5$). Excellent agreement between the two approaches is found across all parameter sets considered.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{benchmark}
+\doxyfigcaption{Results of the benchmark test for various Poisson ratio and external pressure values. }
+\end{DoxyImage}
+\hypertarget{index_namespaces}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespaces}
+As is standard, the namespaces {\ttfamily \doxylink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}} and {\ttfamily \doxylink{namespaceGlobalSimSettings}{Global\+Sim\+Settings}} are used to define the physical parameters and simulation parameters, respectively, for the problem.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ physical\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalPhysicalVariables}{GlobalPhysicalVariables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Poisson\ ratio\ -\/\ only\ used\ in\ the\ compressible\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ (nu\ =\ 0.5\ for\ incompressible\ material)}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ =\ 0.4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ external\ pressure}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ =\ 0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Traction\ function\ for\ appyling\ a\ pressure\ on\ the\ outer\ surface}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{external\_pressure\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[0]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[1]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[1];}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ namespace\ GlobalPhysicalVariables}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ simulation\ settings}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalSimSettings}{GlobalSimSettings}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Folder\ for\ output}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{result\_folder}}\ =\ \textcolor{stringliteral}{"{}RESLT"{}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Flag\ for\ using\ a\ pressure\ formulation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{use\_pressure\_formulation}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ If\ using\ a\ pressure\ formulation,\ is\ the\ solid\ incompressible?}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{incompressible}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ radial\ direction}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{n\_radial}}\ =\ 10;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ azimuthal\ direction}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{n\_azimuthal}}\ =\ 10;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Inner\ radius}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{a}}\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Thickness}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{h}}\ =\ 0.5;}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ namespace\ GlobalSimSettings}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_meshing}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_meshing}
+The mesh for this problem can be constructed simply by upgrading the existing {\ttfamily Two\+DAnnular\+Mesh} to a solid mesh. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======================start\_mesh================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Upgrade\ the\ mesh\ to\ a\ solidmesh.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Quarter-\/annulus\ in\ quadrant\ r>0,\ z>0}}
+\DoxyCodeLine{\textcolor{comment}{///\ ntheta\ -\/\ no.\ elements\ in\ theta\ direction}}
+\DoxyCodeLine{\textcolor{comment}{///\ nr\ -\/\ no.\ elements\ in\ the\ radial\ direction}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ -\/\ Inner\ radius\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{///\ h\ -\/\ thickness\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ TwoDAnnularMesh<ELEMENT>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Constructor:\ Build\ mesh\ and\ copy\ Eulerian\ coords\ to\ Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ ones\ so\ that\ the\ initial\ configuration\ is\ the\ stress-\/free\ one.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ a,}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ h,}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}\ =\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{Mesh::Default\_TimeStepper}})}
+\DoxyCodeLine{\ \ \ \ :\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RectangularQuadMesh}}<\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}>(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},\ 1.0,\ 1.0,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ \ \ \ \ TwoDAnnularMesh<\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{a}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{h}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{MathematicalConstants}}::\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Pi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Eulerian\ ones}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ End\ mesh}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem_class}
+The driver contains two problem classes. The first is the main problem using the 2D axisymmetric elements, while the second is an auxiliary problem to solve equation (3) in the compressible case or find the unknowns $\hat{R}_{i}$ and $\hat{R}_{o}$ in the incompressible case. Since the latter of these is relatively standard, only the former is documented here. The problem class declaration is shown below. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_problem=========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Axisymmetric\ compression\ of\ a\ finite\ thickness\ shell\ in\ cylindrical}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ polar\ coordiantes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classShellProblem}{ShellProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_afb893165e8a3695d416f852bff5b3280}{\string~ShellProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{doc\_solution}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{create\_boundary\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Delete\ boundary\ elements\ and\ wipe\ the\ associated\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{delete\_boundary\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}}\ =\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ delete\_boundary\_elements}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Complete\ the\ problem\ setup\ (attach\ function/physical\ parameter\ pointers)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}*\ \mbox{\hyperlink{classShellProblem_a76c561add6b4cd52b058583c09006576}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Pointer\ to\ the\ "{}surface"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}}*\ \mbox{\hyperlink{classShellProblem_a4e5c2c39eb20b2c91cbf27746813dc13}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{classShellProblem_a896a5bc80642be89abfeb73de25f86a6}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ DocInfo\ object}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{DocInfo}}\ \mbox{\hyperlink{classShellProblem_a2f891d36692df03ae47e1e750564c17c}{Doc\_info}};}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The constructor begins with assigning the output directory and creating the bulk and surface meshes. The function {\ttfamily create\+\_\+boundary\+\_\+elements()} is then called to create traction elements on the outer boundary of the shell. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem<ELEMENT>::ShellProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{GlobalSimSettings::result\_folder}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Initialise\ counter\ for\ solutions}}
+\DoxyCodeLine{\ \ Doc\_info.number()\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ mesh:\ Quarter-\/annulus\ in\ the\ quadrant\ r>0,\ z>0.}}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}(\mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{GlobalSimSettings::n\_azimuthal}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{GlobalSimSettings::n\_radial}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{GlobalSimSettings::h}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ "{}surface\ mesh"{}\ that\ will\ contain\ only\ the\ interface}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ elements.\ The\ constructor\ just\ creates\ the\ mesh\ without\ giving}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ it\ any\ elements,\ nodes,\ etc.}}
+\DoxyCodeLine{\ \ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\ \ create\_boundary\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Add\ the\ two\ submeshes}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Combine\ all\ sub-\/meshes\ into\ a\ single\ mesh}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{build\_global\_mesh}}();}
+
+\end{DoxyCodeInclude}
+ Following this, a constitutive law is selected. Depending on the flag {\ttfamily Global\+Sim\+Settings\+::is\+\_\+incompressible}, this will either be the incompressible or compressible version of the Neo\+Hookean constiutive law. The function {\ttfamily complete\+\_\+problem\+\_\+setup()} (discussed below) is then called and equation numbers are assigned. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ from\ a\ strain\ energy\ density\ function.}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Version\ depends\ on\ the\ incompressibility\ flag}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{IncompressibleNeoHookean}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{NeoHookean}}(\&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ Constitutive\_law\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Complete\ the\ problem\ set\ up}}
+\DoxyCodeLine{\ \ complete\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assign\ eqn\ numbers}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ constructor}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_complete}{}\doxysection{\texorpdfstring{Completing the problem setup}{Completing the problem setup}}\label{index_complete}
+To complete the problem setup, the pointer to the constitutive law is passed to each of the bulk elements. An attempt is made to cast to the version of the bulk element that contains pressure degrees of freedom, the {\ttfamily QAxisymmetric\+Cylindrical\+PVDWith\+Pressure\+Element}. If this cast is successful, then the run is using the solid pressure formulation and, depending on the value of {\ttfamily Global\+Sim\+Settings\+::is\+\_\+incompressible}, incompressibility may be enforced using the element\textquotesingle{}s member function {\ttfamily set\+\_\+incompressible()}. The pointer to the external pressure function is then passed to each of the interface elements for application of the traction boundary condition on the outer surface. Finally, The Dirichlet boundary conditions for this problem are set\+: pinned radial position at $r = 0$ and pinned axial position at $z = 0$. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//========start\_of\_complete\_problem\_setup==================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Assign\ function/parameter\ pointers,\ set\ boundary\ conditions\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{ShellProblem<ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Determine\ number\ of\ bulk\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =\ Constitutive\_law\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Cast\ to\ element\ with\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{QAxisymmetricCylindricalPVDWithPressureElement}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{QAxisymmetricCylindricalPVDWithPressureElement}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Can\ set\ compressible/incompressible\ condition\ here}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}\ !=\ 0)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}-\/>set\_incompressible();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_with\_pres\_pt}}-\/>set\_compressible();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ bulk\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Determine\ number\ of\ 1D\ interface\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ the\ interface\ elements}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ traction\ function\ for\ applying\ pressure}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>traction\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{GlobalPhysicalVariables::external\_pressure\_fct}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ interface\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ the\ Dirichlet\ boundary\ conditions\ for\ this\ problem}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Find\ number\ of\ nodes\ on\ boundary\ 3}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ fixed\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ fixed\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ complete\_problem\_setup}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_driver}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_driver}
+The driver code begins by specifying command line arguments for whether the solid pressure formulation is to be used, whether incompressibility should be enforced, the value of the material\textquotesingle{}s Poisson ratio and the external pressure applied on the outer face of the shell. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_main===================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ an\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{shell_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/use\_solid\_pressure"{}},\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}},\ \textcolor{stringliteral}{"{}Use\ solid\ pressure"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/incompressible"{}},\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}},\ \textcolor{stringliteral}{"{}Incompressible"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/poisson"{}},\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},\ \textcolor{stringliteral}{"{}Poisson"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/pressure"{}},\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{GlobalPhysicalVariables::ext\_pressure}},\ \textcolor{stringliteral}{"{}External\ pressure"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::parse\_and\_assign}}();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::doc\_specified\_flags}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{istringstream}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_solid\_pressure}})\ >>\ std::boolalpha\ >>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{istringstream}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp\_incompressible}})\ >>\ std::boolalpha\ >>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}};}
+
+\end{DoxyCodeInclude}
+Following this, a number of consistency checks are made. For example, if incompressibility has been specified then a check is made that the solid pressure formulation has also been selected. If this is not the case, a warning is issued and the flag {\ttfamily \doxylink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}} is set to {\ttfamily true}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ If\ the\ Poisson\ ratio\ has\ been\ set\ to\ 0.5,\ but\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ use\_pressure\_formulation\ and/or\ incompressible\ flags\ are\ false,\ set\ them\ to}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ true}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (std::fabs(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}}\ -\/\ 0.5)\ <\ 1.0e-\/10\ \&\&}
+\DoxyCodeLine{\ \ \ \ \ \ !(\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ \&\&}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ std::string\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}Inconsistency:\ Poisson\ ratio\ has\ been\ set\ to\ 0.5\ but\ the\ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}use\_pressure\_formulation\ and/or\ incompressible\ flags\ are\ false.\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}Setting\ both\ of\ these\ to\ true\ to\ proceed."{}};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OomphLibWarning}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ If\ the\ incompressibility\ flag\ has\ been\ set,\ we\ must\ use\ the\ solid}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ pressure\ formulation.\ The\ Poisson\ ratio\ will\ not\ be\ used\ in\ this\ case.}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}}\ \&\&}
+\DoxyCodeLine{\ \ \ \ \ \ !\mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ std::string\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}Inconsistency:\ The\ incompressibility\ flag\ is\ true\ but\ we\ are\ not\ using\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}the\ solid\ pressure\ formulation.\ Setting\ use\_solid\_pressure\ to\ true\ to\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}proceed.\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OomphLibWarning}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{warning\_message}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ the\ Poisson\ ratio\ to\ 0.5\ if\ incompressibility\ has\ been\ specified.\ This}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ is\ solely\ for\ the\ purpose\ of\ output}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{GlobalSimSettings::incompressible}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}}\ =\ 0.5;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ End\ consistency\ checks}}
+
+\end{DoxyCodeInclude}
+Finally, both the main and auxiliary problems are created and the Newton solve followed by output is done in each case. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ problem}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Build\ the\ problem\ with\ an\ additional\ degree\ of\ freedom\ for\ pressure}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<QAxisymmetricCylindricalPVDWithPressureElement>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.doc\_solution();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Standard\ build}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<QAxisymmetricCylindricalPVDElement<3>}}>\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.doc\_solution();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ and\ solve\ the\ auxiliary\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAuxiliaryShellProblem}{AuxiliaryShellProblem}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}}.solve\_auxiliary\_problem();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{aux\_problem}}.doc\_solution();}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ main}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{
+../../../../
+demo_drivers/axisym_solid/shell/
+}{\texttt{ demo\+\_\+drivers/axisym\+\_\+solid/shell/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{
+../../../../
+demo_drivers/axisym_solid/shell/shell.cc
+}{\texttt{ demo\+\_\+drivers/axisym\+\_\+solid/shell/shell.\+cc }} \end{center} 
+\item A refineable version of the driver code can be found at\+: \begin{center} \href{
+../../../../
+demo_drivers/axisym_solid/shell/shell_adaptive.cc
+}{\texttt{ demo\+\_\+drivers/axisym\+\_\+solid/shell/shell\+\_\+adaptive.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,146 @@
+\doxysection{spherical\+\_\+shell\+\_\+unsteady.\+txt\+\_\+doxygenified.\+h}
+\hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source}{}\label{spherical__shell__unsteady_8txt__doxygenified_8h_source}\mbox{\hyperlink{spherical__shell__unsteady_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00002}00002\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00003}00003\ \textcolor{comment}{\(\backslash\)mainpage\ Axisymmetric\ solid\ mechanics:\ a\ time-\/dependent\ demo\ problem}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00004}00004\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00005}00005\ \textcolor{comment}{This\ example\ considers\ the\ application\ of\ the\ axisymmetric\ PVD\ equations\ introduced\ in\ a}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00006}00006\ \textcolor{comment}{<A\ HREF="{}../../axisym\_solid/shell/html/index.html"{}>previous\ tutorial</A>\ toward\ a\ time-\/dependent\ problem.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00007}00007\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00008}00008\ \textcolor{comment}{\(\backslash\)section\ description\ Problem\ description}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00009}00009\ \textcolor{comment}{The\ problem\ under\ consideration\ is\ a\ benchmark\ test\ using\ the\ method\ of\ manufactured\ solutions.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00010}00010\ \textcolor{comment}{Similar\ to\ the\ approach\ used\ in\ the\ previous\ tutorial,\ a\ solution\ in\ spherical\ symmetry\ is\ sought.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00011}00011\ \textcolor{comment}{The\ imposed\ displacment\ field\ is:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00012}00012\ \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00013}00013\ \textcolor{comment}{\ \ u(\(\backslash\)hat\{r\},t)\ =\ \(\backslash\)hat\{R\}(\(\backslash\)hat\{r\},t)\ -\/\ \(\backslash\)hat\{r\}\ =\ A(t)\(\backslash\)hat\{r\}\ +\ \(\backslash\)frac\{B(t)\}\{\(\backslash\)hat\{r\}\string^2\},}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00014}00014\ \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00015}00015\ \textcolor{comment}{where\ the\ chosen\ time-\/dependence\ for\ \(\backslash\)f\$A(t)\(\backslash\)f\$\ and\ \(\backslash\)f\$B(t)\(\backslash\)f\$\ are:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00016}00016\ \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00017}00017\ \textcolor{comment}{\ \ A(t)\ =\ A\_0\(\backslash\)sin(\(\backslash\)omega\ t),\ \(\backslash\)hspace\{1cm\}\ B(t)\ =\ B\_0\(\backslash\)sin(\(\backslash\)omega\ t)}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00018}00018\ \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00019}00019\ \textcolor{comment}{Using\ the\ same\ compressible\ Neo-\/Hookean\ constitutive\ law\ as\ previously,\ the\ body\ force\ required\ for\ the\ manufactured}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00020}00020\ \textcolor{comment}{solution\ to\ be\ an\ exact\ solution\ is:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00021}00021\ \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00022}00022\ \textcolor{comment}{\ \ \(\backslash\)mathbf\{b\}\ =\ -\/\(\backslash\)left\(\backslash\)\{\(\backslash\)omega\string^2\ u\ +}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00023}00023\ \textcolor{comment}{\ \ \(\backslash\)mu\(\backslash\)left[\(\backslash\)frac\{\(\backslash\)partial\ \(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\}\{\(\backslash\)partial\ \(\backslash\)hat\{r\}\}\ +\ \(\backslash\)frac\{2\}\{\(\backslash\)hat\{r\}\}(\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}-\/\(\backslash\)lambda\_\{\(\backslash\)Theta\})\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00024}00024\ \textcolor{comment}{\ \ +\ \(\backslash\)frac\{\(\backslash\)lambda\}\{J\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\}\(\backslash\)frac\{\(\backslash\)partial\ J\}\{\(\backslash\)partial\ \(\backslash\)hat\{r\}\}}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00025}00025\ \textcolor{comment}{\ \ +\ \(\backslash\)left[\(\backslash\)frac\{1\}\{\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\string^2\}\(\backslash\)frac\{\(\backslash\)partial\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\}\{\(\backslash\)partial\ \(\backslash\)hat\{r\}\}\ +\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00026}00026\ \textcolor{comment}{\ \ \(\backslash\)frac\{2\}\{\(\backslash\)hat\{r\}\}\(\backslash\)left(\(\backslash\)frac\{1\}\{\(\backslash\)lambda\_\{\(\backslash\)Theta\}\}-\/\(\backslash\)frac\{1\}\{\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\}\(\backslash\)right)\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00027}00027\ \textcolor{comment}{\ \ (\(\backslash\)mu-\/\(\backslash\)lambda\(\backslash\)log\ J)\(\backslash\)right\(\backslash\)\}\(\backslash\)mathbf\{e\}\_\{\(\backslash\)hat\{r\}\},}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00028}00028\ \textcolor{comment}{\ \ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ (1)}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00029}00029\ \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00030}00030\ \textcolor{comment}{where\ \(\backslash\)f\$\(\backslash\)mu\ =\ 1/[2(1+\(\backslash\)nu)]\(\backslash\)f\$\ and\ \(\backslash\)f\$\(\backslash\)lambda\ =\ \(\backslash\)nu/[(1+\(\backslash\)nu)(1-\/2\(\backslash\)nu)]\(\backslash\)f\$\ are\ the\ dimensionless\ Lamé\ parameters\ (other\ symbols\ retain}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00031}00031\ \textcolor{comment}{their\ meaning\ from\ the\ <A\ HREF="{}../../axisym\_solid/shell/html/index.html"{}>previous\ tutorial</A>).}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00032}00032\ \textcolor{comment}{The\ required\ traction\ force\ on\ the\ inner\ and\ outer\ faces\ of\ the\ shell\ is:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00033}00033\ \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00034}00034\ \textcolor{comment}{\ \ \(\backslash\)mathbf\{t\}\ =\ \(\backslash\)frac\{1\}\{J\}\(\backslash\)left[\(\backslash\)mu\ (\(\backslash\)lambda\_\{\(\backslash\)hat\{R\}\}\string^2-\/1)\ +\ \(\backslash\)lambda\ \(\backslash\)log\ J\(\backslash\)right]\(\backslash\)mathbf\{n\},}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00035}00035\ \textcolor{comment}{\ \ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ \(\backslash\)\ (2)}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00036}00036\ \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00037}00037\ \textcolor{comment}{where\ \(\backslash\)f\$\(\backslash\)mathbf\{n\}\(\backslash\)f\$\ is\ the\ unit\ normal.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00038}00038\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00039}00039\ \textcolor{comment}{\(\backslash\)section\ results\ Results}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00040}00040\ \textcolor{comment}{The\ predictions\ of\ the\ finite\ element\ simulation\ against\ the\ manufactured\ solution\ are\ shown\ below.\ An\ excellent\ agreement\ in\ the}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00041}00041\ \textcolor{comment}{deformed\ inner\ and\ outer\ radii\ and\ is\ seen\ over\ the\ full\ oscillation\ period.\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00042}00042\ \textcolor{comment}{\(\backslash\)image\ html\ inner\_outer\_radii.gif\ "{}The\ deformed\ inner\ and\ outer\ radii\ of\ the\ shell\ against\ time.\ "{}\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00043}00043\ \textcolor{comment}{\(\backslash\)image\ latex\ inner\_outer\_radii.eps\ "{}The\ deformed\ inner\ and\ outer\ radii\ of\ the\ shell\ against\ time.\ "{}\ width=\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00044}00044\ \textcolor{comment}{Also\ shown\ below\ are\ heatmaps\ of\ the\ components\ \(\backslash\)f\$\(\backslash\)gamma\_\{rr\}\(\backslash\)f\$\ and\ \(\backslash\)f\$\(\backslash\)gamma\_\{zz\}\(\backslash\)f\$\ of\ the\ Green-\/Lagrange\ strain\ tensor:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00045}00045\ \textcolor{comment}{\(\backslash\)image\ html\ rr\_strain.gif\ "{}The\ rr-\/component\ (cylindrical\ coordinates)\ of\ the\ Green-\/Lagrange\ strain.\ "{}\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00046}00046\ \textcolor{comment}{\(\backslash\)image\ latex\ rr\_strain.eps\ "{}The\ rr-\/component\ (cylindrical\ coordinates)\ of\ the\ Green-\/Lagrange\ strain.\ "{}\ width=\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00047}00047\ \textcolor{comment}{\(\backslash\)image\ html\ zz\_strain.gif\ "{}The\ zz-\/component\ of\ the\ Green-\/Lagrange\ strain.\ "{}\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00048}00048\ \textcolor{comment}{\(\backslash\)image\ latex\ zz\_strain.eps\ "{}The\ zz-\/component\ of\ the\ Green-\/Lagrange\ strain.\ "{}\ width=\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00049}00049\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00050}00050\ \textcolor{comment}{\(\backslash\)section\ namespaces\ Global\ parameters\ and\ functions}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00051}00051\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00052}00052\ \textcolor{comment}{The\ namespace\ \(\backslash\)c\ GlobalPhysicalVariables\ contains\ the\ material's\ Poisson\ ratio\ and\ the\ parameters\ \(\backslash\)f\$A\_0\(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00053}00053\ \textcolor{comment}{\(\backslash\)f\$B\_0\(\backslash\)f\$\ and\ \(\backslash\)f\$\(\backslash\)omega\(\backslash\)f\$\ that\ parameterise\ the\ manufactured\ displacement\ solution.\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00054}00054\ \textcolor{comment}{The\ functions\ \(\backslash\)c\ deformed\_position\_fct,\ \(\backslash\)c\ deformed\_velocity\_fct\ and\ \(\backslash\)c\ deformed\_accel\_fct\ are}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00055}00055\ \textcolor{comment}{used\ to\ set\ the\ initial\ condition.\ The\ namespace\ also\ contains\ functions}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00056}00056\ \textcolor{comment}{\(\backslash\)c\ body\_force\_fct\ and\ \(\backslash\)c\ traction\_force\_fct\ which}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00057}00057\ \textcolor{comment}{define\ the\ forcing\ given\ by\ equations\ (1)\ and\ (2),\ respectively.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00058}00058\ \textcolor{comment}{\(\backslash\)dontinclude\ shell\_unsteady.cc}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00059}00059\ \textcolor{comment}{\(\backslash\)skipline\ start\_namespace}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00060}00060\ \textcolor{comment}{\(\backslash\)until\ //\ namespace\ GlobalPhysicalVariables}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00061}00061\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00062}00062\ \textcolor{comment}{A\ seperate\ namespace\ \(\backslash\)c\ GlobalSimSettings\ then\ defines\ the\ simulation\ parameters\ such\ as\ the\ mesh\ dimensions,}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00063}00063\ \textcolor{comment}{the\ number\ of\ timesteps\ in\ the\ run\ and\ the\ flag\ indicating\ if\ the\ solid\ pressure\ formulation\ is\ to\ be\ used.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00064}00064\ \textcolor{comment}{\(\backslash\)skipline\ start\_namespace}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00065}00065\ \textcolor{comment}{\(\backslash\)until\ //\ namespace\ GlobalSimSettings}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00066}00066\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00067}00067\ \textcolor{comment}{\(\backslash\)section\ mesh\ The\ mesh}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00068}00068\ \textcolor{comment}{As\ done\ in\ the\ <A\ HREF="{}../../axisym\_solid/shell/html/index.html"{}>previous\ tutorial</A>,\ the\ mesh\ is\ constructed}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00069}00069\ \textcolor{comment}{by\ upgrading\ the\ existing\ \(\backslash\)c\ TwoDAnnularMesh\ to\ a\ solid\ mesh.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00070}00070\ \textcolor{comment}{\(\backslash\)skipline\ start\_mesh}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00071}00071\ \textcolor{comment}{\(\backslash\)until\ \};}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00072}00072\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00073}00073\ \textcolor{comment}{\(\backslash\)section\ problem\_class\ The\ problem\ class}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00074}00074\ \textcolor{comment}{The\ problem\ class\ is\ relatively\ standard\ and\ is\ identical\ to\ the\ previous\ tutorial,\ execpt\ for\ the\ addition\ of}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00075}00075\ \textcolor{comment}{the\ member\ functions\ \(\backslash\)c\ set\_initial\_condition(),\ which\ sets\ the\ initial\ condition\ manually\ using\ functions}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00076}00076\ \textcolor{comment}{provided\ in\ \(\backslash\)c\ GlobalPhysicalVariables,\ and\ \(\backslash\)c\ unsteady\_run()\ which\ performs\ the\ time\ integration.\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00077}00077\ \textcolor{comment}{\(\backslash\)skipline\ start\_problem}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00078}00078\ \textcolor{comment}{\(\backslash\)until\ \};}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00079}00079\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00080}00080\ \textcolor{comment}{\(\backslash\)section\ constructor\ The\ problem\ constructor}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00081}00081\ \textcolor{comment}{The\ constructor\ begins\ with\ assigning\ the\ output\ directory\ and\ setting\ \(\backslash\)c\ Newmark<1>\ as\ the\ problem's}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00082}00082\ \textcolor{comment}{timestepper.\ Following\ this,\ the\ bulk\ and\ surface\ meshes\ are\ created\ and\ the\ member\ function\ \(\backslash\)c\ create\_boundary\_elements()}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00083}00083\ \textcolor{comment}{is\ called\ to\ create\ traction\ elements\ on\ the\ outer\ boundary\ of\ the\ shell.\ \(\backslash\)c\ complete\_problem\_setup()\ (discussed\ below)\ is}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00084}00084\ \textcolor{comment}{called\ to\ complete\ the\ setup\ of\ the\ bulk\ and\ surface\ elements\ and\ assign\ Dirichlet\ boundary\ conditions.\ \(\backslash\)c\ set\_initial\_condition()}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00085}00085\ \textcolor{comment}{(also\ discussed\ below)\ is\ called\ to\ manually\ set\ an\ initial\ condition\ which\ is\ consistent\ with\ the\ manufactured\ solution.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00086}00086\ \textcolor{comment}{\(\backslash\)skipline\ start\_constructor}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00087}00087\ \textcolor{comment}{\(\backslash\)until\ //\ end\ constructor}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00088}00088\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00089}00089\ \textcolor{comment}{\(\backslash\)section\ complete\ Completing\ the\ problem\ setup}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00090}00090\ \textcolor{comment}{To\ complete\ the\ problem\ setup,\ the\ pointers\ for\ the\ constutive\ law\ and\ body\ force\ function\ are\ passed\ to\ each}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00091}00091\ \textcolor{comment}{of\ the\ bulk\ elements.\ The\ pointer\ to\ the\ traction\ force\ is\ then\ passed\ to\ each\ of\ the\ interface\ elements.\ Finally,}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00092}00092\ \textcolor{comment}{the\ Dirichlet\ boundary\ conditions\ for\ the\ problem\ are\ set.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00093}00093\ \textcolor{comment}{\(\backslash\)skipline\ start\_of\_complete\_problem\_setup}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00094}00094\ \textcolor{comment}{\(\backslash\)until\ //\ end\ complete\_problem\_setup}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00095}00095\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00096}00096\ \textcolor{comment}{\(\backslash\)section\ initial\_condition\ Setting\ the\ initial\ condition}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00097}00097\ \textcolor{comment}{Since\ this\ tutorial\ uses\ a\ manufactured\ solution,\ the\ nodal\ positions,\ velocities\ and\ accelerations\ are\ known\ at\ all\ times}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00098}00098\ \textcolor{comment}{and\ so\ the\ initial\ condition\ can\ be\ set\ manually.\ The\ \(\backslash\)c\ Newmark<1>\ timestepper\ stores\ the\ following\ values:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00099}00099\ \textcolor{comment}{\ \ -\/\ 0:\ Displacement\ at\ time\ \(\backslash\)f\$\ t\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00100}00100\ \textcolor{comment}{\ \ -\/\ 1:\ Displacement\ at\ time\ \(\backslash\)f\$\ t-\/dt\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00101}00101\ \textcolor{comment}{\ \ -\/\ 2:\ Velocity\ at\ time\ \(\backslash\)f\$\ t-\/dt\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00102}00102\ \textcolor{comment}{\ \ -\/\ 3:\ Acceleration\ at\ time\ \(\backslash\)f\$\ t-\/dt\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00103}00103\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00104}00104\ \textcolor{comment}{These\ values\ are\ easily\ accessible\ using\ the\ functions\ \(\backslash\)c\ deformed\_position\_fct,\ \(\backslash\)c\ deformed\_velocity\_fct\ and}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00105}00105\ \textcolor{comment}{\(\backslash\)c\ deformed\_accel\_fct\ in\ the\ namespace\ \(\backslash\)c\ GlobalPhysicalVariables.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00106}00106\ \textcolor{comment}{\(\backslash\)skipline\ start\_of\_set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00107}00107\ \textcolor{comment}{\(\backslash\)until\ //\ end\ set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00108}00108\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00109}00109\ \textcolor{comment}{\(\backslash\)section\ driver\ The\ driver\ code}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00110}00110\ \textcolor{comment}{The\ driver\ code\ is\ relatively\ simple.\ Command\ line\ arguments\ for\ the\ material's\ Poisson\ ratio\ and\ the\ \(\backslash\)c\ use\_solid\_pressure}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00111}00111\ \textcolor{comment}{flag\ are\ specified.\ Following\ this,\ the\ problem\ is\ built\ and\ solved\ by\ calling\ the\ member\ function\ \(\backslash\)c\ unsteady\_run,\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00112}00112\ \textcolor{comment}{which\ simply\ perfoms\ the\ Newton\ solve\ and\ output\ within\ a\ timestepping\ loop.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00113}00113\ \textcolor{comment}{\(\backslash\)skipline\ start\_main}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00114}00114\ \textcolor{comment}{\(\backslash\)until\ //\ end\ main}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00115}00115\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00116}00116\ \textcolor{comment}{\(\backslash\)section\ sources\ Source\ files\ for\ this\ tutorial}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00117}00117\ \textcolor{comment}{-\/\ The\ source\ files\ for\ this\ tutorial\ are\ located\ in\ the\ directory:}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00118}00118\ \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00119}00119\ \textcolor{comment}{<A\ HREF="{}}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00120}00120\ \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00121}00121\ \textcolor{comment}{demo\_drivers/axisym\_solid/shell\_unsteady/}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00122}00122\ \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00123}00123\ \textcolor{comment}{demo\_drivers/axisym\_solid/shell\_unsteady/}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00124}00124\ \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00125}00125\ \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00126}00126\ \textcolor{comment}{-\/\ The\ driver\ code\ is:\ }}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00127}00127\ \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00128}00128\ \textcolor{comment}{<A\ HREF="{}}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00129}00129\ \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00130}00130\ \textcolor{comment}{demo\_drivers/axisym\_solid/shell\_unsteady/shell\_unsteady.cc}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00131}00131\ \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00132}00132\ \textcolor{comment}{demo\_drivers/axisym\_solid/shell\_unsteady/shell\_unsteady.cc}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00133}00133\ \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00134}00134\ \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00135}00135\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00136}00136\ \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00137}00137\ \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00138}00138\ \textcolor{comment}{\(\backslash\)section\ pdf\ PDF\ file}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00139}00139\ \textcolor{comment}{A\ <a\ href="{}../latex/refman.pdf"{}>pdf\ version</a>\ of\ this\ document\ is\ available.}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00140}00140\ \textcolor{comment}{\(\backslash\)*/}}
+\DoxyCodeLine{\Hypertarget{spherical__shell__unsteady_8txt__doxygenified_8h_source_l00141}00141\ }
+
+\end{DoxyCode}

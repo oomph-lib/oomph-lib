@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ShellBenchmarkElement&lt; N_NODE1D &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html">ShellBenchmarkElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ShellBenchmarkElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for elements to solve the 1D radial displacement ODE in the spherical shell compression benchmark problem.  
+ <a href="classoomph_1_1ShellBenchmarkElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ShellBenchmarkElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aaf3f04fbb8d2cad836994ae4b8dc5d7b" id="r_aaf3f04fbb8d2cad836994ae4b8dc5d7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#aaf3f04fbb8d2cad836994ae4b8dc5d7b">ShellBenchmarkElement</a> ()</td></tr>
+<tr class="memdesc:aaf3f04fbb8d2cad836994ae4b8dc5d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor ()  <br /></td></tr>
+<tr class="separator:aaf3f04fbb8d2cad836994ae4b8dc5d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85dd268ad97844a8dbe950ad86c578c7" id="r_a85dd268ad97844a8dbe950ad86c578c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a85dd268ad97844a8dbe950ad86c578c7">ShellBenchmarkElement</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">ShellBenchmarkElement</a> &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">dummy</a>)=<a class="el" href="classElasticTwoDAnnularMesh.html">delete</a></td></tr>
+<tr class="memdesc:a85dd268ad97844a8dbe950ad86c578c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a85dd268ad97844a8dbe950ad86c578c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a33921b59ee414c5a9c819819e738b3" id="r_a1a33921b59ee414c5a9c819819e738b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a1a33921b59ee414c5a9c819819e738b3">operator=</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">ShellBenchmarkElement</a> &amp;)=<a class="el" href="classElasticTwoDAnnularMesh.html">delete</a></td></tr>
+<tr class="memdesc:a1a33921b59ee414c5a9c819819e738b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a1a33921b59ee414c5a9c819819e738b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0df2789039f5cf81256af74c6268613" id="r_af0df2789039f5cf81256af74c6268613"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#af0df2789039f5cf81256af74c6268613">required_nvalue</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">n</a>) <a class="el" href="classElasticTwoDAnnularMesh.html">const</a></td></tr>
+<tr class="memdesc:af0df2789039f5cf81256af74c6268613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Required # of &lsquo;values&rsquo; (pinned or dofs) at node n.  <br /></td></tr>
+<tr class="separator:af0df2789039f5cf81256af74c6268613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18be5dba1c7fbc88d52a3b1217195377" id="r_a18be5dba1c7fbc88d52a3b1217195377"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a18be5dba1c7fbc88d52a3b1217195377">nu</a> () <a class="el" href="classElasticTwoDAnnularMesh.html">const</a></td></tr>
+<tr class="memdesc:a18be5dba1c7fbc88d52a3b1217195377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: Poisson ratio.  <br /></td></tr>
+<tr class="separator:a18be5dba1c7fbc88d52a3b1217195377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a08bd73a9084d37aa9eb3ba1a5e515c" id="r_a9a08bd73a9084d37aa9eb3ba1a5e515c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">double</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a9a08bd73a9084d37aa9eb3ba1a5e515c">nu_pt</a> ()</td></tr>
+<tr class="memdesc:a9a08bd73a9084d37aa9eb3ba1a5e515c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Poisson ratio.  <br /></td></tr>
+<tr class="separator:a9a08bd73a9084d37aa9eb3ba1a5e515c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3716ec703eefcc58bfdba3b87361fb24" id="r_a3716ec703eefcc58bfdba3b87361fb24"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a3716ec703eefcc58bfdba3b87361fb24">output</a> (std::ostream &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">outfile</a>, <a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">n_plot</a>)</td></tr>
+<tr class="memdesc:a3716ec703eefcc58bfdba3b87361fb24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output FE representation of soln: x,y,u or x,y,z,u at n_plot^DIM plot points.  <br /></td></tr>
+<tr class="separator:a3716ec703eefcc58bfdba3b87361fb24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a775276da1d74b0ae78d8ea2f979fd7c6" id="r_a775276da1d74b0ae78d8ea2f979fd7c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a775276da1d74b0ae78d8ea2f979fd7c6">fill_in_contribution_to_residuals</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">residuals</a>)</td></tr>
+<tr class="memdesc:a775276da1d74b0ae78d8ea2f979fd7c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residual vector (wrapper)  <br /></td></tr>
+<tr class="separator:a775276da1d74b0ae78d8ea2f979fd7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb62dc88c7eb6b4de5868676ee83fa47" id="r_acb62dc88c7eb6b4de5868676ee83fa47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">virtual</a> <a class="el" href="classElasticTwoDAnnularMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#acb62dc88c7eb6b4de5868676ee83fa47">interpolated_u_shell_benchmark</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">s</a>) <a class="el" href="classElasticTwoDAnnularMesh.html">const</a></td></tr>
+<tr class="memdesc:acb62dc88c7eb6b4de5868676ee83fa47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of function value u at local coordinate s.  <br /></td></tr>
+<tr class="separator:acb62dc88c7eb6b4de5868676ee83fa47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a88b068da76c64c61ed756adc29cfc4c6" id="r_a88b068da76c64c61ed756adc29cfc4c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">virtual</a> <a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#a88b068da76c64c61ed756adc29cfc4c6">fill_in_generic_residual_contribution_shell_benchmark</a> (<a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;<a class="el" href="classElasticTwoDAnnularMesh.html">residuals</a>)</td></tr>
+<tr class="memdesc:a88b068da76c64c61ed756adc29cfc4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute element residual Vector only (if flag=and/or element Jacobian matrix.  <br /></td></tr>
+<tr class="separator:a88b068da76c64c61ed756adc29cfc4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa115919c044c2e8b268eef4e70f3dfb3" id="r_aa115919c044c2e8b268eef4e70f3dfb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html#aa115919c044c2e8b268eef4e70f3dfb3">Nu_pt</a></td></tr>
+<tr class="memdesc:aa115919c044c2e8b268eef4e70f3dfb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the Poisson ratio.  <br /></td></tr>
+<tr class="separator:aa115919c044c2e8b268eef4e70f3dfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt;<br />
+class oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;</div><p>A class for elements to solve the 1D radial displacement ODE in the spherical shell compression benchmark problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00041">41</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaf3f04fbb8d2cad836994ae4b8dc5d7b" name="aaf3f04fbb8d2cad836994ae4b8dc5d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf3f04fbb8d2cad836994ae4b8dc5d7b">&#9670;&#160;</a></span>ShellBenchmarkElement() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::ShellBenchmarkElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor () </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00046">46</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a85dd268ad97844a8dbe950ad86c578c7" name="a85dd268ad97844a8dbe950ad86c578c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85dd268ad97844a8dbe950ad86c578c7">&#9670;&#160;</a></span>ShellBenchmarkElement() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::ShellBenchmarkElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a775276da1d74b0ae78d8ea2f979fd7c6" name="a775276da1d74b0ae78d8ea2f979fd7c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a775276da1d74b0ae78d8ea2f979fd7c6">&#9670;&#160;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residual vector (wrapper) </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00077">77</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="benchmark__elements_8cc_source.html#l00037">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::fill_in_generic_residual_contribution_shell_benchmark()</a>.</p>
+
+</div>
+</div>
+<a id="a88b068da76c64c61ed756adc29cfc4c6" name="a88b068da76c64c61ed756adc29cfc4c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b068da76c64c61ed756adc29cfc4c6">&#9670;&#160;</a></span>fill_in_generic_residual_contribution_shell_benchmark()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> NNODE_1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">NNODE_1D</a> &gt;::fill_in_generic_residual_contribution_shell_benchmark </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute element residual Vector only (if flag=and/or element Jacobian matrix. </p>
+<p>Compute element residual Vector and/or element Jacobian matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8cc_source.html#l00036">36</a> of file <a class="el" href="benchmark__elements_8cc_source.html">benchmark_elements.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="benchmark__elements_8h_source.html#l00077">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="acb62dc88c7eb6b4de5868676ee83fa47" name="acb62dc88c7eb6b4de5868676ee83fa47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb62dc88c7eb6b4de5868676ee83fa47">&#9670;&#160;</a></span>interpolated_u_shell_benchmark()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">virtual</a> <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::interpolated_u_shell_benchmark </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">Vector</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return FE representation of function value u at local coordinate s. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00085">85</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a18be5dba1c7fbc88d52a3b1217195377" name="a18be5dba1c7fbc88d52a3b1217195377"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18be5dba1c7fbc88d52a3b1217195377">&#9670;&#160;</a></span>nu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">double</a> &amp; <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::nu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function: Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00061">61</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="benchmark__elements_8h_source.html#l00119">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::Nu_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9a08bd73a9084d37aa9eb3ba1a5e515c" name="a9a08bd73a9084d37aa9eb3ba1a5e515c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a08bd73a9084d37aa9eb3ba1a5e515c">&#9670;&#160;</a></span>nu_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">double</a> *&amp; <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::nu_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00067">67</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="benchmark__elements_8h_source.html#l00119">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::Nu_pt</a>.</p>
+
+</div>
+</div>
+<a id="a1a33921b59ee414c5a9c819819e738b3" name="a1a33921b59ee414c5a9c819819e738b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a33921b59ee414c5a9c819819e738b3">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;<a class="el" href="classElasticTwoDAnnularMesh.html">::operator</a>= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a3716ec703eefcc58bfdba3b87361fb24" name="a3716ec703eefcc58bfdba3b87361fb24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3716ec703eefcc58bfdba3b87361fb24">&#9670;&#160;</a></span>output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">NNODE_1D</a> &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output FE representation of soln: x,y,u or x,y,z,u at n_plot^DIM plot points. </p>
+<p>Output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8cc_source.html#l00126">126</a> of file <a class="el" href="benchmark__elements_8cc_source.html">benchmark_elements.cc</a>.</p>
+
+</div>
+</div>
+<a id="af0df2789039f5cf81256af74c6268613" name="af0df2789039f5cf81256af74c6268613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0df2789039f5cf81256af74c6268613">&#9670;&#160;</a></span>required_nvalue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::required_nvalue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticTwoDAnnularMesh.html">const</a> <a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Required # of &lsquo;values&rsquo; (pinned or dofs) at node n. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00055">55</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa115919c044c2e8b268eef4e70f3dfb3" name="aa115919c044c2e8b268eef4e70f3dfb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa115919c044c2e8b268eef4e70f3dfb3">&#9670;&#160;</a></span>Nu_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">unsigned</a> N_NODE1D&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">double</a>* <a class="el" href="classoomph_1_1ShellBenchmarkElement.html">oomph::ShellBenchmarkElement</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">N_NODE1D</a> &gt;::Nu_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="benchmark__elements_8h_source.html#l00119">119</a> of file <a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="benchmark__elements_8h_source.html#l00061">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::nu()</a>, and <a class="el" href="benchmark__elements_8h_source.html#l00067">oomph::ShellBenchmarkElement&lt; N_NODE1D &gt;::nu_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="benchmark__elements_8h_source.html">benchmark_elements.h</a></li>
+<li><a class="el" href="benchmark__elements_8cc_source.html">benchmark_elements.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 16 2026 17:05:32
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

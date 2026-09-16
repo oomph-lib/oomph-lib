@@ -1,0 +1,67 @@
+\doxysection{shell.\+cc File Reference}
+\hypertarget{shell_8cc}{}\label{shell_8cc}\index{shell.cc@{shell.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Upgrade the mesh to a solidmesh. Quarter-\/annulus in quadrant r\texorpdfstring{$>$}{>}0, z\texorpdfstring{$>$}{>}0 ntheta -\/ no. elements in theta direction nr -\/ no. elements in the radial direction a -\/ Inner radius of annulus h -\/ thickness of annulus. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classAuxiliaryShellProblem}{Auxiliary\+Shell\+Problem}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global physical variables. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobalSimSettings}{Global\+Sim\+Settings}}
+\begin{DoxyCompactList}\small\item\em Global simulation settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aae8fc0ec1d6fe9f6175f8a613b4b972d}{Global\+Physical\+Variables\+::external\+\_\+pressure\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{shell_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{Global\+Physical\+Variables\+::nu}} = 0.\+4
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ad48c0e8c5cc9f96ff594eb1f8d3112d3}{Global\+Physical\+Variables\+::ext\+\_\+pressure}} = 0.\+05
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{string}} \mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{Global\+Sim\+Settings\+::result\+\_\+folder}} = "{}RESLT"{}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bool}} \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}} = \mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}}
+\begin{DoxyCompactList}\small\item\em Flag for using a pressure formulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bool}} \mbox{\hyperlink{namespaceGlobalSimSettings_a65873875f0b352080f837f8f6c6694fc}{Global\+Sim\+Settings\+::incompressible}} = \mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}}
+\begin{DoxyCompactList}\small\item\em If using a pressure formulation, is the solid incompressible? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{Global\+Sim\+Settings\+::n\+\_\+radial}} = 10
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{Global\+Sim\+Settings\+::n\+\_\+azimuthal}} = 10
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{Global\+Sim\+Settings\+::a}} = 1.\+0
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{Global\+Sim\+Settings\+::h}} = 0.\+5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{shell_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{shell_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{shell.cc@{shell.cc}!main@{main}}
+\index{main@{main}!shell.cc@{shell.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{shell_8cc_source_l00592}{592}} of file \mbox{\hyperlink{shell_8cc_source}{shell.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell_8cc_source_l00117}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+DAnnular\+Mesh()}}, \mbox{\hyperlink{shell_8cc_source_l00061}{Global\+Physical\+Variables\+::ext\+\_\+pressure}}, \mbox{\hyperlink{shell_8cc_source_l00087}{Global\+Sim\+Settings\+::incompressible}}, \mbox{\hyperlink{shell_8cc_source_l00058}{Global\+Physical\+Variables\+::nu}}, and \mbox{\hyperlink{shell_8cc_source_l00084}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}}.
+

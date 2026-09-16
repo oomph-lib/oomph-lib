@@ -1,0 +1,563 @@
+\chapter{Axisymmetric solid mechanics\+: a time-\/dependent demo problem}
+\hypertarget{index}{}\label{index}\index{Axisymmetric solid mechanics: a time-\/dependent demo problem@{Axisymmetric solid mechanics: a time-\/dependent demo problem}}
+This example considers the application of the axisymmetric PVD equations introduced in a \href{../../axisym_solid/shell/html/index.html}{\texttt{ previous tutorial}} toward a time-\/dependent problem.\hypertarget{index_description}{}\doxysection{\texorpdfstring{Problem description}{Problem description}}\label{index_description}
+The problem under consideration is a benchmark test using the method of manufactured solutions. Similar to the approach used in the previous tutorial, a solution in spherical symmetry is sought. The imposed displacment field is\+:  \[
+  u(\hat{r},t) = \hat{R}(\hat{r},t) - \hat{r} = A(t)\hat{r} + \frac{B(t)}{\hat{r}^2},
+\] where the chosen time-\/dependence for $A(t)$ and $B(t)$ are\+:  \[
+  A(t) = A_0\sin(\omega t), \hspace{1cm} B(t) = B_0\sin(\omega t)
+\] Using the same compressible Neo-\/\+Hookean constitutive law as previously, the body force required for the manufactured solution to be an exact solution is\+:  \[
+  \mathbf{b} = -\left\{\omega^2 u +
+  \mu\left[\frac{\partial \lambda_{\hat{R}}}{\partial \hat{r}} + \frac{2}{\hat{r}}(\lambda_{\hat{R}}-\lambda_{\Theta})\right]
+  + \frac{\lambda}{J\lambda_{\hat{R}}}\frac{\partial J}{\partial \hat{r}}
+  + \left[\frac{1}{\lambda_{\hat{R}}^2}\frac{\partial\lambda_{\hat{R}}}{\partial \hat{r}} + 
+  \frac{2}{\hat{r}}\left(\frac{1}{\lambda_{\Theta}}-\frac{1}{\lambda_{\hat{R}}}\right)\right]
+  (\mu-\lambda\log J)\right\}\mathbf{e}_{\hat{r}},
+  \ \ \ \ \ \ \ \ (1)
+\] where $\mu = 1/[2(1+\nu)]$ and $\lambda = \nu/[(1+\nu)(1-2\nu)]$ are the dimensionless Lamé parameters (other symbols retain their meaning from the \href{../../axisym_solid/shell/html/index.html}{\texttt{ previous tutorial}}). The required traction force on the inner and outer faces of the shell is\+:  \[
+  \mathbf{t} = \frac{1}{J}\left[\mu (\lambda_{\hat{R}}^2-1) + \lambda \log J\right]\mathbf{n},
+  \ \ \ \ \ \ \ \ (2)
+\] where $\mathbf{n}$ is the unit normal.\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The predictions of the finite element simulation against the manufactured solution are shown below. An excellent agreement in the deformed inner and outer radii and is seen over the full oscillation period.  
+\begin{DoxyImage}
+\includegraphics[width=\textwidth]{inner_outer_radii}
+\doxyfigcaption{The deformed inner and outer radii of the shell against time. }
+\end{DoxyImage}
+ Also shown below are heatmaps of the components $\gamma_{rr}$ and $\gamma_{zz}$ of the Green-\/\+Lagrange strain tensor\+:  
+\begin{DoxyImage}
+\includegraphics[width=\textwidth]{rr_strain}
+\doxyfigcaption{The rr-\/component (cylindrical coordinates) of the Green-\/\+Lagrange strain. }
+\end{DoxyImage}
+  
+\begin{DoxyImage}
+\includegraphics[width=\textwidth]{zz_strain}
+\doxyfigcaption{The zz-\/component of the Green-\/\+Lagrange strain. }
+\end{DoxyImage}
+\hypertarget{index_namespaces}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespaces}
+The namespace {\ttfamily \doxylink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}} contains the material\textquotesingle{}s Poisson ratio and the parameters $A_0$, $B_0$ and $\omega$ that parameterise the manufactured displacement solution. The functions {\ttfamily deformed\+\_\+position\+\_\+fct}, {\ttfamily deformed\+\_\+velocity\+\_\+fct} and {\ttfamily deformed\+\_\+accel\+\_\+fct} are used to set the initial condition. The namespace also contains functions {\ttfamily body\+\_\+force\+\_\+fct} and {\ttfamily traction\+\_\+force\+\_\+fct} which define the forcing given by equations (1) and (2), respectively.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ physical\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalPhysicalVariables}{GlobalPhysicalVariables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Poisson\ ratio}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ =\ 0.4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Coefficient\ amplitudes\ for\ the\ manufactured\ solution}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ =\ 0.05;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ =\ 0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Oscillation\ frequency}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ =\ 5.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ principal\ stretches\ from\ the\ manufactured\ solution}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a0285d6216bd5382eb5860ffbf48ad962}{get\_principal\_stretches}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{A}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ =\ 1.0\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{A}}\ -\/\ 2.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/3.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ =\ 1.0\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{A}}\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/3.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ derivatives\ of\ prinicipal\ stretches\ w.r.t.\ r}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a08c57783b28735718a0681158009bf0c}{get\_principal\_stretch\_derivatives}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[0]\ =\ 6.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ 4.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[1]\ =\ -\/3.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{B}}\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ 4.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ the\ deformed\ position}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6d029936a1355675d8d9c7147c956a7a}{deformed\_position\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{atan2}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}[0]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}[1]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ +\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ the\ deformed\ position}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ab370e54f41dc8f5f179b9c41ab253e23}{deformed\_velocity\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_dot}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{atan2}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_dot}}[0]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_dot}}[1]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ the\ deformed\ position}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a3d0741f668814641b31d8949164d6f3c}{deformed\_accel\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_ddot}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{atan2}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_ddot}}[0]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\_ddot}}[1]\ =\ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}})\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Body\ force\ function}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_afb184f3858eb55e33e0ce67e4d5b0197}{body\_force\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ the\ radial\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Radial\ acceleration}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{accel}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{A0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{B0}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}},\ -\/2.0))\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{omega}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Principal\ stretches}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a0285d6216bd5382eb5860ffbf48ad962}{get\_principal\_stretches}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Jacobian}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1];}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Derivative\ of\ radial\ principal\ stretch\ and\ Jacobian\ w.r.t.\ r}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a08c57783b28735718a0681158009bf0c}{get\_principal\_stretch\_derivatives}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dJdr}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Dimensionless\ Lame\ parameters}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{mu\_L}}\ =\ 1.0\ /\ (2.0\ *\ (1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda\_L}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ /\ ((1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}})\ *\ (1.0\ -\/\ 2.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Evaluate\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b\_spher}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{accel}}\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{mu\_L}}\ *\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[0]\ +\ (2.0\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})\ *\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]))\ -\/}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda\_L}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{dJdr}}\ /\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0])\ -\/}
+\DoxyCodeLine{\ \ \ \ \ \ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{dlambda\_dr}}[0]\ /\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0])\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ (2.0\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})\ *\ (1.0\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ -\/\ 1.0\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]))\ *}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{mu\_L}}\ -\/\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda\_L}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{log}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{atan2}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b}}[0]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b\_spher}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{cos}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b}}[1]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{b\_spher}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{sin}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{theta}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ External\ traction\ force\ function}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a89d0dd28995f587a136bca24656522d2}{traction\_force\_fct}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ the\ (undeformed)\ radial\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{pow}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1],\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Principal\ stretches}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a0285d6216bd5382eb5860ffbf48ad962}{get\_principal\_stretches}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Jacobian}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}}\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Dimensionless\ Lame\ parameters}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{mu\_L}}\ =\ 1.0\ /\ (2.0\ *\ (1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda\_L}}\ =\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}\ /\ ((1.0\ +\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}})\ *\ (1.0\ -\/\ 2.0\ *\ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{nu}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pressure\ required\ for\ the\ manufactured\ solution\ to\ work}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ext\_pressure}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ -\/1.0\ *\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{mu\_L}}\ *\ (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda}}[0]\ -\/\ 1.0)\ +\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{lambda\_L}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{log}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}}))\ /\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{J}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Return\ the\ traction}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[0]\ =\ -\/1.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}}[1]\ =\ -\/1.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ext\_pressure}}\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}[1];}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ namespace\ GlobalPhysicalVariables}}
+
+\end{DoxyCodeInclude}
+ A seperate namespace {\ttfamily \doxylink{namespaceGlobalSimSettings}{Global\+Sim\+Settings}} then defines the simulation parameters such as the mesh dimensions, the number of timesteps in the run and the flag indicating if the solid pressure formulation is to be used. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ simulation\ settings}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalSimSettings}{GlobalSimSettings}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Folder\ for\ output}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{result\_folder}}\ =\ \textcolor{stringliteral}{"{}RESLT"{}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Flag\ for\ using\ a\ pressure\ formulation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{use\_pressure\_formulation}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ radial\ direction}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{n\_radial}}\ =\ 14;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ elements\ in\ azimuthal\ direction}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{n\_azimuthal}}\ =\ 14;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Inner\ radius}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{a}}\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Thickness}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{h}}\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ timesteps}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a346ca0d7817539534c4a5b2d734ab30e}{Nsteps}}\ =\ 120;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Size\ of\ the\ timestep}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{dt}};}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ namespace\ GlobalSimSettings}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_mesh}
+As done in the \href{../../axisym_solid/shell/html/index.html}{\texttt{ previous tutorial}}, the mesh is constructed by upgrading the existing {\ttfamily Two\+DAnnular\+Mesh} to a solid mesh. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======================start\_mesh================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Upgrade\ the\ mesh\ to\ a\ solidmesh.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Quarter-\/annulus\ in\ quadrant\ r>0,\ z>0}}
+\DoxyCodeLine{\textcolor{comment}{///\ ntheta\ -\/\ no.\ elements\ in\ theta\ direction}}
+\DoxyCodeLine{\textcolor{comment}{///\ nr\ -\/\ no.\ elements\ in\ the\ radial\ direction}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ -\/\ Inner\ radius\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{///\ h\ -\/\ thickness\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ TwoDAnnularMesh<ELEMENT>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Constructor:\ Build\ mesh\ and\ copy\ Eulerian\ coords\ to\ Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ ones\ so\ that\ the\ initial\ configuration\ is\ the\ stress-\/free\ one.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ a,}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ h,}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}\ =\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{Mesh::Default\_TimeStepper}})}
+\DoxyCodeLine{\ \ \ \ :\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{RectangularQuadMesh}}<\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}>(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},\ 1.0,\ 1.0,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ \ \ \ \ TwoDAnnularMesh<\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.25,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ntheta}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nr}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{a}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{h}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{MathematicalConstants}}::\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Pi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Eulerian\ ones}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem_class}
+The problem class is relatively standard and is identical to the previous tutorial, execpt for the addition of the member functions {\ttfamily set\+\_\+initial\+\_\+condition()}, which sets the initial condition manually using functions provided in {\ttfamily \doxylink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}}, and {\ttfamily unsteady\+\_\+run()} which performs the time integration. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_problem=========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Axisymmetric\ compression\ of\ a\ finite\ thickness\ shell\ in\ cylindrical}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ polar\ coordiantes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classShellProblem}{ShellProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classShellProblem_afb893165e8a3695d416f852bff5b3280}{\string~ShellProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Set\ the\ initial\ condition}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a1c2fbd7b8fbaee2808d5444f2558fe39}{set\_initial\_condition}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Run\ through\ the\ timesteps}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_abb4716b05349a7bfcc60b7f642e1da94}{unsteady\_run}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Complete\ the\ problem\ setup\ (attach\ function/physical\ parameter\ pointers)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{create\_boundary\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Delete\ boundary\ elements\ and\ wipe\ the\ associated\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{delete\_boundary\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}}\ =\ \mbox{\hyperlink{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}{Surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}{Surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ delete\_boundary\_elements}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}*\ \mbox{\hyperlink{classShellProblem_a76c561add6b4cd52b058583c09006576}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Surface\ mesh\ for\ traction\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}}*\ \mbox{\hyperlink{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{classShellProblem_aec9abc5db195469eb7e4ecb14c1795ba}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ DocInfo\ object}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{DocInfo}}\ \mbox{\hyperlink{classShellProblem_a2f891d36692df03ae47e1e750564c17c}{Doc\_info}};}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The constructor begins with assigning the output directory and setting {\ttfamily Newmark$<$1$>$} as the problem\textquotesingle{}s timestepper. Following this, the bulk and surface meshes are created and the member function {\ttfamily create\+\_\+boundary\+\_\+elements()} is called to create traction elements on the outer boundary of the shell. {\ttfamily complete\+\_\+problem\+\_\+setup()} (discussed below) is called to complete the setup of the bulk and surface elements and assign Dirichlet boundary conditions. {\ttfamily set\+\_\+initial\+\_\+condition()} (also discussed below) is called to manually set an initial condition which is consistent with the manufactured solution. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{ShellProblem<ELEMENT>::ShellProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{GlobalSimSettings::result\_folder}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Initialise\ counter\ for\ solutions}}
+\DoxyCodeLine{\ \ Doc\_info.number()\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Allocate\ the\ timestepper}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Newmark<1>}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Calculate\ the\ timestep\ size}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{GlobalSimSettings::dt}}\ =}
+\DoxyCodeLine{\ \ \ \ 2.0\ *\ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{MathematicalConstants::Pi}}\ /}
+\DoxyCodeLine{\ \ \ \ (\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{GlobalPhysicalVariables::omega}}\ *\ \mbox{\hyperlink{namespaceGlobalSimSettings_a346ca0d7817539534c4a5b2d734ab30e}{GlobalSimSettings::Nsteps}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ mesh:\ Quarter-\/annulus\ in\ the\ quadrant\ r>0,\ z>0.}}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ElasticTwoDAnnularMesh<ELEMENT>}}(\mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{GlobalSimSettings::n\_azimuthal}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{GlobalSimSettings::n\_radial}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{GlobalSimSettings::a}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{GlobalSimSettings::h}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{time\_stepper\_pt}}());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ boundary\ elements}}
+\DoxyCodeLine{\ \ create\_boundary\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Add\ the\ two\ submeshes}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Combine\ all\ sub-\/meshes\ into\ a\ single\ mesh}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ from\ a\ strain\ energy\ density\ function.}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Compressible\ Neo-\/Hookean}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{NeoHookean}}(\&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}});}
+\DoxyCodeLine{\ \ Constitutive\_law\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{strain\_energy\_function\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Complete\ the\ problem\ set\ up}}
+\DoxyCodeLine{\ \ complete\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ the\ initial\ condition\ consistently}}
+\DoxyCodeLine{\ \ set\_initial\_condition();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assign\ eqn\ numbers}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ constructor}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_complete}{}\doxysection{\texorpdfstring{Completing the problem setup}{Completing the problem setup}}\label{index_complete}
+To complete the problem setup, the pointers for the constutive law and body force function are passed to each of the bulk elements. The pointer to the traction force is then passed to each of the interface elements. Finally, the Dirichlet boundary conditions for the problem are set. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//========start\_of\_complete\_problem\_setup==================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Assign\ function/parameter\ pointers,\ set\ boundary\ conditions\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{ShellProblem<ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Determine\ number\ of\ bulk\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_element\_bulk}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =\ Constitutive\_law\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ traction\ function\ for\ applying\ pressure}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>body\_force\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_afb184f3858eb55e33e0ce67e4d5b0197}{GlobalPhysicalVariables::body\_force\_fct}};}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ bulk\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Determine\ number\ of\ 1D\ interface\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ the\ interface\ elements}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_interface\_element}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{AxisymmetricCylindricalSolidTractionElement<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ traction\ function\ for\ applying\ pressure}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{el\_pt}}-\/>traction\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_a89d0dd28995f587a136bca24656522d2}{GlobalPhysicalVariables::traction\_force\_fct}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ interface\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ Dirichlet\ boundary\ conditions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ fixed\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_boundary\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ radial\ position\ on\ symmetry\ axis\ only}}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ complete\_problem\_setup}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_initial_condition}{}\doxysection{\texorpdfstring{Setting the initial condition}{Setting the initial condition}}\label{index_initial_condition}
+Since this tutorial uses a manufactured solution, the nodal positions, velocities and accelerations are known at all times and so the initial condition can be set manually. The {\ttfamily Newmark$<$1$>$} timestepper stores the following values\+:
+\begin{DoxyItemize}
+\item 0\+: Displacement at time $ t $.
+\item 1\+: Displacement at time $ t-dt $.
+\item 2\+: Velocity at time $ t-dt $.
+\item 3\+: Acceleration at time $ t-dt $.
+\end{DoxyItemize}
+
+These values are easily accessible using the functions {\ttfamily deformed\+\_\+position\+\_\+fct}, {\ttfamily deformed\+\_\+velocity\+\_\+fct} and {\ttfamily deformed\+\_\+accel\+\_\+fct} in the namespace {\ttfamily \doxylink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_set\_initial\_condition==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Given\ the\ form\ of\ the\ manufactured\ solution,\ this\ really\ only\ needs}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ doing\ for\ the\ velocity}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classShellProblem_a1c2fbd7b8fbaee2808d5444f2558fe39}{ShellProblem<ELEMENT>::set\_initial\_condition}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ First\ initialize\ dt\ and\ set\ the\ weights}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{initialise\_dt}}(\mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{GlobalSimSettings::dt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ nodes}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ =\ 0;\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}\ <\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\_node}};\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Container\ for\ position/velocity/acceleration}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Cast\ to\ (solid)node}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{SolidNode}}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ the\ undeformed\ position}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}(2),\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}(2);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[0]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>lagrangian\_position(0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}[1]\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>lagrangian\_position(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ values\ of\ deformed\ position\ at\ the\ present\ and\ previous\ times}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6d029936a1355675d8d9c7147c956a7a}{GlobalPhysicalVariables::deformed\_position\_fct}}(0.0,\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(0,\ 0)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(0,\ 1)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[1];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6d029936a1355675d8d9c7147c956a7a}{GlobalPhysicalVariables::deformed\_position\_fct}}(}
+\DoxyCodeLine{\ \ \ \ \ \ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{GlobalSimSettings::dt}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(1,\ 0)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(1,\ 1)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ velocity\ at\ the\ previous\ time}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ab370e54f41dc8f5f179b9c41ab253e23}{GlobalPhysicalVariables::deformed\_velocity\_fct}}(}
+\DoxyCodeLine{\ \ \ \ \ \ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{GlobalSimSettings::dt}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(2,\ 0)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(2,\ 1)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ acceleration\ at\ the\ previous\ time}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a3d0741f668814641b31d8949164d6f3c}{GlobalPhysicalVariables::deformed\_accel\_fct}}(}
+\DoxyCodeLine{\ \ \ \ \ \ -\/1.0\ *\ \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{GlobalSimSettings::dt}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(3,\ 0)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[0];}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{nod\_pt}}-\/>x(3,\ 1)\ =\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{value}}[1];}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ set\_initial\_condition}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_driver}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_driver}
+The driver code is relatively simple. Command line arguments for the material\textquotesingle{}s Poisson ratio and the {\ttfamily use\+\_\+solid\+\_\+pressure} flag are specified. Following this, the problem is built and solved by calling the member function {\ttfamily unsteady\+\_\+run}, which simply perfoms the Newton solve and output within a timestepping loop. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_main===================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ an\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{shell__unsteady_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}},\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/use\_solid\_pressure"{}},\ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp}},\ \textcolor{stringliteral}{"{}Use\ solid\ pressure"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/poisson"{}},\ \&\mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{GlobalPhysicalVariables::nu}},\ \textcolor{stringliteral}{"{}Poisson"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::specify\_command\_line\_flag}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/-\/Nsteps"{}},\ \&\mbox{\hyperlink{namespaceGlobalSimSettings_a346ca0d7817539534c4a5b2d734ab30e}{GlobalSimSettings::Nsteps}},\ \textcolor{stringliteral}{"{}Number\ of\ Steps"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::parse\_and\_assign}}();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh_a27c2f2221dd333e881698d3723aa5524}{CommandLineArgs::doc\_specified\_flags}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{istringstream}}(\mbox{\hyperlink{classElasticTwoDAnnularMesh}{str\_temp}})\ >>\ std::boolalpha\ >>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ problem}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{GlobalSimSettings::use\_pressure\_formulation}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Build\ the\ problem\ with\ an\ additional\ degree\ of\ freedom\ for\ pressure}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<QAxisymmetricCylindricalPVDWithPressureElement>}}\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Perform\ time\ integration\ and\ docs}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.unsteady\_run();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Standard\ build}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ShellProblem<QAxisymmetricCylindricalPVDElement<3>}}>\ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Perform\ time\ integration\ and\ docs}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{problem}}.unsteady\_run();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ main}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/
+}{\texttt{ demo\+\_\+drivers/axisym\+\_\+solid/shell\+\_\+unsteady/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{
+../../../../
+demo_drivers/axisym_solid/shell_unsteady/shell_unsteady.cc
+}{\texttt{ demo\+\_\+drivers/axisym\+\_\+solid/shell\+\_\+unsteady/shell\+\_\+unsteady.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

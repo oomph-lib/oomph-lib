@@ -1,0 +1,200 @@
+\doxysection{oomph\+::Shell\+Benchmark\+Pressure\+Element Class Reference}
+\hypertarget{classoomph_1_1ShellBenchmarkPressureElement}{}\label{classoomph_1_1ShellBenchmarkPressureElement}\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+
+
+Face elements for the application of an external pressure.  
+
+
+
+
+{\ttfamily \#include $<$benchmark\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Shell\+Benchmark\+Pressure\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ShellBenchmarkPressureElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a7ddd1c4832310f1247b1ac885474a356}{Shell\+Benchmark\+Pressure\+Element}} (Finite\+Element \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bulk\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the "{}bulk"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a72b518ac08cc0215c8c12eca6e1e4081}{Shell\+Benchmark\+Pressure\+Element}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement}{Shell\+Benchmark\+Pressure\+Element}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{dummy}})=\mbox{\hyperlink{classElasticTwoDAnnularMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_ad79ba87e21df4ddba7aa0aad3bc8f731}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Compute the element residual vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_aa556b2c780d341ab382ad3402ea9b339}{pressure}} () \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function\+: Poisson ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_ae30d48a6219d5486420ab17b6cd4792b}{pressure\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark\+\_\+pressure}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a2016d8253a10321751eb172abf111af7}{Pressure\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the applied pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement_a55d3bc22bc2330e2806bad8255ea81a6}{U\+\_\+index\+\_\+shell\+\_\+benchmark\+\_\+pressure}}
+\begin{DoxyCompactList}\small\item\em The index at which the unknown is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Face elements for the application of an external pressure. 
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00126}{126}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_a7ddd1c4832310f1247b1ac885474a356}\label{classoomph_1_1ShellBenchmarkPressureElement_a7ddd1c4832310f1247b1ac885474a356} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!ShellBenchmarkPressureElement@{ShellBenchmarkPressureElement}}
+\index{ShellBenchmarkPressureElement@{ShellBenchmarkPressureElement}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{ShellBenchmarkPressureElement()}{ShellBenchmarkPressureElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::\+Shell\+Benchmark\+Pressure\+Element (\begin{DoxyParamCaption}\item[{Finite\+Element \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, takes the pointer to the "{}bulk"{} element and the index of the face to be created. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00132}{132}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_a72b518ac08cc0215c8c12eca6e1e4081}\label{classoomph_1_1ShellBenchmarkPressureElement_a72b518ac08cc0215c8c12eca6e1e4081} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!ShellBenchmarkPressureElement@{ShellBenchmarkPressureElement}}
+\index{ShellBenchmarkPressureElement@{ShellBenchmarkPressureElement}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{ShellBenchmarkPressureElement()}{ShellBenchmarkPressureElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::\+Shell\+Benchmark\+Pressure\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkPressureElement}{Shell\+Benchmark\+Pressure\+Element}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_ad79ba87e21df4ddba7aa0aad3bc8f731}\label{classoomph_1_1ShellBenchmarkPressureElement_ad79ba87e21df4ddba7aa0aad3bc8f731} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element residual vector. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8cc_source_l00153}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark\+\_\+pressure()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102}\label{classoomph_1_1ShellBenchmarkPressureElement_a32bae8226ad7acda211f6eb37e3b5102} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure@{fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure}}
+\index{fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure@{fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure()}{fill\_in\_generic\_residual\_contribution\_shell\_benchmark\_pressure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
+
+Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8cc_source_l00152}{152}} of file \mbox{\hyperlink{benchmark__elements_8cc_source}{benchmark\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8h_source_l00154}{pressure()}}.
+
+
+
+Referenced by \mbox{\hyperlink{benchmark__elements_8h_source_l00146}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_aa556b2c780d341ab382ad3402ea9b339}\label{classoomph_1_1ShellBenchmarkPressureElement_aa556b2c780d341ab382ad3402ea9b339} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!pressure@{pressure}}
+\index{pressure@{pressure}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{pressure()}{pressure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \& oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00154}{154}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8h_source_l00172}{Pressure\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{benchmark__elements_8cc_source_l00153}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark\+\_\+pressure()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_ae30d48a6219d5486420ab17b6cd4792b}\label{classoomph_1_1ShellBenchmarkPressureElement_ae30d48a6219d5486420ab17b6cd4792b} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!pressure\_pt@{pressure\_pt}}
+\index{pressure\_pt@{pressure\_pt}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{pressure\_pt()}{pressure\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::pressure\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00160}{160}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8h_source_l00172}{Pressure\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_a2016d8253a10321751eb172abf111af7}\label{classoomph_1_1ShellBenchmarkPressureElement_a2016d8253a10321751eb172abf111af7} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!Pressure\_pt@{Pressure\_pt}}
+\index{Pressure\_pt@{Pressure\_pt}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{Pressure\_pt}{Pressure\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::\+Pressure\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the applied pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00172}{172}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{benchmark__elements_8h_source_l00154}{pressure()}}, and \mbox{\hyperlink{benchmark__elements_8h_source_l00160}{pressure\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkPressureElement_a55d3bc22bc2330e2806bad8255ea81a6}\label{classoomph_1_1ShellBenchmarkPressureElement_a55d3bc22bc2330e2806bad8255ea81a6} 
+\index{oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}!U\_index\_shell\_benchmark\_pressure@{U\_index\_shell\_benchmark\_pressure}}
+\index{U\_index\_shell\_benchmark\_pressure@{U\_index\_shell\_benchmark\_pressure}!oomph::ShellBenchmarkPressureElement@{oomph::ShellBenchmarkPressureElement}}
+\doxysubsubsection{\texorpdfstring{U\_index\_shell\_benchmark\_pressure}{U\_index\_shell\_benchmark\_pressure}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} oomph\+::\+Shell\+Benchmark\+Pressure\+Element\+::\+U\+\_\+index\+\_\+shell\+\_\+benchmark\+\_\+pressure\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The index at which the unknown is stored at the nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{benchmark__elements_8h}{benchmark\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{benchmark__elements_8cc}{benchmark\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,83 @@
+\doxysection{shell\+\_\+unsteady.\+cc File Reference}
+\hypertarget{shell__unsteady_8cc}{}\label{shell__unsteady_8cc}\index{shell\_unsteady.cc@{shell\_unsteady.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Upgrade the mesh to a solidmesh. Quarter-\/annulus in quadrant r\texorpdfstring{$>$}{>}0, z\texorpdfstring{$>$}{>}0 ntheta -\/ no. elements in theta direction nr -\/ no. elements in the radial direction a -\/ Inner radius of annulus h -\/ thickness of annulus. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalPhysicalVariables}{Global\+Physical\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global physical variables. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobalSimSettings}{Global\+Sim\+Settings}}
+\begin{DoxyCompactList}\small\item\em Global simulation settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a0285d6216bd5382eb5860ffbf48ad962}{Global\+Physical\+Variables\+::get\+\_\+principal\+\_\+stretches}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a08c57783b28735718a0681158009bf0c}{Global\+Physical\+Variables\+::get\+\_\+principal\+\_\+stretch\+\_\+derivatives}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{r}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6d029936a1355675d8d9c7147c956a7a}{Global\+Physical\+Variables\+::deformed\+\_\+position\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_ab370e54f41dc8f5f179b9c41ab253e23}{Global\+Physical\+Variables\+::deformed\+\_\+velocity\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\+\_\+dot}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a3d0741f668814641b31d8949164d6f3c}{Global\+Physical\+Variables\+::deformed\+\_\+accel\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x\+\_\+ddot}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_afb184f3858eb55e33e0ce67e4d5b0197}{Global\+Physical\+Variables\+::body\+\_\+force\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{b}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a89d0dd28995f587a136bca24656522d2}{Global\+Physical\+Variables\+::traction\+\_\+force\+\_\+fct}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{time}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{xi}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{x}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{traction}})
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{shell__unsteady_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{argc}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticTwoDAnnularMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aa6f7e7ba10d24d328cb5885b22f55410}{Global\+Physical\+Variables\+::nu}} = 0.\+4
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_aece54b22568f56774a8b220da37ee4a0}{Global\+Physical\+Variables\+::\+A0}} = 0.\+05
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a206a84ff2245d6473aa3a7a2dec39d53}{Global\+Physical\+Variables\+::\+B0}} = 0.\+05
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalPhysicalVariables_a6e33cd39f1b613eee985587ec2632653}{Global\+Physical\+Variables\+::omega}} = 5.\+0
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{string}} \mbox{\hyperlink{namespaceGlobalSimSettings_ae852721117b7f4638a608800ab6aa280}{Global\+Sim\+Settings\+::result\+\_\+folder}} = "{}RESLT"{}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{bool}} \mbox{\hyperlink{namespaceGlobalSimSettings_ae74221310839405c9b6f8ddfac9888d3}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}} = \mbox{\hyperlink{classElasticTwoDAnnularMesh}{false}}
+\begin{DoxyCompactList}\small\item\em Flag for using a pressure formulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{namespaceGlobalSimSettings_a7f2abb69ed4837decee986408c2328b2}{Global\+Sim\+Settings\+::n\+\_\+radial}} = 14
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{namespaceGlobalSimSettings_a0193c69b05dae41104ccb2a41e6fbf83}{Global\+Sim\+Settings\+::n\+\_\+azimuthal}} = 14
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalSimSettings_a476a2d8141475a4c7363fc4a41a08859}{Global\+Sim\+Settings\+::a}} = 1.\+0
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalSimSettings_a35bec0251495dcf01e9650ca19efeb45}{Global\+Sim\+Settings\+::h}} = 0.\+5
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{namespaceGlobalSimSettings_a346ca0d7817539534c4a5b2d734ab30e}{Global\+Sim\+Settings\+::\+Nsteps}} = 120
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{namespaceGlobalSimSettings_a5d909ebbb2dc3bc7e6ec6d00d83df6dc}{Global\+Sim\+Settings\+::dt}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{shell__unsteady_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{shell__unsteady_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{shell\_unsteady.cc@{shell\_unsteady.cc}!main@{main}}
+\index{main@{main}!shell\_unsteady.cc@{shell\_unsteady.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00565}{565}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00234}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+DAnnular\+Mesh()}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00213}{Global\+Sim\+Settings\+::\+Nsteps}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00054}{Global\+Physical\+Variables\+::nu}}, and \mbox{\hyperlink{shell__unsteady_8cc_source_l00198}{Global\+Sim\+Settings\+::use\+\_\+pressure\+\_\+formulation}}.
+

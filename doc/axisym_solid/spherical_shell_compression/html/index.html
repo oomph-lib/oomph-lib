@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Nonlinear solid mechanics with axisymmetry</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Nonlinear solid mechanics with axisymmetry </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="theory"></a>
+Theory</h1>
+<p>This example considers the solution of the PVD equations introduced in a <a href="../../solid/solid_theory/html/index.html">previous tutorial</a>, but in cylindrical coordinates and under the assumption of axisymmetry. In this case, the undeformed and deformed position vectors, denoted by <img class="formulaInl" alt="$\mathbf{r}(\xi^i,t)$" src="form_0.png" width="36" height="15"/> and <img class="formulaInl" alt="$\mathbf{R}(\xi^i,t)$" src="form_1.png" width="41" height="15"/> respectively, may be written as:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mathbf{r}(\xi^{i},t) = \begin{bmatrix}
+\xi^0 \cos(\xi^2) \\
+\xi^0 \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}, \hspace{1cm}
+\mathbf{R}(\xi^{i},t) = \begin{bmatrix}
+R(\xi^0,\xi^1,t) \cos(\xi^2) \\
+Z(\xi^0,\xi^1,t) \sin(\xi^2) \\
+\xi^1
+\end{bmatrix}.
+\]" src="form_2.png" width="341" height="46"/>
+</p>
+<p>The undeformed and deformed covariant metric tensors, <img class="formulaInl" alt="$g_{ij}$" src="form_3.png" width="15" height="10"/> and <img class="formulaInl" alt="$G_{ij}$" src="form_4.png" width="18" height="14"/> respectively, are therefore:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+g_{ij} = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; {\xi^0}^2
+\end{bmatrix}, \hspace{1cm}
+G_{ij} = \begin{bmatrix}
+(\frac{\partial R}{\partial \xi^0})^2 + (\frac{\partial Z}{\partial \xi^0})^2 &amp;
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} &amp; 0 \\
+\frac{\partial R}{\partial \xi^0}\frac{\partial R}{\partial \xi^1} + \frac{\partial Z}{\partial \xi^0}\frac{\partial Z}{\partial \xi^1} &amp;
+(\frac{\partial R}{\partial \xi^1})^2 + (\frac{\partial Z}{\partial \xi^1})^2 &amp; 0 \\
+0 &amp; 0 &amp; R^2
+\end{bmatrix}
+\]" src="form_5.png" width="413" height="49"/>
+</p>
+<p>Recall the non-dimensional PVD equation, presented here with an additional mass damping term, <img class="formulaInl" alt="$\eta_M \partial_t\mathbf{R}$" src="form_6.png" width="40" height="13"/>:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial{\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (1)
+\]" src="form_7.png" width="443" height="33"/>
+</p>
+<p>Note that in the implementation of these equations <img class="formulaInl" alt="$\eta_M = 0$" src="form_8.png" width="41" height="11"/> by default. The following property holds due to the definition of the Green-Lagrange strain tensor <img class="formulaInl" alt="$\gamma_{ij}$" src="form_9.png" width="15" height="10"/> and the symmetry of the second Piola stress tensor <img class="formulaInl" alt="$\sigma^{ij}$" src="form_10.png" width="15" height="11"/>:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\sigma^{ij}\delta\gamma_{ij} = \sigma^{ij}\delta\left[\frac{1}{2}(G_{ij} - g_{ij})\right]
+ = \sigma^{ij}\frac{\partial \mathbf{R}}{\partial \xi^i} \cdot \delta \frac{\partial\mathbf{R}}{\partial \xi^j}.
+\]" src="form_11.png" width="253" height="31"/>
+</p>
+<p>Hence, the PVD equation becomes:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\begin{aligned}
+\int_{v} \left\{ \sum_{i,j=1}^2 \sigma^{ij}\left[\frac{\partial R}{\partial \xi^i}\frac{\partial(\delta R)}{\partial \xi^j}
+ + \frac{\partial Z}{\partial \xi^i}\frac{\partial(\delta Z)}{\partial \xi^j}\right] + \sigma^{33}R\delta R
+ - \left[ {\bf f} - 
+ \Lambda^2 \left(\frac{\partial^2 {\bf R}}{\partial t^{2}} + \eta_M\frac{\partial {\bf R}}{\partial t}\right) \right] \cdot 
+ \delta {\bf R} \right\} dv \\
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+  \ \ \ \ \ \ \ \ (2)
+\end{aligned}
+\]" src="form_12.png" width="485" height="81"/>
+</p>
+<p>The following example considers a steady state solution ( <img class="formulaInl" alt="$\partial \mathbf{R}/\partial t = \partial^2 \mathbf{R}/\partial t^2 = 0$" src="form_13.png" width="123" height="15"/>) to these equations, though the solution to a time-dependent problem using the same underlying elements is discussed <a href="../spherical_shell_unsteady/html/index.html">here</a>.</p>
+<h1><a class="anchor" id="spherical_shell_compression"></a>
+Demo problem: Compression of a hyperelastic spherical shell</h1>
+<p>As a demonstration, we consider the compression of hyperelastic spherical shell which has an inner radius <img class="formulaInl" alt="$a$" src="form_14.png" width="6" height="6"/> and thickness <img class="formulaInl" alt="$h$" src="form_15.png" width="8" height="10"/> when stress-free, under an external pressure <img class="formulaInl" alt="$p_{ext}$" src="form_16.png" width="21" height="9"/>. The shell is assumed to obey the Neo-Hookean consitutive law. For an incompressible material, the strain energy density (non-dimensionalised by the elastic modulus) is given by:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+W = \frac{1}{4(1+\nu)}(I_1-3).
+\]" src="form_17.png" width="123" height="30"/>
+</p>
+<p> A generalization to the above, proposed by Attard ("Finite strain--isotropic hyperelasticity", International Journal of Solids and Structures 2003), for compressible materials is:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+W = \frac{1}{2(1+\nu)}\left[\frac{1}{2}(I_1-3) - \frac{1}{2}\log(I_3) + \frac{\nu}{1-2\nu}\log\left(\sqrt{I_3}\right)^2\right].
+\]" src="form_18.png" width="329" height="31"/>
+</p>
+<p> In the above, <img class="formulaInl" alt="$ \nu$" src="form_19.png" width="6" height="6"/> is the Poisson ratio and <img class="formulaInl" alt="$(I_1,I_2,I_3)$" src="form_20.png" width="53" height="14"/> are the strain invariants introduced previously. The incompressible and compressible cases shall now be considered seperately. </p>
+<h2><a class="anchor" id="incompressible_case"></a>
+Incompressible case</h2>
+<p>When the material is incompressible, some analytical progress can be made by imposing spherical symmetry. Denoting <img class="formulaInl" alt="$(\hat{r},\theta,\phi)$" src="form_21.png" width="39" height="14"/> and <img class="formulaInl" alt="$(\hat{R},\Theta,\Phi)$" src="form_22.png" width="48" height="16"/> as the spherical coordinates in the undeformed and deformed configurations, respectively, the Cauchy principal stresses, denoted here as <img class="formulaInl" alt="$S^{\hat{R}\hat{R}}$" src="form_23.png" width="24" height="15"/>, <img class="formulaInl" alt="$S^{\Theta\Theta}$" src="form_24.png" width="24" height="11"/> and <img class="formulaInl" alt="$S^{\Phi\Phi}$" src="form_25.png" width="23" height="11"/> are given by:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+S^{\hat{R}\hat{R}} = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 - p_s, \hspace{1cm}
+S^{\Theta\Theta} = S^{\Phi\Phi} = \frac{1}{2(1+\nu)}\lambda_{\Theta}^2 - p_s,
+\]" src="form_26.png" width="344" height="30"/>
+</p>
+<p> where <img class="formulaInl" alt="$\lambda_{\hat{R}} = d\hat{R}/d\hat{r}$" src="form_27.png" width="66" height="18"/> and <img class="formulaInl" alt="$\lambda_{\Theta} = \lambda_{\Phi} = \hat{R}/\hat{r}$" src="form_28.png" width="85" height="16"/> are the principal stretches and <img class="formulaInl" alt="$p_s$" src="form_29.png" width="11" height="9"/> is the solid pressure, the Lagrange multiplier term introduced in the <a href="../../solid/solid_theory/html/index.html">solid theory tutorial</a> to enforce incompressibility. The incompressibility condition is <img class="formulaInl" alt="$\lambda_{\hat{R}}\lambda_{\hat{\Theta}}^2 = 1$" src="form_30.png" width="53" height="18"/>, from which the the dependence <img class="formulaInl" alt="$\hat{R}(\hat{r})$" src="form_31.png" width="24" height="16"/> can be derived as:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \hat{R}^2 d\hat{R} = \hat{r}^2 d\hat{r} \longrightarrow \hat{R}_{o}^3 - \hat{R}_{i}^3 = (a+h)^3 - a_{i}^3,
+\]" src="form_32.png" width="236" height="16"/>
+</p>
+<p> where <img class="formulaInl" alt="$\hat{R}_{i}$" src="form_33.png" width="13" height="15"/> and <img class="formulaInl" alt="$\hat{R}_{o}$" src="form_34.png" width="14" height="15"/> denote the outer and inner radii of the shell, respectively, when under compression. A second equation for the two unknowns <img class="formulaInl" alt="$\hat{R}_{i}$" src="form_33.png" width="13" height="15"/>, <img class="formulaInl" alt="$\hat{R}_{o}$" src="form_34.png" width="14" height="15"/> can be derived by first obtaining an expression for the solid pressure <img class="formulaInl" alt="$p_s$" src="form_29.png" width="11" height="9"/> from the equilibrium equation:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \frac{d S^{\hat{R}\hat{R}}}{d\hat{R}} + \frac{2}{\hat{R}}(S^{\hat{R}\hat{R}} - S^{\Theta\Theta}) = 0 \longrightarrow
+  p_s = \frac{1}{2(1+\nu)}\lambda_{\hat{R}}^2 + \frac{1}{1+\nu}\int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R}
+\]" src="form_35.png" width="443" height="39"/>
+</p>
+<p> The integral can be evaluated by changing the integration variable to <img class="formulaInl" alt="$\lambda_{\Theta}$" src="form_36.png" width="15" height="13"/> and using the incompressibility condition as follows:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \int\left(\frac{\hat{r}(\hat{R})^4}{\hat{R}^5} - \frac{\hat{R}}{\hat{r}(\hat{R})^2}\right)d\hat{R} = 
+  \int\left(\lambda_{\Theta}^{-4}-\lambda_{\Theta}^2\right)\left(\lambda_{\Theta}-\lambda_{\Theta}^4\right)^{-1}d\lambda_{\Theta} =
+  -\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\]" src="form_37.png" width="474" height="39"/>
+</p>
+<p> The radial principal Cauchy stress is therefore:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  S^{\hat{R}\hat{R}} = \frac{1}{1+\nu}\left(\frac{1}{4\lambda_{\Theta}^4} + \frac{1}{\lambda_{\Theta}}\right) + const.
+\]" src="form_38.png" width="199" height="33"/>
+</p>
+<p> After applying the boundary conditions, <img class="formulaInl" alt="$S^{\hat{R}\hat{R}} = 0$" src="form_39.png" width="46" height="15"/> on the inside face and <img class="formulaInl" alt="$S^{\hat{R}\hat{R}} = -p_{ext}$" src="form_40.png" width="70" height="16"/> on the outside face, the second equation connecting <img class="formulaInl" alt="$\hat{R}_{i}$" src="form_33.png" width="13" height="15"/> and <img class="formulaInl" alt="$\hat{R}_{o}$" src="form_34.png" width="14" height="15"/> is found to be:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  p_{ext} = \frac{1}{1+\nu}\left[\frac{1}{4}\left(\frac{a}{\hat{R}_{i}}\right)^4 +
+   \frac{a}{\hat{R}_{i}}
+   -\frac{1}{4}\left(\frac{a+h}{\hat{R}_{o}}\right)^4 -\frac{a+h}{\hat{R}_{o}}\right].
+\]" src="form_41.png" width="305" height="39"/>
+</p>
+<p> In the driver code discussed below, <img class="formulaInl" alt="$\hat{R}_{i}$" src="form_33.png" width="13" height="15"/> and <img class="formulaInl" alt="$\hat{R}_{o}$" src="form_34.png" width="14" height="15"/> are found via Newton iteration.</p>
+<h2><a class="anchor" id="compressible_case"></a>
+Compressible case</h2>
+<p>Although less analytical progress is possible in the compressible case, the problem can still be simplified down to a single ODE for <img class="formulaInl" alt="$\hat{R}(\hat{r})$" src="form_31.png" width="24" height="16"/> using spherical symmetry. If the material obeys the compressible Neo-Hookean constitutive law, then the Cauchy principal stresses are:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  S^{\hat{R}\hat{R}} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+  \hspace{0.5cm}
+  S^{\Theta\Theta} = \frac{1}{J}\frac{1}{2(1+\nu)}\left[\lambda_{\hat{\Theta}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right],
+\]" src="form_42.png" width="510" height="31"/>
+</p>
+<p> where <img class="formulaInl" alt="$J = \sqrt{I_3} = \lambda_{\hat{R}}\lambda_{\Theta}^2$" src="form_43.png" width="93" height="16"/>. Substituting these expressions into the equilibrium equation gives:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \frac{d}{d\hat{R}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log J\right]\right\}
+  + \frac{2}{\hat{R}}\frac{1}{J}(\lambda_{\hat{R}}^2 - \lambda_{\Theta}^2) = 0.
+\]" src="form_44.png" width="304" height="31"/>
+</p>
+<p> In the undeformed frame, this equation reads:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{d}{d\hat{r}}\left\{\frac{1}{J}\left[\lambda_{\hat{R}}^2-1 + \frac{2\nu}{1-2\nu}\log(J)\right]\right\}
++ \frac{2}{\hat{R}}\left[\left(\frac{\lambda_{\hat{R}}}{\lambda_{\Theta}}\right)^2-1\right] = 0
+  \ \ \ \ \ \ \ \ (3)
+\]" src="form_45.png" width="368" height="39"/>
+</p>
+<p>In this tutorial, a benchmark test is performed by solving equation (3) is solved seperately using 1D finite elements.</p>
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows plots of the deformed position <img class="formulaInl" alt="$\hat{R}(\hat{r})$" src="form_31.png" width="24" height="16"/> against the undeformed position <img class="formulaInl" alt="$\hat{r}$" src="form_46.png" width="8" height="10"/> for a range of Poisson ratio and external pressure values. The solid blue lines were obtained using the 2D axisymmetric elements, while the dashed blue lines were obtained under the assumption of spherical symmetry, following the approach outlined in sections <a class="el" href="index.html#incompressible_case">Incompressible case</a> (for <img class="formulaInl" alt="$\nu = 0.5$" src="form_47.png" width="39" height="9"/>) and <a class="el" href="index.html#compressible_case">Compressible case</a> (for <img class="formulaInl" alt="$\nu &lt; 0.5$" src="form_48.png" width="39" height="10"/>). Excellent agreement between the two approaches is found across all parameter sets considered.</p>
+<div class="image">
+<img src="benchmark.gif" alt=""/>
+<div class="caption">
+Results of the benchmark test for various Poisson ratio and external pressure values. </div></div>
+ <h1><a class="anchor" id="namespaces"></a>
+Global parameters and functions</h1>
+<p>As is standard, the namespaces <code><a class="el" href="namespaceGlobalPhysicalVariables.html" title="Global physical variables.">GlobalPhysicalVariables</a></code> and <code><a class="el" href="namespaceGlobalSimSettings.html" title="Global simulation settings.">GlobalSimSettings</a></code> are used to define the physical parameters and simulation parameters, respectively, for the problem.  </p><div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global physical variables</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobalPhysicalVariables.html">GlobalPhysicalVariables</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Poisson ratio - only used in the compressible case</span></div>
+<div class="line">  <span class="comment">// (nu = 0.5 for incompressible material)</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">nu</a> = 0.4;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The external pressure</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#ad48c0e8c5cc9f96ff594eb1f8d3112d3">ext_pressure</a> = 0.05;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Traction function for appyling a pressure on the outer surface</span></div>
+<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#aae8fc0ec1d6fe9f6175f8a613b4b972d">external_pressure_fct</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time</a>,</div>
+<div class="line">                             <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">xi</a>,</div>
+<div class="line">                             <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">x</a>,</div>
+<div class="line">                             <span class="keyword">const</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>,</div>
+<div class="line">                             <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>[0] = -1.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#ad48c0e8c5cc9f96ff594eb1f8d3112d3">ext_pressure</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>[0];</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">traction</a>[1] = -1.0 * <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#ad48c0e8c5cc9f96ff594eb1f8d3112d3">ext_pressure</a> * <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>[1];</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// namespace GlobalPhysicalVariables</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=======start_namespace==========================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Global simulation settings</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobalSimSettings.html">GlobalSimSettings</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Folder for output</span></div>
+<div class="line">  <span class="keywordtype">string</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">result_folder</a> = <span class="stringliteral">&quot;RESLT&quot;</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Flag for using a pressure formulation</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">use_pressure_formulation</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// If using a pressure formulation, is the solid incompressible?</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">incompressible</a> = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of elements in radial direction</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">n_radial</a> = 10;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of elements in azimuthal direction</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">n_azimuthal</a> = 10;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Inner radius</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">a</a> = 1.0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Thickness</span></div>
+<div class="line">  <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">h</a> = 0.5;</div>
+<div class="line">} <span class="comment">// namespace GlobalSimSettings</span></div>
+<div class="ttc" id="aclassElasticTwoDAnnularMesh_html"><div class="ttname"><a href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a></div><div class="ttdoc">Upgrade the mesh to a solidmesh. Quarter-annulus in quadrant r&gt;0, z&gt;0 ntheta - no....</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00111">shell.cc:113</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html">GlobalPhysicalVariables</a></div><div class="ttdoc">Global physical variables.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00054">shell.cc:55</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_aa6f7e7ba10d24d328cb5885b22f55410"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a></div><div class="ttdeci">double nu</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00058">shell.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_aae8fc0ec1d6fe9f6175f8a613b4b972d"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#aae8fc0ec1d6fe9f6175f8a613b4b972d">GlobalPhysicalVariables::external_pressure_fct</a></div><div class="ttdeci">void external_pressure_fct(const double &amp;time, const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00064">shell.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobalPhysicalVariables_html_ad48c0e8c5cc9f96ff594eb1f8d3112d3"><div class="ttname"><a href="namespaceGlobalPhysicalVariables.html#ad48c0e8c5cc9f96ff594eb1f8d3112d3">GlobalPhysicalVariables::ext_pressure</a></div><div class="ttdeci">double ext_pressure</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00061">shell.cc:61</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html"><div class="ttname"><a href="namespaceGlobalSimSettings.html">GlobalSimSettings</a></div><div class="ttdoc">Global simulation settings.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00078">shell.cc:79</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a0193c69b05dae41104ccb2a41e6fbf83"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">GlobalSimSettings::n_azimuthal</a></div><div class="ttdeci">unsigned n_azimuthal</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00093">shell.cc:93</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a35bec0251495dcf01e9650ca19efeb45"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">GlobalSimSettings::h</a></div><div class="ttdeci">double h</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00099">shell.cc:99</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a476a2d8141475a4c7363fc4a41a08859"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">GlobalSimSettings::a</a></div><div class="ttdeci">double a</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00096">shell.cc:96</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a65873875f0b352080f837f8f6c6694fc"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a></div><div class="ttdeci">bool incompressible</div><div class="ttdoc">If using a pressure formulation, is the solid incompressible?</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00087">shell.cc:87</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_a7f2abb69ed4837decee986408c2328b2"><div class="ttname"><a href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">GlobalSimSettings::n_radial</a></div><div class="ttdeci">unsigned n_radial</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00090">shell.cc:90</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_ae74221310839405c9b6f8ddfac9888d3"><div class="ttname"><a href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a></div><div class="ttdeci">bool use_pressure_formulation</div><div class="ttdoc">Flag for using a pressure formulation.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00084">shell.cc:84</a></div></div>
+<div class="ttc" id="anamespaceGlobalSimSettings_html_ae852721117b7f4638a608800ab6aa280"><div class="ttname"><a href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">GlobalSimSettings::result_folder</a></div><div class="ttdeci">string result_folder</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00081">shell.cc:81</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="meshing"></a>
+The mesh</h1>
+<p>The mesh for this problem can be constructed simply by upgrading the existing <code>TwoDAnnularMesh</code> to a solid mesh. </p><div class="fragment"><div class="line"><span class="comment">//======================start_mesh================================</span></div>
+<div class="line"><span class="comment">/// Upgrade the mesh to a solidmesh.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Quarter-annulus in quadrant r&gt;0, z&gt;0</span></div>
+<div class="line"><span class="comment">/// ntheta - no. elements in theta direction</span></div>
+<div class="line"><span class="comment">/// nr - no. elements in the radial direction</span></div>
+<div class="line"><span class="comment">/// a - Inner radius of annulus</span></div>
+<div class="line"><span class="comment">/// h - thickness of annulus</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> TwoDAnnularMesh&lt;ELEMENT&gt;,</div>
+<div class="line">                               <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Constructor: Build mesh and copy Eulerian coords to Lagrangian</span></div>
+<div class="line"><span class="comment">  /// ones so that the initial configuration is the stress-free one.</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>(</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; h,</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">TimeStepper</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a> = &amp;<a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">Mesh::Default_TimeStepper</a>)</div>
+<div class="line">    : <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">RectangularQuadMesh</a>&lt;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;(</div>
+<div class="line">        <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>, 1.0, 1.0, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">false</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a>),</div>
+<div class="line">      TwoDAnnularMesh&lt;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">false</a>,</div>
+<div class="line">                               0.25,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ntheta</a>,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">nr</a>,</div>
+<div class="line">                               a,</div>
+<div class="line">                               h,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">MathematicalConstants</a>::<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Pi</a>,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">time_stepper_pt</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Make the current configuration the undeformed one by</span></div>
+<div class="line">    <span class="comment">// setting the nodal Lagrangian coordinates to their current</span></div>
+<div class="line">    <span class="comment">// Eulerian ones</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">set_lagrangian_nodal_coordinates</a>();</div>
+<div class="line">  }</div>
+<div class="line">}; <span class="comment">// End mesh</span></div>
+<div class="ttc" id="aclassElasticTwoDAnnularMesh_html_a27c2f2221dd333e881698d3723aa5524"><div class="ttname"><a href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">ElasticTwoDAnnularMesh::ElasticTwoDAnnularMesh</a></div><div class="ttdeci">ElasticTwoDAnnularMesh(const unsigned &amp;ntheta, const unsigned &amp;nr, const double &amp;a, const double &amp;h, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration...</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00099">shell.cc:117</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>The driver contains two problem classes. The first is the main problem using the 2D axisymmetric elements, while the second is an auxiliary problem to solve equation (3) in the compressible case or find the unknowns <img class="formulaInl" alt="$\hat{R}_{i}$" src="form_33.png" width="13" height="15"/> and <img class="formulaInl" alt="$\hat{R}_{o}$" src="form_34.png" width="14" height="15"/> in the incompressible case. Since the latter of these is relatively standard, only the former is documented here. The problem class declaration is shown below. </p><div class="fragment"><div class="line"><span class="comment">//==============start_problem=========================================</span></div>
+<div class="line"><span class="comment">/// Axisymmetric compression of a finite thickness shell in cylindrical</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// polar coordiantes</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classShellProblem.html">ShellProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Constructor:</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_function" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Destructor</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_function" href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">~ShellProblem</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">doc_solution</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">  /// Create the boundary elements</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a10958621472472e01549a049d1278942">create_boundary_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Delete boundary elements and wipe the associated mesh</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">delete_boundary_elements</a>()</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element</a> = <a class="code hl_variable" href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">Surface_mesh_pt</a>-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Loop over the surface elements</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Kill surface element</span></div>
+<div class="line">      <span class="keyword">delete</span> <a class="code hl_variable" href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">Surface_mesh_pt</a>-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Wipe the mesh</span></div>
+<div class="line">    <a class="code hl_variable" href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">Surface_mesh_pt</a>-&gt;flush_element_and_node_storage();</div>
+<div class="line">  } <span class="comment">// end of delete_boundary_elements</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Complete the problem setup (attach function/physical parameter pointers)</span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">complete_problem_setup</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Bulk mesh</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classShellProblem.html#a76c561add6b4cd52b058583c09006576">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Pointer to the &quot;surface&quot; mesh</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Mesh</a>* <a class="code hl_variable" href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">Surface_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">  /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span>  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ConstitutiveLaw</a>* <a class="code hl_variable" href="classShellProblem.html#a896a5bc80642be89abfeb73de25f86a6">Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// DocInfo object</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">DocInfo</a> <a class="code hl_variable" href="classShellProblem.html#a2f891d36692df03ae47e1e750564c17c">Doc_info</a>;</div>
+<div class="line">};</div>
+<div class="ttc" id="aclassShellProblem_html"><div class="ttname"><a href="classShellProblem.html">ShellProblem</a></div><div class="ttdoc">Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00146">shell.cc:147</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a10958621472472e01549a049d1278942"><div class="ttname"><a href="classShellProblem.html#a10958621472472e01549a049d1278942">ShellProblem::create_boundary_elements</a></div><div class="ttdeci">void create_boundary_elements()</div><div class="ttdoc">Create the boundary elements.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00325">shell.cc:325</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a2f891d36692df03ae47e1e750564c17c"><div class="ttname"><a href="classShellProblem.html#a2f891d36692df03ae47e1e750564c17c">ShellProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00192">shell.cc:192</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a33734a4a25df3436a58bd75c9356f3c5"><div class="ttname"><a href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">ShellProblem::complete_problem_setup</a></div><div class="ttdeci">void complete_problem_setup()</div><div class="ttdoc">Complete the problem setup (attach function/physical parameter pointers)</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00255">shell.cc:255</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a4e5c2c39eb20b2c91cbf27746813dc13"><div class="ttname"><a href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">ShellProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the &quot;surface&quot; mesh.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00186">shell.cc:186</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a6b16c0923d5f3023cb6cecf1ac3ce798"><div class="ttname"><a href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">ShellProblem::delete_boundary_elements</a></div><div class="ttdeci">void delete_boundary_elements()</div><div class="ttdoc">Delete boundary elements and wipe the associated mesh.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00163">shell.cc:163</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a76c561add6b4cd52b058583c09006576"><div class="ttname"><a href="classShellProblem.html#a76c561add6b4cd52b058583c09006576">ShellProblem::Bulk_mesh_pt</a></div><div class="ttdeci">ElasticTwoDAnnularMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00183">shell.cc:183</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a896a5bc80642be89abfeb73de25f86a6"><div class="ttname"><a href="classShellProblem.html#a896a5bc80642be89abfeb73de25f86a6">ShellProblem::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00189">shell.cc:189</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_a9981fcc355f178761268acf3cd5d6119"><div class="ttname"><a href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">ShellProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00355">shell.cc:355</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_acf096f825635ae9c161c704969a5e21c"><div class="ttname"><a href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem::ShellProblem</a></div><div class="ttdeci">ShellProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00199">shell.cc:199</a></div></div>
+<div class="ttc" id="aclassShellProblem_html_afb893165e8a3695d416f852bff5b3280"><div class="ttname"><a href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">ShellProblem::~ShellProblem</a></div><div class="ttdeci">~ShellProblem()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00153">shell.cc:153</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The constructor begins with assigning the output directory and creating the bulk and surface meshes. The function <code>create_boundary_elements()</code> is then called to create traction elements on the outer boundary of the shell. </p><div class="fragment"><div class="line"><span class="comment">//===============start_constructor========================================</span></div>
+<div class="line"><span class="comment">/// Constructor for unstructured solid problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem&lt;ELEMENT&gt;::ShellProblem</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  Doc_info.set_directory(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae852721117b7f4638a608800ab6aa280">GlobalSimSettings::result_folder</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Initialise counter for solutions</span></div>
+<div class="line">  Doc_info.number() = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the mesh: Quarter-annulus in the quadrant r&gt;0, z&gt;0.</span></div>
+<div class="line">  Bulk_mesh_pt =</div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh&lt;ELEMENT&gt;</a>(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a0193c69b05dae41104ccb2a41e6fbf83">GlobalSimSettings::n_azimuthal</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a7f2abb69ed4837decee986408c2328b2">GlobalSimSettings::n_radial</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a476a2d8141475a4c7363fc4a41a08859">GlobalSimSettings::a</a>,</div>
+<div class="line">                                        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a35bec0251495dcf01e9650ca19efeb45">GlobalSimSettings::h</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the &quot;surface mesh&quot; that will contain only the interface</span></div>
+<div class="line">  <span class="comment">// elements. The constructor just creates the mesh without giving</span></div>
+<div class="line">  <span class="comment">// it any elements, nodes, etc.</span></div>
+<div class="line">  Surface_mesh_pt = <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">Mesh</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create the boundary elements</span></div>
+<div class="line">  create_boundary_elements();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Add the two submeshes</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">add_sub_mesh</a>(Bulk_mesh_pt);</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">add_sub_mesh</a>(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Combine all sub-meshes into a single mesh</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">build_global_mesh</a>();</div>
+</div><!-- fragment --><p> Following this, a constitutive law is selected. Depending on the flag <code>GlobalSimSettings::is_incompressible</code>, this will either be the incompressible or compressible version of the NeoHookean constiutive law. The function <code>complete_problem_setup()</code> (discussed below) is then called and equation numbers are assigned. </p><div class="fragment"><div class="line">  <span class="comment">// Define a constitutive law from a strain energy density function.</span></div>
+<div class="line">  <span class="comment">// Version depends on the incompressibility flag</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">StrainEnergyFunction</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a>;</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">IncompressibleNeoHookean</a>();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">NeoHookean</a>(&amp;<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a>);</div>
+<div class="line">  }</div>
+<div class="line">  Constitutive_law_pt =</div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">IsotropicStrainEnergyFunctionConstitutiveLaw</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">strain_energy_function_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Complete the problem set up</span></div>
+<div class="line">  complete_problem_setup();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Assign eqn numbers</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end constructor</span></div>
+</div><!-- fragment --> <h1><a class="anchor" id="complete"></a>
+Completing the problem setup</h1>
+<p>To complete the problem setup, the pointer to the constitutive law is passed to each of the bulk elements. An attempt is made to cast to the version of the bulk element that contains pressure degrees of freedom, the <code>QAxisymmetricCylindricalPVDWithPressureElement</code>. If this cast is successful, then the run is using the solid pressure formulation and, depending on the value of <code>GlobalSimSettings::is_incompressible</code>, incompressibility may be enforced using the element's member function <code>set_incompressible()</code>. The pointer to the external pressure function is then passed to each of the interface elements for application of the traction boundary condition on the outer surface. Finally, The Dirichlet boundary conditions for this problem are set: pinned radial position at <img class="formulaInl" alt="$r = 0$" src="form_49.png" width="30" height="9"/> and pinned axial position at <img class="formulaInl" alt="$z = 0$" src="form_50.png" width="29" height="9"/>. </p><div class="fragment"><div class="line"><span class="comment">//========start_of_complete_problem_setup==================================</span></div>
+<div class="line"><span class="comment">/// Assign function/parameter pointers, set boundary conditions etc.</span></div>
+<div class="line"><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">ShellProblem&lt;ELEMENT&gt;::complete_problem_setup</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Determine number of bulk elements in mesh</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element_bulk</a> = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over the bulk elements</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_element_bulk</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the constitutive law</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Cast to element with pressure dofs</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">QAxisymmetricCylindricalPVDWithPressureElement</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_with_pres_pt</a> =</div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">QAxisymmetricCylindricalPVDWithPressureElement</a>*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Can set compressible/incompressible condition here</span></div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_with_pres_pt</a> != 0)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a>)</div>
+<div class="line">      {</div>
+<div class="line">        <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_with_pres_pt</a>-&gt;set_incompressible();</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">else</span></div>
+<div class="line">      {</div>
+<div class="line">        <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_with_pres_pt</a>-&gt;set_compressible();</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// End of loop over bulk elements</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Determine number of 1D interface elements in mesh</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_interface_element</a> = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Loop over the interface elements</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_interface_element</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">AxisymmetricCylindricalSolidTractionElement&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a> =</div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticTwoDAnnularMesh.html">AxisymmetricCylindricalSolidTractionElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">        Surface_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the traction function for applying pressure</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">el_pt</a>-&gt;traction_fct_pt() = &amp;<a class="code hl_function" href="namespaceGlobalPhysicalVariables.html#aae8fc0ec1d6fe9f6175f8a613b4b972d">GlobalPhysicalVariables::external_pressure_fct</a>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of loop over interface elements</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set the Dirichlet boundary conditions for this problem</span></div>
+<div class="line">  <span class="comment">// Find number of nodes on boundary 3</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a> = Bulk_mesh_pt-&gt;nboundary_node(3);</div>
+<div class="line">  <span class="comment">// Loop over nodes on fixed boundary</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Pin radial position on symmetry axis only</span></div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(3, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>)-&gt;pin_position(0);</div>
+<div class="line">  }</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a> = Bulk_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line">  <span class="comment">// Loop over nodes on fixed boundary</span></div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> = 0; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a> &lt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n_boundary_node</a>; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Pin radial position on symmetry axis only</span></div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_node_pt(1, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">n</a>)-&gt;pin_position(1);</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// End complete_problem_setup</span></div>
+</div><!-- fragment --> <h1><a class="anchor" id="driver"></a>
+The driver code</h1>
+<p>The driver code begins by specifying command line arguments for whether the solid pressure formulation is to be used, whether incompressibility should be enforced, the value of the material's Poisson ratio and the external pressure applied on the outer face of the shell. </p><div class="fragment"><div class="line"><span class="comment">//===========start_main===================================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve an unstructured solid problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="shell_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argc</a>, <span class="keywordtype">char</span>* <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argv</a>[])</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Store command line arguments</span></div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::setup</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argc</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">argv</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">string</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_solid_pressure</a>;</div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--use_solid_pressure&quot;</span>, &amp;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_solid_pressure</a>, <span class="stringliteral">&quot;Use solid pressure&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">string</span> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_incompressible</a>;</div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--incompressible&quot;</span>, &amp;<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_incompressible</a>, <span class="stringliteral">&quot;Incompressible&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--poisson&quot;</span>, &amp;<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a>, <span class="stringliteral">&quot;Poisson&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::specify_command_line_flag</a>(</div>
+<div class="line">    <span class="stringliteral">&quot;--pressure&quot;</span>, &amp;<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#ad48c0e8c5cc9f96ff594eb1f8d3112d3">GlobalPhysicalVariables::ext_pressure</a>, <span class="stringliteral">&quot;External pressure&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::parse_and_assign</a>();</div>
+<div class="line">  <a class="code hl_function" href="classElasticTwoDAnnularMesh.html#a27c2f2221dd333e881698d3723aa5524">CommandLineArgs::doc_specified_flags</a>();</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">istringstream</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_solid_pressure</a>) &gt;&gt; std::boolalpha &gt;&gt;</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>;</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">istringstream</a>(<a class="code hl_class" href="classElasticTwoDAnnularMesh.html">str_temp_incompressible</a>) &gt;&gt; std::boolalpha &gt;&gt;</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a>;</div>
+<div class="ttc" id="ashell_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="shell_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Demonstrate how to solve an unstructured solid problem.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00592">shell.cc:592</a></div></div>
+</div><!-- fragment --><p>Following this, a number of consistency checks are made. For example, if incompressibility has been specified then a check is made that the solid pressure formulation has also been selected. If this is not the case, a warning is issued and the flag <code><a class="el" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3" title="Flag for using a pressure formulation.">GlobalSimSettings::use_pressure_formulation</a></code> is set to <code>true</code>. </p><div class="fragment"><div class="line">  <span class="comment">// If the Poisson ratio has been set to 0.5, but the</span></div>
+<div class="line">  <span class="comment">// use_pressure_formulation and/or incompressible flags are false, set them to</span></div>
+<div class="line">  <span class="comment">// true</span></div>
+<div class="line">  <span class="keywordflow">if</span> (std::fabs(<a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a> - 0.5) &lt; 1.0e-10 &amp;&amp;</div>
+<div class="line">      !(<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a> &amp;&amp;</div>
+<div class="line">        <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>))</div>
+<div class="line">  {</div>
+<div class="line">    std::string <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">warning_message</a> =</div>
+<div class="line">      <span class="stringliteral">&quot;Inconsistency: Poisson ratio has been set to 0.5 but the  \n&quot;</span></div>
+<div class="line">      <span class="stringliteral">&quot;use_pressure_formulation and/or incompressible flags are false. \n&quot;</span></div>
+<div class="line">      <span class="stringliteral">&quot;Setting both of these to true to proceed.&quot;</span>;</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OomphLibWarning</a>(</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">warning_message</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OOMPH_CURRENT_FUNCTION</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a> = <span class="keyword">true</span>;</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a> = <span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// If the incompressibility flag has been set, we must use the solid</span></div>
+<div class="line">  <span class="comment">// pressure formulation. The Poisson ratio will not be used in this case.</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a> &amp;&amp;</div>
+<div class="line">      !<a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>)</div>
+<div class="line">  {</div>
+<div class="line">    std::string <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">warning_message</a> =</div>
+<div class="line">      <span class="stringliteral">&quot;Inconsistency: The incompressibility flag is true but we are not using &quot;</span></div>
+<div class="line">      <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">      <span class="stringliteral">&quot;the solid pressure formulation. Setting use_solid_pressure to true to &quot;</span></div>
+<div class="line">      <span class="stringliteral">&quot;proceed. \n&quot;</span>;</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OomphLibWarning</a>(</div>
+<div class="line">      <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">warning_message</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OOMPH_CURRENT_FUNCTION</a>, <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a> = <span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set the Poisson ratio to 0.5 if incompressibility has been specified. This</span></div>
+<div class="line">  <span class="comment">// is solely for the purpose of output</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#a65873875f0b352080f837f8f6c6694fc">GlobalSimSettings::incompressible</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobalPhysicalVariables.html#aa6f7e7ba10d24d328cb5885b22f55410">GlobalPhysicalVariables::nu</a> = 0.5;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// End consistency checks</span></div>
+</div><!-- fragment --><p>Finally, both the main and auxiliary problems are created and the Newton solve followed by output is done in each case. </p><div class="fragment"><div class="line">  <span class="comment">// Create the problem</span></div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobalSimSettings.html#ae74221310839405c9b6f8ddfac9888d3">GlobalSimSettings::use_pressure_formulation</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Build the problem with an additional degree of freedom for pressure</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ShellProblem&lt;QAxisymmetricCylindricalPVDWithPressureElement&gt;</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.newton_solve();</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.doc_solution();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Standard build</span></div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">ShellProblem&lt;QAxisymmetricCylindricalPVDElement&lt;3&gt;</a>&gt; <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.newton_solve();</div>
+<div class="line">    <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">problem</a>.doc_solution();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Build and solve the auxiliary problem</span></div>
+<div class="line">  <a class="code hl_class" href="classAuxiliaryShellProblem.html">AuxiliaryShellProblem</a> <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">aux_problem</a>;</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">aux_problem</a>.solve_auxiliary_problem();</div>
+<div class="line">  <a class="code hl_class" href="classElasticTwoDAnnularMesh.html">aux_problem</a>.doc_solution();</div>
+<div class="line">} <span class="comment">// end main</span></div>
+<div class="ttc" id="aclassAuxiliaryShellProblem_html"><div class="ttname"><a href="classAuxiliaryShellProblem.html">AuxiliaryShellProblem</a></div><div class="ttdoc">Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.</div><div class="ttdef"><b>Definition</b> <a href="shell_8cc_source.html#l00390">shell.cc:391</a></div></div>
+</div><!-- fragment --> <h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+demo_drivers/axisym_solid/shell/
+">demo_drivers/axisym_solid/shell/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/axisym_solid/shell/shell.cc
+">demo_drivers/axisym_solid/shell/shell.cc </a> </center></li>
+<li>A refineable version of the driver code can be found at: <center> <a href="
+../../../../
+demo_drivers/axisym_solid/shell/shell_adaptive.cc
+">demo_drivers/axisym_solid/shell/shell_adaptive.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 16 2026 17:05:33
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: ShellProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classShellProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ShellProblem&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.  
+ <a href="classShellProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ShellProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classShellProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:acf096f825635ae9c161c704969a5e21c" id="r_acf096f825635ae9c161c704969a5e21c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem</a> ()</td></tr>
+<tr class="memdesc:acf096f825635ae9c161c704969a5e21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <br /></td></tr>
+<tr class="separator:acf096f825635ae9c161c704969a5e21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb893165e8a3695d416f852bff5b3280" id="r_afb893165e8a3695d416f852bff5b3280"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">~ShellProblem</a> ()</td></tr>
+<tr class="memdesc:afb893165e8a3695d416f852bff5b3280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:afb893165e8a3695d416f852bff5b3280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9981fcc355f178761268acf3cd5d6119" id="r_a9981fcc355f178761268acf3cd5d6119"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">doc_solution</a> ()</td></tr>
+<tr class="memdesc:a9981fcc355f178761268acf3cd5d6119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <br /></td></tr>
+<tr class="separator:a9981fcc355f178761268acf3cd5d6119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf096f825635ae9c161c704969a5e21c" id="r_acf096f825635ae9c161c704969a5e21c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#acf096f825635ae9c161c704969a5e21c">ShellProblem</a> ()</td></tr>
+<tr class="memdesc:acf096f825635ae9c161c704969a5e21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <br /></td></tr>
+<tr class="separator:acf096f825635ae9c161c704969a5e21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb893165e8a3695d416f852bff5b3280" id="r_afb893165e8a3695d416f852bff5b3280"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#afb893165e8a3695d416f852bff5b3280">~ShellProblem</a> ()</td></tr>
+<tr class="memdesc:afb893165e8a3695d416f852bff5b3280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:afb893165e8a3695d416f852bff5b3280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9981fcc355f178761268acf3cd5d6119" id="r_a9981fcc355f178761268acf3cd5d6119"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a9981fcc355f178761268acf3cd5d6119">doc_solution</a> ()</td></tr>
+<tr class="memdesc:a9981fcc355f178761268acf3cd5d6119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <br /></td></tr>
+<tr class="separator:a9981fcc355f178761268acf3cd5d6119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a10958621472472e01549a049d1278942" id="r_a10958621472472e01549a049d1278942"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a10958621472472e01549a049d1278942">create_boundary_elements</a> ()</td></tr>
+<tr class="memdesc:a10958621472472e01549a049d1278942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the boundary elements.  <br /></td></tr>
+<tr class="separator:a10958621472472e01549a049d1278942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b16c0923d5f3023cb6cecf1ac3ce798" id="r_a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">delete_boundary_elements</a> ()</td></tr>
+<tr class="memdesc:a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete boundary elements and wipe the associated mesh.  <br /></td></tr>
+<tr class="separator:a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33734a4a25df3436a58bd75c9356f3c5" id="r_a33734a4a25df3436a58bd75c9356f3c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a33734a4a25df3436a58bd75c9356f3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete the problem setup (attach function/physical parameter pointers)  <br /></td></tr>
+<tr class="separator:a33734a4a25df3436a58bd75c9356f3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10958621472472e01549a049d1278942" id="r_a10958621472472e01549a049d1278942"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a10958621472472e01549a049d1278942">create_boundary_elements</a> ()</td></tr>
+<tr class="memdesc:a10958621472472e01549a049d1278942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the boundary elements.  <br /></td></tr>
+<tr class="separator:a10958621472472e01549a049d1278942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33734a4a25df3436a58bd75c9356f3c5" id="r_a33734a4a25df3436a58bd75c9356f3c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a33734a4a25df3436a58bd75c9356f3c5">complete_problem_setup</a> ()</td></tr>
+<tr class="memdesc:a33734a4a25df3436a58bd75c9356f3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete the problem setup (attach function/physical parameter pointers)  <br /></td></tr>
+<tr class="separator:a33734a4a25df3436a58bd75c9356f3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb5de98864d2bf915e584cf1111729c" id="r_a5eb5de98864d2bf915e584cf1111729c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a5eb5de98864d2bf915e584cf1111729c">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a5eb5de98864d2bf915e584cf1111729c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Wipe the mesh of boundary elements.  <br /></td></tr>
+<tr class="separator:a5eb5de98864d2bf915e584cf1111729c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1e71cbfac465586243ba7e8e15230f" id="r_abb1e71cbfac465586243ba7e8e15230f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#abb1e71cbfac465586243ba7e8e15230f">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:abb1e71cbfac465586243ba7e8e15230f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any actions after refining the mesh.  <br /></td></tr>
+<tr class="separator:abb1e71cbfac465586243ba7e8e15230f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b16c0923d5f3023cb6cecf1ac3ce798" id="r_a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a6b16c0923d5f3023cb6cecf1ac3ce798">delete_boundary_elements</a> ()</td></tr>
+<tr class="memdesc:a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete boundary elements and wipe the associated mesh.  <br /></td></tr>
+<tr class="separator:a6b16c0923d5f3023cb6cecf1ac3ce798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a76c561add6b4cd52b058583c09006576" id="r_a76c561add6b4cd52b058583c09006576"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a76c561add6b4cd52b058583c09006576">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a76c561add6b4cd52b058583c09006576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bulk mesh.  <br /></td></tr>
+<tr class="separator:a76c561add6b4cd52b058583c09006576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5c2c39eb20b2c91cbf27746813dc13" id="r_a4e5c2c39eb20b2c91cbf27746813dc13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a4e5c2c39eb20b2c91cbf27746813dc13">Surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a4e5c2c39eb20b2c91cbf27746813dc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "surface" mesh.  <br /></td></tr>
+<tr class="separator:a4e5c2c39eb20b2c91cbf27746813dc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896a5bc80642be89abfeb73de25f86a6" id="r_a896a5bc80642be89abfeb73de25f86a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">ConstitutiveLaw</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a896a5bc80642be89abfeb73de25f86a6">Constitutive_law_pt</a></td></tr>
+<tr class="memdesc:a896a5bc80642be89abfeb73de25f86a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to constitutive law.  <br /></td></tr>
+<tr class="separator:a896a5bc80642be89abfeb73de25f86a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f891d36692df03ae47e1e750564c17c" id="r_a2f891d36692df03ae47e1e750564c17c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">DocInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a2f891d36692df03ae47e1e750564c17c">Doc_info</a></td></tr>
+<tr class="separator:a2f891d36692df03ae47e1e750564c17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8081de8e63caa360f8c7f00f37e513b0" id="r_a8081de8e63caa360f8c7f00f37e513b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoDAnnularMesh.html">ElasticRefineableTwoDAnnularMesh</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a8081de8e63caa360f8c7f00f37e513b0">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a8081de8e63caa360f8c7f00f37e513b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bulk mesh.  <br /></td></tr>
+<tr class="separator:a8081de8e63caa360f8c7f00f37e513b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a028bdec71976fb695c545431714104ec" id="r_a028bdec71976fb695c545431714104ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticTwoDAnnularMesh.html">Z2ErrorEstimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShellProblem.html#a028bdec71976fb695c545431714104ec">error_estimator_pt</a></td></tr>
+<tr class="separator:a028bdec71976fb695c545431714104ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;<br />
+class ShellProblem&lt; ELEMENT &gt;</div><p>Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. </p>
+<p>Unstructured solid problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00146">146</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="acf096f825635ae9c161c704969a5e21c" name="acf096f825635ae9c161c704969a5e21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf096f825635ae9c161c704969a5e21c">&#9670;&#160;</a></span>ShellProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;<a class="el" href="classShellProblem.html">::ShellProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+<p>Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.</p>
+<p>Constructor for unstructured solid problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00199">199</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00096">GlobalSimSettings::a</a>, <a class="el" href="shell_8cc_source.html#l00099">GlobalSimSettings::h</a>, <a class="el" href="shell_8cc_source.html#l00087">GlobalSimSettings::incompressible</a>, <a class="el" href="shell_8cc_source.html#l00093">GlobalSimSettings::n_azimuthal</a>, <a class="el" href="shell_8cc_source.html#l00090">GlobalSimSettings::n_radial</a>, <a class="el" href="shell_8cc_source.html#l00058">GlobalPhysicalVariables::nu</a>, and <a class="el" href="shell_8cc_source.html#l00081">GlobalSimSettings::result_folder</a>.</p>
+
+</div>
+</div>
+<a id="afb893165e8a3695d416f852bff5b3280" name="afb893165e8a3695d416f852bff5b3280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb893165e8a3695d416f852bff5b3280">&#9670;&#160;</a></span>~ShellProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::~<a class="el" href="classShellProblem.html">ShellProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00153">153</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+</div>
+</div>
+<a id="acf096f825635ae9c161c704969a5e21c" name="acf096f825635ae9c161c704969a5e21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf096f825635ae9c161c704969a5e21c">&#9670;&#160;</a></span>ShellProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;<a class="el" href="classShellProblem.html">::ShellProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+
+</div>
+</div>
+<a id="afb893165e8a3695d416f852bff5b3280" name="afb893165e8a3695d416f852bff5b3280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb893165e8a3695d416f852bff5b3280">&#9670;&#160;</a></span>~ShellProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::~<a class="el" href="classShellProblem.html">ShellProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00195">195</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abb1e71cbfac465586243ba7e8e15230f" name="abb1e71cbfac465586243ba7e8e15230f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1e71cbfac465586243ba7e8e15230f">&#9670;&#160;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Any actions after refining the mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00218">218</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00183">ShellProblem&lt; ELEMENT &gt;::Bulk_mesh_pt</a>, <a class="el" href="shell_8cc_source.html#l00255">ShellProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, and <a class="el" href="shell_8cc_source.html#l00325">ShellProblem&lt; ELEMENT &gt;::create_boundary_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a5eb5de98864d2bf915e584cf1111729c" name="a5eb5de98864d2bf915e584cf1111729c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb5de98864d2bf915e584cf1111729c">&#9670;&#160;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Wipe the mesh of boundary elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00208">208</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00163">ShellProblem&lt; ELEMENT &gt;::delete_boundary_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a33734a4a25df3436a58bd75c9356f3c5" name="a33734a4a25df3436a58bd75c9356f3c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33734a4a25df3436a58bd75c9356f3c5">&#9670;&#160;</a></span>complete_problem_setup() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::complete_problem_setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Complete the problem setup (attach function/physical parameter pointers) </p>
+<p>Assign function/parameter pointers, set boundary conditions etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00255">255</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00064">GlobalPhysicalVariables::external_pressure_fct()</a>, and <a class="el" href="shell_8cc_source.html#l00087">GlobalSimSettings::incompressible</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="shell__adaptive_8cc_source.html#l00218">ShellProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>.</p>
+
+</div>
+</div>
+<a id="a33734a4a25df3436a58bd75c9356f3c5" name="a33734a4a25df3436a58bd75c9356f3c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33734a4a25df3436a58bd75c9356f3c5">&#9670;&#160;</a></span>complete_problem_setup() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::complete_problem_setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Complete the problem setup (attach function/physical parameter pointers) </p>
+
+</div>
+</div>
+<a id="a10958621472472e01549a049d1278942" name="a10958621472472e01549a049d1278942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10958621472472e01549a049d1278942">&#9670;&#160;</a></span>create_boundary_elements() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::create_boundary_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the boundary elements. </p>
+<p>Create boundary elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00325">325</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="shell__adaptive_8cc_source.html#l00218">ShellProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>.</p>
+
+</div>
+</div>
+<a id="a10958621472472e01549a049d1278942" name="a10958621472472e01549a049d1278942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10958621472472e01549a049d1278942">&#9670;&#160;</a></span>create_boundary_elements() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::create_boundary_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the boundary elements. </p>
+
+</div>
+</div>
+<a id="a6b16c0923d5f3023cb6cecf1ac3ce798" name="a6b16c0923d5f3023cb6cecf1ac3ce798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b16c0923d5f3023cb6cecf1ac3ce798">&#9670;&#160;</a></span>delete_boundary_elements() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::delete_boundary_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete boundary elements and wipe the associated mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00163">163</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00186">ShellProblem&lt; ELEMENT &gt;::Surface_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="shell__adaptive_8cc_source.html#l00208">ShellProblem&lt; ELEMENT &gt;::actions_before_adapt()</a>.</p>
+
+</div>
+</div>
+<a id="a6b16c0923d5f3023cb6cecf1ac3ce798" name="a6b16c0923d5f3023cb6cecf1ac3ce798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b16c0923d5f3023cb6cecf1ac3ce798">&#9670;&#160;</a></span>delete_boundary_elements() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::delete_boundary_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete boundary elements and wipe the associated mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00247">247</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00186">ShellProblem&lt; ELEMENT &gt;::Surface_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9981fcc355f178761268acf3cd5d6119" name="a9981fcc355f178761268acf3cd5d6119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9981fcc355f178761268acf3cd5d6119">&#9670;&#160;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00355">355</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="shell_8cc_source.html#l00061">GlobalPhysicalVariables::ext_pressure</a>, and <a class="el" href="shell_8cc_source.html#l00058">GlobalPhysicalVariables::nu</a>.</p>
+
+</div>
+</div>
+<a id="a9981fcc355f178761268acf3cd5d6119" name="a9981fcc355f178761268acf3cd5d6119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9981fcc355f178761268acf3cd5d6119">&#9670;&#160;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">void</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a76c561add6b4cd52b058583c09006576" name="a76c561add6b4cd52b058583c09006576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c561add6b4cd52b058583c09006576">&#9670;&#160;</a></span>Bulk_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">ElasticTwoDAnnularMesh</a>&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;* <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00183">183</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="shell__adaptive_8cc_source.html#l00218">ShellProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>.</p>
+
+</div>
+</div>
+<a id="a8081de8e63caa360f8c7f00f37e513b0" name="a8081de8e63caa360f8c7f00f37e513b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8081de8e63caa360f8c7f00f37e513b0">&#9670;&#160;</a></span>Bulk_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoDAnnularMesh.html">ElasticRefineableTwoDAnnularMesh</a>&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a>&gt;* <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00262">262</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+</div>
+</div>
+<a id="a896a5bc80642be89abfeb73de25f86a6" name="a896a5bc80642be89abfeb73de25f86a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896a5bc80642be89abfeb73de25f86a6">&#9670;&#160;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">ConstitutiveLaw</a> * <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::Constitutive_law_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to constitutive law. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00189">189</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+</div>
+</div>
+<a id="a2f891d36692df03ae47e1e750564c17c" name="a2f891d36692df03ae47e1e750564c17c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f891d36692df03ae47e1e750564c17c">&#9670;&#160;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">DocInfo</a> <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00192">192</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+</div>
+</div>
+<a id="a028bdec71976fb695c545431714104ec" name="a028bdec71976fb695c545431714104ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a028bdec71976fb695c545431714104ec">&#9670;&#160;</a></span>error_estimator_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">Z2ErrorEstimator</a>* <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::error_estimator_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shell__adaptive_8cc_source.html#l00268">268</a> of file <a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4e5c2c39eb20b2c91cbf27746813dc13" name="a4e5c2c39eb20b2c91cbf27746813dc13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5c2c39eb20b2c91cbf27746813dc13">&#9670;&#160;</a></span>Surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticTwoDAnnularMesh.html">class</a> <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticTwoDAnnularMesh.html">Mesh</a> * <a class="el" href="classShellProblem.html">ShellProblem</a>&lt; <a class="el" href="classElasticTwoDAnnularMesh.html">ELEMENT</a> &gt;::Surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "surface" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="shell_8cc_source.html#l00186">186</a> of file <a class="el" href="shell_8cc_source.html">shell.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="shell_8cc_source.html#l00163">ShellProblem&lt; ELEMENT &gt;::delete_boundary_elements()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="shell_8cc_source.html">shell.cc</a></li>
+<li><a class="el" href="shell__adaptive_8cc_source.html">shell_adaptive.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 16 2026 17:05:32
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

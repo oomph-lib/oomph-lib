@@ -1,0 +1,249 @@
+\doxysection{oomph\+::Shell\+Benchmark\+Element\texorpdfstring{$<$}{<} N\+\_\+\+NODE1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ShellBenchmarkElement}{}\label{classoomph_1_1ShellBenchmarkElement}\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+
+
+A class for elements to solve the 1D radial displacement ODE in the spherical shell compression benchmark problem.  
+
+
+
+
+{\ttfamily \#include $<$benchmark\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Shell\+Benchmark\+Element\texorpdfstring{$<$}{<} N\+\_\+\+NODE1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.931034cm]{classoomph_1_1ShellBenchmarkElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_aaf3f04fbb8d2cad836994ae4b8dc5d7b}{Shell\+Benchmark\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor () \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a85dd268ad97844a8dbe950ad86c578c7}{Shell\+Benchmark\+Element}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{Shell\+Benchmark\+Element}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{dummy}})=\mbox{\hyperlink{classElasticTwoDAnnularMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a1a33921b59ee414c5a9c819819e738b3}{operator=}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{Shell\+Benchmark\+Element}} \&)=\mbox{\hyperlink{classElasticTwoDAnnularMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_af0df2789039f5cf81256af74c6268613}{required\+\_\+nvalue}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n}}) \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a18be5dba1c7fbc88d52a3b1217195377}{nu}} () \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function\+: Poisson ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a9a08bd73a9084d37aa9eb3ba1a5e515c}{nu\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to Poisson ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a3716ec703eefcc58bfdba3b87361fb24}{output}} (std\+::ostream \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{outfile}}, \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a775276da1d74b0ae78d8ea2f979fd7c6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{virtual}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_acb62dc88c7eb6b4de5868676ee83fa47}{interpolated\+\_\+u\+\_\+shell\+\_\+benchmark}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{s}}) \mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value u at local coordinate s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{virtual}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark}} (\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTwoDAnnularMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Compute element residual Vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement_aa115919c044c2e8b268eef4e70f3dfb3}{Nu\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$\newline
+class oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$}
+A class for elements to solve the 1D radial displacement ODE in the spherical shell compression benchmark problem. 
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00041}{41}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_aaf3f04fbb8d2cad836994ae4b8dc5d7b}\label{classoomph_1_1ShellBenchmarkElement_aaf3f04fbb8d2cad836994ae4b8dc5d7b} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!ShellBenchmarkElement@{ShellBenchmarkElement}}
+\index{ShellBenchmarkElement@{ShellBenchmarkElement}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{ShellBenchmarkElement()}{ShellBenchmarkElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::\+Shell\+Benchmark\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor () 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00046}{46}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a85dd268ad97844a8dbe950ad86c578c7}\label{classoomph_1_1ShellBenchmarkElement_a85dd268ad97844a8dbe950ad86c578c7} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!ShellBenchmarkElement@{ShellBenchmarkElement}}
+\index{ShellBenchmarkElement@{ShellBenchmarkElement}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{ShellBenchmarkElement()}{ShellBenchmarkElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::\+Shell\+Benchmark\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a775276da1d74b0ae78d8ea2f979fd7c6}\label{classoomph_1_1ShellBenchmarkElement_a775276da1d74b0ae78d8ea2f979fd7c6} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector (wrapper) 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00077}{77}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8cc_source_l00037}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6}\label{classoomph_1_1ShellBenchmarkElement_a88b068da76c64c61ed756adc29cfc4c6} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!fill\_in\_generic\_residual\_contribution\_shell\_benchmark@{fill\_in\_generic\_residual\_contribution\_shell\_benchmark}}
+\index{fill\_in\_generic\_residual\_contribution\_shell\_benchmark@{fill\_in\_generic\_residual\_contribution\_shell\_benchmark}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_shell\_benchmark()}{fill\_in\_generic\_residual\_contribution\_shell\_benchmark()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{NNODE\+\_\+1D}} $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+shell\+\_\+benchmark (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Compute element residual Vector only (if flag=and/or element Jacobian matrix. 
+
+Compute element residual Vector and/or element Jacobian matrix. 
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8cc_source_l00036}{36}} of file \mbox{\hyperlink{benchmark__elements_8cc_source}{benchmark\+\_\+elements.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{benchmark__elements_8h_source_l00077}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_acb62dc88c7eb6b4de5868676ee83fa47}\label{classoomph_1_1ShellBenchmarkElement_acb62dc88c7eb6b4de5868676ee83fa47} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!interpolated\_u\_shell\_benchmark@{interpolated\_u\_shell\_benchmark}}
+\index{interpolated\_u\_shell\_benchmark@{interpolated\_u\_shell\_benchmark}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{interpolated\_u\_shell\_benchmark()}{interpolated\_u\_shell\_benchmark()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{virtual}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::interpolated\+\_\+u\+\_\+shell\+\_\+benchmark (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return FE representation of function value u at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a18be5dba1c7fbc88d52a3b1217195377}\label{classoomph_1_1ShellBenchmarkElement_a18be5dba1c7fbc88d52a3b1217195377} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!nu@{nu}}
+\index{nu@{nu}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{nu()}{nu()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00061}{61}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8h_source_l00119}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::\+Nu\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a9a08bd73a9084d37aa9eb3ba1a5e515c}\label{classoomph_1_1ShellBenchmarkElement_a9a08bd73a9084d37aa9eb3ba1a5e515c} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!nu\_pt@{nu\_pt}}
+\index{nu\_pt@{nu\_pt}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{nu\_pt()}{nu\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00067}{67}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{benchmark__elements_8h_source_l00119}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::\+Nu\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a1a33921b59ee414c5a9c819819e738b3}\label{classoomph_1_1ShellBenchmarkElement_a1a33921b59ee414c5a9c819819e738b3} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{\+::operator}}= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_a3716ec703eefcc58bfdba3b87361fb24}\label{classoomph_1_1ShellBenchmarkElement_a3716ec703eefcc58bfdba3b87361fb24} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!output@{output}}
+\index{output@{output}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{NNODE\+\_\+1D}} $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
+
+
+
+Output FE representation of soln\+: x,y,u or x,y,z,u at n\+\_\+plot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. 
+
+Output function. 
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8cc_source_l00126}{126}} of file \mbox{\hyperlink{benchmark__elements_8cc_source}{benchmark\+\_\+elements.\+cc}}.
+
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_af0df2789039f5cf81256af74c6268613}\label{classoomph_1_1ShellBenchmarkElement_af0df2789039f5cf81256af74c6268613} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticTwoDAnnularMesh}{const}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Required \# of `values' (pinned or dofs) at node n. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ShellBenchmarkElement_aa115919c044c2e8b268eef4e70f3dfb3}\label{classoomph_1_1ShellBenchmarkElement_aa115919c044c2e8b268eef4e70f3dfb3} 
+\index{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}!Nu\_pt@{Nu\_pt}}
+\index{Nu\_pt@{Nu\_pt}!oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$@{oomph::ShellBenchmarkElement$<$ N\_NODE1D $>$}}
+\doxysubsubsection{\texorpdfstring{Nu\_pt}{Nu\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{unsigned}} N\+\_\+\+NODE1D$>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ShellBenchmarkElement}{oomph\+::\+Shell\+Benchmark\+Element}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{N\+\_\+\+NODE1D}} $>$\+::\+Nu\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{benchmark__elements_8h_source_l00119}{119}} of file \mbox{\hyperlink{benchmark__elements_8h_source}{benchmark\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{benchmark__elements_8h_source_l00061}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::nu()}}, and \mbox{\hyperlink{benchmark__elements_8h_source_l00067}{oomph\+::\+Shell\+Benchmark\+Element$<$ N\+\_\+\+NODE1\+D $>$\+::nu\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{benchmark__elements_8h}{benchmark\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{benchmark__elements_8cc}{benchmark\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

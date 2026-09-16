@@ -1,0 +1,269 @@
+\doxysection{Shell\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classShellProblem}{}\label{classShellProblem}\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+
+
+Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes.  
+
+
+Inheritance diagram for Shell\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classShellProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellProblem_acf096f825635ae9c161c704969a5e21c}{Shell\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellProblem_afb893165e8a3695d416f852bff5b3280}{\texorpdfstring{$\sim$}{\string~}\+Shell\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_a9981fcc355f178761268acf3cd5d6119}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_a1c2fbd7b8fbaee2808d5444f2558fe39}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set the initial condition. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_abb4716b05349a7bfcc60b7f642e1da94}{unsteady\+\_\+run}} ()
+\begin{DoxyCompactList}\small\item\em Run through the timesteps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}{complete\+\_\+problem\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Complete the problem setup (attach function/physical parameter pointers) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_a10958621472472e01549a049d1278942}{create\+\_\+boundary\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create the boundary elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}{delete\+\_\+boundary\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete boundary elements and wipe the associated mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Elastic\+Two\+DAnnular\+Mesh}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem_a76c561add6b4cd52b058583c09006576}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Surface mesh for traction force. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem_aec9abc5db195469eb7e4ecb14c1795ba}{Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Doc\+Info}} \mbox{\hyperlink{classShellProblem_a2f891d36692df03ae47e1e750564c17c}{Doc\+\_\+info}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}$>$\newline
+class Shell\+Problem$<$ ELEMENT $>$}
+Axisymmetric compression of a finite thickness shell in cylindrical polar coordiantes. 
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00263}{263}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classShellProblem_acf096f825635ae9c161c704969a5e21c}\label{classShellProblem_acf096f825635ae9c161c704969a5e21c} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!ShellProblem@{ShellProblem}}
+\index{ShellProblem@{ShellProblem}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ShellProblem()}{ShellProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\mbox{\hyperlink{classShellProblem}{\+::\+Shell\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+Constructor for unstructured solid problem. 
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00322}{322}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00207}{Global\+Sim\+Settings\+::a}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00216}{Global\+Sim\+Settings\+::dt}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00234}{Elastic\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+DAnnular\+Mesh()}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00210}{Global\+Sim\+Settings\+::h}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00204}{Global\+Sim\+Settings\+::n\+\_\+azimuthal}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00201}{Global\+Sim\+Settings\+::n\+\_\+radial}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00213}{Global\+Sim\+Settings\+::\+Nsteps}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00054}{Global\+Physical\+Variables\+::nu}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00061}{Global\+Physical\+Variables\+::omega}}, and \mbox{\hyperlink{shell__unsteady_8cc_source_l00195}{Global\+Sim\+Settings\+::result\+\_\+folder}}.
+
+\Hypertarget{classShellProblem_afb893165e8a3695d416f852bff5b3280}\label{classShellProblem_afb893165e8a3695d416f852bff5b3280} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!````~ShellProblem@{\texorpdfstring{$\sim$}{\string~}ShellProblem}}
+\index{````~ShellProblem@{\texorpdfstring{$\sim$}{\string~}ShellProblem}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ShellProblem()}{\string~ShellProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classShellProblem}{Shell\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00270}{270}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5}\label{classShellProblem_a33734a4a25df3436a58bd75c9356f3c5} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!complete\_problem\_setup@{complete\_problem\_setup}}
+\index{complete\_problem\_setup@{complete\_problem\_setup}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_problem\_setup()}{complete\_problem\_setup()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::complete\+\_\+problem\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Complete the problem setup (attach function/physical parameter pointers) 
+
+Assign function/parameter pointers, set boundary conditions etc. 
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00380}{380}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00125}{Global\+Physical\+Variables\+::body\+\_\+force\+\_\+fct()}}, and \mbox{\hyperlink{shell__unsteady_8cc_source_l00161}{Global\+Physical\+Variables\+::traction\+\_\+force\+\_\+fct()}}.
+
+\Hypertarget{classShellProblem_a10958621472472e01549a049d1278942}\label{classShellProblem_a10958621472472e01549a049d1278942} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!create\_boundary\_elements@{create\_boundary\_elements}}
+\index{create\_boundary\_elements@{create\_boundary\_elements}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_boundary\_elements()}{create\_boundary\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::create\+\_\+boundary\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create the boundary elements. 
+
+Create boundary elements. 
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00435}{435}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+\Hypertarget{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798}\label{classShellProblem_a6b16c0923d5f3023cb6cecf1ac3ce798} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!delete\_boundary\_elements@{delete\_boundary\_elements}}
+\index{delete\_boundary\_elements@{delete\_boundary\_elements}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_boundary\_elements()}{delete\_boundary\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::delete\+\_\+boundary\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Delete boundary elements and wipe the associated mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00289}{289}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00309}{Shell\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classShellProblem_a9981fcc355f178761268acf3cd5d6119}\label{classShellProblem_a9981fcc355f178761268acf3cd5d6119} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00534}{534}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+\Hypertarget{classShellProblem_a1c2fbd7b8fbaee2808d5444f2558fe39}\label{classShellProblem_a1c2fbd7b8fbaee2808d5444f2558fe39} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the initial condition. 
+
+Given the form of the manufactured solution, this really only needs doing for the velocity. 
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00470}{470}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00112}{Global\+Physical\+Variables\+::deformed\+\_\+accel\+\_\+fct()}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00086}{Global\+Physical\+Variables\+::deformed\+\_\+position\+\_\+fct()}}, \mbox{\hyperlink{shell__unsteady_8cc_source_l00099}{Global\+Physical\+Variables\+::deformed\+\_\+velocity\+\_\+fct()}}, and \mbox{\hyperlink{shell__unsteady_8cc_source_l00216}{Global\+Sim\+Settings\+::dt}}.
+
+\Hypertarget{classShellProblem_abb4716b05349a7bfcc60b7f642e1da94}\label{classShellProblem_abb4716b05349a7bfcc60b7f642e1da94} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{void}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Run through the timesteps. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00517}{517}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+References \mbox{\hyperlink{shell__unsteady_8cc_source_l00216}{Global\+Sim\+Settings\+::dt}}, and \mbox{\hyperlink{shell__unsteady_8cc_source_l00213}{Global\+Sim\+Settings\+::\+Nsteps}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classShellProblem_a76c561add6b4cd52b058583c09006576}\label{classShellProblem_a76c561add6b4cd52b058583c09006576} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Elastic\+Two\+DAnnular\+Mesh}}$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00306}{306}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+\Hypertarget{classShellProblem_aec9abc5db195469eb7e4ecb14c1795ba}\label{classShellProblem_aec9abc5db195469eb7e4ecb14c1795ba} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Constitutive\+Law}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to constitutive law. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00312}{312}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+\Hypertarget{classShellProblem_a2f891d36692df03ae47e1e750564c17c}\label{classShellProblem_a2f891d36692df03ae47e1e750564c17c} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Doc\+Info}} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00315}{315}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+\Hypertarget{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7}\label{classShellProblem_ac2377e6cfad4e5492a475b45c10fd6d7} 
+\index{ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!ShellProblem$<$ ELEMENT $>$@{ShellProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticTwoDAnnularMesh}{class}} \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticTwoDAnnularMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classShellProblem}{Shell\+Problem}}$<$ \mbox{\hyperlink{classElasticTwoDAnnularMesh}{ELEMENT}} $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Surface mesh for traction force. 
+
+
+
+Definition at line \mbox{\hyperlink{shell__unsteady_8cc_source_l00309}{309}} of file \mbox{\hyperlink{shell__unsteady_8cc_source}{shell\+\_\+unsteady.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{shell__unsteady_8cc_source_l00289}{Shell\+Problem$<$ ELEMENT $>$\+::delete\+\_\+boundary\+\_\+elements()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{shell__unsteady_8cc}{shell\+\_\+unsteady.\+cc}}\end{DoxyCompactItemize}
