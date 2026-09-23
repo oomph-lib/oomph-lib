@@ -71,7 +71,7 @@ fi
 rm -f .tmp_file_name.list
 
 # Make script to extract directories where the codes live
-find $search_root_dir \( -name '*.cc' -o  -name '*.h' \) -exec grep -H -m 1 -l  $search_string {} \; > .tmp_file_name.list
+find $search_root_dir \( -name '*.cc' -o  -name '*.h' \) -exec grep -H -m 1 -l -- "$search_string"  {} \; > .tmp_file_name.list
 
 
 #cat .tmp_file_name.list

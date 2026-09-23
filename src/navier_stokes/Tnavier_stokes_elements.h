@@ -357,8 +357,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
     // The test functions are equal to the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the jacobian
     return J;
   }
@@ -380,8 +380,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
     // The test functions are the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the jacobian
     return J;
   }
@@ -412,25 +412,10 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 9; i++)
-    {
-      test[i] = psi[i];
-
-      for (unsigned k = 0; k < 2; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
-
-        for (unsigned p = 0; p < 2; p++)
-        {
-          for (unsigned q = 0; q < 9; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    // Set the test functions equal to the shape functions
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
+    d_dtestdx_dX.shallow_copy_from(d_dpsidx_dX);
 
     // Return the jacobian
     return J;
@@ -461,7 +446,7 @@ namespace oomph
     // Call the pressure shape functions
     this->pshape_nst(s, psi);
     // The test functions are the shape functions
-    test = psi;
+    test.shallow_copy_from(psi);
   }
 
 
@@ -491,7 +476,7 @@ namespace oomph
     // Call the pressure shape functions
     this->pshape_nst(s, psi);
     // The test functions are the shape functions
-    test = psi;
+    test.shallow_copy_from(psi);
   }
 
 
@@ -538,8 +523,8 @@ namespace oomph
     transform_derivatives(inverse_jacobian, dppsidx);
 
     // The test functions are equal to the shape functions
-    ptest = ppsi;
-    dptestdx = dppsidx;
+    ptest.shallow_copy_from(ppsi);
+    dptestdx.shallow_copy_from(dppsidx);
 
     // Return the determinant of the jacobian
     return det;
@@ -597,8 +582,8 @@ namespace oomph
     transform_derivatives(inverse_jacobian, dppsidx);
 
     // The test functions are equal to the shape functions
-    ptest = ppsi;
-    dptestdx = dppsidx;
+    ptest.shallow_copy_from(ppsi);
+    dptestdx.shallow_copy_from(dppsidx);
 
     // Return the determinant of the jacobian
     return det;
@@ -1103,8 +1088,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
     // Test functions are the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the jacobian
     return J;
   }
@@ -1126,8 +1111,8 @@ namespace oomph
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
     // Test functions are the shape functions
-    test = psi;
-    dtestdx = dpsidx;
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
     // Return the jacobian
     return J;
   }
@@ -1175,8 +1160,8 @@ namespace oomph
     transform_derivatives(inverse_jacobian, dppsidx);
 
     // Test functions are shape functions
-    ptest = ppsi;
-    dptestdx = dppsidx;
+    ptest.shallow_copy_from(ppsi);
+    dptestdx.shallow_copy_from(dppsidx);
 
     // Return the determinant of the jacobian
     return det;
@@ -1234,8 +1219,8 @@ namespace oomph
     transform_derivatives(inverse_jacobian, dppsidx);
 
     // Test functions are shape functions
-    ptest = ppsi;
-    dptestdx = dppsidx;
+    ptest.shallow_copy_from(ppsi);
+    dptestdx.shallow_copy_from(dppsidx);
 
     // Return the determinant of the jacobian
     return det;
@@ -1266,25 +1251,10 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 6; i++)
-    {
-      test[i] = psi[i];
-
-      for (unsigned k = 0; k < 2; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
-
-        for (unsigned p = 0; p < 2; p++)
-        {
-          for (unsigned q = 0; q < 6; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    // Set the test functions equal to the shape functions
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
+    d_dtestdx_dX.shallow_copy_from(d_dpsidx_dX);
 
     // Return the jacobian
     return J;
@@ -1315,25 +1285,10 @@ namespace oomph
     const double J = this->dshape_eulerian_at_knot(
       ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
-    // Loop over the test functions and derivatives and set them equal to the
-    // shape functions
-    for (unsigned i = 0; i < 10; i++)
-    {
-      test[i] = psi[i];
-
-      for (unsigned k = 0; k < 3; k++)
-      {
-        dtestdx(i, k) = dpsidx(i, k);
-
-        for (unsigned p = 0; p < 3; p++)
-        {
-          for (unsigned q = 0; q < 10; q++)
-          {
-            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
-          }
-        }
-      }
-    }
+    // Set the test functions equal to the shape functions
+    test.shallow_copy_from(psi);
+    dtestdx.shallow_copy_from(dpsidx);
+    d_dtestdx_dX.shallow_copy_from(d_dpsidx_dX);
 
     // Return the jacobian
     return J;
@@ -1379,7 +1334,7 @@ namespace oomph
     // Call the pressure shape functions
     this->pshape_nst(s, psi);
     // Test functions are shape functions
-    test = psi;
+    test.shallow_copy_from(psi);
   }
 
 
