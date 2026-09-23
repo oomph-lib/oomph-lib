@@ -236,112 +236,108 @@
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00232}00232\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00233}00233\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00234}00234\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00236}00236\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00237}00237\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{n\_node}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00238}00238\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00239}00239\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00240}00240\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0);}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00241}00241\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1);}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00242}00242\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00237}00237\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00239}00239\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00241}00241\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00242}00242\ }
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00243}00243\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00244}00244\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00245}00245\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00246}00246\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00247}00247\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00248}00248\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00249}00249\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00250}00250\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00251}00251\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00252}00252\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00253}00253\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00254}00254\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00255}00255\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00256}\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{00256}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{TUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00257}00257\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00262}00262\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00263}00263\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00264}00264\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00244}00244\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00245}00245\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00246}00246\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00247}00247\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00248}00248\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00249}00249\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00250}00250\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00251}\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{00251}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{TUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00252}00252\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00257}00257\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00258}00258\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00259}00259\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00261}00261\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00262}00262\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copy\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00263}00263\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00264}00264\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00265}00265\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00266}00266\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00267}00267\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00268}00268\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00266}00266\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00268}00268\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00269}00269\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00270}00270\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00272}00272\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00273}00273\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00274}00274\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00275}00275\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00276}00276\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00277}00277\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00278}00278\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00279}00279\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00280}00280\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00281}00281\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00282}00282\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00283}00283\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00284}\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a45a721e6148650c201f6aed6a5f38702}{00284}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{TUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00285}00285\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00286}00286\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00287}00287\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00288}00288\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00289}00289\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00290}00290\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00291}00291\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00292}00292\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00293}00293\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00294}00294\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00295}00295\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00296}00296\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00297}00297\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00298}00298\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00299}00299\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00300}00300\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00301}00301\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00302}00302\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{d\_dpsidx\_dX}};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00271}00271\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00272}00272\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00273}00273\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00274}00274\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00275}00275\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00276}00276\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00277}00277\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00278}00278\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00279}00279\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00280}\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a45a721e6148650c201f6aed6a5f38702}{00280}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{TUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00281}00281\ \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00282}00282\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00283}00283\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00284}00284\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00285}00285\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00286}00286\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00287}00287\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00288}00288\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00289}00289\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00290}00290\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00291}00291\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00292}00292\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00293}00293\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00295}00295\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00296}00296\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00297}00297\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00298}00298\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00300}00300\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00301}00301\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00302}00302\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00304}00304\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00305}00305\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00306}00306\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00307}00307\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00308}00308\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00309}00309\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00310}00310\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TUnsteadyHeatElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00311}00311\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00312}00312\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00313}00313\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00314}00314\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00315}00315\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00316}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00316}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{TUnsteadyHeatElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00317}00317\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00318}00318\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00319}00319\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00320}00320\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00321}00321\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00322}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aaa769e2b78896380662b06975efd752e}{00322}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aaa769e2b78896380662b06975efd752e}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00323}00323\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00324}00324\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00325}00325\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00326}00326\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TUnsteadyHeatElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00327}00327\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00328}00328\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00329}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{00329}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{TUnsteadyHeatElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00330}00330\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00331}00331\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00332}00332\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00333}00333\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00334}00334\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00335}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_ab38443959b2c1d097897f4e35fefdde2}{00335}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_ab38443959b2c1d097897f4e35fefdde2}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00336}00336\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00337}00337\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00338}00338\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00339}00339\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00340}00340\ }
-\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00341}00341\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00305}00305\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00306}00306\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TUnsteadyHeatElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00307}00307\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00308}00308\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00309}00309\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00310}00310\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00311}00311\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00312}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00312}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{TUnsteadyHeatElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00313}00313\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00314}00314\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00315}00315\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00316}00316\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00317}00317\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00318}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aaa769e2b78896380662b06975efd752e}{00318}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aaa769e2b78896380662b06975efd752e}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00319}00319\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00321}00321\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00322}00322\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TUnsteadyHeatElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00323}00323\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00324}00324\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00325}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{00325}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement}{TUnsteadyHeatElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00326}00326\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00327}00327\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00328}00328\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00329}00329\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00330}00330\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00331}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_ab38443959b2c1d097897f4e35fefdde2}{00331}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_ab38443959b2c1d097897f4e35fefdde2}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00332}00332\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00335}00335\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{Tunsteady__heat__elements_8h_source_l00337}00337\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

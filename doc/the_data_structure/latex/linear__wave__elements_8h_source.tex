@@ -521,89 +521,83 @@
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00517}00517\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00518}00518\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00519}00519\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00520}00520\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00521}00521\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{NNODE\_1D}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00523}00523\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00524}00524\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00525}00525\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{DIM}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00526}00526\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00527}00527\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00528}00528\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00529}00529\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00530}00530\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00531}00531\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00532}00532\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00533}00533\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00534}00534\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00535}00535\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00536}00536\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00537}00537\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00538}00538\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00539}00539\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00540}00540\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00541}00541\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00542}\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{00542}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{QLinearWaveElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00543}00543\ \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00548}00548\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00549}00549\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00550}00550\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00551}00551\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00552}00552\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00553}00553\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers)}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00554}00554\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00555}00555\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00556}00556\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00557}00557\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00558}00558\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00559}00559\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00521}00521\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00522}00522\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00523}00523\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00525}00525\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00526}00526\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00527}00527\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00528}00528\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00529}00529\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00530}00530\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00531}00531\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00532}00532\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00533}00533\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00534}00534\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00535}00535\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00536}\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{00536}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{QLinearWaveElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00537}00537\ \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00542}00542\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00543}00543\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00544}00544\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00546}00546\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00547}00547\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers\ for\ speed)}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00548}00548\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00549}00549\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00551}00551\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00552}00552\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00553}00553\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00555}00555\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00556}00556\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00557}00557\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00558}00558\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00559}00559\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00560}00560\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00561}00561\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00562}00562\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00563}00563\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00564}00564\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00565}00565\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00566}00566\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00567}00567\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00568}00568\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QLinearWaveElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00569}00569\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00570}00570\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00571}00571\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00572}00572\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00573}00573\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00574}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00574}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00575}00575\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00576}00576\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00577}00577\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00578}00578\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00579}00579\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00580}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ae598de898fd7867e0456ca763cdfecd1}{00580}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ae598de898fd7867e0456ca763cdfecd1}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00581}00581\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00582}00582\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00583}00583\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00584}00584\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00585}00585\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00586}00586\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00587}00587\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00588}00588\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00589}00589\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QLinearWaveElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00590}00590\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00591}00591\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00592}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4}{00592}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00593}00593\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00594}00594\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00595}00595\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00596}00596\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00597}00597\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00598}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4_a0fd7955ea3d50a8effb413631d32aec7}{00598}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4_a0fd7955ea3d50a8effb413631d32aec7}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00599}00599\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00600}00600\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00601}00601\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00602}00602\ }
-\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00603}00603\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00561}00561\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00562}00562\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QLinearWaveElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00563}00563\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00564}00564\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00565}00565\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00566}00566\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00567}00567\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00568}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00568}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00569}00569\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00570}00570\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00571}00571\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00572}00572\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00573}00573\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00574}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ae598de898fd7867e0456ca763cdfecd1}{00574}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ae598de898fd7867e0456ca763cdfecd1}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00575}00575\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00576}00576\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00577}00577\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00578}00578\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00579}00579\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00580}00580\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00581}00581\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00582}00582\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00583}00583\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QLinearWaveElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00584}00584\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00585}00585\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00586}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4}{00586}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinearWaveElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00587}00587\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00588}00588\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00589}00589\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00590}00590\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00591}00591\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00592}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4_a0fd7955ea3d50a8effb413631d32aec7}{00592}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QLinearWaveElement_3_011_00_01NNODE__1D_01_4_01_4_a0fd7955ea3d50a8effb413631d32aec7}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00593}00593\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00595}00595\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00596}00596\ }
+\DoxyCodeLine{\Hypertarget{linear__wave__elements_8h_source_l00597}00597\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

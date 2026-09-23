@@ -547,8 +547,8 @@
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00543}00543\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>dshape\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}});}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00544}00544\ }
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00545}00545\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00546}00546\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00547}00547\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}};}
+\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00546}00546\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00547}00547\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdt}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}});}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00548}00548\ }
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00549}00549\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00550}00550\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
@@ -573,8 +573,8 @@
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00569}00569\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>dshape\_eulerian\_at\_knot(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}});}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00570}00570\ }
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00571}00571\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00572}00572\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00573}00573\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}};}
+\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00572}00572\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00573}00573\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdt}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidt}});}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00574}00574\ }
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00575}00575\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{periodic__orbit__handler_8h_source_l00576}00576\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}

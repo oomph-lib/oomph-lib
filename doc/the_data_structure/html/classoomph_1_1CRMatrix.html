@@ -380,7 +380,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00697">697</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l03404">oomph::CRMatrix&lt; T &gt;::build()</a>, <a class="el" href="matrices_8h_source.html#l00870">oomph::CRMatrix&lt; T &gt;::Column_index</a>, <a class="el" href="matrices_8h_source.html#l00873">oomph::CRMatrix&lt; T &gt;::Row_start</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, CRMatrix&lt; T &gt; &gt;::value()</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l03450">oomph::CRMatrix&lt; T &gt;::build()</a>, <a class="el" href="matrices_8h_source.html#l00870">oomph::CRMatrix&lt; T &gt;::Column_index</a>, <a class="el" href="matrices_8h_source.html#l00873">oomph::CRMatrix&lt; T &gt;::Row_start</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, CRMatrix&lt; T &gt; &gt;::value()</a>.</p>
 
 </div>
 </div>
@@ -501,7 +501,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 <p>Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. This matrix forms the storage for CRDoubleMatrices which are distributable. The argument n should be the number of local rows. The argument m is the number of columns. </p>
 <p>Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. The optional final parameter specifies the number of columns. If it is not specified the matrix is assumed to be quadratic. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03404">3404</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03450">3450</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="Tadvection__diffusion__reaction__elements_8h_source.html#l00070">oomph::TAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;::TAdvectionDiffusionReactionElement()</a>.</p>
 
@@ -564,7 +564,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 <p>Function to build matrix from pointers to arrays which hold the row starts, column indices and non-zero values. The final two arguments are the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! </p>
 <p>Function to build a <a class="el" href="classoomph_1_1CRMatrix.html" title="A class for compressed row matrices, a sparse storage format Once again the recursive template trick ...">CRMatrix</a> from pointers to arrays which hold the row starts, column indices and non-zero values Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03354">3354</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03400">3400</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 <p class="reference">References <a class="el" href="Tadvection__diffusion__reaction__elements_8h_source.html#l00070">oomph::TAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;::TAdvectionDiffusionReactionElement()</a>.</p>
 
@@ -591,7 +591,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Wipe matrix data and set all values to 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03323">3323</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l03369">3369</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l01694">oomph::CRDoubleMatrix::build()</a>, <a class="el" href="matrices_8cc_source.html#l01710">oomph::CRDoubleMatrix::build_without_copy()</a>, and <a class="el" href="matrices_8cc_source.html#l01657">oomph::CRDoubleMatrix::clear()</a>.</p>
 
@@ -1019,7 +1019,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 16 2026 17:01:05
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Sep 23 2026 19:28:45
         </div>
       </div>
     </footer>

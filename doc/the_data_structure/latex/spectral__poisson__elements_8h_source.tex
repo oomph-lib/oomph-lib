@@ -194,117 +194,110 @@
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00190}00190\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00191}00191\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00192}00192\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00193}00193\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00194}00194\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00195}00195\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00196}00196\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{nnod}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00197}00197\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00198}00198\ \ \ \ \ \ \ test[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00199}00199\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{DIM}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00200}00200\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00202}00202\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00203}00203\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00204}00204\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00207}00207\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00208}00208\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00209}00209\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00210}00210\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00211}00211\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00212}00212\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00213}00213\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00214}00214\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00215}00215\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00216}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{00216}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{QSpectralPoissonElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00217}00217\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00222}00222\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00223}00223\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00225}00225\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00227}00227\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00228}00228\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00229}00229\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00230}00230\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00232}00232\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00233}00233\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00234}00234\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00235}00235\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00236}00236\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00237}00237\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00238}00238\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00239}00239\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00240}00240\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00241}00241\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00242}00242\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00243}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a20e5c72a2d391708edb7dd2e53666810}{00243}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{QSpectralPoissonElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00244}00244\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00245}00245\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00246}00246\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00247}00247\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00248}00248\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00249}00249\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00250}00250\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00251}00251\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00252}00252\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00253}00253\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00254}00254\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00255}00255\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00256}00256\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00257}00257\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00258}00258\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00259}00259\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00260}00260\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00261}00261\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{d\_dpsidx\_dX}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00262}00262\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00263}00263\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00265}00265\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00266}00266\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00267}00267\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00268}00268\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00269}00269\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00270}00270\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00271}00271\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00272}00272\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00273}00273\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QSpectralPoissonElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00274}00274\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00275}00275\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00276}00276\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00277}00277\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00278}00278\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00279}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00279}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{QSpectralPoissonElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00280}00280\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00281}00281\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00282}00282\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00283}00283\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00284}00284\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00285}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aa4c8a14fe50aa0a5454769b75490d253}{00285}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aa4c8a14fe50aa0a5454769b75490d253}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00286}00286\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00287}00287\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00288}00288\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00289}00289\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00290}00290\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QPoissonElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00291}00291\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00292}00292\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00293}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4}{00293}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{QSpectralPoissonElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00294}00294\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00295}00295\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00296}00296\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00297}00297\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00298}00298\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00299}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_a3b8269193296e7a366f3d077443379be}{00299}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_a3b8269193296e7a366f3d077443379be}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00300}00300\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00301}00301\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00302}00302\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00304}00304\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00193}00193\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00194}00194\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00195}00195\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00197}00197\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00198}00198\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00199}00199\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00201}00201\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00202}00202\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00203}00203\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00204}00204\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00205}00205\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00206}00206\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00207}00207\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00208}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{00208}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{QSpectralPoissonElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00209}00209\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00214}00214\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00215}00215\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00216}00216\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00218}00218\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00219}00219\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copy\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00220}00220\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00221}00221\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00223}00223\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00224}00224\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00225}00225\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00227}00227\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00228}00228\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00229}00229\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00230}00230\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00231}00231\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00232}00232\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00233}00233\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00234}00234\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00235}00235\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00236}\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a20e5c72a2d391708edb7dd2e53666810}{00236}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{QSpectralPoissonElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00237}00237\ \mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement_a294aee49389f189dc34724737aa26efe}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00238}00238\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00239}00239\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00240}00240\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00241}00241\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00242}00242\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00243}00243\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00244}00244\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00245}00245\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00246}00246\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00247}00247\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00248}00248\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00249}00249\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00251}00251\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00252}00252\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00253}00253\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00254}00254\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00256}00256\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00258}00258\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00259}00259\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00260}00260\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00261}00261\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00262}00262\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00263}00263\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00265}00265\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00266}00266\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QSpectralPoissonElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00267}00267\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00268}00268\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00269}00269\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00270}00270\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00271}00271\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00272}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00272}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{QSpectralPoissonElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00273}00273\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00274}00274\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00275}00275\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00276}00276\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00277}00277\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00278}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aa4c8a14fe50aa0a5454769b75490d253}{00278}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_aa4c8a14fe50aa0a5454769b75490d253}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QSpectralElement}{QSpectralElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00279}00279\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00282}00282\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00283}00283\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QPoissonElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00284}00284\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00285}00285\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00286}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4}{00286}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QSpectralPoissonElement}{QSpectralPoissonElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00287}00287\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00288}00288\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00289}00289\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00290}00290\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00291}00291\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00292}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_a3b8269193296e7a366f3d077443379be}{00292}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QSpectralPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_a3b8269193296e7a366f3d077443379be}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00293}00293\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00295}00295\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{spectral__poisson__elements_8h_source_l00297}00297\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

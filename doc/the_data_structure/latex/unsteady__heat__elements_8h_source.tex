@@ -607,352 +607,345 @@
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00603}00603\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00604}00604\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00605}00605\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00606}00606\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00607}00607\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00608}00608\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{NNODE\_1D}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00609}00609\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00610}00610\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00611}00611\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{DIM}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00612}00612\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00613}00613\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00614}00614\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00615}00615\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00616}00616\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00617}00617\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00618}00618\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00619}00619\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00620}00620\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00621}00621\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00622}00622\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00623}00623\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00624}00624\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00625}00625\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00626}00626\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00627}00627\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00628}00628\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00629}\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{00629}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{QUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00630}00630\ \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00633}00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00635}00635\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00636}00636\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00637}00637\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00638}00638\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00639}00639\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00640}00640\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers)}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00641}00641\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00642}00642\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00643}00643\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00644}00644\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00645}00645\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00646}00646\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00647}00647\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00648}00648\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00649}00649\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00650}00650\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00651}00651\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00652}00652\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00653}00653\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00654}00654\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QUnsteadyHeatElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00655}00655\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00656}00656\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00657}00657\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00658}00658\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00659}00659\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00660}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00660}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00661}00661\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00662}00662\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00663}00663\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00664}00664\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00665}00665\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00666}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a529e4a591d38ef1f613cf65159257ccc}{00666}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a529e4a591d38ef1f613cf65159257ccc}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00667}00667\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00668}00668\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00669}00669\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00670}00670\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00671}00671\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00672}00672\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00673}00673\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00674}00674\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00675}00675\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QUnsteadyHeatElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00676}00676\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00677}00677\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00678}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{00678}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00679}00679\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00680}00680\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00681}00681\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00682}00682\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00683}00683\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00684}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_a8289eb012fff70c662ee87d1576451b6}{00684}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_a8289eb012fff70c662ee87d1576451b6}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00685}00685\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00686}00686\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00687}00687\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00688}00688\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00689}00689\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00690}00690\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00691}00691\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00692}00692\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00693}00693\ \ \ \textcolor{comment}{//==========================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00694}00694\ \textcolor{comment}{\ \ ///\ UnsteadyHeat\ upgraded\ to\ become\ projectable}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00695}00695\ \textcolor{comment}{}\ \ \textcolor{comment}{//==========================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00696}00696\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ UNSTEADY\_HEAT\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00697}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{00697}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00698}00698\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1ProjectableElement}{ProjectableElement}}<UNSTEADY\_HEAT\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00699}00699\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00700}00700\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00701}00701\ \textcolor{comment}{\ \ \ \ ///\ Constructor\ [this\ was\ only\ required\ explicitly}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00702}00702\ \textcolor{comment}{\ \ \ \ ///\ from\ gcc\ 4.5.2\ onwards...]}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00703}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a0c06505ffcefcceaddf84905b5a8c1ce}{00703}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a0c06505ffcefcceaddf84905b5a8c1ce}{ProjectableUnsteadyHeatElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00704}00704\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00705}00705\ \textcolor{comment}{\ \ \ \ ///\ Specify\ the\ values\ associated\ with\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00706}00706\ \textcolor{comment}{\ \ \ \ ///\ The\ information\ is\ returned\ in\ a\ vector\ of\ pairs\ which\ comprise}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00707}00707\ \textcolor{comment}{\ \ \ \ ///\ the\ Data\ object\ and\ the\ value\ within\ it,\ that\ correspond\ to\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00708}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ab0b711801870e4ba02c434d548514f4a}{00708}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ab0b711801870e4ba02c434d548514f4a}{data\_values\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00709}00709\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00710}00710\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00711}00711\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00712}00712\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00713}00713\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00714}00714\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00717}00717\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00718}00718\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00719}00719\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00720}00720\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00721}00721\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00722}00722\ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ vector}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00723}00723\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00724}00724\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00606}00606\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00607}00607\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00608}00608\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00610}00610\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00611}00611\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00612}00612\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00613}00613\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00614}00614\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00615}00615\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00616}00616\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00617}00617\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00618}00618\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00619}00619\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00620}00620\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00621}00621\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00622}\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{00622}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{QUnsteadyHeatElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00623}00623\ \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00628}00628\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00629}00629\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00630}00630\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00631}00631\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00632}00632\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00633}00633\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers)}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00634}00634\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00635}00635\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00636}00636\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00637}00637\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00638}00638\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00639}00639\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00640}00640\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00641}00641\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00642}00642\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00643}00643\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00644}00644\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00645}00645\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00646}00646\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00647}00647\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QUnsteadyHeatElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00648}00648\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00649}00649\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00650}00650\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00651}00651\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00652}00652\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00653}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00653}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00654}00654\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00655}00655\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00656}00656\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00657}00657\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00658}00658\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00659}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a529e4a591d38ef1f613cf65159257ccc}{00659}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a529e4a591d38ef1f613cf65159257ccc}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00660}00660\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00661}00661\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00662}00662\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00663}00663\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00664}00664\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00665}00665\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00666}00666\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00667}00667\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00668}00668\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QUnsteadyHeatElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00669}00669\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00670}00670\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00671}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{00671}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteadyHeatElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00672}00672\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00673}00673\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00674}00674\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00675}00675\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00676}00676\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00677}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_a8289eb012fff70c662ee87d1576451b6}{00677}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4_a8289eb012fff70c662ee87d1576451b6}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00678}00678\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00679}00679\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00680}00680\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00681}00681\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00682}00682\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00683}00683\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00684}00684\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00685}00685\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00686}00686\ \ \ \textcolor{comment}{//==========================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00687}00687\ \textcolor{comment}{\ \ ///\ UnsteadyHeat\ upgraded\ to\ become\ projectable}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00688}00688\ \textcolor{comment}{}\ \ \textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00689}00689\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ UNSTEADY\_HEAT\_ELEMENT>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00690}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{00690}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00691}00691\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1ProjectableElement}{ProjectableElement}}<UNSTEADY\_HEAT\_ELEMENT>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00692}00692\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00693}00693\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00694}00694\ \textcolor{comment}{\ \ \ \ ///\ Constructor\ [this\ was\ only\ required\ explicitly}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00695}00695\ \textcolor{comment}{\ \ \ \ ///\ from\ gcc\ 4.5.2\ onwards...]}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00696}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a0c06505ffcefcceaddf84905b5a8c1ce}{00696}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a0c06505ffcefcceaddf84905b5a8c1ce}{ProjectableUnsteadyHeatElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00697}00697\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00698}00698\ \textcolor{comment}{\ \ \ \ ///\ Specify\ the\ values\ associated\ with\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00699}00699\ \textcolor{comment}{\ \ \ \ ///\ The\ information\ is\ returned\ in\ a\ vector\ of\ pairs\ which\ comprise}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00700}00700\ \textcolor{comment}{\ \ \ \ ///\ the\ Data\ object\ and\ the\ value\ within\ it,\ that\ correspond\ to\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00701}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ab0b711801870e4ba02c434d548514f4a}{00701}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ab0b711801870e4ba02c434d548514f4a}{data\_values\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00702}00702\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00703}00703\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00704}00704\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00705}00705\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00706}00706\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00707}00707\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00710}00710\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00712}00712\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00713}00713\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00714}00714\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00715}00715\ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00716}00716\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00717}00717\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00718}00718\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00719}00719\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00720}00720\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00721}00721\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00722}00722\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ data\ value\ associated\ field:\ The\ node\ itself}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00723}00723\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}]\ =\ std::make\_pair(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00724}00724\ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00725}00725\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00726}00726\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00727}00727\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00728}00728\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00729}00729\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ data\ value\ associated\ field:\ The\ node\ itself}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00730}00730\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}]\ =\ std::make\_pair(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00731}00731\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00732}00732\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00733}00733\ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ the\ vector}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00734}00734\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00735}00735\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00736}00736\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00737}00737\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ fields\ to\ be\ projected:\ Just\ one}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00738}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a8966da6a379eb20fcf86efe03c681a86}{00738}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a8966da6a379eb20fcf86efe03c681a86}{nfields\_for\_projection}}()}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00726}00726\ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00727}00727\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00728}00728\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00729}00729\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00730}00730\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ fields\ to\ be\ projected:\ Just\ one}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00731}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a8966da6a379eb20fcf86efe03c681a86}{00731}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a8966da6a379eb20fcf86efe03c681a86}{nfields\_for\_projection}}()}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00732}00732\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00733}00733\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00734}00734\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00735}00735\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00736}00736\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ history\ values\ to\ be\ stored\ for\ fld-\/th\ field.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00737}00737\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00738}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ac26bb5fe73e07db80e7e4e7a2070074c}{00738}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ac26bb5fe73e07db80e7e4e7a2070074c}{nhistory\_values\_for\_projection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00739}00739\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00740}00740\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00741}00741\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00742}00742\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00743}00743\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ history\ values\ to\ be\ stored\ for\ fld-\/th\ field.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00744}00744\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00745}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ac26bb5fe73e07db80e7e4e7a2070074c}{00745}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ac26bb5fe73e07db80e7e4e7a2070074c}{nhistory\_values\_for\_projection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00746}00746\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00747}00747\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00748}00748\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00749}00749\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00750}00750\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00751}00751\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00754}00754\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00756}00756\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00757}00757\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00758}00758\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00740}00740\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00741}00741\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00742}00742\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00743}00743\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00744}00744\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00747}00747\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00749}00749\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00750}00750\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00751}00751\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00752}00752\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00753}00753\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00754}00754\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ positional\ history\ values}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00755}00755\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00756}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a1fcd0a7808f65c0ffde81c1e23d0e1c1}{00756}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a1fcd0a7808f65c0ffde81c1e23d0e1c1}{nhistory\_values\_for\_coordinate\_projection}}()}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00757}00757\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00758}00758\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00759}00759\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00760}00760\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00761}00761\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ positional\ history\ values}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00762}00762\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00763}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a1fcd0a7808f65c0ffde81c1e23d0e1c1}{00763}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a1fcd0a7808f65c0ffde81c1e23d0e1c1}{nhistory\_values\_for\_coordinate\_projection}}()}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00764}00764\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00765}00765\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00766}00766\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00767}00767\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00768}00768\ \textcolor{comment}{\ \ \ \ ///\ Return\ Jacobian\ of\ mapping\ and\ shape\ functions\ of\ field\ fld}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00769}00769\ \textcolor{comment}{\ \ \ \ ///\ at\ local\ coordinate\ s}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00770}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a49318b95add2b1ac8c6f0f0cfac195f6}{00770}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a49318b95add2b1ac8c6f0f0cfac195f6}{jacobian\_and\_shape\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00771}00771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00773}00773\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00774}00774\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00775}00775\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00776}00776\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00777}00777\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00778}00778\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00779}00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00780}00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00781}00781\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00782}00782\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00783}00783\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00784}00784\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00785}00785\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00786}00786\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00787}00787\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00788}00788\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00789}00789\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00790}00790\ \ \ \ \ \ \ \ \ this-\/>dshape\_and\_dtest\_eulerian\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00791}00791\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00792}00792\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00793}00793\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00794}00794\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00795}00795\ \textcolor{comment}{\ \ \ \ ///\ Return\ interpolated\ field\ fld\ at\ local\ coordinate\ s,\ at\ time}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00796}00796\ \textcolor{comment}{\ \ \ \ ///\ level\ t\ (t=0:\ present;\ t>0:\ history\ values)}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00797}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ae4b0cb13a1849f7e950252164884eeba}{00797}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ae4b0cb13a1849f7e950252164884eeba}{get\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00800}00800\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00801}00801\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00802}00802\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00803}00803\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00804}00804\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00805}00805\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00808}00808\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00810}00810\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00811}00811\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00812}00812\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00813}00813\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00761}00761\ \textcolor{comment}{\ \ \ \ ///\ Return\ Jacobian\ of\ mapping\ and\ shape\ functions\ of\ field\ fld}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00762}00762\ \textcolor{comment}{\ \ \ \ ///\ at\ local\ coordinate\ s}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00763}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a49318b95add2b1ac8c6f0f0cfac195f6}{00763}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a49318b95add2b1ac8c6f0f0cfac195f6}{jacobian\_and\_shape\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00764}00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00765}00765\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00766}00766\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00767}00767\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00768}00768\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00769}00769\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00770}00770\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00771}00771\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00774}00774\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00776}00776\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00777}00777\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00778}00778\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00779}00779\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00780}00780\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00781}00781\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00782}00782\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00783}00783\ \ \ \ \ \ \ \ \ this-\/>dshape\_and\_dtest\_eulerian\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00784}00784\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00785}00785\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00786}00786\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00787}00787\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00788}00788\ \textcolor{comment}{\ \ \ \ ///\ Return\ interpolated\ field\ fld\ at\ local\ coordinate\ s,\ at\ time}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00789}00789\ \textcolor{comment}{\ \ \ \ ///\ level\ t\ (t=0:\ present;\ t>0:\ history\ values)}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00790}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ae4b0cb13a1849f7e950252164884eeba}{00790}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ae4b0cb13a1849f7e950252164884eeba}{get\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00793}00793\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00794}00794\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00795}00795\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00796}00796\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00797}00797\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00798}00798\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00801}00801\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00803}00803\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00804}00804\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00805}00805\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00806}00806\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00807}00807\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00808}00808\ \ \ \ \ \ \ \textcolor{comment}{//\ Local\ shape\ function}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00809}00809\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00810}00810\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00811}00811\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00812}00812\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ values\ of\ shape\ function}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00813}00813\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00814}00814\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00815}00815\ \ \ \ \ \ \ \textcolor{comment}{//\ Local\ shape\ function}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00816}00816\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00817}00817\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00818}00818\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00819}00819\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ values\ of\ shape\ function}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00820}00820\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00821}00821\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00822}00822\ \ \ \ \ \ \ \textcolor{comment}{//\ Initialise\ value\ of\ u}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00823}00823\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_u\ =\ 0.0;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00824}00824\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00825}00825\ \ \ \ \ \ \ \textcolor{comment}{//\ Sum\ over\ the\ local\ nodes}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00826}00826\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00827}00827\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00828}00828\ \ \ \ \ \ \ \ \ interpolated\_u\ +=\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(t,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}})\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}];}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00829}00829\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00830}00830\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ interpolated\_u;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00831}00831\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00832}00832\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00833}00833\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00834}00834\ \textcolor{comment}{\ \ \ \ ///\ Return\ number\ of\ values\ in\ field\ fld:\ One\ per\ node}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00835}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_aa15defb47cb015dc9c589606addfdd61}{00835}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_aa15defb47cb015dc9c589606addfdd61}{nvalue\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00836}00836\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00837}00837\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00838}00838\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00839}00839\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00840}00840\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00841}00841\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00844}00844\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00845}00845\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00846}00846\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00847}00847\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00848}00848\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00849}00849\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00850}00850\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00851}00851\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00852}00852\ \textcolor{comment}{\ \ \ \ ///\ Return\ local\ equation\ number\ of\ value\ j\ in\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00853}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ad3c589c0bd97ac402919e426e5ee0e6b}{00853}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ad3c589c0bd97ac402919e426e5ee0e6b}{local\_equation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00854}00854\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00855}00855\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00856}00856\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00857}00857\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00858}00858\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00859}00859\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00860}00860\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00861}00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00862}00862\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00863}00863\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00864}00864\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00865}00865\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00866}00866\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_ust\_heat();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00867}00867\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00868}00868\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00869}00869\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00870}00870\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00871}00871\ \textcolor{comment}{\ \ \ \ ///\ Output\ FE\ representation\ of\ soln:\ x,y,u\ or\ x,y,z,u\ at}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00872}00872\ \textcolor{comment}{\ \ \ \ ///\ and\ history\ values\ at\ n\_plot\string^DIM\ plot\ points}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00873}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a2509779b894af697108d2fa8f2cf1ea8}{00873}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a2509779b894af697108d2fa8f2cf1ea8}{output}}(std::ostream\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00874}00874\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00875}00875\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00876}00876\ \ \ \ \ \ \ \textcolor{comment}{//\ Vector\ of\ local\ coordinates}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00877}00877\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00878}00878\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00879}00879\ \ \ \ \ \ \ \textcolor{comment}{//\ Tecplot\ header\ info}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00880}00880\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00815}00815\ \ \ \ \ \ \ \textcolor{comment}{//\ Initialise\ value\ of\ u}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00816}00816\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_u\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00817}00817\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00818}00818\ \ \ \ \ \ \ \textcolor{comment}{//\ Sum\ over\ the\ local\ nodes}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00819}00819\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00820}00820\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00821}00821\ \ \ \ \ \ \ \ \ interpolated\_u\ +=\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(t,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}})\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}];}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00822}00822\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00823}00823\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ interpolated\_u;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00824}00824\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00825}00825\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00826}00826\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00827}00827\ \textcolor{comment}{\ \ \ \ ///\ Return\ number\ of\ values\ in\ field\ fld:\ One\ per\ node}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00828}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_aa15defb47cb015dc9c589606addfdd61}{00828}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_aa15defb47cb015dc9c589606addfdd61}{nvalue\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00829}00829\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00830}00830\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00831}00831\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00832}00832\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00833}00833\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00834}00834\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00835}00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00836}00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00837}00837\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00839}00839\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00840}00840\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00841}00841\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00842}00842\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00844}00844\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00845}00845\ \textcolor{comment}{\ \ \ \ ///\ Return\ local\ equation\ number\ of\ value\ j\ in\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00846}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ad3c589c0bd97ac402919e426e5ee0e6b}{00846}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_ad3c589c0bd97ac402919e426e5ee0e6b}{local\_equation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00847}00847\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00848}00848\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00849}00849\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00850}00850\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00851}00851\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00852}00852\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}UnsteadyHeat\ elements\ only\ store\ a\ single\ field\ so\ "{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fld\ must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00854}00854\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00855}00855\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00856}00856\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00857}00857\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00858}00858\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00859}00859\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_ust\_heat();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00860}00860\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00861}00861\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00862}00862\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00863}00863\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00864}00864\ \textcolor{comment}{\ \ \ \ ///\ Output\ FE\ representation\ of\ soln:\ x,y,u\ or\ x,y,z,u\ at}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00865}00865\ \textcolor{comment}{\ \ \ \ ///\ and\ history\ values\ at\ n\_plot\string^DIM\ plot\ points}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00866}\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a2509779b894af697108d2fa8f2cf1ea8}{00866}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement_a2509779b894af697108d2fa8f2cf1ea8}{output}}(std::ostream\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00867}00867\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00868}00868\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00869}00869\ \ \ \ \ \ \ \textcolor{comment}{//\ Vector\ of\ local\ coordinates}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00870}00870\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00871}00871\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00872}00872\ \ \ \ \ \ \ \textcolor{comment}{//\ Tecplot\ header\ info}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00873}00873\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e0609d17a8ffb386c6}{tecplot\_zone\_string}}(nplot);}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00875}00875\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ plot\ points}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00876}00876\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{num\_plot\_points}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00877}00877\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{num\_plot\_points}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00878}00878\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00879}00879\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ local\ coordinates\ of\ plot\ point}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00880}00880\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}},\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00881}00881\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00882}00882\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ plot\ points}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00883}00883\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{num\_plot\_points}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8bafdbb0132b388106}{nplot\_points}}(nplot);}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00884}00884\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{num\_plot\_points}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00885}00885\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00886}00886\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ local\ coordinates\ of\ plot\ point}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00887}00887\ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb2005842464cdc148a03}{get\_s\_plot}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iplot}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}},\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00882}00882\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00883}00883\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00884}00884\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00885}00885\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00886}00886\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_u\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00887}00887\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_du\_dt\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00888}00888\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00889}00889\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00890}00890\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(s,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00892}00892\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00893}00893\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_u\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00894}00894\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_du\_dt\_ust\_heat(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00895}00895\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00896}00896\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00897}00897\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ History\ values\ of\ coordinates}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00898}00898\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_prev}}\ =}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00900}00900\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ =\ 1;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ <\ n\_prev;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00901}00901\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00902}00902\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00903}00903\ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00904}00904\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ s,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00889}00889\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00890}00890\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ History\ values\ of\ coordinates}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00891}00891\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_prev}}\ =}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00892}00892\ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00893}00893\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ =\ 1;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ <\ n\_prev;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00894}00894\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00895}00895\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_dim}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd17603096e63087020f}{interpolated\_x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ s,\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00898}00898\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00899}00899\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00900}00900\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00901}00901\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ History\ values\ of\ velocities}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00902}00902\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_prev}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00903}00903\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ =\ 1;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ <\ n\_prev;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00904}00904\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_u\_ust\_heat(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00906}00906\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00907}00907\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00908}00908\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ History\ values\ of\ velocities}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00909}00909\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_prev}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00910}00910\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ =\ 1;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ <\ n\_prev;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}++)}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00911}00911\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00912}00912\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ this-\/>interpolated\_u\_ust\_heat(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00913}00913\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00914}00914\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00915}00915\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00907}00907\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00908}00908\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00909}00909\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00910}00910\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00911}00911\ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ tecplot\ footer\ (e.g.\ FE\ connectivity\ lists)}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00912}00912\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}});}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00913}00913\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00914}00914\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00915}00915\ }
 \DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00916}00916\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00917}00917\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00918}00918\ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ tecplot\ footer\ (e.g.\ FE\ connectivity\ lists)}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00919}00919\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ac3987a5ead7dc20c63d86b333466e2b5}{write\_tecplot\_zone\_footer}}(outfile,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}});}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00920}00920\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00921}00921\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00922}00922\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00923}00923\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00924}00924\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00925}00925\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ element\ is\ the\ same\ as\ that\ for\ the\ underlying}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00926}00926\ \textcolor{comment}{\ \ ///\ wrapped\ element}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00927}00927\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00928}00928\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00929}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4}{00929}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}<ELEMENT>>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00930}00930\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00931}00931\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00932}00932\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00933}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_ac3fab47aafbb7bad5d21e95ad6ab119a}{00933}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_ac3fab47aafbb7bad5d21e95ad6ab119a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00934}00934\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00935}00935\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00936}00936\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00937}00937\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00938}00938\ \textcolor{comment}{\ \ ///\ Face\ geometry\ of\ the\ Face\ Geometry\ for\ element\ is\ the\ same\ as}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00939}00939\ \textcolor{comment}{\ \ ///\ that\ for\ the\ underlying\ wrapped\ element}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00940}00940\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00941}00941\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00942}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4}{00942}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}<ELEMENT>>>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00943}00943\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<FaceGeometry<ELEMENT>>}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00944}00944\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00945}00945\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00946}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4_aad4abb55352b0655390f8c8cc8380323}{00946}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4_aad4abb55352b0655390f8c8cc8380323}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00947}00947\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00948}00948\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00949}00949\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00950}00950\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00951}00951\ }
-\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00952}00952\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00917}00917\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00918}00918\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ element\ is\ the\ same\ as\ that\ for\ the\ underlying}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00919}00919\ \textcolor{comment}{\ \ ///\ wrapped\ element}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00920}00920\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00921}00921\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00922}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4}{00922}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}<ELEMENT>>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00923}00923\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00924}00924\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00925}00925\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00926}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_ac3fab47aafbb7bad5d21e95ad6ab119a}{00926}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_ac3fab47aafbb7bad5d21e95ad6ab119a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00927}00927\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00928}00928\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00929}00929\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00930}00930\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00931}00931\ \textcolor{comment}{\ \ ///\ Face\ geometry\ of\ the\ Face\ Geometry\ for\ element\ is\ the\ same\ as}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00932}00932\ \textcolor{comment}{\ \ ///\ that\ for\ the\ underlying\ wrapped\ element}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00933}00933\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00934}00934\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00935}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4}{00935}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{ProjectableUnsteadyHeatElement}}<ELEMENT>>>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00936}00936\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<FaceGeometry<ELEMENT>>}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00937}00937\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00938}00938\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00939}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4_aad4abb55352b0655390f8c8cc8380323}{00939}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4_aad4abb55352b0655390f8c8cc8380323}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00940}00940\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00941}00941\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00942}00942\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00943}00943\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00944}00944\ }
+\DoxyCodeLine{\Hypertarget{unsteady__heat__elements_8h_source_l00945}00945\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

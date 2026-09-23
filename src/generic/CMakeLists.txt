@@ -122,6 +122,7 @@ set(SOURCES
     oomph_utilities.cc
     complex_matrices.cc
     matrices.cc
+    shape.cc
     timesteppers.cc
     explicit_timesteppers.cc
     integral.cc

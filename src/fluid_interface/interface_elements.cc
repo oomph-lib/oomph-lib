@@ -781,7 +781,7 @@ namespace oomph
 
     // The surface divergence is the same as the surface
     // gradient operator
-    dpsidS_div = dpsidS;
+    dpsidS_div.shallow_copy_from(dpsidS);
 
     // Return the jacobian
     return sqrt(a11);
@@ -898,7 +898,7 @@ namespace oomph
     }
 
     // The divergence operator is the same
-    dpsidS_div = dpsidS;
+    dpsidS_div.shallow_copy_from(dpsidS);
 
     // Return the jacobian
     return sqrt(det_a);

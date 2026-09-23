@@ -218,64 +218,59 @@
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00214}00214\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00215}00215\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00216}00216\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00218}00218\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00219}00219\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{n\_node}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00220}00220\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00221}00221\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00222}00222\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0);}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00223}00223\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1);}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00224}00224\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00217}00217\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00218}00218\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00219}00219\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00221}00221\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00223}00223\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00224}00224\ }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00225}00225\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00226}00226\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00227}00227\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00228}00228\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00229}00229\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00231}00231\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00232}00232\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00233}00233\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00234}00234\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00235}00235\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00236}00236\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00237}00237\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00238}00238\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{TFoepplvonKarmanElement}}<}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00239}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a47009097d667db8345785599cb3bdb81}{00239}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>::dshape\_and\_dtest\_eulerian\_at\_knot\_fvk(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00244}00244\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00246}00246\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>dshape\_eulerian\_at\_knot(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00247}00247\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00248}00248\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00249}00249\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00250}00250\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00226}00226\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00227}00227\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00228}00228\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00229}00229\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00230}00230\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00231}00231\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00232}00232\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00233}00233\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{TFoepplvonKarmanElement}}<}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00234}\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement_a47009097d667db8345785599cb3bdb81}{00234}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>::dshape\_and\_dtest\_eulerian\_at\_knot\_fvk(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00239}00239\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00240}00240\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00241}00241\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>dshape\_eulerian\_at\_knot(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00243}00243\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00244}00244\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00245}00245\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00247}00247\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00249}00249\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00250}00250\ }
 \DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00251}00251\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00252}00252\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00253}00253\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00254}00254\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00255}00255\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00256}00256\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00257}00257\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00258}00258\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TFoepplvonKarmanElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00259}00259\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00260}00260\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00261}00261\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00262}00262\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00263}00263\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00264}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4}{00264}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{TFoepplvonKarmanElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00265}00265\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00266}00266\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00267}00267\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00268}00268\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00269}00269\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00270}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4_a6105f671ea381b92e06f2ae67118d04b}{00270}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4_a6105f671ea381b92e06f2ae67118d04b}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00271}00271\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00272}00272\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00273}00273\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00274}00274\ }
-\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00275}00275\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00252}00252\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00253}00253\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TFoepplvonKarmanElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00254}00254\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00255}00255\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00256}00256\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00257}00257\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00258}00258\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00259}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4}{00259}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TFoepplvonKarmanElement}{TFoepplvonKarmanElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00260}00260\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00261}00261\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00262}00262\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00263}00263\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00264}00264\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00265}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4_a6105f671ea381b92e06f2ae67118d04b}{00265}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TFoepplvonKarmanElement_3_01NNODE__1D_01_4_01_4_a6105f671ea381b92e06f2ae67118d04b}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00266}00266\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00268}00268\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{Tfoeppl__von__karman__elements_8h_source_l00270}00270\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

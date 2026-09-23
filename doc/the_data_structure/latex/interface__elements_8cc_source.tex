@@ -785,7 +785,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00781}00781\ }
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00782}00782\ \ \ \ \ \textcolor{comment}{//\ The\ surface\ divergence\ is\ the\ same\ as\ the\ surface}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00783}00783\ \ \ \ \ \textcolor{comment}{//\ gradient\ operator}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00784}00784\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS\_div}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS}};}
+\DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00784}00784\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS\_div}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS}});}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00785}00785\ }
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00786}00786\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00787}00787\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{a11}});}
@@ -902,7 +902,7 @@
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00898}00898\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00899}00899\ }
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00900}00900\ \ \ \ \ \textcolor{comment}{//\ The\ divergence\ operator\ is\ the\ same}}
-\DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00901}00901\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS\_div}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS}};}
+\DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00901}00901\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS\_div}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidS}});}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00902}00902\ }
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00903}00903\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{interface__elements_8cc_source_l00904}00904\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{det\_a}});}

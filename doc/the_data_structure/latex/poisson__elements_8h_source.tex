@@ -676,321 +676,325 @@
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00672}00672\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00673}00673\ }
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00674}00674\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00675}00675\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00676}00676\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00677}00677\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00678}00678\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00679}00679\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00680}00680\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00681}00681\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00675}00675\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copies\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00676}00676\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00677}00677\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00679}00679\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00680}00680\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00681}00681\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00682}00682\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00683}00683\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00684}00684\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00685}00685\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00686}00686\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00687}00687\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00688}00688\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00689}00689\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00690}\mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{00690}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{QPoissonElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00691}00691\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00693}00693\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00696}00696\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00697}00697\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00698}00698\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00699}00699\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00700}00700\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00701}00701\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00702}00702\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00703}00703\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00704}00704\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00705}00705\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00706}00706\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00707}00707\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00708}00708\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00709}00709\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00710}00710\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00711}00711\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00712}00712\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00713}00713\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00714}00714\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00715}00715\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00716}00716\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00717}00717\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00718}\mbox{\hyperlink{classoomph_1_1QPoissonElement_a0e919ee36672fdf05dedad29d8e53b8a}{00718}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{QPoissonElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00719}00719\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00720}00720\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00721}00721\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00722}00722\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00723}00723\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00724}00724\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00725}00725\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00726}00726\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00727}00727\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00728}00728\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00729}00729\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00730}00730\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00731}00731\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00732}00732\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00733}00733\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00734}00734\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00735}00735\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00736}00736\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{d\_dpsidx\_dX}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00737}00737\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00738}00738\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00739}00739\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00740}00740\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00684}00684\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00685}00685\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00686}00686\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00687}00687\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00688}00688\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00689}00689\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00690}00690\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00691}\mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{00691}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{QPoissonElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00692}00692\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00693}00693\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00697}00697\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00698}00698\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00699}00699\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00700}00700\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00701}00701\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00702}00702\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copies\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00703}00703\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00704}00704\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00706}00706\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00707}00707\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00708}00708\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00709}00709\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00710}00710\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00711}00711\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00712}00712\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ (psi)\ and\ test\ functions\ (test)\ and}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00713}00713\ \textcolor{comment}{\ \ ///\ their\ derivatives\ w.r.t.\ global\ coordinates\ (dpsidx\ and\ dtestdx)}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00714}00714\ \textcolor{comment}{\ \ ///\ and\ return\ Jacobian\ of\ mapping\ (J).\ Additionally\ compute\ the}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00715}00715\ \textcolor{comment}{\ \ ///\ derivatives\ of\ dpsidx,\ dtestdx\ and\ J\ w.r.t.\ nodal\ coordinates.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00716}00716\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00717}00717\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00718}00718\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00719}00719\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00720}\mbox{\hyperlink{classoomph_1_1QPoissonElement_a0e919ee36672fdf05dedad29d8e53b8a}{00720}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{QPoissonElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00721}00721\ \mbox{\hyperlink{classoomph_1_1QPoissonElement_a0f51d1468383a7af95b82522038d4e20}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_poisson}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00722}00722\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00723}00723\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00724}00724\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00725}00725\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00726}00726\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00727}00727\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00728}00728\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{RankFourTensor<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00729}00729\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DenseMatrix<double>}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00730}00730\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00731}00731\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00732}00732\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00733}00733\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00734}00734\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00735}00735\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00736}00736\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copies\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00737}00737\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00738}00738\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00739}00739\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00740}00740\ \ \ \ \ \textcolor{comment}{//\ d\_dtestdx\_dX\ =\ d\_dpsidx\_dX;}}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00741}00741\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00742}00742\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00743}00743\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00744}00744\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00745}00745\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00742}00742\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00743}00743\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00744}00744\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00745}00745\ }
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00746}00746\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00747}00747\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00748}00748\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00749}00749\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QPoissonElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00750}00750\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00751}00751\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00752}00752\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00753}00753\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00754}00754\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00755}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00755}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00756}00756\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00757}00757\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00758}00758\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00759}00759\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00760}00760\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00761}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a954702ded1d713906350fa118d8c9aa2}{00761}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a954702ded1d713906350fa118d8c9aa2}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00762}00762\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00763}00763\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00764}00764\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00765}00765\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00766}00766\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00747}00747\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00748}00748\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00749}00749\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00750}00750\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00751}00751\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00752}00752\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00753}00753\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QPoissonElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00754}00754\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00755}00755\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00756}00756\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00757}00757\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00758}00758\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00759}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00759}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00760}00760\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00761}00761\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00762}00762\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00763}00763\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00764}00764\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00765}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a954702ded1d713906350fa118d8c9aa2}{00765}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a954702ded1d713906350fa118d8c9aa2}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00766}00766\ \ \ \};}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00767}00767\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00768}00768\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00769}00769\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00770}00770\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QPoissonElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00771}00771\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00772}00772\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00773}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4}{00773}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00774}00774\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00775}00775\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00776}00776\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00777}00777\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00778}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_afd5f5f3ccd00da5c68f1e35c11f91c0f}{00778}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_afd5f5f3ccd00da5c68f1e35c11f91c0f}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00779}00779\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00780}00780\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00781}00781\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00782}00782\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00783}00783\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00784}00784\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00768}00768\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00769}00769\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00770}00770\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00771}00771\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00773}00773\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00774}00774\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QPoissonElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00775}00775\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00776}00776\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00777}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4}{00777}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QPoissonElement}{QPoissonElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00778}00778\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00779}00779\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00780}00780\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00781}00781\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00782}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_afd5f5f3ccd00da5c68f1e35c11f91c0f}{00782}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPoissonElement_3_011_00_01NNODE__1D_01_4_01_4_afd5f5f3ccd00da5c68f1e35c11f91c0f}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00783}00783\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00784}00784\ }
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00785}00785\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00786}00786\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00787}00787\ \ \ \textcolor{comment}{//==========================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00788}00788\ \textcolor{comment}{\ \ ///\ Poisson\ upgraded\ to\ become\ projectable}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00789}00789\ \textcolor{comment}{}\ \ \textcolor{comment}{//==========================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00790}00790\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ POISSON\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00791}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{00791}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00792}00792\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1ProjectableElement}{ProjectableElement}}<POISSON\_ELEMENT>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00793}00793\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00794}00794\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00795}00795\ \textcolor{comment}{\ \ \ \ ///\ Specify\ the\ values\ associated\ with\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00796}00796\ \textcolor{comment}{\ \ \ \ ///\ The\ information\ is\ returned\ in\ a\ vector\ of\ pairs\ which\ comprise}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00797}00797\ \textcolor{comment}{\ \ \ \ ///\ the\ Data\ object\ and\ the\ value\ within\ it,\ that\ correspond\ to\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00798}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{00798}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{data\_values\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00799}00799\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00800}00800\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00801}00801\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00802}00802\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00803}00803\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00804}00804\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00807}00807\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00809}00809\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00810}00810\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00811}00811\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00812}00812\ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ vector}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00813}00813\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00814}00814\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00786}00786\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00787}00787\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00788}00788\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00789}00789\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00791}00791\ \ \ \textcolor{comment}{//==========================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00792}00792\ \textcolor{comment}{\ \ ///\ Poisson\ upgraded\ to\ become\ projectable}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00793}00793\ \textcolor{comment}{}\ \ \textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00794}00794\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ POISSON\_ELEMENT>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00795}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{00795}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00796}00796\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1ProjectableElement}{ProjectableElement}}<POISSON\_ELEMENT>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00797}00797\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00798}00798\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00799}00799\ \textcolor{comment}{\ \ \ \ ///\ Specify\ the\ values\ associated\ with\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00800}00800\ \textcolor{comment}{\ \ \ \ ///\ The\ information\ is\ returned\ in\ a\ vector\ of\ pairs\ which\ comprise}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00801}00801\ \textcolor{comment}{\ \ \ \ ///\ the\ Data\ object\ and\ the\ value\ within\ it,\ that\ correspond\ to\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00802}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{00802}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a1f22fb7c0e2ea9e3e7f022d534c0b69d}{data\_values\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00803}00803\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00804}00804\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00805}00805\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00806}00806\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00807}00807\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00808}00808\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00811}00811\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00813}00813\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00814}00814\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00815}00815\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00816}00816\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00817}00817\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00818}00818\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00819}00819\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ data\ value\ associated\ field:\ The\ node\ itself}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00820}00820\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}]\ =\ std::make\_pair(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00821}00821\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00822}00822\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00823}00823\ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ the\ vector}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00824}00824\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00825}00825\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00826}00826\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00827}00827\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ fields\ to\ be\ projected:\ Just\ one}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00828}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0b8e911e3eca8dbfecd30a5e8dc2ff33}{00828}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0b8e911e3eca8dbfecd30a5e8dc2ff33}{nfields\_for\_projection}}()}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00829}00829\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00830}00830\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00831}00831\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00832}00832\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00833}00833\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ history\ values\ to\ be\ stored\ for\ fld-\/th\ field}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00834}00834\ \textcolor{comment}{\ \ \ \ ///\ (includes\ current\ value!)}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00835}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{00835}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{nhistory\_values\_for\_projection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00836}00836\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00837}00837\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00838}00838\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00839}00839\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00840}00840\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00841}00841\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00844}00844\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00845}00845\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00846}00846\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00847}00847\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00848}00848\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00849}00849\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00850}00850\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00851}00851\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ positional\ history\ values}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00852}00852\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00853}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}{00853}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}{nhistory\_values\_for\_coordinate\_projection}}()}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00854}00854\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00855}00855\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00856}00856\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00857}00857\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00858}00858\ \textcolor{comment}{\ \ \ \ ///\ Return\ Jacobian\ of\ mapping\ and\ shape\ functions\ of\ field\ fld}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00859}00859\ \textcolor{comment}{\ \ \ \ ///\ at\ local\ coordinate\ s}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00860}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{00860}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{jacobian\_and\_shape\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00861}00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00862}00862\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00863}00863\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00864}00864\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00865}00865\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00866}00866\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00867}00867\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00868}00868\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00871}00871\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00873}00873\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00874}00874\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00875}00875\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00876}00876\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00877}00877\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00878}00878\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00879}00879\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00880}00880\ \ \ \ \ \ \ \ \ this-\/>dshape\_and\_dtest\_eulerian\_poisson(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00881}00881\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00882}00882\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00883}00883\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00884}00884\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00885}00885\ \textcolor{comment}{\ \ \ \ ///\ Return\ interpolated\ field\ fld\ at\ local\ coordinate\ s,\ at\ time}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00886}00886\ \textcolor{comment}{\ \ \ \ ///\ level\ t\ (t=0:\ present;\ t>0:\ history\ values)}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00887}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{00887}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{get\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00890}00890\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00891}00891\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00892}00892\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00893}00893\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00894}00894\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00895}00895\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00898}00898\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00900}00900\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00901}00901\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00902}00902\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00903}00903\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_poisson();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00904}00904\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00905}00905\ \ \ \ \ \ \ \textcolor{comment}{//\ Local\ shape\ function}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00906}00906\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00907}00907\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00816}00816\ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00817}00817\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00818}00818\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::pair<Data*,\ unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00819}00819\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00820}00820\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00821}00821\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00822}00822\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00823}00823\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ data\ value\ associated\ field:\ The\ node\ itself}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00824}00824\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}]\ =\ std::make\_pair(this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00825}00825\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00826}00826\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00827}00827\ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00828}00828\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\_values}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00829}00829\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00830}00830\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00831}00831\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ fields\ to\ be\ projected:\ Just\ one}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00832}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0b8e911e3eca8dbfecd30a5e8dc2ff33}{00832}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0b8e911e3eca8dbfecd30a5e8dc2ff33}{nfields\_for\_projection}}()}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00833}00833\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00834}00834\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00835}00835\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00836}00836\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00837}00837\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ history\ values\ to\ be\ stored\ for\ fld-\/th\ field}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00838}00838\ \textcolor{comment}{\ \ \ \ ///\ (includes\ current\ value!)}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00839}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{00839}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a6256481549383c8abdd666f691e3dbed}{nhistory\_values\_for\_projection}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00840}00840\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00841}00841\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00842}00842\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00843}00843\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00844}00844\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00845}00845\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00846}00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00847}00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00848}00848\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00849}00849\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00850}00850\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00851}00851\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00852}00852\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00853}00853\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00854}00854\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00855}00855\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ positional\ history\ values}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00856}00856\ \textcolor{comment}{\ \ \ \ ///\ (Note:\ count\ includes\ current\ value!)}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00857}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}{00857}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a42e8ec2cd54a3301190d2b3a10e66370}{nhistory\_values\_for\_coordinate\_projection}}()}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00858}00858\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00859}00859\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\_time\_stepper\_pt}}()-\/>\mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00860}00860\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00861}00861\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00862}00862\ \textcolor{comment}{\ \ \ \ ///\ Return\ Jacobian\ of\ mapping\ and\ shape\ functions\ of\ field\ fld}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00863}00863\ \textcolor{comment}{\ \ \ \ ///\ at\ local\ coordinate\ s}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00864}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{00864}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a0fa8292f5be360a3c8727cb1790506aa}{jacobian\_and\_shape\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00865}00865\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00867}00867\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00868}00868\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00869}00869\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00870}00870\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00871}00871\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00874}00874\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00875}00875\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00876}00876\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00877}00877\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00878}00878\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00879}00879\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00880}00880\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00881}00881\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00882}00882\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}}),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_dim}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00883}00883\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00884}00884\ \ \ \ \ \ \ \ \ this-\/>dshape\_and\_dtest\_eulerian\_poisson(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00885}00885\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00886}00886\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00887}00887\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00888}00888\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00889}00889\ \textcolor{comment}{\ \ \ \ ///\ Return\ interpolated\ field\ fld\ at\ local\ coordinate\ s,\ at\ time}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00890}00890\ \textcolor{comment}{\ \ \ \ ///\ level\ t\ (t=0:\ present;\ t>0:\ history\ values)}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00891}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{00891}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a39f08edb4ea9e6c4e0def984cee288c6}{get\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00892}00892\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00893}00893\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\&\ \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00894}00894\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00895}00895\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00896}00896\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00897}00897\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00898}00898\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00899}00899\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00900}00900\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00901}00901\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00902}00902\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00903}00903\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00904}00904\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00905}00905\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00906}00906\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00907}00907\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_poisson();}
 \DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00908}00908\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00909}00909\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ values\ of\ shape\ function}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00910}00910\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00911}00911\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00912}00912\ \ \ \ \ \ \ \textcolor{comment}{//\ Initialise\ value\ of\ u}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00913}00913\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_u\ =\ 0.0;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00914}00914\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00915}00915\ \ \ \ \ \ \ \textcolor{comment}{//\ Sum\ over\ the\ local\ nodes}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00916}00916\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}++)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00917}00917\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00918}00918\ \ \ \ \ \ \ \ \ interpolated\_u\ +=\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}})\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}];}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00919}00919\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00920}00920\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ interpolated\_u;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00921}00921\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00922}00922\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00923}00923\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00924}00924\ \textcolor{comment}{\ \ \ \ ///\ Return\ number\ of\ values\ in\ field\ fld:\ One\ per\ node}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00925}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{00925}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{nvalue\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00926}00926\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00927}00927\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00928}00928\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00929}00929\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00930}00930\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00931}00931\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00932}00932\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00933}00933\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00934}00934\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00935}00935\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00936}00936\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00937}00937\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00938}00938\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00939}00939\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00940}00940\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00941}00941\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00942}00942\ \textcolor{comment}{\ \ \ \ ///\ Return\ local\ equation\ number\ of\ value\ j\ in\ field\ fld.}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00943}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{00943}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{local\_equation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00944}00944\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00945}00945\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00946}00946\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00947}00947\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00948}00948\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00949}00949\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00950}00950\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00951}00951\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00952}00952\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00954}00954\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00955}00955\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00956}00956\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_poisson();}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00957}00957\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}});}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00958}00958\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00959}00959\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00960}00960\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00961}00961\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00962}00962\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00963}00963\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ element\ is\ the\ same\ as\ that\ for\ the\ underlying}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00964}00964\ \textcolor{comment}{\ \ ///\ wrapped\ element}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00965}00965\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00966}00966\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00967}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4}{00967}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}<ELEMENT>>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00968}00968\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00969}00969\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00970}00970\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00971}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_aa5469f0278a5a7e8c474220abeae3ff4}{00971}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_aa5469f0278a5a7e8c474220abeae3ff4}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00972}00972\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00973}00973\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00974}00974\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00975}00975\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00976}00976\ \textcolor{comment}{\ \ ///\ Face\ geometry\ of\ the\ Face\ Geometry\ for\ element\ is\ the\ same\ as}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00977}00977\ \textcolor{comment}{\ \ ///\ that\ for\ the\ underlying\ wrapped\ element}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00978}00978\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00979}00979\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00980}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4}{00980}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}<ELEMENT>>>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00981}00981\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<FaceGeometry<ELEMENT>>}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00982}00982\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00983}00983\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00984}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4_ad171405238db1ef82e9977f5bcb78425}{00984}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4_ad171405238db1ef82e9977f5bcb78425}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00985}00985\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00986}00986\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00987}00987\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00988}00988\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00989}00989\ }
-\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00990}00990\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00909}00909\ \ \ \ \ \ \ \textcolor{comment}{//\ Local\ shape\ function}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00910}00910\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00911}00911\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00912}00912\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00913}00913\ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ values\ of\ shape\ function}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00914}00914\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00915}00915\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00916}00916\ \ \ \ \ \ \ \textcolor{comment}{//\ Initialise\ value\ of\ u}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00917}00917\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_u\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00918}00918\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00919}00919\ \ \ \ \ \ \ \textcolor{comment}{//\ Sum\ over\ the\ local\ nodes}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00920}00920\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_node}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}++)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00921}00921\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00922}00922\ \ \ \ \ \ \ \ \ interpolated\_u\ +=\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a28fd5c2d4aeba5ef65bee0e0d72569f5}{nodal\_value}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}})\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}];}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00923}00923\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00924}00924\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ interpolated\_u;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00925}00925\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00926}00926\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00927}00927\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00928}00928\ \textcolor{comment}{\ \ \ \ ///\ Return\ number\ of\ values\ in\ field\ fld:\ One\ per\ node}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00929}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{00929}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_a006f46a3072037df9f301ed71af56ac1}{nvalue\_of\_field}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00930}00930\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00931}00931\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00932}00932\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00933}00933\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00934}00934\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00935}00935\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00936}00936\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00937}00937\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00938}00938\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00939}00939\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00940}00940\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00941}00941\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00942}00942\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00943}00943\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00944}00944\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00945}00945\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00946}00946\ \textcolor{comment}{\ \ \ \ ///\ Return\ local\ equation\ number\ of\ value\ j\ in\ field\ fld.}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00947}\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{00947}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement_af13ec8e584c3ab11cb501030220fcb87}{local\_equation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00948}00948\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00949}00949\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00950}00950\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00951}00951\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00952}00952\ \ \ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00953}00953\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Poisson\ elements\ only\ store\ a\ single\ field\ so\ fld\ "{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00954}00954\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}must\ be\ 0\ rather"{}}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00955}00955\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ than\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fld}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00956}00956\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00957}00957\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00958}00958\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00959}00959\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00960}00960\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}}\ =\ this-\/>u\_index\_poisson();}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00961}00961\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5da80bbed97543e586f698251d67941d}{nodal\_local\_eqn}}(j,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{u\_nodal\_index}});}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00962}00962\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00963}00963\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00964}00964\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00965}00965\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00966}00966\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00967}00967\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ element\ is\ the\ same\ as\ that\ for\ the\ underlying}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00968}00968\ \textcolor{comment}{\ \ ///\ wrapped\ element}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00969}00969\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00970}00970\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00971}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4}{00971}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}<ELEMENT>>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00972}00972\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00973}00973\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00974}00974\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00975}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_aa5469f0278a5a7e8c474220abeae3ff4}{00975}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_aa5469f0278a5a7e8c474220abeae3ff4}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00976}00976\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00977}00977\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00978}00978\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00979}00979\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00980}00980\ \textcolor{comment}{\ \ ///\ Face\ geometry\ of\ the\ Face\ Geometry\ for\ element\ is\ the\ same\ as}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00981}00981\ \textcolor{comment}{\ \ ///\ that\ for\ the\ underlying\ wrapped\ element}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00982}00982\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00983}00983\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00984}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4}{00984}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1ProjectablePoissonElement}{ProjectablePoissonElement}}<ELEMENT>>>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00985}00985\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<FaceGeometry<ELEMENT>>}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00986}00986\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00987}00987\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00988}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4_ad171405238db1ef82e9977f5bcb78425}{00988}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4_01_4_ad171405238db1ef82e9977f5bcb78425}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<ELEMENT>>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00989}00989\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00990}00990\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00991}00991\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00992}00992\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00993}00993\ }
+\DoxyCodeLine{\Hypertarget{poisson__elements_8h_source_l00994}00994\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

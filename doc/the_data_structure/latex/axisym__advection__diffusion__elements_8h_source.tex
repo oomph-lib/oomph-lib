@@ -709,496 +709,489 @@
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00705}00705\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00706}00706\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>dshape\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00707}00707\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00708}00708\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00709}00709\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00710}00710\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00711}00711\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00712}00712\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00713}00713\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ 2;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00714}00714\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00715}00715\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00716}00716\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00717}00717\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00718}00718\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00719}00719\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00720}00720\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00721}00721\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00722}00722\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00708}00708\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00709}00709\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00710}00710\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00711}00711\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00712}00712\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00713}00713\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00714}00714\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00715}00715\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00716}00716\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00717}00717\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00718}00718\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00719}00719\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00720}00720\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00721}00721\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00722}00722\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00723}00723\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00724}00724\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00725}00725\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00726}00726\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00727}00727\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00728}00728\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00729}00729\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00730}00730\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00731}00731\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00732}\mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{00732}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{QAxisymAdvectionDiffusionElement<NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00733}00733\ \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_adv\_diff}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00736}00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00737}00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00738}00738\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00739}00739\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00740}00740\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00741}00741\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00742}00742\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions\ (pointer\ copy)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00743}00743\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00744}00744\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00745}00745\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00746}00746\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00747}00747\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00748}00748\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00749}00749\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00750}00750\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00751}00751\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00752}00752\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00753}00753\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00754}00754\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00755}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{00755}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisymAdvectionDiffusionElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00756}00756\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00757}00757\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00758}00758\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00759}00759\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00760}00760\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00761}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4_a7c174f03870a2be3a784a71044ae2810}{00761}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4_a7c174f03870a2be3a784a71044ae2810}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00762}00762\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00763}00763\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00764}00764\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00765}00765\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00766}00766\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00767}00767\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00768}00768\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00769}00769\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00770}00770\ \textcolor{comment}{\ \ ///\ A\ class\ for\ elements\ that\ allow\ the\ imposition\ of\ an}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00771}00771\ \textcolor{comment}{\ \ ///\ applied\ Robin\ boundary\ condition\ on\ the\ boundaries\ of\ Steady}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00772}00772\ \textcolor{comment}{\ \ ///\ Axisymmnetric\ Advection\ Diffusion\ Flux\ elements.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00773}00773\ \textcolor{comment}{\ \ ///\ \(\backslash\)f[\ -\/\(\backslash\)Delta\ u\ \(\backslash\)cdot\ \(\backslash\)mathbf\{n\}\ +\ \(\backslash\)alpha(r,z)\ u\ =\ \(\backslash\)beta(r,z)\ \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00774}00774\ \textcolor{comment}{\ \ ///\ The\ element\ geometry\ is\ obtained\ from\ the\ FaceGeometry<ELEMENT>}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00775}00775\ \textcolor{comment}{\ \ ///\ policy\ class.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00776}00776\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00777}00777\ \textcolor{comment}{\ \ ///\ AT\ THE\ MOMENT\ THESE\ ARE\ IN\ SPHERICAL\ POLARS\ -\/-\/-\/\ NOT\ CONSISTENT}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00778}00778\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00779}00779\ \ \ \textcolor{comment}{//\ template\ <class\ ELEMENT>}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00780}00780\ \ \ \textcolor{comment}{//\ class\ AxisymAdvectionDiffusionFluxElement\ :}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00781}00781\ \ \ \textcolor{comment}{//\ public\ virtual\ FaceGeometry<ELEMENT>,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00782}00782\ \ \ \textcolor{comment}{//\ \ public\ virtual\ FaceElement}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00783}00783\ \ \ \textcolor{comment}{//\ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00784}00784\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00785}00785\ \ \ \textcolor{comment}{//\ public:}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00786}00786\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00724}00724\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00725}\mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{00725}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{QAxisymAdvectionDiffusionElement<NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00726}00726\ \mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement_a4bb026009c2c69e6870ff45450382418}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_adv\_diff}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00730}00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00731}00731\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00732}00732\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00733}00733\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00734}00734\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00735}00735\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions\ (pointer\ copy)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00736}00736\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00737}00737\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00738}00738\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00739}00739\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00740}00740\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00741}00741\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00742}00742\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00743}00743\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00744}00744\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00745}00745\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00746}00746\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00747}00747\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00748}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{00748}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QAxisymAdvectionDiffusionElement}{QAxisymAdvectionDiffusionElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00749}00749\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00750}00750\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00751}00751\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00752}00752\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00753}00753\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00754}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4_a7c174f03870a2be3a784a71044ae2810}{00754}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4_a7c174f03870a2be3a784a71044ae2810}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00755}00755\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00756}00756\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00757}00757\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00758}00758\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00759}00759\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00760}00760\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00761}00761\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00762}00762\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00763}00763\ \textcolor{comment}{\ \ ///\ A\ class\ for\ elements\ that\ allow\ the\ imposition\ of\ an}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00764}00764\ \textcolor{comment}{\ \ ///\ applied\ Robin\ boundary\ condition\ on\ the\ boundaries\ of\ Steady}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00765}00765\ \textcolor{comment}{\ \ ///\ Axisymmnetric\ Advection\ Diffusion\ Flux\ elements.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00766}00766\ \textcolor{comment}{\ \ ///\ \(\backslash\)f[\ -\/\(\backslash\)Delta\ u\ \(\backslash\)cdot\ \(\backslash\)mathbf\{n\}\ +\ \(\backslash\)alpha(r,z)\ u\ =\ \(\backslash\)beta(r,z)\ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00767}00767\ \textcolor{comment}{\ \ ///\ The\ element\ geometry\ is\ obtained\ from\ the\ FaceGeometry<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00768}00768\ \textcolor{comment}{\ \ ///\ policy\ class.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00769}00769\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00770}00770\ \textcolor{comment}{\ \ ///\ AT\ THE\ MOMENT\ THESE\ ARE\ IN\ SPHERICAL\ POLARS\ -\/-\/-\/\ NOT\ CONSISTENT}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00771}00771\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00772}00772\ \ \ \textcolor{comment}{//\ template\ <class\ ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00773}00773\ \ \ \textcolor{comment}{//\ class\ AxisymAdvectionDiffusionFluxElement\ :}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00774}00774\ \ \ \textcolor{comment}{//\ public\ virtual\ FaceGeometry<ELEMENT>,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00775}00775\ \ \ \textcolor{comment}{//\ \ public\ virtual\ FaceElement}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00776}00776\ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00777}00777\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00778}00778\ \ \ \textcolor{comment}{//\ public:}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00779}00779\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00780}00780\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00781}00781\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ prescribed-\/beta\ function\ fct(x,beta(x))}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00782}00782\ \ \ \textcolor{comment}{//\ \ -\/-\/}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00783}00783\ \ \ \textcolor{comment}{//\ \ ///\ x\ is\ a\ Vector!}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00784}00784\ \ \ \textcolor{comment}{//\ \ typedef\ void\ (*AxisymAdvectionDiffusionPrescribedBetaFctPt)(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00785}00785\ \ \ \textcolor{comment}{//\ \ \ const\ Vector<double>\&\ x,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00786}00786\ \ \ \textcolor{comment}{//\ \ \ double\&\ beta);}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00787}00787\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00788}00788\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ prescribed-\/beta\ function\ fct(x,beta(x))}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00789}00789\ \ \ \textcolor{comment}{//\ \ -\/-\/}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00788}00788\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ prescribed-\/alpha\ function}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00789}00789\ \ \ \textcolor{comment}{//\ \ fct(x,alpha(x))\ -\/-\/}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00790}00790\ \ \ \textcolor{comment}{//\ \ ///\ x\ is\ a\ Vector!}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00791}00791\ \ \ \textcolor{comment}{//\ \ typedef\ void\ (*AxisymAdvectionDiffusionPrescribedBetaFctPt)(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00791}00791\ \ \ \textcolor{comment}{//\ \ typedef\ void\ (*AxisymAdvectionDiffusionPrescribedAlphaFctPt)(}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00792}00792\ \ \ \textcolor{comment}{//\ \ \ const\ Vector<double>\&\ x,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00793}00793\ \ \ \textcolor{comment}{//\ \ \ double\&\ beta);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00793}00793\ \ \ \textcolor{comment}{//\ \ \ double\&\ alpha);}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00794}00794\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00795}00795\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ prescribed-\/alpha\ function}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00796}00796\ \ \ \textcolor{comment}{//\ \ fct(x,alpha(x))\ -\/-\/}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00797}00797\ \ \ \textcolor{comment}{//\ \ ///\ x\ is\ a\ Vector!}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00798}00798\ \ \ \textcolor{comment}{//\ \ typedef\ void\ (*AxisymAdvectionDiffusionPrescribedAlphaFctPt)(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00799}00799\ \ \ \textcolor{comment}{//\ \ \ const\ Vector<double>\&\ x,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00800}00800\ \ \ \textcolor{comment}{//\ \ \ double\&\ alpha);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00796}00796\ \ \ \textcolor{comment}{//\ \ ///\ Constructor,\ takes\ the\ pointer\ to\ the\ "{}bulk"{}\ element}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00797}00797\ \ \ \textcolor{comment}{//\ \ ///\ and\ the\ index\ of\ the\ face\ to\ be\ created}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00798}00798\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement(FiniteElement*\ const\ \&bulk\_el\_pt,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00799}00799\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ int\ \&face\_index);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00800}00800\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00801}00801\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00802}00802\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00803}00803\ \ \ \textcolor{comment}{//\ \ ///\ Constructor,\ takes\ the\ pointer\ to\ the\ "{}bulk"{}\ element}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00804}00804\ \ \ \textcolor{comment}{//\ \ ///\ and\ the\ index\ of\ the\ face\ to\ be\ created}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00805}00805\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement(FiniteElement*\ const\ \&bulk\_el\_pt,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00806}00806\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ int\ \&face\_index);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00807}00807\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00808}00808\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00809}00809\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ empty\ constructor}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00810}00810\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement()}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00811}00811\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00812}00812\ \ \ \textcolor{comment}{//\ \ \ \ throw\ OomphLibError(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00813}00813\ \ \ \textcolor{comment}{//\ \ \ \ \ "{}Don't\ call\ empty\ constructor\ for\ AxisymAdvectionDiffusionFluxElement"{},}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00814}00814\ \ \ \textcolor{comment}{//\ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00815}00815\ \ \ \textcolor{comment}{//\ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00816}00816\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00802}00802\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ empty\ constructor}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00803}00803\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement()}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00804}00804\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00805}00805\ \ \ \textcolor{comment}{//\ \ \ \ throw\ OomphLibError(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00806}00806\ \ \ \textcolor{comment}{//\ \ \ \ \ "{}Don't\ call\ empty\ constructor\ for\ AxisymAdvectionDiffusionFluxElement"{},}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00807}00807\ \ \ \textcolor{comment}{//\ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00808}00808\ \ \ \textcolor{comment}{//\ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00809}00809\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00810}00810\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00811}00811\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ copy\ constructor}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00812}00812\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00813}00813\ \ \ \textcolor{comment}{//\ \ \ const\ AxisymAdvectionDiffusionFluxElement\&\ dummy)\ =\ delete;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00814}00814\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00815}00815\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ assignment\ operator}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00816}00816\ \ \ \textcolor{comment}{//\ \ /*void\ operator=(const\ AxisymAdvectionDiffusionFluxElement\&)\ =\ delete;*/}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00817}00817\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00818}00818\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ copy\ constructor}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00819}00819\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionFluxElement(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00820}00820\ \ \ \textcolor{comment}{//\ \ \ const\ AxisymAdvectionDiffusionFluxElement\&\ dummy)\ =\ delete;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00821}00821\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00822}00822\ \ \ \textcolor{comment}{//\ \ ///\ Broken\ assignment\ operator}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00823}00823\ \ \ \textcolor{comment}{//\ \ /*void\ operator=(const\ AxisymAdvectionDiffusionFluxElement\&)\ =\ delete;*/}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00824}00824\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00825}00825\ \ \ \textcolor{comment}{//\ \ ///\ Access\ function\ for\ the\ prescribed-\/beta\ function\ pointer}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00826}00826\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedBetaFctPt\&\ beta\_fct\_pt()}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00827}00827\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00828}00828\ \ \ \textcolor{comment}{//\ \ \ \ return\ Beta\_fct\_pt;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00829}00829\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00818}00818\ \ \ \textcolor{comment}{//\ \ ///\ Access\ function\ for\ the\ prescribed-\/beta\ function\ pointer}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00819}00819\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedBetaFctPt\&\ beta\_fct\_pt()}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00820}00820\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00821}00821\ \ \ \textcolor{comment}{//\ \ \ \ return\ Beta\_fct\_pt;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00822}00822\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00823}00823\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00824}00824\ \ \ \textcolor{comment}{//\ \ ///\ Access\ function\ for\ the\ prescribed-\/alpha\ function\ pointer}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00825}00825\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedAlphaFctPt\&\ alpha\_fct\_pt()}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00826}00826\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00827}00827\ \ \ \textcolor{comment}{//\ \ \ \ return\ Alpha\_fct\_pt;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00828}00828\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00829}00829\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00830}00830\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00831}00831\ \ \ \textcolor{comment}{//\ \ ///\ Access\ function\ for\ the\ prescribed-\/alpha\ function\ pointer}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00832}00832\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedAlphaFctPt\&\ alpha\_fct\_pt()}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00831}00831\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00832}00832\ \ \ \textcolor{comment}{//\ \ inline\ void\ fill\_in\_contribution\_to\_residuals(Vector<double>\ \&residuals)}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00833}00833\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00834}00834\ \ \ \textcolor{comment}{//\ \ \ \ return\ Alpha\_fct\_pt;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00835}00835\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00836}00836\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00837}00837\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00838}00838\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00839}00839\ \ \ \textcolor{comment}{//\ \ inline\ void\ fill\_in\_contribution\_to\_residuals(Vector<double>\ \&residuals)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00840}00840\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00841}00841\ \ \ \textcolor{comment}{//\ \ \ \ //Call\ the\ generic\ residuals\ function\ with\ flag\ set\ to\ 0}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00842}00842\ \ \ \textcolor{comment}{//\ \ \ \ //using\ a\ dummy\ matrix}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00843}00843\ \ \ \textcolor{comment}{//\ \ \ \ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00844}00844\ \ \ \textcolor{comment}{//\ \ \ \ \ residuals,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00845}00845\ \ \ \textcolor{comment}{//\ \ \ \ \ GeneralisedElement::Dummy\_matrix,0);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00846}00846\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00847}00847\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00848}00848\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00849}00849\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector\ and}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00850}00850\ \ \ \textcolor{comment}{//\ \ ///\ its\ Jacobian\ matrix}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00851}00851\ \ \ \textcolor{comment}{//\ \ inline\ void\ fill\_in\_contribution\_to\_jacobian(Vector<double>\ \&residuals,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00852}00852\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DenseMatrix<double>}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00853}00853\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&jacobian)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00854}00854\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00855}00855\ \ \ \textcolor{comment}{//\ \ \ \ //Call\ the\ generic\ routine\ with\ the\ flag\ set\ to\ 1}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00856}00856\ \ \ \textcolor{comment}{//\ \ \ \ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(residuals,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00857}00857\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ jacobian,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00858}00858\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00859}00859\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00860}00860\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00861}00861\ \ \ \textcolor{comment}{//\ \ ///\ Specify\ the\ value\ of\ nodal\ zeta\ from\ the\ face\ geometry}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00862}00862\ \ \ \textcolor{comment}{//\ \ ///\ The\ "{}global"{}\ intrinsic\ coordinate\ of\ the\ element\ when}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00863}00863\ \ \ \textcolor{comment}{//\ \ ///\ viewed\ as\ part\ of\ a\ geometric\ object\ should\ be\ given\ by}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00864}00864\ \ \ \textcolor{comment}{//\ \ ///\ the\ FaceElement\ representation,\ by\ default\ (needed\ to\ break}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00865}00865\ \ \ \textcolor{comment}{//\ \ ///\ indeterminacy\ if\ bulk\ element\ is\ SolidElement)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00866}00866\ \ \ \textcolor{comment}{//\ \ double\ zeta\_nodal(const\ unsigned\ \&n,\ const\ unsigned\ \&k,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00867}00867\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ unsigned\ \&i)\ const}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00868}00868\ \ \ \textcolor{comment}{//\ \ \{return\ FaceElement::zeta\_nodal(n,k,i);\}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00869}00869\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00834}00834\ \ \ \textcolor{comment}{//\ \ \ \ //Call\ the\ generic\ residuals\ function\ with\ flag\ set\ to\ 0}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00835}00835\ \ \ \textcolor{comment}{//\ \ \ \ //using\ a\ dummy\ matrix}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00836}00836\ \ \ \textcolor{comment}{//\ \ \ \ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00837}00837\ \ \ \textcolor{comment}{//\ \ \ \ \ residuals,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00838}00838\ \ \ \textcolor{comment}{//\ \ \ \ \ GeneralisedElement::Dummy\_matrix,0);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00839}00839\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00840}00840\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00841}00841\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00842}00842\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector\ and}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00843}00843\ \ \ \textcolor{comment}{//\ \ ///\ its\ Jacobian\ matrix}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00844}00844\ \ \ \textcolor{comment}{//\ \ inline\ void\ fill\_in\_contribution\_to\_jacobian(Vector<double>\ \&residuals,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00845}00845\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DenseMatrix<double>}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00846}00846\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&jacobian)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00847}00847\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00848}00848\ \ \ \textcolor{comment}{//\ \ \ \ //Call\ the\ generic\ routine\ with\ the\ flag\ set\ to\ 1}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00849}00849\ \ \ \textcolor{comment}{//\ \ \ \ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(residuals,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00850}00850\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ jacobian,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00851}00851\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00852}00852\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00853}00853\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00854}00854\ \ \ \textcolor{comment}{//\ \ ///\ Specify\ the\ value\ of\ nodal\ zeta\ from\ the\ face\ geometry}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00855}00855\ \ \ \textcolor{comment}{//\ \ ///\ The\ "{}global"{}\ intrinsic\ coordinate\ of\ the\ element\ when}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00856}00856\ \ \ \textcolor{comment}{//\ \ ///\ viewed\ as\ part\ of\ a\ geometric\ object\ should\ be\ given\ by}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00857}00857\ \ \ \textcolor{comment}{//\ \ ///\ the\ FaceElement\ representation,\ by\ default\ (needed\ to\ break}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00858}00858\ \ \ \textcolor{comment}{//\ \ ///\ indeterminacy\ if\ bulk\ element\ is\ SolidElement)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00859}00859\ \ \ \textcolor{comment}{//\ \ double\ zeta\_nodal(const\ unsigned\ \&n,\ const\ unsigned\ \&k,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00860}00860\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ unsigned\ \&i)\ const}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00861}00861\ \ \ \textcolor{comment}{//\ \ \{return\ FaceElement::zeta\_nodal(n,k,i);\}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00862}00862\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00863}00863\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00864}00864\ \ \ \textcolor{comment}{//\ \ ///\ Output\ function\ -\/-\/\ forward\ to\ broken\ version\ in\ FiniteElement}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00865}00865\ \ \ \textcolor{comment}{//\ \ ///\ until\ somebody\ decides\ what\ exactly\ they\ want\ to\ plot\ here...}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00866}00866\ \ \ \textcolor{comment}{//\ \ void\ output(std::ostream\ \&outfile)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00867}00867\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00868}00868\ \ \ \textcolor{comment}{//\ \ \ \ FiniteElement::output(outfile);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00869}00869\ \ \ \textcolor{comment}{//\ \ \ \}}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00870}00870\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00871}00871\ \ \ \textcolor{comment}{//\ \ ///\ Output\ function\ -\/-\/\ forward\ to\ broken\ version\ in\ FiniteElement}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00872}00872\ \ \ \textcolor{comment}{//\ \ ///\ until\ somebody\ decides\ what\ exactly\ they\ want\ to\ plot\ here...}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00873}00873\ \ \ \textcolor{comment}{//\ \ void\ output(std::ostream\ \&outfile)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00873}00873\ \ \ \textcolor{comment}{//\ \ void\ output(std::ostream\ \&outfile,\ const\ unsigned\ \&nplot)}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00874}00874\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00875}00875\ \ \ \textcolor{comment}{//\ \ \ \ FiniteElement::output(outfile);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00875}00875\ \ \ \textcolor{comment}{//\ \ \ \ FiniteElement::output(outfile,nplot);}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00876}00876\ \ \ \textcolor{comment}{//\ \ \ \}}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00877}00877\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00878}00878\ \ \ \textcolor{comment}{//\ \ ///\ Output\ function\ -\/-\/\ forward\ to\ broken\ version\ in\ FiniteElement}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00879}00879\ \ \ \textcolor{comment}{//\ \ ///\ until\ somebody\ decides\ what\ exactly\ they\ want\ to\ plot\ here...}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00880}00880\ \ \ \textcolor{comment}{//\ \ void\ output(std::ostream\ \&outfile,\ const\ unsigned\ \&nplot)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00881}00881\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00882}00882\ \ \ \textcolor{comment}{//\ \ \ \ FiniteElement::output(outfile,nplot);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00883}00883\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00884}00884\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00885}00885\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00886}00886\ \ \ \textcolor{comment}{//\ protected:}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00887}00887\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00888}00888\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ compute\ the\ shape\ and\ test\ functions\ and\ to\ return}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00889}00889\ \ \ \textcolor{comment}{//\ \ ///\ the\ Jacobian\ of\ mapping\ between\ local\ and\ global\ (Eulerian)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00890}00890\ \ \ \textcolor{comment}{//\ \ ///\ coordinates}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00891}00891\ \ \ \textcolor{comment}{//\ \ inline\ double\ shape\_and\_test(const\ Vector<double>\ \&s,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00892}00892\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00893}00893\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&test)\ const}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00894}00894\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00895}00895\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ number\ of\ nodes}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00896}00896\ \ \ \textcolor{comment}{//\ \ \ \ unsigned\ n\_node\ =\ nnode();}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00897}00897\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00898}00898\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00899}00899\ \ \ \textcolor{comment}{//\ \ \ \ shape(s,psi);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00900}00900\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00901}00901\ \ \ \textcolor{comment}{//\ \ \ \ //Set\ the\ test\ functions\ to\ be\ the\ same\ as\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00902}00902\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<n\_node;i++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00903}00903\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00904}00904\ \ \ \textcolor{comment}{//\ \ \ \ \ \ test[i]\ =\ psi[i];}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00905}00905\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00906}00906\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00907}00907\ \ \ \textcolor{comment}{//\ \ \ \ //Return\ the\ value\ of\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00908}00908\ \ \ \textcolor{comment}{//\ \ \ \ return\ J\_eulerian(s);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00909}00909\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00910}00910\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00911}00911\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00912}00912\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ compute\ the\ shape\ and\ test\ functions\ and\ to\ return}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00913}00913\ \ \ \textcolor{comment}{//\ \ ///\ the\ Jacobian\ of\ mapping\ between\ local\ and\ global\ (Eulerian)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00914}00914\ \ \ \textcolor{comment}{//\ \ ///\ coordinates}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00915}00915\ \ \ \textcolor{comment}{//\ \ inline\ double\ shape\_and\_test\_at\_knot(const\ unsigned\ \&ipt,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00916}00916\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00917}00917\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&test)\ const}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00918}00918\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00919}00919\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ number\ of\ nodes}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00920}00920\ \ \ \textcolor{comment}{//\ \ \ \ unsigned\ n\_node\ =\ nnode();}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00921}00921\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00922}00922\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00923}00923\ \ \ \textcolor{comment}{//\ \ \ \ shape\_at\_knot(ipt,psi);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00924}00924\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00925}00925\ \ \ \textcolor{comment}{//\ \ \ \ //Set\ the\ test\ functions\ to\ be\ the\ same\ as\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00926}00926\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<n\_node;i++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00927}00927\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00928}00928\ \ \ \textcolor{comment}{//\ \ \ \ \ \ test[i]\ =\ psi[i];}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00929}00929\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00930}00930\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00931}00931\ \ \ \textcolor{comment}{//\ \ \ \ //Return\ the\ value\ of\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00932}00932\ \ \ \textcolor{comment}{//\ \ \ \ return\ J\_eulerian\_at\_knot(ipt);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00933}00933\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00934}00934\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00935}00935\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ calculate\ the\ prescribed\ beta\ at\ a\ given\ spatial}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00936}00936\ \ \ \textcolor{comment}{//\ \ ///\ position}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00937}00937\ \ \ \textcolor{comment}{//\ \ void\ get\_beta(const\ Vector<double>\&\ x,\ double\&\ beta)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00938}00938\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00939}00939\ \ \ \textcolor{comment}{//\ \ \ \ //If\ the\ function\ pointer\ is\ zero\ return\ zero}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00940}00940\ \ \ \textcolor{comment}{//\ \ \ \ if(Beta\_fct\_pt\ ==\ 0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00941}00941\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00942}00942\ \ \ \textcolor{comment}{//\ \ \ \ \ \ beta\ =\ 0.0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00943}00943\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00944}00944\ \ \ \textcolor{comment}{//\ \ \ \ //Otherwise\ call\ the\ function}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00945}00945\ \ \ \textcolor{comment}{//\ \ \ \ else}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00946}00946\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00947}00947\ \ \ \textcolor{comment}{//\ \ \ \ \ \ (*Beta\_fct\_pt)(x,beta);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00948}00948\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00949}00949\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00950}00950\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00951}00951\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ calculate\ the\ prescribed\ alpha\ at\ a\ given\ spatial}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00952}00952\ \ \ \textcolor{comment}{//\ \ ///\ position}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00953}00953\ \ \ \textcolor{comment}{//\ \ void\ get\_alpha(const\ Vector<double>\&\ x,\ double\&\ alpha)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00954}00954\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00955}00955\ \ \ \textcolor{comment}{//\ \ \ \ //If\ the\ function\ pointer\ is\ zero\ return\ zero}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00956}00956\ \ \ \textcolor{comment}{//\ \ \ \ if(Alpha\_fct\_pt\ ==\ 0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00957}00957\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00958}00958\ \ \ \textcolor{comment}{//\ \ \ \ \ \ alpha\ =\ 0.0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00959}00959\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00960}00960\ \ \ \textcolor{comment}{//\ \ \ \ //Otherwise\ call\ the\ function}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00961}00961\ \ \ \textcolor{comment}{//\ \ \ \ else}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00962}00962\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00963}00963\ \ \ \textcolor{comment}{//\ \ \ \ \ \ (*Alpha\_fct\_pt)(x,alpha);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00964}00964\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00965}00965\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00966}00966\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00967}00967\ \ \ \textcolor{comment}{//\ private:}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00878}00878\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00879}00879\ \ \ \textcolor{comment}{//\ protected:}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00881}00881\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ compute\ the\ shape\ and\ test\ functions\ and\ to\ return}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00882}00882\ \ \ \textcolor{comment}{//\ \ ///\ the\ Jacobian\ of\ mapping\ between\ local\ and\ global\ (Eulerian)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00883}00883\ \ \ \textcolor{comment}{//\ \ ///\ coordinates}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00884}00884\ \ \ \textcolor{comment}{//\ \ inline\ double\ shape\_and\_test(const\ Vector<double>\ \&s,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00885}00885\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00886}00886\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&test)\ const}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00887}00887\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00888}00888\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ number\ of\ nodes}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00889}00889\ \ \ \textcolor{comment}{//\ \ \ \ unsigned\ n\_node\ =\ nnode();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00890}00890\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00891}00891\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00892}00892\ \ \ \textcolor{comment}{//\ \ \ \ shape(s,psi);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00893}00893\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00894}00894\ \ \ \textcolor{comment}{//\ \ \ \ //Set\ the\ test\ functions\ to\ be\ the\ same\ as\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00895}00895\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<n\_node;i++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00896}00896\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00897}00897\ \ \ \textcolor{comment}{//\ \ \ \ \ \ test[i]\ =\ psi[i];}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00898}00898\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00899}00899\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00900}00900\ \ \ \textcolor{comment}{//\ \ \ \ //Return\ the\ value\ of\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00901}00901\ \ \ \textcolor{comment}{//\ \ \ \ return\ J\_eulerian(s);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00902}00902\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00903}00903\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00904}00904\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00905}00905\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ compute\ the\ shape\ and\ test\ functions\ and\ to\ return}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00906}00906\ \ \ \textcolor{comment}{//\ \ ///\ the\ Jacobian\ of\ mapping\ between\ local\ and\ global\ (Eulerian)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00907}00907\ \ \ \textcolor{comment}{//\ \ ///\ coordinates}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00908}00908\ \ \ \textcolor{comment}{//\ \ inline\ double\ shape\_and\_test\_at\_knot(const\ unsigned\ \&ipt,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00909}00909\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00910}00910\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&test)\ const}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00911}00911\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00912}00912\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ number\ of\ nodes}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00913}00913\ \ \ \textcolor{comment}{//\ \ \ \ unsigned\ n\_node\ =\ nnode();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00914}00914\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00915}00915\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00916}00916\ \ \ \textcolor{comment}{//\ \ \ \ shape\_at\_knot(ipt,psi);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00917}00917\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00918}00918\ \ \ \textcolor{comment}{//\ \ \ \ //Set\ the\ test\ functions\ to\ be\ the\ same\ as\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00919}00919\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<n\_node;i++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00920}00920\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00921}00921\ \ \ \textcolor{comment}{//\ \ \ \ \ \ test[i]\ =\ psi[i];}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00922}00922\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00923}00923\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00924}00924\ \ \ \textcolor{comment}{//\ \ \ \ //Return\ the\ value\ of\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00925}00925\ \ \ \textcolor{comment}{//\ \ \ \ return\ J\_eulerian\_at\_knot(ipt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00926}00926\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00927}00927\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00928}00928\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ calculate\ the\ prescribed\ beta\ at\ a\ given\ spatial}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00929}00929\ \ \ \textcolor{comment}{//\ \ ///\ position}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00930}00930\ \ \ \textcolor{comment}{//\ \ void\ get\_beta(const\ Vector<double>\&\ x,\ double\&\ beta)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00931}00931\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00932}00932\ \ \ \textcolor{comment}{//\ \ \ \ //If\ the\ function\ pointer\ is\ zero\ return\ zero}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00933}00933\ \ \ \textcolor{comment}{//\ \ \ \ if(Beta\_fct\_pt\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00934}00934\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00935}00935\ \ \ \textcolor{comment}{//\ \ \ \ \ \ beta\ =\ 0.0;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00936}00936\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00937}00937\ \ \ \textcolor{comment}{//\ \ \ \ //Otherwise\ call\ the\ function}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00938}00938\ \ \ \textcolor{comment}{//\ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00939}00939\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00940}00940\ \ \ \textcolor{comment}{//\ \ \ \ \ \ (*Beta\_fct\_pt)(x,beta);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00941}00941\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00942}00942\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00943}00943\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00944}00944\ \ \ \textcolor{comment}{//\ \ ///\ Function\ to\ calculate\ the\ prescribed\ alpha\ at\ a\ given\ spatial}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00945}00945\ \ \ \textcolor{comment}{//\ \ ///\ position}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00946}00946\ \ \ \textcolor{comment}{//\ \ void\ get\_alpha(const\ Vector<double>\&\ x,\ double\&\ alpha)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00947}00947\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00948}00948\ \ \ \textcolor{comment}{//\ \ \ \ //If\ the\ function\ pointer\ is\ zero\ return\ zero}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00949}00949\ \ \ \textcolor{comment}{//\ \ \ \ if(Alpha\_fct\_pt\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00950}00950\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00951}00951\ \ \ \textcolor{comment}{//\ \ \ \ \ \ alpha\ =\ 0.0;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00952}00952\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00953}00953\ \ \ \textcolor{comment}{//\ \ \ \ //Otherwise\ call\ the\ function}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00954}00954\ \ \ \textcolor{comment}{//\ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00955}00955\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00956}00956\ \ \ \textcolor{comment}{//\ \ \ \ \ \ (*Alpha\_fct\_pt)(x,alpha);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00957}00957\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00958}00958\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00959}00959\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00960}00960\ \ \ \textcolor{comment}{//\ private:}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00961}00961\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00962}00962\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00963}00963\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00964}00964\ \ \ \textcolor{comment}{//\ \ ///\ flag=1(or\ 0):\ do\ (or\ don't)\ compute\ the\ Jacobian\ as\ well.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00965}00965\ \ \ \textcolor{comment}{//\ \ void\ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00966}00966\ \ \ \textcolor{comment}{//\ \ \ Vector<double>\ \&residuals,\ DenseMatrix<double>\ \&jacobian,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00967}00967\ \ \ \textcolor{comment}{//\ \ \ unsigned\ flag);}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00968}00968\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00969}00969\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00970}00970\ \ \ \textcolor{comment}{//\ \ ///\ Add\ the\ element's\ contribution\ to\ its\ residual\ vector.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00971}00971\ \ \ \textcolor{comment}{//\ \ ///\ flag=1(or\ 0):\ do\ (or\ don't)\ compute\ the\ Jacobian\ as\ well.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00972}00972\ \ \ \textcolor{comment}{//\ \ void\ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00973}00973\ \ \ \textcolor{comment}{//\ \ \ Vector<double>\ \&residuals,\ DenseMatrix<double>\ \&jacobian,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00974}00974\ \ \ \textcolor{comment}{//\ \ \ unsigned\ flag);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00970}00970\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ (global)\ prescribed-\/beta\ function}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00971}00971\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedBetaFctPt\ Beta\_fct\_pt;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00972}00972\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00973}00973\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ (global)\ prescribed-\/alpha\ function}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00974}00974\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedAlphaFctPt\ Alpha\_fct\_pt;}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00975}00975\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00976}00976\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00977}00977\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ (global)\ prescribed-\/beta\ function}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00978}00978\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedBetaFctPt\ Beta\_fct\_pt;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00976}00976\ \ \ \textcolor{comment}{//\ \ ///\ The\ index\ at\ which\ the\ unknown\ is\ stored\ at\ the\ nodes}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00977}00977\ \ \ \textcolor{comment}{//\ \ unsigned\ U\_index\_adv\_diff;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00978}00978\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00979}00979\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00980}00980\ \ \ \textcolor{comment}{//\ \ ///\ Function\ pointer\ to\ the\ (global)\ prescribed-\/alpha\ function}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00981}00981\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionPrescribedAlphaFctPt\ Alpha\_fct\_pt;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00980}00980\ \ \ \textcolor{comment}{//\ \};//End\ class\ AxisymAdvectionDiffusionFluxElement}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00981}00981\ }
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00982}00982\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00983}00983\ \ \ \textcolor{comment}{//\ \ ///\ The\ index\ at\ which\ the\ unknown\ is\ stored\ at\ the\ nodes}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00984}00984\ \ \ \textcolor{comment}{//\ \ unsigned\ U\_index\_adv\_diff;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00985}00985\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00983}00983\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00984}00984\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00985}00985\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00986}00986\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00987}00987\ \ \ \textcolor{comment}{//\ \};//End\ class\ AxisymAdvectionDiffusionFluxElement}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00988}00988\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00989}00989\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00990}00990\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00991}00991\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00992}00992\ \ \ \textcolor{comment}{//\ ///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00993}00993\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00994}00994\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00995}00995\ \ \ \textcolor{comment}{//\ //===========================================================================}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00996}00996\ \ \ \textcolor{comment}{//\ ///\ Constructor,\ takes\ the\ pointer\ to\ the\ "{}bulk"{}\ element\ and\ the}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00997}00997\ \ \ \textcolor{comment}{//\ index}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00998}00998\ \ \ \textcolor{comment}{//\ ///\ of\ the\ face\ to\ be\ created}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00999}00999\ \ \ \textcolor{comment}{//\ //===========================================================================}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01000}01000\ \ \ \textcolor{comment}{//\ template<class\ ELEMENT>}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01001}01001\ \ \ \textcolor{comment}{//\ AxisymAdvectionDiffusionFluxElement<ELEMENT>::}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01002}01002\ \ \ \textcolor{comment}{//\ AxisymAdvectionDiffusionFluxElement(FiniteElement*\ const\ \&bulk\_el\_pt,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01003}01003\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ int\ \&face\_index)\ :}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01004}01004\ \ \ \textcolor{comment}{//\ FaceGeometry<ELEMENT>(),\ FaceElement()}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01005}01005\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01006}01006\ \ \ \textcolor{comment}{//\ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01007}01007\ \ \ \textcolor{comment}{//\ \ //Let\ the\ bulk\ element\ build\ the\ FaceElement,\ i.e.\ setup\ the\ pointers}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01008}01008\ \ \ \textcolor{comment}{//\ \ //to\ its\ nodes\ (by\ referring\ to\ the\ appropriate\ nodes\ in\ the\ bulk}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01009}01009\ \ \ \textcolor{comment}{//\ \ //element),\ etc.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01010}01010\ \ \ \textcolor{comment}{//\ \ bulk\_el\_pt-\/>build\_face\_element(face\_index,this);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01011}01011\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01012}01012\ \ \ \textcolor{comment}{//\ \#ifdef\ PARANOID}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01013}01013\ \ \ \textcolor{comment}{//\ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01014}01014\ \ \ \textcolor{comment}{//\ \ \ //Check\ that\ the\ element\ is\ not\ a\ refineable\ 3d\ element}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01015}01015\ \ \ \textcolor{comment}{//\ \ \ ELEMENT*\ elem\_pt\ =\ dynamic\_cast<ELEMENT*>(bulk\_el\_pt);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01016}01016\ \ \ \textcolor{comment}{//\ \ \ //If\ it's\ three-\/d}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01017}01017\ \ \ \textcolor{comment}{//\ \ \ if(elem\_pt-\/>dim()==3)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01018}01018\ \ \ \textcolor{comment}{//\ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01019}01019\ \ \ \textcolor{comment}{//\ \ \ \ \ //Is\ it\ refineable}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01020}01020\ \ \ \textcolor{comment}{//\ \ \ \ \ RefineableElement*\ ref\_el\_pt=dynamic\_cast<RefineableElement*>(elem\_pt);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01021}01021\ \ \ \textcolor{comment}{//\ \ \ \ \ if(ref\_el\_pt!=0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01022}01022\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01023}01023\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (this-\/>has\_hanging\_nodes())}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01024}01024\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01025}01025\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ throw\ OomphLibError(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01026}01026\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ "{}This\ flux\ element\ will\ not\ work\ correctly\ if\ nodes\ are}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01027}01027\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ hanging\(\backslash\)n"{},\ OOMPH\_CURRENT\_FUNCTION,\ OOMPH\_EXCEPTION\_LOCATION);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01028}01028\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01029}01029\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01030}01030\ \ \ \textcolor{comment}{//\ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01031}01031\ \ \ \textcolor{comment}{//\ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01032}01032\ \ \ \textcolor{comment}{//\ \#endif}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00987}00987\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00988}00988\ \ \ \textcolor{comment}{//\ //===========================================================================}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00989}00989\ \ \ \textcolor{comment}{//\ ///\ Constructor,\ takes\ the\ pointer\ to\ the\ "{}bulk"{}\ element\ and\ the}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00990}00990\ \ \ \textcolor{comment}{//\ index}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00991}00991\ \ \ \textcolor{comment}{//\ ///\ of\ the\ face\ to\ be\ created}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00992}00992\ \ \ \textcolor{comment}{//\ //===========================================================================}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00993}00993\ \ \ \textcolor{comment}{//\ template<class\ ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00994}00994\ \ \ \textcolor{comment}{//\ AxisymAdvectionDiffusionFluxElement<ELEMENT>::}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00995}00995\ \ \ \textcolor{comment}{//\ AxisymAdvectionDiffusionFluxElement(FiniteElement*\ const\ \&bulk\_el\_pt,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00996}00996\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ int\ \&face\_index)\ :}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00997}00997\ \ \ \textcolor{comment}{//\ FaceGeometry<ELEMENT>(),\ FaceElement()}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00998}00998\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l00999}00999\ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01000}01000\ \ \ \textcolor{comment}{//\ \ //Let\ the\ bulk\ element\ build\ the\ FaceElement,\ i.e.\ setup\ the\ pointers}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01001}01001\ \ \ \textcolor{comment}{//\ \ //to\ its\ nodes\ (by\ referring\ to\ the\ appropriate\ nodes\ in\ the\ bulk}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01002}01002\ \ \ \textcolor{comment}{//\ \ //element),\ etc.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01003}01003\ \ \ \textcolor{comment}{//\ \ bulk\_el\_pt-\/>build\_face\_element(face\_index,this);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01004}01004\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01005}01005\ \ \ \textcolor{comment}{//\ \#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01006}01006\ \ \ \textcolor{comment}{//\ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01007}01007\ \ \ \textcolor{comment}{//\ \ \ //Check\ that\ the\ element\ is\ not\ a\ refineable\ 3d\ element}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01008}01008\ \ \ \textcolor{comment}{//\ \ \ ELEMENT*\ elem\_pt\ =\ dynamic\_cast<ELEMENT*>(bulk\_el\_pt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01009}01009\ \ \ \textcolor{comment}{//\ \ \ //If\ it's\ three-\/d}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01010}01010\ \ \ \textcolor{comment}{//\ \ \ if(elem\_pt-\/>dim()==3)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01011}01011\ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01012}01012\ \ \ \textcolor{comment}{//\ \ \ \ \ //Is\ it\ refineable}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01013}01013\ \ \ \textcolor{comment}{//\ \ \ \ \ RefineableElement*\ ref\_el\_pt=dynamic\_cast<RefineableElement*>(elem\_pt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01014}01014\ \ \ \textcolor{comment}{//\ \ \ \ \ if(ref\_el\_pt!=0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01015}01015\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01016}01016\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ if\ (this-\/>has\_hanging\_nodes())}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01017}01017\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01018}01018\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ throw\ OomphLibError(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01019}01019\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ "{}This\ flux\ element\ will\ not\ work\ correctly\ if\ nodes\ are}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01020}01020\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ hanging\(\backslash\)n"{},\ OOMPH\_CURRENT\_FUNCTION,\ OOMPH\_EXCEPTION\_LOCATION);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01021}01021\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01022}01022\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01023}01023\ \ \ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01024}01024\ \ \ \textcolor{comment}{//\ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01025}01025\ \ \ \textcolor{comment}{//\ \#endif}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01026}01026\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01027}01027\ \ \ \textcolor{comment}{//\ \ //Initialise\ the\ prescribed-\/beta\ function\ pointer\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01028}01028\ \ \ \textcolor{comment}{//\ \ Beta\_fct\_pt\ =\ 0;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01029}01029\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01030}01030\ \ \ \textcolor{comment}{//\ \ //Set\ up\ U\_index\_adv\_diff.\ Initialise\ to\ zero,\ which\ probably\ won't\ change}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01031}01031\ \ \ \textcolor{comment}{//\ \ //in\ most\ cases,\ oh\ well,\ the\ price\ we\ pay\ for\ generality}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01032}01032\ \ \ \textcolor{comment}{//\ \ U\_index\_adv\_diff\ =\ 0;}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01033}01033\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01034}01034\ \ \ \textcolor{comment}{//\ \ //Initialise\ the\ prescribed-\/beta\ function\ pointer\ to\ zero}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01035}01035\ \ \ \textcolor{comment}{//\ \ Beta\_fct\_pt\ =\ 0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01036}01036\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01037}01037\ \ \ \textcolor{comment}{//\ \ //Set\ up\ U\_index\_adv\_diff.\ Initialise\ to\ zero,\ which\ probably\ won't\ change}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01038}01038\ \ \ \textcolor{comment}{//\ \ //in\ most\ cases,\ oh\ well,\ the\ price\ we\ pay\ for\ generality}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01039}01039\ \ \ \textcolor{comment}{//\ \ U\_index\_adv\_diff\ =\ 0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01040}01040\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01041}01041\ \ \ \textcolor{comment}{//\ \ //Cast\ to\ the\ appropriate\ AdvectionDiffusionEquation\ so\ that\ we\ can}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01042}01042\ \ \ \textcolor{comment}{//\ \ //find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01043}01043\ \ \ \textcolor{comment}{//\ \ //We\ assume\ that\ the\ dimension\ of\ the\ full\ problem\ is\ the\ same}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01044}01044\ \ \ \textcolor{comment}{//\ \ //as\ the\ dimension\ of\ the\ node,\ if\ this\ is\ not\ the\ case\ you\ will\ have}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01045}01045\ \ \ \textcolor{comment}{//\ \ //to\ write\ custom\ elements,\ sorry}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01046}01046\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionEquations*\ eqn\_pt\ =}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01047}01047\ \ \ \textcolor{comment}{//\ \ dynamic\_cast<AxisymAdvectionDiffusionEquations*>(bulk\_el\_pt);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01048}01048\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01049}01049\ \ \ \textcolor{comment}{//\ \ //If\ the\ cast\ has\ failed\ die}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01050}01050\ \ \ \textcolor{comment}{//\ \ if(eqn\_pt==0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01051}01051\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01052}01052\ \ \ \textcolor{comment}{//\ \ \ \ \ \ std::string\ error\_string\ =}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01053}01053\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}Bulk\ element\ must\ inherit\ from\ AxisymAdvectionDiffusionEquations."{};}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01054}01054\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01055}01055\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}Nodes\ are\ two\ dimensional,\ but\ cannot\ cast\ the\ bulk\ element\ to\(\backslash\)n"{};}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01056}01056\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=\ "{}AxisymAdvectionDiffusionEquations<2>\(\backslash\)n."{};}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01057}01057\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01058}01058\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}If\ you\ desire\ this\ functionality,\ you\ must\ implement\ it\ yourself\(\backslash\)n"{};}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01059}01059\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01060}01060\ \ \ \textcolor{comment}{//\ \ \ \ \ \ throw\ OomphLibError(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01061}01061\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ error\_string,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01062}01062\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01063}01063\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01064}01064\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01065}01065\ \ \ \textcolor{comment}{//\ \ else}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01066}01066\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01067}01067\ \ \ \textcolor{comment}{//\ \ \ \ //Read\ the\ index\ from\ the\ (cast)\ bulk\ element.}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01068}01068\ \ \ \textcolor{comment}{//\ \ \ \ U\_index\_adv\_diff\ =\ eqn\_pt-\/>u\_index\_axi\_adv\_diff();}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01069}01069\ \ \ \textcolor{comment}{//\ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01070}01070\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01071}01071\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01072}01072\ \ \ \textcolor{comment}{//\ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01073}01073\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01074}01074\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01075}01075\ \ \ \textcolor{comment}{//\ //===========================================================================}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01076}01076\ \ \ \textcolor{comment}{//\ ///\ Compute\ the\ element's\ residual\ vector\ and\ the\ (zero)\ Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01077}01077\ \ \ \textcolor{comment}{//\ ///\ matrix\ for\ the\ Robin\ boundary\ condition:}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01078}01078\ \ \ \textcolor{comment}{//\ ///\ \(\backslash\)f[\ \(\backslash\)Delta\ u\ \(\backslash\)cdot\ \(\backslash\)mathbf\{n\}\ +\ \(\backslash\)alpha\ (\(\backslash\)mathbf\{x\})\ =\ \(\backslash\)beta\ (\(\backslash\)mathbf\{x\})\ \(\backslash\)f]}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01079}01079\ \ \ \textcolor{comment}{//\ //===========================================================================}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01080}01080\ \ \ \textcolor{comment}{//\ template<class\ ELEMENT>}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01081}01081\ \ \ \textcolor{comment}{//\ void\ AxisymAdvectionDiffusionFluxElement<ELEMENT>::}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01082}01082\ \ \ \textcolor{comment}{//\ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01083}01083\ \ \ \textcolor{comment}{//\ \ Vector<double>\ \&residuals,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01084}01084\ \ \ \textcolor{comment}{//\ \ DenseMatrix<double>\ \&jacobian,}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01085}01085\ \ \ \textcolor{comment}{//\ \ unsigned\ flag)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01086}01086\ \ \ \textcolor{comment}{//\ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01087}01087\ \ \ \textcolor{comment}{//\ \ //Find\ out\ how\ many\ nodes\ there\ are}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01088}01088\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ n\_node\ =\ nnode();}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01089}01089\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01090}01090\ \ \ \textcolor{comment}{//\ \ //\ Locally\ cache\ the\ index\ at\ which\ the\ variable\ is\ stored}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01091}01091\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ u\_index\_axi\_adv\_diff\ =\ U\_index\_adv\_diff;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01092}01092\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01093}01093\ \ \ \textcolor{comment}{//\ \ //Set\ up\ memory\ for\ the\ shape\ and\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01094}01094\ \ \ \textcolor{comment}{//\ \ Shape\ psif(n\_node),\ testf(n\_node);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01095}01095\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01096}01096\ \ \ \textcolor{comment}{//\ \ //Set\ the\ value\ of\ n\_intpt}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01097}01097\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ n\_intpt\ =\ integral\_pt()-\/>nweight();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01034}01034\ \ \ \textcolor{comment}{//\ \ //Cast\ to\ the\ appropriate\ AdvectionDiffusionEquation\ so\ that\ we\ can}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01035}01035\ \ \ \textcolor{comment}{//\ \ //find\ the\ index\ at\ which\ the\ variable\ is\ stored}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01036}01036\ \ \ \textcolor{comment}{//\ \ //We\ assume\ that\ the\ dimension\ of\ the\ full\ problem\ is\ the\ same}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01037}01037\ \ \ \textcolor{comment}{//\ \ //as\ the\ dimension\ of\ the\ node,\ if\ this\ is\ not\ the\ case\ you\ will\ have}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01038}01038\ \ \ \textcolor{comment}{//\ \ //to\ write\ custom\ elements,\ sorry}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01039}01039\ \ \ \textcolor{comment}{//\ \ AxisymAdvectionDiffusionEquations*\ eqn\_pt\ =}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01040}01040\ \ \ \textcolor{comment}{//\ \ dynamic\_cast<AxisymAdvectionDiffusionEquations*>(bulk\_el\_pt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01041}01041\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01042}01042\ \ \ \textcolor{comment}{//\ \ //If\ the\ cast\ has\ failed\ die}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01043}01043\ \ \ \textcolor{comment}{//\ \ if(eqn\_pt==0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01044}01044\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01045}01045\ \ \ \textcolor{comment}{//\ \ \ \ \ \ std::string\ error\_string\ =}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01046}01046\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}Bulk\ element\ must\ inherit\ from\ AxisymAdvectionDiffusionEquations."{};}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01047}01047\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01048}01048\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}Nodes\ are\ two\ dimensional,\ but\ cannot\ cast\ the\ bulk\ element\ to\(\backslash\)n"{};}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01049}01049\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=\ "{}AxisymAdvectionDiffusionEquations<2>\(\backslash\)n."{};}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01050}01050\ \ \ \textcolor{comment}{//\ \ \ \ \ \ error\_string\ +=}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01051}01051\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ "{}If\ you\ desire\ this\ functionality,\ you\ must\ implement\ it\ yourself\(\backslash\)n"{};}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01052}01052\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01053}01053\ \ \ \textcolor{comment}{//\ \ \ \ \ \ throw\ OomphLibError(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01054}01054\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ error\_string,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01055}01055\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01056}01056\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01057}01057\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01058}01058\ \ \ \textcolor{comment}{//\ \ else}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01059}01059\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01060}01060\ \ \ \textcolor{comment}{//\ \ \ \ //Read\ the\ index\ from\ the\ (cast)\ bulk\ element.}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01061}01061\ \ \ \textcolor{comment}{//\ \ \ \ U\_index\_adv\_diff\ =\ eqn\_pt-\/>u\_index\_axi\_adv\_diff();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01062}01062\ \ \ \textcolor{comment}{//\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01063}01063\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01064}01064\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01065}01065\ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01066}01066\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01067}01067\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01068}01068\ \ \ \textcolor{comment}{//\ //===========================================================================}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01069}01069\ \ \ \textcolor{comment}{//\ ///\ Compute\ the\ element's\ residual\ vector\ and\ the\ (zero)\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01070}01070\ \ \ \textcolor{comment}{//\ ///\ matrix\ for\ the\ Robin\ boundary\ condition:}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01071}01071\ \ \ \textcolor{comment}{//\ ///\ \(\backslash\)f[\ \(\backslash\)Delta\ u\ \(\backslash\)cdot\ \(\backslash\)mathbf\{n\}\ +\ \(\backslash\)alpha\ (\(\backslash\)mathbf\{x\})\ =\ \(\backslash\)beta\ (\(\backslash\)mathbf\{x\})\ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01072}01072\ \ \ \textcolor{comment}{//\ //===========================================================================}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01073}01073\ \ \ \textcolor{comment}{//\ template<class\ ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01074}01074\ \ \ \textcolor{comment}{//\ void\ AxisymAdvectionDiffusionFluxElement<ELEMENT>::}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01075}01075\ \ \ \textcolor{comment}{//\ fill\_in\_generic\_residual\_contribution\_axi\_adv\_diff\_flux(}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01076}01076\ \ \ \textcolor{comment}{//\ \ Vector<double>\ \&residuals,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01077}01077\ \ \ \textcolor{comment}{//\ \ DenseMatrix<double>\ \&jacobian,}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01078}01078\ \ \ \textcolor{comment}{//\ \ unsigned\ flag)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01079}01079\ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01080}01080\ \ \ \textcolor{comment}{//\ \ //Find\ out\ how\ many\ nodes\ there\ are}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01081}01081\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ n\_node\ =\ nnode();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01082}01082\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01083}01083\ \ \ \textcolor{comment}{//\ \ //\ Locally\ cache\ the\ index\ at\ which\ the\ variable\ is\ stored}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01084}01084\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ u\_index\_axi\_adv\_diff\ =\ U\_index\_adv\_diff;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01085}01085\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01086}01086\ \ \ \textcolor{comment}{//\ \ //Set\ up\ memory\ for\ the\ shape\ and\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01087}01087\ \ \ \textcolor{comment}{//\ \ Shape\ psif(n\_node),\ testf(n\_node);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01088}01088\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01089}01089\ \ \ \textcolor{comment}{//\ \ //Set\ the\ value\ of\ n\_intpt}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01090}01090\ \ \ \textcolor{comment}{//\ \ const\ unsigned\ n\_intpt\ =\ integral\_pt()-\/>nweight();}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01091}01091\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01092}01092\ \ \ \textcolor{comment}{//\ \ //Set\ the\ Vector\ to\ hold\ local\ coordinates}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01093}01093\ \ \ \textcolor{comment}{//\ \ Vector<double>\ s(1);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01094}01094\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01095}01095\ \ \ \textcolor{comment}{//\ \ //Integers\ used\ to\ store\ the\ local\ equation\ number\ and\ local\ unknown}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01096}01096\ \ \ \textcolor{comment}{//\ \ //indices\ for\ the\ residuals\ and\ jacobians}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01097}01097\ \ \ \textcolor{comment}{//\ \ int\ local\_eqn=0,\ local\_unknown=0;}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01098}01098\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01099}01099\ \ \ \textcolor{comment}{//\ \ //Set\ the\ Vector\ to\ hold\ local\ coordinates}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01100}01100\ \ \ \textcolor{comment}{//\ \ Vector<double>\ s(1);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01101}01101\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01102}01102\ \ \ \textcolor{comment}{//\ \ //Integers\ used\ to\ store\ the\ local\ equation\ number\ and\ local\ unknown}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01103}01103\ \ \ \textcolor{comment}{//\ \ //indices\ for\ the\ residuals\ and\ jacobians}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01104}01104\ \ \ \textcolor{comment}{//\ \ int\ local\_eqn=0,\ local\_unknown=0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01105}01105\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01106}01106\ \ \ \textcolor{comment}{//\ \ //Loop\ over\ the\ integration\ points}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01107}01107\ \ \ \textcolor{comment}{//\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01108}01108\ \ \ \textcolor{comment}{//\ \ for(unsigned\ ipt=0;ipt<n\_intpt;ipt++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01109}01109\ \ \ \textcolor{comment}{//\ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01110}01110\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01111}01111\ \ \ \textcolor{comment}{//\ \ \ \ //Assign\ values\ of\ s}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01112}01112\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<1;i++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01113}01113\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01114}01114\ \ \ \textcolor{comment}{//\ \ \ \ \ \ s[i]\ =\ integral\_pt()-\/>knot(ipt,i);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01115}01115\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01099}01099\ \ \ \textcolor{comment}{//\ \ //Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01100}01100\ \ \ \textcolor{comment}{//\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01101}01101\ \ \ \textcolor{comment}{//\ \ for(unsigned\ ipt=0;ipt<n\_intpt;ipt++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01102}01102\ \ \ \textcolor{comment}{//\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01103}01103\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01104}01104\ \ \ \textcolor{comment}{//\ \ \ \ //Assign\ values\ of\ s}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01105}01105\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ i=0;i<1;i++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01106}01106\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01107}01107\ \ \ \textcolor{comment}{//\ \ \ \ \ \ s[i]\ =\ integral\_pt()-\/>knot(ipt,i);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01108}01108\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01109}01109\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01110}01110\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ integral\ weight}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01111}01111\ \ \ \textcolor{comment}{//\ \ \ \ double\ w\ =\ integral\_pt()-\/>weight(ipt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01112}01112\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01113}01113\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ the\ shape\ and\ test\ functions\ and\ return\ the\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01114}01114\ \ \ \textcolor{comment}{//\ \ \ \ //of\ the\ mapping}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01115}01115\ \ \ \textcolor{comment}{//\ \ \ \ double\ J\ =\ shape\_and\_test(s,psif,testf);}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01116}01116\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01117}01117\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ integral\ weight}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01118}01118\ \ \ \textcolor{comment}{//\ \ \ \ double\ w\ =\ integral\_pt()-\/>weight(ipt);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01117}01117\ \ \ \textcolor{comment}{//\ \ \ \ //Premultiply\ the\ weights\ and\ the\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01118}01118\ \ \ \textcolor{comment}{//\ \ \ \ double\ W\ =\ w*J;}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01119}01119\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01120}01120\ \ \ \textcolor{comment}{//\ \ \ \ //Find\ the\ shape\ and\ test\ functions\ and\ return\ the\ Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01121}01121\ \ \ \textcolor{comment}{//\ \ \ \ //of\ the\ mapping}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01122}01122\ \ \ \textcolor{comment}{//\ \ \ \ double\ J\ =\ shape\_and\_test(s,psif,testf);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01123}01123\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01124}01124\ \ \ \textcolor{comment}{//\ \ \ \ //Premultiply\ the\ weights\ and\ the\ Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01125}01125\ \ \ \textcolor{comment}{//\ \ \ \ double\ W\ =\ w*J;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01126}01126\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01127}01127\ \ \ \textcolor{comment}{//\ \ \ \ //Calculate\ local\ values\ of\ the\ solution\ and\ its\ derivatives}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01128}01128\ \ \ \textcolor{comment}{//\ \ \ \ //Allocate}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01129}01129\ \ \ \textcolor{comment}{//\ \ \ \ double\ interpolated\_u=0.0;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01130}01130\ \ \ \textcolor{comment}{//\ \ \ \ Vector<double>\ interpolated\_x(2,0.0);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01131}01131\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01132}01132\ \ \ \textcolor{comment}{//\ \ \ \ //Calculate\ position}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01133}01133\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ l=0;l<n\_node;l++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01134}01134\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01135}01135\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Get\ the\ value\ at\ the\ node}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01136}01136\ \ \ \textcolor{comment}{//\ \ \ \ \ \ double\ u\_value\ =\ raw\_nodal\_value(l,u\_index\_axi\_adv\_diff);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01137}01137\ \ \ \textcolor{comment}{//\ \ \ \ \ \ interpolated\_u\ +=\ u\_value*psif(l);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01138}01138\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Loop\ over\ coordinate\ direction}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01139}01139\ \ \ \textcolor{comment}{//\ \ \ \ \ \ for(unsigned\ i=0;i<2;i++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01140}01140\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01141}01141\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ interpolated\_x[i]\ +=\ nodal\_position(l,i)*psif(l);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01142}01142\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01143}01143\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01144}01144\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01145}01145\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ imposed\ beta\ (beta=flux\ when\ alpha=0.0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01146}01146\ \ \ \textcolor{comment}{//\ \ \ \ double\ beta;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01147}01147\ \ \ \textcolor{comment}{//\ \ \ \ get\_beta(interpolated\_x,beta);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01148}01148\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01149}01149\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ imposed\ alpha}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01150}01150\ \ \ \textcolor{comment}{//\ \ \ \ double\ alpha;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01151}01151\ \ \ \textcolor{comment}{//\ \ \ \ get\_alpha(interpolated\_x,alpha);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01152}01152\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01153}01153\ \ \ \textcolor{comment}{//\ \ \ \ //calculate\ the\ area\ weighting\ dS\ =\ r\string^\{2\}\ sin\ theta\ dr\ dtheta}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01154}01154\ \ \ \textcolor{comment}{//\ \ \ \ //\ r\ =\ x[0]\ and\ theta\ =\ x[1]}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01155}01155\ \ \ \textcolor{comment}{//\ \ \ \ double\ dS\ =\ interpolated\_x[0]*interpolated\_x[0]*sin(interpolated\_x[1]);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01156}01156\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01157}01157\ \ \ \textcolor{comment}{//\ \ \ \ //Now\ add\ to\ the\ appropriate\ equations}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01158}01158\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01159}01159\ \ \ \textcolor{comment}{//\ \ \ \ //Loop\ over\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01160}01160\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ l=0;l<n\_node;l++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01161}01161\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01162}01162\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Set\ the\ local\ equation\ number}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01163}01163\ \ \ \textcolor{comment}{//\ \ \ \ \ \ local\_eqn\ =\ nodal\_local\_eqn(l,u\_index\_axi\_adv\_diff);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01164}01164\ \ \ \textcolor{comment}{//\ \ \ \ \ \ /*IF\ it's\ not\ a\ boundary\ condition*/}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01165}01165\ \ \ \textcolor{comment}{//\ \ \ \ \ \ if(local\_eqn\ >=\ 0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01166}01166\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01167}01167\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //Add\ the\ prescribed\ beta\ terms}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01168}01168\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ residuals[local\_eqn]\ -\/=\ dS*(beta\ -\/\ alpha*interpolated\_u)*testf(l)*W;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01169}01169\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01170}01170\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //Calculate\ the\ Jacobian}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01171}01171\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01172}01172\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ (\ (flag)\ \&\&\ (alpha!=0.0)\ )}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01173}01173\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01174}01174\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ //Loop\ over\ the\ velocity\ shape\ functions\ again}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01175}01175\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ for(unsigned\ l2=0;l2<n\_node;l2++)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01176}01176\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01177}01177\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ //Set\ the\ number\ of\ the\ unknown}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01178}01178\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ nodal\_local\_eqn(l2,u\_index\_axi\_adv\_diff);}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01179}01179\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01180}01180\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ //If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01181}01181\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ if(local\_unknown\ >=\ 0)}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01182}01182\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01183}01183\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01184}01184\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dS*alpha*psif[l2]*testf[l]*W;}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01185}01185\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01186}01186\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01187}01187\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01120}01120\ \ \ \textcolor{comment}{//\ \ \ \ //Calculate\ local\ values\ of\ the\ solution\ and\ its\ derivatives}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01121}01121\ \ \ \textcolor{comment}{//\ \ \ \ //Allocate}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01122}01122\ \ \ \textcolor{comment}{//\ \ \ \ double\ interpolated\_u=0.0;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01123}01123\ \ \ \textcolor{comment}{//\ \ \ \ Vector<double>\ interpolated\_x(2,0.0);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01124}01124\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01125}01125\ \ \ \textcolor{comment}{//\ \ \ \ //Calculate\ position}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01126}01126\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ l=0;l<n\_node;l++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01127}01127\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01128}01128\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Get\ the\ value\ at\ the\ node}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01129}01129\ \ \ \textcolor{comment}{//\ \ \ \ \ \ double\ u\_value\ =\ raw\_nodal\_value(l,u\_index\_axi\_adv\_diff);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01130}01130\ \ \ \textcolor{comment}{//\ \ \ \ \ \ interpolated\_u\ +=\ u\_value*psif(l);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01131}01131\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Loop\ over\ coordinate\ direction}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01132}01132\ \ \ \textcolor{comment}{//\ \ \ \ \ \ for(unsigned\ i=0;i<2;i++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01133}01133\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01134}01134\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ interpolated\_x[i]\ +=\ nodal\_position(l,i)*psif(l);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01135}01135\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01136}01136\ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01137}01137\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01138}01138\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ imposed\ beta\ (beta=flux\ when\ alpha=0.0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01139}01139\ \ \ \textcolor{comment}{//\ \ \ \ double\ beta;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01140}01140\ \ \ \textcolor{comment}{//\ \ \ \ get\_beta(interpolated\_x,beta);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01141}01141\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01142}01142\ \ \ \textcolor{comment}{//\ \ \ \ //Get\ the\ imposed\ alpha}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01143}01143\ \ \ \textcolor{comment}{//\ \ \ \ double\ alpha;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01144}01144\ \ \ \textcolor{comment}{//\ \ \ \ get\_alpha(interpolated\_x,alpha);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01145}01145\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01146}01146\ \ \ \textcolor{comment}{//\ \ \ \ //calculate\ the\ area\ weighting\ dS\ =\ r\string^\{2\}\ sin\ theta\ dr\ dtheta}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01147}01147\ \ \ \textcolor{comment}{//\ \ \ \ //\ r\ =\ x[0]\ and\ theta\ =\ x[1]}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01148}01148\ \ \ \textcolor{comment}{//\ \ \ \ double\ dS\ =\ interpolated\_x[0]*interpolated\_x[0]*sin(interpolated\_x[1]);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01149}01149\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01150}01150\ \ \ \textcolor{comment}{//\ \ \ \ //Now\ add\ to\ the\ appropriate\ equations}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01151}01151\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01152}01152\ \ \ \textcolor{comment}{//\ \ \ \ //Loop\ over\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01153}01153\ \ \ \textcolor{comment}{//\ \ \ \ for(unsigned\ l=0;l<n\_node;l++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01154}01154\ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01155}01155\ \ \ \textcolor{comment}{//\ \ \ \ \ \ //Set\ the\ local\ equation\ number}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01156}01156\ \ \ \textcolor{comment}{//\ \ \ \ \ \ local\_eqn\ =\ nodal\_local\_eqn(l,u\_index\_axi\_adv\_diff);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01157}01157\ \ \ \textcolor{comment}{//\ \ \ \ \ \ /*IF\ it's\ not\ a\ boundary\ condition*/}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01158}01158\ \ \ \textcolor{comment}{//\ \ \ \ \ \ if(local\_eqn\ >=\ 0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01159}01159\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01160}01160\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //Add\ the\ prescribed\ beta\ terms}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01161}01161\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ residuals[local\_eqn]\ -\/=\ dS*(beta\ -\/\ alpha*interpolated\_u)*testf(l)*W;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01162}01162\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01163}01163\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //Calculate\ the\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01164}01164\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01165}01165\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ (\ (flag)\ \&\&\ (alpha!=0.0)\ )}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01166}01166\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01167}01167\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ //Loop\ over\ the\ velocity\ shape\ functions\ again}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01168}01168\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ for(unsigned\ l2=0;l2<n\_node;l2++)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01169}01169\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01170}01170\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ //Set\ the\ number\ of\ the\ unknown}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01171}01171\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ nodal\_local\_eqn(l2,u\_index\_axi\_adv\_diff);}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01172}01172\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01173}01173\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ //If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01174}01174\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ if(local\_unknown\ >=\ 0)}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01175}01175\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01176}01176\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01177}01177\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dS*alpha*psif[l2]*testf[l]*W;}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01178}01178\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01179}01179\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01180}01180\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01181}01181\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01182}01182\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01183}01183\ \ \ \textcolor{comment}{//\ \ \ \ \ \}\ //end\ loop\ over\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01184}01184\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01185}01185\ \ \ \textcolor{comment}{//\ \ \ \}\ //end\ loop\ over\ integration\ points}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01186}01186\ }
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01187}01187\ \ \ \textcolor{comment}{//\ \}//end\ fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}
 \DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01188}01188\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01189}01189\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01190}01190\ \ \ \textcolor{comment}{//\ \ \ \ \ \}\ //end\ loop\ over\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01191}01191\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01192}01192\ \ \ \textcolor{comment}{//\ \ \ \}\ //end\ loop\ over\ integration\ points}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01193}01193\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01194}01194\ \ \ \textcolor{comment}{//\ \}//end\ fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01195}01195\ }
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01196}01196\ \ \ \textcolor{comment}{//\ \}\ //End\ AxisymAdvectionDiffusionFluxElement\ class}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01197}01197\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01198}01198\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01189}01189\ \ \ \textcolor{comment}{//\ \}\ //End\ AxisymAdvectionDiffusionFluxElement\ class}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01190}01190\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{axisym__advection__diffusion__elements_8h_source_l01191}01191\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

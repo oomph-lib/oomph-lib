@@ -182,91 +182,84 @@
 \DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00178}00178\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00179}00179\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00180}00180\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00181}00181\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00182}00182\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{NNODE\_1D}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00184}00184\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00185}00185\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00186}00186\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{DIM}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00187}00187\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00189}00189\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00190}00190\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00191}00191\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00192}00192\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00194}00194\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00195}00195\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00196}00196\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00197}00197\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00198}00198\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00199}00199\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00200}00200\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00201}00201\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00202}00202\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00203}00203\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00204}\mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{00204}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{TWomersleyElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00205}00205\ \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_womersley}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00210}00210\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00211}00211\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00212}00212\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00213}00213\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00214}00214\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00215}00215\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers)}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00216}00216\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00217}00217\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00218}00218\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00219}00219\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00220}00220\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00221}00221\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00222}00222\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00223}00223\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00224}00224\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00225}00225\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00226}00226\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00227}00227\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00228}00228\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00229}00229\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TWomersleyElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00230}00230\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00231}00231\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00232}00232\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00233}00233\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00234}00234\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00235}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00235}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TWomersleyElement}{TWomersleyElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00236}00236\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00237}00237\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00238}00238\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00239}00239\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00241}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ad6124924235d691ccb2db24394e9b973}{00241}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ad6124924235d691ccb2db24394e9b973}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00242}00242\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00243}00243\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00244}00244\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00245}00245\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00246}00246\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00247}00247\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00248}00248\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00249}00249\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00250}00250\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00251}00251\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TWomersleyElement\ elements:\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00252}00252\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00253}00253\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00254}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4}{00254}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TWomersleyElement}{TWomersleyElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00255}00255\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00256}00256\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00257}00257\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00258}00258\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00260}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4_a6db1b1f549675de60e0847709a2b925a}{00260}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4_a6db1b1f549675de60e0847709a2b925a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00261}00261\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00262}00262\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00263}00263\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00264}00264\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00265}00265\ }
-\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00266}00266\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00181}00181\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00182}00182\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00183}00183\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00185}00185\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00186}00186\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00187}00187\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00190}00190\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00191}00191\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00192}00192\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00193}00193\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00194}00194\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00195}00195\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00196}00196\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00197}\mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{00197}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{TWomersleyElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00198}00198\ \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_womersley}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00203}00203\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00204}00204\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00205}00205\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00207}00207\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00208}00208\ \ \ \ \ \textcolor{comment}{//(sets\ internal\ pointers)}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00209}00209\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00210}00210\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00212}00212\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00214}00214\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00216}00216\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00217}00217\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00218}00218\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00219}00219\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00221}00221\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00222}00222\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TWomersleyElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00223}00223\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00224}00224\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00225}00225\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00226}00226\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00227}00227\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00228}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00228}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TWomersleyElement}{TWomersleyElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00229}00229\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00230}00230\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00231}00231\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00232}00232\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00233}00233\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00234}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ad6124924235d691ccb2db24394e9b973}{00234}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_01DIM_00_01NNODE__1D_01_4_01_4_ad6124924235d691ccb2db24394e9b973}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00235}00235\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00237}00237\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00238}00238\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00239}00239\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00240}00240\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00241}00241\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00243}00243\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00244}00244\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TWomersleyElement\ elements:\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00245}00245\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00246}00246\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00247}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4}{00247}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TWomersleyElement}{TWomersleyElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00248}00248\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00249}00249\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00250}00250\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00251}00251\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00252}00252\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00253}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4_a6db1b1f549675de60e0847709a2b925a}{00253}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TWomersleyElement_3_011_00_01NNODE__1D_01_4_01_4_a6db1b1f549675de60e0847709a2b925a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00254}00254\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00257}00257\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{Twomersley__elements_8h_source_l00259}00259\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

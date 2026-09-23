@@ -765,91 +765,85 @@
 \DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00761}00761\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00762}00762\ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ this-\/>dshape\_eulerian(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\ psi,\ dpsidx);}
 \DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00763}00763\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00764}00764\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00765}00765\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00766}00766\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ NNODE\_1D;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00767}00767\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00768}00768\ \ \ \ \ \ \ test[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ psi[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00769}00769\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ j\ =\ 0;\ j\ <\ DIM;\ j++)}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00770}00770\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00771}00771\ \ \ \ \ \ \ \ \ dtestdx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ j)\ =\ dpsidx(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ j);}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00772}00772\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00773}00773\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00774}00774\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00775}00775\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00776}00776\ \ \ \ \ \textcolor{keywordflow}{return}\ J;}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00777}00777\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00778}00778\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00779}00779\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00780}00780\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00781}00781\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00782}00782\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00783}00783\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00784}00784\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00785}00785\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00786}00786\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00787}\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{00787}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{QGeneralisedAdvectionDiffusionElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00788}00788\ \mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_cons\_adv\_diff}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ psi,}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00790}00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ dpsidx,}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ test,}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ dtestdx)\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00793}00793\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00794}00794\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00795}00795\ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ this-\/>dshape\_eulerian\_at\_knot(ipt,\ psi,\ dpsidx);}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00796}00796\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00797}00797\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions\ (pointer\ copy)}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00798}00798\ \ \ \ \ test\ =\ psi;}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00799}00799\ \ \ \ \ dtestdx\ =\ dpsidx;}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00800}00800\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00801}00801\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00802}00802\ \ \ \ \ \textcolor{keywordflow}{return}\ J;}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00803}00803\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00764}00764\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00765}00765\ \ \ \ \ test.\mbox{\hyperlink{classoomph_1_1Shape_a02a48eb0d32d75a05e713faa2f5562ef}{shallow\_copy\_from}}(psi);}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00766}00766\ \ \ \ \ dtestdx.\mbox{\hyperlink{classoomph_1_1DShape_aa4c94316dec6af00cdec4a386ff71261}{shallow\_copy\_from}}(dpsidx);}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00767}00767\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00768}00768\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00769}00769\ \ \ \ \ \textcolor{keywordflow}{return}\ J;}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00770}00770\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00773}00773\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00774}00774\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00775}00775\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00776}00776\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00777}00777\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00778}00778\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00779}00779\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00780}\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{00780}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{QGeneralisedAdvectionDiffusionElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00781}00781\ \mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement_a86385db741884733eb3ec459cc40290d}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_cons\_adv\_diff}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00782}00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ psi,}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00783}00783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ dpsidx,}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00784}00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ test,}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ dtestdx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00786}00786\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00787}00787\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00788}00788\ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ this-\/>dshape\_eulerian\_at\_knot(ipt,\ psi,\ dpsidx);}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00789}00789\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00790}00790\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions\ (pointer\ copy)}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00791}00791\ \ \ \ \ \textcolor{comment}{//\ Shallow\ copy\ for\ speed}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00792}00792\ \ \ \ \ test.\mbox{\hyperlink{classoomph_1_1Shape_a02a48eb0d32d75a05e713faa2f5562ef}{shallow\_copy\_from}}(psi);}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00793}00793\ \ \ \ \ dtestdx.\mbox{\hyperlink{classoomph_1_1DShape_aa4c94316dec6af00cdec4a386ff71261}{shallow\_copy\_from}}(dpsidx);}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00794}00794\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00795}00795\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00796}00796\ \ \ \ \ \textcolor{keywordflow}{return}\ J;}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00797}00797\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00799}00799\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00800}00800\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00801}00801\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00802}00802\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00803}00803\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00804}00804\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00805}00805\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00806}00806\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00807}00807\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00808}00808\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00809}00809\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00810}00810\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00811}00811\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00812}00812\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QGeneralisedAdvectionDiffusionElement}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00813}00813\ \textcolor{comment}{\ \ ///\ elements:\ The\ spatial\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00814}00814\ \textcolor{comment}{\ \ ///\ that\ of\ the\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points\ along}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00815}00815\ \textcolor{comment}{\ \ ///\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00816}00816\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00817}00817\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00818}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00818}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement}{QGeneralisedAdvectionDiffusionElement}}<DIM,\ NNODE\_1D>>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00819}00819\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00820}00820\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00821}00821\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00822}00822\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00823}00823\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00824}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a88ec5bd82caba197e610feb10b9884b1}{00824}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a88ec5bd82caba197e610feb10b9884b1}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00825}00825\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00805}00805\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00806}00806\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ QGeneralisedAdvectionDiffusionElement}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00807}00807\ \textcolor{comment}{\ \ ///\ elements:\ The\ spatial\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00808}00808\ \textcolor{comment}{\ \ ///\ that\ of\ the\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points\ along}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00809}00809\ \textcolor{comment}{\ \ ///\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00810}00810\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00811}00811\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00812}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00812}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement}{QGeneralisedAdvectionDiffusionElement}}<DIM,\ NNODE\_1D>>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00813}00813\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00814}00814\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00815}00815\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00816}00816\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00817}00817\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00818}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a88ec5bd82caba197e610feb10b9884b1}{00818}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a88ec5bd82caba197e610feb10b9884b1}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00819}00819\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00820}00820\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00821}00821\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00822}00822\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00823}00823\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00824}00824\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00825}00825\ \textcolor{comment}{}}
 \DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00826}00826\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00827}00827\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00828}00828\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00829}00829\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00830}00830\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00831}00831\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00832}00832\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00833}00833\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00834}00834\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QGeneralisedAdvectionDiffusion\ elements:\ Point}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00835}00835\ \textcolor{comment}{\ \ ///\ elements}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00836}00836\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00837}00837\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00838}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4}{00838}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement}{QGeneralisedAdvectionDiffusionElement}}<1,\ NNODE\_1D>>}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00839}00839\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00840}00840\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00841}00841\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00842}00842\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00843}00843\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00844}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4_afea1308a286ac676d6f8dd20329b7603}{00844}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4_afea1308a286ac676d6f8dd20329b7603}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00845}00845\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00846}00846\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00847}00847\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00848}00848\ }
-\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00849}00849\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00827}00827\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00828}00828\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ QGeneralisedAdvectionDiffusion\ elements:\ Point}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00829}00829\ \textcolor{comment}{\ \ ///\ elements}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00830}00830\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00831}00831\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00832}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4}{00832}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1QGeneralisedAdvectionDiffusionElement}{QGeneralisedAdvectionDiffusionElement}}<1,\ NNODE\_1D>>}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00833}00833\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00834}00834\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00835}00835\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00836}00836\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00837}00837\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ QElement}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00838}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4_afea1308a286ac676d6f8dd20329b7603}{00838}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAdvectionDiffusionElement_3_011_00_01NNODE__1D_01_4_01_4_afea1308a286ac676d6f8dd20329b7603}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00839}00839\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00840}00840\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00841}00841\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00842}00842\ }
+\DoxyCodeLine{\Hypertarget{gen__advection__diffusion__elements_8h_source_l00843}00843\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

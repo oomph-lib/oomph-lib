@@ -31,14 +31,16 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Modal\+Shape\+:\begin{figure}
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}{Shape}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor -\/ just assigns a null pointers and zero index sizes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
-\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a290b31eb089009211e08621936b286c5}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em Assignment operator, shallow copy (not recommended so warning given) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shape\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Assignment operator, shallow copy (not recommended so warning given) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a02a48eb0d32d75a05e713faa2f5562ef}{shallow\+\_\+copy\+\_\+from}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em This function makes a shallow copy (sets the pointer to the allocated data to be from another \doxylink{classoomph_1_1Shape}{Shape} object) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_aac7e5876e09d5f21c6108f045c56470a}{shallow\+\_\+copy\+\_\+from}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shape\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em This function make a shallow copy (sets the pointer to the allocated data to be from another \doxylink{classoomph_1_1Shape}{Shape} object) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}{\texorpdfstring{$\sim$}{\string~}\+Shape}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clear up the memory allocated by the object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&M=1)
-\begin{DoxyCompactList}\small\item\em Change the size of the storage. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a6738e5f9e1c1355c82a6a8ec1caedd63}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Overload the bracket operator to provide access to values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a06e98287258052bf7dbb108a57b4b7d0}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
@@ -56,6 +58,11 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Modal\+Shape\+:\begin{figure}
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_ae5be285b7233935366b561646a085463}{nindex2}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Return the range of index 2 of the shape function object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_a91e3c72bafbaa614697acdd116dbd5e5}{Suppress\+\_\+warning\+\_\+about\+\_\+assignment}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean used to suppress warning about assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,13 +78,17 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Modal\+Shape\+:\begin{figure}
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}{Index1}}
 \begin{DoxyCompactList}\small\item\em Size of the first index of the shape function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}{Index2}}
-\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_acee5db0adf841662c64f4391453b2f1e}{Is\+\_\+psi\+\_\+copied}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the data has been copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_aa5ddbd720d12cffc1a11545accab59f2}{Is\+\_\+psi\+\_\+a\+\_\+copy}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the data is a copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Non-\/templated class that returns modal hierachical shape functions based on Legendre polynomials. 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01348}{1348}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01474}{1474}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
@@ -94,7 +105,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01352}{1352}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01478}{1478}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 

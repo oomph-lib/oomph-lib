@@ -663,15 +663,15 @@ namespace oomph
       double J = this->transform_basis(s, q_basis_local, psi, dpsi, q_basis);
 
       // u_basis consists of the normal Lagrangian shape functions
-      u_basis = psi;
-      du_basis_dx = dpsi;
+      u_basis.shallow_copy_from(psi);
+      du_basis_dx.shallow_copy_from(dpsi);
 
-      u_test = psi;
-      du_test_dx = dpsi;
+      u_test.shallow_copy_from(psi);
+      du_test_dx.shallow_copy_from(dpsi);
 
-      q_test = q_basis;
-      p_test = p_basis;
-      div_q_test_ds = div_q_basis_ds;
+      q_test.shallow_copy_from(q_basis);
+      p_test.shallow_copy_from(p_basis);
+      div_q_test_ds.shallow_copy_from(div_q_basis_ds);
 
       return J;
     }

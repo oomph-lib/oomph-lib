@@ -236,133 +236,128 @@
 \DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00232}00232\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00233}00233\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00234}00234\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ test\ functions\ and\ derivatives\ and\ set\ them\ equal\ to\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00236}00236\ \ \ \ \ \textcolor{comment}{//\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00237}00237\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{n\_node}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00238}00238\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00239}00239\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00240}00240\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 0);}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00241}00241\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dtestdx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1)\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ 1);}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00242}00242\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00237}00237\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00239}00239\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00241}00241\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00242}00242\ }
 \DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00243}00243\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00244}00244\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00245}00245\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00246}00246\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00247}00247\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00248}00248\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00249}00249\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00250}00250\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00251}00251\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00252}00252\ \textcolor{comment}{\ \ ///}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00253}00253\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00254}00254\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00255}00255\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00256}\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{00256}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{TPMLHelmholtzElement<DIM,\ NNODE\_1D>::}}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00257}00257\ \mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_helmholtz}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00262}00262\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00263}00263\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00264}00264\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00265}00265\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00266}00266\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00267}00267\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{psi}};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00268}00268\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00244}00244\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00245}00245\ \textcolor{comment}{\ \ ///\ Define\ the\ shape\ functions\ and\ test\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00246}00246\ \textcolor{comment}{\ \ ///\ w.r.t.\ global\ coordinates\ and\ return\ Jacobian\ of\ mapping.}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00247}00247\ \textcolor{comment}{\ \ ///}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00248}00248\ \textcolor{comment}{\ \ ///\ Galerkin:\ Test\ functions\ =\ shape\ functions}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00249}00249\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00250}00250\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00251}\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{00251}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{TPMLHelmholtzElement<DIM,\ NNODE\_1D>::}}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00252}00252\ \mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement_a52e4f612fd56a76456adf4dbc604d430}{\ \ \ \ dshape\_and\_dtest\_eulerian\_at\_knot\_helmholtz}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ipt}},}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}},}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1DShape}{DShape}}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00257}00257\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00258}00258\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00259}00259\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00261}00261\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointers\ of\ the\ test\ functions}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00262}00262\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00263}00263\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00265}00265\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00266}00266\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00267}00267\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00268}00268\ }
 \DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00269}00269\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00270}00270\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_abbe854e6d95ceea2b377d854d339d9d1}{J}};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00272}00272\ \ \ \}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00273}00273\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00274}00274\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00275}00275\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00276}00276\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TPMLHelmholtzElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00277}00277\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00278}00278\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00279}00279\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00280}00280\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00281}00281\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00282}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00282}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00283}00283\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00284}00284\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00285}00285\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00286}00286\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00287}00287\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00288}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a67b90cf39749e445440549130ff95f26}{00288}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a67b90cf39749e445440549130ff95f26}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00289}00289\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00290}00290\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00291}00291\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00292}00292\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TPMLHelmholtzElement\ elements:}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00293}00293\ \textcolor{comment}{\ \ ///\ Point\ elements}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00294}00294\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00295}00295\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00296}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4}{00296}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00297}00297\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00298}00298\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00299}00299\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00300}00300\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00301}00301\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00302}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4_a192fd865679c958d4b04a84b4eadebd6}{00302}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4_a192fd865679c958d4b04a84b4eadebd6}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00303}00303\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00304}00304\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00305}00305\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00306}00306\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00307}00307\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00308}00308\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00309}00309\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00310}00310\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00311}00311\ \textcolor{comment}{\ \ ///\ Policy\ class\ defining\ the\ elements\ to\ be\ used\ in\ the\ actual}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00312}00312\ \textcolor{comment}{\ \ ///\ PML\ layers.\ It's\ the\ corresponding\ quads.}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00313}00313\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00314}00314\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00315}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4}{00315}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00316}00316\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00317}00317\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00318}00318\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00319}00319\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00320}00320\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ QElement}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00321}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_ae1a2fe871a1583f10e8fec93f0dba183}{00321}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_ae1a2fe871a1583f10e8fec93f0dba183}{PMLLayerElement}}()\ :\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00322}00322\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00323}00323\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00324}00324\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00325}00325\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TPMLHelmholtzElement\ elements:\ The\ spatial}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00326}00326\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00327}00327\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00328}00328\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00329}00329\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00330}00330\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00331}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4}{00331}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00332}00332\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00333}00333\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00334}00334\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00335}00335\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00336}00336\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00337}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4_a234b2a698d8c86724305f39b0141ad4a}{00337}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4_a234b2a698d8c86724305f39b0141ad4a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00338}00338\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00339}00339\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00340}00340\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00341}00341\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00342}00342\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00343}00343\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00344}00344\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00345}00345\ \textcolor{comment}{\ \ ///\ Policy\ class\ defining\ the\ elements\ to\ be\ used\ in\ the\ actual}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00346}00346\ \textcolor{comment}{\ \ ///\ PML\ layers.\ It's\ the\ corresponding\ quads.}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00347}00347\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00348}00348\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00349}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{00349}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00350}00350\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement}{ProjectablePMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00351}00351\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ NNODE\_1D>}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00352}00352\ \ \ \{}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00353}00353\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00354}00354\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00355}00355\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ QElement}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00356}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4_aa5fc0e7a626c4d26177babff04159328}{00356}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4_aa5fc0e7a626c4d26177babff04159328}{PMLLayerElement}}()\ :\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00357}00357\ \ \ \};}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00358}00358\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00359}00359\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00360}00360\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00361}00361\ }
-\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00362}00362\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00270}00270\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00271}00271\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TPMLHelmholtzElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00272}00272\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00273}00273\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00274}00274\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00275}00275\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00276}00276\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00277}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{00277}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00278}00278\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00279}00279\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00280}00280\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00281}00281\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00282}00282\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00283}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a67b90cf39749e445440549130ff95f26}{00283}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_a67b90cf39749e445440549130ff95f26}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00284}00284\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00286}00286\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00287}00287\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ 1D\ TPMLHelmholtzElement\ elements:}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00288}00288\ \textcolor{comment}{\ \ ///\ Point\ elements}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00289}00289\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00290}00290\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00291}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4}{00291}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00292}00292\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00293}00293\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00294}00294\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00295}00295\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00296}00296\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00297}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4_a192fd865679c958d4b04a84b4eadebd6}{00297}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPMLHelmholtzElement_3_011_00_01NNODE__1D_01_4_01_4_a192fd865679c958d4b04a84b4eadebd6}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1PointElement}{PointElement}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00298}00298\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00300}00300\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00301}00301\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00302}00302\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00303}00303\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00304}00304\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00305}00305\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00306}00306\ \textcolor{comment}{\ \ ///\ Policy\ class\ defining\ the\ elements\ to\ be\ used\ in\ the\ actual}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00307}00307\ \textcolor{comment}{\ \ ///\ PML\ layers.\ It's\ the\ corresponding\ quads.}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00308}00308\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00309}00309\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00310}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4}{00310}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00311}00311\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00312}00312\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00313}00313\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00314}00314\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00315}00315\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ QElement}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00316}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_ae1a2fe871a1583f10e8fec93f0dba183}{00316}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_ae1a2fe871a1583f10e8fec93f0dba183}{PMLLayerElement}}()\ :\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00317}00317\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00319}00319\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00320}00320\ \textcolor{comment}{\ \ ///\ Face\ geometry\ for\ the\ TPMLHelmholtzElement\ elements:\ The\ spatial}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00321}00321\ \textcolor{comment}{\ \ ///\ dimension\ of\ the\ face\ elements\ is\ one\ lower\ than\ that\ of\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00322}00322\ \textcolor{comment}{\ \ ///\ bulk\ element\ but\ they\ have\ the\ same\ number\ of\ points}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00323}00323\ \textcolor{comment}{\ \ ///\ along\ their\ 1D\ edges.}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00324}00324\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00325}00325\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM,\ \textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00326}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4}{00326}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1FaceGeometry}{FaceGeometry}}<\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00327}00327\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<DIM\ -\/\ 1,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00328}00328\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00329}00329\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00330}00330\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00331}00331\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ lower-\/dimensional\ TElement}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00332}\mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4_a234b2a698d8c86724305f39b0141ad4a}{00332}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLLayerElement_3_01TPMLHelmholtzElement_3_01DIM_00_01NNODE__1D_01_4_01_4_01_4_a234b2a698d8c86724305f39b0141ad4a}{FaceGeometry}}()\ :\ \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}\ -\/\ 1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00333}00333\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00334}00334\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00335}00335\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00336}00336\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00337}00337\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00338}00338\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00339}00339\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00340}00340\ \textcolor{comment}{\ \ ///\ Policy\ class\ defining\ the\ elements\ to\ be\ used\ in\ the\ actual}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00341}00341\ \textcolor{comment}{\ \ ///\ PML\ layers.\ It's\ the\ corresponding\ quads.}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00342}00342\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00343}00343\ \ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00344}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{00344}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1PMLLayerElement}{PMLLayerElement}}<}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00345}00345\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement}{ProjectablePMLHelmholtzElement}}<\mbox{\hyperlink{classoomph_1_1TPMLHelmholtzElement}{TPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>>>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00346}00346\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ NNODE\_1D>}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00347}00347\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00348}00348\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00349}00349\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Call\ the\ constructor\ for\ the}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00350}00350\ \textcolor{comment}{\ \ \ \ ///\ appropriate\ QElement}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00351}\mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4_aa5fc0e7a626c4d26177babff04159328}{00351}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLHelmholtzElement_3_01TPMLHelmholtzElement_3_012_00_01NNODE__1D_01_4_01_4_01_4_aa5fc0e7a626c4d26177babff04159328}{PMLLayerElement}}()\ :\ \mbox{\hyperlink{classoomph_1_1QPMLHelmholtzElement}{QPMLHelmholtzElement}}<2,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\_1D}}>()\ \{\}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00352}00352\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00354}00354\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{Tpml__helmholtz__elements_8h_source_l00357}00357\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

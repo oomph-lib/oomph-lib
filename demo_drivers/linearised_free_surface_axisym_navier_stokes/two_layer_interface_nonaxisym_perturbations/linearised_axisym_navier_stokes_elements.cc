@@ -608,7 +608,7 @@ namespace oomph
 
     // Set the derivatives of the test functions w.r.t. local coords
     // equal to that of the shape functions
-    dtestfds = dpsifds;
+    dtestfds.shallow_copy_from(dpsifds);
 
     // Calculate the fluid shape and test functions, and their derivatives
     // w.r.t. the global coordinates

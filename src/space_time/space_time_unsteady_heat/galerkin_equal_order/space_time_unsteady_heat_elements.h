@@ -829,10 +829,10 @@ namespace oomph
     double det = this->dshape_eulerian(s, psi, dpsidx);
 
     // The test functions are equal to the shape functions
-    test = psi;
+    test.shallow_copy_from(psi);
 
     // The test function derivatives are equal to those of the shape functions
-    dtestdx = dpsidx;
+    dtestdx.shallow_copy_from(dpsidx);
 
     // Return the Jacobian of the mapping
     return det;

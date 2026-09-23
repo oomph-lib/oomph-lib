@@ -31,14 +31,16 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Legendre\+Shape\texorpdfstrin
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}{Shape}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor -\/ just assigns a null pointers and zero index sizes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
-\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a290b31eb089009211e08621936b286c5}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em Assignment operator, shallow copy (not recommended so warning given) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shape\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Assignment operator, shallow copy (not recommended so warning given) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a02a48eb0d32d75a05e713faa2f5562ef}{shallow\+\_\+copy\+\_\+from}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em This function makes a shallow copy (sets the pointer to the allocated data to be from another \doxylink{classoomph_1_1Shape}{Shape} object) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_aac7e5876e09d5f21c6108f045c56470a}{shallow\+\_\+copy\+\_\+from}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shape\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em This function make a shallow copy (sets the pointer to the allocated data to be from another \doxylink{classoomph_1_1Shape}{Shape} object) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}{\texorpdfstring{$\sim$}{\string~}\+Shape}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clear up the memory allocated by the object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&M=1)
-\begin{DoxyCompactList}\small\item\em Change the size of the storage. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a6738e5f9e1c1355c82a6a8ec1caedd63}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Overload the bracket operator to provide access to values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a06e98287258052bf7dbb108a57b4b7d0}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
@@ -67,6 +69,11 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Legendre\+Shape\texorpdfstrin
 \item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678}{z}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_a91e3c72bafbaa614697acdd116dbd5e5}{Suppress\+\_\+warning\+\_\+about\+\_\+assignment}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean used to suppress warning about assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -88,7 +95,11 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Legendre\+Shape\texorpdfstrin
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}{Index1}}
 \begin{DoxyCompactList}\small\item\em Size of the first index of the shape function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}{Index2}}
-\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_acee5db0adf841662c64f4391453b2f1e}{Is\+\_\+psi\+\_\+copied}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the data has been copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Shape_aa5ddbd720d12cffc1a11545accab59f2}{Is\+\_\+psi\+\_\+a\+\_\+copy}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the data is a copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -96,7 +107,7 @@ Inheritance diagram for oomph\+::One\+Dimensional\+Legendre\+Shape\texorpdfstrin
 class oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$}
 Class that returns the shape functions associated with legendre. 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01233}{1233}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01359}{1359}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
@@ -114,11 +125,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01256}{1256}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01382}{1382}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References \mbox{\hyperlink{orthpoly_8h_source_l00052}{oomph\+::\+Orthpoly\+::eps}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01238}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
+References \mbox{\hyperlink{orthpoly_8h_source_l00052}{oomph\+::\+Orthpoly\+::eps}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01364}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
 
 
 
@@ -136,11 +147,11 @@ Static function used to populate the stored positions.
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01241}{1241}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01367}{1367}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References \mbox{\hyperlink{orthpoly_8cc_source_l00033}{oomph\+::\+Orthpoly\+::gll\+\_\+nodes()}}, \mbox{\hyperlink{shape_8h_source_l01235}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::\+Nodes\+\_\+calculated}}, and \mbox{\hyperlink{shape_8h_source_l01238}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
+References \mbox{\hyperlink{orthpoly_8cc_source_l00033}{oomph\+::\+Orthpoly\+::gll\+\_\+nodes()}}, \mbox{\hyperlink{shape_8h_source_l01361}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::\+Nodes\+\_\+calculated}}, and \mbox{\hyperlink{shape_8h_source_l01364}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
 
 
 
@@ -155,11 +166,11 @@ Referenced by \mbox{\hyperlink{hp__refineable__elements_8cc_source_l00812}{oomph
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01250}{1250}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01376}{1376}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l01238}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
+References \mbox{\hyperlink{shape_8h_source_l01364}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::z}}.
 
 
 
@@ -177,11 +188,11 @@ Referenced by \mbox{\hyperlink{hp__refineable__elements_8cc_source_l00042}{oomph
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01235}{1235}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01361}{1361}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{shape_8h_source_l01241}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions()}}.
+Referenced by \mbox{\hyperlink{shape_8h_source_l01367}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions()}}.
 
 \Hypertarget{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678}\label{classoomph_1_1OneDimensionalLegendreShape_ab2d2b8418ac85a8ebf643d365fd52678} 
 \index{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$@{oomph::OneDimensionalLegendreShape$<$ NNODE\_1D $>$}!z@{z}}
@@ -192,11 +203,11 @@ Referenced by \mbox{\hyperlink{shape_8h_source_l01241}{oomph\+::\+One\+Dimension
 
 
 
-Definition at line \mbox{\hyperlink{shape_8h_source_l01238}{1238}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01364}{1364}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{shape_8h_source_l01241}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions()}}, \mbox{\hyperlink{shape_8h_source_l01250}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::nodal\+\_\+position()}}, and \mbox{\hyperlink{shape_8h_source_l01256}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+Shape()}}.
+Referenced by \mbox{\hyperlink{shape_8h_source_l01367}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions()}}, \mbox{\hyperlink{shape_8h_source_l01376}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::nodal\+\_\+position()}}, and \mbox{\hyperlink{shape_8h_source_l01382}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+Shape()}}.
 
 
 

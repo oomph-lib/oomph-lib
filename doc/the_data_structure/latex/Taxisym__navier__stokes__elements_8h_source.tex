@@ -402,8 +402,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00398}00398\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00399}00399\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00400}00400\ \ \ \ \ \textcolor{comment}{//\ The\ test\ functions\ are\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00401}00401\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00402}00402\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00401}00401\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00402}00402\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00403}00403\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00404}00404\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00405}00405\ \ \ \}}
@@ -424,8 +424,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00420}00420\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00421}00421\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00422}00422\ \ \ \ \ \textcolor{comment}{//\ The\ test\ functions\ are\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00423}00423\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00424}00424\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00423}00423\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00424}00424\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00425}00425\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00426}00426\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00427}00427\ \ \ \}}
@@ -455,9 +455,9 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00451}00451\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00452}00452\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00453}00453\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00454}00454\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00455}00455\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00456}00456\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00454}00454\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00455}00455\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00456}00456\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00457}00457\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00458}00458\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00459}00459\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
@@ -484,7 +484,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00480}00480\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ pressure\ shape\ functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00481}00481\ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricTCrouzeixRaviartElement_afd3664b820b924b9509f4f75eaf7420c}{pshape\_axi\_nst}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00482}00482\ \ \ \ \ \textcolor{comment}{//\ The\ test\ functions\ are\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00483}00483\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00483}00483\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00484}00484\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00485}00485\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00486}00486\ \ \ \textcolor{comment}{//==========================================================================}\textcolor{comment}{}}
@@ -529,8 +529,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00525}00525\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement_a2c2f243c9f450c4023e5aa4246facd20}{transform\_derivatives}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inverse\_jacobian}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00526}00526\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00527}00527\ \ \ \ \ \textcolor{comment}{//\ The\ test\ functions\ are\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00528}00528\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ptest}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ppsi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00529}00529\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dptestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00528}00528\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ptest}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ppsi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00529}00529\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dptestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00530}00530\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00531}00531\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ determinant\ of\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00532}00532\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{det}};}
@@ -915,8 +915,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00911}00911\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00912}00912\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{dshape\_eulerian}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00913}00913\ \ \ \ \ \textcolor{comment}{//\ Test\ functions\ are\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00914}00914\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00915}00915\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00914}00914\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00915}00915\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00916}00916\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00917}00917\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00918}00918\ \ \ \}}
@@ -937,8 +937,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00933}00933\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ geometrical\ shape\ functions\ and\ derivatives}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00934}00934\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a368c44e295e35dd0b697be3222ce7b2f}{dshape\_eulerian\_at\_knot}}(ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00935}00935\ \ \ \ \ \textcolor{comment}{//\ Test\ functions\ are\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00936}00936\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00937}00937\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00936}00936\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00937}00937\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00938}00938\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00939}00939\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00940}00940\ \ \ \}}
@@ -967,9 +967,9 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00963}00963\ \ \ \ \ \ \ ipt,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djacobian\_dX}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00964}00964\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00965}00965\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ test\ functions\ equal\ to\ the\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00966}00966\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00967}00967\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00968}00968\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00966}00966\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00967}00967\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dtestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsidx}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00968}00968\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dtestdx\_dX}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\_dpsidx\_dX}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00969}00969\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00970}00970\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l00971}00971\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}};}
@@ -1016,8 +1016,8 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01012}01012\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement_a2c2f243c9f450c4023e5aa4246facd20}{transform\_derivatives}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inverse\_jacobian}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01013}01013\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01014}01014\ \ \ \ \ \textcolor{comment}{//\ Test\ functions\ are\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01015}01015\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ptest}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ppsi}};}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01016}01016\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dptestdx}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01015}01015\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ptest}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ppsi}});}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01016}01016\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dptestdx}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dppsidx}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01017}01017\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01018}01018\ \ \ \ \ \textcolor{comment}{//\ Return\ the\ determinant\ of\ the\ jacobian}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01019}01019\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{det}};}
@@ -1044,7 +1044,7 @@
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01040}01040\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ pressure\ shape\ functions}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01041}01041\ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1AxisymmetricTTaylorHoodElement_a9a52e3c13681e0ad373b330a0934b7a1}{pshape\_axi\_nst}}(s,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01042}01042\ \ \ \ \ \textcolor{comment}{//\ Test\ functions\ are\ shape\ functions}}
-\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01043}01043\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}};}
+\DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01043}01043\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{test}}.shallow\_copy\_from(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}});}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01044}01044\ \ \ \}}
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01045}01045\ }
 \DoxyCodeLine{\Hypertarget{Taxisym__navier__stokes__elements_8h_source_l01046}01046\ }
