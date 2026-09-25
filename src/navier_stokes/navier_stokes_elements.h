@@ -2321,6 +2321,7 @@ namespace oomph
       DenseMatrix<double>& djacobian_dX) const;
 
   public:
+   
     /// Constructor, no internal data points
     QTaylorHoodElement() : QElement<DIM, 3>(), NavierStokesEquations<DIM>() {}
 

@@ -1795,7 +1795,7 @@ namespace oomph
     {
       u_nodal_index[i] = u_index_nst(i);
     }
-
+    
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
@@ -1849,8 +1849,10 @@ namespace oomph
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
+       {
         interpolated_p += p_nst(l) * psip[l];
-
+       }
+      
       // Calculate velocities and derivatives:
 
       // Loop over nodes
@@ -2064,10 +2066,10 @@ namespace oomph
                 /*If we're at a non-zero degree of freedom add it in*/
                 local_unknown = nodal_local_eqn(l2, u_nodal_index[i2]);
                 if (local_unknown >= 0)
-                {
+                 {
                   jacobian(local_eqn, local_unknown) +=
-                    dpsifdx(l2, i2) * testp[l] * W;
-                }
+                   dpsifdx(l2, i2) * testp[l] * W;
+                 }
               } /*End of loop over i2*/
             } /*End of loop over l2*/
           } /*End of Jacobian calculation*/
