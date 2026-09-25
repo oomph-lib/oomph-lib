@@ -1473,7 +1473,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -1529,7 +1529,7 @@ namespace oomph
     dtestdx = dpsidx;
     d_dtestdx_dX = d_dpsidx_dX;
 
-   
+
     // Return the jacobian
     return J;
   }
@@ -1759,7 +1759,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }

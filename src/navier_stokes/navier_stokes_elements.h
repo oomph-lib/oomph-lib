@@ -1964,11 +1964,11 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
-    
+
     // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -1988,7 +1988,7 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
-    
+
     // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
@@ -2321,7 +2321,6 @@ namespace oomph
       DenseMatrix<double>& djacobian_dX) const;
 
   public:
-   
     /// Constructor, no internal data points
     QTaylorHoodElement() : QElement<DIM, 3>(), NavierStokesEquations<DIM>() {}
 

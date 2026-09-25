@@ -931,7 +931,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -952,11 +952,11 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = QElement<2, 3>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
-    
+
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -1160,7 +1160,7 @@ namespace oomph
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    
+
     // Return the jacobian
     return J;
   }
@@ -1181,7 +1181,7 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = QElement<2, 3>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
-    
+
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;

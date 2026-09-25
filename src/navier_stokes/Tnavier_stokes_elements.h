@@ -108,7 +108,6 @@ namespace oomph
                                                   DShape& dptestdx) const;
 
   public:
-   
     /// Pressure shape functions at local coordinate s
     inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
 
@@ -792,7 +791,6 @@ namespace oomph
 
 
   public:
-   
     /// Constructor, no internal data points
     TTaylorHoodElement() : TElement<DIM, 3>(), NavierStokesEquations<DIM>() {}
 
@@ -851,7 +849,7 @@ namespace oomph
     /// Set the value at which the pressure is stored in the nodes
     int p_nodal_index_nst() const
     {
-     return static_cast<int>(DIM);
+      return static_cast<int>(DIM);
     }
 
     /// Return number of pressure values
@@ -861,8 +859,8 @@ namespace oomph
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
-      this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(),
-                                             p_value);
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_nst(), p_value);
     }
 
 
@@ -1253,7 +1251,7 @@ namespace oomph
     test = psi;
     dtestdx = dpsidx;
     d_dtestdx_dX = d_dpsidx_dX;
- 
+
     // Return the jacobian
     return J;
   }

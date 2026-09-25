@@ -151,7 +151,7 @@ namespace oomph
   {
     // Find the index at which the pressure is stored
     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
-    
+
     unsigned n_node = this->nnode();
     // loop over nodes
     for (unsigned l = 0; l < n_node; l++)
@@ -174,7 +174,7 @@ namespace oomph
   {
     // Find the index at which the pressure is stored
     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
-    
+
     // Loop over all nodes and pin pressure
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
@@ -194,7 +194,7 @@ namespace oomph
   {
     // Find the index at which the pressure is stored
     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
-    
+
     // Loop over all pressure nodes and unpin if they're not hanging
     unsigned n_pres = npres_nst();
     for (unsigned l = 0; l < n_pres; l++)
@@ -236,7 +236,7 @@ namespace oomph
       // and indices to the vectors
       for (unsigned i = 0; i < DIM; i++)
       {
-        paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
+        paired_load_data.insert(std::make_pair(this->node_pt(n), u_index[i]));
       }
     }
 
@@ -259,7 +259,7 @@ namespace oomph
   {
     // Find the index at which the pressure is stored
     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
-    
+
     // Loop over the pressure data
     unsigned n_pres = npres_nst();
     for (unsigned l = 0; l < n_pres; l++)

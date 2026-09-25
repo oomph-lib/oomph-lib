@@ -2079,7 +2079,7 @@ namespace oomph
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
-    
+
     // Set the test functions equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
