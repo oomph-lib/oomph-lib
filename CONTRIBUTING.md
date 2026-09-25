@@ -448,6 +448,10 @@ The general workflow for approving a pull request is as follows:
 
 1. **Reviewer:** When all requests from all reviewers have been dealt with, and all reviewers have approved the changes, the changes can be merged in by pressing the green "Merge pull request" button. **IMPORTANT:** Before you merge, go to the top of the page and double-check that you're merging into the `main` branch!
 
+
+Note that maintainers may want to download a PR onto their own machine to test things out. We provide a [separate document](COLLABORATING_ON_PR.md) to explain how to do this. In particular, we demonstrate how to submit "PRs on PRs" as a way for the maintainer to contribute changes to the PR. 
+
+
 ## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
@@ -485,7 +489,6 @@ Described below is an alternative way to pull changes from the official reposito
    ```
    Now both your local forked repository and your remote forked repository are in
    sync with the upstream (i.e. official) repository. Hurray!
-
 
 ## Advanced: pulling in changes from another branch without going through the central repository
 

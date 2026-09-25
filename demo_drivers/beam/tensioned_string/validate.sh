@@ -127,7 +127,7 @@ echo "Running tensioned string validation (new; large sigma0; non-unit stretch r
 
 echo "done"
 echo " " >> validation.log
-echo "Tensioned string validation (new; large sigma0; non0unit stretch ratio)" >> validation.log
+echo "Tensioned string validation (new; large sigma0; non-unit stretch ratio)" >> validation.log
 echo "-----------------------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -155,7 +155,7 @@ fi
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 

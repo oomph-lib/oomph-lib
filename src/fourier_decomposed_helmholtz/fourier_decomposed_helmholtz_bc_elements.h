@@ -318,8 +318,8 @@ namespace oomph
       dshape_local(s, psi, dpsi_ds);
 
       // Set the test functions equal to the shape functions
-      test = psi;
-      dtest_ds = dpsi_ds;
+      test.shallow_copy_from(psi);
+      dtest_ds.shallow_copy_from(dpsi_ds);
 
       // Return the value of the jacobian
       return J_eulerian(s);
