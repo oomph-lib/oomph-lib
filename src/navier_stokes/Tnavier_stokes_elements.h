@@ -829,21 +829,21 @@ namespace oomph
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
     {
-      return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
+      return this->nodal_local_eqn(Pconv[n], this->p_nodal_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& n_p) const
     {
-      return this->nodal_value(Pconv[n_p], p_nodal_index_nst());
+      return this->nodal_value(Pconv[n_p], this->p_nodal_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& t, const unsigned& n_p) const
     {
-      return this->nodal_value(t, Pconv[n_p], p_nodal_index_nst());
+      return this->nodal_value(t, Pconv[n_p], this->p_nodal_index_nst());
     }
 
     /// Set the value at which the pressure is stored in the nodes
