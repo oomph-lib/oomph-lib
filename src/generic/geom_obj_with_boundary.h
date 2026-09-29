@@ -35,7 +35,7 @@
 
 // oomph-lib headers
 #include "geom_objects.h"
-
+#include "fixed_size_vector.h"
 
 namespace oomph
 {
@@ -70,8 +70,13 @@ namespace oomph
   class DiskLikeGeomObjectWithBoundaries : public GeomObject
   {
   public:
+   
     /// Constructor
-    DiskLikeGeomObjectWithBoundaries() : GeomObject(2, 3) {}
+    DiskLikeGeomObjectWithBoundaries() : GeomObject(2, 3)
+    {
+     R_work_space.resize(3);
+     Zeta_work_space.resize(2);
+    }
 
     /// How many boundaries do we have?
     unsigned nboundary() const
@@ -79,22 +84,42 @@ namespace oomph
       return Boundary_parametrising_geom_object_pt.size();
     }
 
+   /// Parametrised position on object at current time: r(zeta).
+   /// but specialised to 2D disk in 3D space
+   void position_from_fixed_size_vectors(const FixedSizeVector<double,2>& zeta,
+                                         FixedSizeVector<double,3>& r) 
+    {
+     R_work_space[0]=r[0];
+     R_work_space[1]=r[1];
+     R_work_space[2]=r[2];
+
+     Zeta_work_space[0]=zeta[0];
+     Zeta_work_space[1]=zeta[1];
+
+     position(Zeta_work_space,R_work_space);
+     
+     r[0]=R_work_space[0];
+     r[1]=R_work_space[1];
+     r[2]=R_work_space[2];
+    }
+
+   
     /// Compute 3D vector of Eulerian coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
     void position_on_boundary(const unsigned& b,
                               const double& zeta_bound,
-                              Vector<double>& r) const
+                              FixedSizeVector<double,3>& r) // const
     {
-      Vector<double> zeta(2);
-      zeta_on_boundary(b, zeta_bound, zeta);
-      position(zeta, r);
+     FixedSizeVector<double,2> zeta;
+     zeta_on_boundary(b, zeta_bound, zeta);
+     position_from_fixed_size_vectors(zeta, r);
     }
 
     /// Compute 2D vector of intrinsic coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
     void zeta_on_boundary(const unsigned& b,
                           const double& zeta_bound,
-                          Vector<double>& zeta) const
+                          FixedSizeVector<double,2>& zeta) const
     {
 #ifdef PARANOID
       if (Boundary_parametrising_geom_object_pt[b] == 0)
@@ -131,9 +156,13 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      Vector<double> zeta_bound_vector(1, zeta_bound);
-      Boundary_parametrising_geom_object_pt[b]->position(zeta_bound_vector,
-                                                         zeta);
+      Vector<double> zeta_bound_vector(1,zeta_bound);
+      Vector<double> zeta2(2);
+      Boundary_parametrising_geom_object_pt[b]->
+       position(zeta_bound_vector,
+                zeta2);
+      zeta[0]=zeta2[0];
+      zeta[1]=zeta2[1];
     }
 
     /// Pointer to GeomObject<1,2> that parametrises intrinisc
@@ -174,10 +203,10 @@ namespace oomph
     /// Broken virtual.
     virtual void boundary_triad(const unsigned& b,
                                 const double& zeta_bound,
-                                Vector<double>& r,
-                                Vector<double>& tangent,
-                                Vector<double>& normal,
-                                Vector<double>& binormal)
+                                FixedSizeVector<double,3>& r,
+                                FixedSizeVector<double,3>& tangent,
+                                FixedSizeVector<double,3>& normal,
+                                FixedSizeVector<double,3>& binormal)
     {
       std::ostringstream error_message;
       error_message << "Broken virtual function; please implement for your\n"
@@ -218,54 +247,54 @@ namespace oomph
                                       std::ofstream& boundaries_normal_file,
                                       std::ofstream& boundaries_binormal_file)
     {
-      Vector<double> r(3);
-      Vector<double> zeta(2);
-      double zeta_bound = 0.0;
-      Vector<double> tangent(3);
-      Vector<double> normal(3);
-      Vector<double> binormal(3);
-      unsigned nb = nboundary();
-      for (unsigned b = 0; b < nb; b++)
+     FixedSizeVector<double,3> r;
+     FixedSizeVector<double,2> zeta;
+     double zeta_bound = 0.0;
+     FixedSizeVector<double,3> tangent;
+     FixedSizeVector<double,3> normal;
+     FixedSizeVector<double,3> binormal;
+     unsigned nb = nboundary();
+     for (unsigned b = 0; b < nb; b++)
       {
-        two_d_boundaries_file << "ZONE" << std::endl;
-        three_d_boundaries_file << "ZONE" << std::endl;
-        boundaries_tangent_file << "ZONE" << std::endl;
-        boundaries_normal_file << "ZONE" << std::endl;
-        boundaries_binormal_file << "ZONE" << std::endl;
-
-        double zeta_min = zeta_boundary_start(b);
-        double zeta_max = zeta_boundary_end(b);
-        unsigned n = 100;
-        for (unsigned i = 0; i < n; i++)
+       two_d_boundaries_file << "ZONE" << std::endl;
+       three_d_boundaries_file << "ZONE" << std::endl;
+       boundaries_tangent_file << "ZONE" << std::endl;
+       boundaries_normal_file << "ZONE" << std::endl;
+       boundaries_binormal_file << "ZONE" << std::endl;
+       
+       double zeta_min = zeta_boundary_start(b);
+       double zeta_max = zeta_boundary_end(b);
+       unsigned n = 100;
+       for (unsigned i = 0; i < n; i++)
         {
-          zeta_bound =
-            zeta_min + (zeta_max - zeta_min) * double(i) / double(n - 1);
-          position_on_boundary(b, zeta_bound, r);
-          zeta_on_boundary(b, zeta_bound, zeta);
-          boundary_triad(b, zeta_bound, r, tangent, normal, binormal);
-
-          two_d_boundaries_file << zeta[0] << " " << zeta[1] << " "
-                                << zeta_bound << " " << std::endl;
-
-          three_d_boundaries_file << r[0] << " " << r[1] << " " << r[2] << " "
-                                  << zeta[0] << " " << zeta[1] << " "
-                                  << zeta_bound << " " << std::endl;
-
-          boundaries_tangent_file << r[0] << " " << r[1] << " " << r[2] << " "
-                                  << tangent[0] << " " << tangent[1] << " "
-                                  << tangent[2] << " " << std::endl;
-
-          boundaries_normal_file << r[0] << " " << r[1] << " " << r[2] << " "
-                                 << normal[0] << " " << normal[1] << " "
-                                 << normal[2] << " " << std::endl;
-
-          boundaries_binormal_file << r[0] << " " << r[1] << " " << r[2] << " "
-                                   << binormal[0] << " " << binormal[1] << " "
-                                   << binormal[2] << " " << std::endl;
+         zeta_bound =
+          zeta_min + (zeta_max - zeta_min) * double(i) / double(n - 1);
+         // position_on_boundary(b, zeta_bound, r);
+         zeta_on_boundary(b, zeta_bound, zeta);
+         boundary_triad(b, zeta_bound, r, tangent, normal, binormal);
+         
+         two_d_boundaries_file << zeta[0] << " " << zeta[1] << " "
+                               << zeta_bound << " " << std::endl;
+         
+         three_d_boundaries_file << r[0] << " " << r[1] << " " << r[2] << " "
+                                 << zeta[0] << " " << zeta[1] << " "
+                                 << zeta_bound << " " << std::endl;
+         
+         boundaries_tangent_file << r[0] << " " << r[1] << " " << r[2] << " "
+                                 << tangent[0] << " " << tangent[1] << " "
+                                 << tangent[2] << " " << std::endl;
+         
+         boundaries_normal_file << r[0] << " " << r[1] << " " << r[2] << " "
+                                << normal[0] << " " << normal[1] << " "
+                                << normal[2] << " " << std::endl;
+         
+         boundaries_binormal_file << r[0] << " " << r[1] << " " << r[2] << " "
+                                  << binormal[0] << " " << binormal[1] << " "
+                                  << binormal[2] << " " << std::endl;
         }
       }
     }
-
+   
 
     /// Specify intrinsic coordinates of a point within a specified
     /// region  -- region ID, r, should be positive.
@@ -330,7 +359,7 @@ namespace oomph
     /// (zeta_1(zeta_bound),zeta_2(zeta_bound)) As described in the class
     /// description, zeta_global is enforced to lie between 0 and 2pi
     virtual void boundary_lagrangian_coordinates(const double& zeta_global,
-                                                 Vector<double>& zeta) const
+                                                 FixedSizeVector<double,2>& zeta) const
     {
       // The number of the boundaries
       unsigned n_boundary = nboundary();
@@ -415,6 +444,12 @@ namespace oomph
 
     /// Map to store zeta coordinates of points that identify regions
     std::map<unsigned, Vector<double>> Zeta_in_region;
+
+   /// Workspace to avoid re-allocation in wrapped call to position()
+   Vector<double> R_work_space;
+   
+   /// Workspace to avoid re-allocation in wrapped call to position()
+   Vector<double> Zeta_work_space;
   };
 
 
@@ -514,10 +549,10 @@ namespace oomph
     /// Boundary triad on boundary b at boundary coordinate zeta_bound
     void boundary_triad(const unsigned& b,
                         const double& zeta_bound,
-                        Vector<double>& r,
-                        Vector<double>& tangent,
-                        Vector<double>& normal,
-                        Vector<double>& binormal)
+                        FixedSizeVector<double,3>& r,
+                        FixedSizeVector<double,3>& tangent,
+                        FixedSizeVector<double,3>& normal,
+                        FixedSizeVector<double,3>& binormal)
     {
       double phi = zeta_bound;
 
@@ -526,7 +561,7 @@ namespace oomph
       r[1] = sin(phi);
       r[2] = Z_offset + w(1.0, phi);
 
-      Vector<double> dr_dr(3);
+      FixedSizeVector<double,3> dr_dr;
       dr_dr[0] = cos(phi);
       dr_dr[1] = sin(phi);
       dr_dr[2] = dwdr(1.0, phi);
@@ -537,7 +572,7 @@ namespace oomph
       normal[1] = dr_dr[1] * inv_norm;
       normal[2] = dr_dr[2] * inv_norm;
 
-      Vector<double> dr_dphi(3);
+      FixedSizeVector<double,3> dr_dphi;
       dr_dphi[0] = -sin(phi);
       dr_dphi[1] = cos(phi);
       dr_dphi[2] = dwdphi(1.0, phi);
@@ -555,6 +590,7 @@ namespace oomph
     }
 
   private:
+   
     /// Vertical deflection
     double w(const double& r, const double& phi) const
     {
@@ -657,6 +693,7 @@ namespace oomph
     }
 
   protected:
+   
     /// Thickness of annular region (distance of internal boundary
     /// from outer edge of unit circle)
     double H_annulus;
