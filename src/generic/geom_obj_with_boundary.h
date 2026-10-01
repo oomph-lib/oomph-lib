@@ -87,7 +87,7 @@ namespace oomph
    /// Parametrised position on object at current time: r(zeta).
    /// but specialised to 2D disk in 3D space
    void position_from_fixed_size_vectors(const FixedSizeVector<double,2>& zeta,
-                                         FixedSizeVector<double,3>& r) 
+                                         FixedSizeVector<double,3>& r) const
     {
      R_work_space[0]=r[0];
      R_work_space[1]=r[1];
@@ -108,7 +108,7 @@ namespace oomph
     /// coordinate zeta_bound on boundary b:
     void position_on_boundary(const unsigned& b,
                               const double& zeta_bound,
-                              FixedSizeVector<double,3>& r) // const
+                              FixedSizeVector<double,3>& r) const
     {
      FixedSizeVector<double,2> zeta;
      zeta_on_boundary(b, zeta_bound, zeta);
@@ -446,10 +446,17 @@ namespace oomph
     std::map<unsigned, Vector<double>> Zeta_in_region;
 
    /// Workspace to avoid re-allocation in wrapped call to position()
-   Vector<double> R_work_space;
+   /// Mutable qualifier implies that it's only used as scratch workspace
+   /// so doesn't actualy change the state of the object.
+   /// It's resized once (to size 3) and must stay that size.
+   mutable Vector<double> R_work_space;
    
    /// Workspace to avoid re-allocation in wrapped call to position()
-   Vector<double> Zeta_work_space;
+   /// Mutable qualifier implies that it's only used as scratch workspace
+   /// so doesn't actualy change the state of the object
+   /// It's resized once (to size 2) and must stay that size.
+   mutable Vector<double> Zeta_work_space;
+   
   };
 
 

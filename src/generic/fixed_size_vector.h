@@ -158,7 +158,6 @@ public:
    fill(value);
   }
 
- // hierher copy into vector.
  
  /// Fill all entries with specified value
  void fill(const T& value)
@@ -244,6 +243,233 @@ private:
 
   /// Matrix entries stored in row-major order
   T Data[NROW*NCOL];
+
+};
+
+
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+
+
+//============================================================
+/// Class for fixed-size rank-three tensor storing
+/// N1 x N2 x N3 objects of type T.
+///
+/// Storage layout:
+///
+/// (0,0,0), (0,0,1), ... , (0,0,N3-1),
+/// (0,1,0), ...
+/// ...
+/// (N1-1,N2-1,N3-1)
+//============================================================
+template<class T,
+         unsigned N1,
+         unsigned N2,
+         unsigned N3>
+class FixedSizeRankThreeTensor
+{
+
+public:
+
+ /// Default constructor
+ FixedSizeRankThreeTensor()
+  {
+  }
+
+ /// Constructor with initialisation
+ FixedSizeRankThreeTensor(const T& value)
+  {
+   fill(value);
+  }
+
+ /// Fill all entries with specified value
+ void fill(const T& value)
+  {
+   for(unsigned i=0;i<N1*N2*N3;i++)
+    {
+     Data[i]=value;
+    }
+  }
+
+ /// Read/write access to (i,j,k)-th entry
+ T& operator()(const unsigned& i,
+               const unsigned& j,
+               const unsigned& k)
+  {
+#ifdef RANGE_CHECKING
+   if((i>=N1)||(j>=N2)||(k>=N3))
+    {
+     std::stringstream error_message;
+
+     error_message
+      << "Range error: trying to access entry ("
+      << i << "," << j << "," << k << ") "
+      << "in a fixed-size rank-three tensor of size "
+      << N1 << " x "
+      << N2 << " x "
+      << N3
+      << std::endl;
+
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return Data[(i*N2+j)*N3+k];
+  }
+
+ /// Read access to (i,j,k)-th entry
+ const T& operator()(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k) const
+  {
+#ifdef RANGE_CHECKING
+   if((i>=N1)||(j>=N2)||(k>=N3))
+    {
+     std::stringstream error_message;
+
+     error_message
+      << "Range error: trying to access entry ("
+      << i << "," << j << "," << k << ") "
+      << "in a fixed-size rank-three tensor of size "
+      << N1 << " x "
+      << N2 << " x "
+      << N3
+      << std::endl;
+
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return Data[(i*N2+j)*N3+k];
+  }
+
+private:
+
+ /// Tensor data
+ T Data[N1*N2*N3];
+
+};
+ 
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+//============================================================
+/// Class for fixed-size rank-four tensor storing
+/// N1 x N2 x N3 x N4 objects of type T.
+///
+/// Storage layout:
+///
+/// (0,0,0,0), (0,0,0,1), ... , (0,0,0,N4-1),
+/// (0,0,1,0), ...
+/// ...
+/// (N1-1,N2-1,N3-1,N4-1)
+//============================================================
+template<class T,
+         unsigned N1,
+         unsigned N2,
+         unsigned N3,
+         unsigned N4>
+class FixedSizeRankFourTensor
+{
+
+public:
+
+ /// Default constructor
+ FixedSizeRankFourTensor()
+  {
+  }
+
+ /// Constructor with initialisation
+ FixedSizeRankFourTensor(const T& value)
+  {
+   fill(value);
+  }
+
+ /// Fill all entries with specified value
+ void fill(const T& value)
+  {
+   for(unsigned i=0;i<N1*N2*N3*N4;i++)
+    {
+     Data[i]=value;
+    }
+  }
+
+ /// Read/write access to (i,j,k,l)-th entry
+ T& operator()(const unsigned& i,
+               const unsigned& j,
+               const unsigned& k,
+               const unsigned& l)
+  {
+#ifdef RANGE_CHECKING
+   if((i>=N1)||(j>=N2)||(k>=N3)||(l>=N4))
+    {
+     std::stringstream error_message;
+
+     error_message
+      << "Range error: trying to access entry ("
+      << i << "," << j << "," << k << "," << l << ") "
+      << "in a fixed-size rank-four tensor of size "
+      << N1 << " x "
+      << N2 << " x "
+      << N3 << " x "
+      << N4
+      << std::endl;
+
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return Data[((i*N2+j)*N3+k)*N4+l];
+  }
+
+ /// Read access to (i,j,k,l)-th entry
+ const T& operator()(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k,
+                     const unsigned& l) const
+  {
+#ifdef RANGE_CHECKING
+   if((i>=N1)||(j>=N2)||(k>=N3)||(l>=N4))
+    {
+     std::stringstream error_message;
+
+     error_message
+      << "Range error: trying to access entry ("
+      << i << "," << j << "," << k << "," << l << ") "
+      << "in a fixed-size rank-four tensor of size "
+      << N1 << " x "
+      << N2 << " x "
+      << N3 << " x "
+      << N4
+      << std::endl;
+
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return Data[((i*N2+j)*N3+k)*N4+l];
+  }
+
+private:
+
+ /// Tensor data
+ T Data[N1*N2*N3*N4];
 
 };
 
