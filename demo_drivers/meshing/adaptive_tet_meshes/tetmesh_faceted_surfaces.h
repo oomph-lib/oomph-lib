@@ -657,7 +657,7 @@ public:
  /// gets mapped to actual boundary coordinate inside!
  void boundary_zeta01(const unsigned& facet_id,
                       const double& zeta_boundary,
-                      Vector<double>& zeta)
+                      FixedSizeVector<double,2>& zeta)
  {
   if (Facet_is_on_boundary[facet_id])
    {
@@ -924,10 +924,10 @@ public:
 
     // Get coordinate on edge and normal and tangent vectors
     Vector<double> x(3);
-    Vector<double> r_edge(3);
-    Vector<double> normal(3);
-    Vector<double> tangent(3);
-    Vector<double> normal_normal(3);
+    FixedSizeVector<double,3> r_edge;
+    FixedSizeVector<double,3> normal;
+    FixedSizeVector<double,3> tangent;
+    FixedSizeVector<double,3> normal_normal;
     Geom_object_with_boundaries_pt->boundary_triad(b,
                                                    zeta_bound,
                                                    r_edge,
