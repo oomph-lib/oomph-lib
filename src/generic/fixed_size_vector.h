@@ -34,429 +34,379 @@ namespace oomph
 {
 
 
- //============================================================
- /// Class for fixed-size vector storing N objects of type T.
- /// No resize or other STL functionality but (therefore)
- /// much less run-time overhead.
- //============================================================
- template<class T, unsigned N>
- class FixedSizeVector
- {
- public:
-  /// Constructor; no initialisiation
-  FixedSizeVector() {}
+  //============================================================
+  /// Class for fixed-size vector storing N objects of type T.
+  /// No resize or other STL functionality but (therefore)
+  /// much less run-time overhead.
+  //============================================================
+  template<class T, unsigned N>
+  class FixedSizeVector
+  {
+  public:
+    /// Constructor; no initialisiation
+    FixedSizeVector() {}
 
-  /// Constructor with initialisation to value
-  FixedSizeVector(const T& value)
-   {
-    fill(value);
-   }
+    /// Constructor with initialisation to value
+    FixedSizeVector(const T& value)
+    {
+      fill(value);
+    }
 
-  /// Fill all entries with specified value
-  void fill(const T& value)
-   {
-    for (unsigned i = 0; i < N; i++)
-     {
-      Data[i] = value;
-     }
-   }
+    /// Fill all entries with specified value
+    void fill(const T& value)
+    {
+      for (unsigned i = 0; i < N; i++)
+      {
+        Data[i] = value;
+      }
+    }
 
-  /// Size of vector
-  unsigned size() const
-   {
-    return N;
-   }
+    /// Size of vector
+    unsigned size() const
+    {
+      return N;
+    }
 
-  /// Read/write access to i-th entry
-  T& operator[](const unsigned& i)
-   {
+    /// Read/write access to i-th entry
+    T& operator[](const unsigned& i)
+    {
 #ifdef RANGE_CHECKING
-    if (i >= N)
-     {
-      std::stringstream error_message;
-      error_message << "Range error: trying to access entry " << i
-                    << " in a fixed-size vector of size " << N << std::endl;
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+      if (i >= N)
+      {
+        std::stringstream error_message;
+        error_message << "Range error: trying to access entry " << i
+                      << " in a fixed-size vector of size " << N << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[i];
-   }
+      return Data[i];
+    }
 
 
-  /// Read access to i-th entry
-  const T& operator[](const unsigned& i) const
-   {
+    /// Read access to i-th entry
+    const T& operator[](const unsigned& i) const
+    {
 #ifdef RANGE_CHECKING
-    if (i >= N)
-     {
-      std::stringstream error_message;
-      error_message << "Range error: trying to access entry " << i
-                    << " in a fixed-size vector of size " << N << std::endl;
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+      if (i >= N)
+      {
+        std::stringstream error_message;
+        error_message << "Range error: trying to access entry " << i
+                      << " in a fixed-size vector of size " << N << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[i];
-   }
- 
- private:
+      return Data[i];
+    }
 
-  /// The data, stored as a raw C-style array
-  T Data[N];
-
- };
+  private:
+    /// The data, stored as a raw C-style array
+    T Data[N];
+  };
 
 
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
 
 
+  //============================================================
+  /// Class for fixed-size matrix storing NROW x NCOL objects
+  /// of type T.
+  ///
+  /// No resize or other STL functionality but therefore
+  /// much less run-time overhead.
+  ///
+  /// Storage is row-major:
+  ///
+  /// (0,0), (0,1), ..., (0,NCOL-1),
+  /// (1,0), (1,1), ..., (1,NCOL-1),
+  /// ...
+  /// (NROW-1,NCOL-1)
+  //============================================================
+  template<class T, unsigned NROW, unsigned NCOL>
+  class FixedSizeMatrix
+  {
+  public:
+    /// Default constructor
+    FixedSizeMatrix() {}
 
-//============================================================
-/// Class for fixed-size matrix storing NROW x NCOL objects
-/// of type T.
-///
-/// No resize or other STL functionality but therefore
-/// much less run-time overhead.
-///
-/// Storage is row-major:
-///
-/// (0,0), (0,1), ..., (0,NCOL-1),
-/// (1,0), (1,1), ..., (1,NCOL-1),
-/// ...
-/// (NROW-1,NCOL-1)
-//============================================================
- template<class T, unsigned NROW, unsigned NCOL>
- class FixedSizeMatrix
- {
+    /// Construct and fill all entries with specified value
+    FixedSizeMatrix(const T& value)
+    {
+      fill(value);
+    }
 
- public:
+    // hierher copy into vector.
 
-  /// Default constructor
-  FixedSizeMatrix()
-   {
-   }
+    /// Fill all entries with specified value
+    void fill(const T& value)
+    {
+      for (unsigned i = 0; i < NROW * NCOL; i++)
+      {
+        Data[i] = value;
+      }
+    }
 
-  /// Construct and fill all entries with specified value
-  FixedSizeMatrix(const T& value)
-   {
-    fill(value);
-   }
+    /// Number of rows
+    unsigned nrow() const
+    {
+      return NROW;
+    }
 
-  // hierher copy into vector.
+    /// Number of columns
+    unsigned ncol() const
+    {
+      return NCOL;
+    }
 
-  /// Fill all entries with specified value
-  void fill(const T& value)
-   {
-    for (unsigned i = 0; i < NROW * NCOL; i++)
-     {
-      Data[i] = value;
-     }
-   }
-
-  /// Number of rows
-  unsigned nrow() const
-   {
-    return NROW;
-   }
-
-  /// Number of columns
-  unsigned ncol() const
-   {
-    return NCOL;
-   }
-
-  /// Read/write access to (i,j)-th entry
-  T& operator()(const unsigned& i, const unsigned& j)
-   {
+    /// Read/write access to (i,j)-th entry
+    T& operator()(const unsigned& i, const unsigned& j)
+    {
 #ifdef RANGE_CHECKING
-    if ((i >= NROW) || (j >= NCOL))
-     {
-      std::stringstream error_message;
+      if ((i >= NROW) || (j >= NCOL))
+      {
+        std::stringstream error_message;
 
-      error_message << "Range error: trying to access entry (" << i << ","
-                    << j << ") "
-                    << "in a fixed-size matrix of size " << NROW << " x "
-                    << NCOL << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << ") "
+                      << "in a fixed-size matrix of size " << NROW << " x "
+                      << NCOL << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[i * NCOL + j];
-   }
+      return Data[i * NCOL + j];
+    }
 
-  /// Read access to (i,j)-th entry
-  const T& operator()(const unsigned& i, const unsigned& j) const
-   {
+    /// Read access to (i,j)-th entry
+    const T& operator()(const unsigned& i, const unsigned& j) const
+    {
 #ifdef RANGE_CHECKING
-    if ((i >= NROW) || (j >= NCOL))
-     {
-      std::stringstream error_message;
+      if ((i >= NROW) || (j >= NCOL))
+      {
+        std::stringstream error_message;
 
-      error_message << "Range error: trying to access entry (" << i << ","
-                    << j << ") "
-                    << "in a fixed-size matrix of size " << NROW << " x "
-                    << NCOL << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << ") "
+                      << "in a fixed-size matrix of size " << NROW << " x "
+                      << NCOL << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[i * NCOL + j];
-   }
+      return Data[i * NCOL + j];
+    }
 
-  /// Fill all entries with specified value
-  void initialise(const T& value)
-   {
-    for (unsigned i = 0; i < NROW * NCOL; i++)
-     {
-      Data[i] = value;
-     }
-   }
+    /// Fill all entries with specified value
+    void initialise(const T& value)
+    {
+      for (unsigned i = 0; i < NROW * NCOL; i++)
+      {
+        Data[i] = value;
+      }
+    }
 
- private:
-  /// Matrix entries stored in row-major order
-  T Data[NROW * NCOL];
- };
-
-
-
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+  private:
+    /// Matrix entries stored in row-major order
+    T Data[NROW * NCOL];
+  };
 
 
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
 
 
-//============================================================
-/// Class for fixed-size rank-three tensor storing
-/// N1 x N2 x N3 objects of type T.
-///
-/// Storage layout:
-///
-/// (0,0,0), (0,0,1), ... , (0,0,N3-1),
-/// (0,1,0), ...
-/// ...
-/// (N1-1,N2-1,N3-1)
-//============================================================
- template<class T,
-          unsigned N1,
-          unsigned N2,
-          unsigned N3>
- class FixedSizeRankThreeTensor
- {
+  //============================================================
+  /// Class for fixed-size rank-three tensor storing
+  /// N1 x N2 x N3 objects of type T.
+  ///
+  /// Storage layout:
+  ///
+  /// (0,0,0), (0,0,1), ... , (0,0,N3-1),
+  /// (0,1,0), ...
+  /// ...
+  /// (N1-1,N2-1,N3-1)
+  //============================================================
+  template<class T, unsigned N1, unsigned N2, unsigned N3>
+  class FixedSizeRankThreeTensor
+  {
+  public:
+    /// Default constructor
+    FixedSizeRankThreeTensor() {}
 
- public:
+    /// Constructor with initialisation
+    FixedSizeRankThreeTensor(const T& value)
+    {
+      fill(value);
+    }
 
-  /// Default constructor
-  FixedSizeRankThreeTensor()
-   {
-   }
+    /// Fill all entries with specified value
+    void fill(const T& value)
+    {
+      for (unsigned i = 0; i < N1 * N2 * N3; i++)
+      {
+        Data[i] = value;
+      }
+    }
 
-  /// Constructor with initialisation
-  FixedSizeRankThreeTensor(const T& value)
-   {
-    fill(value);
-   }
-
-  /// Fill all entries with specified value
-  void fill(const T& value)
-   {
-    for(unsigned i=0;i<N1*N2*N3;i++)
-     {
-      Data[i]=value;
-     }
-   }
-
-  /// Read/write access to (i,j,k)-th entry
-  T& operator()(const unsigned& i,
-                const unsigned& j,
-                const unsigned& k)
-   {
+    /// Read/write access to (i,j,k)-th entry
+    T& operator()(const unsigned& i, const unsigned& j, const unsigned& k)
+    {
 #ifdef RANGE_CHECKING
-    if((i>=N1)||(j>=N2)||(k>=N3))
-     {
-      std::stringstream error_message;
+      if ((i >= N1) || (j >= N2) || (k >= N3))
+      {
+        std::stringstream error_message;
 
-      error_message
-       << "Range error: trying to access entry ("
-       << i << "," << j << "," << k << ") "
-       << "in a fixed-size rank-three tensor of size "
-       << N1 << " x "
-       << N2 << " x "
-       << N3
-       << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << "," << k << ") "
+                      << "in a fixed-size rank-three tensor of size " << N1
+                      << " x " << N2 << " x " << N3 << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[(i*N2+j)*N3+k];
-   }
+      return Data[(i * N2 + j) * N3 + k];
+    }
 
-  /// Read access to (i,j,k)-th entry
-  const T& operator()(const unsigned& i,
-                      const unsigned& j,
-                      const unsigned& k) const
-   {
+    /// Read access to (i,j,k)-th entry
+    const T& operator()(const unsigned& i,
+                        const unsigned& j,
+                        const unsigned& k) const
+    {
 #ifdef RANGE_CHECKING
-    if((i>=N1)||(j>=N2)||(k>=N3))
-     {
-      std::stringstream error_message;
+      if ((i >= N1) || (j >= N2) || (k >= N3))
+      {
+        std::stringstream error_message;
 
-      error_message
-       << "Range error: trying to access entry ("
-       << i << "," << j << "," << k << ") "
-       << "in a fixed-size rank-three tensor of size "
-       << N1 << " x "
-       << N2 << " x "
-       << N3
-       << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << "," << k << ") "
+                      << "in a fixed-size rank-three tensor of size " << N1
+                      << " x " << N2 << " x " << N3 << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[(i*N2+j)*N3+k];
-   }
+      return Data[(i * N2 + j) * N3 + k];
+    }
 
- private:
-
-  /// Tensor data
-  T Data[N1*N2*N3];
-
- };
- 
+  private:
+    /// Tensor data
+    T Data[N1 * N2 * N3];
+  };
 
 
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
 
-//============================================================
-/// Class for fixed-size rank-four tensor storing
-/// N1 x N2 x N3 x N4 objects of type T.
-///
-/// Storage layout:
-///
-/// (0,0,0,0), (0,0,0,1), ... , (0,0,0,N4-1),
-/// (0,0,1,0), ...
-/// ...
-/// (N1-1,N2-1,N3-1,N4-1)
-//============================================================
- template<class T,
-          unsigned N1,
-          unsigned N2,
-          unsigned N3,
-          unsigned N4>
- class FixedSizeRankFourTensor
- {
+  //============================================================
+  /// Class for fixed-size rank-four tensor storing
+  /// N1 x N2 x N3 x N4 objects of type T.
+  ///
+  /// Storage layout:
+  ///
+  /// (0,0,0,0), (0,0,0,1), ... , (0,0,0,N4-1),
+  /// (0,0,1,0), ...
+  /// ...
+  /// (N1-1,N2-1,N3-1,N4-1)
+  //============================================================
+  template<class T, unsigned N1, unsigned N2, unsigned N3, unsigned N4>
+  class FixedSizeRankFourTensor
+  {
+  public:
+    /// Default constructor
+    FixedSizeRankFourTensor() {}
 
- public:
+    /// Constructor with initialisation
+    FixedSizeRankFourTensor(const T& value)
+    {
+      fill(value);
+    }
 
-  /// Default constructor
-  FixedSizeRankFourTensor()
-   {
-   }
+    /// Fill all entries with specified value
+    void fill(const T& value)
+    {
+      for (unsigned i = 0; i < N1 * N2 * N3 * N4; i++)
+      {
+        Data[i] = value;
+      }
+    }
 
-  /// Constructor with initialisation
-  FixedSizeRankFourTensor(const T& value)
-   {
-    fill(value);
-   }
-
-  /// Fill all entries with specified value
-  void fill(const T& value)
-   {
-    for(unsigned i=0;i<N1*N2*N3*N4;i++)
-     {
-      Data[i]=value;
-     }
-   }
-
-  /// Read/write access to (i,j,k,l)-th entry
-  T& operator()(const unsigned& i,
-                const unsigned& j,
-                const unsigned& k,
-                const unsigned& l)
-   {
+    /// Read/write access to (i,j,k,l)-th entry
+    T& operator()(const unsigned& i,
+                  const unsigned& j,
+                  const unsigned& k,
+                  const unsigned& l)
+    {
 #ifdef RANGE_CHECKING
-    if((i>=N1)||(j>=N2)||(k>=N3)||(l>=N4))
-     {
-      std::stringstream error_message;
+      if ((i >= N1) || (j >= N2) || (k >= N3) || (l >= N4))
+      {
+        std::stringstream error_message;
 
-      error_message
-       << "Range error: trying to access entry ("
-       << i << "," << j << "," << k << "," << l << ") "
-       << "in a fixed-size rank-four tensor of size "
-       << N1 << " x "
-       << N2 << " x "
-       << N3 << " x "
-       << N4
-       << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << "," << k << "," << l << ") "
+                      << "in a fixed-size rank-four tensor of size " << N1
+                      << " x " << N2 << " x " << N3 << " x " << N4 << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[((i*N2+j)*N3+k)*N4+l];
-   }
+      return Data[((i * N2 + j) * N3 + k) * N4 + l];
+    }
 
-  /// Read access to (i,j,k,l)-th entry
-  const T& operator()(const unsigned& i,
-                      const unsigned& j,
-                      const unsigned& k,
-                      const unsigned& l) const
-   {
+    /// Read access to (i,j,k,l)-th entry
+    const T& operator()(const unsigned& i,
+                        const unsigned& j,
+                        const unsigned& k,
+                        const unsigned& l) const
+    {
 #ifdef RANGE_CHECKING
-    if((i>=N1)||(j>=N2)||(k>=N3)||(l>=N4))
-     {
-      std::stringstream error_message;
+      if ((i >= N1) || (j >= N2) || (k >= N3) || (l >= N4))
+      {
+        std::stringstream error_message;
 
-      error_message
-       << "Range error: trying to access entry ("
-       << i << "," << j << "," << k << "," << l << ") "
-       << "in a fixed-size rank-four tensor of size "
-       << N1 << " x "
-       << N2 << " x "
-       << N3 << " x "
-       << N4
-       << std::endl;
+        error_message << "Range error: trying to access entry (" << i << ","
+                      << j << "," << k << "," << l << ") "
+                      << "in a fixed-size rank-four tensor of size " << N1
+                      << " x " << N2 << " x " << N3 << " x " << N4 << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    return Data[((i*N2+j)*N3+k)*N4+l];
-   }
+      return Data[((i * N2 + j) * N3 + k) * N4 + l];
+    }
 
- private:
-
-  /// Tensor data
-  T Data[N1*N2*N3*N4];
-
- };
+  private:
+    /// Tensor data
+    T Data[N1 * N2 * N3 * N4];
+  };
 
 
-} // oomph-lib namespace
+} // namespace oomph
 
 #endif
