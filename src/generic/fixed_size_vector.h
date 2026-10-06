@@ -53,39 +53,34 @@ namespace oomph
     }
 
 
-   
-   /// Constructor from initializer list. Allows
-   /// FixedSizeVector<double,3> = {0.0,1.0,2.0};
-   /// say. 
-   FixedSizeVector(std::initializer_list<T> values)
+    /// Constructor from initializer list. Allows
+    /// FixedSizeVector<double,3> = {0.0,1.0,2.0};
+    /// say.
+    FixedSizeVector(std::initializer_list<T> values)
     {
 #ifdef RANGE_CHECKING
-     if(values.size()!=N)
+      if (values.size() != N)
       {
-       std::stringstream error_message;
-       
-       error_message
-        << "Initialiser list contains "
-        << values.size()
-        << " entries but FixedSizeVector has size "
-        << N
-        << std::endl;
-       
-       throw OomphLibError(error_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
+        std::stringstream error_message;
+
+        error_message << "Initialiser list contains " << values.size()
+                      << " entries but FixedSizeVector has size " << N
+                      << std::endl;
+
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-     
-     unsigned i=0;  
-     for(const auto& value : values)
+
+      unsigned i = 0;
+      for (const auto& value : values)
       {
-       Data[i++]=value;
+        Data[i++] = value;
       }
     }
-   
 
-   
+
     /// Fill all entries with specified value
     void fill(const T& value)
     {
