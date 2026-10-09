@@ -1529,7 +1529,6 @@ namespace oomph
     dtestdx.shallow_copy_from(dpsidx);
     d_dtestdx_dX.shallow_copy_from(d_dpsidx_dX);
 
-
     // Return the jacobian
     return J;
   }

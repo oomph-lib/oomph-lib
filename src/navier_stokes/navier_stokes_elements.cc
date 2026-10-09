@@ -1849,7 +1849,9 @@ namespace oomph
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
+      {
         interpolated_p += p_nst(l) * psip[l];
+      }
 
       // Calculate velocities and derivatives:
 
