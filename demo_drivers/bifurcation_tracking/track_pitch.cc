@@ -392,7 +392,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
  static_cast<HSL_MA42*>(linear_solver_pt())->front_factor() = 3.0;*/
 
  // ALH tweak to handle the near singular system close to the bifurcation
- Newton_solver_tolerance=5.0e-8; 
+ Newton_solver_tolerance=1.0e-7; 
  
  //Complete the build of the elements 
  finish_problem_setup();
