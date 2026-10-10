@@ -675,7 +675,6 @@ namespace oomph
     test.shallow_copy_from(psi);
     dtestdx.shallow_copy_from(dpsidx);
 
-
     // Return the Jacobian
     return J;
   }

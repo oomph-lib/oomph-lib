@@ -821,11 +821,6 @@ namespace oomph
                            Shape& psi,
                            Shape& test) const;
 
-    /// Which nodal value represents the pressure?
-    unsigned p_index_nst()
-    {
-      return DIM;
-    }
 
     /// Pointer to n_p-th pressure node
     // Node* pressure_node_pt(const unsigned &n_p)
@@ -834,21 +829,21 @@ namespace oomph
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
     {
-      return this->nodal_local_eqn(Pconv[n], DIM);
+      return this->nodal_local_eqn(Pconv[n], this->p_nodal_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& n_p) const
     {
-      return this->nodal_value(Pconv[n_p], DIM);
+      return this->nodal_value(Pconv[n_p], this->p_nodal_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& t, const unsigned& n_p) const
     {
-      return this->nodal_value(t, Pconv[n_p], DIM);
+      return this->nodal_value(t, Pconv[n_p], this->p_nodal_index_nst());
     }
 
     /// Set the value at which the pressure is stored in the nodes
@@ -863,8 +858,9 @@ namespace oomph
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
-      this->node_pt(Pconv[p_dof])->pin(DIM);
-      this->node_pt(Pconv[p_dof])->set_value(DIM, p_value);
+      this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_nst(), p_value);
     }
 
 
