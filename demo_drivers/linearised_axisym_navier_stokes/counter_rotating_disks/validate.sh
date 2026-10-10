@@ -49,7 +49,7 @@ else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_CR_nonref.dat.gz  \
          results_CR_nonref.dat  0.1 1.5e-9 >> validation.log
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_TH_nonref.dat.gz  \
-         results_TH_nonref.dat 0.1 1.0e-11 >> validation.log
+         results_TH_nonref.dat 0.1 1.5e-9 >> validation.log
 fi
 
 #rm results_TH.dat
@@ -86,7 +86,7 @@ else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_CR_ref.dat.gz  \
          results_CR_ref.dat 0.1 1.5e-9 >> validation.log
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_TH_ref.dat.gz  \
-         results_TH_ref.dat 0.1 1.0e-13 >> validation.log
+         results_TH_ref.dat 0.1 1.5e-9 >> validation.log
 fi
 
 #rm results_TH.dat

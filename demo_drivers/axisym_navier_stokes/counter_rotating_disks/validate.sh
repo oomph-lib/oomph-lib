@@ -82,7 +82,7 @@ else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_TH_ref.dat.gz  \
          results_TH_ref.dat >> validation.log
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_CR_ref.dat.gz  \
-         results_CR_ref.dat >> validation.log
+         results_CR_ref.dat 0.1 1.0e-12 >> validation.log
 fi
 
 

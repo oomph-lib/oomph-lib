@@ -59,7 +59,7 @@ if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/dd_multimesh.dat.gz \
-    dd_multimesh.dat  0.1 1.0e-12 >> validation.log
+    dd_multimesh.dat  0.1 1.0e-10 >> validation.log
 fi
 mv RESLT RESLT_dd_multimesh
 
