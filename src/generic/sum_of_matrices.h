@@ -364,12 +364,12 @@ namespace oomph
     }
 
 
-   /// Output the matrix in sparse format. Note that this is going to be
-   /// slow because we have to check every entry of every matrix for non-zeros.
-   /// Final optional argument specifies the largest abs value below which entries
-   /// are suppressed
-   void sparse_indexed_output_helper(std::ostream& outfile,
-                                     const double& cutoff=0.0) const
+    /// Output the matrix in sparse format. Note that this is going to be
+    /// slow because we have to check every entry of every matrix for non-zeros.
+    /// Final optional argument specifies the largest abs value below which
+    /// entries are suppressed
+    void sparse_indexed_output_helper(std::ostream& outfile,
+                                      const double& cutoff = 0.0) const
     {
       for (unsigned long i = 0; i < nrow(); i++)
       {
@@ -379,9 +379,9 @@ namespace oomph
           // Output if non-zero entry
           if (entry != 0.0)
           {
-           if (std::abs(entry)>cutoff)
+            if (std::abs(entry) > cutoff)
             {
-             outfile << i << " " << j << " " << entry << std::endl;
+              outfile << i << " " << j << " " << entry << std::endl;
             }
           }
         }

@@ -61,7 +61,6 @@ namespace oomph
 #undef OOMPH_INITIALISE_DENSE_MATRICES
 
 
-
   //=================================================================
   /// Abstract base class for matrices, templated by
   /// the type of object that is stored in them and the type of matrix.
@@ -172,9 +171,9 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   virtual void sparse_indexed_output_helper(std::ostream& outfile,
-                                             const double& cutoff=0.0) const = 0;
+    /// specifies max. size of entries which are set to zero on output.
+    virtual void sparse_indexed_output_helper(
+      std::ostream& outfile, const double& cutoff = 0.0) const = 0;
 
     /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
@@ -182,12 +181,11 @@ namespace oomph
     /// to true we also output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python). Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-    void sparse_indexed_output(
-      std::ostream& outfile,
-      const unsigned& precision = 0,
-      const bool& output_bottom_right_zero = false,
-      const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output(std::ostream& outfile,
+                               const unsigned& precision = 0,
+                               const bool& output_bottom_right_zero = false,
+                               const double& cutoff = 0.0) const
     {
       // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
       // so that only one output helper function is needed in derived classes.
@@ -205,7 +203,7 @@ namespace oomph
       }
 
       // Output as normal using the helper function defined in each matrix class
-      sparse_indexed_output_helper(outfile,cutoff);
+      sparse_indexed_output_helper(outfile, cutoff);
 
       // If requested and there is no output for the last entry then output a
       // zero entry.
@@ -224,18 +222,16 @@ namespace oomph
     }
 
 
-   
     /// Indexed output function to print a matrix to the file named
     /// filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If
     /// optional boolean flag is set to true we also output the "bottom right"
     /// entry regardless of it being zero or not (this allows automatic
-    /// detection of matrix size in e.g. matlab, python). Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-    void sparse_indexed_output(
-      std::string filename,
-      const unsigned& precision = 0,
-      const bool& output_bottom_right_zero = false,
-      const double& cutoff=0.0) const
+    /// detection of matrix size in e.g. matlab, python). Final optional
+    /// argument specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output(std::string filename,
+                               const unsigned& precision = 0,
+                               const bool& output_bottom_right_zero = false,
+                               const double& cutoff = 0.0) const
     {
       // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
       // so that only one output function needs to be written in matrix
@@ -245,40 +241,35 @@ namespace oomph
       std::ofstream some_file(filename.c_str());
 
       // Output as normal
-      sparse_indexed_output(some_file, precision, output_bottom_right_zero,cutoff);
+      sparse_indexed_output(
+        some_file, precision, output_bottom_right_zero, cutoff);
 
       // Close file
       some_file.close();
     }
-   
+
     /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-    void sparse_indexed_output_with_cutoff(
-      std::ostream& outfile,
-      const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_with_cutoff(std::ostream& outfile,
+                                           const double& cutoff = 0.0) const
     {
-     unsigned precision = 0;
-     bool output_bottom_right_zero = false;
-     sparse_indexed_output(outfile,
-                           precision,
-                           output_bottom_right_zero,
-                           cutoff);
+      unsigned precision = 0;
+      bool output_bottom_right_zero = false;
+      sparse_indexed_output(
+        outfile, precision, output_bottom_right_zero, cutoff);
     }
-   
+
     /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-    void sparse_indexed_output_with_cutoff(
-     std::string filename,
-      const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_with_cutoff(std::string filename,
+                                           const double& cutoff = 0.0) const
     {
-     unsigned precision = 0;
-     bool output_bottom_right_zero = false;
-     sparse_indexed_output(filename,
-                           precision,
-                           output_bottom_right_zero,
-                           cutoff);
+      unsigned precision = 0;
+      bool output_bottom_right_zero = false;
+      sparse_indexed_output(
+        filename, precision, output_bottom_right_zero, cutoff);
     }
   };
 
@@ -580,9 +571,9 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   void sparse_indexed_output_helper(std::ostream& outfile,
-                                     const double& cutoff=0.0) const;
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_helper(std::ostream& outfile,
+                                      const double& cutoff = 0.0) const;
   };
 
 
@@ -699,9 +690,9 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   virtual void sparse_indexed_output_helper(std::ostream& outfile,
-                                             const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    virtual void sparse_indexed_output_helper(std::ostream& outfile,
+                                              const double& cutoff = 0.0) const
     {
       std::string error_message =
         "SparseMatrix::sparse_indexed_output_helper() is a virtual function.\n";
@@ -868,18 +859,18 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   void sparse_indexed_output_helper(std::ostream& outfile,
-                                     const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_helper(std::ostream& outfile,
+                                      const double& cutoff = 0.0) const
     {
       for (unsigned long i = 0; i < this->N; i++)
       {
         for (long j = Row_start[i]; j < Row_start[i + 1]; j++)
         {
-         if (std::abs(this->Value[j])>cutoff)
+          if (std::abs(this->Value[j]) > cutoff)
           {
-           outfile << i << " " << Column_index[j] << " " << this->Value[j]
-                   << std::endl;
+            outfile << i << " " << Column_index[j] << " " << this->Value[j]
+                    << std::endl;
           }
         }
       }
@@ -1068,11 +1059,11 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   void sparse_indexed_output_helper(std::ostream& outfile,
-                                     const double& cutoff=0.0) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_helper(std::ostream& outfile,
+                                      const double& cutoff = 0.0) const
     {
-     CR_matrix.sparse_indexed_output_helper(outfile,cutoff);
+      CR_matrix.sparse_indexed_output_helper(outfile, cutoff);
     }
 
     /// Indexed output function to print a matrix to a
@@ -2828,18 +2819,18 @@ namespace oomph
 
     /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-    /// specifies max. size of entries which are set to zero on output. 
-   void sparse_indexed_output_helper(std::ostream& outfile,
-                                     const double& cutoff) const
+    /// specifies max. size of entries which are set to zero on output.
+    void sparse_indexed_output_helper(std::ostream& outfile,
+                                      const double& cutoff) const
     {
       for (unsigned long j = 0; j < this->N; j++)
       {
         for (long k = Column_start[j]; k < Column_start[j + 1]; k++)
         {
-         if (std::abs(this->Value[k])>cutoff)
+          if (std::abs(this->Value[k]) > cutoff)
           {
-           outfile << Row_index[k] << " " << j << " " << this->Value[k]
-                   << std::endl;
+            outfile << Row_index[k] << " " << j << " " << this->Value[k]
+                    << std::endl;
           }
         }
       }
@@ -3238,8 +3229,8 @@ namespace oomph
   }
 
   //============================================================================
-  /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument
-  /// specifies max. size of entries which are set to zero on output. 
+  /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only. Final optional
+  /// argument specifies max. size of entries which are set to zero on output.
   //============================================================================
   template<class T>
   void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream& outfile,
@@ -3253,21 +3244,21 @@ namespace oomph
       {
         if ((*this)(i, j) != T(0))
         {
-         // Only do check if the template type an sensibly evaluated
-         // the abs function which returns something that can be converted
-         // to a double
-         if constexpr (HasMagnitude<T>::value)
+          // Only do check if the template type an sensibly evaluated
+          // the abs function which returns something that can be converted
+          // to a double
+          if constexpr (HasMagnitude<T>::value)
           {
-           if (std::abs((*this)(i,j)) > cutoff)
+            if (std::abs((*this)(i, j)) > cutoff)
             {
-             outfile << i << " " << j << " " << (*this)(i, j) << std::endl;
+              outfile << i << " " << j << " " << (*this)(i, j) << std::endl;
             }
           }
-         // otherwise just output it -- at least it's not null!
-         else
-         {
-          outfile << i << " " << j << " " << (*this)(i, j) << std::endl;
-         }
+          // otherwise just output it -- at least it's not null!
+          else
+          {
+            outfile << i << " " << j << " " << (*this)(i, j) << std::endl;
+          }
         }
       }
     }

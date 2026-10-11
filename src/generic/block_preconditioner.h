@@ -2090,13 +2090,13 @@ namespace oomph
       return Output_base_filename.size() > 0;
     } // EOFunc block_output_on()
 
-   /// Output all blocks to numbered files. Called at the end of get blocks if
-   /// an output filename has been set.
-   /// Final optional argument specifies the largest abs value below which entries
-   /// are suppressed
-   void output_blocks_to_files(const std::string& basefilename,
+    /// Output all blocks to numbered files. Called at the end of get blocks if
+    /// an output filename has been set.
+    /// Final optional argument specifies the largest abs value below which
+    /// entries are suppressed
+    void output_blocks_to_files(const std::string& basefilename,
                                 const unsigned& precision = 8,
-                                const double& cutoff=0.0) const
+                                const double& cutoff = 0.0) const
     {
       unsigned nblocks = internal_nblock_types();
 
@@ -2110,7 +2110,8 @@ namespace oomph
                                StringConversion::to_string(j));
 
           // Write out the block.
-          get_block(i, j).sparse_indexed_output(filename,precision,true,cutoff);
+          get_block(i, j).sparse_indexed_output(
+            filename, precision, true, cutoff);
         }
       }
     } // EOFunc output_blocks_to_files(...)

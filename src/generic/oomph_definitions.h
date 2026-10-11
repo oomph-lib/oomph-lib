@@ -95,7 +95,7 @@ namespace oomph
 #define OOMPH_WARNING(msg) \
   OomphLibWarning(msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 
- 
+
   //==================================================================
   /// Compile-time test to determine if a type T has a notion of
   /// "magnitude", i.e. if std::abs(T) is a valid expression.
@@ -112,7 +112,7 @@ namespace oomph
   /// This facility is used to prevent compilation failures in generic
   /// code where operations involving std::abs() only make sense for
   /// numerical types.
-  /// 
+  ///
   /// Example:
   ///   HasMagnitude<double>::value            -> true
   ///   HasMagnitude<std::complex<double>>::value -> true
@@ -120,8 +120,9 @@ namespace oomph
   //==================================================================
   template<class T, class = void>
   struct HasMagnitude : std::false_type
-  {};
- 
+  {
+  };
+
 
   //==================================================================
   /// Partial specialisation of HasMagnitude<T> which is selected
@@ -137,11 +138,11 @@ namespace oomph
   ///   HasMagnitude<Vector<double>>::value    -> false
   //==================================================================
   template<class T>
-  struct HasMagnitude<T,std::void_t<decltype(std::abs(std::declval<T>()))>>
-   : std::true_type
-  {};
+  struct HasMagnitude<T, std::void_t<decltype(std::abs(std::declval<T>()))>>
+    : std::true_type
+  {
+  };
 
- 
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
