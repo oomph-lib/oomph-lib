@@ -805,7 +805,7 @@ namespace oomph
           // Compute zeta values of the vertices from parametrisation of
           // boundaries
           double tol = 1.0e-12;
-          FixedSizeVector<double,2> zeta_from_boundary;
+          FixedSizeVector<double, 2> zeta_from_boundary;
           Vector<double> zeta_vertex(2);
           for (unsigned v = 0; v < 3; v++)
           {
@@ -882,10 +882,10 @@ namespace oomph
 #endif
 
           // Compute zeta values of the interpolation parameters
-          FixedSizeVector<double,2> zeta_a;
+          FixedSizeVector<double, 2> zeta_a;
           Vector<double> zeta_b(2, 0.0);
           Vector<double> zeta_c(2, 0.0);
-          FixedSizeVector<double,2> zeta_d;
+          FixedSizeVector<double, 2> zeta_d;
           Vector<double> zeta_e(2, 0.0);
           Vector<double> zeta_f(2, 0.0);
           faceted_surface_pt->boundary_zeta01(facet_id_of_boundary, s1, zeta_a);
