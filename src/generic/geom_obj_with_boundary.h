@@ -89,10 +89,6 @@ namespace oomph
       const FixedSizeVector<double, 2>& zeta,
       FixedSizeVector<double, 3>& r) const
     {
-      R_work_space[0] = r[0];
-      R_work_space[1] = r[1];
-      R_work_space[2] = r[2];
-
       Zeta_work_space[0] = zeta[0];
       Zeta_work_space[1] = zeta[1];
 
@@ -268,7 +264,6 @@ namespace oomph
         {
           zeta_bound =
             zeta_min + (zeta_max - zeta_min) * double(i) / double(n - 1);
-          // position_on_boundary(b, zeta_bound, r);
           zeta_on_boundary(b, zeta_bound, zeta);
           boundary_triad(b, zeta_bound, r, tangent, normal, binormal);
 
