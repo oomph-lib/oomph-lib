@@ -694,10 +694,18 @@ namespace oomph
     // Local shape function
     Shape psi(n_node);
 
-    // Vectors of local coordinates and coords and velocities
+    // Vector of local coordinates. This is passed to the (Vector-based)
+    // FiniteElement interface (get_s_plot(...), shape(...)) and is
+    // therefore kept as a resizable Vector; it's allocated only once per
+    // call of this function so there's no benefit in converting it.
     Vector<double> s(DIM);
-    Vector<double> interpolated_x(DIM);
-    Vector<double> interpolated_u(DIM);
+
+    // Coordinates and velocities at the plot point; their size (DIM) is
+    // known at compile time and they're only accessed component-wise so
+    // we use fixed-size vectors. No initialisation required here
+    // since they're explicitly zeroed before each use below.
+    FixedSizeVector<double, DIM> interpolated_x;
+    FixedSizeVector<double, DIM> interpolated_u;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -847,14 +855,9 @@ namespace oomph
   void NavierStokesEquations<DIM>::full_output(std::ostream& outfile,
                                                const unsigned& nplot)
   {
-    // Vector of local coordinates
+    // Vector of local coordinates. Passed to the (Vector-based)
+    // FiniteElement interface so kept as a resizable Vector.
     Vector<double> s(DIM);
-
-    // Acceleration
-    Vector<double> dudt(DIM);
-
-    // Mesh elocity
-    Vector<double> mesh_veloc(DIM, 0.0);
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -876,23 +879,18 @@ namespace oomph
       // Call the derivatives of the shape and test functions
       dshape_eulerian(s, psif, dpsifdx);
 
-      // Allocate storage
-      Vector<double> mesh_veloc(DIM);
-      Vector<double> dudt(DIM);
-      Vector<double> dudt_ALE(DIM);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM);
-
-      // Initialise everything to zero
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        mesh_veloc[i] = 0.0;
-        dudt[i] = 0.0;
-        dudt_ALE[i] = 0.0;
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          interpolated_dudx(i, j) = 0.0;
-        }
-      }
+      // Allocate storage for the mesh velocity, the acceleration (in
+      // Eulerian and ALE form) and the velocity gradients. Their sizes are
+      // known at compile time and they're only accessed component-wise
+      // so we use fixed-size containers, allocated on the stack. Note
+      // that fixed-size containers do not initialise their entries by
+      // default, so the quantities that are accumulated (via +=) below
+      // must be explicitly initialised to zero; dudt_ALE is assigned
+      // (rather than accumulated) and therefore doesn't need to be.
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeVector<double, DIM> dudt_ALE;
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate velocities and derivatives
 
@@ -1069,8 +1067,10 @@ namespace oomph
       // Get Jacobian of mapping
       double J = J_eulerian(s);
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM, DIM);
+      // Get strain rate matrix. strain_rate(...) requires a DenseMatrix
+      // so we use the pre-allocated (DIM x DIM) workspace rather than
+      // creating a new matrix at every integration point.
+      DenseMatrix<double>& strainrate = Strain_rate_work_space;
       strain_rate(s, strainrate);
 
       // Initialise
@@ -1099,8 +1099,11 @@ namespace oomph
                                                 const Vector<double>& N,
                                                 Vector<double>& traction)
   {
-    // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get velocity gradients. strain_rate(...) requires a DenseMatrix
+    // so we use the pre-allocated (DIM x DIM) workspace rather than
+    // creating a new matrix every time this function is called (which
+    // tends to happen at every integration point of a FaceElement).
+    DenseMatrix<double>& strainrate = Strain_rate_work_space;
     strain_rate(s, strainrate);
 
     // Get pressure
@@ -1130,10 +1133,18 @@ namespace oomph
                                                 Vector<double>& traction_visc_n,
                                                 Vector<double>& traction_visc_t)
   {
-    Vector<double> traction_visc(DIM);
+    // Viscous contribution to the traction: size known at compile time
+    // and only accessed component-wise, so use a fixed-size vector.
+    // It's accumulated (via +=) below so it must be initialised to zero
+    // (the original resizable Vector did this implicitly; fixed-size
+    // vectors don't!)
+    FixedSizeVector<double, DIM> traction_visc(0.0);
 
-    // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get velocity gradients. strain_rate(...) requires a DenseMatrix
+    // so we use the pre-allocated (DIM x DIM) workspace rather than
+    // creating a new matrix every time this function is called (which
+    // tends to happen at every integration point of a FaceElement).
+    DenseMatrix<double>& strainrate = Strain_rate_work_space;
     strain_rate(s, strainrate);
 
     // Get pressure
@@ -1161,8 +1172,10 @@ namespace oomph
   template<unsigned DIM>
   double NavierStokesEquations<DIM>::dissipation(const Vector<double>& s) const
   {
-    // Get strain rate matrix
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get strain rate matrix. strain_rate(...) requires a DenseMatrix
+    // so we use the pre-allocated (DIM x DIM) workspace rather than
+    // creating a new matrix every time this function is called.
+    DenseMatrix<double>& strainrate = Strain_rate_work_space;
     strain_rate(s, strainrate);
 
     // Initialise
@@ -1198,8 +1211,12 @@ namespace oomph
     }
 #endif
 
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1210,15 +1227,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1270,11 +1278,17 @@ namespace oomph
     }
 #endif
 
-    // Specify spatial dimension
-    unsigned DIM = 2;
+    // Specify spatial dimension. This is a compile-time constant so that
+    // it can be used as the template parameter of the fixed-size
+    // containers below.
+    const unsigned DIM = 2;
 
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1285,15 +1299,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1357,11 +1362,17 @@ namespace oomph
     }
 #endif
 
-    // Specify spatial dimension
-    unsigned DIM = 3;
+    // Specify spatial dimension. This is a compile-time constant so that
+    // it can be used as the template parameter of the fixed-size
+    // containers below.
+    const unsigned DIM = 3;
 
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1372,15 +1383,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1491,8 +1493,12 @@ namespace oomph
       // Get the integral weight
       double w = integral_pt()->weight(ipt);
 
-      // Now work out the velocity and the time derivative
-      Vector<double> interpolated_u(DIM, 0.0), interpolated_dudt(DIM, 0.0);
+      // Now work out the velocity and the time derivative. Their size
+      // (DIM) is known at compile time and they're only accessed
+      // component-wise so we use fixed-size vectors. Both are
+      // accumulated (via +=) below so they must be initialised to zero.
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -1508,8 +1514,10 @@ namespace oomph
       // Get mesh velocity bit
       if (!ALE_is_disabled)
       {
-        Vector<double> mesh_velocity(DIM, 0.0);
-        DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+        // Mesh velocity and velocity gradients: fixed size, only accessed
+        // component-wise, accumulated below (hence the zero initialisation)
+        FixedSizeVector<double, DIM> mesh_velocity(0.0);
+        FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
@@ -1663,10 +1671,13 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dpdx(DIM, 0.0);
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM) so we use fixed-size vectors, allocated on the stack.
+      // All of them are accumulated (via +=) below so they must be
+      // initialised to zero (fixed-size vectors don't do this by default).
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> interpolated_dpdx(0.0);
 
       // Calculate pressure gradient
       for (unsigned l = 0; l < n_pres; l++)
@@ -1696,7 +1707,14 @@ namespace oomph
       double source = 0.0;
       if (Press_adv_diff_source_fct_pt != 0)
       {
-        source = Press_adv_diff_source_fct_pt(interpolated_x);
+        // The user-defined source function requires the Eulerian
+        // coordinates as a Vector<double>, so copy the fixed-size vector
+        // into the pre-allocated workspace (of size DIM) before the call.
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          X_work_space[i] = interpolated_x[i];
+        }
+        source = Press_adv_diff_source_fct_pt(X_work_space);
       }
 
       // Loop over the shape functions
@@ -1806,7 +1824,11 @@ namespace oomph
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Set the Vector to hold local coordinates. This is passed to the
+    // (Vector-based) interface of the shape functions and the body force
+    // function and is therefore kept as a resizable Vector; it's
+    // allocated only once per call of this function so there's no
+    // benefit in converting it to a fixed-size vector.
     Vector<double> s(DIM);
 
     // Get Physical Variables from Element
@@ -1815,7 +1837,9 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    // Gravity vector: use a reference to avoid copying (and therefore
+    // allocating) the vector every time this function is called.
+    const Vector<double>& G = g();
 
     // Integers to store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -1839,13 +1863,18 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1888,12 +1917,24 @@ namespace oomph
         }
       }
 
-      // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
-      get_body_force_nst(time, ipt, s, interpolated_x, body_force);
+      // Get the user-defined body force terms. get_body_force_nst(...)
+      // (and the user-supplied function it may call) require the Eulerian
+      // coordinates as a Vector<double> and return the body force in a
+      // Vector<double>, so: copy the fixed-size interpolated_x into the
+      // pre-allocated workspace (of size DIM) and receive the body force
+      // in the (equally pre-allocated) body force workspace. The latter is
+      // only ever read component-wise below; the reference simply gives it
+      // a more descriptive local name.
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        X_work_space[i] = interpolated_x[i];
+      }
+      Vector<double>& body_force = Body_force_work_space;
+      get_body_force_nst(time, ipt, s, X_work_space, body_force);
 
-      // Get the user-defined source function
-      double source = get_source_nst(time, ipt, interpolated_x);
+      // Get the user-defined source function (also requires the Eulerian
+      // coordinates as a Vector<double>; X_work_space still holds them)
+      double source = get_source_nst(time, ipt, X_work_space);
 
 
       // MOMENTUM EQUATIONS
@@ -2172,8 +2213,24 @@ namespace oomph
     // Determine the number of integration points
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Vector to hold local coordinates
+    // Vector to hold local coordinates. This is passed to the
+    // (Vector-based) interface of the shape functions and the body force
+    // function and is therefore kept as a resizable Vector; it's
+    // allocated only once per call of this function.
     Vector<double> s(DIM);
+
+    // Storage for the gradients of the body force and the source function
+    // w.r.t. the Eulerian coordinates. Both are filled by functions whose
+    // interface requires a DenseMatrix/Vector so they cannot be converted
+    // to fixed-size containers. We allocate them once per call of this
+    // function (rather than once per integration point as before) and
+    // re-initialise them to zero at every integration point below. We
+    // don't provide dedicated workspace member data for them (as for the
+    // body force itself) since this function is only used in a small
+    // number of (FSI) applications and the additional member data would
+    // bloat every single Navier-Stokes element.
+    DenseMatrix<double> d_body_force_dx(DIM, DIM);
+    Vector<double> source_gradient(DIM);
 
     // Get physical variables from element
     // (Reynolds number must be multiplied by the density ratio)
@@ -2181,7 +2238,9 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    // Gravity vector: use a reference to avoid copying (and therefore
+    // allocating) the vector every time this function is called.
+    const Vector<double>& G = g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -2199,8 +2258,10 @@ namespace oomph
       {
         element_has_node_with_aux_node_update_fct = true;
 
-        // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        // Current nodal velocity: size known at compile time and only
+        // accessed component-wise so use a fixed-size vector. No
+        // initialisation required since all entries are assigned below.
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -2261,13 +2322,18 @@ namespace oomph
       pshape_nst(s, psip, testp);
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -2339,24 +2405,41 @@ namespace oomph
       const double val_time_weight =
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
-      // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
-      get_body_force_nst(time, ipt, s, interpolated_x, body_force);
+      // Get the user-defined body force terms. get_body_force_nst(...)
+      // (and the user-supplied function it may call) require the Eulerian
+      // coordinates as a Vector<double> and return the body force in a
+      // Vector<double>, so: copy the fixed-size interpolated_x into the
+      // pre-allocated workspace (of size DIM) and receive the body force
+      // in the (equally pre-allocated) body force workspace. The latter is
+      // only ever read component-wise below; the reference simply gives it
+      // a more descriptive local name.
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        X_work_space[i] = interpolated_x[i];
+      }
+      Vector<double>& body_force = Body_force_work_space;
+      get_body_force_nst(time, ipt, s, X_work_space, body_force);
 
-      // Get the user-defined source function
-      const double source = get_source_nst(time, ipt, interpolated_x);
+      // Get the user-defined source function (also requires the Eulerian
+      // coordinates as a Vector<double>; X_work_space still holds them)
+      const double source = get_source_nst(time, ipt, X_work_space);
 
       // Note: Can use raw values and avoid bypassing hanging information
       // because this is the non-refineable version!
 
-      // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
-      get_body_force_gradient_nst(
-        time, ipt, s, interpolated_x, d_body_force_dx);
+      // Get gradient of body force function (storage allocated once,
+      // above; re-initialised here since the default implementation
+      // of this function doesn't necessarily overwrite all entries).
+      // NOTE: The default (finite-difference based) implementation of
+      // get_body_force_gradient_nst(...) calls get_body_force_nst(...)
+      // with its own local storage, so the content of
+      // Body_force_work_space (i.e. body_force) is not affected.
+      d_body_force_dx.initialise(0.0);
+      get_body_force_gradient_nst(time, ipt, s, X_work_space, d_body_force_dx);
 
-      // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
-      get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
+      // Get gradient of source function (storage allocated once, above)
+      source_gradient.initialise(0.0);
+      get_source_gradient_nst(time, ipt, X_work_space, source_gradient);
 
 
       // Assemble shape derivatives
