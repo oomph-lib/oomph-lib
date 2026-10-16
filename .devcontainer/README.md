@@ -35,6 +35,11 @@ oomph-build -c Debug --oomph-OOMPH_ENABLE_PARANOID=ON --reuse-oomph
 cmake -G Ninja -S demo_drivers/poisson/one_d_poisson -B demo_drivers/poisson/one_d_poisson/build
 cmake --build demo_drivers/poisson/one_d_poisson/build
 ctest --test-dir demo_drivers/poisson/one_d_poisson/build
+
+# ...or several at once (configure + build + ctest each, with a summary)
+.devcontainer/run_selected_tests.sh \
+    demo_drivers/navier_stokes/driven_cavity \
+    demo_drivers/navier_stokes/rayleigh_channel
 ```
 
 `oomph-build` is just

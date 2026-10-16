@@ -38,6 +38,7 @@
 #include "generic/Qelements.h"
 #include "generic/fsi.h"
 #include "generic/projection.h"
+#include "generic/fixed_size_vector.h"
 
 #include <algorithm>
 #include <iterator>
@@ -478,6 +479,56 @@ namespace oomph
     /// pressure advection diffusion problem (defaults to -1)
     int Pinned_fp_pressure_eqn;
 
+
+    // Workspace containers
+    //---------------------
+    // Within the element's residual/Jacobian/post-processing routines
+    // all quantities whose size is known at compile time (the spatial
+    // dimension DIM) are stored in FixedSizeVectors/FixedSizeMatrices.
+    // These are allocated on the stack and therefore avoid the
+    // heap allocation/deallocation that would otherwise occur every
+    // time such a quantity is created (e.g. once per integration point).
+    //
+    // However, some of these quantities have to be passed to functions
+    // whose interface requires a (resizable) Vector<double> or
+    // DenseMatrix<double>: the user-defined body force and source
+    // functions (accessed via function pointers that are part of the
+    // public interface and therefore cannot be changed), the virtual
+    // functions get_body_force_nst(...) and get_source_nst(...) which
+    // are overloaded in multi-physics/user elements, and the public
+    // function strain_rate(...). Rather than creating temporary Vectors
+    // for these calls (which would re-introduce the allocation overhead)
+    // we copy the data into the dedicated workspace containers below.
+    // They are allocated once and once only (in the constructor) and
+    // must never be resized afterwards. They are declared mutable because
+    // they are pure scratch storage: their use does not change the state
+    // of the element, and they therefore have to be usable from const
+    // member functions.
+    //
+    // WARNING: Each workspace container may only be "live" in a single
+    // function at any one time. In particular, functions that use one
+    // of them must not call other functions that use the same one
+    // while they still rely on its content.
+
+    /// Workspace to hold the Eulerian coordinates (size DIM) when
+    /// they have to be passed to functions that require a Vector<double>
+    /// (body force/source functions etc.). Allocated once (with size DIM)
+    /// in the constructor; must never be resized. See the comment above
+    /// for details.
+    mutable Vector<double> X_work_space;
+
+    /// Workspace to receive the body force (size DIM) from
+    /// get_body_force_nst(...), whose interface requires a
+    /// Vector<double>. Allocated once (with size DIM) in the constructor;
+    /// must never be resized. See the comment above for details.
+    mutable Vector<double> Body_force_work_space;
+
+    /// Workspace to receive the strain rate tensor (size DIM x DIM) from
+    /// strain_rate(...), whose interface requires a DenseMatrix<double>.
+    /// Allocated once (with size DIM x DIM) in the constructor; must never
+    /// be resized. See the comment above for details.
+    mutable DenseMatrix<double> Strain_rate_work_space;
+
     /// Compute the shape functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
@@ -674,12 +725,17 @@ namespace oomph
   public:
     /// Constructor: NULL the body force and source function
     /// and make sure the ALE terms are included by default.
+    /// Also allocate the workspace containers (see the comments
+    /// accompanying their declaration) once and for all.
     NavierStokesEquations()
       : Body_force_fct_pt(0),
         Source_fct_pt(0),
         Press_adv_diff_source_fct_pt(0),
         ALE_is_disabled(false),
-        Pinned_fp_pressure_eqn(-1)
+        Pinned_fp_pressure_eqn(-1),
+        X_work_space(DIM),
+        Body_force_work_space(DIM),
+        Strain_rate_work_space(DIM, DIM)
     {
       // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
