@@ -95,6 +95,55 @@ namespace oomph
 #define OOMPH_WARNING(msg) \
   OomphLibWarning(msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 
+
+  //==================================================================
+  /// Compile-time test to determine if a type T has a notion of
+  /// "magnitude", i.e. if std::abs(T) is a valid expression.
+  ///
+  /// The primary template defaults to "false".
+  ///
+  /// A partial specialisation (below) is selected automatically via
+  /// SFINAE ("Substitution Failure Is Not An Error") if the expression
+  ///
+  ///   std::abs(std::declval<T>())
+  ///
+  /// is valid. In that case HasMagnitude<T>::value evaluates to true.
+  ///
+  /// This facility is used to prevent compilation failures in generic
+  /// code where operations involving std::abs() only make sense for
+  /// numerical types.
+  ///
+  /// Example:
+  ///   HasMagnitude<double>::value            -> true
+  ///   HasMagnitude<std::complex<double>>::value -> true
+  ///   HasMagnitude<Vector<double>>::value    -> false
+  //==================================================================
+  template<class T, class = void>
+  struct HasMagnitude : std::false_type
+  {
+  };
+
+
+  //==================================================================
+  /// Partial specialisation of HasMagnitude<T> which is selected
+  /// when std::abs(T) is a valid expression. In that case
+  /// HasMagnitude<T>::value is true.
+  /// std::declval<T>() creates a fictitious object of type T for use in
+  /// unevaluated expressions (decltype in this case) without requiring
+  /// construction of an actual object.
+  ///
+  /// Example:
+  ///   HasMagnitude<double>::value            -> true
+  ///   HasMagnitude<std::complex<double>>::value -> true
+  ///   HasMagnitude<Vector<double>>::value    -> false
+  //==================================================================
+  template<class T>
+  struct HasMagnitude<T, std::void_t<decltype(std::abs(std::declval<T>()))>>
+    : std::true_type
+  {
+  };
+
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////

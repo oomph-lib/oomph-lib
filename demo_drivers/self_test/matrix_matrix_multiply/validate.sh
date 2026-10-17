@@ -56,7 +56,12 @@ $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz   CR_result2.dat.sor
 echo "CR method 3: ">> validation.log
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz   CR_result3.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "Dense: ">> validation.log
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz   D_result.dat.sorted  0.1 2.0e-14 >> validation.log
+
+# The dense multiply prunes entries that come out exactly zero, whereas the
+# compressed-row and compressed-column ones keep them explicitly, so its
+# sparsity pattern is not the same and it needs its own validata. (The two
+# used to agree only because round-off left every entry non-zero.)
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_dense.dat.gz   D_result.dat.sorted  0.1 2.0e-14 >> validation.log
 fi
 
 

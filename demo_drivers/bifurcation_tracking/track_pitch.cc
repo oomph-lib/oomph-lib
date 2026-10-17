@@ -391,6 +391,9 @@ RotatingProblem<ELEMENT>::RotatingProblem
  static_cast<HSL_MA42*>(linear_solver_pt())->lenbuf_factor2() = 3.0;
  static_cast<HSL_MA42*>(linear_solver_pt())->front_factor() = 3.0;*/
 
+ // ALH tweak to handle the near singular system close to the bifurcation
+ Newton_solver_tolerance=1.0e-7; 
+ 
  //Complete the build of the elements 
  finish_problem_setup();
  
@@ -517,7 +520,7 @@ void RotatingProblem<ELEMENT>::solve_system()
 
  //Continuation parameters
 
- //Control parameter for contiuation
+ //Control parameter for continuation
  double *cont_param = &Re;
  //Initial continuation step
  double ds = 0.1;

@@ -45,7 +45,7 @@ cat RESLT_no_bl_squash/soln0.dat RESLT_no_bl_squash/soln1.dat  \
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/no_bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_no_bl_squash.dat.gz \
     result_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -82,7 +82,7 @@ cat RESLT_bl_squash/soln0.dat RESLT_bl_squash/soln1.dat  \
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_bl_squash.dat.gz \
     result_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -120,7 +120,7 @@ cat RESLT_alg_no_bl_squash/soln0.dat RESLT_alg_no_bl_squash/soln1.dat  \
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_no_bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_alg_no_bl_squash.dat.gz \
     result_alg_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -157,7 +157,7 @@ cat RESLT_alg_bl_squash/soln0.dat RESLT_alg_bl_squash/soln1.dat  \
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg_bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_alg_bl_squash.dat.gz \
     result_alg_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -195,7 +195,7 @@ cat RESLT_adapt_alg_no_bl_squash/soln0.dat RESLT_adapt_alg_no_bl_squash/soln1.da
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adapt_alg_no_bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_adapt_alg_no_bl_squash.dat.gz \
     result_adapt_alg_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 
@@ -232,7 +232,7 @@ cat RESLT_adapt_alg_bl_squash/soln0.dat RESLT_adapt_alg_bl_squash/soln1.dat  \
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adapt_alg_bl_squash.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result_adapt_alg_bl_squash.dat.gz \
     result_adapt_alg_bl_squash.dat 0.1 1.0e-8 >> validation.log
 fi
 

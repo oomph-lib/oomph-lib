@@ -87,7 +87,7 @@ echo " " >> validation.log
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unst_precond.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unsteady_precond.dat.gz \
     unsteady_precond.dat 0.1 3.0e-14 >> validation.log
 fi
 
@@ -122,7 +122,11 @@ else
 #Note that the higher tolerance is to cover the discrepancy between
 #different processors with this coarse mesh and the irons_and_tuck
 #accelerated case. Going back down to 1% or less doesn't make a significant
-#difference in most places
+#difference in most places. Note also that the concatenated comparison data
+#includes data from a case where the Picard iteration doesn't converge,
+#It's likely that those values are particularly sensitive. When
+#updating the validata after the fix of the integration scheme, we checked
+#that the biggest error came from that case.    
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unsteady.dat.gz \
     unsteady.dat 5.0 5.0e-7 >> validation.log
 fi

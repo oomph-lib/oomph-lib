@@ -1,5 +1,23 @@
 #!/bin/bash
 
+
+# NOTE: Update of validata can be done with these lines
+# (in a separate script) after uncommenting the hierher-ed
+# copy operations.
+
+#file_list=`ls *.dat.gz.dat`
+#
+#for file in `echo $file_list`; do
+#    ls -l $file
+#    stripped=`basename -s '.gz.dat' $file`
+#    mv $file $stripped
+#    gzip -f $stripped
+#done
+
+
+
+
+
 # Get the OOMPH-LIB root directory from a makefile
 #-------------------------------------------------
 OOMPH_ROOT_DIR=$1
@@ -257,7 +275,8 @@ for code in ${code_stem[@]}; do
 					if test "$2" = "no_fpdiff"; then
 						echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 					else
-						$compare_data ../$store$validata_file_0 $result_dir$file_0 >>validation.log
+					        $compare_data ../$store$validata_file_0 $result_dir$file_0 >>validation.log
+                                                # cp $result_dir$file_0 ../$store$validata_file_0".dat" #hierher
 					fi
 
 					# Check soln1.dat
@@ -265,7 +284,8 @@ for code in ${code_stem[@]}; do
 					if test "$2" = "no_fpdiff"; then
 						echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 					else
-						$compare_data ../$store$validata_file_1 $result_dir$file_1 1.0e-13 0.1 >>validation.log
+					        $compare_data ../$store$validata_file_1 $result_dir$file_1 1.0e-13 0.1 >>validation.log
+                                                # cp $result_dir$file_1 ../$store$validata_file_1".dat" #hierher
 					fi
 
 					# Move the result directory into storage
@@ -351,7 +371,8 @@ for code in ${demo_code_stem[@]}; do
 	if test "$2" = "no_fpdiff"; then
 		echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 	else
-		$compare_data ../$store$validata_file_0 $result_dir$file_0 >>validation.log
+	    $compare_data ../$store$validata_file_0 $result_dir$file_0 >>validation.log
+            # cp  $result_dir$file_0 ../$store$validata_file_0".dat" # hierher
 	fi
 
 	# Move the result directory into storage
