@@ -36,8 +36,8 @@ Inheritance diagram for oomph\+::Sum\+Of\+Matrices\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Set the main matrix to be deleted by the destructor of the \doxylink{classoomph_1_1SumOfMatrices}{Sum\+Of\+Matrices} (default is to not delete it). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a13408a013cf37a9455b9813b7a19fb0e}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em Output the matrix in sparse format. Note that this is going to be slow because we have to check every entry of every matrix for non-\/zeros. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0bbd147b2767bafb34ce7f6ed2f99c9b}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output the matrix in sparse format. Note that this is going to be slow because we have to check every entry of every matrix for non-\/zeros. Final optional argument specifies the largest abs value below which entries are suppressed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71ab79}{get\+\_\+as\+\_\+indices}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{row}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{col}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get a list of row/col indices and total entry for non-\/zeros in the matrix. e.\+g. for use as input to other matrix classes. Warning this is SLOW! for sparse matrices. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a950924dfc285c908aac317f3be4fd158}{add\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{added\+\_\+matrix\+\_\+pt\+\_\+in}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{main\+\_\+to\+\_\+added\+\_\+rows\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{main\+\_\+to\+\_\+added\+\_\+cols\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{should\+\_\+delete\+\_\+matrix}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
@@ -106,10 +106,14 @@ Inheritance diagram for oomph\+::Sum\+Of\+Matrices\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a5ec8424dd0fa8e9d70eb9a503d7c608f}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). Final optional argument specifies max. size of entries which are set to zero on output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ae7c8d3dceda363428274f0b42352c677}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). Final optional argument specifies max. size of entries which are set to zero on output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a1b94bb8ed59c40abea2158bf8a6082a2}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+cutoff}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0. Final optional argument specifies max. size of entries which are set to zero on output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a36e541fce67b6b031cef01892331a320}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+cutoff}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0. Final optional argument specifies max. size of entries which are set to zero on output. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -221,11 +225,11 @@ Add a new matrix to the sum by giving a matrix pointer and a mapping from the ma
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{415}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{421}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{Should\+\_\+delete\+\_\+added\+\_\+matrix}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{Should\+\_\+delete\+\_\+added\+\_\+matrix}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_aea0062a941a940d3f7ffbfef27eb0580}\label{classoomph_1_1SumOfMatrices_aea0062a941a940d3f7ffbfef27eb0580} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!added\_matrix\_pt@{added\_matrix\_pt}}
@@ -239,7 +243,7 @@ Access function for ith added matrix (main matrix not included in numbering).
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{485}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{491}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -247,7 +251,7 @@ References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matri
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a9a5636bde953bf79bd3c067ba3aa5884}\label{classoomph_1_1SumOfMatrices_a9a5636bde953bf79bd3c067ba3aa5884} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!col\_map\_pt@{col\_map\_pt}}
@@ -257,7 +261,7 @@ Referenced by \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00495}{495}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{501}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -275,11 +279,11 @@ Broken operator() because it does not make sense to return anything by reference
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{540}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00546}{546}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00395}{get\+\_\+as\+\_\+indices()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00371}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71ab79}\label{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71ab79} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!get\_as\_indices@{get\_as\_indices}}
@@ -293,11 +297,11 @@ Get a list of row/col indices and total entry for non-\/zeros in the matrix. e.\
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{389}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00395}{395}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00546}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a418847e6562fb451b1b06c16bf7fb3fc}\label{classoomph_1_1SumOfMatrices_a418847e6562fb451b1b06c16bf7fb3fc} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!main\_matrix\_pt@{main\_matrix\_pt}}
@@ -333,7 +337,7 @@ References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}\label{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!multiply@{multiply}}
@@ -355,7 +359,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{39}} of
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}\label{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!multiply\_transpose@{multiply\_transpose}}
@@ -373,7 +377,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00573}{573}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00579}{579}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a4b75af475c7e1d9d7e5a66065895abe7}\label{classoomph_1_1SumOfMatrices_a4b75af475c7e1d9d7e5a66065895abe7} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!n\_added\_matrix@{n\_added\_matrix}}
@@ -387,7 +391,7 @@ Return the number of added matrices in the sum.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{529}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00535}{535}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -395,7 +399,7 @@ References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matri
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}\label{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!ncol@{ncol}}
@@ -413,7 +417,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{515}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{521}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -421,7 +425,7 @@ References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00395}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00371}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}\label{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!nrow@{nrow}}
@@ -439,7 +443,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{501}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{507}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -447,7 +451,7 @@ References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00395}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00371}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}\label{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!operator()@{operator()}}
@@ -465,15 +469,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{552}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{558}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00535}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00395}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00371}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_aa64f741169700b953b158fe325026377}\label{classoomph_1_1SumOfMatrices_aa64f741169700b953b158fe325026377} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!operator=@{operator=}}
@@ -505,7 +509,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{353}} of
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a5bf6ccd4af2e08e94d48b68a555d85dc}\label{classoomph_1_1SumOfMatrices_a5bf6ccd4af2e08e94d48b68a555d85dc} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!row\_map\_pt@{row\_map\_pt}}
@@ -519,7 +523,7 @@ Access to the maps.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{491}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00497}{497}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -543,27 +547,27 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00344}{344}} of
 
 References \mbox{\hyperlink{sum__of__matrices_8h_source_l00283}{Should\+\_\+delete\+\_\+main\+\_\+matrix}}.
 
-\Hypertarget{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82}\label{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82} 
+\Hypertarget{classoomph_1_1SumOfMatrices_a0bbd147b2767bafb34ce7f6ed2f99c9b}\label{classoomph_1_1SumOfMatrices_a0bbd147b2767bafb34ce7f6ed2f99c9b} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
 \index{sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{sparse\_indexed\_output\_helper()}{sparse\_indexed\_output\_helper()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Sum\+Of\+Matrices\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Sum\+Of\+Matrices\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cutoff = {\ttfamily 0.0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Output the matrix in sparse format. Note that this is going to be slow because we have to check every entry of every matrix for non-\/zeros. 
+Output the matrix in sparse format. Note that this is going to be slow because we have to check every entry of every matrix for non-\/zeros. Final optional argument specifies the largest abs value below which entries are suppressed. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}{oomph\+::\+Matrix$<$ double, Sum\+Of\+Matrices $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_a51db47d62d0366dd03c0709d3f47e02e}{oomph\+::\+Matrix$<$ double, Sum\+Of\+Matrices $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{369}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00371}{371}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00546}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 
 
@@ -584,7 +588,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{268}} of
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00535}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_a67b29b2c909a515cd328a45db2016a6c}\label{classoomph_1_1SumOfMatrices_a67b29b2c909a515cd328a45db2016a6c} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Col\_map\_pt@{Col\_map\_pt}}
@@ -602,7 +606,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{276}} of
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00495}{col\+\_\+map\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{col\+\_\+map\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266}\label{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Main\_matrix\_pt@{Main\_matrix\_pt}}
@@ -620,7 +624,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{265}} of
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00337}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00337}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00521}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00507}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_ab9c2057db624b4cfeb41dd5ffa117abf}\label{classoomph_1_1SumOfMatrices_ab9c2057db624b4cfeb41dd5ffa117abf} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Row\_map\_pt@{Row\_map\_pt}}
@@ -638,7 +642,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{272}} of
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{row\+\_\+map\+\_\+pt()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00039}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00558}{operator()()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00497}{row\+\_\+map\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_abba55a2123febe3b1bb89ee010a56eb5}\label{classoomph_1_1SumOfMatrices_abba55a2123febe3b1bb89ee010a56eb5} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Should\_delete\_added\_matrix@{Should\_delete\_added\_matrix}}
@@ -656,7 +660,7 @@ Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{279}} of
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00421}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{\texorpdfstring{$\sim$}{\string~}\+Sum\+Of\+Matrices()}}.
 
 \Hypertarget{classoomph_1_1SumOfMatrices_af1a5407d43ff8bbf0715d28f6d9e1642}\label{classoomph_1_1SumOfMatrices_af1a5407d43ff8bbf0715d28f6d9e1642} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Should\_delete\_main\_matrix@{Should\_delete\_main\_matrix}}

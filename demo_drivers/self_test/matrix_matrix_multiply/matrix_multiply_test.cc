@@ -337,51 +337,52 @@ int main()
 
  // output matrices
  bool output = true;
+ double cutoff=1.0e-10;
  if (output)
  {
   ofstream file;
   file.open("CR_matrix1.dat", ios_base::out);
-  CR_matrix1_pt->sparse_indexed_output(file);
+  CR_matrix1_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CR_matrix2.dat", ios_base::out);
-  CR_matrix2_pt->sparse_indexed_output(file);
+  CR_matrix2_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
 
   file.open("CR_result1.dat", ios_base::out);
-  CR_result1_pt->sparse_indexed_output(file);
+  CR_result1_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CR_result2.dat", ios_base::out);
-  CR_result2_pt->sparse_indexed_output(file);
+  CR_result2_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CR_result3.dat", ios_base::out);
-  CR_result3_pt->sparse_indexed_output(file);
+  CR_result3_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
 
   file.open("CC_matrix1.dat", ios_base::out);
-  CC_matrix1_pt->sparse_indexed_output(file);
+  CC_matrix1_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CC_matrix2.dat", ios_base::out);
-  CR_matrix2_pt->sparse_indexed_output(file);
+  CR_matrix2_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
 
   file.open("CC_result1.dat", ios_base::out);
-  CC_result1_pt->sparse_indexed_output(file);
+  CC_result1_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CC_result2.dat", ios_base::out);
-  CC_result2_pt->sparse_indexed_output(file);
+  CC_result2_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("CC_result3.dat", ios_base::out);
-  CC_result3_pt->sparse_indexed_output(file);
+  CC_result3_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
 
   file.open("D_matrix1.dat", ios_base::out);
-  D_matrix1_pt->sparse_indexed_output(file);
+  D_matrix1_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("D_matrix2.dat", ios_base::out);
-  D_matrix2_pt->sparse_indexed_output(file);
+  D_matrix2_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
   file.open("D_result.dat", ios_base::out);
-  D_result_pt->sparse_indexed_output(file);
+  D_result_pt->sparse_indexed_output_with_cutoff(file,cutoff);
   file.close();
  }
 

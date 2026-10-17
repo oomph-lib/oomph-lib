@@ -3,6 +3,10 @@
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+struct \mbox{\hyperlink{structoomph_1_1HasMagnitude}{oomph\+::\+Has\+Magnitude$<$ T, class $>$}}
+\begin{DoxyCompactList}\small\item\em Compile-\/time test to determine if a type T has a notion of "{}magnitude"{}, i.\+e. if std\+::abs(\+T) is a valid expression. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1HasMagnitude_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1abs_07std_1_1declval_3_01T_01_4_07_08_08_08_4_01_4}{oomph\+::\+Has\+Magnitude$<$ T, std\+::void\+\_\+t$<$ decltype(std\+::abs(std\+::declval$<$ T $>$()))$>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Partial specialisation of Has\+Magnitude$<$\+T$>$ which is selected when std\+::abs(\+T) is a valid expression. In that case Has\+Magnitude$<$\+T$>$\+::value is true. std\+::declval$<$\+T$>$() creates a fictitious object of type T for use in unevaluated expressions (decltype in this case) without requiring construction of an actual object. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1OomphLibQuietException}{oomph\+::\+Oomph\+Lib\+Quiet\+Exception}}
 \begin{DoxyCompactList}\small\item\em ===================================================================== A class for handling oomph-\/lib run-\/time exceptions quietly. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}

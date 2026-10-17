@@ -110,8 +110,8 @@ Inheritance diagram for oomph\+::Block\+Preconditioner\texorpdfstring{$<$}{<} MA
 \begin{DoxyCompactList}\small\item\em Turn off output of blocks (by clearing the basefilename string). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0bd0ab19a7501b79c16c1283766f0abb}{block\+\_\+output\+\_\+on}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Test if output of blocks is on or not. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6}{output\+\_\+blocks\+\_\+to\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{basefilename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=8) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
-\begin{DoxyCompactList}\small\item\em Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a27c201865f4b2123c7272b308eb3b437}{output\+\_\+blocks\+\_\+to\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{basefilename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=8, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cutoff}}=0.\+0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. Final optional argument specifies the largest abs value below which entries are suppressed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e}{post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear}} ()
 \begin{DoxyCompactList}\small\item\em A helper method to reduce the memory requirements of block preconditioners. Once the methods get\+\_\+block(...), get\+\_\+blocks(...) and build\+\_\+preconditioner\+\_\+matrix(...) have been called in this and all subsidiary block preconditioners this method can be called to clean up. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7f5ac3923f56ebea6458f2f3fe2636c2}{master\+\_\+block\+\_\+preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
@@ -407,7 +407,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{425}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03285}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03288}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03380}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03362}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03368}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03519}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03393}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03375}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03289}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03384}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03366}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03372}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03527}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03379}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a78c33fc6f29101f027e22d64d158d567}\label{classoomph_1_1BlockPreconditioner_a78c33fc6f29101f027e22d64d158d567} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!````~BlockPreconditioner@{\texorpdfstring{$\sim$}{\string~}BlockPreconditioner}}
@@ -426,7 +426,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00506}{506}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a0634f494e1284446512560cb1dc73a32}\label{classoomph_1_1BlockPreconditioner_a0634f494e1284446512560cb1dc73a32} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!BlockPreconditioner@{BlockPreconditioner}}
@@ -455,7 +455,7 @@ Check if any of the meshes are distributed. This is equivalent to problem.\+dist
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03025}{3025}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03029}{3029}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -478,7 +478,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{1903
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
@@ -501,7 +501,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01933}{1933
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a4d8ff67e34e85a71c0f9bb68c0b10496}\label{classoomph_1_1BlockPreconditioner_a4d8ff67e34e85a71c0f9bb68c0b10496} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_matrix\_test@{block\_matrix\_test}}
@@ -539,7 +539,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{1822
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03288}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02689}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02693}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}.
 
 
 
@@ -562,7 +562,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02088}{2088
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03531}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03535}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}\label{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!block\_setup@{block\_setup}}
@@ -578,10 +578,6 @@ Determine the size of the matrix blocks and setup the lookup schemes relating th
 Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "{}blocks"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if each DOF type corresponds to a unique block type. 
 
 Definition at line \mbox{\hyperlink{block__preconditioner_8cc_source_l02482}{2482}} of file \mbox{\hyperlink{block__preconditioner_8cc_source}{block\+\_\+preconditioner.\+cc}}.
-
-
-
-References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
 
 
 
@@ -621,11 +617,11 @@ Clears all \doxylink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner} d
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{2159}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{2163}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03387}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03463}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03362}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03368}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03519}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03393}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03492}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03508}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03484}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03500}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03274}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03488}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03504}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03480}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03496}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+ordered}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03391}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03467}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03366}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03372}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{matrices_8h_source_l00521}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}, \mbox{\hyperlink{matrices_8h_source_l00515}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03496}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03512}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03488}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03504}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03527}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03278}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00528}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03492}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03508}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+recv\+\_\+for\+\_\+get\+\_\+ordered}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03484}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+block}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03500}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Rows\+\_\+to\+\_\+send\+\_\+for\+\_\+get\+\_\+ordered}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
@@ -648,7 +644,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02082}{2082
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03531}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03535}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa98340f94d}\label{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa98340f94d} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!document@{document}}
@@ -663,11 +659,11 @@ debugging method to document the setup. Should only be called after block\+\_\+s
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{2269}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{2273}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03468}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03238}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03362}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03368}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03251}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03267}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03472}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03242}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03366}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03372}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03255}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03271}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_aec42a15c43a7d2b7bb128434be457279}\label{classoomph_1_1BlockPreconditioner_aec42a15c43a7d2b7bb128434be457279} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!dof\_block\_distribution\_pt@{dof\_block\_distribution\_pt}}
@@ -686,11 +682,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{1962
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a14e8e7525cf28f702a66245da112f96c}\label{classoomph_1_1BlockPreconditioner_a14e8e7525cf28f702a66245da112f96c} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!doftype\_coarsen\_map\_fine@{doftype\_coarsen\_map\_fine}}
@@ -705,11 +701,11 @@ Access function for the Doftype\+\_\+coarsen\+\_\+map\+\_\+fine variable.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02334}{2334}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02338}{2338}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03334}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03338}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a4c37f469646c689b5f1e79d0953bd588}\label{classoomph_1_1BlockPreconditioner_a4c37f469646c689b5f1e79d0953bd588} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block@{get\_block}}
@@ -747,11 +743,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{673}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03285}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l03536}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03274}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03289}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l03598}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03278}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00988}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01012}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+other\+\_\+matrix()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02095}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00988}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01012}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+other\+\_\+matrix()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02097}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_afd37323d2b5ba31e2d14f3ce8e6e474d}\label{classoomph_1_1BlockPreconditioner_afd37323d2b5ba31e2d14f3ce8e6e474d} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_block\_ordered\_preconditioner\_vector@{get\_block\_ordered\_preconditioner\_vector}}
@@ -943,7 +939,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{1134
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03387}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02769}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03391}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02773}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_af9321cdab3f506ab95fe51cd9b93deab}\label{classoomph_1_1BlockPreconditioner_af9321cdab3f506ab95fe51cd9b93deab} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_concatenated\_block\_vector@{get\_concatenated\_block\_vector}}
@@ -959,6 +955,10 @@ Takes the naturally ordered vector and extracts the blocks indicated by the bloc
 
 
 Definition at line \mbox{\hyperlink{block__preconditioner_8cc_source_l02607}{2607}} of file \mbox{\hyperlink{block__preconditioner_8cc_source}{block\+\_\+preconditioner.\+cc}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a1df550d281ec99914115edfa1a40b982}\label{classoomph_1_1BlockPreconditioner_a1df550d281ec99914115edfa1a40b982} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_dof\_level\_block@{get\_dof\_level\_block}}
@@ -976,7 +976,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8cc_source_l05670}{567
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l03536}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{elements_8h_source_l01189}{oomph\+::\+Generalised\+Element\+::ndof\+\_\+types()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+References \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l03598}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{elements_8h_source_l01189}{oomph\+::\+Generalised\+Element\+::ndof\+\_\+types()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}\label{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_dof\_level\_block@{get\_dof\_level\_block}}
@@ -1006,11 +1006,11 @@ Returns the most fine grain dof types in a (possibly coarsened) dof type.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02341}{2341}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02345}{2345}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03334}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03338}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_acac55e8dea1a0f63fcf32b7b058b0979}\label{classoomph_1_1BlockPreconditioner_acac55e8dea1a0f63fcf32b7b058b0979} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!get\_index\_of\_value@{get\_index\_of\_value}}
@@ -1026,7 +1026,7 @@ Get the index of first occurrence of value in a vector. If the element does not 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02827}{2827}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02831}{2831}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -1049,7 +1049,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{1850
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03288}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02734}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02738}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a9b3c4072be2bf4f0dfdd18f56a5d51bf}\label{classoomph_1_1BlockPreconditioner_a9b3c4072be2bf4f0dfdd18f56a5d51bf} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!insert\_auxiliary\_block\_distribution@{insert\_auxiliary\_block\_distribution}}
@@ -1064,15 +1064,15 @@ insert a \doxylink{classoomph_1_1Vector}{Vector$<$unsigned$>$} and Linear\+Algeb
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02769}{2769}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02773}{2773}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03387}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03391}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02401}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ac460225afc092cc5ed9d77acc6316536}\label{classoomph_1_1BlockPreconditioner_ac460225afc092cc5ed9d77acc6316536} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_block\_dimension@{internal\_block\_dimension}}
@@ -1087,11 +1087,11 @@ Return the number of degrees of freedom in block b. Note that if this preconditi
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03165}{3165}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03169}{3169}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a92aa6c59cd0b4dc15705d2b90f9bd206}\label{classoomph_1_1BlockPreconditioner_a92aa6c59cd0b4dc15705d2b90f9bd206} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_block\_distribution\_pt@{internal\_block\_distribution\_pt}}
@@ -1106,11 +1106,11 @@ Access function to the internal block distributions.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02734}{2734}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02738}{2738}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
@@ -1129,15 +1129,15 @@ Return the block number corresponding to a global index i\+\_\+dof. This returns
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02689}{2689}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02693}{2693}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03471}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+to\+\_\+block\+\_\+number\+\_\+lookup}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03475}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+to\+\_\+block\+\_\+number\+\_\+lookup}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01822}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_abe03c970690224b46a29e55e16992dd7}\label{classoomph_1_1BlockPreconditioner_abe03c970690224b46a29e55e16992dd7} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_dof\_block\_dimension@{internal\_dof\_block\_dimension}}
@@ -1152,15 +1152,15 @@ Return the size of the dof "{}block"{} i, i.\+e. how many degrees of freedom are
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{3187}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{3191}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03457}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+dimension}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03238}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03461}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+dimension}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03242}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_abb4dff3469cc6718103fddfdf3f3a7bb}\label{classoomph_1_1BlockPreconditioner_abb4dff3469cc6718103fddfdf3f3a7bb} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_dof\_number@{internal\_dof\_number}}
@@ -1175,15 +1175,15 @@ Return the number of the block associated with global unknown i\+\_\+dof. If thi
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{3045}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{3049}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{preconditioner_8h_source_l00171}{oomph\+::\+Preconditioner\+::comm\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03420}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03450}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03404}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+fine}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03433}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+References \mbox{\hyperlink{preconditioner_8h_source_l00171}{oomph\+::\+Preconditioner\+::comm\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03424}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03454}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03408}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+fine}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03437}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::index\+\_\+in\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02689}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::index\+\_\+in\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02693}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a4f714d01cd2fdb791aa0795f34b9610a}\label{classoomph_1_1BlockPreconditioner_a4f714d01cd2fdb791aa0795f34b9610a} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_get\_block@{internal\_get\_block}}
@@ -1313,11 +1313,11 @@ Return the index in the block corresponding to a global block number i\+\_\+dof.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{2705}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{2709}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03468}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02689}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03472}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02693}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a1e0a33327b5042dfba04baf46c045373}\label{classoomph_1_1BlockPreconditioner_a1e0a33327b5042dfba04baf46c045373} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_index\_in\_dof@{internal\_index\_in\_dof}}
@@ -1332,15 +1332,15 @@ Return the row/column number of global unknown i\+\_\+dof within it\textquotesin
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{3113}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{3117}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03433}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03415}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03442}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03437}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03419}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03446}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::index\+\_\+in\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::index\+\_\+in\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a7297e4d24c2c7ae7af6a9ad009669928}\label{classoomph_1_1BlockPreconditioner_a7297e4d24c2c7ae7af6a9ad009669928} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_master\_dof\_number@{internal\_master\_dof\_number}}
@@ -1355,15 +1355,15 @@ Takes the block number within this preconditioner and returns the corresponding 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03238}{3238}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03242}{3242}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03404}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+fine}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03408}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+fine}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a7c2b9ed482db072b0cabe5a51eb76efa}\label{classoomph_1_1BlockPreconditioner_a7c2b9ed482db072b0cabe5a51eb76efa} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_nblock\_types@{internal\_nblock\_types}}
@@ -1382,15 +1382,15 @@ This is legacy code from before the coarsening dof type functionality was added.
 
 The function nblock\+\_\+types(...) should be used if the number of block types is required. 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{2522}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{2526}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03362}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03366}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+nblock\+\_\+types}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03165}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02734}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02095}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03169}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02738}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02097}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a4f3efe468cd6e133d6840ede8c3687b5}\label{classoomph_1_1BlockPreconditioner_a4f3efe468cd6e133d6840ede8c3687b5} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_ndof\_types@{internal\_ndof\_types}}
@@ -1405,15 +1405,15 @@ Return the number of internal dof types. This is the number of most fine grain d
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{2564}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{2568}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03368}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03372}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+ndof\+\_\+types}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_aab9893960364a7fa71fdc4628a453b8a}\label{classoomph_1_1BlockPreconditioner_aab9893960364a7fa71fdc4628a453b8a} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_preconditioner\_matrix\_distribution\_pt@{internal\_preconditioner\_matrix\_distribution\_pt}}
@@ -1428,15 +1428,15 @@ access function to the internal preconditioner matrix distribution pt. precondit
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03251}{3251}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03255}{3255}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03519}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a679a82067056628cc4bbc8bb68d088f2}\label{classoomph_1_1BlockPreconditioner_a679a82067056628cc4bbc8bb68d088f2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!internal\_return\_block\_ordered\_preconditioner\_vector@{internal\_return\_block\_ordered\_preconditioner\_vector}}
@@ -1535,11 +1535,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{2068
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03238}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03251}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03222}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03242}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03255}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03226}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a9ac4335ec07fc13f7bf1093fd0489c52}\label{classoomph_1_1BlockPreconditioner_a9ac4335ec07fc13f7bf1093fd0489c52} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!is\_subsidiary\_block\_preconditioner@{is\_subsidiary\_block\_preconditioner}}
@@ -1558,11 +1558,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{2061
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00998}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+master\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00554}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+off\+\_\+recursive\+\_\+debug\+\_\+flag()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00545}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+on\+\_\+recursive\+\_\+debug\+\_\+flag()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00998}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+master\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00554}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+off\+\_\+recursive\+\_\+debug\+\_\+flag()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00545}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+on\+\_\+recursive\+\_\+debug\+\_\+flag()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a7f5ac3923f56ebea6458f2f3fe2636c2}\label{classoomph_1_1BlockPreconditioner_a7f5ac3923f56ebea6458f2f3fe2636c2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!master\_block\_preconditioner\_pt@{master\_block\_preconditioner\_pt}}
@@ -1577,11 +1577,11 @@ Access function to the master block preconditioner pt.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{2141}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{2145}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
 
 
 
@@ -1604,11 +1604,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{2017
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}\label{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!master\_nrow@{master\_nrow}}
@@ -1623,11 +1623,11 @@ Return the number of dofs (number of rows or columns) in the overall problem. Th
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03222}{3222}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03226}{3226}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03393}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Master\+\_\+block\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}\label{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!matrix\_pt@{matrix\_pt}}
@@ -1650,7 +1650,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{520}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}.
 
 
 
@@ -1673,11 +1673,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{1782
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00191}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::add\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03025}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::any\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00532}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00546}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$\+::set\+\_\+wall\+\_\+mesh()}}.
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00191}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::add\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03029}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::any\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02870}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00532}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00546}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$\+::set\+\_\+wall\+\_\+mesh()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a80808d42be8db74fd58af80b019bf317}\label{classoomph_1_1BlockPreconditioner_a80808d42be8db74fd58af80b019bf317} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!nblock\_types@{nblock\_types}}
@@ -1696,11 +1696,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{1670
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03285}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03289}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01933}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02769}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01933}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02773}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}\label{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!ndof\_types@{ndof\_types}}
@@ -1719,11 +1719,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{1694
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03326}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03330}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+fine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02361}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+fine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02365}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a45509677ccef78be13b5e4485312ddc1}\label{classoomph_1_1BlockPreconditioner_a45509677ccef78be13b5e4485312ddc1} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!ndof\_types\_in\_mesh@{ndof\_types\_in\_mesh}}
@@ -1742,11 +1742,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{2037
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01189}{oomph\+::\+Generalised\+Element\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Ndof\+\_\+types\+\_\+in\+\_\+mesh}}.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01189}{oomph\+::\+Generalised\+Element\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03360}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Ndof\+\_\+types\+\_\+in\+\_\+mesh}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a50b76a374797805f64e2af34d581cdc2}\label{classoomph_1_1BlockPreconditioner_a50b76a374797805f64e2af34d581cdc2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!nfine\_grain\_dof\_types\_in@{nfine\_grain\_dof\_types\_in}}
@@ -1761,11 +1761,11 @@ Access function for the number of most fine grain dof types in a (possibly coars
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02361}{2361}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02365}{2365}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03334}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03338}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a193776a271f7c23d20d2102de0ff1cb9}\label{classoomph_1_1BlockPreconditioner_a193776a271f7c23d20d2102de0ff1cb9} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!nmesh@{nmesh}}
@@ -1784,11 +1784,11 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{1816
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03025}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::any\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00218}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::gp\+\_\+preconditioner\+\_\+set\+\_\+all\+\_\+meshes()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03029}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::any\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00218}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::gp\+\_\+preconditioner\+\_\+set\+\_\+all\+\_\+meshes()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02870}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a8f07557542d4ebeba0e5a2307c7a7d48}\label{classoomph_1_1BlockPreconditioner_a8f07557542d4ebeba0e5a2307c7a7d48} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!operator=@{operator=}}
@@ -1801,24 +1801,24 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03025}{oomph\+::
 
 Broken assignment operator. 
 
-\Hypertarget{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6}\label{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6} 
+\Hypertarget{classoomph_1_1BlockPreconditioner_a27c201865f4b2123c7272b308eb3b437}\label{classoomph_1_1BlockPreconditioner_a27c201865f4b2123c7272b308eb3b437} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!output\_blocks\_to\_files@{output\_blocks\_to\_files}}
 \index{output\_blocks\_to\_files@{output\_blocks\_to\_files}!oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{output\_blocks\_to\_files()}{output\_blocks\_to\_files()}}
 {\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{basefilename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{precision = {\ttfamily 8} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{basefilename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{precision = {\ttfamily 8},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cutoff = {\ttfamily 0.0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. 
+Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. Final optional argument specifies the largest abs value below which entries are suppressed. 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02095}{2095}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02097}{2097}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e}\label{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!post\_block\_matrix\_assembly\_partial\_clear@{post\_block\_matrix\_assembly\_partial\_clear}}
@@ -1833,15 +1833,15 @@ A helper method to reduce the memory requirements of block preconditioners. Once
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{2120}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{2124}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03468}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03457}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+dimension}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03420}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03450}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03471}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+to\+\_\+block\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03433}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03415}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03442}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03474}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Ndof\+\_\+in\+\_\+block}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03472}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+number\+\_\+to\+\_\+dof\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03461}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+dimension}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03424}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03454}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03475}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Dof\+\_\+number\+\_\+to\+\_\+block\+\_\+number\+\_\+lookup}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03437}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Global\+\_\+index\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03419}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+dense}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03446}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Index\+\_\+in\+\_\+dof\+\_\+block\+\_\+sparse}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03478}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Ndof\+\_\+in\+\_\+block}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a1fc376778f57a98580e6355e09db7a9d}\label{classoomph_1_1BlockPreconditioner_a1fc376778f57a98580e6355e09db7a9d} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!preconditioner\_matrix\_distribution\_pt@{preconditioner\_matrix\_distribution\_pt}}
@@ -1856,15 +1856,15 @@ Access function to the preconditioner matrix distribution pointer. This is the c
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03267}{3267}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03271}{3271}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03527}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_abe3587d642c05b2ace85e3aa7fd3a718}\label{classoomph_1_1BlockPreconditioner_abe3587d642c05b2ace85e3aa7fd3a718} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!replacement\_dof\_block\_pt@{replacement\_dof\_block\_pt}}
@@ -1879,15 +1879,15 @@ Access function to the replaced dof-\/level blocks.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02381}{2381}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02385}{2385}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03274}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03278}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a98e920e003f085b02dbb30510fb23a0f}\label{classoomph_1_1BlockPreconditioner_a98e920e003f085b02dbb30510fb23a0f} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!return\_block\_ordered\_preconditioner\_vector@{return\_block\_ordered\_preconditioner\_vector}}
@@ -2007,7 +2007,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02076}{2076
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03531}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03535}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Output\+\_\+base\+\_\+filename}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a748e2ad8836bc8edf5b9a42373a7ad61}\label{classoomph_1_1BlockPreconditioner_a748e2ad8836bc8edf5b9a42373a7ad61} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!set\_master\_matrix\_pt@{set\_master\_matrix\_pt}}
@@ -2026,7 +2026,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00998}{998}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}.
 
 
 
@@ -2045,11 +2045,11 @@ Set the i-\/th mesh for this block preconditioner. Note\+: The method set\+\_\+n
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{2866}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02870}{2870}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03349}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}.
 
 
 
@@ -2068,11 +2068,11 @@ Specify the number of meshes required by this block preconditioner. Note\+: elem
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{2851}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02855}{2855}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03349}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Mesh\+\_\+pt}}.
 
 
 
@@ -2091,11 +2091,11 @@ Set replacement dof-\/level blocks. Only dof-\/level blocks can be set. This is 
 
 IMPORTANT\+: The block indices (block\+\_\+i, block\+\_\+j) is the dof-\/level ordering, NOT the block-\/ordering. The block-\/ordering is determined by the parameters given to block\+\_\+setup(...). The DOF-\/ordering is determined by the two-\/level ordering scheme of first the elements, then the meshes. 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{2911}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{2915}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02381}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03274}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02385}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03278}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Replacement\+\_\+dof\+\_\+block\+\_\+pt}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a65059c036724814a0e490716fa6eaf0a}\label{classoomph_1_1BlockPreconditioner_a65059c036724814a0e490716fa6eaf0a} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!setup\_matrix\_vector\_product@{setup\_matrix\_vector\_product}}
@@ -2110,11 +2110,11 @@ Setup matrix vector product. This is simply a wrapper around the other setup\+\_
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02438}{2438}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02442}{2442}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02401}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}\label{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!setup\_matrix\_vector\_product@{setup\_matrix\_vector\_product}}
@@ -2129,15 +2129,15 @@ Setup a matrix vector product. matvec\+\_\+prod\+\_\+pt is a pointer to the \dox
 
 The distribution of the block column must be the same as the RHS vector being solved. By default, OOMPH-\/\+LIB\textquotesingle{}s uniform row distribution is employed. When block matrices are concatenated without communication, the columns are permuted, as a result, the distribution of the columns may no longer be uniform. 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{2397}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l02401}{2401}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03387}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02769}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03391}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02773}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02438}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02442}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}\label{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_into\_subsidiary\_block\_preconditioner@{turn\_into\_subsidiary\_block\_preconditioner}}
@@ -2224,7 +2224,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00568}{568}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03380}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03384}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a8ed741a5fbf514fc29f0a332a211255f}\label{classoomph_1_1BlockPreconditioner_a8ed741a5fbf514fc29f0a332a211255f} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_off\_recursive\_debug\_flag@{turn\_off\_recursive\_debug\_flag}}
@@ -2243,7 +2243,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00554}{554}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03375}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03379}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a271bf5ea70579e43797187498d98f9a9}\label{classoomph_1_1BlockPreconditioner_a271bf5ea70579e43797187498d98f9a9} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_on\_debug\_flag@{turn\_on\_debug\_flag}}
@@ -2262,7 +2262,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00562}{562}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03380}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l03384}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Debug\+\_\+flag}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a0d977a81515458e59b94438a215e93e1}\label{classoomph_1_1BlockPreconditioner_a0d977a81515458e59b94438a215e93e1} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!turn\_on\_recursive\_debug\_flag@{turn\_on\_recursive\_debug\_flag}}
@@ -2281,7 +2281,7 @@ Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00545}{545}
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03375}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
+References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03379}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Recursive\+\_\+debug\+\_\+flag}}.
 
 
 
@@ -2299,11 +2299,11 @@ References \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+B
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{3345}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03349}{3349}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02870}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02855}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ab295a391e32dc00c4e56dfb0527ea354}\label{classoomph_1_1BlockPreconditioner_ab295a391e32dc00c4e56dfb0527ea354} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Auxiliary\_block\_distribution\_pt@{Auxiliary\_block\_distribution\_pt}}
@@ -2318,11 +2318,11 @@ Stores any block-\/level distributions / concatenation of block-\/level distribu
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03387}{3387}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03391}{3391}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02769}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02773}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::insert\+\_\+auxiliary\+\_\+block\+\_\+distribution()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02401}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a59e83eca59e3cdc41a93668539e138f1}\label{classoomph_1_1BlockPreconditioner_a59e83eca59e3cdc41a93668539e138f1} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Block\_distribution\_pt@{Block\_distribution\_pt}}
@@ -2337,11 +2337,11 @@ The distribution for the blocks.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{3277}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03281}{3281}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01933}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01933}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02401}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a61561c20a262195f1bdacda515a2394b}\label{classoomph_1_1BlockPreconditioner_a61561c20a262195f1bdacda515a2394b} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Block\_number\_to\_dof\_number\_lookup@{Block\_number\_to\_dof\_number\_lookup}}
@@ -2356,11 +2356,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01903}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03468}{3468}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03472}{3472}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02705}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02709}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae047d81b8179dfd09b70cf35f40f62ca}\label{classoomph_1_1BlockPreconditioner_ae047d81b8179dfd09b70cf35f40f62ca} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Block\_to\_dof\_map\_coarse@{Block\_to\_dof\_map\_coarse}}
@@ -2375,7 +2375,7 @@ Mapping for block types to dof types. These are the dof types the writer of the 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03285}{3285}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03289}{3289}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2394,7 +2394,7 @@ Mapping for the block types to the most fine grain dof types.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03288}{3288}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03292}{3292}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2413,7 +2413,7 @@ Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03380}{3380}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03384}{3384}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2432,11 +2432,11 @@ Storage for the default distribution for each dof block at this level.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{3341}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03345}{3345}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a55900a517c9e354b9fc49624483b7273}\label{classoomph_1_1BlockPreconditioner_a55900a517c9e354b9fc49624483b7273} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Dof\_dimension@{Dof\_dimension}}
@@ -2451,11 +2451,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03457}{3457}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03461}{3461}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a37b22a0a25030a4b08f2eaec261ae22b}\label{classoomph_1_1BlockPreconditioner_a37b22a0a25030a4b08f2eaec261ae22b} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Dof\_number\_dense@{Dof\_number\_dense}}
@@ -2470,11 +2470,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03420}{3420}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03424}{3424}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a5a6adc0423ef4d31562d149324c4a679}\label{classoomph_1_1BlockPreconditioner_a5a6adc0423ef4d31562d149324c4a679} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Dof\_number\_sparse@{Dof\_number\_sparse}}
@@ -2489,11 +2489,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03450}{3450}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03454}{3454}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae2f496bfa8307485101a3b8ac57e8c71}\label{classoomph_1_1BlockPreconditioner_ae2f496bfa8307485101a3b8ac57e8c71} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Dof\_number\_to\_block\_number\_lookup@{Dof\_number\_to\_block\_number\_lookup}}
@@ -2508,11 +2508,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03471}{3471}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03475}{3475}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02689}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02693}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a015ba85d839a80512c6c4065e39a3d4a}\label{classoomph_1_1BlockPreconditioner_a015ba85d839a80512c6c4065e39a3d4a} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Doftype\_coarsen\_map\_coarse@{Doftype\_coarsen\_map\_coarse}}
@@ -2533,7 +2533,7 @@ Doftype\+\_\+coarsen\+\_\+map\+\_\+fine = \mbox{[}\mbox{[}0,1\mbox{]}\mbox{[}2,3
 
 In the case of the top most master block preconditioner, the block\+\_\+setup(...) function fills the vector with the identity mapping. 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03326}{3326}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03330}{3330}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2552,11 +2552,11 @@ Mapping the dof types within this preconditioner. The values in here refers to t
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03334}{3334}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03338}{3338}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02334}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::doftype\+\_\+coarsen\+\_\+map\+\_\+fine()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02341}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+fine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02361}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02338}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::doftype\+\_\+coarsen\+\_\+map\+\_\+fine()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02345}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+fine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02365}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a2d341eaf3312c7afcd663c7f4eba6fc2}\label{classoomph_1_1BlockPreconditioner_a2d341eaf3312c7afcd663c7f4eba6fc2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Doftype\_in\_master\_preconditioner\_coarse@{Doftype\_in\_master\_preconditioner\_coarse}}
@@ -2571,7 +2571,7 @@ The map between the dof types in this preconditioner and the master precondition
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03411}{3411}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03415}{3415}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae8c06ce4f4baf8480a2f25b152031dad}\label{classoomph_1_1BlockPreconditioner_ae8c06ce4f4baf8480a2f25b152031dad} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Doftype\_in\_master\_preconditioner\_fine@{Doftype\_in\_master\_preconditioner\_fine}}
@@ -2586,11 +2586,11 @@ The map between the dof types in this preconditioner and the master precondition
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03404}{3404}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03408}{3408}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03238}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03242}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+master\+\_\+dof\+\_\+number()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a79ea9c428aa8533c371ef3f0048a3a92}\label{classoomph_1_1BlockPreconditioner_a79ea9c428aa8533c371ef3f0048a3a92} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Global\_index@{Global\_index}}
@@ -2605,11 +2605,11 @@ Vectors of vectors for the mapping from block number and block row to global row
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03463}{3463}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03467}{3467}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae7a8d4a769319bffc94432a3c4adf30b}\label{classoomph_1_1BlockPreconditioner_ae7a8d4a769319bffc94432a3c4adf30b} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Global\_index\_sparse@{Global\_index\_sparse}}
@@ -2628,11 +2628,11 @@ For global indices outside of the range this-\/\texorpdfstring{$>$}{>}\doxylink{
 \item Dof\+\_\+number\+\_\+sparse; The corresponding global indices are stored in this vector. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03433}{3433}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03437}{3437}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a0ad82070ce2f6cdfa9ea6c7226ea28af}\label{classoomph_1_1BlockPreconditioner_a0ad82070ce2f6cdfa9ea6c7226ea28af} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Index\_in\_dof\_block\_dense@{Index\_in\_dof\_block\_dense}}
@@ -2647,11 +2647,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03415}{3415}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03419}{3419}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a06bef26c782dacdc6b5caa6419df73c9}\label{classoomph_1_1BlockPreconditioner_a06bef26c782dacdc6b5caa6419df73c9} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Index\_in\_dof\_block\_sparse@{Index\_in\_dof\_block\_sparse}}
@@ -2666,11 +2666,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03442}{3442}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03446}{3446}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a38de6514d7065086335e0e6f60dc77a9}\label{classoomph_1_1BlockPreconditioner_a38de6514d7065086335e0e6f60dc77a9} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Internal\_block\_distribution\_pt@{Internal\_block\_distribution\_pt}}
@@ -2685,11 +2685,11 @@ Storage for the default distribution for each internal block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03337}{3337}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03341}{3341}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03165}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+dimension()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02734}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01962}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::dof\+\_\+block\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03169}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+dimension()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02738}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+block\+\_\+distribution\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a06c7426a2c8c096c8f4dc583444e0e0e}\label{classoomph_1_1BlockPreconditioner_a06c7426a2c8c096c8f4dc583444e0e0e} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Internal\_nblock\_types@{Internal\_nblock\_types}}
@@ -2704,11 +2704,11 @@ Number of different block types in this preconditioner. Note that this informati
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03362}{3362}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03366}{3366}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02522}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02526}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+nblock\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a3985436e4645c202eadd47a4f4f466e2}\label{classoomph_1_1BlockPreconditioner_a3985436e4645c202eadd47a4f4f466e2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Internal\_ndof\_types@{Internal\_ndof\_types}}
@@ -2723,11 +2723,11 @@ Number of different DOF types in this preconditioner. Note that this information
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03368}{3368}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03372}{3372}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02269}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02564}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02273}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::document()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02568}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+ndof\+\_\+types()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a58079eb938b4d3602d0819cf68b318c0}\label{classoomph_1_1BlockPreconditioner_a58079eb938b4d3602d0819cf68b318c0} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Internal\_preconditioner\_matrix\_distribution\_pt@{Internal\_preconditioner\_matrix\_distribution\_pt}}
@@ -2745,11 +2745,11 @@ The distribution of the (internal) preconditioner matrix. This is formed by conc
 \item only used if this preconditioner is a master preconditioner. Warning\+: always use the access function \doxylink{classoomph_1_1BlockPreconditioner_aab9893960364a7fa71fdc4628a453b8a}{internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03519}{3519}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{3523}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03251}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03255}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a7759d79eefa52fb688caac08a4ff4894}\label{classoomph_1_1BlockPreconditioner_a7759d79eefa52fb688caac08a4ff4894} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Master\_block\_preconditioner\_pt@{Master\_block\_preconditioner\_pt}}
@@ -2764,11 +2764,11 @@ If the block preconditioner is acting a subsidiary block preconditioner then a p
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03399}{3399}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03403}{3403}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03187}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02141}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03222}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03191}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+block\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03049}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03117}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02068}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+master\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02145}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+block\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03226}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a89adb506e8f9103c80b4b36cc309f536}\label{classoomph_1_1BlockPreconditioner_a89adb506e8f9103c80b4b36cc309f536} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Mesh\_pt@{Mesh\_pt}}
@@ -2783,11 +2783,11 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03352}{3352}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{3356}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::nmesh()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02870}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02855}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+nmesh()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a874cbe5520d546ee24004e229a48037e}\label{classoomph_1_1BlockPreconditioner_a874cbe5520d546ee24004e229a48037e} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Ndof\_in\_block@{Ndof\_in\_block}}
@@ -2802,11 +2802,11 @@ Number of types of degree of freedom associated with each block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03474}{3474}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03478}{3478}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02120}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02124}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a43e9d73ff61daa00aea4e4deff0d6aff}\label{classoomph_1_1BlockPreconditioner_a43e9d73ff61daa00aea4e4deff0d6aff} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Ndof\_types\_in\_mesh@{Ndof\_types\_in\_mesh}}
@@ -2821,7 +2821,7 @@ Storage for number of types of degree of freedom of the elements in each mesh.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03356}{3356}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03360}{3360}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2840,11 +2840,11 @@ Number of DOFs (\# of rows or columns in the matrix) in this preconditioner. Not
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03393}{3393}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03397}{3397}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03222}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03226}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+nrow()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a9ab1a931e617f04a50e8f24e75069628}\label{classoomph_1_1BlockPreconditioner_a9ab1a931e617f04a50e8f24e75069628} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Nrows\_to\_recv\_for\_get\_block@{Nrows\_to\_recv\_for\_get\_block}}
@@ -2859,11 +2859,11 @@ The number of block rows to be received from processor p for block b (matrix ind
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03492}{3492}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03496}{3496}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a0265c19418608d4a525c159abe1b5c60}\label{classoomph_1_1BlockPreconditioner_a0265c19418608d4a525c159abe1b5c60} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Nrows\_to\_recv\_for\_get\_ordered@{Nrows\_to\_recv\_for\_get\_ordered}}
@@ -2878,11 +2878,11 @@ The number of preconditioner rows to be received from processor p for get\+\_\+b
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03508}{3508}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03512}{3512}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a2080668f30dd3095ce8f2f791536f20e}\label{classoomph_1_1BlockPreconditioner_a2080668f30dd3095ce8f2f791536f20e} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Nrows\_to\_send\_for\_get\_block@{Nrows\_to\_send\_for\_get\_block}}
@@ -2897,11 +2897,11 @@ The number of global rows to be sent of block b to processor p (matrix indexed \
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03484}{3484}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03488}{3488}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae1a0fcd29c4939f668d2225b5d33caf5}\label{classoomph_1_1BlockPreconditioner_ae1a0fcd29c4939f668d2225b5d33caf5} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Nrows\_to\_send\_for\_get\_ordered@{Nrows\_to\_send\_for\_get\_ordered}}
@@ -2916,11 +2916,11 @@ The number global rows to be sent to processor p for get\+\_\+block\+\_\+ordered
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03500}{3500}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03504}{3504}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a915ff2775ccef6ac3dadf072566da9e7}\label{classoomph_1_1BlockPreconditioner_a915ff2775ccef6ac3dadf072566da9e7} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Output\_base\_filename@{Output\_base\_filename}}
@@ -2935,7 +2935,7 @@ String giving the base of the files to write block data into. If empty then do n
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03531}{3531}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03535}{3535}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2954,11 +2954,11 @@ The distribution of the preconditioner matrix. This is the concatenation of the 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03523}{3523}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03527}{3527}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03267}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00425}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l03271}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ae6ce543de76eedb34a2562eecceb222b}\label{classoomph_1_1BlockPreconditioner_ae6ce543de76eedb34a2562eecceb222b} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Recursive\_debug\_flag@{Recursive\_debug\_flag}}
@@ -2973,7 +2973,7 @@ Debugging variable. Set true or false via the access functions turn\+\_\+on\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03375}{3375}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03379}{3379}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -2992,11 +2992,11 @@ The replacement dof-\/level blocks.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03274}{3274}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03278}{3278}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02381}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02385}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::replacement\+\_\+dof\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02915}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a37d5573e5a7c9fba43f4364458e9075c}\label{classoomph_1_1BlockPreconditioner_a37d5573e5a7c9fba43f4364458e9075c} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Rows\_to\_recv\_for\_get\_block@{Rows\_to\_recv\_for\_get\_block}}
@@ -3011,11 +3011,11 @@ The block rows to be received from processor p for block b (matrix indexed \mbox
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03488}{3488}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03492}{3492}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a68830fbf53861f7b2e3e6a1b4843f6b2}\label{classoomph_1_1BlockPreconditioner_a68830fbf53861f7b2e3e6a1b4843f6b2} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Rows\_to\_recv\_for\_get\_ordered@{Rows\_to\_recv\_for\_get\_ordered}}
@@ -3030,11 +3030,11 @@ The preconditioner rows to be received from processor p for get\+\_\+block\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03504}{3504}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03508}{3508}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_ac24e5ec4afe8904b3de7975ff0b2649d}\label{classoomph_1_1BlockPreconditioner_ac24e5ec4afe8904b3de7975ff0b2649d} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Rows\_to\_send\_for\_get\_block@{Rows\_to\_send\_for\_get\_block}}
@@ -3049,11 +3049,11 @@ The global rows to be sent of block b to processor p (matrix indexed \mbox{[}b\m
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03480}{3480}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03484}{3484}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a47d5bfe73b47ab79504e878d372dd65f}\label{classoomph_1_1BlockPreconditioner_a47d5bfe73b47ab79504e878d372dd65f} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Rows\_to\_send\_for\_get\_ordered@{Rows\_to\_send\_for\_get\_ordered}}
@@ -3068,11 +3068,11 @@ The global rows to be sent to processor p for get\+\_\+block\+\_\+ordered\+\_\+.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03496}{3496}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03500}{3500}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02163}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
 
 \Hypertarget{classoomph_1_1BlockPreconditioner_a6e6a40988711a64c622c2fd9104c56cf}\label{classoomph_1_1BlockPreconditioner_a6e6a40988711a64c622c2fd9104c56cf} 
 \index{oomph::BlockPreconditioner$<$ MATRIX $>$@{oomph::BlockPreconditioner$<$ MATRIX $>$}!Run\_block\_matrix\_test@{Run\_block\_matrix\_test}}
@@ -3087,7 +3087,7 @@ Static boolean to allow block\+\_\+matrix\+\_\+test(...) to be run. Defaults to 
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03527}{3527}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l03531}{3531}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
 
 
 

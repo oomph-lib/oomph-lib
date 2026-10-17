@@ -182,9 +182,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4c638f36db786e159565e1f890402ed2" id="r_a4c638f36db786e159565e1f890402ed2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a4c638f36db786e159565e1f890402ed2">output_bottom_right_zero_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
 <tr class="memdesc:a4c638f36db786e159565e1f890402ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
 <tr class="separator:a4c638f36db786e159565e1f890402ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84a08f7e77be50af6a5655cbe0609619" id="r_a84a08f7e77be50af6a5655cbe0609619"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a84a08f7e77be50af6a5655cbe0609619">sparse_indexed_output_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
-<tr class="memdesc:a84a08f7e77be50af6a5655cbe0609619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <br /></td></tr>
-<tr class="separator:a84a08f7e77be50af6a5655cbe0609619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb89bfdcda79631ed837891d079253bc" id="r_aeb89bfdcda79631ed837891d079253bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#aeb89bfdcda79631ed837891d079253bc">sparse_indexed_output_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">cutoff</a>=0.0) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aeb89bfdcda79631ed837891d079253bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument specifies max. size of entries which are set to zero on output.  <br /></td></tr>
+<tr class="separator:aeb89bfdcda79631ed837891d079253bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
 <tr class="memitem:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix" id="r_ab414a0bf8e2658fc30d2c516f3bf4837"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ab414a0bf8e2658fc30d2c516f3bf4837">Matrix</a> ()</td></tr>
 <tr class="memdesc:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor  <br /></td></tr>
@@ -207,12 +207,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix" id="r_ace9b59cbe514c77f0b3816b144c740f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ace9b59cbe514c77f0b3816b144c740f6">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
 <tr class="memdesc:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices.  <br /></td></tr>
 <tr class="separator:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix" id="r_a4f97fa3c94e6fd664e46acb8873a80f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a4f97fa3c94e6fd664e46acb8873a80f8">sparse_indexed_output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
-<tr class="memdesc:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
-<tr class="separator:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix" id="r_ac7473fb07d4db925b4cf3a22131b561a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac7473fb07d4db925b4cf3a22131b561a">sparse_indexed_output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
-<tr class="memdesc:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
-<tr class="separator:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec8424dd0fa8e9d70eb9a503d7c608f inherit pub_methods_classoomph_1_1Matrix" id="r_a5ec8424dd0fa8e9d70eb9a503d7c608f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a5ec8424dd0fa8e9d70eb9a503d7c608f">sparse_indexed_output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">cutoff</a>=0.0) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5ec8424dd0fa8e9d70eb9a503d7c608f inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python). Final optional argument specifies max. size of entries which are set to zero on output.  <br /></td></tr>
+<tr class="separator:a5ec8424dd0fa8e9d70eb9a503d7c608f inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c8d3dceda363428274f0b42352c677 inherit pub_methods_classoomph_1_1Matrix" id="r_ae7c8d3dceda363428274f0b42352c677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ae7c8d3dceda363428274f0b42352c677">sparse_indexed_output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">cutoff</a>=0.0) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae7c8d3dceda363428274f0b42352c677 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python). Final optional argument specifies max. size of entries which are set to zero on output.  <br /></td></tr>
+<tr class="separator:ae7c8d3dceda363428274f0b42352c677 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b94bb8ed59c40abea2158bf8a6082a2 inherit pub_methods_classoomph_1_1Matrix" id="r_a1b94bb8ed59c40abea2158bf8a6082a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a1b94bb8ed59c40abea2158bf8a6082a2">sparse_indexed_output_with_cutoff</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">cutoff</a>=0.0) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1b94bb8ed59c40abea2158bf8a6082a2 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0. Final optional argument specifies max. size of entries which are set to zero on output.  <br /></td></tr>
+<tr class="separator:a1b94bb8ed59c40abea2158bf8a6082a2 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e541fce67b6b031cef01892331a320 inherit pub_methods_classoomph_1_1Matrix" id="r_a36e541fce67b6b031cef01892331a320"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a36e541fce67b6b031cef01892331a320">sparse_indexed_output_with_cutoff</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">cutoff</a>=0.0) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a36e541fce67b6b031cef01892331a320 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0. Final optional argument specifies max. size of entries which are set to zero on output.  <br /></td></tr>
+<tr class="separator:a36e541fce67b6b031cef01892331a320 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -246,7 +252,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX_TYPE</a>&gt;<br />
 class oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</div><p>Class for sparse matrices, that store only the non-zero values in a linear array in memory. The details of the array indexing vary depending on the storage scheme used. The MATRIX_TYPE template parameter for use in the curious recursive template pattern is included and passed directly to the base <a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00561">561</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00593">593</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9aff0ae09aadbc704580726a53fe51c5" name="a9aff0ae09aadbc704580726a53fe51c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9aff0ae09aadbc704580726a53fe51c5">&#9670;&#160;</a></span>SparseMatrix() <span class="overload">[1/2]</span></h2>
@@ -275,7 +281,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Default constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00581">581</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00613">613</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -307,9 +313,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Copy constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00584">584</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00616">616</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00571">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00568">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00574">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Nnz</a>, and <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00603">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00600">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l00606">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Nnz</a>, and <a class="el" href="matrices_8h_source.html#l00597">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
 
 </div>
 </div>
@@ -340,9 +346,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Destructor, delete the memory associated with the values. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00609">609</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00641">641</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00597">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
 
 </div>
 </div>
@@ -376,11 +382,11 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Implements <a class="el" href="classoomph_1_1Matrix.html#ad1af46b34096c348272b0dfacb5ce6a9">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00634">634</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00666">666</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00571">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::M</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00603">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::M</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l01008">oomph::CRDoubleMatrix::ncol()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l01047">oomph::CRDoubleMatrix::ncol()</a>.</p>
 
 </div>
 </div>
@@ -411,11 +417,11 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Return the number of nonzero entries. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00640">640</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00672">672</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00574">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Nnz</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00606">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Nnz</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00559">oomph::CRComplexMatrix::multiply()</a>, and <a class="el" href="matrices_8h_source.html#l01096">oomph::CRDoubleMatrix::nnz()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00559">oomph::CRComplexMatrix::multiply()</a>, and <a class="el" href="matrices_8h_source.html#l01137">oomph::CRDoubleMatrix::nnz()</a>.</p>
 
 </div>
 </div>
@@ -448,9 +454,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Implements <a class="el" href="classoomph_1_1Matrix.html#ac366ca5324d3e00e23d9800f3d5f4d5f">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00628">628</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00660">660</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00568">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00600">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>.</p>
 
 </div>
 </div>
@@ -516,12 +522,12 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; double &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#abf764862746afbbe2655a41bdf726327">oomph::CRMatrix&lt; std::complex&lt; double &gt; &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; double &gt;</a>, and <a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00648">648</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00680">680</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
-<a id="a84a08f7e77be50af6a5655cbe0609619" name="a84a08f7e77be50af6a5655cbe0609619"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84a08f7e77be50af6a5655cbe0609619">&#9670;&#160;</a></span>sparse_indexed_output_helper()</h2>
+<a id="aeb89bfdcda79631ed837891d079253bc" name="aeb89bfdcda79631ed837891d079253bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb89bfdcda79631ed837891d079253bc">&#9670;&#160;</a></span>sparse_indexed_output_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,8 +541,18 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
           <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix</a>&lt; T, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX_TYPE</a> &gt;::sparse_indexed_output_helper </td>
           <td>(</td>
           <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>outfile</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>cutoff</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -546,13 +562,13 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 </table>
 </div><div class="memdoc">
 
-<p>Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. </p>
+<p>Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. Final optional argument specifies max. size of entries which are set to zero on output. </p>
 
-<p>Implements <a class="el" href="classoomph_1_1Matrix.html#a7a5b44e7688ce2c2f7552da104e615c8">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
+<p>Implements <a class="el" href="classoomph_1_1Matrix.html#a51db47d62d0366dd03c0709d3f47e02e">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; double &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#af34167172020d60e5fa382e4bd5d6466">oomph::CRMatrix&lt; std::complex&lt; double &gt; &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; double &gt;</a>, and <a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classoomph_1_1CCMatrix.html#a82b2a0ad947166a3b159c9952dbcb9bb">oomph::CCMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a82b2a0ad947166a3b159c9952dbcb9bb">oomph::CCMatrix&lt; double &gt;</a>, <a class="el" href="classoomph_1_1CCMatrix.html#a82b2a0ad947166a3b159c9952dbcb9bb">oomph::CCMatrix&lt; std::complex&lt; double &gt; &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#a552562b3c4b7a6c0d89096b813fe2498">oomph::CRMatrix&lt; T &gt;</a>, <a class="el" href="classoomph_1_1CRMatrix.html#a552562b3c4b7a6c0d89096b813fe2498">oomph::CRMatrix&lt; double &gt;</a>, and <a class="el" href="classoomph_1_1CRMatrix.html#a552562b3c4b7a6c0d89096b813fe2498">oomph::CRMatrix&lt; std::complex&lt; double &gt; &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00661">661</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00694">694</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -583,11 +599,11 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Access to C-style value array. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00616">616</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00648">648</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00597">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00867">oomph::CRComplexMatrix::add()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00967">oomph::CRComplexMatrix::add()</a>, <a class="el" href="matrices_8cc_source.html#l03412">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="matrices_8cc_source.html#l02365">oomph::CRDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00559">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l01084">oomph::CRDoubleMatrix::value()</a>, and <a class="el" href="matrices_8h_source.html#l01090">oomph::CRDoubleMatrix::value()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00867">oomph::CRComplexMatrix::add()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00967">oomph::CRComplexMatrix::add()</a>, <a class="el" href="matrices_8cc_source.html#l03412">oomph::CRDoubleMatrix::inf_norm()</a>, <a class="el" href="matrices_8cc_source.html#l02365">oomph::CRDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00559">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l01125">oomph::CRDoubleMatrix::value()</a>, and <a class="el" href="matrices_8h_source.html#l01131">oomph::CRDoubleMatrix::value()</a>.</p>
 
 </div>
 </div>
@@ -618,9 +634,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Access to C-style value array (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00622">622</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00654">654</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">References <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00597">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
 
 </div>
 </div>
@@ -649,9 +665,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Number of columns. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00571">571</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00603">603</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l00634">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::ncol()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, and <a class="el" href="matrices_8h_source.html#l00584">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l00666">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::ncol()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -679,9 +695,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Number of rows. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00568">568</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00600">600</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00622">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l00628">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nrow()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, and <a class="el" href="matrices_8h_source.html#l00584">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00622">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="matrices_8h_source.html#l00660">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nrow()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -709,9 +725,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Number of non-zero values (i.e. size of Value array) </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00574">574</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00606">606</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8h_source.html#l00640">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, and <a class="el" href="matrices_8h_source.html#l00584">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8h_source.html#l00672">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::nnz()</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -739,9 +755,9 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Internal representation of the matrix values, a pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00565">565</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00597">597</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l01149">oomph::CCDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00622">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, <a class="el" href="matrices_8h_source.html#l00584">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>, <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, <a class="el" href="matrices_8h_source.html#l00622">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l00609">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::~SparseMatrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l01616">oomph::CRComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01283">oomph::CCComplexMatrix::clean_up_memory()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01535">oomph::CRComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01201">oomph::CCComplexMatrix::lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01482">oomph::CRComplexMatrix::ludecompose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01147">oomph::CCComplexMatrix::ludecompose()</a>, <a class="el" href="matrices_8cc_source.html#l01149">oomph::CCDoubleMatrix::matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00622">oomph::CCDoubleMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01706">oomph::CRComplexMatrix::multiply()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01388">oomph::CCComplexMatrix::multiply()</a>, <a class="el" href="matrices_8cc_source.html#l00715">oomph::CCDoubleMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01745">oomph::CRComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01431">oomph::CCComplexMatrix::multiply_transpose()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01656">oomph::CRComplexMatrix::residual()</a>, <a class="el" href="complex__matrices_8cc_source.html#l01324">oomph::CCComplexMatrix::residual()</a>, <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::SparseMatrix()</a>, <a class="el" href="matrices_8h_source.html#l00648">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, <a class="el" href="matrices_8h_source.html#l00654">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>, and <a class="el" href="matrices_8h_source.html#l00641">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::~SparseMatrix()</a>.</p>
 
 </div>
 </div>
@@ -769,7 +785,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
 
 <p>Dummy zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00577">577</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l00609">609</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
 
 </div>
 </div>
@@ -804,7 +820,7 @@ template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Sep 26 2026 13:30:07
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Oct 17 2026 09:43:46
         </div>
       </div>
     </footer>

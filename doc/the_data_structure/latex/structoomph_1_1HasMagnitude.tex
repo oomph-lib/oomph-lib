@@ -1,0 +1,43 @@
+\doxysection{oomph\+::Has\+Magnitude\texorpdfstring{$<$}{<} T, class \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structoomph_1_1HasMagnitude}{}\label{structoomph_1_1HasMagnitude}\index{oomph::HasMagnitude$<$ T, class $>$@{oomph::HasMagnitude$<$ T, class $>$}}
+
+
+Compile-\/time test to determine if a type T has a notion of "{}magnitude"{}, i.\+e. if std\+::abs(\+T) is a valid expression.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
+
+Inheritance diagram for oomph\+::Has\+Magnitude\texorpdfstring{$<$}{<} T, class \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structoomph_1_1HasMagnitude}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} = void$>$\newline
+struct oomph\+::\+Has\+Magnitude$<$ T, class $>$}
+Compile-\/time test to determine if a type T has a notion of "{}magnitude"{}, i.\+e. if std\+::abs(\+T) is a valid expression. 
+
+The primary template defaults to "{}false"{}.
+
+A partial specialisation (below) is selected automatically via SFINAE ("{}\+Substitution Failure Is Not An Error"{}) if the expression
+
+std\+::abs(std\+::declval$<$\+T$>$())
+
+is valid. In that case Has\+Magnitude$<$\+T$>$\+::value evaluates to true.
+
+This facility is used to prevent compilation failures in generic code where operations involving std\+::abs() only make sense for numerical types.
+
+Example\+: Has\+Magnitude$<$double$>$\+::value -\/\texorpdfstring{$>$}{>} true Has\+Magnitude$<$std\+::complex$<$double$>$$>$\+::value -\/\texorpdfstring{$>$}{>} true Has\+Magnitude$<$\+Vector$<$double$>$$>$\+::value -\/\texorpdfstring{$>$}{>} false 
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00122}{122}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__definitions_8h}{oomph\+\_\+definitions.\+h}}\end{DoxyCompactItemize}
