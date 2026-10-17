@@ -442,13 +442,13 @@ namespace oomph
     /// Workspace to avoid re-allocation in wrapped call to position()
     /// Mutable qualifier implies that it's only used as scratch workspace
     /// so doesn't actualy change the state of the object.
-    /// It's resized once (to size 3) and must stay that size.
+    /// It's resized once (to size 3) and must not be resized!
     mutable Vector<double> R_work_space;
 
     /// Workspace to avoid re-allocation in wrapped call to position()
     /// Mutable qualifier implies that it's only used as scratch workspace
     /// so doesn't actualy change the state of the object
-    /// It's resized once (to size 2) and must stay that size.
+    /// It's resized once (to size 2) and must not be resized!
     mutable Vector<double> Zeta_work_space;
   };
 

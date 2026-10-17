@@ -24,11 +24,15 @@
 // LIC//
 // LIC//====================================================================
 
-#ifndef FIXED_SIZE_VECTOR_HEADER
-#define FIXED_SIZE_VECTOR_HEADER
+#ifndef OOMPH_FIXED_SIZE_VECTOR_HEADER
+#define OOMPH_FIXED_SIZE_VECTOR_HEADER
 
-// Generic oomph-lib header
-#include "generic.h"
+	
+// Standard library includes
+#include <initializer_list>
+#include <sstream>
+
+#include "oomph_definitions.h"
 
 namespace oomph
 {
