@@ -27,7 +27,7 @@
 #ifndef OOMPH_FIXED_SIZE_VECTOR_HEADER
 #define OOMPH_FIXED_SIZE_VECTOR_HEADER
 
-	
+
 // Standard library includes
 #include <initializer_list>
 #include <sstream>
