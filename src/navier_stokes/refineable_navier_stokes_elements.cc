@@ -384,10 +384,15 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dpdx(DIM, 0.0);
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> interpolated_dpdx(0.0);
 
       // Calculate pressure gradient
       for (unsigned l = 0; l < n_pres; l++)
@@ -417,7 +422,15 @@ namespace oomph
       double source = 0.0;
       if (this->Press_adv_diff_source_fct_pt != 0)
       {
-        source = this->Press_adv_diff_source_fct_pt(interpolated_x);
+        // The user-defined source function requires the Eulerian
+        // coordinates as a Vector<double>, so copy the fixed-size vector
+        // into the pre-allocated workspace (of size DIM; inherited from
+        // NavierStokesEquations) before the call.
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          this->X_work_space[i] = interpolated_x[i];
+        }
+        source = this->Press_adv_diff_source_fct_pt(this->X_work_space);
       }
 
 
@@ -633,7 +646,11 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Set the Vector to hold local coordinates. This is passed to the
+    // (Vector-based) interface of the shape functions and the body force
+    // function and is therefore kept as a resizable Vector; it's
+    // allocated only once per call of this function so there's no
+    // benefit in converting it to a fixed-size vector.
     Vector<double> s(DIM);
 
     // Get Physical Variables from Element
@@ -642,7 +659,9 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    // Gravity vector: use a reference to avoid copying (and therefore
+    // allocating) the vector every time this function is called.
+    const Vector<double>& G = this->g();
 
     // Integers that store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -677,12 +696,18 @@ namespace oomph
 
       // Calculate local values of the pressure and velocity components
       //--------------------------------------------------------------
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_veloc(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -726,12 +751,25 @@ namespace oomph
         }
       }
 
-      // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
-      this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
+      // Get the user-defined body force terms. get_body_force_nst(...)
+      // (and the user-supplied function it may call) require the Eulerian
+      // coordinates as a Vector<double> and return the body force in a
+      // Vector<double>, so: copy the fixed-size interpolated_x into the
+      // pre-allocated workspace (of size DIM; inherited from
+      // NavierStokesEquations) and receive the body force in the (equally
+      // pre-allocated) body force workspace. The latter is only ever read
+      // component-wise below; the reference simply gives it a more
+      // descriptive local name.
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        this->X_work_space[i] = interpolated_x[i];
+      }
+      Vector<double>& body_force = this->Body_force_work_space;
+      this->get_body_force_nst(time, ipt, s, this->X_work_space, body_force);
 
-      // Get the user-defined source function
-      double source = this->get_source_nst(time, ipt, interpolated_x);
+      // Get the user-defined source function (also requires the Eulerian
+      // coordinates as a Vector<double>; X_work_space still holds them)
+      double source = this->get_source_nst(time, ipt, this->X_work_space);
 
       // MOMENTUM EQUATIONS
       //==================
@@ -1208,8 +1246,24 @@ namespace oomph
     // Determine the number of integration points
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Vector to hold local coordinates
+    // Vector to hold local coordinates. This is passed to the
+    // (Vector-based) interface of the shape functions and the body force
+    // function and is therefore kept as a resizable Vector; it's
+    // allocated only once per call of this function.
     Vector<double> s(DIM);
+
+    // Storage for the gradients of the body force and the source function
+    // w.r.t. the Eulerian coordinates. Both are filled by functions whose
+    // interface requires a DenseMatrix/Vector so they cannot be converted
+    // to fixed-size containers. We allocate them once per call of this
+    // function (rather than once per integration point as before) and
+    // re-initialise them to zero at every integration point below. We
+    // don't provide dedicated workspace member data for them (as for the
+    // body force itself) since this function is only used in a small
+    // number of (FSI) applications and the additional member data would
+    // bloat every single Navier-Stokes element.
+    DenseMatrix<double> d_body_force_dx(DIM, DIM);
+    Vector<double> source_gradient(DIM);
 
     // Get physical variables from element
     // (Reynolds number must be multiplied by the density ratio)
@@ -1217,7 +1271,9 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    // Gravity vector: use a reference to avoid copying (and therefore
+    // allocating) the vector every time this function is called.
+    const Vector<double>& G = this->g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -1247,8 +1303,10 @@ namespace oomph
       {
         element_has_node_with_aux_node_update_fct = true;
 
-        // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        // Current nodal velocity: size known at compile time and only
+        // accessed component-wise so use a fixed-size vector. No
+        // initialisation required since all entries are assigned below.
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -1313,13 +1371,18 @@ namespace oomph
       this->pshape_nst(s, psip, testp);
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1393,21 +1456,41 @@ namespace oomph
       const double val_time_weight =
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
-      // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
-      this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
+      // Get the user-defined body force terms. get_body_force_nst(...)
+      // (and the user-supplied function it may call) require the Eulerian
+      // coordinates as a Vector<double> and return the body force in a
+      // Vector<double>, so: copy the fixed-size interpolated_x into the
+      // pre-allocated workspace (of size DIM; inherited from
+      // NavierStokesEquations) and receive the body force in the (equally
+      // pre-allocated) body force workspace. The latter is only ever read
+      // component-wise below; the reference simply gives it a more
+      // descriptive local name.
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        this->X_work_space[i] = interpolated_x[i];
+      }
+      Vector<double>& body_force = this->Body_force_work_space;
+      this->get_body_force_nst(time, ipt, s, this->X_work_space, body_force);
 
-      // Get the user-defined source function
-      const double source = this->get_source_nst(time, ipt, interpolated_x);
+      // Get the user-defined source function (also requires the Eulerian
+      // coordinates as a Vector<double>; X_work_space still holds them)
+      const double source = this->get_source_nst(time, ipt, this->X_work_space);
 
-      // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
+      // Get gradient of body force function (storage allocated once,
+      // above; re-initialised here since the default implementation
+      // of this function doesn't necessarily overwrite all entries).
+      // NOTE: The default (finite-difference based) implementation of
+      // get_body_force_gradient_nst(...) calls get_body_force_nst(...)
+      // with its own local storage, so the content of
+      // Body_force_work_space (i.e. body_force) is not affected.
+      d_body_force_dx.initialise(0.0);
       this->get_body_force_gradient_nst(
-        time, ipt, s, interpolated_x, d_body_force_dx);
+        time, ipt, s, this->X_work_space, d_body_force_dx);
 
-      // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
-      this->get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
+      // Get gradient of source function (storage allocated once, above)
+      source_gradient.initialise(0.0);
+      this->get_source_gradient_nst(
+        time, ipt, this->X_work_space, source_gradient);
 
 
       // Assemble shape derivatives
