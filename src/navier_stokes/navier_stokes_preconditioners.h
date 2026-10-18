@@ -73,8 +73,14 @@ namespace oomph
     /// Exact solution as a scalar
     extern void get_exact_u(const Vector<double>& x, double& u);
 
-    /// Source function required to make the solution above an exact solution
-    extern double source_function(const Vector<double>& x_vect);
+    /// Source function required to make the solution above an exact
+    /// solution. The Eulerian coordinates are passed as a fixed-size
+    /// vector (of size 2, i.e. this is 2D only!) because this function is
+    /// assigned to the Navier-Stokes elements' pressure advection
+    /// diffusion source function pointer
+    /// (NavierStokesEquations<2>::NavierStokesPressureAdvDiffSourceFctPt)
+    /// whose interface requires one.
+    extern double source_function(const FixedSizeVector<double, 2>& x_vect);
 
   } // namespace PressureAdvectionDiffusionValidation
 

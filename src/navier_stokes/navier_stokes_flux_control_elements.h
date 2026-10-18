@@ -471,6 +471,18 @@ namespace oomph
       // Get the pressure at the outflow
       double pressure = this->external_data_pt(pressure_data_id())->value(0);
 
+      // Outer unit normal. Filled by the (Vector-based)
+      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
+      // but allocated only once, outside the loop over the integration
+      // points.
+      Vector<double> unit_normal(Dim);
+
+      // Traction: its size is the bulk element's spatial dimension,
+      // obtained (as a compile-time constant) from its publicly exposed
+      // template parameter, so we use a fixed-size vector. No
+      // initialisation required since all entries are assigned below.
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
@@ -485,11 +497,9 @@ namespace oomph
         double W = w * J;
 
         // Get the outer unit normal
-        Vector<double> unit_normal(Dim);
         this->outer_unit_normal(ipt, unit_normal);
 
         // Calculate the traction
-        Vector<double> traction(Dim);
         for (unsigned i = 0; i < Dim; i++)
         {
           traction[i] = -pressure * unit_normal[i];
@@ -641,6 +651,18 @@ namespace oomph
       double pressure =
         this->external_data_pt(this->pressure_data_id())->value(0);
 
+      // Outer unit normal. Filled by the (Vector-based)
+      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
+      // but allocated only once, outside the loop over the integration
+      // points.
+      Vector<double> unit_normal(this->Dim);
+
+      // Traction: its size is the bulk element's spatial dimension,
+      // obtained (as a compile-time constant) from its publicly exposed
+      // template parameter, so we use a fixed-size vector. No
+      // initialisation required since all entries are assigned below.
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
@@ -655,11 +677,9 @@ namespace oomph
         double W = w * J;
 
         // Get the outer unit normal
-        Vector<double> unit_normal(this->Dim);
         this->outer_unit_normal(ipt, unit_normal);
 
         // Calculate the traction
-        Vector<double> traction(this->Dim);
         for (unsigned i = 0; i < this->Dim; i++)
         {
           traction[i] = -pressure * unit_normal[i];

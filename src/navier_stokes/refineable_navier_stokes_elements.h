@@ -90,16 +90,25 @@ namespace oomph
     // Pointers to hang info objects
     HangInfo *hang_info_pt = 0, *hang_info2_pt = 0;
 
-    // Storage for local coordinates in FaceElement and associted bulk element
+    // Storage for local coordinates in FaceElement and associted bulk element.
+    // These are passed to the (Vector-based) FiniteElement/FaceElement
+    // interface so they're kept as resizable Vectors; they're allocated
+    // only once per call of this function.
     unsigned my_dim = this->dim();
     Vector<double> s(my_dim);
     Vector<double> s_bulk(my_dim + 1);
 
-    // Storage for outer unit normal
+    // Storage for outer unit normal; filled by the (Vector-based)
+    // FaceElement::outer_unit_normal(...) so it has to remain a Vector.
     Vector<double> unit_normal(my_dim + 1);
 
-    // Storage for veloc in bulk element
-    Vector<double> veloc(my_dim + 1);
+    // Storage for veloc in bulk element. The bulk element computes
+    // the velocity into a fixed-size vector whose size is the bulk
+    // element's spatial dimension, which we obtain (as a compile-time
+    // constant) from its publicly exposed template parameter. No
+    // initialisation required because interpolated_u_nst(...) assigns
+    // all entries.
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
 
     // Set the value of n_intpt
     unsigned n_intpt = this->integral_pt()->nweight();
@@ -163,8 +172,10 @@ namespace oomph
       for (unsigned i = 0; i < my_dim; i++)
         s[i] = this->integral_pt()->knot(ipt, i);
 
-      // Find corresponding coordinate in the the bulk element
-      s_bulk = this->local_coordinate_in_bulk(s);
+      // Find corresponding coordinate in the the bulk element (computed
+      // in place, into the pre-allocated s_bulk, rather than via the
+      // version of this function that returns a newly allocated Vector)
+      this->get_local_coordinate_in_bulk(s, s_bulk);
 
       /// Get outer unit normal
       this->outer_unit_normal(ipt, unit_normal);
@@ -416,8 +427,11 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector

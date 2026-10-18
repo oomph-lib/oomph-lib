@@ -191,16 +191,25 @@ namespace oomph
     fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
-    // Storage for local coordinates in FaceElement and associted bulk element
+    // Storage for local coordinates in FaceElement and associted bulk element.
+    // These are passed to the (Vector-based) FiniteElement/FaceElement
+    // interface so they're kept as resizable Vectors; they're allocated
+    // only once per call of this function.
     unsigned my_dim = this->dim();
     Vector<double> s(my_dim);
     Vector<double> s_bulk(my_dim + 1);
 
-    // Storage for outer unit normal
+    // Storage for outer unit normal; filled by the (Vector-based)
+    // FaceElement::outer_unit_normal(...) so it has to remain a Vector.
     Vector<double> unit_normal(my_dim + 1);
 
-    // Storage for veloc in bulk element
-    Vector<double> veloc(my_dim + 1);
+    // Storage for veloc in bulk element. The bulk element computes
+    // the velocity into a fixed-size vector whose size is the bulk
+    // element's spatial dimension, which we obtain (as a compile-time
+    // constant) from its publicly exposed template parameter. No
+    // initialisation required because interpolated_u_nst(...) assigns
+    // all entries.
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
 
     // Set the value of n_intpt
     unsigned n_intpt = this->integral_pt()->nweight();
@@ -231,8 +240,10 @@ namespace oomph
       for (unsigned i = 0; i < my_dim; i++)
         s[i] = this->integral_pt()->knot(ipt, i);
 
-      // Find corresponding coordinate in the the bulk element
-      s_bulk = this->local_coordinate_in_bulk(s);
+      // Find corresponding coordinate in the the bulk element (computed
+      // in place, into the pre-allocated s_bulk, rather than via the
+      // version of this function that returns a newly allocated Vector)
+      this->get_local_coordinate_in_bulk(s, s_bulk);
 
       /// Get outer unit normal
       this->outer_unit_normal(ipt, unit_normal);
@@ -395,23 +406,39 @@ namespace oomph
       public virtual TemplateFreeNavierStokesEquationsBase
   {
   public:
+    /// Publicly exposed template parameter: the spatial dimension.
+    /// This allows classes that are templated by the type of the
+    /// Navier-Stokes element (rather than its dimension), e.g.
+    /// FaceElements, to use fixed-size containers of the appropriate
+    /// size for quantities such as velocities or tractions.
+    static const unsigned TEMPLATE_PARAMETER_DIM = DIM;
+
+    /// Number of components of the vorticity vector returned by
+    /// get_vorticity(...): In 2D the vorticity only has a single
+    /// (out-of-plane) component; in 3D it has three. Compile-time
+    /// constant so that it can be used to size fixed-size containers.
+    static const unsigned N_vorticity_component = (DIM == 2) ? 1 : 3;
+
     /// Function pointer to body force function fct(t,x,f(x))
-    /// x is a Vector!
-    typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-                                               const Vector<double>& x,
-                                               Vector<double>& body_force);
+    /// x is a FixedSizeVector of size DIM (the spatial dimension), as
+    /// is the body force, f, that the function has to return.
+    typedef void (*NavierStokesBodyForceFctPt)(
+      const double& time,
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeVector<double, DIM>& body_force);
 
     /// Function pointer to source function fct(t,x)
-    /// x is a Vector!
-    typedef double (*NavierStokesSourceFctPt)(const double& time,
-                                              const Vector<double>& x);
+    /// x is a FixedSizeVector of size DIM (the spatial dimension).
+    typedef double (*NavierStokesSourceFctPt)(
+      const double& time, const FixedSizeVector<double, DIM>& x);
 
 
     /// Function pointer to source function fct(x) for the
     /// pressure advection diffusion equation (only used during
-    /// validation!). x is a Vector!
+    /// validation!). x is a FixedSizeVector of size DIM (the spatial
+    /// dimension).
     typedef double (*NavierStokesPressureAdvDiffSourceFctPt)(
-      const Vector<double>& x);
+      const FixedSizeVector<double, DIM>& x);
 
   private:
     /// Static "magic" number that indicates that the pressure is
@@ -426,8 +453,9 @@ namespace oomph
     /// one)
     static double Default_Physical_Ratio_Value;
 
-    /// Static default value for the gravity vector
-    static Vector<double> Default_Gravity_vector;
+    /// Static default value for the gravity vector (size DIM; all
+    /// components initialised to zero)
+    static FixedSizeVector<double, DIM> Default_Gravity_vector;
 
   protected:
     // Physical constants
@@ -452,8 +480,8 @@ namespace oomph
     /// (= Bond number / Capillary number)
     double* ReInvFr_pt;
 
-    /// Pointer to global gravity Vector
-    Vector<double>* G_pt;
+    /// Pointer to global gravity vector (size DIM)
+    FixedSizeVector<double, DIM>* G_pt;
 
     /// Pointer to body force function
     NavierStokesBodyForceFctPt Body_force_fct_pt;
@@ -480,54 +508,35 @@ namespace oomph
     int Pinned_fp_pressure_eqn;
 
 
-    // Workspace containers
-    //---------------------
-    // Within the element's residual/Jacobian/post-processing routines
-    // all quantities whose size is known at compile time (the spatial
-    // dimension DIM) are stored in FixedSizeVectors/FixedSizeMatrices.
-    // These are allocated on the stack and therefore avoid the
-    // heap allocation/deallocation that would otherwise occur every
-    // time such a quantity is created (e.g. once per integration point).
+    // Container policy
+    //-----------------
+    // Within this element all quantities whose size is known at compile
+    // time (the spatial dimension DIM) -- Eulerian coordinates,
+    // velocities, body forces, normals, tractions, velocity gradients,
+    // strain rates, etc. -- are stored in FixedSizeVectors/
+    // FixedSizeMatrices. These are allocated on the stack and therefore
+    // avoid the heap allocation/deallocation that would otherwise occur
+    // every time such a quantity is created (e.g. once per integration
+    // point). The same applies to the interfaces of the member functions
+    // that compute or consume such quantities (strain_rate(...),
+    // get_traction(...), get_vorticity(...), interpolated_u_nst(...),
+    // the virtual body force/source functions, and the user-specified
+    // function pointers for the body force and source functions).
     //
-    // However, some of these quantities have to be passed to functions
-    // whose interface requires a (resizable) Vector<double> or
-    // DenseMatrix<double>: the user-defined body force and source
-    // functions (accessed via function pointers that are part of the
-    // public interface and therefore cannot be changed), the virtual
-    // functions get_body_force_nst(...) and get_source_nst(...) which
-    // are overloaded in multi-physics/user elements, and the public
-    // function strain_rate(...). Rather than creating temporary Vectors
-    // for these calls (which would re-introduce the allocation overhead)
-    // we copy the data into the dedicated workspace containers below.
-    // They are allocated once and once only (in the constructor) and
-    // must never be resized afterwards. They are declared mutable because
-    // they are pure scratch storage: their use does not change the state
-    // of the element, and they therefore have to be usable from const
-    // member functions.
-    //
-    // WARNING: Each workspace container may only be "live" in a single
-    // function at any one time. In particular, functions that use one
-    // of them must not call other functions that use the same one
-    // while they still rely on its content.
-
-    /// Workspace to hold the Eulerian coordinates (size DIM) when
-    /// they have to be passed to functions that require a Vector<double>
-    /// (body force/source functions etc.). Allocated once (with size DIM)
-    /// in the constructor; must never be resized. See the comment above
-    /// for details.
-    mutable Vector<double> X_work_space;
-
-    /// Workspace to receive the body force (size DIM) from
-    /// get_body_force_nst(...), whose interface requires a
-    /// Vector<double>. Allocated once (with size DIM) in the constructor;
-    /// must never be resized. See the comment above for details.
-    mutable Vector<double> Body_force_work_space;
-
-    /// Workspace to receive the strain rate tensor (size DIM x DIM) from
-    /// strain_rate(...), whose interface requires a DenseMatrix<double>.
-    /// Allocated once (with size DIM x DIM) in the constructor; must never
-    /// be resized. See the comment above for details.
-    mutable DenseMatrix<double> Strain_rate_work_space;
+    // The only quantities that are kept as (resizable) Vectors/
+    // DenseMatrices are those that have to be passed to functions in the
+    // generic library whose interface requires them: the local
+    // coordinates s (passed on to the shape functions, get_s_plot(...),
+    // J_eulerian(...), etc.; this is why s remains a Vector in the
+    // interfaces of all the functions listed above), Eulerian coordinates
+    // obtained from interpolated_x(...) for the sole purpose of passing
+    // them to the exact solutions specified by
+    // FiniteElement::[Un]SteadyExactSolutionFctPt, and the arguments of
+    // the virtual functions declared in the generic base classes (e.g.
+    // FSIFluidElement::get_load(...), whose implementation below
+    // therefore copies to/from fixed-size storage). All of these are
+    // allocated once per function call (rather than once per integration
+    // point) so there's no benefit in converting them.
 
     /// Compute the shape functions and derivatives
     /// w.r.t. global coords at local coordinate s.
@@ -564,12 +573,16 @@ namespace oomph
     /// Calculate the body force at a given time and local and/or
     /// Eulerian position. This function is virtual so that it can be
     /// overloaded in multi-physics elements where the body force might
-    /// depend on another variable.
+    /// depend on another variable. The Eulerian position x and the
+    /// body force (returned in result) are fixed-size vectors of size
+    /// DIM. NOTE: result is not initialised before the call, so (any
+    /// overloaded version of) this function must assign all of its
+    /// DIM entries.
     virtual void get_body_force_nst(const double& time,
                                     const unsigned& ipt,
                                     const Vector<double>& s,
-                                    const Vector<double>& x,
-                                    Vector<double>& result)
+                                    const FixedSizeVector<double, DIM>& x,
+                                    FixedSizeVector<double, DIM>& result)
     {
       // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
@@ -591,26 +604,38 @@ namespace oomph
     /// is virtual to allow overloading in multi-physics problems where the
     /// strength of the source function might be determined by another system of
     /// equations. Computed via function pointer (if set) or by finite
-    /// differencing (default)
+    /// differencing (default). The Eulerian position x is a fixed-size
+    /// vector (size DIM); the gradient is returned in the fixed-size
+    /// (DIM x DIM) matrix d_body_force_dx whose (j,i)-th entry is the
+    /// derivative of the j-th body force component w.r.t. x_i. NOTE:
+    /// d_body_force_dx is not initialised before the call, so (any
+    /// overloaded version of) this function must assign all of its
+    /// entries.
     inline virtual void get_body_force_gradient_nst(
       const double& time,
       const unsigned& ipt,
       const Vector<double>& s,
-      const Vector<double>& x,
-      DenseMatrix<double>& d_body_force_dx)
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeMatrix<double, DIM, DIM>& d_body_force_dx)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
       /*    if(Body_force_fct_gradient_pt==0) */
       {
-        // Reference value
-        Vector<double> body_force(DIM, 0.0);
+        // Reference value of the body force. Fixed-size (and therefore
+        // stack-allocated) vector; no initialisation required since
+        // get_body_force_nst(...) assigns all entries.
+        FixedSizeVector<double, DIM> body_force;
         get_body_force_nst(time, ipt, s, x, body_force);
 
         // FD it
         double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
-        Vector<double> body_force_pls(DIM, 0.0);
-        Vector<double> x_pls(x);
+
+        // Storage for the perturbed body force (assigned by
+        // get_body_force_nst(...), so no initialisation required) and
+        // the perturbed position (initialised by copying x).
+        FixedSizeVector<double, DIM> body_force_pls;
+        FixedSizeVector<double, DIM> x_pls(x);
         for (unsigned i = 0; i < DIM; i++)
         {
           x_pls[i] += eps_fd;
@@ -632,10 +657,10 @@ namespace oomph
 
 
     /// Calculate the source fct at given time and
-    /// Eulerian position
+    /// Eulerian position (a fixed-size vector of size DIM)
     virtual double get_source_nst(const double& time,
                                   const unsigned& ipt,
-                                  const Vector<double>& x)
+                                  const FixedSizeVector<double, DIM>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)
@@ -654,11 +679,16 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations. Computed via function pointer
-    /// (if set) or by finite differencing (default)
-    inline virtual void get_source_gradient_nst(const double& time,
-                                                const unsigned& ipt,
-                                                const Vector<double>& x,
-                                                Vector<double>& gradient)
+    /// (if set) or by finite differencing (default). The Eulerian
+    /// position x and the gradient are fixed-size vectors of size DIM.
+    /// NOTE: gradient is not initialised before the call, so (any
+    /// overloaded version of) this function must assign all of its
+    /// DIM entries.
+    inline virtual void get_source_gradient_nst(
+      const double& time,
+      const unsigned& ipt,
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeVector<double, DIM>& gradient)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
@@ -670,7 +700,9 @@ namespace oomph
         // FD it
         double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
         double source_pls = 0.0;
-        Vector<double> x_pls(x);
+
+        // Perturbed position (initialised by copying x)
+        FixedSizeVector<double, DIM> x_pls(x);
         for (unsigned i = 0; i < DIM; i++)
         {
           x_pls[i] += eps_fd;
@@ -725,17 +757,12 @@ namespace oomph
   public:
     /// Constructor: NULL the body force and source function
     /// and make sure the ALE terms are included by default.
-    /// Also allocate the workspace containers (see the comments
-    /// accompanying their declaration) once and for all.
     NavierStokesEquations()
       : Body_force_fct_pt(0),
         Source_fct_pt(0),
         Press_adv_diff_source_fct_pt(0),
         ALE_is_disabled(false),
-        Pinned_fp_pressure_eqn(-1),
-        X_work_space(DIM),
-        Body_force_work_space(DIM),
-        Strain_rate_work_space(DIM, DIM)
+        Pinned_fp_pressure_eqn(-1)
     {
       // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -747,11 +774,14 @@ namespace oomph
       Density_Ratio_pt = &Default_Physical_Ratio_Value;
     }
 
-    /// Vector to decide whether the stress-divergence form is used or not
+    /// Vector to decide whether the stress-divergence form is used or not.
+    /// Fixed-size vector with DIM entries (one for each momentum
+    /// equation), all of which are initialised to 1.0 (i.e. we use the
+    /// stress-divergence form by default).
     // N.B. This needs to be public so that the intel compiler gets things
     // correct somehow the access function messes things up when going to
     // refineable navier--stokes
-    static Vector<double> Gamma;
+    static FixedSizeVector<double, DIM> Gamma;
 
     // Access functions for the physical constants
 
@@ -817,14 +847,15 @@ namespace oomph
       return ReInvFr_pt;
     }
 
-    /// Vector of gravitational components
-    const Vector<double>& g() const
+    /// Vector of gravitational components (fixed-size vector of size DIM)
+    const FixedSizeVector<double, DIM>& g() const
     {
       return *G_pt;
     }
 
-    /// Pointer to Vector of gravitational components
-    Vector<double>*& g_pt()
+    /// Pointer to Vector of gravitational components (a fixed-size
+    /// vector of size DIM)
+    FixedSizeVector<double, DIM>*& g_pt()
     {
       return G_pt;
     }
@@ -1003,9 +1034,14 @@ namespace oomph
     /// Return dissipation at local coordinate s
     double dissipation(const Vector<double>& s) const;
 
-    /// Compute the vorticity vector at local coordinate s
-    void get_vorticity(const Vector<double>& s,
-                       Vector<double>& vorticity) const;
+    /// Compute the vorticity vector at local coordinate s. The
+    /// vorticity is returned in a fixed-size vector with
+    /// N_vorticity_component entries: In 2D this is the single
+    /// (out-of-plane) component of the vorticity vector; in 3D it's the
+    /// full 3D vorticity vector.
+    void get_vorticity(
+      const Vector<double>& s,
+      FixedSizeVector<double, N_vorticity_component>& vorticity) const;
 
     /// Compute the scalar vorticity at local coordinate s (2D)
     void get_vorticity(const Vector<double>& s, double& vorticity) const;
@@ -1016,32 +1052,40 @@ namespace oomph
     /// Get integral of time derivative of kinetic energy over element
     double d_kin_energy_dt() const;
 
-    /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
+    /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i), returned
+    /// in a fixed-size (DIM x DIM) matrix.
     void strain_rate(const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, DIM, DIM>& strain_rate) const;
 
     /// Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s. N has to be outer unit normal
-    /// to the fluid.
+    /// to the fluid. Both the normal and the traction (returned in
+    /// traction) are fixed-size vectors of size DIM. NOTE: If the normal
+    /// is obtained from FaceElement::outer_unit_normal(...) (whose
+    /// interface requires a resizable Vector) it has to be copied into
+    /// a fixed-size vector before calling this function; see, e.g.,
+    /// NavierStokesSurfacePowerElement::drag_force(...).
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
+                      const FixedSizeVector<double, DIM>& N,
+                      FixedSizeVector<double, DIM>& traction);
 
     /// Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s, decomposed into pressure and
-    /// normal and tangential viscous components.
-    /// N has to be outer unit normal to the fluid.
+    /// normal and tangential viscous components, each returned in
+    /// a fixed-size vector (size DIM). N has to be outer unit normal
+    /// to the fluid, also passed as a fixed-size vector (see the comment
+    /// for the other version of this function).
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction_p,
-                      Vector<double>& traction_visc_n,
-                      Vector<double>& traction_visc_t);
+                      const FixedSizeVector<double, DIM>& N,
+                      FixedSizeVector<double, DIM>& traction_p,
+                      FixedSizeVector<double, DIM>& traction_visc_n,
+                      FixedSizeVector<double, DIM>& traction_visc_t);
 
     /// This implements a pure virtual function defined
     /// in the FSIFluidElement class. The function computes
     /// the traction (on the viscous scale), at the element's local
     /// coordinate s, that the fluid element exerts onto an adjacent
-    /// solid element. The number of arguments is imposed by
+    /// solid element. The number (and type) of arguments is imposed by
     /// the interface defined in the FSIFluidElement -- only the
     /// unit normal N (pointing into the fluid!) is actually used
     /// in the computation.
@@ -1053,7 +1097,25 @@ namespace oomph
       // if N is the outer unit normal onto the fluid; here we're
       // exepcting N to point into the fluid so we're getting the
       // traction onto the adjacent wall instead!
-      get_traction(s, N, load);
+      //
+      // get_traction(...) expects the normal in, and returns the traction
+      // in, fixed-size vectors whereas the interface of this function
+      // (inherited from FSIFluidElement) requires resizable Vectors, so
+      // we copy the normal into (stack-allocated) fixed-size storage,
+      // compute the traction into the same kind of storage and copy it
+      // across. No initialisation required since all entries are
+      // assigned.
+      FixedSizeVector<double, DIM> normal;
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        normal[i] = N[i];
+      }
+      FixedSizeVector<double, DIM> traction;
+      get_traction(s, normal, traction);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        load[i] = traction[i];
+      }
     }
 
     /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -1557,9 +1619,11 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
 
-    /// Compute vector of FE interpolated velocity u at local coordinate s
+    /// Compute vector of FE interpolated velocity u at local coordinate s.
+    /// The velocity is returned in a fixed-size vector (size DIM); all
+    /// of its entries are assigned, so no initialisation is required.
     void interpolated_u_nst(const Vector<double>& s,
-                            Vector<double>& veloc) const
+                            FixedSizeVector<double, DIM>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();

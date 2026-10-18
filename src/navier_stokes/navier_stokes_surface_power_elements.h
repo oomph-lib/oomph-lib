@@ -36,6 +36,7 @@
 
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
+#include "generic/fixed_size_vector.h"
 
 namespace oomph
 {
@@ -80,23 +81,30 @@ namespace oomph
     }
 
 
-    /// Get drag force (traction acting on fluid)
-    Vector<double> drag_force()
+    /// Get drag force (traction acting on fluid). Returned in a
+    /// fixed-size vector whose size is the bulk element's spatial
+    /// dimension (obtained from its publicly exposed template parameter).
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> drag_force()
     {
       std::ofstream dummy_file;
       return drag_force(dummy_file);
     }
 
 
-    /// Get  drag force (traction acting on fluid)
+    /// Get  drag force (traction acting on fluid). Returned in a
+    /// fixed-size vector whose size is the bulk element's spatial
+    /// dimension (obtained from its publicly exposed template parameter).
     /// Doc in outfile.
-    Vector<double> drag_force(std::ofstream& outfile)
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> drag_force(
+      std::ofstream& outfile)
     {
       // Spatial dimension of element
       unsigned ndim = dim();
 
-      // Initialise
-      Vector<double> drag(ndim + 1, 0.0);
+      // Initialise the drag: it's accumulated (via +=) below so it must
+      // be initialised to zero (fixed-size vectors don't do this by
+      // default!)
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> drag(0.0);
 
       // Vector of local coordinates in face element
       Vector<double> s(ndim);
@@ -106,6 +114,16 @@ namespace oomph
 
       // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
+
+      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
+      // in a resizable Vector (allocated only once, outside the loop over
+      // the integration points) from which it is copied into the
+      // fixed-size vector (of the bulk element's spatial dimension,
+      // obtained as a compile-time constant from its publicly exposed
+      // template parameter) that the bulk element's get_traction(...)
+      // requires and that is used for all subsequent computations.
+      Vector<double> normal_from_face_element(ndim + 1);
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
@@ -167,16 +185,27 @@ namespace oomph
         }
 #endif
 
-        // Outer unit normal
-        Vector<double> normal(ndim + 1);
-        outer_unit_normal(s, normal);
+        // Outer unit normal (computed into the resizable Vector and
+        // copied into the fixed-size vector; see above)
+        outer_unit_normal(s, normal_from_face_element);
+        for (unsigned i = 0; i < ndim + 1; i++)
+        {
+          normal[i] = normal_from_face_element[i];
+        }
 
-        // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
+        // Get velocity from bulk element. It's returned in a fixed-size
+        // vector whose size is the bulk element's spatial dimension,
+        // obtained (as a compile-time constant) from its publicly exposed
+        // template parameter. No initialisation required since
+        // interpolated_u_nst(...) assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
-        // Get traction from bulk element
-        Vector<double> traction(ndim + 1);
+        // Get traction from bulk element (returned in a fixed-size vector
+        // of the bulk element's spatial dimension; see above). No
+        // initialisation required since get_traction(...) assigns all
+        // entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
         bulk_el_pt->get_traction(s_bulk, normal, traction);
 
         // Integrate
@@ -240,6 +269,16 @@ namespace oomph
       // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
+      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
+      // in a resizable Vector (allocated only once, outside the loop over
+      // the integration points) from which it is copied into the
+      // fixed-size vector (of the bulk element's spatial dimension,
+      // obtained as a compile-time constant from its publicly exposed
+      // template parameter) that the bulk element's get_traction(...)
+      // requires and that is used for all subsequent computations.
+      Vector<double> normal_from_face_element(ndim + 1);
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
+
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
@@ -300,17 +339,28 @@ namespace oomph
         }
 #endif
 
-        // Outer unit normal
-        Vector<double> normal(ndim + 1);
-        outer_unit_normal(s, normal);
+        // Outer unit normal (computed into the resizable Vector and
+        // copied into the fixed-size vector; see above)
+        outer_unit_normal(s, normal_from_face_element);
+        for (unsigned i = 0; i < ndim + 1; i++)
+        {
+          normal[i] = normal_from_face_element[i];
+        }
 
 
-        // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
+        // Get velocity from bulk element. It's returned in a fixed-size
+        // vector whose size is the bulk element's spatial dimension,
+        // obtained (as a compile-time constant) from its publicly exposed
+        // template parameter. No initialisation required since
+        // interpolated_u_nst(...) assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
-        // Get traction from bulk element
-        Vector<double> traction(ndim + 1);
+        // Get traction from bulk element (returned in a fixed-size vector
+        // of the bulk element's spatial dimension; see above). No
+        // initialisation required since get_traction(...) assigns all
+        // entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
         bulk_el_pt->get_traction(s_bulk, normal, traction);
 
 
@@ -404,6 +454,16 @@ namespace oomph
       // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
+      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
+      // in a resizable Vector (allocated only once, outside the loop over
+      // the integration points) from which it is copied into the
+      // fixed-size vector (of the bulk element's spatial dimension,
+      // obtained as a compile-time constant from its publicly exposed
+      // template parameter) that the bulk element's get_traction(...)
+      // requires and that is used for all subsequent computations.
+      Vector<double> normal_from_face_element(ndim + 1);
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
+
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
@@ -464,19 +524,30 @@ namespace oomph
         }
 #endif
 
-        // Outer unit normal
-        Vector<double> normal(ndim + 1);
-        outer_unit_normal(s, normal);
+        // Outer unit normal (computed into the resizable Vector and
+        // copied into the fixed-size vector; see above)
+        outer_unit_normal(s, normal_from_face_element);
+        for (unsigned i = 0; i < ndim + 1; i++)
+        {
+          normal[i] = normal_from_face_element[i];
+        }
 
 
-        // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
+        // Get velocity from bulk element. It's returned in a fixed-size
+        // vector whose size is the bulk element's spatial dimension,
+        // obtained (as a compile-time constant) from its publicly exposed
+        // template parameter. No initialisation required since
+        // interpolated_u_nst(...) assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
-        // Get traction from bulk element
-        Vector<double> traction_p(ndim + 1);
-        Vector<double> traction_n(ndim + 1);
-        Vector<double> traction_t(ndim + 1);
+        // Get traction components from bulk element (returned in
+        // fixed-size vectors of the bulk element's spatial dimension; see
+        // above). No initialisation required since get_traction(...)
+        // assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction_p;
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction_n;
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction_t;
         bulk_el_pt->get_traction(
           s_bulk, normal, traction_p, traction_n, traction_t);
 
@@ -585,6 +656,12 @@ namespace oomph
       // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
+      // Outer unit normal. Filled by the (Vector-based)
+      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
+      // but allocated only once, outside the loop over the integration
+      // points.
+      Vector<double> normal(ndim + 1);
+
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
@@ -645,11 +722,14 @@ namespace oomph
 #endif
 
         // Outer unit normal
-        Vector<double> normal(ndim + 1);
         outer_unit_normal(s, normal);
 
-        // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
+        // Get velocity from bulk element. It's returned in a fixed-size
+        // vector whose size is the bulk element's spatial dimension,
+        // obtained (as a compile-time constant) from its publicly exposed
+        // template parameter. No initialisation required since
+        // interpolated_u_nst(...) assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
         double kin_energy = 0.0;
@@ -726,6 +806,12 @@ namespace oomph
       // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
+      // Outer unit normal. Filled by the (Vector-based)
+      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
+      // but allocated only once, outside the loop over the integration
+      // points.
+      Vector<double> normal(ndim + 1);
+
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
@@ -787,11 +873,14 @@ namespace oomph
 #endif
 
         // Outer unit normal
-        Vector<double> normal(ndim + 1);
         outer_unit_normal(s, normal);
 
-        // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
+        // Get velocity from bulk element. It's returned in a fixed-size
+        // vector whose size is the bulk element's spatial dimension,
+        // obtained (as a compile-time constant) from its publicly exposed
+        // template parameter. No initialisation required since
+        // interpolated_u_nst(...) assigns all entries.
+        FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
         // Volume flux

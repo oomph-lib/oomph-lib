@@ -2307,7 +2307,11 @@ namespace oomph
           {
             case 0:
             {
-              Vector<double> vorticity(1, 0.0);
+              // The vorticity is returned in a fixed-size vector whose
+              // (compile-time) size is determined by the element: a
+              // single component since this is 2D. No initialisation
+              // required since get_vorticity(...) assigns it.
+              FixedSizeVector<double, ELEMENT::N_vorticity_component> vorticity;
               el_pt->get_vorticity(s, vorticity);
               recovered_quantity = vorticity[0];
               break;

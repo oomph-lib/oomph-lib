@@ -31,6 +31,9 @@
 #include <oomph-lib-config.h>
 #endif
 
+// Fixed-size containers
+#include "generic/fixed_size_vector.h"
+
 namespace oomph
 {
   //========================================================================
@@ -138,16 +141,28 @@ namespace oomph
       int local_eqn = 0;
       int local_unknown = 0;
 
-      // to store normal vector
+      // to store normal vector. Filled by the (Vector-based)
+      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
+      // (allocated only once per call of this function).
       Vector<double> norm_vec(dim_el + 1);
 
-      // get the value at which the velocities are stored
-      Vector<unsigned> u_index(dim_el + 1);
+      // get the value at which the velocities are stored. There are as
+      // many as the bulk element's spatial dimension, obtained (as a
+      // compile-time constant) from its publicly exposed template
+      // parameter, so we use a fixed-size vector; no initialisation
+      // required since all entries are assigned below.
+      FixedSizeVector<unsigned, ELEMENT::TEMPLATE_PARAMETER_DIM> u_index;
       ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
       for (unsigned i = 0; i < dim_el + 1; i++)
       {
         u_index[i] = el_pt->u_index_nst(i);
       }
+
+      // Storage for the velocity at the integration point: fixed-size
+      // vector (see above), allocated once (on the stack) outside the
+      // loop over the integration points. It's accumulated (via +=) at
+      // every integration point so it's re-initialised to zero there.
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_u;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -165,7 +180,7 @@ namespace oomph
         shape_at_knot(ipt, psi);
 
         // compute  the velocity and the Lagrange multiplier
-        Vector<double> interpolated_u(dim_el + 1, 0.0);
+        interpolated_u.fill(0.0);
         double lambda = 0.0;
 
         // Loop over nodes

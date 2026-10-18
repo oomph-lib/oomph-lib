@@ -280,8 +280,11 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -964,8 +967,11 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
