@@ -64,17 +64,33 @@ namespace oomph
     /// Peclet number -- overwrite with actual Reynolds number
     extern double Peclet;
 
-    /// Wind
-    extern void wind_function(const Vector<double>& x, Vector<double>& wind);
+    /// Wind: both the 2D Eulerian coordinates x and the 2D wind vector
+    /// have compile-time size 2 so we use fixed-size vectors.
+    extern void wind_function(const FixedSizeVector<double, 2>& x,
+                              FixedSizeVector<double, 2>& wind);
 
-    /// Exact solution as a Vector
+    /// Exact solution as a Vector (compile-time sizes: 2 for x, 3 for u).
+    /// Maintained with resizable Vector<double> arguments for consistency
+    /// with FiniteElement::SteadyExactSolutionFctPt in generic (to which
+    /// this function is passed in Mesh::output_fct(...)); convert to
+    /// FixedSizeVectors once generic has been updated.
     extern void get_exact_u(const Vector<double>& x, Vector<double>& u);
 
-    /// Exact solution as a scalar
+    /// Exact solution as a scalar (compile-time size of x: 2).
+    /// Maintained with a resizable Vector<double> argument because its
+    /// caller obtains x from FiniteElement::interpolated_x(...) in
+    /// generic; convert to FixedSizeVector<double, 2> once generic has
+    /// been updated.
     extern void get_exact_u(const Vector<double>& x, double& u);
 
-    /// Source function required to make the solution above an exact solution
-    extern double source_function(const Vector<double>& x_vect);
+    /// Source function required to make the solution above an exact
+    /// solution. The Eulerian coordinates are passed as a fixed-size
+    /// vector (of size 2, i.e. this is 2D only!) because this function is
+    /// assigned to the Navier-Stokes elements' pressure advection
+    /// diffusion source function pointer
+    /// (NavierStokesEquations<2>::NavierStokesPressureAdvDiffSourceFctPt)
+    /// whose interface requires one.
+    extern double source_function(const FixedSizeVector<double, 2>& x_vect);
 
   } // namespace PressureAdvectionDiffusionValidation
 
@@ -347,10 +363,13 @@ namespace oomph
           // Set wind
           if (set_pressure_bc_for_validation)
           {
-            Vector<double> x(2);
+            // 2D nodal coordinates and wind velocity: compile-time size 2
+            // so use fixed-size vectors (no initialisation required since
+            // all entries are assigned before use).
+            FixedSizeVector<double, 2> x;
             x[0] = nod_pt->x(0);
             x[1] = nod_pt->x(1);
-            Vector<double> u(2);
+            FixedSizeVector<double, 2> u;
             PressureAdvectionDiffusionValidation::wind_function(x, u);
             nod_pt->set_value(el_pt->u_index_nst(0), u[0]);
             nod_pt->set_value(el_pt->u_index_nst(1), u[1]);
@@ -484,7 +503,12 @@ namespace oomph
       unsigned npts;
       npts = 5;
 
-      // Check value of FE solution in first element
+      // Check value of FE solution in first element. Both s and x have
+      // compile-time size ELEMENT::TEMPLATE_PARAMETER_DIM, but they have
+      // to be maintained as resizable Vectors for consistency with
+      // FiniteElement::interpolated_x(...) in generic (and
+      // interpolated_p_nst(...)); convert to FixedSizeVectors once
+      // generic has been updated.
       Vector<double> s(Ndim, 0.0);
       Vector<double> x(Ndim);
       double p = dynamic_cast<ELEMENT*>(mesh_pt()->finite_element_pt(0))

@@ -2521,11 +2521,11 @@ namespace oomph
 
     // Initialise errors
     max_error = 0.0;
-    Vector<double> max_error_x(3, 0.0);
+    FixedSizeVector<double, 3> max_error_x(0.0);
     double max_error_val = 0.0;
 
     // Set the faces
-    Vector<int> faces(6);
+    FixedSizeVector<int, 6> faces;
     faces[0] = D;
     faces[1] = U;
     faces[2] = L;
@@ -2537,7 +2537,7 @@ namespace oomph
     for (unsigned face_counter = 0; face_counter < 6; face_counter++)
     {
       Vector<double> s(3), s_lo_neigh(3), s_hi_neigh(3);
-      Vector<double> s_fraction(3);
+      FixedSizeVector<double, 3> s_fraction;
       Vector<unsigned> translate_s(3);
       int neigh_face, diff_level;
       int my_face;

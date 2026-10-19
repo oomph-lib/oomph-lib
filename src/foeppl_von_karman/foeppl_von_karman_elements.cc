@@ -94,13 +94,13 @@ namespace oomph
       double interpolated_phi = 0;
       double interpolated_laplacian_phi = 0;
 
-      Vector<double> interpolated_dwdx(2, 0.0);
-      Vector<double> interpolated_dlaplacian_wdx(2, 0.0);
-      Vector<double> interpolated_dphidx(2, 0.0);
-      Vector<double> interpolated_dlaplacian_phidx(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dwdx(0.0);
+      FixedSizeVector<double, 2> interpolated_dlaplacian_wdx(0.0);
+      FixedSizeVector<double, 2> interpolated_dphidx(0.0);
+      FixedSizeVector<double, 2> interpolated_dlaplacian_phidx(0.0);
 
-      Vector<double> interpolated_smooth_dwdx(2, 0.0);
-      Vector<double> interpolated_smooth_dphidx(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_smooth_dwdx(0.0);
+      FixedSizeVector<double, 2> interpolated_smooth_dphidx(0.0);
       double interpolated_continuous_d2wdx2 = 0;
       double interpolated_continuous_d2wdy2 = 0;
       double interpolated_continuous_d2phidx2 = 0;
@@ -110,7 +110,7 @@ namespace oomph
 
       // Calculate function values and derivatives:
       //-----------------------------------------
-      Vector<double> nodal_value(8, 0.0);
+      FixedSizeVector<double, 8> nodal_value(0.0);
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {

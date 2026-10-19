@@ -35,9 +35,10 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////////
 
 
-  /// Navier--Stokes equations static data
+  /// Navier--Stokes equations static data: By default, use the
+  /// stress-divergence form in all DIM momentum equations.
   template<unsigned DIM>
-  Vector<double> NavierStokesEquations<DIM>::Gamma(DIM, 1.0);
+  FixedSizeVector<double, DIM> NavierStokesEquations<DIM>::Gamma(1.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is
@@ -55,9 +56,11 @@ namespace oomph
   template<unsigned DIM>
   double NavierStokesEquations<DIM>::Default_Physical_Ratio_Value = 1.0;
 
-  /// Navier-Stokes equations default gravity vector
+  /// Navier-Stokes equations default gravity vector: all DIM
+  /// components are zero.
   template<unsigned DIM>
-  Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM, 0.0);
+  FixedSizeVector<double, DIM> NavierStokesEquations<
+    DIM>::Default_Gravity_vector(0.0);
 
 
   //===================================================================
@@ -84,15 +87,18 @@ namespace oomph
     // find out how many nodes there are
     unsigned n_node = nnode();
 
-    // find number of spatial dimensions
-    unsigned n_dim = this->dim();
+    // Local coordinates (compile-time size: DIM). Maintained as a
+    // resizable Vector for consistency with pshape_nst(...) (whose
+    // interface takes a Vector<double> for consistency with generic);
+    // convert to FixedSizeVector<double, DIM> once generic has been
+    // updated.
+    Vector<double> s(DIM);
 
-    // Local coordinates
-    Vector<double> s(n_dim);
-
-    // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_dim);
-    for (unsigned i = 0; i < n_dim; i++)
+    // find the indices at which the local velocities are stored. There
+    // are DIM of them (a compile-time constant) so we use a fixed-size
+    // vector; all entries are assigned below so no initialisation required.
+    FixedSizeVector<unsigned, DIM> u_nodal_index;
+    for (unsigned i = 0; i < DIM; i++)
     {
       u_nodal_index[i] = this->u_index_nst(i);
     }
@@ -122,7 +128,7 @@ namespace oomph
       double J = J_eulerian_at_knot(ipt);
 
       // Assign values of s
-      for (unsigned i = 0; i < n_dim; i++)
+      for (unsigned i = 0; i < DIM; i++)
       {
         s[i] = integral_pt()->knot(ipt, i);
       }
@@ -141,7 +147,7 @@ namespace oomph
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over the velocity components
-          for (unsigned i = 0; i < n_dim; i++)
+          for (unsigned i = 0; i < DIM; i++)
           {
             local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
 
@@ -188,7 +194,10 @@ namespace oomph
     // Initialise
     norm = 0.0;
 
-    // Vector of local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::J_eulerian(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Solution
@@ -238,11 +247,17 @@ namespace oomph
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::compute_norm(Vector<double>& norm)
   {
-    // Resize the solution norm vector
+    // Resize the solution norm vector (interface inherited from
+    // FiniteElement::compute_norm(...) in generic)
     norm.resize(DIM + 1, 0.0);
 
-    // Vector of local coordinates
-    Vector<double> s(DIM, 0.0);
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::J_eulerian(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated. No
+    // initialisation required since all entries are assigned at each
+    // integration point.
+    Vector<double> s(DIM);
 
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -296,10 +311,14 @@ namespace oomph
     error = 0.0;
     norm = 0.0;
 
-    // Vector of local coordinates
+    // Local coordinates (size DIM), Eulerian coordinates (size DIM) and
+    // exact solution vector (size DIM + 1: u,v,[w],p). Their sizes are
+    // known at compile time, but they have to be maintained as resizable
+    // Vectors for consistency with FiniteElement::J_eulerian(...),
+    // FiniteElement::interpolated_x(...) and
+    // FiniteElement::UnsteadyExactSolutionFctPt in generic; convert to
+    // FixedSizeVectors once generic has been updated.
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Set the value of n_intpt
@@ -374,10 +393,14 @@ namespace oomph
     error = 0.0;
     norm = 0.0;
 
-    // Vector of local coordinates
+    // Local coordinates (size DIM), Eulerian coordinates (size DIM) and
+    // exact solution vector (size DIM + 1: u,v,[w],p). Their sizes are
+    // known at compile time, but they have to be maintained as resizable
+    // Vectors for consistency with FiniteElement::J_eulerian(...),
+    // FiniteElement::interpolated_x(...) and
+    // FiniteElement::SteadyExactSolutionFctPt in generic; convert to
+    // FixedSizeVectors once generic has been updated.
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Set the value of n_intpt
@@ -452,10 +475,14 @@ namespace oomph
     error = 0.0;
     norm = 0.0;
 
-    // Vector of local coordinates
+    // Local coordinates (size DIM), Eulerian coordinates (size DIM) and
+    // exact solution vector (size DIM + 1: u,v,[w],p). Their sizes are
+    // known at compile time, but they have to be maintained as resizable
+    // Vectors for consistency with FiniteElement::J_eulerian(...),
+    // FiniteElement::interpolated_x(...) and
+    // FiniteElement::[Un]SteadyExactSolutionFctPt in generic; convert to
+    // FixedSizeVectors once generic has been updated.
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Set the value of n_intpt
@@ -516,10 +543,14 @@ namespace oomph
     // Initialise exact solution norm value
     norm = 0.0;
 
-    // Vector of local coordinates
+    // Local coordinates (size DIM), Eulerian coordinates (size DIM) and
+    // exact solution vector (size DIM + 1: u,v,[w],p). Their sizes are
+    // known at compile time, but they have to be maintained as resizable
+    // Vectors for consistency with FiniteElement::J_eulerian(...),
+    // FiniteElement::interpolated_x(...) and
+    // FiniteElement::[Un]SteadyExactSolutionFctPt in generic; convert to
+    // FixedSizeVectors once generic has been updated.
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Set the value of n_intpt
@@ -575,10 +606,14 @@ namespace oomph
     const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
-    // Vector of local coordinates
+    // Local coordinates (size DIM) and Eulerian coordinates (size DIM).
+    // Maintained as resizable Vectors for consistency with
+    // FiniteElement::get_s_plot(...), FiniteElement::interpolated_x(...)
+    // and FiniteElement::[Un]SteadyExactSolutionFctPt in generic;
+    // convert to FixedSizeVector<double, DIM> once generic has been
+    // updated. (exact_soln is sized by the user callback and can have an
+    // arbitrary number of components.)
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Tecplot header info
@@ -632,10 +667,14 @@ namespace oomph
     const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
-    // Vector of local coordinates
+    // Local coordinates (size DIM) and Eulerian coordinates (size DIM).
+    // Maintained as resizable Vectors for consistency with
+    // FiniteElement::get_s_plot(...), FiniteElement::interpolated_x(...)
+    // and FiniteElement::[Un]SteadyExactSolutionFctPt in generic;
+    // convert to FixedSizeVector<double, DIM> once generic has been
+    // updated. (exact_soln is sized by the user callback and can have an
+    // arbitrary number of components.)
     Vector<double> s(DIM);
-
-    // Vector for coordintes
     Vector<double> x(DIM);
 
     // Tecplot header info
@@ -694,10 +733,19 @@ namespace oomph
     // Local shape function
     Shape psi(n_node);
 
-    // Vectors of local coordinates and coords and velocities
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::get_s_plot(...) and FiniteElement::shape(...) in
+    // generic; convert to FixedSizeVector<double, DIM> once generic has
+    // been updated.
     Vector<double> s(DIM);
-    Vector<double> interpolated_x(DIM);
-    Vector<double> interpolated_u(DIM);
+
+    // Coordinates and velocities at the plot point; their size (DIM) is
+    // known at compile time and they're only accessed component-wise so
+    // we use fixed-size vectors. No initialisation required here
+    // since they're explicitly zeroed before each use below.
+    FixedSizeVector<double, DIM> interpolated_x;
+    FixedSizeVector<double, DIM> interpolated_u;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -756,7 +804,11 @@ namespace oomph
   void NavierStokesEquations<DIM>::output(std::ostream& outfile,
                                           const unsigned& nplot)
   {
-    // Vector of local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::get_s_plot(...) and
+    // FiniteElement::interpolated_x(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Tecplot header info
@@ -802,7 +854,11 @@ namespace oomph
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::output(FILE* file_pt, const unsigned& nplot)
   {
-    // Vector of local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::get_s_plot(...) and
+    // FiniteElement::interpolated_x(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Tecplot header info
@@ -847,14 +903,12 @@ namespace oomph
   void NavierStokesEquations<DIM>::full_output(std::ostream& outfile,
                                                const unsigned& nplot)
   {
-    // Vector of local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::get_s_plot(...), FiniteElement::dshape_eulerian(...)
+    // and FiniteElement::interpolated_x(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
-
-    // Acceleration
-    Vector<double> dudt(DIM);
-
-    // Mesh elocity
-    Vector<double> mesh_veloc(DIM, 0.0);
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -876,23 +930,18 @@ namespace oomph
       // Call the derivatives of the shape and test functions
       dshape_eulerian(s, psif, dpsifdx);
 
-      // Allocate storage
-      Vector<double> mesh_veloc(DIM);
-      Vector<double> dudt(DIM);
-      Vector<double> dudt_ALE(DIM);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM);
-
-      // Initialise everything to zero
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        mesh_veloc[i] = 0.0;
-        dudt[i] = 0.0;
-        dudt_ALE[i] = 0.0;
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          interpolated_dudx(i, j) = 0.0;
-        }
-      }
+      // Allocate storage for the mesh velocity, the acceleration (in
+      // Eulerian and ALE form) and the velocity gradients. Their sizes are
+      // known at compile time and they're only accessed component-wise
+      // so we use fixed-size containers, allocated on the stack. Note
+      // that fixed-size containers do not initialise their entries by
+      // default, so the quantities that are accumulated (via +=) below
+      // must be explicitly initialised to zero; dudt_ALE is assigned
+      // (rather than accumulated) and therefore doesn't need to be.
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeVector<double, DIM> dudt_ALE;
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate velocities and derivatives
 
@@ -978,28 +1027,18 @@ namespace oomph
   void NavierStokesEquations<DIM>::output_vorticity(std::ostream& outfile,
                                                     const unsigned& nplot)
   {
-    // Vector of local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::get_s_plot(...) and
+    // FiniteElement::interpolated_x(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
-    // Create vorticity vector of the required size
-    Vector<double> vorticity;
-    if (DIM == 2)
-    {
-      vorticity.resize(1);
-    }
-    else if (DIM == 3)
-    {
-      vorticity.resize(3);
-    }
-    else
-    {
-      std::string error_message =
-        "Can't output vorticity in 1D - in fact, what do you mean\n";
-      error_message += "by the 1D Navier-Stokes equations?\n";
-
-      throw OomphLibError(
-        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    // Vorticity vector: fixed-size vector with N_vorticity_component
+    // entries (1 in 2D, 3 in 3D), as required by get_vorticity(...).
+    // No initialisation required since get_vorticity(...) assigns all
+    // entries.
+    FixedSizeVector<double, N_vorticity_component> vorticity;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -1051,8 +1090,17 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::J_eulerian(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
+
+    // Storage for the strain rate matrix: its size (DIM x DIM) is known
+    // at compile time so we use a fixed-size matrix, allocated once (on
+    // the stack) outside the loop over the integration points. No
+    // initialisation required since strain_rate(...) assigns all entries.
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -1070,7 +1118,6 @@ namespace oomph
       double J = J_eulerian(s);
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM, DIM);
       strain_rate(s, strainrate);
 
       // Initialise
@@ -1092,15 +1139,21 @@ namespace oomph
   //==============================================================
   /// Compute traction (on the viscous scale) exerted onto
   /// the fluid at local coordinate s. N has to be outer unit normal
-  /// to the fluid.
+  /// to the fluid. The normal and the traction are fixed-size vectors.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::get_traction(const Vector<double>& s,
-                                                const Vector<double>& N,
-                                                Vector<double>& traction)
+  void NavierStokesEquations<DIM>::get_traction(
+    const Vector<double>& s,
+    const FixedSizeVector<double, DIM>& N,
+    FixedSizeVector<double, DIM>& traction)
   {
-    // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get velocity gradients. The strain rate's size (DIM x DIM) is known
+    // at compile time so we use a fixed-size matrix, allocated on the
+    // stack. (This function tends to be called at every integration
+    // point of a FaceElement so avoiding the heap allocation matters.)
+    // No initialisation required since strain_rate(...) assigns all
+    // entries.
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
     strain_rate(s, strainrate);
 
     // Get pressure
@@ -1120,20 +1173,28 @@ namespace oomph
   //==============================================================
   /// Compute traction (on the viscous scale) exerted onto
   /// the fluid at local coordinate s, decomposed into pressure and
-  /// normal and tangential viscous components.
-  /// N has to be outer unit normal to the fluid.
+  /// normal and tangential viscous components, each returned in
+  /// a fixed-size vector. N has to be outer unit normal to the fluid
+  /// (also a fixed-size vector).
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::get_traction(const Vector<double>& s,
-                                                const Vector<double>& N,
-                                                Vector<double>& traction_p,
-                                                Vector<double>& traction_visc_n,
-                                                Vector<double>& traction_visc_t)
+  void NavierStokesEquations<DIM>::get_traction(
+    const Vector<double>& s,
+    const FixedSizeVector<double, DIM>& N,
+    FixedSizeVector<double, DIM>& traction_p,
+    FixedSizeVector<double, DIM>& traction_visc_n,
+    FixedSizeVector<double, DIM>& traction_visc_t)
   {
-    Vector<double> traction_visc(DIM);
+    // Viscous contribution to the traction: size known at compile time
+    // and only accessed component-wise, so use a fixed-size vector.
+    // It's accumulated (via +=) below so it must be initialised to zero
+    // (fixed-size vectors don't do this by default!)
+    FixedSizeVector<double, DIM> traction_visc(0.0);
 
-    // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get velocity gradients: fixed-size (DIM x DIM) matrix, allocated
+    // on the stack; no initialisation required since strain_rate(...)
+    // assigns all entries.
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
     strain_rate(s, strainrate);
 
     // Get pressure
@@ -1161,8 +1222,10 @@ namespace oomph
   template<unsigned DIM>
   double NavierStokesEquations<DIM>::dissipation(const Vector<double>& s) const
   {
-    // Get strain rate matrix
-    DenseMatrix<double> strainrate(DIM, DIM);
+    // Get strain rate matrix: fixed-size (DIM x DIM) matrix, allocated
+    // on the stack; no initialisation required since strain_rate(...)
+    // assigns all entries.
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
     strain_rate(s, strainrate);
 
     // Initialise
@@ -1179,27 +1242,20 @@ namespace oomph
   }
 
   //==============================================================
-  /// Get strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
+  /// Get strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i). Returned
+  /// in a fixed-size (DIM x DIM) matrix; all of its entries are assigned.
   //==============================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s,
+    FixedSizeMatrix<double, DIM, DIM>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not " << DIM << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1210,15 +1266,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1250,31 +1297,23 @@ namespace oomph
 
   //==============================================================
   /// Compute 2D vorticity vector at local coordinate s (return in
-  /// one and only component of vorticity vector
+  /// one and only component of vorticity vector)
   //==============================================================
   template<>
-  void NavierStokesEquations<2>::get_vorticity(const Vector<double>& s,
-                                               Vector<double>& vorticity) const
+  void NavierStokesEquations<2>::get_vorticity(
+    const Vector<double>& s, FixedSizeVector<double, 1>& vorticity) const
   {
-#ifdef PARANOID
-    if (vorticity.size() != 1)
-    {
-      std::ostringstream error_message;
-      error_message << "Computation of vorticity in 2D requires a 1D vector\n"
-                    << "which contains the only non-zero component of the\n"
-                    << "vorticity vector. You've passed a vector of size "
-                    << vorticity.size() << std::endl;
+    // Specify spatial dimension. This is a compile-time constant so that
+    // it can be used as the template parameter of the fixed-size
+    // containers below.
+    const unsigned DIM = 2;
 
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Specify spatial dimension
-    unsigned DIM = 2;
-
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1285,15 +1324,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1325,8 +1355,10 @@ namespace oomph
   void NavierStokesEquations<2>::get_vorticity(const Vector<double>& s,
                                                double& vorticity) const
   {
-    // Create a vector to store the vorticity
-    Vector<double> vort(1, 0.0);
+    // Create a (fixed-size, single-component) vector to store the
+    // vorticity. No initialisation required since get_vorticity(...)
+    // assigns its only entry.
+    FixedSizeVector<double, 1> vort;
 
     // Calculate the vorticity
     get_vorticity(s, vort);
@@ -1340,28 +1372,20 @@ namespace oomph
   /// Compute 3D vorticity vector at local coordinate s
   //==============================================================
   template<>
-  void NavierStokesEquations<3>::get_vorticity(const Vector<double>& s,
-                                               Vector<double>& vorticity) const
+  void NavierStokesEquations<3>::get_vorticity(
+    const Vector<double>& s, FixedSizeVector<double, 3>& vorticity) const
   {
-#ifdef PARANOID
-    if (vorticity.size() != 3)
-    {
-      std::ostringstream error_message;
-      error_message << "Computation of vorticity in 3D requires a 3D vector\n"
-                    << "which contains the only non-zero component of the\n"
-                    << "vorticity vector. You've passed a vector of size "
-                    << vorticity.size() << std::endl;
+    // Specify spatial dimension. This is a compile-time constant so that
+    // it can be used as the template parameter of the fixed-size
+    // containers below.
+    const unsigned DIM = 3;
 
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Specify spatial dimension
-    unsigned DIM = 3;
-
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    // Velocity gradient matrix: its size (DIM x DIM) is known at compile
+    // time and it's only accessed component-wise so we use a fixed-size
+    // matrix, allocated on the stack. It's accumulated (via +=) below so
+    // it must be initialised to zero (fixed-size containers don't do
+    // this by default).
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1372,15 +1396,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1421,7 +1436,10 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::J_eulerian(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Loop over the integration points
@@ -1465,9 +1483,6 @@ namespace oomph
     // Set the value of n_intpt
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
-    Vector<double> s(DIM);
-
     // Get the number of nodes
     const unsigned n_node = this->nnode();
 
@@ -1491,8 +1506,12 @@ namespace oomph
       // Get the integral weight
       double w = integral_pt()->weight(ipt);
 
-      // Now work out the velocity and the time derivative
-      Vector<double> interpolated_u(DIM, 0.0), interpolated_dudt(DIM, 0.0);
+      // Now work out the velocity and the time derivative. Their size
+      // (DIM) is known at compile time and they're only accessed
+      // component-wise so we use fixed-size vectors. Both are
+      // accumulated (via +=) below so they must be initialised to zero.
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -1508,8 +1527,10 @@ namespace oomph
       // Get mesh velocity bit
       if (!ALE_is_disabled)
       {
-        Vector<double> mesh_velocity(DIM, 0.0);
-        DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+        // Mesh velocity and velocity gradients: fixed size, only accessed
+        // component-wise, accumulated below (hence the zero initialisation)
+        FixedSizeVector<double, DIM> mesh_velocity(0.0);
+        FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
@@ -1563,7 +1584,10 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // FiniteElement::J_eulerian(...) in generic; convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Loop over the integration points
@@ -1633,7 +1657,11 @@ namespace oomph
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // dpshape_and_dptest_eulerian_nst(...) (which calls
+    // FiniteElement::dshape_local(...) in generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Get Physical Variables from Element
@@ -1663,10 +1691,13 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dpdx(DIM, 0.0);
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM) so we use fixed-size vectors, allocated on the stack.
+      // All of them are accumulated (via +=) below so they must be
+      // initialised to zero (fixed-size vectors don't do this by default).
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> interpolated_dpdx(0.0);
 
       // Calculate pressure gradient
       for (unsigned l = 0; l < n_pres; l++)
@@ -1692,7 +1723,9 @@ namespace oomph
         }
       }
 
-      // Source function (for validaton only)
+      // Source function (for validaton only). The Eulerian coordinates
+      // are passed straight through as the fixed-size vector that the
+      // user-defined source function expects.
       double source = 0.0;
       if (Press_adv_diff_source_fct_pt != 0)
       {
@@ -1806,8 +1839,18 @@ namespace oomph
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...) and
+    // get_body_force_nst(...) (whose s argument is kept as a
+    // Vector<double> for consistency with generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
+
+    // Storage for the body force at the integration point: a fixed-size
+    // vector, allocated once (on the stack) outside the loop over the
+    // integration points. No initialisation required since
+    // get_body_force_nst(...) assigns all entries.
+    FixedSizeVector<double, DIM> body_force;
 
     // Get Physical Variables from Element
     // Reynolds number must be multiplied by the density ratio
@@ -1815,7 +1858,8 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    // Gravity vector (fixed-size vector; use a reference to avoid copying)
+    const FixedSizeVector<double, DIM>& G = g();
 
     // Integers to store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -1839,13 +1883,18 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1889,7 +1938,6 @@ namespace oomph
       }
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
       get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -2172,8 +2220,23 @@ namespace oomph
     // Determine the number of integration points
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...),
+    // get_body_force_nst(...) and get_body_force_gradient_nst(...)
+    // (whose s argument is kept as a Vector<double> for consistency
+    // with generic); convert to FixedSizeVector<double, DIM> once
+    // generic has been updated.
     Vector<double> s(DIM);
+
+    // Storage for the body force and the gradients of the body force
+    // and the source function w.r.t. the Eulerian coordinates. Their
+    // sizes (DIM or DIM x DIM) are known at compile time so we use
+    // fixed-size containers, allocated once (on the stack) outside the
+    // loop over the integration points. No initialisation required
+    // since the functions that compute them assign all entries.
+    FixedSizeVector<double, DIM> body_force;
+    FixedSizeMatrix<double, DIM, DIM> d_body_force_dx;
+    FixedSizeVector<double, DIM> source_gradient;
 
     // Get physical variables from element
     // (Reynolds number must be multiplied by the density ratio)
@@ -2181,7 +2244,8 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    // Gravity vector (fixed-size vector; use a reference to avoid copying)
+    const FixedSizeVector<double, DIM>& G = g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -2199,8 +2263,10 @@ namespace oomph
       {
         element_has_node_with_aux_node_update_fct = true;
 
-        // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        // Current nodal velocity: size known at compile time and only
+        // accessed component-wise so use a fixed-size vector. No
+        // initialisation required since all entries are assigned below.
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -2261,13 +2327,18 @@ namespace oomph
       pshape_nst(s, psip, testp);
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -2340,7 +2411,6 @@ namespace oomph
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
       get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -2350,12 +2420,10 @@ namespace oomph
       // because this is the non-refineable version!
 
       // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
       get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
       get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
 

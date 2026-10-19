@@ -68,11 +68,17 @@ namespace oomph
     // Pressure shape function
     Shape psi_p(n_pres);
 
-    // Local coordinates
+    // Local coordinates (compile-time size: DIM). Maintained as a
+    // resizable Vector for consistency with pshape_nst(...) (whose s
+    // argument is kept as a Vector<double> for consistency with
+    // generic); convert to FixedSizeVector<double, DIM> once generic
+    // has been updated.
     Vector<double> s(DIM);
 
-    // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(DIM);
+    // find the indices at which the local velocities are stored. There
+    // are DIM of them (a compile-time constant) so we use a fixed-size
+    // vector; all entries are assigned below so no initialisation required.
+    FixedSizeVector<unsigned, DIM> u_nodal_index;
     for (unsigned i = 0; i < DIM; i++)
     {
       u_nodal_index[i] = this->u_index_nst(i);
@@ -351,7 +357,11 @@ namespace oomph
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // dpshape_and_dptest_eulerian_nst(...) (which calls
+    // FiniteElement::dshape_local(...) in generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Get Physical Variables from Element
@@ -384,10 +394,15 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dpdx(DIM, 0.0);
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> interpolated_dpdx(0.0);
 
       // Calculate pressure gradient
       for (unsigned l = 0; l < n_pres; l++)
@@ -413,7 +428,9 @@ namespace oomph
         }
       }
 
-      // Source function (for validaton only)
+      // Source function (for validaton only). The Eulerian coordinates
+      // are passed straight through as the fixed-size vector that the
+      // user-defined source function expects.
       double source = 0.0;
       if (this->Press_adv_diff_source_fct_pt != 0)
       {
@@ -633,8 +650,18 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...) and
+    // get_body_force_nst(...) (whose s argument is kept as a
+    // Vector<double> for consistency with generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
+
+    // Storage for the body force at the integration point: a fixed-size
+    // vector, allocated once (on the stack) outside the loop over the
+    // integration points. No initialisation required since
+    // get_body_force_nst(...) assigns all entries.
+    FixedSizeVector<double, DIM> body_force;
 
     // Get Physical Variables from Element
     // Reynolds number must be multiplied by the density ratio
@@ -642,7 +669,8 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    // Gravity vector (fixed-size vector; use a reference to avoid copying)
+    const FixedSizeVector<double, DIM>& G = this->g();
 
     // Integers that store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -677,12 +705,18 @@ namespace oomph
 
       // Calculate local values of the pressure and velocity components
       //--------------------------------------------------------------
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_veloc(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -727,7 +761,6 @@ namespace oomph
       }
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
       this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -1208,8 +1241,23 @@ namespace oomph
     // Determine the number of integration points
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...),
+    // get_body_force_nst(...) and get_body_force_gradient_nst(...)
+    // (whose s argument is kept as a Vector<double> for consistency
+    // with generic); convert to FixedSizeVector<double, DIM> once
+    // generic has been updated.
     Vector<double> s(DIM);
+
+    // Storage for the body force and the gradients of the body force
+    // and the source function w.r.t. the Eulerian coordinates. Their
+    // sizes (DIM or DIM x DIM) are known at compile time so we use
+    // fixed-size containers, allocated once (on the stack) outside the
+    // loop over the integration points. No initialisation required
+    // since the functions that compute them assign all entries.
+    FixedSizeVector<double, DIM> body_force;
+    FixedSizeMatrix<double, DIM, DIM> d_body_force_dx;
+    FixedSizeVector<double, DIM> source_gradient;
 
     // Get physical variables from element
     // (Reynolds number must be multiplied by the density ratio)
@@ -1217,7 +1265,8 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    // Gravity vector (fixed-size vector; use a reference to avoid copying)
+    const FixedSizeVector<double, DIM>& G = this->g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -1247,8 +1296,10 @@ namespace oomph
       {
         element_has_node_with_aux_node_update_fct = true;
 
-        // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        // Current nodal velocity: size known at compile time and only
+        // accessed component-wise so use a fixed-size vector. No
+        // initialisation required since all entries are assigned below.
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -1313,13 +1364,18 @@ namespace oomph
       this->pshape_nst(s, psip, testp);
 
       // Calculate local values of the pressure and velocity components
-      // Allocate
+      // Allocate: the sizes of all these quantities are known at compile
+      // time (DIM or DIM x DIM) so we use fixed-size containers, allocated
+      // on the stack; this avoids the heap allocation/deallocation that
+      // previously occurred at every integration point. All of them are
+      // accumulated (via +=) below so they must be initialised to zero
+      // (fixed-size containers don't do this by default).
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1394,19 +1450,16 @@ namespace oomph
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
       this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       const double source = this->get_source_nst(time, ipt, interpolated_x);
 
       // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
       this->get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
       this->get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
 
@@ -1842,6 +1895,12 @@ namespace oomph
         // What type of son am I? Ask my quadtree representation...
         int son_type = quadtree_pt()->son_type();
 
+        // Local coordinates of son midpoint in father element
+        // (compile-time size: 2). Maintained as a resizable Vector for
+        // consistency with interpolated_p_nst(...) (whose s argument is
+        // kept as a Vector<double> for consistency with generic);
+        // convert to FixedSizeVector<double, 2> once generic has been
+        // updated.
         Vector<double> s_father(2);
 
         // Son midpoint is located at the following coordinates in father
@@ -1953,6 +2012,12 @@ namespace oomph
         // What type of son am I? Ask my quadtree representation...
         int son_type = octree_pt()->son_type();
 
+        // Local coordinates of son midpoint in father element
+        // (compile-time size: 3). Maintained as a resizable Vector for
+        // consistency with interpolated_p_nst(...) (whose s argument is
+        // kept as a Vector<double> for consistency with generic);
+        // convert to FixedSizeVector<double, 3> once generic has been
+        // updated.
         Vector<double> s_father(3);
 
 

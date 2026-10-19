@@ -4462,7 +4462,7 @@ namespace oomph
                 // Receive from processor dd number of haloed nodes (entry 0),
                 // external haloed nodes (entry 1) and total number of
                 // unsigneds to be sent below (entry 2)
-                Vector<int> tmp(3);
+                FixedSizeVector<int, 3> tmp;
                 MPI_Recv(
                   &tmp[0], 3, MPI_INT, dd, 0, Comm_pt->mpi_comm(), &status);
 
@@ -4637,7 +4637,7 @@ namespace oomph
           // Storage for number of haloed nodes (entry 0), number of external
           // haloed nodes (entry 1) and total number of unsigneds to be sent
           // below (entry 2)
-          Vector<int> tmp(3);
+          FixedSizeVector<int, 3> tmp;
           int nnod_haloed = this->nhaloed_node(d);
           tmp[0] = nnod_haloed;
           int nnod_ext_haloed = this->nexternal_haloed_node(d);

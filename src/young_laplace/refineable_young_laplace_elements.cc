@@ -63,7 +63,7 @@ namespace oomph
       // Allocate and initialise to zero
       double interpolated_u = 0.0;
       Vector<double> interpolated_zeta(2, 0.0);
-      Vector<double> interpolated_du_dzeta(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_du_dzeta(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------
@@ -120,7 +120,7 @@ namespace oomph
       Vector<double> area_variation_numerator_1(3, 0.0);
 
       // Vector position
-      Vector<double> r(3, 0.0);
+      FixedSizeVector<double, 3> r(0.0);
 
       // No spines
       //---------

@@ -602,7 +602,7 @@ namespace oomph
       const double q_value = q();
 
       // Storage for traction (includes swirl!)
-      Vector<double> traction(n_dim + 1);
+      FixedSizeVector<double, 3> traction;
 
       outfile << "ZONE\n";
 
@@ -630,7 +630,10 @@ namespace oomph
         Vector<double> s_ext(this->external_element_local_coord(0, ipt));
 
         // Get traction from bulk element (on fluid scale)
-        ext_el_pt->traction(s_ext, interpolated_normal, traction);
+        FixedSizeVector<double, 3> n_fixed(0.0);
+        n_fixed[0] = interpolated_normal[0];
+        n_fixed[1] = interpolated_normal[1];
+        ext_el_pt->traction(s_ext, n_fixed, traction);
 
         outfile << ext_el_pt->interpolated_x(s_ext, 0) << " "
                 << ext_el_pt->interpolated_x(s_ext, 1) << " "
@@ -714,7 +717,7 @@ namespace oomph
     const double q_value = q();
 
     // Storage for traction
-    Vector<double> traction(3);
+    FixedSizeVector<double, 3> traction;
 
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -802,7 +805,10 @@ namespace oomph
       Vector<double> s_ext(this->external_element_local_coord(0, ipt));
 
       // Get traction from bulk element
-      ext_el_pt->traction(s_ext, interpolated_normal, traction);
+      FixedSizeVector<double, 3> n_fixed(0.0);
+      n_fixed[0] = interpolated_normal[0];
+      n_fixed[1] = interpolated_normal[1];
+      ext_el_pt->traction(s_ext, n_fixed, traction);
 
       // Loop over the test functions, nodes of the element
       for (unsigned l = 0; l < n_node; l++)

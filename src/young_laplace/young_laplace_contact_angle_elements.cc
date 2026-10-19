@@ -380,10 +380,10 @@ namespace oomph
 
       // Derivative of spine and spine base w.r.t. local coordinate in
       // FaceElement:
-      Vector<double> dspine_ds_tangent(3, 0.0);
-      Vector<double> dspine_base_ds_tangent(3, 0.0);
-      Vector<double> dspine_ds_pseudo_normal(3, 0.0);
-      Vector<double> dspine_base_ds_pseudo_normal(3, 0.0);
+      FixedSizeVector<double, 3> dspine_ds_tangent(0.0);
+      FixedSizeVector<double, 3> dspine_base_ds_tangent(0.0);
+      FixedSizeVector<double, 3> dspine_ds_pseudo_normal(0.0);
+      FixedSizeVector<double, 3> dspine_base_ds_pseudo_normal(0.0);
       for (unsigned i = 0; i < 3; i++)
       {
         dspine_ds_tangent[i] +=

@@ -602,7 +602,7 @@ namespace oomph
     /// zeta_boundary=1.0: we're on vertex 1.
     virtual void boundary_zeta01(const unsigned& facet_id,
                                  const double& zeta_boundary,
-                                 Vector<double>& zeta)
+                                 FixedSizeVector<double, 2>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(0)->zeta_in_geom_object();
@@ -621,7 +621,7 @@ namespace oomph
     /// zeta_boundary=1.0: we're on vertex 2.
     virtual void boundary_zeta12(const unsigned& facet_id,
                                  const double& zeta_boundary,
-                                 Vector<double>& zeta)
+                                 FixedSizeVector<double, 2>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(1)->zeta_in_geom_object();
@@ -640,7 +640,7 @@ namespace oomph
     /// zeta_boundary=1.0: we're on vertex 0.
     virtual void boundary_zeta20(const unsigned& facet_id,
                                  const double& zeta_boundary,
-                                 Vector<double>& zeta)
+                                 FixedSizeVector<double, 2>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(2)->zeta_in_geom_object();
@@ -1294,10 +1294,10 @@ namespace oomph
     Node* upper_right_node_pt = 0;
 
     // Unit vector connecting lower left and upper right nodes
-    Vector<double> b0(3);
+    FixedSizeVector<double, 3> b0;
 
     // ...and a vector normal to it
-    Vector<double> b1(3);
+    FixedSizeVector<double, 3> b1;
 
 
     // Facet?
@@ -1520,7 +1520,7 @@ namespace oomph
             Node* nod_pt = this->boundary_node_pt(b, j);
 
             // Difference vector to lower left corner
-            Vector<double> delta(3);
+            FixedSizeVector<double, 3> delta;
             delta[0] = nod_pt->x(0) - lower_left_node_pt->x(0);
             delta[1] = nod_pt->x(1) - lower_left_node_pt->x(1);
             delta[2] = nod_pt->x(2) - lower_left_node_pt->x(2);
@@ -1601,13 +1601,13 @@ namespace oomph
               Triangular_facet_vertex_boundary_coordinate[b][j].resize(2);
 
               // Difference vector to lower left corner
-              Vector<double> delta(3);
+              FixedSizeVector<double, 3> delta;
               delta[0] = f_pt->vertex_pt(j)->x(0) - lower_left_node_pt->x(0);
               delta[1] = f_pt->vertex_pt(j)->x(1) - lower_left_node_pt->x(1);
               delta[2] = f_pt->vertex_pt(j)->x(2) - lower_left_node_pt->x(2);
 
               // Project
-              Vector<double> zeta(2);
+              FixedSizeVector<double, 2> zeta;
               zeta[0] = delta[0] * b0[0] + delta[1] * b0[1] + delta[2] * b0[2];
               zeta[1] = delta[0] * b1[0] + delta[1] * b1[1] + delta[2] * b1[2];
 
@@ -1817,7 +1817,7 @@ namespace oomph
       Vector<double> zeta(2);
 
       // Unit vector connecting lower left and upper right nodes
-      Vector<double> b0(3);
+      FixedSizeVector<double, 3> b0;
       b0[0] = upper_right_node_pt->x(0) - lower_left_node_pt->x(0);
       b0[1] = upper_right_node_pt->x(1) - lower_left_node_pt->x(1);
       b0[2] = upper_right_node_pt->x(2) - lower_left_node_pt->x(2);
@@ -1833,9 +1833,9 @@ namespace oomph
       // with the enumeration chosen in oomph-lib's xda to poly
       // conversion code the sign below is correct for the outer
       // unit normal on the FSI interface.
-      Vector<double> tang1(3);
-      Vector<double> tang2(3);
-      Vector<double> normal(3);
+      FixedSizeVector<double, 3> tang1;
+      FixedSizeVector<double, 3> tang2;
+      FixedSizeVector<double, 3> normal;
       tang1[0] =
         face_el_pt[e]->node_pt(1)->x(0) - face_el_pt[e]->node_pt(0)->x(0);
       tang1[1] =
@@ -1868,7 +1868,7 @@ namespace oomph
       }
 
       // Cross-product to get second in-plane vector, normal to b0
-      Vector<double> b1(3);
+      FixedSizeVector<double, 3> b1;
       b1[0] = b0[1] * normal[2] - b0[2] * normal[1];
       b1[1] = b0[2] * normal[0] - b0[0] * normal[2];
       b1[2] = b0[0] * normal[1] - b0[1] * normal[0];
@@ -1880,7 +1880,7 @@ namespace oomph
         Node* nod_pt = face_el_pt[e]->node_pt(j);
 
         // Difference vector to lower left corner
-        Vector<double> delta(3);
+        FixedSizeVector<double, 3> delta;
         delta[0] = nod_pt->x(0) - lower_left_node_pt->x(0);
         delta[1] = nod_pt->x(1) - lower_left_node_pt->x(1);
         delta[2] = nod_pt->x(2) - lower_left_node_pt->x(2);

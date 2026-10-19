@@ -406,7 +406,12 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
                            Vector<double>& wind) const
   {
    //The wind function is simply the velocity at the points
-   this->interpolated_u_spherical_nst(s,wind);
+   FixedSizeVector<double, 3> u;
+   this->interpolated_u_spherical_nst(s,u);
+   for (unsigned i=0;i<3;i++)
+    {
+     wind[i] = u[i];
+    }
   }
  
  
@@ -416,15 +421,15 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
  /// temperature multiplied by the Rayleigh number acting in the
  /// direction opposite to gravity.
  void get_body_force_spherical_nst(const double& time, const unsigned& ipt,
-                             const Vector<double> &s, const Vector<double> &x,
-                             Vector<double> &result)
+                             const Vector<double> &s, const FixedSizeVector<double, 2> &x,
+                             FixedSizeVector<double, 3> &result)
   {
    // Get the temperature
    const double interpolated_t = this->interpolated_u_spherical_adv_diff(s);
 
    // Get vector that indicates the direction of gravity from
    // the Navier-Stokes equations
-   Vector<double> gravity(SphericalNavierStokesEquations::g());
+   FixedSizeVector<double, 3> gravity(SphericalNavierStokesEquations::g());
 
    // This is for the eye problem
    //gravity[0] = -cos(x[1]);
@@ -529,7 +534,7 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
    //Get Physical Variables from Element
    double Ra = this->ra();
    double Pe = this->pe();
-   Vector<double> gravity = this->g();
+   FixedSizeVector<double, 3> gravity = this->g();
    
    //Integers to store the local equations and unknowns
    int local_eqn=0, local_unknown=0;

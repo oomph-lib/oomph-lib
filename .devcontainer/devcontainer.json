@@ -1,0 +1,73 @@
+{
+  "name": "oomph-lib",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+    "target": "dev",
+    "args": {
+      // Set to "ON" to get OpenMPI + MPI-enabled third-party libraries.
+      "ENABLE_MPI": "OFF",
+      // Optional third-party libraries to prebuild into the image. OpenBLAS and
+      // SuperLU are always built. Turning these on makes the first image build
+      // considerably longer (Trilinos in particular).
+      "BUILD_CGAL": "OFF",
+      "BUILD_MUMPS": "OFF",
+      "BUILD_HYPRE": "OFF",
+      "BUILD_TRILINOS": "OFF",
+      // The container user. Its UID/GID are remapped to match the host user
+      // on Linux via "updateRemoteUserUID" below, so there's normally no need
+      // to pass USER_UID/USER_GID here.
+      "USERNAME": "oomph"
+    }
+  },
+  "workspaceFolder": "/workspaces/oomph-lib",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/oomph-lib,type=bind,consistency=cached",
+  "remoteUser": "oomph",
+  "updateRemoteUserUID": true,
+
+  // Persist the compiler cache across container rebuilds.
+  "mounts": [
+    "source=oomph-lib-ccache,target=/home/oomph/.ccache,type=volume"
+  ],
+
+  "containerEnv": {
+    "CCACHE_DIR": "/home/oomph/.ccache",
+    "CTEST_OUTPUT_ON_FAILURE": "1"
+  },
+
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cmake-tools",
+        "xaver.clang-format",
+        "ms-python.python",
+        "cheshirekow.cmake-format",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+        "C_Cpp.clang_format_style": "file",
+        "editor.formatOnSave": false,
+        "cmake.configureOnOpen": false,
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.generator": "Ninja",
+        "files.associations": {
+          "*.h": "cpp",
+          "*.cc": "cpp"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}

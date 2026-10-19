@@ -119,7 +119,7 @@ namespace oomph
     GeomObject* lower_transition_geom_object_pt = 0;
     GeomObject* upper_transition_geom_object_pt = 0;
     Vector<double> s_transition_lo(1), s_transition_up(1);
-    Vector<double> spine_centre(2);
+    FixedSizeVector<double, 2> spine_centre;
 
     // Find position of lower and upper walls at start of transition region
     zeta[0] = Zeta_transition_start;
@@ -360,7 +360,7 @@ namespace oomph
                 lower_sub_geom_object_pt->position(s_lo, r_wall_lo);
 
                 // Get normal vector towards origin
-                Vector<double> N(2);
+                FixedSizeVector<double, 2> N;
                 N[0] = spine_centre[0] - r_wall_lo[0];
                 N[1] = spine_centre[1] - r_wall_lo[1];
                 double length = sqrt(N[0] * N[0] + N[1] * N[1]);
@@ -446,14 +446,14 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_parameter(parameters);
 
                 // Origin of spine
-                Vector<double> S0(2);
+                FixedSizeVector<double, 2> S0;
                 S0[0] = r_wall_lo[0] +
                         vertical_fraction * (r_wall_up[0] - r_wall_lo[0]);
                 S0[1] = r_wall_lo[1] +
                         vertical_fraction * (r_wall_up[1] - r_wall_lo[1]);
 
                 // Get normal vector towards origin
-                Vector<double> N(2);
+                FixedSizeVector<double, 2> N;
                 N[0] = spine_centre[0] - S0[0];
                 N[1] = spine_centre[1] - S0[1];
 
@@ -540,14 +540,14 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_parameter(parameters);
 
                 // Origin of spine
-                Vector<double> S0(2);
+                FixedSizeVector<double, 2> S0;
                 S0[0] = r_wall_lo[0] +
                         vertical_fraction * (r_wall_up[0] - r_wall_lo[0]);
                 S0[1] = r_wall_lo[1] +
                         vertical_fraction * (r_wall_up[1] - r_wall_lo[1]);
 
                 // Get normal vector towards origin
-                Vector<double> N(2);
+                FixedSizeVector<double, 2> N;
                 N[0] = spine_centre[0] - S0[0];
                 N[1] = spine_centre[1] - S0[1];
 
@@ -631,7 +631,7 @@ namespace oomph
                 upper_sub_geom_object_pt->position(s_up, r_wall_up);
 
                 // Get normal vector towards origin
-                Vector<double> N(2);
+                FixedSizeVector<double, 2> N;
                 N[0] = spine_centre[0] - r_wall_up[0];
                 N[1] = spine_centre[1] - r_wall_up[1];
                 double length = sqrt(N[0] * N[0] + N[1] * N[1]);
@@ -1065,7 +1065,7 @@ namespace oomph
     Vector<double> dx(2);
     Vector<double> new_free_x(2);
     DenseDoubleMatrix jacobian(2, 2, 0.0);
-    Vector<double> spine_x(2);
+    FixedSizeVector<double, 2> spine_x;
     Vector<double> free_x(2);
 
     double maxres = 100.0;

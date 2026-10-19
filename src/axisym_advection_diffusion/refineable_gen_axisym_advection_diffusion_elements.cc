@@ -94,8 +94,8 @@ namespace oomph
 
       // These need to be a Vector to be ANSI C++, initialise to zero
       Vector<double> interpolated_x(2, 0.0);
-      Vector<double> interpolated_dudx(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dudx(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------

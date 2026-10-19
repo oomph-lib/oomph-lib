@@ -88,7 +88,7 @@ namespace oomph
       double interpolated_dlaplacian_wdr = 0.0;
       double interpolated_du_rdr = 0.0;
 
-      Vector<double> nodal_value(3, 0.0);
+      FixedSizeVector<double, 3> nodal_value(0.0);
 
       // Calculate function values and derivatives:
       //-----------------------------------------

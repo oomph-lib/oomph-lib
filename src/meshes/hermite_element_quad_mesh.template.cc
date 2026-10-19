@@ -398,7 +398,7 @@ namespace oomph
                                    s_macro_R[0] - s_macro_N[0]);
 
       // compute dm1/ds0
-      Vector<double> node_space(2);
+      FixedSizeVector<double, 2> node_space;
       node_space[0] = s_macro_N[1] - s_macro_L[1];
       node_space[1] = s_macro_R[1] - s_macro_N[1];
       // set nodal dof
@@ -516,7 +516,7 @@ namespace oomph
       macro_coordinate_position(node_num_x, node_num_y - 1, s_macro_D);
 
       // compute dm0/ds1
-      Vector<double> node_space(2);
+      FixedSizeVector<double, 2> node_space;
       node_space[0] = s_macro_N[0] - s_macro_D[0];
       node_space[1] = s_macro_U[0] - s_macro_N[0];
       // set nodal coordinate
@@ -558,7 +558,7 @@ namespace oomph
         Vector<double> s_macro_DL(2);
         macro_coordinate_position(node_num_x - 1, node_num_y - 1, s_macro_DL);
 
-        Vector<double> node_space(2);
+        FixedSizeVector<double, 2> node_space;
         // comute dm0/ds0ds1 wrt to node above and below
         node_space[0] =
           m_gen(1, 0) - 0.5 * std::min(s_macro_D[0] - s_macro_DL[0],

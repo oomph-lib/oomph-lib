@@ -33,6 +33,9 @@
 #include <oomph-lib-config.h>
 #endif
 
+// Fixed-size containers
+#include "generic/fixed_size_vector.h"
+
 namespace oomph
 {
   //======================================================================
@@ -64,7 +67,7 @@ namespace oomph
       this->Dim = node_pt(0)->ndim();
 
       // Default centre of rotation is the origin
-      this->Centre_of_rotation.resize(this->Dim, 0.0);
+      this->Centre_of_rotation.fill(0.0);
     }
 
     /// Set the translation and rotation of the rigid object
@@ -83,7 +86,12 @@ namespace oomph
 
 
     /// Function that specifies the drag force and the torque about
-    /// the origin
+    /// the origin. Note: The signature of this function is inherited
+    /// from ElementWithDragFunction in generic and therefore maintains
+    /// resizable Vector<double> arguments for drag_force (compile-time
+    /// size: ELEMENT::TEMPLATE_PARAMETER_DIM) and drag_torque
+    /// (compile-time size: 2*ELEMENT::TEMPLATE_PARAMETER_DIM - 3, i.e.
+    /// 1 in 2D and 3 in 3D) until generic has been updated.
     virtual void get_drag_and_torque(Vector<double>& drag_force,
                                      Vector<double>& drag_torque)
     {
@@ -103,14 +111,39 @@ namespace oomph
         drag_torque[i] = 0.0;
       }
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
+
+      // Outer unit normal of the fluid. FaceElement::outer_unit_normal(...)
+      // in generic returns it in a resizable Vector (allocated only once,
+      // outside the loop over the integration points) from which it is
+      // copied into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires. Once FaceElement::outer_unit_normal(...)
+      // in generic has been updated to FixedSizeVector,
+      // normal_from_face_element and the copy below can be removed.
+      Vector<double> normal_from_face_element(ndim + 1);
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
+
+      // Velocity and traction from the bulk element and the position
+      // relative to the centre of rotation: their size is the bulk
+      // element's spatial dimension so, again, we use fixed-size
+      // vectors. No initialisation required since all their entries are
+      // assigned before use.
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> X;
 
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
@@ -145,7 +178,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -167,17 +203,19 @@ namespace oomph
         }
 #endif
 
-        // Outer unit normal of the fluid
-        Vector<double> normal(ndim + 1);
-        outer_unit_normal(s, normal);
+        // Outer unit normal of the fluid (computed into the resizable
+        // Vector and copied into the fixed-size vector; see above)
+        outer_unit_normal(s, normal_from_face_element);
+        for (unsigned i = 0; i < ndim + 1; i++)
+        {
+          normal[i] = normal_from_face_element[i];
+        }
 
         // Get velocity from bulk element
-        Vector<double> veloc(ndim + 1);
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
         // Get traction from bulk element this is directed into the fluid
         // so we need to reverse the sign
-        Vector<double> traction(ndim + 1);
         bulk_el_pt->get_traction(s_bulk, normal, traction);
 
         // Integrate (note the minus sign)
@@ -188,7 +226,6 @@ namespace oomph
 
         // Now Calculate the torque which is r x F
         // Scale X relative to the centre of rotation
-        Vector<double> X(ndim + 1);
         for (unsigned i = 0; i < ndim + 1; i++)
         {
           X[i] = x[i] - Centre_of_rotation[i] -
@@ -242,22 +279,38 @@ namespace oomph
       // Elemental dimension
       unsigned dim_el = dim();
 
-      // Local coordinates
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), local coordinates in the
+      // bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and Eulerian
+      // coordinates (size: ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained
+      // as resizable Vectors for consistency with
+      // FiniteElement::get_s_plot(...),
+      // FaceElement::get_local_coordinate_in_bulk(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(dim_el);
-
       Vector<double> s_bulk(dim_el + 1);
+      Vector<double> x(dim_el + 1);
 
-      // Calculate the Eulerian coordinates and Lagrange multiplier
-      Vector<double> x(dim_el + 1, 0.0);
+      // Outer unit normal of the fluid. FaceElement::outer_unit_normal(...)
+      // in generic returns it in a resizable Vector from which it is
+      // copied into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires. Once FaceElement::outer_unit_normal(...)
+      // in generic has been updated to FixedSizeVector,
+      // normal_from_face_element and the copy below can be removed.
+      Vector<double> normal_from_face_element(dim_el + 1);
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
-      // Outer unit normal of the fluid
-      Vector<double> normal(dim_el + 1);
-
-      // Velocity from bulk element
-      Vector<double> veloc(dim_el + 1);
-
-      // Tractions (from bulk element)
-      Vector<double> traction(dim_el + 1);
+      // Velocity and tractions from the bulk element and the position
+      // relative to the centre of rotation: their size is the bulk
+      // element's spatial dimension so, again, we use fixed-size
+      // vectors. No initialisation required since all their entries are
+      // assigned before use.
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> X;
 
       // Tecplot header info
       outfile << this->tecplot_zone_string(n_plot);
@@ -273,8 +326,13 @@ namespace oomph
 
         // Get x position from bulk
         bulk_el_pt->interpolated_x(s_bulk, x);
-        // Get outer unit normal
-        outer_unit_normal(s, normal);
+        // Get outer unit normal (computed into the resizable Vector and
+        // copied into the fixed-size vector; see above)
+        outer_unit_normal(s, normal_from_face_element);
+        for (unsigned i = 0; i < dim_el + 1; i++)
+        {
+          normal[i] = normal_from_face_element[i];
+        }
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
         // Get traction from bulk element this is directed into the fluid
         // so we need to reverse the sign
@@ -282,7 +340,6 @@ namespace oomph
 
         // Now Calculate the torque which is r x F
         // Scale X relative to the centre of rotation
-        Vector<double> X(dim_el + 1);
         for (unsigned i = 0; i < dim_el + 1; i++)
         {
           X[i] = x[i] - Centre_of_rotation[i] -
@@ -321,8 +378,10 @@ namespace oomph
     /// The highest dimension of the problem
     unsigned Dim;
 
-    /// The centre of rotation for the torque calculation
-    Vector<double> Centre_of_rotation;
+    /// The centre of rotation for the torque calculation: fixed-size
+    /// vector whose size is the bulk element's spatial dimension
+    /// (obtained from its publicly exposed template parameter)
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> Centre_of_rotation;
 
     /// The index of where the translation and rotation data is stored
     unsigned Translation_index;

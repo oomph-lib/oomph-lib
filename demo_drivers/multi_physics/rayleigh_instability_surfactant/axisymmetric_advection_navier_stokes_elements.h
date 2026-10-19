@@ -231,7 +231,12 @@ public:
                             Vector<double>& wind) const
  {
   //The wind function is simply the velocity at the points
-  this->interpolated_u_axi_nst(s,wind);
+  FixedSizeVector<double, 3> u;
+  this->interpolated_u_axi_nst(s,u);
+  for (unsigned i=0;i<3;i++)
+   {
+    wind[i] = u[i];
+   }
  }
 
  /// Calculate the element's contribution to the residual vector.

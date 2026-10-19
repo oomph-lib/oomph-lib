@@ -318,8 +318,8 @@ namespace oomph
         // and solid.
 
         // Get deformed and undeformed tangent vectors
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_T1(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_T1(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -476,8 +476,8 @@ namespace oomph
       bulk_pt->interpolated_u(s_bulk, disp);
 
       // Get deformed and undeformed tangent vectors
-      Vector<double> interpolated_t1(2, 0.0);
-      Vector<double> interpolated_T1(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_t1(0.0);
+      FixedSizeVector<double, 2> interpolated_T1(0.0);
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over directional components
@@ -565,8 +565,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psi, dpsids);
 
         // Get position and tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -600,7 +600,7 @@ namespace oomph
         bulk_el_pt->interpolated_du_dt(s_bulk, du_dt);
 
 #ifdef PARANOID
-        Vector<double> x_bulk(2);
+        FixedSizeVector<double, 2> x_bulk;
         x_bulk[0] = bulk_el_pt->interpolated_x(s_bulk, 0);
         x_bulk[1] = bulk_el_pt->interpolated_x(s_bulk, 1);
         double error = sqrt(
@@ -951,8 +951,11 @@ namespace oomph
       this->outer_unit_normal(intpt, interpolated_normal);
 
       // Get all 3 (r,z,theta) components of the nst traction
-      Vector<double> traction_nst(3);
-      ext_el_pt->traction(s_ext, interpolated_normal, traction_nst);
+      FixedSizeVector<double, 3> n_fixed(0.0);
+      n_fixed[0] = interpolated_normal[0];
+      n_fixed[1] = interpolated_normal[1];
+      FixedSizeVector<double, 3> traction_nst;
+      ext_el_pt->traction(s_ext, n_fixed, traction_nst);
 
 
 #ifdef PARANOID
@@ -1023,8 +1026,11 @@ namespace oomph
       this->outer_unit_normal(intpt, interpolated_normal);
 
       // Get all 3 components of the nst traction
-      Vector<double> traction_nst(3);
-      ext_el_pt->traction(s_ext, interpolated_normal, traction_nst);
+      FixedSizeVector<double, 3> n_fixed(0.0);
+      n_fixed[0] = interpolated_normal[0];
+      n_fixed[1] = interpolated_normal[1];
+      FixedSizeVector<double, 3> traction_nst;
+      ext_el_pt->traction(s_ext, n_fixed, traction_nst);
 
       // Get FSI parameter
       const double q_value = q();

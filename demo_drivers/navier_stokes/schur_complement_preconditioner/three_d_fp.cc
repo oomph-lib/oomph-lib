@@ -87,11 +87,10 @@ namespace Global_Variables
 
  /// Traction at the outflow boundary
  void prescribed_traction(const double& t,
-                          const Vector<double>& x,
-                          const Vector<double> &n,
-                          Vector<double>& traction)
+                          const FixedSizeVector<double, 3>& x,
+                          const FixedSizeVector<double, 3> &n,
+                          FixedSizeVector<double, 3>& traction)
  {
-  traction.resize(3);
   traction[0]=1.0;
   traction[1]=0.0;
   traction[2]=0.0;

@@ -52,19 +52,20 @@ namespace Global_Physical_Variables2
  double Re_invFr=100;
 
  /// Gravity vector
- Vector<double> Gravity(2);
+ FixedSizeVector<double, 2> Gravity;
 
  /// Functional body force
- void body_force(const double& time, const Vector<double>& x, 
-                 Vector<double>& result)
+ void body_force(const double& time, const FixedSizeVector<double, 2>& x, 
+                 FixedSizeVector<double, 2>& result)
  {
   result[0]=0.0;
   result[1]=-Re_invFr;
  }
 
  /// Zero functional body force
- void zero_body_force(const double& time, const Vector<double>& x, 
-                      Vector<double>& result)
+ void zero_body_force(const double& time,
+                      const FixedSizeVector<double, 2>& x, 
+                      FixedSizeVector<double, 2>& result)
  {
   result[0]=0.0;
   result[1]=0.0;

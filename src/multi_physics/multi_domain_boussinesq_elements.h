@@ -120,11 +120,12 @@ namespace oomph
     /// buoyancy force, using the temperature computed by the
     /// "external" advection diffusion element associated with
     /// integration point \c ipt.
-    void get_body_force_nst(const double& time,
-                            const unsigned& ipt,
-                            const Vector<double>& s,
-                            const Vector<double>& x,
-                            Vector<double>& body_force)
+    void get_body_force_nst(
+      const double& time,
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& x,
+      FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& body_force)
     {
       // Set interaction index -- there's only one interaction...
       const unsigned interaction = 0;
@@ -140,11 +141,11 @@ namespace oomph
 
       // Get vector that indicates the direction of gravity from
       // the Navier-Stokes equations
-      Vector<double> gravity(NST_ELEMENT::g());
+      const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>&
+        gravity = NST_ELEMENT::g();
 
       // Set the temperature-dependent body force:
-      const unsigned n_dim = this->dim();
-      for (unsigned i = 0; i < n_dim; i++)
+      for (unsigned i = 0; i < NST_ELEMENT::TEMPLATE_PARAMETER_DIM; i++)
       {
         body_force[i] = -gravity[i] * interpolated_t * ra();
       }
@@ -465,9 +466,18 @@ namespace oomph
       NST_ELEMENT* nst_el_pt =
         dynamic_cast<NST_ELEMENT*>(external_element_pt(interaction, ipt));
 
-      // Wind is given by the velocity in the Navier Stokes element
+      // Wind is given by the velocity in the Navier Stokes element.
+      // interpolated_u_nst(...) returns a FixedSizeVector whereas
+      // get_wind_adv_diff(...) (inherited from AdvectionDiffusionEquations)
+      // still requires a resizable Vector; copy across until
+      // AdvectionDiffusionEquations has been updated.
+      FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM> u_nst;
       nst_el_pt->interpolated_u_nst(
-        external_element_local_coord(interaction, ipt), wind);
+        external_element_local_coord(interaction, ipt), u_nst);
+      for (unsigned i = 0; i < NST_ELEMENT::TEMPLATE_PARAMETER_DIM; i++)
+      {
+        wind[i] = u_nst[i];
+      }
 
     } // end of get_wind_adv_diff
 
@@ -588,7 +598,8 @@ namespace oomph
         double W = w * J;
 
         // Calculate local values of the derivatives of the solution
-        Vector<double> interpolated_dudx(n_dim, 0.0);
+        FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>
+          interpolated_dudx(0.0);
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
@@ -848,11 +859,12 @@ namespace oomph
     /// Overload get_body_force_nst to get the temperature "body force"
     /// from the "source" AdvectionDiffusion element via current integration
     /// point
-    void get_body_force_nst(const double& time,
-                            const unsigned& ipt,
-                            const Vector<double>& s,
-                            const Vector<double>& x,
-                            Vector<double>& result);
+    void get_body_force_nst(
+      const double& time,
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& x,
+      FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& result);
 
     /// Fill in the derivatives of the body force with respect to the
     /// external unknowns
@@ -906,7 +918,8 @@ namespace oomph
       // Local storage for the index in the nodes at which the
       // Navier-Stokes velocities are stored (we know that this should be 0,1,2)
       const unsigned n_dim = this->dim();
-      Vector<unsigned> u_nodal_nst(n_dim);
+      FixedSizeVector<unsigned, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>
+        u_nodal_nst;
       for (unsigned i = 0; i < n_dim; i++)
       {
         u_nodal_nst[i] = this->u_index_nst(i);
@@ -1000,11 +1013,12 @@ namespace oomph
   //========================================================
   template<class NST_ELEMENT, class AD_ELEMENT>
   void NavierStokesBoussinesqElement<NST_ELEMENT, AD_ELEMENT>::
-    get_body_force_nst(const double& time,
-                       const unsigned& ipt,
-                       const Vector<double>& s,
-                       const Vector<double>& x,
-                       Vector<double>& result)
+    get_body_force_nst(
+      const double& time,
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& x,
+      FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>& result)
   {
     // The interaction index is 0 in this case
     unsigned interaction = 0;
@@ -1017,11 +1031,11 @@ namespace oomph
 
     // Get vector that indicates the direction of gravity from
     // the Navier-Stokes equations
-    Vector<double> gravity(NST_ELEMENT::g());
+    const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>&
+      gravity = NST_ELEMENT::g();
 
     // Temperature-dependent body force:
-    const unsigned n_dim = this->dim();
-    for (unsigned i = 0; i < n_dim; i++)
+    for (unsigned i = 0; i < NST_ELEMENT::TEMPLATE_PARAMETER_DIM; i++)
     {
       result[i] = -gravity[i] * interpolated_t * ra();
     }
@@ -1242,7 +1256,8 @@ namespace oomph
         double W = w * J;
 
         // Calculate local values of the derivatives of the solution
-        Vector<double> interpolated_dudx(n_dim, 0.0);
+        FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>
+          interpolated_dudx(0.0);
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
@@ -1330,9 +1345,18 @@ namespace oomph
     NST_ELEMENT* source_el_pt =
       dynamic_cast<NST_ELEMENT*>(external_element_pt(interaction, ipt));
 
-    // The wind function is simply the velocity at the points of the "other" el
+    // The wind function is simply the velocity at the points of the
+    // "other" element. interpolated_u_nst(...) returns a FixedSizeVector
+    // whereas get_wind_adv_diff(...) (inherited from
+    // AdvectionDiffusionEquations) still requires a resizable Vector;
+    // copy across until AdvectionDiffusionEquations has been updated.
+    FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM> u_nst;
     source_el_pt->interpolated_u_nst(
-      external_element_local_coord(interaction, ipt), wind);
+      external_element_local_coord(interaction, ipt), u_nst);
+    for (unsigned i = 0; i < NST_ELEMENT::TEMPLATE_PARAMETER_DIM; i++)
+    {
+      wind[i] = u_nst[i];
+    }
   }
 
   //=========================================================================
@@ -1381,7 +1405,8 @@ namespace oomph
   {
     // Get vector that indicates the direction of gravity from
     // the Navier-Stokes equations
-    Vector<double> gravity(NST_ELEMENT::g());
+    const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>&
+      gravity = NST_ELEMENT::g();
 
     // The interaction index is 0 in this case
     unsigned interaction = 0;
@@ -1439,7 +1464,8 @@ namespace oomph
   {
     // Get vector that indicates the direction of gravity from
     // the Navier-Stokes equations
-    Vector<double> gravity(NST_ELEMENT::g());
+    const FixedSizeVector<double, NST_ELEMENT::TEMPLATE_PARAMETER_DIM>&
+      gravity = NST_ELEMENT::g();
 
     // The interaction index is 0 in this case
     unsigned interaction = 0;

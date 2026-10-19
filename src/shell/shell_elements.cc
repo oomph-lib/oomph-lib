@@ -100,7 +100,7 @@ namespace oomph
 
     // Calculate local values of lagrangian position and
     // the derivative of global position wrt lagrangian coordinates
-    DenseMatrix<double> interpolated_A(2, 3);
+    FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
 
     // Initialise to zero
     for (unsigned i = 0; i < n_dim; i++)
@@ -183,8 +183,8 @@ namespace oomph
     // Calculate local values of lagrangian position and
     // the derivative of global position wrt lagrangian coordinates
     Vector<double> interpolated_xi(2, 0.0), interpolated_x(3, 0.0);
-    Vector<double> accel(3, 0.0);
-    DenseMatrix<double> interpolated_A(2, 3);
+    FixedSizeVector<double, 3> accel(0.0);
+    FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
     DenseMatrix<double> interpolated_dAdxi(3);
 
     // Initialise to zero
@@ -408,8 +408,8 @@ namespace oomph
       // Calculate local values of lagrangian position and
       // the derivative of global position wrt lagrangian coordinates
       Vector<double> interpolated_xi(2, 0.0), interpolated_x(3, 0.0);
-      Vector<double> accel(3, 0.0);
-      DenseMatrix<double> interpolated_A(2, 3);
+      FixedSizeVector<double, 3> accel(0.0);
+      FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
       DenseMatrix<double> interpolated_dAdxi(3);
 
       // Initialise to zero

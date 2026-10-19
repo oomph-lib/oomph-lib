@@ -131,12 +131,12 @@ namespace oomph
       double W = w * J;
 
       // Calculate local values of the pressure and velocity components
-      // Allocate storage initialised to zero
+      // Allocate storage
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(2, 0.0);
-      Vector<double> interpolated_x(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_u;
+      FixedSizeVector<double, 2> interpolated_x;
       // Vector<double> dudt(2);
-      DenseMatrix<double> interpolated_dudx(2, 2, 0.0);
+      FixedSizeMatrix<double, 2, 2> interpolated_dudx;
 
       // Initialise to zero
       for (unsigned i = 0; i < 2; i++)

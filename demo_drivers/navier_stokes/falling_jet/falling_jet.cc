@@ -225,7 +225,7 @@ namespace Global_Physical_Variables
  double St = 0.0;
 
  /// Gravity direction
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;

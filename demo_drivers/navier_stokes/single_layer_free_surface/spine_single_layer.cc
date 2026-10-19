@@ -65,7 +65,7 @@ namespace Global_Physical_Variables
  double Ca = 0.01;
 
  /// Direction of gravity
- Vector<double> G(2);
+ FixedSizeVector<double, 2> G;
 
 } // End of namespace
 

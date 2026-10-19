@@ -39,6 +39,7 @@
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/Telements.h"
+#include "generic/fixed_size_vector.h"
 
 namespace oomph
 {
@@ -53,12 +54,22 @@ namespace oomph
   class NavierStokesTractionElement : public virtual FaceGeometry<ELEMENT>,
                                       public virtual FaceElement
   {
+  public:
+    /// Function pointer to the imposed traction function
+    /// fct(t,x,n,traction): The Eulerian position x, the outer unit
+    /// normal n and the traction (returned in result) are fixed-size
+    /// vectors whose size is the spatial dimension of the bulk element
+    /// (obtained, as a compile-time constant, from its publicly exposed
+    /// template parameter).
+    typedef void (*NavierStokesTractionFctPt)(
+      const double& time,
+      const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& x,
+      const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& n,
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& result);
+
   private:
     /// Pointer to an imposed traction function
-    void (*Traction_fct_pt)(const double& time,
-                            const Vector<double>& x,
-                            const Vector<double>& n,
-                            Vector<double>& result);
+    NavierStokesTractionFctPt Traction_fct_pt;
 
   protected:
     /// The "global" intrinsic coordinate of the element when
@@ -101,11 +112,16 @@ namespace oomph
     }
 
 
-    /// Function to calculate the traction applied to the fluid
-    void get_traction(const double& time,
-                      const Vector<double>& x,
-                      const Vector<double>& n,
-                      Vector<double>& result)
+    /// Function to calculate the traction applied to the fluid at
+    /// time t, Eulerian position x and outer unit normal n. The traction
+    /// is returned in result; all three vectors are fixed-size vectors
+    /// of the bulk element's spatial dimension. All DIM entries of
+    /// result are assigned so it doesn't have to be initialised.
+    void get_traction(
+      const double& time,
+      const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& x,
+      const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& n,
+      FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
@@ -182,11 +198,8 @@ namespace oomph
     /// Destructor should not delete anything
     ~NavierStokesTractionElement() {}
 
-    // Access function for the imposed traction pointer
-    void (*&traction_fct_pt())(const double& t,
-                               const Vector<double>& x,
-                               const Vector<double>& n,
-                               Vector<double>& result)
+    /// Access function for the imposed traction pointer
+    NavierStokesTractionFctPt& traction_fct_pt()
     {
       return Traction_fct_pt;
     }
@@ -252,6 +265,22 @@ namespace oomph
     // Integers to store local equation numbers
     int local_eqn = 0;
 
+    // Storage for the Eulerian position, the outer unit normal and the
+    // traction at the integration point. Their size is the bulk
+    // element's spatial dimension, obtained (as a compile-time constant)
+    // from its publicly exposed template parameter, so we use fixed-size
+    // vectors, allocated once (on the stack) outside the loop over the
+    // integration points. FaceElement::outer_unit_normal(...) in generic
+    // returns the normal in a resizable Vector (also allocated only once)
+    // from which it is copied into the fixed-size vector; once
+    // FaceElement::outer_unit_normal(...) in generic has been updated to
+    // FixedSizeVector, normal_from_face_element and the copy below can
+    // be removed.
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_x;
+    Vector<double> normal_from_face_element(Dim);
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_n;
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
@@ -265,10 +294,8 @@ namespace oomph
       // Premultiply the weights and the Jacobian
       double W = w * J;
 
-      // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(Dim);
-
-      // Initialise to zero
+      // Need to find position to feed into Traction function:
+      // Initialise to zero (it's accumulated below)
       for (unsigned i = 0; i < Dim; i++)
       {
         interpolated_x[i] = 0.0;
@@ -284,12 +311,15 @@ namespace oomph
         }
       }
 
-      // Get the outer unit normal
-      Vector<double> interpolated_n(Dim);
-      outer_unit_normal(ipt, interpolated_n);
+      // Get the outer unit normal (computed into the resizable Vector and
+      // copied into the fixed-size vector; see above)
+      outer_unit_normal(ipt, normal_from_face_element);
+      for (unsigned i = 0; i < Dim; i++)
+      {
+        interpolated_n[i] = normal_from_face_element[i];
+      }
 
       // Get the user-defined traction terms
-      Vector<double> traction(Dim);
       get_traction(time, interpolated_x, interpolated_n, traction);
 
       // Now add to the appropriate equations
@@ -421,6 +451,22 @@ namespace oomph
     // Integers to store local equation numbers
     int local_eqn = 0;
 
+    // Storage for the Eulerian position, the outer unit normal and the
+    // traction at the integration point. Their size is the bulk
+    // element's spatial dimension, obtained (as a compile-time constant)
+    // from its publicly exposed template parameter, so we use fixed-size
+    // vectors, allocated once (on the stack) outside the loop over the
+    // integration points. FaceElement::outer_unit_normal(...) in generic
+    // returns the normal in a resizable Vector (also allocated only once)
+    // from which it is copied into the fixed-size vector; once
+    // FaceElement::outer_unit_normal(...) in generic has been updated to
+    // FixedSizeVector, normal_from_face_element and the copy below can
+    // be removed.
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_x;
+    Vector<double> normal_from_face_element(this->Dim);
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_n;
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> traction;
+
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
@@ -434,10 +480,8 @@ namespace oomph
       // Premultiply the weights and the Jacobian
       double W = w * J;
 
-      // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(this->Dim);
-
-      // Initialise to zero
+      // Need to find position to feed into Traction function:
+      // Initialise to zero (it's accumulated below)
       for (unsigned i = 0; i < this->Dim; i++)
       {
         interpolated_x[i] = 0.0;
@@ -453,12 +497,15 @@ namespace oomph
         }
       }
 
-      // Get the outer unit normal
-      Vector<double> interpolated_n(this->Dim);
-      this->outer_unit_normal(ipt, interpolated_n);
+      // Get the outer unit normal (computed into the resizable Vector and
+      // copied into the fixed-size vector; see above)
+      this->outer_unit_normal(ipt, normal_from_face_element);
+      for (unsigned i = 0; i < this->Dim; i++)
+      {
+        interpolated_n[i] = normal_from_face_element[i];
+      }
 
       // Get the user-defined traction terms
-      Vector<double> traction(this->Dim);
       this->get_traction(time, interpolated_x, interpolated_n, traction);
 
       // Now add to the appropriate equations

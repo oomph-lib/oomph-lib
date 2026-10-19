@@ -65,7 +65,7 @@ namespace Global_Physical_Variables
  double P_ext = 1.31;
 
  /// Direction of gravity
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
  /// Free surface cosine deform parameter
  double Epsilon = 0.1;

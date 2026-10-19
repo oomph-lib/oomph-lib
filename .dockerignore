@@ -1,0 +1,19 @@
+# Keep the Docker build context small and avoid leaking host build artefacts
+# into the image.
+.git
+.github
+**/build/
+**/install/
+**/Validation/
+**/validation.log
+external_distributions/build
+external_distributions/install
+**/CMakeUserPresets.json
+**/*.o
+**/*.a
+**/*.so
+**/__pycache__/
+.oomph-build-cache
+.vscode
+.idea
+*.swp

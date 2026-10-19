@@ -144,10 +144,10 @@ namespace oomph
 
     unsigned global_max = 0;
     unsigned global_max_level = 0;
-    Vector<unsigned> data(2, 0);
+    FixedSizeVector<unsigned, 2> data(0);
     data[0] = my_max;
     data[1] = my_max_level;
-    Vector<unsigned> global_data(2, 0);
+    FixedSizeVector<unsigned, 2> global_data(0);
 #ifdef OOMPH_HAS_MPI
     if (this->is_mesh_distributed())
     {
@@ -3069,7 +3069,7 @@ namespace oomph
             // Are we going to receive anything? This is zero
             // either if there are no discrepancies or there's zero
             // data to be sent.
-            Vector<unsigned> n_all_recv(2, 0);
+            FixedSizeVector<unsigned, 2> n_all_recv(0);
             MPI_Recv(&n_all_recv[0],
                      2,
                      MPI_UNSIGNED,

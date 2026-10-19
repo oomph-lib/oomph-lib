@@ -2044,7 +2044,7 @@ namespace oomph
     // Receive first and last element from root on non-master processors
     else
     {
-      Vector<int> aux(2);
+      FixedSizeVector<int, 2> aux;
       MPI_Status status;
       MPI_Recv(&aux[0],
                2,
@@ -11484,7 +11484,7 @@ namespace oomph
     adapt(n_refined, n_unrefined);
 
     // Check if mesh has been adapted on other processors
-    Vector<int> total_ref_count(2);
+    FixedSizeVector<int, 2> total_ref_count;
     total_ref_count[0] = n_refined;
     total_ref_count[1] = n_unrefined;
 
@@ -11493,7 +11493,7 @@ namespace oomph
     if (Problem_has_been_distributed)
     {
       // Sum n_refine across all processors
-      Vector<int> ref_count(2);
+      FixedSizeVector<int, 2> ref_count;
       ref_count[0] = n_refined;
       ref_count[1] = n_unrefined;
       MPI_Allreduce(&ref_count[0],

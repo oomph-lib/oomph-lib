@@ -93,7 +93,7 @@ namespace GlobalPhysicalVariables
  int k = 0;
 
  /// Direction of gravity
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
 } // End of namespace
 

@@ -78,7 +78,7 @@ namespace oomph
     Vector<double> s(DIM + 1, 0.0);
 
     // Storage for the local velocity indices
-    Vector<unsigned> u_nodal_index(DIM, 0.0);
+    FixedSizeVector<unsigned, DIM> u_nodal_index(0.0);
 
     // Find the indices at which the local velocities are stored
     for (unsigned i = 0; i < DIM; i++)
@@ -388,9 +388,9 @@ namespace oomph
 
       // Calculate local values of the pressure and velocity components
       // Allocate
-      Vector<double> interpolated_u(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dpdx(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dpdx(0.0);
 
       // Calculate pressure gradient
       for (unsigned l = 0; l < n_pres; l++)
@@ -723,16 +723,16 @@ namespace oomph
       Vector<double> interpolated_x(DIM, 0.0);
 
       // Storage for the interpolated velocity components
-      Vector<double> interpolated_u(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
 
       // Storage for the interpolated time-derivative of the velocities
-      Vector<double> interpolated_dudt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Storage for the mesh velocity
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
       // Storage for the spatial derivatives of the velocity components
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)

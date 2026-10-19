@@ -94,8 +94,8 @@ namespace Global_Physical_Variables
 
   /// Unused (but assigned) function to specify tractions
   void traction_function(const double &time, 
-                         const Vector<double> &x, 
-                         Vector<double> &traction)
+                         const FixedSizeVector<double, 2> &x, 
+                         FixedSizeVector<double, 2> &traction)
   {
    //Impose traction
    traction[0] = 0.0;

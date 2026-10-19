@@ -64,7 +64,7 @@ namespace Global_Physical_Variables
  double P_ext = 0.0;
 
  /// Direction of gravity
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
 } // End of namespace
 

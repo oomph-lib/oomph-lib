@@ -678,7 +678,6 @@ namespace oomph
     int edge = OMEGA;
 
     Vector<double> s(1);
-    Vector<double> x(1);
     Vector<int> prev_son_type;
 
     Vector<double> s_in_neighbour(1);

@@ -45,12 +45,11 @@ namespace oomph
     /// Default load function (zero traction)
     //=======================================================================
     void Zero_traction_fct(const double& time,
-                           const Vector<double>& x,
-                           const Vector<double>& N,
-                           Vector<double>& load)
+                           const FixedSizeVector<double, 2>& x,
+                           const FixedSizeVector<double, 2>& N,
+                           FixedSizeVector<double, 3>& load)
     {
-      unsigned n_dim = load.size();
-      for (unsigned i = 0; i < n_dim; i++)
+      for (unsigned i = 0; i < 3; i++)
       {
         load[i] = 0.0;
       }

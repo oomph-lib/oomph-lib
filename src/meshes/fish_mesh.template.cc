@@ -906,7 +906,7 @@ namespace oomph
     back_pt->position(t, zeta, r_near_tail);
 
     // Get position on symmetry line
-    Vector<double> r_sym(2);
+    FixedSizeVector<double, 2> r_sym;
     r_sym[0] = x_mouth + fract_x * (r_near_tail[0] - x_mouth);
     r_sym[1] = 0.0;
 

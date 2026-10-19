@@ -119,23 +119,29 @@ namespace oomph
       public virtual GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase
   {
   public:
+    /// Publicly exposed template parameter: the spatial dimension
+    static const unsigned TEMPLATE_PARAMETER_DIM = DIM;
+
+    /// Number of components of the vorticity vector returned by
+    /// get_vorticity(...): 1 in 2D, 3 in 3D
+    static const unsigned N_vorticity_component = (DIM == 2) ? 1 : 3;
+
     /// Function pointer to body force function fct(t,x,f(x))
-    /// x is a Vector!
-    typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-                                               const Vector<double>& x,
-                                               Vector<double>& body_force);
+    typedef void (*NavierStokesBodyForceFctPt)(
+      const double& time,
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeVector<double, DIM>& body_force);
 
     /// Function pointer to source function fct(t,x)
-    /// x is a Vector!
-    typedef double (*NavierStokesSourceFctPt)(const double& time,
-                                              const Vector<double>& x);
+    typedef double (*NavierStokesSourceFctPt)(
+      const double& time, const FixedSizeVector<double, DIM>& x);
 
 
     /// Function pointer to source function fct(x) for the
     /// pressure advection diffusion equation (only used during
-    /// validation!). x is a Vector!
+    /// validation!)
     typedef double (*NavierStokesPressureAdvDiffSourceFctPt)(
-      const Vector<double>& x);
+      const FixedSizeVector<double, DIM>& x);
 
   private:
     /// Static "magic" number that indicates that the pressure is
@@ -151,7 +157,7 @@ namespace oomph
     static double Default_Physical_Ratio_Value;
 
     /// Static default value for the gravity vector
-    static Vector<double> Default_Gravity_vector;
+    static FixedSizeVector<double, DIM> Default_Gravity_vector;
 
   protected:
     /// Static boolean telling us whether we pre-multiply the pressure and
@@ -180,8 +186,8 @@ namespace oomph
     /// (= Bond number / Capillary number)
     double* ReInvFr_pt;
 
-    /// Pointer to global gravity Vector
-    Vector<double>* G_pt;
+    /// Pointer to global gravity vector
+    FixedSizeVector<double, DIM>* G_pt;
 
     /// Pointer to body force function
     NavierStokesBodyForceFctPt Body_force_fct_pt;
@@ -250,8 +256,8 @@ namespace oomph
     virtual void get_body_force_nst(const double& time,
                                     const unsigned& ipt,
                                     const Vector<double>& s,
-                                    const Vector<double>& x,
-                                    Vector<double>& result)
+                                    const FixedSizeVector<double, DIM>& x,
+                                    FixedSizeVector<double, DIM>& result)
     {
       // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
@@ -278,21 +284,21 @@ namespace oomph
       const double& time,
       const unsigned& ipt,
       const Vector<double>& s,
-      const Vector<double>& x,
-      DenseMatrix<double>& d_body_force_dx)
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeMatrix<double, DIM, DIM>& d_body_force_dx)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
       /*    if(Body_force_fct_gradient_pt==0) */
       {
         // Reference value
-        Vector<double> body_force(DIM, 0.0);
+        FixedSizeVector<double, DIM> body_force;
         get_body_force_nst(time, ipt, s, x, body_force);
 
         // FD it
         double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
-        Vector<double> body_force_pls(DIM, 0.0);
-        Vector<double> x_pls(x);
+        FixedSizeVector<double, DIM> body_force_pls;
+        FixedSizeVector<double, DIM> x_pls(x);
         for (unsigned i = 0; i < DIM; i++)
         {
           x_pls[i] += eps_fd;
@@ -317,7 +323,7 @@ namespace oomph
     /// Eulerian position
     virtual double get_source_nst(const double& time,
                                   const unsigned& ipt,
-                                  const Vector<double>& x)
+                                  const FixedSizeVector<double, DIM>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)
@@ -337,10 +343,11 @@ namespace oomph
     /// the strength of the source function might be determined by
     /// another system of equations. Computed via function pointer
     /// (if set) or by finite differencing (default)
-    inline virtual void get_source_gradient_nst(const double& time,
-                                                const unsigned& ipt,
-                                                const Vector<double>& x,
-                                                Vector<double>& gradient)
+    inline virtual void get_source_gradient_nst(
+      const double& time,
+      const unsigned& ipt,
+      const FixedSizeVector<double, DIM>& x,
+      FixedSizeVector<double, DIM>& gradient)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
@@ -352,7 +359,7 @@ namespace oomph
         // FD it
         double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
         double source_pls = 0.0;
-        Vector<double> x_pls(x);
+        FixedSizeVector<double, DIM> x_pls(x);
         for (unsigned i = 0; i < DIM; i++)
         {
           x_pls[i] += eps_fd;
@@ -422,7 +429,7 @@ namespace oomph
     // N.B. This needs to be public so that the intel compiler gets things
     // correct somehow the access function messes things up when going to
     // refineable navier--stokes
-    static Vector<double> Gamma;
+    static FixedSizeVector<double, DIM> Gamma;
 
     // Access functions for the physical constants
 
@@ -489,13 +496,13 @@ namespace oomph
     }
 
     /// Vector of gravitational components
-    const Vector<double>& g() const
+    const FixedSizeVector<double, DIM>& g() const
     {
       return *G_pt;
     }
 
     /// Pointer to Vector of gravitational components
-    Vector<double>*& g_pt()
+    FixedSizeVector<double, DIM>*& g_pt()
     {
       return G_pt;
     }
@@ -669,8 +676,9 @@ namespace oomph
     double dissipation(const Vector<double>& s) const;
 
     /// Compute the vorticity vector at local coordinate s
-    void get_vorticity(const Vector<double>& s,
-                       Vector<double>& vorticity) const;
+    void get_vorticity(
+      const Vector<double>& s,
+      FixedSizeVector<double, N_vorticity_component>& vorticity) const;
 
     /// Get integral of kinetic energy over element
     double kin_energy() const;
@@ -680,25 +688,27 @@ namespace oomph
 
     /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
     void strain_rate(const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, DIM, DIM>& strain_rate) const;
 
     /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
     /// at a specific time history value
     void strain_rate(const unsigned& t,
                      const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, DIM, DIM>& strain_rate) const;
 
     /// Extrapolated strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
     /// based on the previous time steps evaluated
     /// at local coordinate s
     virtual void extrapolated_strain_rate(
-      const Vector<double>& s, DenseMatrix<double>& strain_rate) const;
+      const Vector<double>& s,
+      FixedSizeMatrix<double, DIM, DIM>& strain_rate) const;
 
     /// Extrapolated strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
     /// based on the previous time steps evaluated at
     /// ipt-th integration point
     virtual void extrapolated_strain_rate(
-      const unsigned& ipt, DenseMatrix<double>& strain_rate) const
+      const unsigned& ipt,
+      FixedSizeMatrix<double, DIM, DIM>& strain_rate) const
     {
       // Set the Vector to hold local coordinates
       Vector<double> s(DIM);
@@ -710,18 +720,18 @@ namespace oomph
     /// the fluid at local coordinate s. N has to be outer unit normal
     /// to the fluid.
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
+                      const FixedSizeVector<double, DIM>& N,
+                      FixedSizeVector<double, DIM>& traction);
 
     /// Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s, decomposed into pressure and
     /// normal and tangential viscous components.
     /// N has to be outer unit normal to the fluid.
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction_p,
-                      Vector<double>& traction_visc_n,
-                      Vector<double>& traction_visc_t);
+                      const FixedSizeVector<double, DIM>& N,
+                      FixedSizeVector<double, DIM>& traction_p,
+                      FixedSizeVector<double, DIM>& traction_visc_n,
+                      FixedSizeVector<double, DIM>& traction_visc_t);
 
     /// This implements a pure virtual function defined
     /// in the FSIFluidElement class. The function computes
@@ -739,7 +749,17 @@ namespace oomph
       // if N is the outer unit normal onto the fluid; here we're
       // exepcting N to point into the fluid so we're getting the
       // traction onto the adjacent wall instead!
-      get_traction(s, N, load);
+      FixedSizeVector<double, DIM> normal;
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        normal[i] = N[i];
+      }
+      FixedSizeVector<double, DIM> traction;
+      get_traction(s, normal, traction);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        load[i] = traction[i];
+      }
     }
 
     /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -1091,7 +1111,7 @@ namespace oomph
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_nst(const Vector<double>& s,
-                            Vector<double>& veloc) const
+                            FixedSizeVector<double, DIM>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();

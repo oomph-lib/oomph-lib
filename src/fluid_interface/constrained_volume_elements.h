@@ -520,7 +520,7 @@ namespace oomph
       const unsigned n_intpt = this->integral_pt()->nweight();
 
       // Storage for the local cooridinate
-      Vector<double> s(1);
+      FixedSizeVector<double, 1> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -536,9 +536,9 @@ namespace oomph
 
         // Get position, tangent vector and velocity vector (r and z
         // components only)
-        Vector<double> interpolated_u(2, 0.0);
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_u(0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
