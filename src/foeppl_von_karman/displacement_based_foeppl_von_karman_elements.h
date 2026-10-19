@@ -401,7 +401,7 @@ namespace oomph
       //--------------------------------------------
       // Calculate function values and derivatives:
       //--------------------------------------------
-      Vector<double> nodal_value(4, 0.0);
+      FixedSizeVector<double, 4> nodal_value(0.0);
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -507,14 +507,14 @@ namespace oomph
         // The variables
         double interpolated_laplacian_w = 0;
         Vector<double> interpolated_dwdx(2, 0.0);
-        Vector<double> interpolated_dlaplacian_wdx(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_dlaplacian_wdx(0.0);
         Vector<double> interpolated_duxdx(2, 0.0);
         Vector<double> interpolated_duydx(2, 0.0);
 
         //--------------------------------------------
         // Calculate function values and derivatives:
         //--------------------------------------------
-        Vector<double> nodal_value(4, 0.0);
+        FixedSizeVector<double, 4> nodal_value(0.0);
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {

@@ -155,7 +155,7 @@ namespace oomph
     unsigned new_el_count = 0;
 
     // Create storage for the coordinates of the centroid
-    Vector<double> centroid(2);
+    FixedSizeVector<double, 2> centroid(0.0);
 
     // Create storage for the coordinates of the vertices of the triangle
     Vector<Vector<double>> triangle_vertex(3);
@@ -375,7 +375,7 @@ namespace oomph
       q2_left_boundary_id = tmp_mesh_pt->edge_boundary(e, 1);
 
       // Store the boundary IDs as a vector; allows us to loop over them easily
-      Vector<unsigned> boundary_id_vector(6, 0);
+      FixedSizeVector<unsigned, 6> boundary_id_vector(0);
       boundary_id_vector[0] = q0_lower_boundary_id;
       boundary_id_vector[1] = q0_left_boundary_id;
       boundary_id_vector[2] = q1_lower_boundary_id;

@@ -270,7 +270,7 @@ namespace oomph
 #endif
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(3);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -797,7 +797,7 @@ namespace oomph
 #endif
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(3);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector

@@ -89,7 +89,7 @@ namespace oomph
       // Allocate and initialise to zero
       std::complex<double> interpolated_u(0.0, 0.0);
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<std::complex<double>> interpolated_dudx(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------
@@ -814,7 +814,7 @@ namespace oomph
     Vector<double> s(2);
 
     // Vector for coordintes
-    Vector<double> x(2);
+    FixedSizeVector<double, 2> x;
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();

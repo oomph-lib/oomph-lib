@@ -30,8 +30,8 @@
 namespace oomph
 {
   /// Navier--Stokes equations static data
-  Vector<double> GeneralisedNewtonianAxisymmetricNavierStokesEquations::Gamma(
-    2, 1.0);
+  FixedSizeVector<double, 2>
+    GeneralisedNewtonianAxisymmetricNavierStokesEquations::Gamma(1.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is
@@ -50,8 +50,9 @@ namespace oomph
     Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  Vector<double> GeneralisedNewtonianAxisymmetricNavierStokesEquations::
-    Default_Gravity_vector(3, 0.0);
+  FixedSizeVector<double, 3>
+    GeneralisedNewtonianAxisymmetricNavierStokesEquations::
+      Default_Gravity_vector(0.0);
 
   /// By default disable the pre-multiplication of the pressure and continuity
   /// equation by the viscosity ratio
@@ -93,7 +94,7 @@ namespace oomph
     const unsigned n_value = 3;
 
     // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_value);
+    FixedSizeVector<unsigned, 3> u_nodal_index;
     for (unsigned i = 0; i < n_value; i++)
     {
       u_nodal_index[i] = this->u_index_axi_nst(i);
@@ -438,8 +439,8 @@ namespace oomph
 
     // Vectors of local coordinates and coords and velocities
     Vector<double> s(2);
-    Vector<double> interpolated_x(2);
-    Vector<double> interpolated_u(3);
+    FixedSizeVector<double, 2> interpolated_x;
+    FixedSizeVector<double, 3> interpolated_u;
 
 
     // Tecplot header info
@@ -631,7 +632,7 @@ namespace oomph
       double J = J_eulerian(s);
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(3, 3);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       strain_rate(s, strainrate);
 
       // Initialise
@@ -656,24 +657,19 @@ namespace oomph
   //==============================================================
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::traction(
     const Vector<double>& s,
-    const Vector<double>& N,
-    Vector<double>& traction) const
+    const FixedSizeVector<double, 3>& N,
+    FixedSizeVector<double, 3>& traction) const
   {
-    // throw OomphLibError(
-    // "Check the traction calculation for axisymmetric NSt",
-    // OOMPH_CURRENT_FUNCTION,
-    // OOMPH_EXCEPTION_LOCATION);
-
     // Pad out normal vector if required
-    Vector<double> n_local(3, 0.0);
+    FixedSizeVector<double, 3> n_local(0.0);
     n_local[0] = N[0];
     n_local[1] = N[1];
 
 #ifdef PARANOID
-    if ((N.size() == 3) && (N[2] != 0.0))
+    if (N[2] != 0.0)
     {
       throw OomphLibError(
-        "Unit normal passed into this fct should either be 2D (r,z) or have a "
+        "Unit normal passed into this fct should have a "
         "zero component in the theta-direction",
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
@@ -681,7 +677,7 @@ namespace oomph
 #endif
 
     // Get velocity gradients
-    DenseMatrix<double> strainrate(3, 3, 0.0);
+    FixedSizeMatrix<double, 3, 3> strainrate;
 
     // Do we use the current or extrapolated strainrate to compute
     // the second invariant?
@@ -726,7 +722,7 @@ namespace oomph
       OOMPH_EXCEPTION_LOCATION);
 
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(3, 3);
+    FixedSizeMatrix<double, 3, 3> strainrate;
     strain_rate(s, strainrate);
 
     // Initialise
@@ -747,20 +743,8 @@ namespace oomph
   /// \f$ i,j = r,z,\theta \f$ (in that order)
   //==============================================================
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s, FixedSizeMatrix<double, 3, 3>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not 3" << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -850,22 +834,8 @@ namespace oomph
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::strain_rate(
     const unsigned& t,
     const Vector<double>& s,
-    DenseMatrix<double>& strainrate) const
+    FixedSizeMatrix<double, 3, 3>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not 3" << std::endl;
-
-      throw OomphLibError(
-        error_message.str(),
-        "GeneralisedNewtonianAxisymmetricNavierStokeEquations::strain_rate()",
-        OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -975,26 +945,13 @@ namespace oomph
   //==============================================================
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::
     extrapolated_strain_rate(const Vector<double>& s,
-                             DenseMatrix<double>& strainrate) const
+                             FixedSizeMatrix<double, 3, 3>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not 3" << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Get strain rates at two previous times
-    DenseMatrix<double> strain_rate_minus_two(3, 3);
+    FixedSizeMatrix<double, 3, 3> strain_rate_minus_two;
     strain_rate(2, s, strain_rate_minus_two);
 
-    DenseMatrix<double> strain_rate_minus_one(3, 3);
+    FixedSizeMatrix<double, 3, 3> strain_rate_minus_one;
     strain_rate(1, s, strain_rate_minus_one);
 
     // Get timestepper from first node
@@ -1140,7 +1097,7 @@ namespace oomph
       for (unsigned i = 0; i < 2; i++) s[i] = integral_pt()->knot(ipt, i);
 
       // The strainrate
-      DenseMatrix<double> strainrate(3, 3, 0.0);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       strain_rate(s, strainrate);
 
       // Calculate the second invariant
@@ -1210,7 +1167,7 @@ namespace oomph
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double scaled_re_inv_ro = re_invro() * density_ratio();
     // double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, 3>& G = g();
 
     // Integers used to store the local equation and unknown numbers
     int local_eqn = 0, local_unknown = 0;
@@ -1235,14 +1192,14 @@ namespace oomph
 
       // Allocate storage for the position and the derivative of the
       // mesh positions wrt time
-      Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
       // Allocate storage for the pressure, velocity components and their
       // time and spatial derivatives
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(3, 0.0);
-      Vector<double> dudt(3, 0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeVector<double, 3> dudt(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
@@ -1293,7 +1250,7 @@ namespace oomph
       }
 
       // The strainrate used to compute the second invariant
-      DenseMatrix<double> strainrate_to_compute_second_invariant(3, 3, 0.0);
+      FixedSizeMatrix<double, 3, 3> strainrate_to_compute_second_invariant;
 
       // the strainrate used to calculate the second invariant
       // can be either the current one or the one extrapolated from
@@ -1315,7 +1272,7 @@ namespace oomph
       double viscosity = Constitutive_eqn_pt->viscosity(second_invariant);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(3);
+      FixedSizeVector<double, 3> body_force;
       get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -1344,12 +1301,12 @@ namespace oomph
         // double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
 
         // calculate a reference strainrate
-        DenseMatrix<double> strainrate_ref(3, 3, 0.0);
+        FixedSizeMatrix<double, 3, 3> strainrate_ref;
         strain_rate(s, strainrate_ref);
 
         // pre-compute the derivative of the second invariant w.r.t. the
         // entries in the rate of strain tensor
-        DenseMatrix<double> dinvariant_dstrainrate(3, 3, 0.0);
+        FixedSizeMatrix<double, 3, 3> dinvariant_dstrainrate(0.0);
 
         // d I_2 / d epsilon_{r,r}
         dinvariant_dstrainrate(0, 0) =
@@ -2492,7 +2449,7 @@ namespace oomph
     const double scaled_re_inv_fr = re_invfr() * density_ratio();
     const double scaled_re_inv_ro = re_invro() * density_ratio();
     const double visc_ratio = viscosity_ratio();
-    const Vector<double> G = g();
+    const FixedSizeVector<double, 3>& G = g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -2527,7 +2484,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
 
         // Current nodal velocity
-        Vector<double> u_ref(3);
+        FixedSizeVector<double, 3> u_ref;
         for (unsigned i = 0; i < 3; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -2593,15 +2550,15 @@ namespace oomph
 
       // Allocate storage for the position and the derivative of the
       // mesh positions w.r.t. time
-      Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
 
       // Allocate storage for the pressure, velocity components and their
       // time and spatial derivatives
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(3, 0.0);
-      Vector<double> dudt(3, 0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeVector<double, 3> dudt(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
@@ -2688,7 +2645,7 @@ namespace oomph
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(3);
+      FixedSizeVector<double, 3> body_force;
       get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -2698,12 +2655,12 @@ namespace oomph
       // because this is the non-refineable version!
 
       // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(3, 2, 0.0);
+      FixedSizeMatrix<double, 3, 2> d_body_force_dx(0.0);
       get_body_force_gradient_axi_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
-      Vector<double> source_gradient(2, 0.0);
+      FixedSizeVector<double, 2> source_gradient(0.0);
       get_source_fct_gradient(time, ipt, interpolated_x, source_gradient);
 
       // Cache r (the first position component)
@@ -3445,7 +3402,7 @@ namespace oomph
     // double scaled_re_inv_ro = re_invro()*density_ratio();
     double dens_ratio = this->density_ratio();
     // double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, 3>& G = g();
 
     // Integers used to store the local equation and unknown numbers
     int local_eqn = 0, local_unknown = 0;
@@ -3470,14 +3427,14 @@ namespace oomph
 
       // Allocate storage for the position and the derivative of the
       // mesh positions wrt time
-      Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
       // Allocate storage for the pressure, velocity components and their
       // time and spatial derivatives
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(3, 0.0);
-      Vector<double> dudt(3, 0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeVector<double, 3> dudt(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
@@ -4118,14 +4075,9 @@ namespace oomph
     // Number of integration points
     unsigned Nintpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates (two dimensions)
-    Vector<double> s(2);
-
     // Get Physical Variables from Element
     // Reynolds number must be multiplied by the density ratio
     double scaled_re = re() * density_ratio();
-    // double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
 
     // Integers used to store the local equation and unknown numbers
     int local_eqn = 0, local_unknown = 0, local_freedom = 0;
@@ -4139,8 +4091,6 @@ namespace oomph
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < Nintpt; ipt++)
     {
-      // Assign values of s
-      for (unsigned i = 0; i < 2; i++) s[i] = integral_pt()->knot(ipt, i);
       // Get the integral weight
       double w = integral_pt()->weight(ipt);
 
@@ -4153,13 +4103,11 @@ namespace oomph
 
       // Allocate storage for the position and the derivative of the
       // mesh positions wrt time
-      Vector<double> interpolated_x(2, 0.0);
-      // Vector<double> mesh_velocity(2,0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
       // Allocate storage for the pressure, velocity components and their
       // time and spatial derivatives
-      Vector<double> interpolated_u(3, 0.0);
-      // Vector<double> dudt(3,0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate velocities and derivatives at integration point
 
@@ -4580,8 +4528,8 @@ namespace oomph
   //========================================================================
   void GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::get_traction(
     const Vector<double>& s,
-    const Vector<double>& N,
-    Vector<double>& traction) const
+    const FixedSizeVector<double, 3>& N,
+    FixedSizeVector<double, 3>& traction) const
   {
     GeneralisedNewtonianAxisymmetricNavierStokesEquations::traction(
       s, N, traction);
@@ -4658,8 +4606,8 @@ namespace oomph
   //========================================================================
   void GeneralisedNewtonianAxisymmetricQTaylorHoodElement::get_traction(
     const Vector<double>& s,
-    const Vector<double>& N,
-    Vector<double>& traction) const
+    const FixedSizeVector<double, 3>& N,
+    FixedSizeVector<double, 3>& traction) const
   {
     GeneralisedNewtonianAxisymmetricNavierStokesEquations::traction(
       s, N, traction);

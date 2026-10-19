@@ -1412,7 +1412,6 @@ namespace oomph
     int edge = OMEGA;
 
     Vector<double> s(2);
-    Vector<double> x(2);
     Vector<int> prev_son_type;
 
     Vector<unsigned> translate_s(2);

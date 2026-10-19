@@ -58,7 +58,7 @@ namespace Global_Parameters
  double Ra = 0.0;
  
  /// Gravity
- Vector<double> G;
+ FixedSizeVector<double, 3> G;
 
  /// Location of the centre of the sphere on the axis
  double Sphere_centre_z= 0.0;
@@ -437,7 +437,6 @@ int main()
  //Multi_domain_functions::Doc_stats=true;
  //Multi_domain_functions::Doc_full_stats=true;
 
- Global_Parameters::G.resize(3);
  Global_Parameters::G[0] = 0.0;
  Global_Parameters::G[1] = -1.0;
  Global_Parameters::G[2] = 0.0;

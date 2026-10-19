@@ -1653,14 +1653,14 @@ namespace oomph
 
         // The vector which will store the coordinates of the bin in the bin
         // arrray
-        Vector<int> vector_of_positions(3);
+        FixedSizeVector<int, 3> vector_of_positions;
 
         // Will store locally the dimension of the bin array
-        Vector<int> vector_of_dimensions(3);
+        FixedSizeVector<int, 3> vector_of_dimensions;
 
         // Will store the radiuses for each dimension
         // If it is 0, that means the dimension is not vector_of_active_dim
-        Vector<int> vector_of_radiuses(3);
+        FixedSizeVector<int, 3> vector_of_radiuses;
 
         // Stores true if the dimension is "active" or false if the
         // dimension is inactive (for example the third dimension is inactive in
@@ -1669,7 +1669,7 @@ namespace oomph
 
         // Will store the coefficients you have to multiply each bin coordinate
         // to have the correct unsigned corresponding to the bin index.
-        Vector<int> vector_of_coef(3);
+        FixedSizeVector<int, 3> vector_of_coef;
 
 
         // First initializing this MyArrays for the active dimensions

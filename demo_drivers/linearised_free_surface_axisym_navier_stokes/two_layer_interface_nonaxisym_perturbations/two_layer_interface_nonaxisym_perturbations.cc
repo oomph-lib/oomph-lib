@@ -90,7 +90,10 @@ namespace GlobalPhysicalVariables
   double Ca = 1.0;
 
   /// Direction of gravity
-  Vector<double> G(3);
+  FixedSizeVector<double, 3> G;
+
+  /// Direction of gravity (resizable Vector for linearised axisymmetric elements)
+  Vector<double> G_linearised(3);
 
   /// Vector of azimuthal mode numbers to investigate
   Vector<int> Vector_of_azimuthal_mode_numbers;
@@ -896,7 +899,7 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     el_pt->re_invfr_pt() = &GlobalPhysicalVariables::ReInvFr;
 
     // Set the direction of gravity
-    el_pt->g_pt() = &GlobalPhysicalVariables::G;
+    el_pt->g_pt() = &GlobalPhysicalVariables::G_linearised;
 
     // Set the azimuthal mode number
     el_pt->azimuthal_mode_number_pt() = &Azimuthal_mode_number;
@@ -924,7 +927,7 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     el_pt->re_invfr_pt() = &GlobalPhysicalVariables::ReInvFr;
 
     // Set the direction of gravity
-    el_pt->g_pt() = &GlobalPhysicalVariables::G;
+    el_pt->g_pt() = &GlobalPhysicalVariables::G_linearised;
 
     // Set the viscosity ratio
     el_pt->viscosity_ratio_pt() = &GlobalPhysicalVariables::Viscosity_Ratio;
@@ -1427,6 +1430,9 @@ int main(int argc, char* argv[])
   GlobalPhysicalVariables::G[0] = 0.0;
   GlobalPhysicalVariables::G[1] = -1.0;
   GlobalPhysicalVariables::G[2] = 0.0;
+  GlobalPhysicalVariables::G_linearised[0] = 0.0;
+  GlobalPhysicalVariables::G_linearised[1] = -1.0;
+  GlobalPhysicalVariables::G_linearised[2] = 0.0;
 
   // Set azimuthal mode numbers to investigate
   for (int i = 0; i < 3; i++)

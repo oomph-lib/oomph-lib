@@ -474,7 +474,7 @@ namespace oomph
       // Storage for the concentration
       double interpolated_u = 0.0;
       // Storage for the derivatives of the concentration
-      Vector<double> interpolated_dudx(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dudx(0.0);
 
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)

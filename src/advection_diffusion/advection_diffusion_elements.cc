@@ -98,8 +98,8 @@ namespace oomph
       double interpolated_u = 0.0;
       double dudt = 0.0;
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dudx(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
 
       // Calculate function value and derivatives:

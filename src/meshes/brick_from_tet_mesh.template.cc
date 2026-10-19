@@ -4618,7 +4618,7 @@ namespace oomph
 
             // Provide possibility for translation -- may need to add
             // face index to this; see ThinLayerBrickOnTetMesh.
-            Vector<unsigned> translate(19);
+            FixedSizeVector<unsigned, 19> translate;
 
             // Initialise with identity mapping
             for (unsigned i = 0; i < 19; i++)
@@ -9385,7 +9385,7 @@ namespace oomph
 
             // Provide possibility for translation -- may need to add
             // face index to this; see ThinLayerBrickOnTetMesh.
-            Vector<unsigned> translate(19);
+            FixedSizeVector<unsigned, 19> translate;
 
             // Initialise with identity mapping
             for (unsigned i = 0; i < 19; i++)

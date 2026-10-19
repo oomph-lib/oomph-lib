@@ -159,9 +159,9 @@ namespace Global_Physical_Variables
   
  /// Inflow traction applied to the fluid mesh
  void fluid_inflow_boundary_traction(const double &time,
-                                     const Vector<double> &x,
-                                     const Vector<double> &n,
-                                     Vector<double> &result)
+                                     const FixedSizeVector<double, 2> &x,
+                                     const FixedSizeVector<double, 2> &n,
+                                     FixedSizeVector<double, 3> &result)
  {
   result[0]=0.0;
   result[1]=P_inlet_const;
@@ -1169,7 +1169,7 @@ doc_solution(DocInfo& doc_info)
  unsigned npts=Fluid_regularly_spaced_plot_point.size();
  Vector<double> x(2);
  Vector<double> s(2);
- Vector<double> veloc(3);
+ FixedSizeVector<double, 3> veloc;
  for (unsigned i=0;i<npts;i++)
   {
    // Pointer to element

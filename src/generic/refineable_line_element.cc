@@ -286,8 +286,8 @@ namespace oomph
       // node on the current element's left-hand edge is located. Likewise,
       // s_right[0] stores the local coordinate within the father element at
       // which the node on the current element's right-hand edge is located).
-      Vector<double> s_left(1);
-      Vector<double> s_right(1);
+      FixedSizeVector<double, 1> s_left;
+      FixedSizeVector<double, 1> s_right;
 
       // In order to set up the vertex coordinates we need to know which
       // type of son the current element is
@@ -696,11 +696,11 @@ namespace oomph
 
     // Initialise errors
     max_error = 0.0;
-    Vector<double> max_error_x(1, 0.0);
+    FixedSizeVector<double, 1> max_error_x(0.0);
     double max_error_val = 0.0;
 
     // Initialise vector of element edges in the current element
-    Vector<int> edge_in_current(2);
+    FixedSizeVector<int, 2> edge_in_current;
     edge_in_current[0] = L;
     edge_in_current[1] = R;
 
@@ -709,7 +709,7 @@ namespace oomph
     {
       // Allocate storage for the fractional position (in the current
       // element) of the node in the direction of s[0]
-      Vector<double> s_fraction(1);
+      FixedSizeVector<double, 1> s_fraction;
 
       // Allocate storage for the location of a node in terms of the local
       // coordinate of the current element

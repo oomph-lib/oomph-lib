@@ -74,7 +74,7 @@ namespace Global_Physical_Variables
  double P_ext = 0.0;
 
  /// Gravity vector
- Vector<double> Direction_of_gravity(3);
+ FixedSizeVector<double, 3> Direction_of_gravity;
 
  /// ----- ENERGY PROBLEM -----
 

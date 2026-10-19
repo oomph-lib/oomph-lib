@@ -226,7 +226,7 @@ namespace oomph
       // Allocate and initialise to zero
       std::complex<double> interpolated_u(0.0, 0.0);
       Vector<double> interpolated_x(2, 0.0);
-      Vector<std::complex<double>> interpolated_dudx(2);
+      FixedSizeVector<std::complex<double>, 2> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------
@@ -293,7 +293,7 @@ namespace oomph
         (k_squared() - n_squared / (complex_r * complex_r)) * complex_r * W;
 
       // Term from the Laplace operator
-      Vector<std::complex<double>> pml_laplace_jacobian(2);
+      FixedSizeVector<std::complex<double>, 2> pml_laplace_jacobian;
       for (unsigned k = 0; k < 2; k++)
       {
         pml_laplace_jacobian[k] = pml_laplace_factor[k] * complex_r * W;
@@ -306,7 +306,7 @@ namespace oomph
         pml_k_squared_jacobian * interpolated_u;
 
       // Term from the Laplace operator
-      Vector<std::complex<double>> pml_laplace_residual(2);
+      FixedSizeVector<std::complex<double>, 2> pml_laplace_residual;
       for (unsigned k = 0; k < 2; k++)
       {
         pml_laplace_residual[k] =
@@ -801,7 +801,7 @@ namespace oomph
     Vector<double> s(2);
 
     // Vector for coordintes
-    Vector<double> x(2);
+    FixedSizeVector<double, 2> x;
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();

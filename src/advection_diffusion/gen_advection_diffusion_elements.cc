@@ -99,8 +99,8 @@ namespace oomph
       double interpolated_u = 0.0;
       double dudt = 0.0;
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dudx(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
 
       // Calculate function value and derivatives:
@@ -318,7 +318,7 @@ namespace oomph
 
       // Get the gradients
       (void)this->dshape_eulerian(s, psi, dpsidx);
-      Vector<double> interpolated_dudx(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
       for (unsigned n = 0; n < n_node; n++)
       {
         const double u_ = this->nodal_value(n, 0);
@@ -527,7 +527,7 @@ namespace oomph
     double sum = 0.0;
 
     // Vector of local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Find out how many nodes there are in the element
     const unsigned n_node = nnode();

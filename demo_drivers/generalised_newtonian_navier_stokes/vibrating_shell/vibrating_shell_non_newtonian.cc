@@ -103,8 +103,8 @@ namespace oomph
   double Dt_min=1.0e-6;
 
   /// Function describing the oscillation
-  void oscillation(const double& time, const Vector<double>& x, 
-                   Vector<double>& force)
+  void oscillation(const double& time, const FixedSizeVector<double, 2>& x, 
+                   FixedSizeVector<double, 2>& force)
   {
    force[0]=0.0;
    
@@ -1406,8 +1406,8 @@ doc_solution(const std::string& comment)
   }
  
  // Get body force
- Vector<double> body_force(2,0.0);
- Vector<double> x(2,0.0);
+ FixedSizeVector<double, 2> body_force(0.0);
+ FixedSizeVector<double, 2> x(0.0);
  Problem_Parameter::oscillation(this->time_pt()->time(),x,body_force);
 
  // only output the actual solution when it's the right time

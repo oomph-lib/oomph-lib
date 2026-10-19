@@ -108,7 +108,7 @@
   /// Return latest guess (obtained via fixed point iteration)
   /// for strain rate at integration point ipt
   void latest_fixed_point_iteration_guess_for_strain_rate(
-   const unsigned& ipt, DenseMatrix<double>& strainrate) const
+   const unsigned& ipt, FixedSizeMatrix<double, 3, 3>& strainrate) const
    {
     for (unsigned i=0;i<3;i++)
      {
@@ -126,7 +126,7 @@
   void update_latest_fixed_point_iteration_guess_for_strain_rate()
    {
     Vector<double> s(2);
-    DenseMatrix<double> strain_rate(3,3,0.0);
+    FixedSizeMatrix<double, 3, 3> strain_rate(0.0);
     unsigned n_intpt = integral_pt()->nweight();
     for (unsigned ipt=0;ipt<n_intpt;ipt++)
      {
@@ -187,7 +187,7 @@
   /// from history values evaluated at integration point ipt. Overloaded
   /// version from base class.
   void extrapolated_strain_rate(const unsigned& ipt,
-                                DenseMatrix<double>& strainrate) const
+                                FixedSizeMatrix<double, 3, 3>& strainrate) const
    {
     if (Use_fixed_point_for_strain_rate)
      {
@@ -207,30 +207,13 @@
   /// from history values evaluated at local coordinate s. Overloaded
   /// version from base class.
   void extrapolated_strain_rate(const Vector<double>& s, 
-                                DenseMatrix<double>& strainrate) const
+                                FixedSizeMatrix<double, 3, 3>& strainrate) const
    {
-
-#ifdef PARANOID
-    if ((strainrate.ncol()!=3)||(strainrate.nrow()!=3))
-     {
-      std::ostringstream error_message;
-      error_message  << "The strain rate has incorrect dimensions " 
-                     << strainrate.ncol() << " x " 
-                     << strainrate.nrow() << " Not 3" << std::endl;
-      
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    
-    
     // Get required previous strain rates
-    Vector<DenseMatrix<double> > 
+    Vector<FixedSizeMatrix<double, 3, 3> > 
      previous_strain_rate(Nprev_for_extrapolation_of_strain_rate);
     for (unsigned it=0;it<Nprev_for_extrapolation_of_strain_rate;it++)
      {
-      previous_strain_rate[it].resize(3,3);
       strain_rate(it+1,s,previous_strain_rate[it]);
      }
     
@@ -592,11 +575,11 @@ dt_minus_3*dt_minus_3);
      
 
       // Actual rate of strain
-      DenseMatrix<double> rate_of_strain(3,3,0.0);
+      FixedSizeMatrix<double, 3, 3> rate_of_strain(0.0);
       this->strain_rate(s,rate_of_strain);
 
       // Extrapolated  (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> rate_of_strain_extrapol(rate_of_strain);
+      FixedSizeMatrix<double, 3, 3> rate_of_strain_extrapol(rate_of_strain);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,rate_of_strain_extrapol);
@@ -760,8 +743,8 @@ dt_minus_3*dt_minus_3);
 #endif
     
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(DIM);
-    DenseMatrix<double> stress(DIM,DIM,0.0);
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
+    FixedSizeMatrix<double, DIM, DIM> stress(0.0);
     
     this->strain_rate(s,strainrate);
     double second_invariant_strain=
@@ -864,13 +847,13 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> strainrate(3,3,0.0);
+      FixedSizeMatrix<double, 3, 3> strainrate(0.0);
       this->strain_rate(s,strainrate);
       double invariant=SecondInvariantHelper::second_invariant(strainrate);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> extrapolated_strainrate(strainrate);
+      FixedSizeMatrix<double, 3, 3> extrapolated_strainrate(strainrate);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,extrapolated_strainrate);
@@ -928,7 +911,7 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> strainrate(3,3,0.0);
+      FixedSizeMatrix<double, 3, 3> strainrate(0.0);
       this->strain_rate(s,strainrate);
       double invariant=SecondInvariantHelper::second_invariant(strainrate);
 
@@ -936,7 +919,7 @@ dt_minus_3*dt_minus_3);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> extrapolated_strainrate(strainrate);
+      FixedSizeMatrix<double, 3, 3> extrapolated_strainrate(strainrate);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,extrapolated_strainrate);
@@ -997,14 +980,14 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> current_strainrate(3,3,0.0);
+      FixedSizeMatrix<double, 3, 3> current_strainrate(0.0);
       this->strain_rate(s,current_strainrate);
       double invariant=
        SecondInvariantHelper::second_invariant(current_strainrate);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> latest_guess_strainrate(3,3,0.0);
+      FixedSizeMatrix<double, 3, 3> latest_guess_strainrate(0.0);
       latest_fixed_point_iteration_guess_for_strain_rate(ipt, 
                                                          latest_guess_strainrate);
       
