@@ -53,7 +53,7 @@ namespace oomph
     /// Constructor with initialisation to value
     FixedSizeVector(const T& value)
     {
-      fill(value);
+      this->fill(value);
     }
 
 
@@ -172,7 +172,7 @@ namespace oomph
     /// Construct and fill all entries with specified value
     FixedSizeMatrix(const T& value)
     {
-      fill(value);
+      this->fill(value);
     }
 
     // hierher copy into vector.
@@ -283,7 +283,7 @@ namespace oomph
     /// Constructor with initialisation
     FixedSizeRankThreeTensor(const T& value)
     {
-      fill(value);
+      this->fill(value);
     }
 
     /// Fill all entries with specified value
@@ -372,7 +372,7 @@ namespace oomph
     /// Constructor with initialisation
     FixedSizeRankFourTensor(const T& value)
     {
-      fill(value);
+      this->fill(value);
     }
 
     /// Fill all entries with specified value
