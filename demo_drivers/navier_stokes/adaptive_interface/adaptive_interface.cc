@@ -739,7 +739,7 @@ public:
 
  double Angle;
 
- Vector<double> G;
+ FixedSizeVector<double, 2> G;
 
  /// Constructor: Pass flag to indicate if you want
  /// a constant source function or the tanh profile.
@@ -919,7 +919,6 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  Global_Physical_Variables::Wall_normal[0] = 1.0; 
  Global_Physical_Variables::Wall_normal[1] = 0.0;
 
- G.resize(2);
  G[0] = 0.0; G[1] = -1.0;
 
  /// Set the initial value of the ReInvFr = Bo/Ca

@@ -86,7 +86,12 @@ namespace oomph
 
 
     /// Function that specifies the drag force and the torque about
-    /// the origin
+    /// the origin. Note: The signature of this function is inherited
+    /// from ElementWithDragFunction in generic and therefore maintains
+    /// resizable Vector<double> arguments for drag_force (compile-time
+    /// size: ELEMENT::TEMPLATE_PARAMETER_DIM) and drag_torque
+    /// (compile-time size: 2*ELEMENT::TEMPLATE_PARAMETER_DIM - 3, i.e.
+    /// 1 in 2D and 3 in 3D) until generic has been updated.
     virtual void get_drag_and_torque(Vector<double>& drag_force,
                                      Vector<double>& drag_torque)
     {
@@ -106,22 +111,28 @@ namespace oomph
         drag_torque[i] = 0.0;
       }
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
       // Outer unit normal of the fluid. FaceElement::outer_unit_normal(...)
-      // returns it in a resizable Vector (allocated only once, outside
-      // the loop over the integration points) from which it is copied
-      // into the fixed-size vector (of the bulk element's spatial
+      // in generic returns it in a resizable Vector (allocated only once,
+      // outside the loop over the integration points) from which it is
+      // copied into the fixed-size vector (of the bulk element's spatial
       // dimension, obtained as a compile-time constant from its publicly
       // exposed template parameter) that the bulk element's
-      // get_traction(...) requires.
+      // get_traction(...) requires. Once FaceElement::outer_unit_normal(...)
+      // in generic has been updated to FixedSizeVector,
+      // normal_from_face_element and the copy below can be removed.
       Vector<double> normal_from_face_element(ndim + 1);
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
@@ -167,7 +178,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -265,20 +279,27 @@ namespace oomph
       // Elemental dimension
       unsigned dim_el = dim();
 
-      // Local coordinates
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), local coordinates in the
+      // bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and Eulerian
+      // coordinates (size: ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained
+      // as resizable Vectors for consistency with
+      // FiniteElement::get_s_plot(...),
+      // FaceElement::get_local_coordinate_in_bulk(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(dim_el);
-
       Vector<double> s_bulk(dim_el + 1);
-
-      // Calculate the Eulerian coordinates and Lagrange multiplier
-      Vector<double> x(dim_el + 1, 0.0);
+      Vector<double> x(dim_el + 1);
 
       // Outer unit normal of the fluid. FaceElement::outer_unit_normal(...)
-      // returns it in a resizable Vector from which it is copied into the
-      // fixed-size vector (of the bulk element's spatial dimension,
-      // obtained as a compile-time constant from its publicly exposed
-      // template parameter) that the bulk element's get_traction(...)
-      // requires.
+      // in generic returns it in a resizable Vector from which it is
+      // copied into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires. Once FaceElement::outer_unit_normal(...)
+      // in generic has been updated to FixedSizeVector,
+      // normal_from_face_element and the copy below can be removed.
       Vector<double> normal_from_face_element(dim_el + 1);
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 

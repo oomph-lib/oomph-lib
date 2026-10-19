@@ -118,8 +118,9 @@ public:
  // Overload get_body_force_nst to get the temperature "body force"
  // from the "source" AdvectionDiffusion element via current integration point
  void get_body_force_nst(const double& time, const unsigned& ipt, 
-                         const Vector<double> &s, const Vector<double> &x, 
-                         Vector<double> &result);
+                         const Vector<double> &s,
+                         const FixedSizeVector<double, DIM> &x, 
+                         FixedSizeVector<double, DIM> &result);
 
 /// Fill in the derivatives of the body force with respect to the
  /// external unknowns
@@ -544,7 +545,7 @@ template<unsigned DIM>
 void RefineableQCrouzeixRaviartElementWithTwoExternalElement<DIM>::
 get_body_force_nst
 (const double& time,const unsigned& ipt,const Vector<double> &s,
- const Vector<double> &x,Vector<double> &result)
+ const FixedSizeVector<double, DIM> &x,FixedSizeVector<double, DIM> &result)
 {
  //Let's choose the thermal interaction to be interaction zeo
  const unsigned t_interaction=0;
@@ -569,7 +570,8 @@ get_body_force_nst
 
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
- Vector<double> gravity(NavierStokesEquations<DIM>::g());
+ const FixedSizeVector<double, DIM>& gravity =
+  NavierStokesEquations<DIM>::g();
    
  // Temperature-dependent body force:
  for (unsigned i=0;i<DIM;i++)
@@ -618,7 +620,8 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
  
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
- Vector<double> gravity(NavierStokesEquations<DIM>::g());
+ const FixedSizeVector<double, DIM>& gravity =
+  NavierStokesEquations<DIM>::g();
   
  //Find the number of external data
  //Assuming that the temperature and concentration elements are separate
@@ -685,8 +688,10 @@ get_wind_adv_diff
   (external_element_pt(interaction,ipt));
  
  //The wind function is simply the velocity at the points of the source element
+ FixedSizeVector<double, DIM> u_nst;
  source_el_pt->interpolated_u_nst
-  (external_element_local_coord(interaction,ipt),wind);
+  (external_element_local_coord(interaction,ipt),u_nst);
+ for(unsigned i=0;i<DIM;i++) {wind[i] = u_nst[i];}
 }  //end of get_wind_adv_diff
 
 

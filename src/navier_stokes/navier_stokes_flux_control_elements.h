@@ -471,10 +471,12 @@ namespace oomph
       // Get the pressure at the outflow
       double pressure = this->external_data_pt(pressure_data_id())->value(0);
 
-      // Outer unit normal. Filled by the (Vector-based)
-      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
-      // but allocated only once, outside the loop over the integration
-      // points.
+      // Outer unit normal (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained as a resizable
+      // Vector for consistency with FaceElement::outer_unit_normal(...)
+      // in generic; convert to
+      // FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> once
+      // generic has been updated.
       Vector<double> unit_normal(Dim);
 
       // Traction: its size is the bulk element's spatial dimension,
@@ -651,10 +653,12 @@ namespace oomph
       double pressure =
         this->external_data_pt(this->pressure_data_id())->value(0);
 
-      // Outer unit normal. Filled by the (Vector-based)
-      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
-      // but allocated only once, outside the loop over the integration
-      // points.
+      // Outer unit normal (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained as a resizable
+      // Vector for consistency with FaceElement::outer_unit_normal(...)
+      // in generic; convert to
+      // FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> once
+      // generic has been updated.
       Vector<double> unit_normal(this->Dim);
 
       // Traction: its size is the bulk element's spatial dimension,

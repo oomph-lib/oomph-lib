@@ -270,9 +270,12 @@ namespace oomph
     // element's spatial dimension, obtained (as a compile-time constant)
     // from its publicly exposed template parameter, so we use fixed-size
     // vectors, allocated once (on the stack) outside the loop over the
-    // integration points. FaceElement::outer_unit_normal(...) returns the
-    // normal in a resizable Vector (also allocated only once) from which
-    // it is copied into the fixed-size vector.
+    // integration points. FaceElement::outer_unit_normal(...) in generic
+    // returns the normal in a resizable Vector (also allocated only once)
+    // from which it is copied into the fixed-size vector; once
+    // FaceElement::outer_unit_normal(...) in generic has been updated to
+    // FixedSizeVector, normal_from_face_element and the copy below can
+    // be removed.
     FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_x;
     Vector<double> normal_from_face_element(Dim);
     FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_n;
@@ -453,9 +456,12 @@ namespace oomph
     // element's spatial dimension, obtained (as a compile-time constant)
     // from its publicly exposed template parameter, so we use fixed-size
     // vectors, allocated once (on the stack) outside the loop over the
-    // integration points. FaceElement::outer_unit_normal(...) returns the
-    // normal in a resizable Vector (also allocated only once) from which
-    // it is copied into the fixed-size vector.
+    // integration points. FaceElement::outer_unit_normal(...) in generic
+    // returns the normal in a resizable Vector (also allocated only once)
+    // from which it is copied into the fixed-size vector; once
+    // FaceElement::outer_unit_normal(...) in generic has been updated to
+    // FixedSizeVector, normal_from_face_element and the copy below can
+    // be removed.
     FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_x;
     Vector<double> normal_from_face_element(this->Dim);
     FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_n;

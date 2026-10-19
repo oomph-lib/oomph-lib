@@ -165,7 +165,7 @@ namespace Global_Physical_Variables
  Vector<double> D(2,1.0);
  
  /// Gravity vector, will be set in the main code
- Vector<double> Direction_of_gravity(2);
+ FixedSizeVector<double, 2> Direction_of_gravity;
  
  /// This next set of functions is only used if we do NOT have
  /// periodic conditions
@@ -174,18 +174,19 @@ namespace Global_Physical_Variables
  /// Function that prescribes the hydrostatic pressure field at the outlet
  /// Let's fix things so that the pressure at the top of the channel is zero.
  void hydrostatic_pressure_outlet_upper(const double& time,
-                                        const Vector<double> &x, 
-                                        const Vector<double> &n, 
-                                        Vector<double> &traction)
+                                        const FixedSizeVector<double, 2> &x, 
+                                        const FixedSizeVector<double, 2> &n, 
+                                        FixedSizeVector<double, 2> &traction)
  {
   traction[0] = ReInvFr*R*Direction_of_gravity[1]*(1.0 - x[1]);
   traction[1] = 0.0;
  }
 
  /// Function that prescribes hydrostatic pressure field at the inlet
- void hydrostatic_pressure_inlet_upper(const double& time, const Vector<double> &x, 
-				       const Vector<double> &n,
-				       Vector<double> &traction)
+ void hydrostatic_pressure_inlet_upper(const double& time,
+                                       const FixedSizeVector<double, 2> &x, 
+				       const FixedSizeVector<double, 2> &n,
+				       FixedSizeVector<double, 2> &traction)
  {
    traction[0] = Delta_P + -ReInvFr*R*Direction_of_gravity[1]*(1.0 - x[1]);
    traction[1] = 0.0;
@@ -198,18 +199,19 @@ namespace Global_Physical_Variables
  /// (i.e. we'll need to read out the interfacial position
  /// on the boundary). For now assume it's at H0.
   void hydrostatic_pressure_outlet_lower(const double& time,
-                                         const Vector<double> &x, 
-                                  const Vector<double> &n, 
-                                  Vector<double> &traction)
+                                         const FixedSizeVector<double, 2> &x, 
+                                  const FixedSizeVector<double, 2> &n, 
+                                  FixedSizeVector<double, 2> &traction)
  {
   traction[0] = ReInvFr*Direction_of_gravity[1]*(R*(1.0 - H0) + H0 - x[1]);
   traction[1] = 0.0;
  }
 
  /// Function that prescribes hydrostatic pressure field at the inlet
- void hydrostatic_pressure_inlet_lower(const double& time, const Vector<double> &x, 
-				       const Vector<double> &n,
-				       Vector<double> &traction)
+ void hydrostatic_pressure_inlet_lower(const double& time,
+                                       const FixedSizeVector<double, 2> &x, 
+				       const FixedSizeVector<double, 2> &n,
+				       FixedSizeVector<double, 2> &traction)
  {
   traction[0] = Delta_P +
    -ReInvFr*Direction_of_gravity[1]*(R*(1.0 - H0) + H0 - x[1]);

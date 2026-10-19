@@ -141,9 +141,12 @@ namespace oomph
       int local_eqn = 0;
       int local_unknown = 0;
 
-      // to store normal vector. Filled by the (Vector-based)
-      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
-      // (allocated only once per call of this function).
+      // Normal vector (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained as a resizable
+      // Vector for consistency with FaceElement::outer_unit_normal(...)
+      // in generic; convert to
+      // FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> once
+      // generic has been updated.
       Vector<double> norm_vec(dim_el + 1);
 
       // get the value at which the velocities are stored. There are as

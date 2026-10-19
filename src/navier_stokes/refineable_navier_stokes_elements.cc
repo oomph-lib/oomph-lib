@@ -68,9 +68,11 @@ namespace oomph
     // Pressure shape function
     Shape psi_p(n_pres);
 
-    // Local coordinates. Passed to the (Vector-based) interface of the
-    // pressure shape functions so kept as a resizable Vector (allocated
-    // only once per call of this function).
+    // Local coordinates (compile-time size: DIM). Maintained as a
+    // resizable Vector for consistency with pshape_nst(...) (whose s
+    // argument is kept as a Vector<double> for consistency with
+    // generic); convert to FixedSizeVector<double, DIM> once generic
+    // has been updated.
     Vector<double> s(DIM);
 
     // find the indices at which the local velocities are stored. There
@@ -355,7 +357,11 @@ namespace oomph
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with
+    // dpshape_and_dptest_eulerian_nst(...) (which calls
+    // FiniteElement::dshape_local(...) in generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Get Physical Variables from Element
@@ -644,11 +650,11 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates. This is passed to the
-    // (Vector-based) interface of the shape functions and the body force
-    // function and is therefore kept as a resizable Vector; it's
-    // allocated only once per call of this function so there's no
-    // benefit in converting it to a fixed-size vector.
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...) and
+    // get_body_force_nst(...) (whose s argument is kept as a
+    // Vector<double> for consistency with generic); convert to
+    // FixedSizeVector<double, DIM> once generic has been updated.
     Vector<double> s(DIM);
 
     // Storage for the body force at the integration point: a fixed-size
@@ -1235,10 +1241,12 @@ namespace oomph
     // Determine the number of integration points
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Vector to hold local coordinates. This is passed to the
-    // (Vector-based) interface of the shape functions and the body force
-    // function and is therefore kept as a resizable Vector; it's
-    // allocated only once per call of this function.
+    // Vector of local coordinates (compile-time size: DIM). Maintained
+    // as a resizable Vector for consistency with pshape_nst(...),
+    // get_body_force_nst(...) and get_body_force_gradient_nst(...)
+    // (whose s argument is kept as a Vector<double> for consistency
+    // with generic); convert to FixedSizeVector<double, DIM> once
+    // generic has been updated.
     Vector<double> s(DIM);
 
     // Storage for the body force and the gradients of the body force
@@ -1887,6 +1895,12 @@ namespace oomph
         // What type of son am I? Ask my quadtree representation...
         int son_type = quadtree_pt()->son_type();
 
+        // Local coordinates of son midpoint in father element
+        // (compile-time size: 2). Maintained as a resizable Vector for
+        // consistency with interpolated_p_nst(...) (whose s argument is
+        // kept as a Vector<double> for consistency with generic);
+        // convert to FixedSizeVector<double, 2> once generic has been
+        // updated.
         Vector<double> s_father(2);
 
         // Son midpoint is located at the following coordinates in father
@@ -1998,6 +2012,12 @@ namespace oomph
         // What type of son am I? Ask my quadtree representation...
         int son_type = octree_pt()->son_type();
 
+        // Local coordinates of son midpoint in father element
+        // (compile-time size: 3). Maintained as a resizable Vector for
+        // consistency with interpolated_p_nst(...) (whose s argument is
+        // kept as a Vector<double> for consistency with generic);
+        // convert to FixedSizeVector<double, 3> once generic has been
+        // updated.
         Vector<double> s_father(3);
 
 

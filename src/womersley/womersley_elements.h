@@ -2092,14 +2092,21 @@ namespace oomph
       // Initialise
       double volume_flux_integral = 0.0;
 
-      // Vector of local coordinates in face element
+      // Local coordinates in face element (size DIM), global Eulerian
+      // coordinates (size DIM + 1), local coordinates in bulk element
+      // (size DIM + 1) and outer unit normal (size DIM + 1). All four
+      // have compile-time-known sizes, but they are maintained as
+      // resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...),
+      // FiniteElement::interpolated_x(...) and
+      // FaceElement::outer_unit_normal(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(DIM);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(DIM + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(DIM + 1);
+      Vector<double> normal(DIM + 1);
+      FixedSizeVector<double, DIM + 1> veloc;
 
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
@@ -2159,11 +2166,9 @@ namespace oomph
 #endif
 
         // Outer unit normal
-        Vector<double> normal(DIM + 1);
         outer_unit_normal(s, normal);
 
         // Get velocity from bulk element
-        Vector<double> veloc(DIM + 1);
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
         // Volume flux
@@ -2293,8 +2298,14 @@ namespace oomph
       // Spatial dimension of element
       // unsigned ndim=dim();
 
-      // Vector of local coordinates in face element
+      // Local coordinates in face element (size DIM) and outer unit
+      // normal (size DIM + 1). Maintained as resizable Vectors for
+      // consistency with FiniteElement::J_eulerian(...),
+      // FiniteElement::shape(...) and FaceElement::outer_unit_normal(...)
+      // in generic; convert to FixedSizeVectors once generic has been
+      // updated.
       Vector<double> s(DIM);
+      Vector<double> normal(DIM + 1);
 
       // Create storage for shape functions
       unsigned nnod = nnode();
@@ -2326,7 +2337,6 @@ namespace oomph
         double W = w * J;
 
         // Outer unit normal
-        Vector<double> normal(DIM + 1);
         outer_unit_normal(s, normal);
 
         // Loop over nodes
@@ -2431,6 +2441,12 @@ namespace oomph
     int local_eqn = 0;
     int local_unknown = 0;
 
+    // Traction vector (compile-time size: DIM + 1) and outer unit normal
+    // (compile-time size: DIM + 1; maintained as a resizable Vector for
+    // consistency with FaceElement::outer_unit_normal(...) in generic).
+    FixedSizeVector<double, DIM + 1> traction;
+    Vector<double> unit_normal(DIM + 1);
+
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
@@ -2443,9 +2459,6 @@ namespace oomph
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
-
-      // Traction vector
-      Vector<double> traction(DIM + 1);
 
       // Initialise response
       double p_in = 0.0;
@@ -2460,7 +2473,6 @@ namespace oomph
       }
 
       // Get outer unit normal at current integration point
-      Vector<double> unit_normal(DIM + 1);
       outer_unit_normal(ipt, unit_normal);
 
       // Loop over the directions

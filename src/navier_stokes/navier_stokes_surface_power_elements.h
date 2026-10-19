@@ -106,22 +106,29 @@ namespace oomph
       // default!)
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> drag(0.0);
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
-      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
-      // in a resizable Vector (allocated only once, outside the loop over
-      // the integration points) from which it is copied into the
-      // fixed-size vector (of the bulk element's spatial dimension,
-      // obtained as a compile-time constant from its publicly exposed
-      // template parameter) that the bulk element's get_traction(...)
-      // requires and that is used for all subsequent computations.
+      // Outer unit normal. FaceElement::outer_unit_normal(...) in generic
+      // returns it in a resizable Vector (allocated only once, outside
+      // the loop over the integration points) from which it is copied
+      // into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires and that is used for all subsequent
+      // computations. Once FaceElement::outer_unit_normal(...) in generic
+      // has been updated to FixedSizeVector, normal_from_face_element and
+      // the copy below can be removed.
       Vector<double> normal_from_face_element(ndim + 1);
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
@@ -163,7 +170,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -260,22 +270,29 @@ namespace oomph
       // Spatial dimension of element
       unsigned ndim = dim();
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
-      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
-      // in a resizable Vector (allocated only once, outside the loop over
-      // the integration points) from which it is copied into the
-      // fixed-size vector (of the bulk element's spatial dimension,
-      // obtained as a compile-time constant from its publicly exposed
-      // template parameter) that the bulk element's get_traction(...)
-      // requires and that is used for all subsequent computations.
+      // Outer unit normal. FaceElement::outer_unit_normal(...) in generic
+      // returns it in a resizable Vector (allocated only once, outside
+      // the loop over the integration points) from which it is copied
+      // into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires and that is used for all subsequent
+      // computations. Once FaceElement::outer_unit_normal(...) in generic
+      // has been updated to FixedSizeVector, normal_from_face_element and
+      // the copy below can be removed.
       Vector<double> normal_from_face_element(ndim + 1);
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
@@ -317,7 +334,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -445,22 +465,29 @@ namespace oomph
       // Spatial dimension of element
       unsigned ndim = dim();
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
 
-      // Outer unit normal. FaceElement::outer_unit_normal(...) returns it
-      // in a resizable Vector (allocated only once, outside the loop over
-      // the integration points) from which it is copied into the
-      // fixed-size vector (of the bulk element's spatial dimension,
-      // obtained as a compile-time constant from its publicly exposed
-      // template parameter) that the bulk element's get_traction(...)
-      // requires and that is used for all subsequent computations.
+      // Outer unit normal. FaceElement::outer_unit_normal(...) in generic
+      // returns it in a resizable Vector (allocated only once, outside
+      // the loop over the integration points) from which it is copied
+      // into the fixed-size vector (of the bulk element's spatial
+      // dimension, obtained as a compile-time constant from its publicly
+      // exposed template parameter) that the bulk element's
+      // get_traction(...) requires and that is used for all subsequent
+      // computations. Once FaceElement::outer_unit_normal(...) in generic
+      // has been updated to FixedSizeVector, normal_from_face_element and
+      // the copy below can be removed.
       Vector<double> normal_from_face_element(ndim + 1);
       FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> normal;
 
@@ -502,7 +529,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -647,19 +677,20 @@ namespace oomph
       // Spatial dimension of element
       unsigned ndim = dim();
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM), local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and
+      // outer unit normal (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...),
+      // FiniteElement::interpolated_x(...) and
+      // FaceElement::outer_unit_normal(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
-
-      // Outer unit normal. Filled by the (Vector-based)
-      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
-      // but allocated only once, outside the loop over the integration
-      // points.
       Vector<double> normal(ndim + 1);
 
       // Set the value of n_intpt
@@ -699,7 +730,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 
@@ -797,19 +831,20 @@ namespace oomph
       // Spatial dimension of element
       unsigned ndim = dim();
 
-      // Vector of local coordinates in face element
+      // Local coordinates in the face element (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM - 1), Eulerian coordinates
+      // (size: ELEMENT::TEMPLATE_PARAMETER_DIM), local coordinates in
+      // the bulk element (size: ELEMENT::TEMPLATE_PARAMETER_DIM) and
+      // outer unit normal (size: ELEMENT::TEMPLATE_PARAMETER_DIM).
+      // Maintained as resizable Vectors for consistency with
+      // FaceElement::get_local_coordinate_in_bulk(...),
+      // FiniteElement::J_eulerian(...),
+      // FiniteElement::interpolated_x(...) and
+      // FaceElement::outer_unit_normal(...) in generic; convert to
+      // FixedSizeVectors once generic has been updated.
       Vector<double> s(ndim);
-
-      // Vector for global Eulerian coordinates
       Vector<double> x(ndim + 1);
-
-      // Vector for local coordinates in bulk element
       Vector<double> s_bulk(ndim + 1);
-
-      // Outer unit normal. Filled by the (Vector-based)
-      // FaceElement::outer_unit_normal(...) so kept as a resizable Vector
-      // but allocated only once, outside the loop over the integration
-      // points.
       Vector<double> normal(ndim + 1);
 
       // Set the value of n_intpt
@@ -850,7 +885,10 @@ namespace oomph
 
 #ifdef PARANOID
 
-        // Get x position as Vector from bulk element
+        // Get x position as Vector from bulk element (compile-time size:
+        // ELEMENT::TEMPLATE_PARAMETER_DIM; maintained as a resizable
+        // Vector for consistency with FiniteElement::interpolated_x(...)
+        // in generic until generic has been updated)
         Vector<double> x_bulk(ndim + 1);
         bulk_el_pt->interpolated_x(s_bulk, x_bulk);
 

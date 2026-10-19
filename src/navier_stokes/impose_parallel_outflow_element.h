@@ -158,11 +158,14 @@ namespace oomph
       int local_eqn = 0;
       int local_unknown = 0;
 
-      // to store normal vector and tangential vectors. Both are filled
-      // by the (Vector-based)
-      // FaceElement::continuous_tangent_and_outer_unit_normal(...) so
-      // they're kept as resizable Vectors (allocated only once per call
-      // of this function).
+      // Normal vector (compile-time size:
+      // ELEMENT::TEMPLATE_PARAMETER_DIM) and tangential vectors
+      // (compile-time size: (ELEMENT::TEMPLATE_PARAMETER_DIM - 1) x
+      // ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained as resizable
+      // Vectors for consistency with
+      // FaceElement::continuous_tangent_and_outer_unit_normal(...) in
+      // generic; convert to FixedSizeVectors once generic has been
+      // updated.
       Vector<double> norm_vec(dim_el + 1);
       Vector<Vector<double>> tang_vec(dim_el, Vector<double>(dim_el + 1));
 
