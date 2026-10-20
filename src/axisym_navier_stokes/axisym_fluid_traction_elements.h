@@ -53,9 +53,9 @@ namespace oomph
     /// Default load function (zero traction)
     //=======================================================================
     extern void Zero_traction_fct(const double& time,
-                                  const Vector<double>& x,
-                                  const Vector<double>& N,
-                                  Vector<double>& load);
+                                  const FixedSizeVector<double, 2>& x,
+                                  const FixedSizeVector<double, 2>& N,
+                                  FixedSizeVector<double, 3>& load);
 
   } // namespace AxisymmetricNavierStokesTractionElementHelper
 
@@ -74,7 +74,7 @@ namespace oomph
   {
   protected:
     /// Index at which the i-th velocity component is stored
-    Vector<unsigned> U_index_axisymmetric_nst_traction;
+    FixedSizeVector<unsigned, 3> U_index_axisymmetric_nst_traction;
 
     /// Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
@@ -82,9 +82,9 @@ namespace oomph
     /// required for all specific load functions but the list should
     /// cover all cases)
     void (*Traction_fct_pt)(const double& time,
-                            const Vector<double>& x,
-                            const Vector<double>& n,
-                            Vector<double>& result);
+                            const FixedSizeVector<double, 2>& x,
+                            const FixedSizeVector<double, 2>& n,
+                            FixedSizeVector<double, 3>& result);
 
 
     /// Get the traction vector: Pass number of integration point
@@ -94,9 +94,9 @@ namespace oomph
     /// virtual so it can be overloaded for FSI.
     virtual void get_traction(const double& time,
                               const unsigned& intpt,
-                              const Vector<double>& x,
-                              const Vector<double>& n,
-                              Vector<double>& traction) const
+                              const FixedSizeVector<double, 2>& x,
+                              const FixedSizeVector<double, 2>& n,
+                              FixedSizeVector<double, 3>& traction) const
     {
       Traction_fct_pt(time, x, n, traction);
     }
@@ -126,7 +126,6 @@ namespace oomph
 
       // Find the index at which the velocity unknowns are stored
       ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-      this->U_index_axisymmetric_nst_traction.resize(n_dim + 1);
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
         this->U_index_axisymmetric_nst_traction[i] =
@@ -141,9 +140,9 @@ namespace oomph
 
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const double& time,
-                               const Vector<double>& x,
-                               const Vector<double>& n,
-                               Vector<double>& traction)
+                               const FixedSizeVector<double, 2>& x,
+                               const FixedSizeVector<double, 2>& n,
+                               FixedSizeVector<double, 3>& traction)
     {
       return Traction_fct_pt;
     }
@@ -213,7 +212,7 @@ namespace oomph
 
       // Local and global coordinates
       Vector<double> s(n_dim - 1);
-      Vector<double> interpolated_x(n_dim);
+      FixedSizeVector<double, 2> interpolated_x;
 
       // Loop over plot points
       unsigned num_plot_points = this->nplot_points_paraview(nplot);
@@ -225,6 +224,11 @@ namespace oomph
         // Outer unit normal
         Vector<double> unit_normal(n_dim);
         outer_unit_normal(s, unit_normal);
+        FixedSizeVector<double, 2> unit_normal_fixed;
+        for (unsigned i = 0; i < 2; i++)
+        {
+          unit_normal_fixed[i] = unit_normal[i];
+        }
 
         // Find the shape functions
         shape(s, psi);
@@ -246,11 +250,11 @@ namespace oomph
         }
 
         // Get the imposed traction
-        Vector<double> traction(3);
+        FixedSizeVector<double, 3> traction;
 
         // Dummy integration point
         unsigned ipt = 0;
-        get_traction(time, ipt, interpolated_x, unit_normal, traction);
+        get_traction(time, ipt, interpolated_x, unit_normal_fixed, traction);
 
         // Traction components
         if (k < n_dim + 1)
@@ -323,7 +327,7 @@ namespace oomph
 
       // Local and global coordinates
       Vector<double> s(n_dim - 1);
-      Vector<double> interpolated_x(n_dim);
+      FixedSizeVector<double, 2> interpolated_x;
 
       // Tecplot header info
       outfile << this->tecplot_zone_string(n_plot);
@@ -338,6 +342,11 @@ namespace oomph
         // Outer unit normal
         Vector<double> unit_normal(n_dim);
         outer_unit_normal(s, unit_normal);
+        FixedSizeVector<double, 2> unit_normal_fixed;
+        for (unsigned i = 0; i < 2; i++)
+        {
+          unit_normal_fixed[i] = unit_normal[i];
+        }
 
         // Find the shape functions
         shape(s, psi);
@@ -359,11 +368,11 @@ namespace oomph
         }
 
         // Get the imposed traction
-        Vector<double> traction(3);
+        FixedSizeVector<double, 3> traction;
 
         // Dummy integration point
         unsigned ipt = 0;
-        get_traction(time, ipt, interpolated_x, unit_normal, traction);
+        get_traction(time, ipt, interpolated_x, unit_normal_fixed, traction);
 
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
@@ -404,7 +413,7 @@ namespace oomph
     /// on integration point!
     void traction(const double& time,
                   const Vector<double>& s,
-                  Vector<double>& traction);
+                  FixedSizeVector<double, 3>& traction);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -418,23 +427,35 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void AxisymmetricNavierStokesTractionElement<ELEMENT>::traction(
-    const double& time, const Vector<double>& s, Vector<double>& traction)
+    const double& time,
+    const Vector<double>& s,
+    FixedSizeVector<double, 3>& traction)
   {
     unsigned n_dim = this->nodal_dimension();
 
     // Position vector
     Vector<double> x(n_dim);
     interpolated_x(s, x);
+    FixedSizeVector<double, 2> x_fixed;
+    for (unsigned i = 0; i < 2; i++)
+    {
+      x_fixed[i] = x[i];
+    }
 
     // Outer unit normal (only in r and z direction!)
     Vector<double> unit_normal(n_dim);
     outer_unit_normal(s, unit_normal);
+    FixedSizeVector<double, 2> unit_normal_fixed;
+    for (unsigned i = 0; i < 2; i++)
+    {
+      unit_normal_fixed[i] = unit_normal[i];
+    }
 
     // Dummy
     unsigned ipt = 0;
 
     // Traction vector
-    get_traction(time, ipt, x, unit_normal, traction);
+    get_traction(time, ipt, x_fixed, unit_normal_fixed, traction);
   }
 
 
@@ -497,7 +518,7 @@ namespace oomph
       dshape_local_at_knot(ipt, psi, dpsids);
 
       // Calculate the Eulerian and Lagrangian coordinates
-      Vector<double> interpolated_x(n_dim, 0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
 
       // Also calculate the surface Vectors (derivatives wrt local coordinates)
       DenseMatrix<double> interpolated_A(n_dim - 1, n_dim, 0.0);
@@ -540,6 +561,11 @@ namespace oomph
       // Get the outer unit normal
       Vector<double> interpolated_normal(n_dim);
       outer_unit_normal(ipt, interpolated_normal);
+      FixedSizeVector<double, 2> interpolated_normal_fixed;
+      for (unsigned i = 0; i < 2; i++)
+      {
+        interpolated_normal_fixed[i] = interpolated_normal[i];
+      }
 
       // Find the determinant of the metric tensor
       double Adet = 0.0;
@@ -564,8 +590,9 @@ namespace oomph
       double W = w * sqrt(Adet);
 
       // Now calculate the load
-      Vector<double> traction(n_dim + 1);
-      get_traction(time, ipt, interpolated_x, interpolated_normal, traction);
+      FixedSizeVector<double, 3> traction;
+      get_traction(
+        time, ipt, interpolated_x, interpolated_normal_fixed, traction);
 
       // Loop over the test functions, nodes of the element
       for (unsigned l = 0; l < n_node; l++)
@@ -801,7 +828,7 @@ namespace oomph
     unsigned Dim;
 
     /// The index at which the unknowns are stored at the nodes
-    Vector<unsigned> U_index_fsi_no_slip_axisym;
+    FixedSizeVector<unsigned, 3> U_index_fsi_no_slip_axisym;
 
     /// Lagrange Id
     unsigned Id;
@@ -855,7 +882,6 @@ namespace oomph
     Dim = this->node_pt(0)->ndim();
 
     // Read the index from the (cast) bulk element.
-    U_index_fsi_no_slip_axisym.resize(3);
     for (unsigned i = 0; i < 3; i++)
     {
       U_index_fsi_no_slip_axisym[i] =
@@ -924,8 +950,8 @@ namespace oomph
       double W = w * J;
 
       // Calculate the Lagrange multiplier and the fluid veloc
-      Vector<double> lambda(Dim + 1, 0.0);
-      Vector<double> fluid_veloc(Dim + 1, 0.0);
+      FixedSizeVector<double, 3> lambda(0.0);
+      FixedSizeVector<double, 3> fluid_veloc(0.0);
 
       // Loop over nodes
       for (unsigned j = 0; j < n_node; j++)

@@ -96,7 +96,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Set the Vector to hold local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Integers to hold the local equation and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -121,7 +121,7 @@ namespace oomph
       double interpolated_u = 0.0;
       double ddudt = 0.0;
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dudx(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       // Loop over nodes

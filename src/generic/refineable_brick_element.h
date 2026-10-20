@@ -334,7 +334,7 @@ namespace oomph
 
       // Now get coordinates and stuff
       Vector<int> s_lo(3);
-      Vector<int> s_hi(3);
+      FixedSizeVector<int, 3> s_hi;
       Vector<double> s(3);
       Vector<double> xi(3);
       Vector<double> xi_fe(3);
@@ -384,10 +384,8 @@ namespace oomph
 
 
       unsigned jnod = 0;
-      Vector<double> x_small(3);
-      Vector<double> x_large(3);
 
-      Vector<double> s_fraction(3);
+      FixedSizeVector<double, 3> s_fraction;
 
 
       // Loop over nodes in element

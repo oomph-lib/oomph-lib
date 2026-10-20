@@ -34,7 +34,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////
 
   /// Navier--Stokes equations static data
-  Vector<double> PolarNavierStokesEquations::Gamma(2, 0.0);
+  FixedSizeVector<double, 2> PolarNavierStokesEquations::Gamma(0.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is
@@ -50,7 +50,8 @@ namespace oomph
   double PolarNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  Vector<double> PolarNavierStokesEquations::Default_Gravity_vector(2, 0.0);
+  FixedSizeVector<double, 2>
+    PolarNavierStokesEquations::Default_Gravity_vector(0.0);
 
   //======================================================================
   /// Validate against exact velocity solution at given time.
@@ -337,8 +338,8 @@ namespace oomph
 
     // Vectors of local coordinates and coords and velocities
     Vector<double> s(2);
-    Vector<double> interpolated_x(2);
-    Vector<double> interpolated_u(2);
+    FixedSizeVector<double, 2> interpolated_x;
+    FixedSizeVector<double, 2> interpolated_u;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -610,12 +611,6 @@ namespace oomph
     // Vector of local coordinates
     Vector<double> s(2);
 
-    // Acceleration
-    Vector<double> dudt(2);
-
-    // Mesh elocity
-    Vector<double> mesh_veloc(2);
-
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
 
@@ -637,10 +632,10 @@ namespace oomph
       dshape_eulerian(s, psif, dpsifdx);
 
       // Allocate storage
-      Vector<double> mesh_veloc(2);
-      Vector<double> dudt(2);
-      Vector<double> dudt_ALE(2);
-      DenseMatrix<double> interpolated_dudx(2, 2);
+      FixedSizeVector<double, 2> mesh_veloc;
+      FixedSizeVector<double, 2> dudt;
+      FixedSizeVector<double, 2> dudt_ALE;
+      FixedSizeMatrix<double, 2, 2> interpolated_dudx;
       // DenseDoubleMatrix interpolated_dudx(2,2);
 
       // Initialise everything to zero
@@ -745,7 +740,7 @@ namespace oomph
       double J = J_eulerian(s);
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(2, 2);
+      FixedSizeMatrix<double, 2, 2> strainrate;
       // DenseDoubleMatrix strainrate(2,2);
       strain_rate(s, strainrate);
 
@@ -769,12 +764,13 @@ namespace oomph
   /// Compute traction (on the viscous scale) at local
   /// coordinate s for outer unit normal N
   //==============================================================
-  void PolarNavierStokesEquations::get_traction(const Vector<double>& s,
-                                                const Vector<double>& N,
-                                                Vector<double>& traction)
+  void PolarNavierStokesEquations::get_traction(
+    const Vector<double>& s,
+    const FixedSizeVector<double, 2>& N,
+    FixedSizeVector<double, 2>& traction)
   {
     // Get velocity gradients
-    DenseMatrix<double> strainrate(2, 2);
+    FixedSizeMatrix<double, 2, 2> strainrate;
     // DenseDoubleMatrix strainrate(2,2);
     strain_rate(s, strainrate);
 
@@ -798,7 +794,7 @@ namespace oomph
   double PolarNavierStokesEquations::dissipation(const Vector<double>& s) const
   {
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(2, 2);
+    FixedSizeMatrix<double, 2, 2> strainrate;
     // DenseDoubleMatrix strainrate(2,2);
     strain_rate(s, strainrate);
 
@@ -820,22 +816,8 @@ namespace oomph
   /// Slightly more complicated in polar coordinates (see eg. Aris)
   //==============================================================
   void PolarNavierStokesEquations::strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s, FixedSizeMatrix<double, 2, 2>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != 2) || (strainrate.nrow() != 2))
-    {
-      std::ostringstream error_stream;
-      error_stream << "Wrong size " << strainrate.ncol() << " "
-                   << strainrate.nrow() << std::endl;
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(2);
-
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
 
@@ -855,9 +837,9 @@ namespace oomph
 
     // Calculate local values of the velocity components
     // Allocate
-    Vector<double> interpolated_u(2);
-    Vector<double> interpolated_x(2);
-    DenseMatrix<double> interpolated_dudx(2, 2);
+    FixedSizeVector<double, 2> interpolated_u;
+    FixedSizeVector<double, 2> interpolated_x;
+    FixedSizeMatrix<double, 2, 2> interpolated_dudx;
 
     // Initialise to zero
     for (unsigned i = 0; i < 2; i++)
@@ -907,22 +889,8 @@ namespace oomph
   /// Slightly more complicated in polar coordinates (see eg. Aris)
   //==============================================================
   void PolarNavierStokesEquations::strain_rate_by_r(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s, FixedSizeMatrix<double, 2, 2>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != 2) || (strainrate.nrow() != 2))
-    {
-      std::ostringstream error_stream;
-      error_stream << "Wrong size " << strainrate.ncol() << " "
-                   << strainrate.nrow() << std::endl;
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Velocity gradient matrix
-    DenseMatrix<double> dudx(2);
-
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
 
@@ -942,9 +910,9 @@ namespace oomph
 
     // Calculate local values of the velocity components
     // Allocate
-    Vector<double> interpolated_u(2);
-    Vector<double> interpolated_x(2);
-    DenseMatrix<double> interpolated_dudx(2, 2);
+    FixedSizeVector<double, 2> interpolated_u;
+    FixedSizeVector<double, 2> interpolated_x;
+    FixedSizeMatrix<double, 2, 2> interpolated_dudx;
 
     // Initialise to zero
     for (unsigned i = 0; i < 2; i++)
@@ -1158,11 +1126,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       // Allocate
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(2);
-      Vector<double> interpolated_x(2);
+      FixedSizeVector<double, 2> interpolated_u;
+      FixedSizeVector<double, 2> interpolated_x;
       // Vector<double> mesh_velocity(2);
       // Vector<double> dudt(2);
-      DenseMatrix<double> interpolated_dudx(2, 2);
+      FixedSizeMatrix<double, 2, 2> interpolated_dudx;
 
       // Initialise to zero
       for (unsigned i = 0; i < 2; i++)

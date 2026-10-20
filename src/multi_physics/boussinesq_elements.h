@@ -285,9 +285,18 @@ namespace oomph
                            const Vector<double>& x,
                            Vector<double>& wind) const
     {
-      // The wind function is simply the velocity at the points
-      this->interpolated_u_nst(s, wind);
-    }
+      // The wind function is simply the velocity at the points.
+      // interpolated_u_nst(...) returns the velocity in a FixedSizeVector
+      // whereas the interface of get_wind_adv_diff(...) (inherited from
+      // AdvectionDiffusionEquations) still requires a resizable Vector;
+      // copy across until AdvectionDiffusionEquations has been updated.
+      FixedSizeVector<double, DIM> u_nst;
+      this->interpolated_u_nst(s, u_nst);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        wind[i] = u_nst[i];
+      }
+    } // end of get_wind_adv_diff
 
 
     /// Overload the body force in the Navier-Stokes equations
@@ -298,15 +307,16 @@ namespace oomph
     void get_body_force_nst(const double& time,
                             const unsigned& ipt,
                             const Vector<double>& s,
-                            const Vector<double>& x,
-                            Vector<double>& result)
+                            const FixedSizeVector<double, DIM>& x,
+                            FixedSizeVector<double, DIM>& result)
     {
       // Get the temperature
       const double interpolated_t = this->interpolated_u_adv_diff(s);
 
       // Get vector that indicates the direction of gravity from
       // the Navier-Stokes equations
-      Vector<double> gravity(NavierStokesEquations<DIM>::g());
+      const FixedSizeVector<double, DIM>& gravity =
+        NavierStokesEquations<DIM>::g();
 
       // Temperature-dependent body force:
       for (unsigned i = 0; i < DIM; i++)
@@ -593,7 +603,7 @@ namespace oomph
       // Get Physical Variables from Element
       double Ra = this->ra();
       double Pe = this->pe();
-      Vector<double> gravity = this->g();
+      const FixedSizeVector<double, DIM>& gravity = this->g();
 
       // Integers to store the local equations and unknowns
       int local_eqn = 0, local_unknown = 0;
@@ -611,9 +621,9 @@ namespace oomph
         // Premultiply the weights and the Jacobian
         double W = w * J;
 
-        // Calculate local values of temperature derivatives
-        // Allocate
-        Vector<double> interpolated_du_adv_diff_dx(DIM, 0.0);
+        // Calculate local values of temperature derivatives: compile-time
+        // size DIM, accumulated below so initialised to zero.
+        FixedSizeVector<double, DIM> interpolated_du_adv_diff_dx(0.0);
 
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
@@ -1218,8 +1228,17 @@ namespace oomph
                            const Vector<double>& x,
                            Vector<double>& wind) const
     {
-      // The wind function is simply the velocity at the points
-      this->interpolated_u_nst(s, wind);
+      // The wind function is simply the velocity at the points.
+      // interpolated_u_nst(...) returns the velocity in a FixedSizeVector
+      // whereas the interface of get_wind_adv_diff(...) (inherited from
+      // AdvectionDiffusionEquations) still requires a resizable Vector;
+      // copy across until AdvectionDiffusionEquations has been updated.
+      FixedSizeVector<double, DIM> u_nst;
+      this->interpolated_u_nst(s, u_nst);
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        wind[i] = u_nst[i];
+      }
     }
 
 
@@ -1231,15 +1250,16 @@ namespace oomph
     void get_body_force_nst(const double& time,
                             const unsigned& ipt,
                             const Vector<double>& s,
-                            const Vector<double>& x,
-                            Vector<double>& result)
+                            const FixedSizeVector<double, DIM>& x,
+                            FixedSizeVector<double, DIM>& result)
     {
       // Get the temperature
       const double interpolated_t = this->interpolated_u_adv_diff(s);
 
       // Get vector that indicates the direction of gravity from
       // the Navier-Stokes equations
-      Vector<double> gravity(NavierStokesEquations<DIM>::g());
+      const FixedSizeVector<double, DIM>& gravity =
+        NavierStokesEquations<DIM>::g();
 
       // Temperature-dependent body force:
       for (unsigned i = 0; i < DIM; i++)
@@ -1332,7 +1352,7 @@ namespace oomph
       // Get Physical Variables from Element
       double Ra = this->ra();
       double Pe = this->pe();
-      Vector<double> gravity = this->g();
+      const FixedSizeVector<double, DIM>& gravity = this->g();
 
       // Integers to store the local equations and unknowns
       int local_eqn = 0, local_unknown = 0;
@@ -1350,9 +1370,9 @@ namespace oomph
         // Premultiply the weights and the Jacobian
         double W = w * J;
 
-        // Calculate local values of temperature derivatives
-        // Allocate
-        Vector<double> interpolated_du_adv_diff_dx(DIM, 0.0);
+        // Calculate local values of temperature derivatives: compile-time
+        // size DIM, accumulated below so initialised to zero.
+        FixedSizeVector<double, DIM> interpolated_du_adv_diff_dx(0.0);
 
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)

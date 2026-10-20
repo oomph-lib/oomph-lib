@@ -1549,7 +1549,7 @@ namespace oomph
          it != normals.end();
          it++)
     {
-      Vector<double> unit_normal(3, 0.0);
+      FixedSizeVector<double, 3> unit_normal(0.0);
       unsigned nnormals = ((*it).second).size();
       for (unsigned j = 0; j < nnormals; j++)
       {

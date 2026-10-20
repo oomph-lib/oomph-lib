@@ -98,7 +98,7 @@ namespace oomph
     (void)dshape_eulerian(s, psi, dpsidx);
 
     // Calculate interpolated values of the derivative of global position
-    DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+    FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
     // Loop over nodes
     for (unsigned l = 0; l < n_node; l++)
@@ -303,7 +303,7 @@ namespace oomph
       Shape psi(n_node);
       shape(s, psi);
 
-      Vector<double> interpolated_du_dt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_du_dt(0.0);
 
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -314,7 +314,7 @@ namespace oomph
         outfile << interpolated_du_dt[i] << " ";
       }
 
-      Vector<double> interpolated_d2u_dt2(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_d2u_dt2(0.0);
 
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -332,7 +332,7 @@ namespace oomph
       this->get_q_basis_local(s, q_basis_local);
       (void)this->transform_basis(s, q_basis_local, psi, q_basis);
 
-      Vector<double> interpolated_dq_dt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dq_dt(0.0);
 
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -693,7 +693,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Storage for the local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Storage for the elasticity source function
     Vector<double> f_solid(DIM);
@@ -759,13 +759,13 @@ namespace oomph
 
       // Storage for interpolated values
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_u(DIM, 0.0);
-      DenseMatrix<double> interpolated_du_dx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_du_dx(0.0);
       double interpolated_div_du_dt_dx = 0.0;
-      Vector<double> interpolated_d2u_dt2(DIM, 0.0);
-      Vector<double> interpolated_q(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_d2u_dt2(0.0);
+      FixedSizeVector<double, DIM> interpolated_q(0.0);
       double interpolated_div_q_ds = 0.0;
-      Vector<double> interpolated_dq_dt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dq_dt(0.0);
       double interpolated_p = 0.0;
 
       // loop over the vector basis functions to find interpolated x

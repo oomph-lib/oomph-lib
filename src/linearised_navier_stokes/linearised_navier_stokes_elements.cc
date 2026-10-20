@@ -66,8 +66,8 @@ namespace oomph
     // Provide storage for vectors of local coordinates and
     // global coordinates and velocities
     Vector<double> s(DIM);
-    Vector<double> interpolated_x(DIM);
-    Vector<double> interpolated_u(2 * DIM);
+    FixedSizeVector<double, DIM> interpolated_x(0.0);
+    FixedSizeVector<double, 2 * DIM> interpolated_u(0.0);
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -446,10 +446,10 @@ namespace oomph
 
       // Allocate storage for the velocity components (six of these)
       // and their derivatives w.r.t. time
-      Vector<std::complex<double>> interpolated_u(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_u;
       // Vector<double> dudt(6,0.0);
       // Allocate storage for the eigen function normalisation
-      Vector<std::complex<double>> interpolated_u_normalisation(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_u_normalisation;
       for (unsigned i = 0; i < DIM; ++i)
       {
         interpolated_u[i].real(0.0);

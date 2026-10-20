@@ -1686,7 +1686,7 @@ namespace oomph
           Node* nod_pt = fe_pt->node_pt(j);
 
           // Extract nodal coordinates from node:
-          Vector<double> x(2);
+          FixedSizeVector<double, 2> x;
           x[0] = nod_pt->x(0);
           x[1] = nod_pt->x(1);
 

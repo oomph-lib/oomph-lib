@@ -31,7 +31,7 @@
 namespace oomph
 {
   /// Navier--Stokes equations static data
-  Vector<double> SphericalNavierStokesEquations::Gamma(3, 1.0);
+  FixedSizeVector<double, 3> SphericalNavierStokesEquations::Gamma(1.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is
@@ -47,7 +47,8 @@ namespace oomph
   double SphericalNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  Vector<double> SphericalNavierStokesEquations::Default_Gravity_vector(3, 0.0);
+  FixedSizeVector<double, 3>
+    SphericalNavierStokesEquations::Default_Gravity_vector(0.0);
 
 
   //================================================================
@@ -84,7 +85,7 @@ namespace oomph
     const unsigned n_value = 3;
 
     // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_value);
+    FixedSizeVector<unsigned, 3> u_nodal_index;
     for (unsigned i = 0; i < n_value; i++)
     {
       u_nodal_index[i] = this->u_index_spherical_nst(i);
@@ -752,8 +753,8 @@ namespace oomph
 
     // Vectors of local coordinates and coords and velocities
     Vector<double> s(2);
-    Vector<double> interpolated_x(2);
-    Vector<double> interpolated_u(3);
+    FixedSizeVector<double, 3> interpolated_x;
+    FixedSizeVector<double, 3> interpolated_u;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -925,12 +926,6 @@ namespace oomph
     // Vector of local coordinates
     Vector<double> s(2);
 
-    // Acceleration
-    Vector<double> dudt(3);
-
-    // Mesh elocity
-    Vector<double> mesh_veloc(3, 0.0);
-
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
 
@@ -952,10 +947,10 @@ namespace oomph
       dshape_eulerian(s, psif, dpsifdx);
 
       // Allocate storage
-      Vector<double> mesh_veloc(3);
-      Vector<double> dudt(3);
-      Vector<double> dudt_ALE(3);
-      DenseMatrix<double> interpolated_dudx(3, 2);
+      FixedSizeVector<double, 3> mesh_veloc;
+      FixedSizeVector<double, 3> dudt;
+      FixedSizeVector<double, 3> dudt_ALE;
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx;
 
       // Initialise everything to zero
       for (unsigned i = 0; i < 3; i++)
@@ -1050,7 +1045,7 @@ namespace oomph
     Vector<double> s(2);
 
     // Create vorticity vector of the required size
-    Vector<double> vorticity(1);
+    FixedSizeVector<double, 1> vorticity;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -1110,7 +1105,7 @@ namespace oomph
       double J = J_eulerian(s);
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(3, 3);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       strain_rate(s, strainrate);
 
       // Initialise
@@ -1134,12 +1129,13 @@ namespace oomph
   /// the fluid at local coordinate s. N has to be outer unit normal
   /// to the fluid.
   //==============================================================
-  void SphericalNavierStokesEquations::get_traction(const Vector<double>& s,
-                                                    const Vector<double>& N,
-                                                    Vector<double>& traction)
+  void SphericalNavierStokesEquations::get_traction(
+    const Vector<double>& s,
+    const FixedSizeVector<double, 2>& N,
+    FixedSizeVector<double, 3>& traction)
   {
     // Get velocity gradients
-    DenseMatrix<double> strainrate(3, 3);
+    FixedSizeMatrix<double, 3, 3> strainrate;
     strain_rate(s, strainrate);
 
     // Get pressure
@@ -1175,7 +1171,7 @@ namespace oomph
     const Vector<double>& s) const
   {
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(3, 3);
+    FixedSizeMatrix<double, 3, 3> strainrate;
     strain_rate(s, strainrate);
 
     // Initialise
@@ -1195,15 +1191,15 @@ namespace oomph
   /// Get strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
   //==============================================================
   void SphericalNavierStokesEquations::strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s, FixedSizeMatrix<double, 3, 3>& strainrate) const
   {
     // Velocity components
-    Vector<double> interpolated_u(3, 0.0);
+    FixedSizeVector<double, 3> interpolated_u(0.0);
     // Coordinates
     double interpolated_r = 0.0;
     double interpolated_theta = 0.0;
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(3, 2, 0.0);
+    FixedSizeMatrix<double, 3, 2> dudx(0.0);
 
 
     // Find out how many nodes there are in the element
@@ -1298,31 +1294,17 @@ namespace oomph
   /// one and only component of vorticity vector
   //==============================================================
   void SphericalNavierStokesEquations::get_vorticity(
-    const Vector<double>& s, Vector<double>& vorticity) const
+    const Vector<double>& s, FixedSizeVector<double, 1>& vorticity) const
   {
     throw OomphLibError("Not tested for spherical Navier-Stokes elements",
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 
-#ifdef PARANOID
-    if (vorticity.size() != 1)
-    {
-      std::ostringstream error_message;
-      error_message << "Computation of vorticity in 2D requires a 1D vector\n"
-                    << "which contains the only non-zero component of the\n"
-                    << "vorticity vector. You've passed a vector of size "
-                    << vorticity.size() << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Specify spatial dimension
     unsigned DIM = 2;
 
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    FixedSizeMatrix<double, 2, 2> dudx;
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1424,9 +1406,6 @@ namespace oomph
     // Set the value of n_intpt
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
-    Vector<double> s(2);
-
     // Get the number of nodes
     const unsigned n_node = this->nnode();
 
@@ -1451,7 +1430,7 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Now work out the velocity and the time derivative
-      Vector<double> interpolated_u(3, 0.0), interpolated_dudt(3, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0), interpolated_dudt(0.0);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -1467,8 +1446,8 @@ namespace oomph
       // Get mesh velocity bit
       if (!ALE_is_disabled)
       {
-        Vector<double> mesh_velocity(2, 0.0);
-        DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+        FixedSizeVector<double, 2> mesh_velocity(0.0);
+        FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
@@ -1608,7 +1587,7 @@ namespace oomph
     const double scaled_re_inv_ro = re_invro() * density_ratio();
     // double scaled_re_inv_fr = re_invfr()*density_ratio();
     // double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, 3>& G = g();
 
     // Integers to store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -1634,11 +1613,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       // Allocate
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(3, 0.0);
-      Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
-      Vector<double> dudt(3, 0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
+      FixedSizeVector<double, 3> dudt(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1693,7 +1672,7 @@ namespace oomph
       }
 
       // Get the user-defined body force terms
-      Vector<double> body_force(3);
+      FixedSizeVector<double, 3> body_force;
       get_body_force_spherical_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function

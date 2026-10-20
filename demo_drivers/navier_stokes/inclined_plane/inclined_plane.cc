@@ -63,7 +63,7 @@ namespace Global_Physical_Variables
  double Alpha = 1.0*atan(1.0);
 
  /// The Vector direction of gravity, set in main()
- Vector<double> G(2,0.0);
+ FixedSizeVector<double, 2> G(0.0);
 
  /// The Capillary number
  double Ca= 1.0;
@@ -103,18 +103,20 @@ namespace Global_Physical_Variables
 
 
  /// Function that prescribes the hydrostatic pressure field at the outlet
- void hydrostatic_pressure_outlet(const double& time, const Vector<double> &x, 
-                                  const Vector<double> &n, 
-                                  Vector<double> &traction)
+ void hydrostatic_pressure_outlet(const double& time,
+                                  const FixedSizeVector<double, 2> &x, 
+                                  const FixedSizeVector<double, 2> &n, 
+                                  FixedSizeVector<double, 2> &traction)
  {
   traction[0] = ReInvFr*G[1]*(1.0 - x[1]);
   traction[1] = 0.0;
  }
 
  /// Function that prescribes hydrostatic pressure field at the inlet
- void hydrostatic_pressure_inlet(const double& time, const Vector<double> &x, 
-                                 const Vector<double> &n,
-                                 Vector<double> &traction)
+ void hydrostatic_pressure_inlet(const double& time,
+                                 const FixedSizeVector<double, 2> &x, 
+                                 const FixedSizeVector<double, 2> &n,
+                                 FixedSizeVector<double, 2> &traction)
  {
   traction[0] = -ReInvFr*G[1]*(1.0 - x[1]);
   traction[1] = 0.0;

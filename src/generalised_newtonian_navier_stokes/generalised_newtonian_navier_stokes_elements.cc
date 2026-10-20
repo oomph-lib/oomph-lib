@@ -37,8 +37,8 @@ namespace oomph
 
   /// Navier--Stokes equations static data
   template<unsigned DIM>
-  Vector<double> GeneralisedNewtonianNavierStokesEquations<DIM>::Gamma(DIM,
-                                                                       1.0);
+  FixedSizeVector<double, DIM>
+    GeneralisedNewtonianNavierStokesEquations<DIM>::Gamma(1.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is
@@ -61,8 +61,8 @@ namespace oomph
 
   /// Navier-Stokes equations default gravity vector
   template<unsigned DIM>
-  Vector<double> GeneralisedNewtonianNavierStokesEquations<
-    DIM>::Default_Gravity_vector(DIM, 0.0);
+  FixedSizeVector<double, DIM> GeneralisedNewtonianNavierStokesEquations<
+    DIM>::Default_Gravity_vector(0.0);
 
   /// By default disable the pre-multiplication of the pressure and continuity
   /// equation by the viscosity ratio
@@ -95,15 +95,12 @@ namespace oomph
     // find out how many nodes there are
     unsigned n_node = nnode();
 
-    // find number of spatial dimensions
-    unsigned n_dim = this->dim();
-
     // Local coordinates
-    Vector<double> s(n_dim);
+    Vector<double> s(DIM);
 
     // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_dim);
-    for (unsigned i = 0; i < n_dim; i++)
+    FixedSizeVector<unsigned, DIM> u_nodal_index;
+    for (unsigned i = 0; i < DIM; i++)
     {
       u_nodal_index[i] = this->u_index_nst(i);
     }
@@ -133,7 +130,7 @@ namespace oomph
       double J = J_eulerian_at_knot(ipt);
 
       // Assign values of s
-      for (unsigned i = 0; i < n_dim; i++)
+      for (unsigned i = 0; i < DIM; i++)
       {
         s[i] = integral_pt()->knot(ipt, i);
       }
@@ -152,7 +149,7 @@ namespace oomph
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over the velocity components
-          for (unsigned i = 0; i < n_dim; i++)
+          for (unsigned i = 0; i < DIM; i++)
           {
             local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
 
@@ -479,8 +476,8 @@ namespace oomph
 
     // Vectors of local coordinates and coords and velocities
     Vector<double> s(DIM);
-    Vector<double> interpolated_x(DIM);
-    Vector<double> interpolated_u(DIM);
+    FixedSizeVector<double, DIM> interpolated_x;
+    FixedSizeVector<double, DIM> interpolated_u;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -634,12 +631,6 @@ namespace oomph
     // Vector of local coordinates
     Vector<double> s(DIM);
 
-    // Acceleration
-    Vector<double> dudt(DIM);
-
-    // Mesh elocity
-    Vector<double> mesh_veloc(DIM, 0.0);
-
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
 
@@ -661,22 +652,10 @@ namespace oomph
       dshape_eulerian(s, psif, dpsifdx);
 
       // Allocate storage
-      Vector<double> mesh_veloc(DIM);
-      Vector<double> dudt(DIM);
-      Vector<double> dudt_ALE(DIM);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM);
-
-      // Initialise everything to zero
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        mesh_veloc[i] = 0.0;
-        dudt[i] = 0.0;
-        dudt_ALE[i] = 0.0;
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          interpolated_dudx(i, j) = 0.0;
-        }
-      }
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeVector<double, DIM> dudt_ALE;
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate velocities and derivatives
 
@@ -765,25 +744,8 @@ namespace oomph
     // Vector of local coordinates
     Vector<double> s(DIM);
 
-    // Create vorticity vector of the required size
-    Vector<double> vorticity;
-    if (DIM == 2)
-    {
-      vorticity.resize(1);
-    }
-    else if (DIM == 3)
-    {
-      vorticity.resize(3);
-    }
-    else
-    {
-      std::string error_message =
-        "Can't output vorticity in 1D - in fact, what do you mean\n";
-      error_message += "by the 1D Navier-Stokes equations?\n";
-
-      throw OomphLibError(
-        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    // Vorticity vector
+    FixedSizeVector<double, N_vorticity_component> vorticity;
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -859,7 +821,7 @@ namespace oomph
       double J = J_eulerian(s);
 
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM, DIM);
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       strain_rate(s, strainrate);
 
       // Initialise
@@ -885,10 +847,12 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void GeneralisedNewtonianNavierStokesEquations<DIM>::get_traction(
-    const Vector<double>& s, const Vector<double>& N, Vector<double>& traction)
+    const Vector<double>& s,
+    const FixedSizeVector<double, DIM>& N,
+    FixedSizeVector<double, DIM>& traction)
   {
     // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM, 0.0);
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
 
     // Do we use the current or extrapolated strainrate to compute
     // the second invariant?
@@ -930,15 +894,15 @@ namespace oomph
   template<unsigned DIM>
   void GeneralisedNewtonianNavierStokesEquations<DIM>::get_traction(
     const Vector<double>& s,
-    const Vector<double>& N,
-    Vector<double>& traction_p,
-    Vector<double>& traction_visc_n,
-    Vector<double>& traction_visc_t)
+    const FixedSizeVector<double, DIM>& N,
+    FixedSizeVector<double, DIM>& traction_p,
+    FixedSizeVector<double, DIM>& traction_visc_n,
+    FixedSizeVector<double, DIM>& traction_visc_t)
   {
-    Vector<double> traction_visc(DIM);
+    FixedSizeVector<double, DIM> traction_visc(0.0);
 
     // Get velocity gradients
-    DenseMatrix<double> strainrate(DIM, DIM, 0.0);
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
 
     // Do we use the current or extrapolated strainrate to compute
     // the second invariant?
@@ -989,7 +953,7 @@ namespace oomph
       OOMPH_EXCEPTION_LOCATION);
 
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(DIM, DIM);
+    FixedSizeMatrix<double, DIM, DIM> strainrate;
     strain_rate(s, strainrate);
 
     // Initialise
@@ -1010,23 +974,11 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void GeneralisedNewtonianNavierStokesEquations<DIM>::strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s,
+    FixedSizeMatrix<double, DIM, DIM>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not " << DIM << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1037,15 +989,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1082,23 +1025,10 @@ namespace oomph
   void GeneralisedNewtonianNavierStokesEquations<DIM>::strain_rate(
     const unsigned& t,
     const Vector<double>& s,
-    DenseMatrix<double>& strainrate) const
+    FixedSizeMatrix<double, DIM, DIM>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not " << DIM << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1121,15 +1051,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1173,26 +1094,14 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void GeneralisedNewtonianNavierStokesEquations<DIM>::extrapolated_strain_rate(
-    const Vector<double>& s, DenseMatrix<double>& strainrate) const
+    const Vector<double>& s,
+    FixedSizeMatrix<double, DIM, DIM>& strainrate) const
   {
-#ifdef PARANOID
-    if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
-    {
-      std::ostringstream error_message;
-      error_message << "The strain rate has incorrect dimensions "
-                    << strainrate.ncol() << " x " << strainrate.nrow()
-                    << " Not " << DIM << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Get strain rates at two previous times
-    DenseMatrix<double> strain_rate_minus_two(DIM, DIM);
+    FixedSizeMatrix<double, DIM, DIM> strain_rate_minus_two;
     strain_rate(2, s, strain_rate_minus_two);
 
-    DenseMatrix<double> strain_rate_minus_one(DIM, DIM);
+    FixedSizeMatrix<double, DIM, DIM> strain_rate_minus_one;
     strain_rate(1, s, strain_rate_minus_one);
 
     // Get timestepper from first node
@@ -1224,27 +1133,13 @@ namespace oomph
   //==============================================================
   template<>
   void GeneralisedNewtonianNavierStokesEquations<2>::get_vorticity(
-    const Vector<double>& s, Vector<double>& vorticity) const
+    const Vector<double>& s, FixedSizeVector<double, 1>& vorticity) const
   {
-#ifdef PARANOID
-    if (vorticity.size() != 1)
-    {
-      std::ostringstream error_message;
-      error_message << "Computation of vorticity in 2D requires a 1D vector\n"
-                    << "which contains the only non-zero component of the\n"
-                    << "vorticity vector. You've passed a vector of size "
-                    << vorticity.size() << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Specify spatial dimension
-    unsigned DIM = 2;
+    const unsigned DIM = 2;
 
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1255,15 +1150,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1291,27 +1177,13 @@ namespace oomph
   //==============================================================
   template<>
   void GeneralisedNewtonianNavierStokesEquations<3>::get_vorticity(
-    const Vector<double>& s, Vector<double>& vorticity) const
+    const Vector<double>& s, FixedSizeVector<double, 3>& vorticity) const
   {
-#ifdef PARANOID
-    if (vorticity.size() != 3)
-    {
-      std::ostringstream error_message;
-      error_message << "Computation of vorticity in 3D requires a 3D vector\n"
-                    << "which contains the only non-zero component of the\n"
-                    << "vorticity vector. You've passed a vector of size "
-                    << vorticity.size() << std::endl;
-
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     // Specify spatial dimension
-    unsigned DIM = 3;
+    const unsigned DIM = 3;
 
     // Velocity gradient matrix
-    DenseMatrix<double> dudx(DIM);
+    FixedSizeMatrix<double, DIM, DIM> dudx(0.0);
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -1322,15 +1194,6 @@ namespace oomph
 
     // Call the derivatives of the shape functions
     dshape_eulerian(s, psi, dpsidx);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        dudx(i, j) = 0.0;
-      }
-    }
 
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
@@ -1420,9 +1283,6 @@ namespace oomph
     // Set the value of n_intpt
     const unsigned n_intpt = integral_pt()->nweight();
 
-    // Set the Vector to hold local coordinates
-    Vector<double> s(DIM);
-
     // Get the number of nodes
     const unsigned n_node = this->nnode();
 
@@ -1447,7 +1307,8 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Now work out the velocity and the time derivative
-      Vector<double> interpolated_u(DIM, 0.0), interpolated_dudt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -1463,8 +1324,8 @@ namespace oomph
       // Get mesh velocity bit
       if (!ALE_is_disabled)
       {
-        Vector<double> mesh_velocity(DIM, 0.0);
-        DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+        FixedSizeVector<double, DIM> mesh_velocity(0.0);
+        FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
@@ -1580,7 +1441,7 @@ namespace oomph
       for (unsigned i = 0; i < DIM; i++) s[i] = integral_pt()->knot(ipt, i);
 
       // The strainrate
-      DenseMatrix<double> strainrate(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       strain_rate(s, strainrate);
 
       // Calculate the second invariant
@@ -1648,7 +1509,7 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, DIM>& G = g();
 
     // Integers to store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -1674,11 +1535,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       // Allocate
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1720,7 +1581,7 @@ namespace oomph
       }
 
       // The strainrate used to compute the second invariant
-      DenseMatrix<double> strainrate_to_compute_second_invariant(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> strainrate_to_compute_second_invariant;
 
       // the strainrate used to calculate the second invariant
       // can be either the current one or the one extrapolated from
@@ -1742,7 +1603,7 @@ namespace oomph
       double viscosity = Constitutive_eqn_pt->viscosity(second_invariant);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
+      FixedSizeVector<double, DIM> body_force;
       get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -1759,16 +1620,16 @@ namespace oomph
           Constitutive_eqn_pt->dviscosity_dinvariant(second_invariant);
 
         // calculate the strainrate
-        DenseMatrix<double> strainrate(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> strainrate;
         strain_rate(s, strainrate);
 
         // pre-compute the derivative of the second invariant w.r.t. the
         // entries in the rate of strain tensor
-        DenseMatrix<double> dinvariant_dstrainrate(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> dinvariant_dstrainrate(0.0);
 
         // setting up a Kronecker Delta matrix, which has ones at the diagonal
         // and zeros off-diagonally
-        DenseMatrix<double> kroneckerdelta(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> kroneckerdelta(0.0);
 
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -2187,7 +2048,7 @@ namespace oomph
     double scaled_re_st = re_st() * density_ratio();
     double scaled_re_inv_fr = re_invfr() * density_ratio();
     double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, DIM>& G = g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -2206,7 +2067,7 @@ namespace oomph
         element_has_node_with_aux_node_update_fct = true;
 
         // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -2269,11 +2130,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       // Allocate
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -2346,7 +2207,7 @@ namespace oomph
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
+      FixedSizeVector<double, DIM> body_force;
       get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -2356,12 +2217,12 @@ namespace oomph
       // because this is the non-refineable version!
 
       // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> d_body_force_dx(0.0);
       get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
+      FixedSizeVector<double, DIM> source_gradient(0.0);
       get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
 

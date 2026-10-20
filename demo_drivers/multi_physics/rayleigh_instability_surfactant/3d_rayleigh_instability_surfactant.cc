@@ -66,7 +66,7 @@ namespace Global_Physical_Variables
  double Ca =  pow(Film_Thickness,3.0);
 
  /// Direction of gravity
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
 // Wavelength of the domain
  double Alpha = 1.047;

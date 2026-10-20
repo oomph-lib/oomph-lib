@@ -187,7 +187,7 @@ namespace oomph
     Vector<Vector<Vector<double>>> Box(2);
 
     // Get the centreline coordinates at the ends of the layer
-    Vector<double> zeta_centre(2);
+    FixedSizeVector<double, 2> zeta_centre;
     // Storage for position in the volume
     Vector<double> zeta(3);
 

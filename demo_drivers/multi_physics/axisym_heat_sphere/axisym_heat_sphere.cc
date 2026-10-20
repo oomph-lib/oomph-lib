@@ -62,7 +62,7 @@ namespace Global_Parameters
  double Ra = 0.0;
  
  /// Gravity
- Vector<double> G;
+ FixedSizeVector<double, 3> G;
 
  /// Location of the centre of the sphere on the axis
  double Sphere_centre_z= 0.0;
@@ -151,7 +151,7 @@ public:
    Vector<double> x(dim+1);
 
    //Need the traction as well
-   Vector<double> traction(3,0.0);
+   FixedSizeVector<double, 3> traction(0.0);
 
    //Need the flux
    Vector<double> flux(2,0.0);
@@ -184,13 +184,12 @@ public:
      this->interpolated_x(s,x);
 
      //Get the normal
-     //Resize normal vector to 2 to stop complaints here
-     N.resize(2);
      this->outer_unit_normal(s,N);
-     //Need to resize to 3 to stop complaints here
-     N.resize(3,0.0);
+     FixedSizeVector<double, 3> n_fixed(0.0);
+     n_fixed[0] = N[0];
+     n_fixed[1] = N[1];
      //Now get the traction from the bulk element
-     bulk_elem_pt->get_traction(s_bulk,N,traction);
+     bulk_elem_pt->get_traction(s_bulk,n_fixed,traction);
 
      //Get the concentration flux from the bulk element
      bulk_elem_pt->get_flux(s_bulk,flux);
@@ -558,7 +557,6 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
 //=====================================================================
 int main()
 {
- Global_Parameters::G.resize(3);
  Global_Parameters::G[0] = 0.0;
  Global_Parameters::G[1] = -1.0;
  Global_Parameters::G[2] = 0.0;

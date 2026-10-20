@@ -275,7 +275,7 @@ namespace oomph
       // Other options: Take average of the four (discontinuous)
       // pressure values at the father's midpoint]
 
-      Vector<double> av_press(2, 0.0);
+      FixedSizeVector<double, 2> av_press(0.0);
 
       // Loop over the sons
       for (unsigned ison = 0; ison < 4; ison++)
@@ -521,7 +521,7 @@ namespace oomph
           father_el_pt);
 
       // Set up storage for pressure in father element
-      Vector<double> press(2, 0.0);
+      FixedSizeVector<double, 2> press(0.0);
 
       // Loop over pressure components
       for (unsigned i = 0; i < 2; i++)
@@ -622,7 +622,7 @@ namespace oomph
       const unsigned n_node = this->nnode();
 
       // Get nodal indeces of the two pressure components
-      Vector<int> p_index(2);
+      FixedSizeVector<int, 2> p_index;
       for (unsigned i = 0; i < 2; i++)
       {
         p_index[i] = this->p_index_linearised_axi_nst(i);
@@ -645,7 +645,7 @@ namespace oomph
       const unsigned n_node = this->nnode();
 
       // Get nodal indeces of the two pressure components
-      Vector<int> p_index(2);
+      FixedSizeVector<int, 2> p_index;
       for (unsigned i = 0; i < 2; i++)
       {
         p_index[i] = this->p_index_linearised_axi_nst(i);
@@ -870,7 +870,7 @@ namespace oomph
         const unsigned NNODE_1D = 2;
         // Storage for the index along each boundary
         // Note that it's only a 2D spatial element
-        Vector<int> index(2);
+        FixedSizeVector<int, 2> index;
         // Loop over the coordinates
         for (unsigned i = 0; i < 2; i++)
         {

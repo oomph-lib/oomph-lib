@@ -108,8 +108,8 @@ public:
  /// "external" advection diffusion element associated with 
  /// integration point \c ipt.
  void get_body_force_axi_nst(const double& time, const unsigned& ipt, 
-                             const Vector<double> &s, const Vector<double> &x, 
-                             Vector<double> &body_force)
+                             const Vector<double> &s, const FixedSizeVector<double, 2> &x, 
+                             FixedSizeVector<double, 3> &body_force)
  {
 
   // Set interaction index -- there's only one interaction...
@@ -127,7 +127,7 @@ public:
   
   // Get vector that indicates the direction of gravity from
   // the Navier-Stokes equations
-  Vector<double> gravity(AxisymmetricNavierStokesEquations::g());
+  FixedSizeVector<double, 3> gravity(AxisymmetricNavierStokesEquations::g());
   
   // Set the temperature-dependent body force:
   for (unsigned i=0;i<3;i++)
@@ -445,8 +445,13 @@ public:
    (external_element_pt(interaction,ipt));
   
   //Wind is given by the velocity in the Navier Stokes element
+  FixedSizeVector<double, 3> u;
   nst_el_pt->interpolated_u_axi_nst
-   (external_element_local_coord(interaction,ipt),wind);
+   (external_element_local_coord(interaction,ipt),u);
+  for (unsigned i=0;i<3;i++)
+   {
+    wind[i] = u[i];
+   }
   
  }  //end of get_wind_adv_diff
  
@@ -755,7 +760,7 @@ get_dbody_force_axi_nst_dexternal_element_data(
  
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
- Vector<double> gravity(AxisymmetricNavierStokesEquations::g());
+ FixedSizeVector<double, 3> gravity(AxisymmetricNavierStokesEquations::g());
  
  // Get the external element's derivatives
  Vector<double> du_adv_diff_ddata;
@@ -844,8 +849,8 @@ public:
  /// Overload get_body_force_nst to get the temperature "body force"
  /// from the "source" AdvectionDiffusion element via current integration point
  void get_body_force_axi_nst(const double& time, const unsigned& ipt, 
-                             const Vector<double> &s, const Vector<double> &x, 
-                             Vector<double> &result);
+                             const Vector<double> &s, const FixedSizeVector<double, 2> &x, 
+                             FixedSizeVector<double, 3> &result);
 
  /// Fill in the derivatives of the body force with respect to the
  /// external unknowns
@@ -1235,8 +1240,8 @@ void QAxisymCrouzeixRaviartElementWithExternalElement::
 get_body_force_axi_nst(const double& time, 
                        const unsigned& ipt,
                        const Vector<double> &s,
-                       const Vector<double> &x,
-                       Vector<double> &result)
+                       const FixedSizeVector<double, 2> &x,
+                       FixedSizeVector<double, 3> &result)
 {
  // The interaction index is 0 in this case
  unsigned interaction=0;
@@ -1249,7 +1254,7 @@ get_body_force_axi_nst(const double& time,
 
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
- Vector<double> gravity(AxisymmetricNavierStokesEquations::g());
+ FixedSizeVector<double, 3> gravity(AxisymmetricNavierStokesEquations::g());
    
  // Temperature-dependent body force:
  for (unsigned i=0;i<3;i++)
@@ -1279,7 +1284,7 @@ get_dbody_force_axi_nst_dexternal_element_data(
  
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
- Vector<double> gravity(AxisymmetricNavierStokesEquations::g());
+ FixedSizeVector<double, 3> gravity(AxisymmetricNavierStokesEquations::g());
  
  // Get the external element's derivatives
  Vector<double> du_axi_adv_diff_ddata;
@@ -1323,8 +1328,13 @@ void QAxisymAdvectionDiffusionElementWithExternalElement::get_wind_axi_adv_diff
   (external_element_pt(interaction,ipt));
 
  //The wind function is simply the velocity at the points of the "other" el
+ FixedSizeVector<double, 3> u;
  source_el_pt->interpolated_u_axi_nst
-  (external_element_local_coord(interaction,ipt),wind);
+  (external_element_local_coord(interaction,ipt),u);
+ for (unsigned i=0;i<3;i++)
+  {
+   wind[i] = u[i];
+  }
 }  
 
 //=========================================================================

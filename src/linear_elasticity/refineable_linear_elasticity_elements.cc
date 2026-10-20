@@ -83,7 +83,7 @@ namespace oomph
     unsigned n_intpt = this->integral_pt()->nweight();
 
     // Set the vector to hold the local coordinates in the element
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Integer to store the local equation number
     int local_eqn = 0, local_unknown = 0;
@@ -110,7 +110,7 @@ namespace oomph
       Vector<double> interpolated_x(DIM, 0.0);
 
       // Calculate interpolated values of the derivative of displacements
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Setup memory for accelerations (initialised to zero)
       // hierher Vector<double> accel(DIM,0.0);
@@ -352,7 +352,7 @@ namespace oomph
       this->interpolated_x(s, x);
 
       // Get FE du/dx
-      Vector<double> dudx_fe(DIM);
+      FixedSizeVector<double, DIM> dudx_fe;
 
       // Get exact gradient at this point
       (*exact_grad_pt)(x, exact_grad);

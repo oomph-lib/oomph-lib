@@ -90,16 +90,31 @@ namespace oomph
     // Pointers to hang info objects
     HangInfo *hang_info_pt = 0, *hang_info2_pt = 0;
 
-    // Storage for local coordinates in FaceElement and associted bulk element
+    // Storage for local coordinates in FaceElement and associated bulk
+    // element. Their sizes (ELEMENT::TEMPLATE_PARAMETER_DIM - 1 and
+    // ELEMENT::TEMPLATE_PARAMETER_DIM) are known at compile time, but
+    // they have to be maintained as resizable Vectors for consistency
+    // with the generic FiniteElement/FaceElement interface
+    // (FaceElement::get_local_coordinate_in_bulk(...) and
+    // pshape_nst(...)); convert to FixedSizeVectors once generic has
+    // been updated.
     unsigned my_dim = this->dim();
     Vector<double> s(my_dim);
     Vector<double> s_bulk(my_dim + 1);
 
-    // Storage for outer unit normal
+    // Storage for outer unit normal (compile-time size:
+    // ELEMENT::TEMPLATE_PARAMETER_DIM). Maintained as a resizable Vector
+    // for consistency with FaceElement::outer_unit_normal(...) in
+    // generic; convert to FixedSizeVector once generic has been updated.
     Vector<double> unit_normal(my_dim + 1);
 
-    // Storage for veloc in bulk element
-    Vector<double> veloc(my_dim + 1);
+    // Storage for veloc in bulk element. The bulk element computes
+    // the velocity into a fixed-size vector whose size is the bulk
+    // element's spatial dimension, which we obtain (as a compile-time
+    // constant) from its publicly exposed template parameter. No
+    // initialisation required because interpolated_u_nst(...) assigns
+    // all entries.
+    FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> veloc;
 
     // Set the value of n_intpt
     unsigned n_intpt = this->integral_pt()->nweight();
@@ -163,8 +178,10 @@ namespace oomph
       for (unsigned i = 0; i < my_dim; i++)
         s[i] = this->integral_pt()->knot(ipt, i);
 
-      // Find corresponding coordinate in the the bulk element
-      s_bulk = this->local_coordinate_in_bulk(s);
+      // Find corresponding coordinate in the the bulk element (computed
+      // in place, into the pre-allocated s_bulk, rather than via the
+      // version of this function that returns a newly allocated Vector)
+      this->get_local_coordinate_in_bulk(s, s_bulk);
 
       /// Get outer unit normal
       this->outer_unit_normal(ipt, unit_normal);
@@ -416,8 +433,16 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // Note: The interface of get_Z2_flux(...) is inherited from
+      // ElementWithZ2ErrorEstimator in generic and therefore maintains
+      // resizable Vector<double> arguments for s (size DIM) and flux
+      // (size DIM + DIM*(DIM - 1)/2) until generic has been updated.
+      //
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -862,8 +887,11 @@ namespace oomph
         unsigned total_index = 0;
         // The number of nodes along each 1d edge is 2.
         unsigned NNODE_1D = 2;
-        // Storage for the index along each boundary
-        Vector<int> index(DIM);
+        // Storage for the index along each boundary: its size (DIM) is
+        // known at compile time and it's only accessed component-wise so
+        // we use a fixed-size vector. No initialisation required since
+        // all entries are assigned below.
+        FixedSizeVector<int, DIM> index;
         // Loop over the coordinates
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1935,6 +1963,11 @@ namespace oomph
     // Pointer to my father (in element impersonation)
     RefineableElement* father_el_pt = quadtree_pt()->father_pt()->object_pt();
 
+    // Local coordinates of son midpoint in father element (compile-time
+    // size: 2). Maintained as a resizable Vector for consistency with
+    // interpolated_p_nst(...) (whose s argument is kept as a
+    // Vector<double> for consistency with generic); convert to
+    // FixedSizeVector<double, 2> once generic has been updated.
     Vector<double> s_father(2);
 
     // Son midpoint is located at the following coordinates in father element:
@@ -2008,6 +2041,11 @@ namespace oomph
     RefineableQElement<3>* father_el_pt = dynamic_cast<RefineableQElement<3>*>(
       octree_pt()->father_pt()->object_pt());
 
+    // Local coordinates of son midpoint in father element (compile-time
+    // size: 3). Maintained as a resizable Vector for consistency with
+    // interpolated_p_nst(...) (whose s argument is kept as a
+    // Vector<double> for consistency with generic); convert to
+    // FixedSizeVector<double, 3> once generic has been updated.
     Vector<double> s_father(3);
 
     // Son midpoint is located at the following coordinates in father element:

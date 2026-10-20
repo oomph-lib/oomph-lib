@@ -57,14 +57,16 @@ namespace oomph
   {
   public:
     /// Function pointer to body force function fct(t,x,f(x))
-    /// x is a Vector!
+    /// x is a FixedSizeVector!
     typedef void (*SphericalNavierStokesBodyForceFctPt)(
-      const double& time, const Vector<double>& x, Vector<double>& body_force);
+      const double& time,
+      const FixedSizeVector<double, 2>& x,
+      FixedSizeVector<double, 3>& body_force);
 
     /// Function pointer to source function fct(t,x)
-    /// x is a Vector!
-    typedef double (*SphericalNavierStokesSourceFctPt)(const double& time,
-                                                       const Vector<double>& x);
+    /// x is a FixedSizeVector!
+    typedef double (*SphericalNavierStokesSourceFctPt)(
+      const double& time, const FixedSizeVector<double, 2>& x);
 
   private:
     /// Static "magic" number that indicates that the pressure is
@@ -80,7 +82,7 @@ namespace oomph
     static double Default_Physical_Ratio_Value;
 
     /// Static default value for the gravity vector
-    static Vector<double> Default_Gravity_vector;
+    static FixedSizeVector<double, 3> Default_Gravity_vector;
 
   protected:
     // Physical constants
@@ -109,8 +111,8 @@ namespace oomph
     /// (used when in a rotating frame)
     double* ReInvRo_pt;
 
-    /// Pointer to global gravity Vector
-    Vector<double>* G_pt;
+    /// Pointer to global gravity vector
+    FixedSizeVector<double, 3>* G_pt;
 
     /// Pointer to body force function
     SphericalNavierStokesBodyForceFctPt Body_force_fct_pt;
@@ -163,11 +165,12 @@ namespace oomph
     /// Eulerian position. This function is virtual so that it can be
     /// overloaded in multi-physics elements where the body force might
     /// depend on another variable.
-    virtual void get_body_force_spherical_nst(const double& time,
-                                              const unsigned& ipt,
-                                              const Vector<double>& s,
-                                              const Vector<double>& x,
-                                              Vector<double>& result)
+    virtual void get_body_force_spherical_nst(
+      const double& time,
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const FixedSizeVector<double, 2>& x,
+      FixedSizeVector<double, 3>& result)
     {
       // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
@@ -187,9 +190,8 @@ namespace oomph
 
     /// Calculate the source fct at given time and
     /// Eulerian position
-    virtual double get_source_spherical_nst(double time,
-                                            const unsigned& ipt,
-                                            const Vector<double>& x)
+    virtual double get_source_spherical_nst(
+      double time, const unsigned& ipt, const FixedSizeVector<double, 2>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)
@@ -241,7 +243,7 @@ namespace oomph
     // N.B. This needs to be public so that the intel compiler gets things
     // correct somehow the access function messes things up when going to
     // refineable navier--stokes
-    static Vector<double> Gamma;
+    static FixedSizeVector<double, 3> Gamma;
 
     // Access functions for the physical constants
 
@@ -320,13 +322,13 @@ namespace oomph
     }
 
     /// Vector of gravitational components
-    const Vector<double>& g() const
+    const FixedSizeVector<double, 3>& g() const
     {
       return *G_pt;
     }
 
     /// Pointer to Vector of gravitational components
-    Vector<double>*& g_pt()
+    FixedSizeVector<double, 3>*& g_pt()
     {
       return G_pt;
     }
@@ -461,7 +463,7 @@ namespace oomph
 
     /// Compute the vorticity vector at local coordinate s
     void get_vorticity(const Vector<double>& s,
-                       Vector<double>& vorticity) const;
+                       FixedSizeVector<double, 1>& vorticity) const;
 
     /// Get integral of kinetic energy over element
     double kin_energy() const;
@@ -471,14 +473,14 @@ namespace oomph
 
     /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
     void strain_rate(const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, 3, 3>& strain_rate) const;
 
     /// Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s. N has to be outer unit normal
     /// to the fluid.
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
+                      const FixedSizeVector<double, 2>& N,
+                      FixedSizeVector<double, 3>& traction);
 
 
     /// This implements a pure virtual function defined
@@ -497,7 +499,18 @@ namespace oomph
       // if N is the outer unit normal onto the fluid; here we're
       // exepcting N to point into the fluid so we're getting the
       // traction onto the adjacent wall instead!
-      get_traction(s, N, load);
+      FixedSizeVector<double, 2> N_fixed;
+      for (unsigned i = 0; i < 2; i++)
+      {
+        N_fixed[i] = N[i];
+      }
+      FixedSizeVector<double, 3> load_fixed;
+      get_traction(s, N_fixed, load_fixed);
+      const unsigned n_load = load.size();
+      for (unsigned i = 0; i < n_load; i++)
+      {
+        load[i] = load_fixed[i];
+      }
     }
 
     /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -700,7 +713,7 @@ namespace oomph
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_spherical_nst(const Vector<double>& s,
-                                      Vector<double>& veloc) const
+                                      FixedSizeVector<double, 3>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();

@@ -98,7 +98,7 @@ namespace oomph
     Vector<double> s(DIM + 1, 0.0);
 
     // Storage for the local velocity indices
-    Vector<unsigned> u_nodal_index(DIM, 0.0);
+    FixedSizeVector<unsigned, DIM> u_nodal_index(0.0);
 
     // Find the indices at which the local velocities are stored
     for (unsigned i = 0; i < DIM; i++)
@@ -1126,16 +1126,16 @@ namespace oomph
       dshape_eulerian(s, psif, dpsifdx);
 
       // Allocate storage for the mesh velocity
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
       // Allocate storage for the acceleration
-      Vector<double> du_dt(DIM, 0.0);
+      FixedSizeVector<double, DIM> du_dt(0.0);
 
       // Allocate storage for the ALE acceleration
-      Vector<double> du_dt_ALE(DIM, 0.0);
+      FixedSizeVector<double, DIM> du_dt_ALE(0.0);
 
       // Allocate storage for the velocity derivatives
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       //--------------------------------------
       // Calculate velocities and derivatives:
@@ -1412,7 +1412,7 @@ namespace oomph
     Vector<double>& traction_visc_t)
   {
     // Allocate space for the traction components
-    Vector<double> traction_visc(DIM);
+    FixedSizeVector<double, DIM> traction_visc(0.0);
 
     // Allocate space for the velocity gradients
     DenseMatrix<double> strainrate(DIM, DIM);
@@ -1708,8 +1708,8 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Now work out the velocity and the time derivative
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_dudt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -1725,8 +1725,8 @@ namespace oomph
       // Get mesh velocity bit
       if (!ALE_is_disabled)
       {
-        Vector<double> mesh_velocity(DIM, 0.0);
-        DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+        FixedSizeVector<double, DIM> mesh_velocity(0.0);
+        FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
@@ -1949,16 +1949,16 @@ namespace oomph
       Vector<double> interpolated_x(DIM, 0.0);
 
       // Storage for the interpolated velocity components
-      Vector<double> interpolated_u(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
 
       // Storage for the interpolated time-derivative of the velocities
-      Vector<double> interpolated_dudt(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudt(0.0);
 
       // Storage for the mesh velocity
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
       // Storage for the spatial derivatives of the velocity components
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)

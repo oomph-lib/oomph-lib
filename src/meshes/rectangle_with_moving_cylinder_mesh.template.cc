@@ -63,7 +63,7 @@ namespace oomph
     Cylinder_pt->position(time, xi_right, point_right);
 
     // Storage for the coordinates of the centre
-    Vector<double> point_centre(2, 0.0);
+    FixedSizeVector<double, 2> point_centre(0.0);
 
     // Loop over the coordinates
     for (unsigned i = 0; i < 2; i++)
@@ -108,7 +108,7 @@ namespace oomph
     Cylinder_pt->position(time, xi_right, point_right);
 
     // Storage for the coordinates of the centre
-    Vector<double> point_centre(2, 0.0);
+    FixedSizeVector<double, 2> point_centre(0.0);
 
     // Loop over the coordinates
     for (unsigned i = 0; i < 2; i++)

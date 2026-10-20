@@ -542,7 +542,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Storage for the local coordinates
-    Vector<double> s(2);
+    FixedSizeVector<double, 2> s;
 
     // Storage for the elasticity source function
     Vector<double> f_solid(2);
@@ -622,14 +622,14 @@ namespace oomph
 
       // Storage for interpolated values
       Vector<double> interpolated_x(2, 0.0);
-      Vector<double> interpolated_u(2, 0.0);
-      DenseMatrix<double> interpolated_du_dx(2, 2, 0.0);
+      FixedSizeVector<double, 2> interpolated_u(0.0);
+      FixedSizeMatrix<double, 2, 2> interpolated_du_dx(0.0);
       double interpolated_div_du_dt_dx = 0.0;
       double interpolated_du_r_dt = 0.0;
-      Vector<double> interpolated_d2u_dt2(2, 0.0);
-      Vector<double> interpolated_q(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_d2u_dt2(0.0);
+      FixedSizeVector<double, 2> interpolated_q(0.0);
       double interpolated_div_q_ds = 0.0;
-      Vector<double> interpolated_dq_dt(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dq_dt(0.0);
       double interpolated_p = 0.0;
 
       // loop over geometric basis functions to find interpolated x

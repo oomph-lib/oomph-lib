@@ -44,8 +44,10 @@ namespace oomph
     /// Peclet number -- overwrite with actual Reynolds number
     double Peclet = 0.0;
 
-    /// Wind
-    void wind_function(const Vector<double>& x, Vector<double>& wind)
+    /// Wind: both the 2D Eulerian coordinates x and the 2D wind vector
+    /// have compile-time size 2 so we use fixed-size vectors.
+    void wind_function(const FixedSizeVector<double, 2>& x,
+                       FixedSizeVector<double, 2>& wind)
     {
       if (Flag == 0)
       {
@@ -59,11 +61,21 @@ namespace oomph
       }
     }
 
-    /// Exact solution as a Vector
+    /// Exact solution as a Vector (compile-time sizes: 2 for x, 3 for u).
+    /// Maintained with resizable Vector<double> arguments for consistency
+    /// with FiniteElement::SteadyExactSolutionFctPt in generic (to which
+    /// this function is passed in Mesh::output_fct(...)); convert to
+    /// FixedSizeVectors once generic has been updated.
     void get_exact_u(const Vector<double>& x, Vector<double>& u)
     {
       u.resize(3);
-      wind_function(x, u);
+      FixedSizeVector<double, 2> x_fixed;
+      x_fixed[0] = x[0];
+      x_fixed[1] = x[1];
+      FixedSizeVector<double, 2> wind;
+      wind_function(x_fixed, wind);
+      u[0] = wind[0];
+      u[1] = wind[1];
       if (Flag == 0)
       {
         u[2] = x[0] * x[0] * pow(1.0 - x[0], 2.0) * x[1] * x[1] *
@@ -75,7 +87,11 @@ namespace oomph
       }
     }
 
-    /// Exact solution as a scalar
+    /// Exact solution as a scalar (compile-time size of x: 2).
+    /// Maintained with a resizable Vector<double> argument because its
+    /// caller obtains x from FiniteElement::interpolated_x(...) in
+    /// generic; convert to FixedSizeVector<double, 2> once generic has
+    /// been updated.
     void get_exact_u(const Vector<double>& x, double& u)
     {
       if (Flag == 0)
@@ -89,8 +105,14 @@ namespace oomph
       }
     }
 
-    /// Source function required to make the solution above an exact solution
-    double source_function(const Vector<double>& x_vect)
+    /// Source function required to make the solution above an exact
+    /// solution. The Eulerian coordinates are passed as a fixed-size
+    /// vector (of size 2, i.e. this is 2D only!) because this function is
+    /// assigned to the Navier-Stokes elements' pressure advection
+    /// diffusion source function pointer
+    /// (NavierStokesEquations<2>::NavierStokesPressureAdvDiffSourceFctPt)
+    /// whose interface requires one.
+    double source_function(const FixedSizeVector<double, 2>& x_vect)
     {
       double x[2];
       x[0] = x_vect[0];

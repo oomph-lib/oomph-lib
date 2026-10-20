@@ -138,7 +138,7 @@ namespace oomph
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
     // There is one possible index.
-    Vector<int> index(1);
+    FixedSizeVector<int, 1> index;
 
     // Determine the index
     // -------------------
@@ -456,15 +456,15 @@ namespace oomph
 
     // Setup vertex coordinates in element:
     //-------------------------------------
-    Vector<double> s_left(1);
-    Vector<double> s_right(1);
+    FixedSizeVector<double, 1> s_left;
+    FixedSizeVector<double, 1> s_right;
     s_left[0] = -1.0;
     s_right[0] = 1.0;
 
     // Local coordinate in element
     Vector<double> s(1);
 
-    Vector<double> s_fraction(1);
+    FixedSizeVector<double, 1> s_fraction;
     // Loop over all nodes in the element
     for (unsigned n = 0; n < P_order; n++)
     {
@@ -1321,7 +1321,7 @@ namespace oomph
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
     // There are two possible indices.
-    Vector<int> index(2);
+    FixedSizeVector<int, 2> index;
 
     // Loop over indices
     for (unsigned i = 0; i < 2; i++)
@@ -1539,7 +1539,7 @@ namespace oomph
     Vector<unsigned> translate_s(2);
     Vector<double> s_lo_neigh(2);
     Vector<double> s_hi_neigh(2);
-    Vector<double> s(2);
+    FixedSizeVector<double, 2> s;
 
     int neigh_edge, diff_level;
     bool in_neighbouring_tree;
@@ -1801,10 +1801,9 @@ namespace oomph
       // Number of history values (incl. present)
       unsigned ntstorage = time_stepper_pt->ntstorage();
 
-      Vector<double> s_lo(2);
-      Vector<double> s_hi(2);
+      FixedSizeVector<double, 2> s_lo;
+      FixedSizeVector<double, 2> s_hi;
       Vector<double> s(2);
-      Vector<double> x(2);
 
       // Setup vertex coordinates in father element:
       //--------------------------------------------
@@ -1870,10 +1869,8 @@ namespace oomph
       else
       {
         unsigned jnod = 0;
-        Vector<double> x_small(2);
-        Vector<double> x_large(2);
 
-        Vector<double> s_fraction(2);
+        FixedSizeVector<double, 2> s_fraction;
         // Loop over nodes in element
         for (unsigned i0 = 0; i0 < n_p; i0++)
         {
@@ -2178,8 +2175,8 @@ namespace oomph
 
     // Setup vertex coordinates in element:
     //-------------------------------------
-    Vector<double> s_lo(2);
-    Vector<double> s_hi(2);
+    FixedSizeVector<double, 2> s_lo;
+    FixedSizeVector<double, 2> s_hi;
     s_lo[0] = -1.0;
     s_hi[0] = 1.0;
     s_lo[1] = -1.0;
@@ -3775,10 +3772,10 @@ namespace oomph
 
     // Initialise errors
     max_error = 0.0;
-    Vector<double> max_error_x(2, 0.0);
+    FixedSizeVector<double, 2> max_error_x(0.0);
     double max_error_val = 0.0;
 
-    Vector<int> edges(4);
+    FixedSizeVector<int, 4> edges;
     edges[0] = S;
     edges[1] = N;
     edges[2] = W;
@@ -4465,8 +4462,7 @@ namespace oomph
           P[i].resize(n_master_nodes, 0.0);
         }
 
-        // Storage for local coordinate
-        Vector<double> s(2);
+
 
         // Sum contributions from master element shapes (quadrature).
         // The order of quadrature must be high enough to evaluate a polynomial
@@ -4496,7 +4492,7 @@ namespace oomph
           // Evaluate mortar test functions at the quadrature knots in the
           // dependent
           // s[active_coord_index] = (*quadrature_knot)[q];
-          Vector<double> s_on_mortar(1);
+          FixedSizeVector<double, 1> s_on_mortar;
           s_on_mortar[0] = (*quadrature_knot)[q];
 
           // Get psi
@@ -4535,7 +4531,7 @@ namespace oomph
           }
 
           // Convert coordinate on mortar to local fraction in dependent element
-          Vector<double> s_fraction(2);
+          FixedSizeVector<double, 2> s_fraction;
           for (unsigned i = 0; i < 2; i++)
           {
             s_fraction[i] = (i == active_coord_index) ?
@@ -4575,7 +4571,7 @@ namespace oomph
         for (unsigned v = 0; v < n_mortar_vertices; v++)
         {
           // Convert coordinate on mortar to local fraction in dependent element
-          Vector<double> s_fraction(2);
+          FixedSizeVector<double, 2> s_fraction;
           for (unsigned i = 0; i < 2; i++)
           {
             s_fraction[i] =
@@ -4894,8 +4890,8 @@ namespace oomph
     unsigned Nnode_1d = this->nnode_1d();
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
-    // There are two possible indices.
-    Vector<int> index(3);
+    // There are three possible indices.
+    FixedSizeVector<int, 3> index;
 
     // Loop over indices
     for (unsigned i = 0; i < 3; i++)
@@ -5364,7 +5360,7 @@ namespace oomph
     Vector<unsigned> translate_s(3);
     Vector<double> s_lo_neigh(3);
     Vector<double> s_hi_neigh(3);
-    Vector<double> s(3);
+    FixedSizeVector<double, 3> s;
 
     int neigh_face, diff_level;
     bool in_neighbouring_tree;
@@ -5909,10 +5905,9 @@ namespace oomph
       /// / Pass pointer to time object:
       // this->time_pt()=father_el_pt->time_pt();
 
-      Vector<double> s_lo(3);
-      Vector<double> s_hi(3);
+      FixedSizeVector<double, 3> s_lo;
+      FixedSizeVector<double, 3> s_hi;
       Vector<double> s(3);
-      Vector<double> x(3);
 
       // Setup vertex coordinates in father element:
       //--------------------------------------------
@@ -6021,7 +6016,7 @@ namespace oomph
       {
         unsigned jnod = 0;
 
-        Vector<double> s_fraction(3);
+        FixedSizeVector<double, 3> s_fraction;
         // Loop over nodes in element
         for (unsigned i0 = 0; i0 < n_p; i0++)
         {
@@ -9128,7 +9123,7 @@ namespace oomph
             // Check if each node is on the master edge
             mortar_vertex_on_master_edge[v] = true;
             unsigned non_extreme_coordinate = 0;
-            Vector<double> s_in_neigh(3);
+            FixedSizeVector<double, 3> s_in_neigh;
             for (unsigned i = 0; i < 3; i++)
             {
               // Work out this node's location in the master
@@ -9367,8 +9362,7 @@ namespace oomph
               P[i].resize(n_master_nodes, 0.0);
             }
 
-            // Storage for local coordinate
-            Vector<double> s(3);
+
 
             // Sum contributions from master element shapes (quadrature).
             // The order of quadrature must be high enough to evaluate a
@@ -9398,7 +9392,7 @@ namespace oomph
               // Evaluate mortar test functions at the quadrature knots in the
               // dependent
               // s[active_coord_index] = (*quadrature_knot)[q];
-              Vector<double> s_on_mortar(1);
+              FixedSizeVector<double, 1> s_on_mortar;
               s_on_mortar[0] = (*quadrature_knot)[q];
 
               // Get psi
@@ -9441,7 +9435,7 @@ namespace oomph
 
               // Convert coordinate on mortar to local fraction in dependent
               // element
-              Vector<double> s_fraction(3);
+              FixedSizeVector<double, 3> s_fraction;
               for (unsigned i = 0; i < 3; i++)
               {
                 s_fraction[i] = (i == active_coord_index) ?
@@ -9495,7 +9489,7 @@ namespace oomph
             {
               // Convert coordinate on mortar to local fraction in dependent
               // element
-              Vector<double> s_fraction(3);
+              FixedSizeVector<double, 3> s_fraction;
               for (unsigned i = 0; i < 3; i++)
               {
                 s_fraction[i] =
@@ -9688,7 +9682,7 @@ namespace oomph
     if (h_type_dependent || p_type_dependent)
     {
       // Compute the active coordinate indices along the this side of mortar
-      Vector<unsigned> active_coord_index(2);
+      FixedSizeVector<unsigned, 2> active_coord_index;
       if (my_face == B || my_face == F)
       {
         active_coord_index[0] = 0;
@@ -10163,8 +10157,7 @@ namespace oomph
           P[i].resize(n_master_nodes, 0.0);
         }
 
-        // Storage for local coordinate
-        Vector<double> s(3);
+
 
         // Sum contributions from master element shapes (quadrature).
         // The order of quadrature must be high enough to evaluate a polynomial
@@ -10194,7 +10187,7 @@ namespace oomph
         {
           // Evaluate mortar test functions at the quadrature knots in the
           // dependent
-          Vector<double> s_on_mortar(2);
+          FixedSizeVector<double, 2> s_on_mortar;
           for (unsigned i = 0; i < 2; i++)
           {
             s_on_mortar[i] = (*quadrature_knot)[q][i];
@@ -10249,7 +10242,7 @@ namespace oomph
           }
 
           // Convert coordinate on mortar to local fraction in dependent element
-          Vector<double> s_fraction(3);
+          FixedSizeVector<double, 3> s_fraction;
           for (unsigned i = 0; i < 3; i++)
           {
             if (i == active_coord_index[0])
@@ -10309,7 +10302,7 @@ namespace oomph
         for (unsigned v = 0; v < n_mortar_vertices; v++)
         {
           // Convert coordinate on mortar to local fraction in dependent element
-          Vector<double> s_fraction(3);
+          FixedSizeVector<double, 3> s_fraction;
           for (unsigned i = 0; i < 3; i++)
           {
             if (i == active_coord_index[0])

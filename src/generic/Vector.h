@@ -39,8 +39,9 @@
 #include <sstream>
 #include <cmath>
 
-// Oomph-lib error handler
+// Oomph-lib error handler and fixed-size containers
 #include "oomph_definitions.h"
+#include "fixed_size_vector.h"
 
 
 namespace oomph

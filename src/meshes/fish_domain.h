@@ -480,7 +480,7 @@ namespace oomph
     Back_pt->position(t, x, r_fish);
 
     // Top end of fin
-    Vector<double> r_fin(2);
+    FixedSizeVector<double, 2> r_fin;
     r_fin[0] = X_fin;
     r_fin[1] = Y_fin;
 
@@ -565,7 +565,7 @@ namespace oomph
     Back_pt->position(t, x, r_top);
 
     // Corresponding point on the x-axis
-    Vector<double> r_back(2);
+    FixedSizeVector<double, 2> r_back;
     r_back[0] = r_top[0];
     r_back[1] = 0.0;
 
@@ -607,7 +607,7 @@ namespace oomph
     Back_pt->position(t, x, r_top);
 
     // The "mouth"
-    Vector<double> r_mouth(2);
+    FixedSizeVector<double, 2> r_mouth;
     r_mouth[0] = X_mouth;
     r_mouth[1] = 0.0;
 

@@ -254,19 +254,13 @@ namespace oomph
       double W = w * J;
 
       // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(Dim);
-
-      // Initialise to zero
-      for (unsigned i = 0; i < Dim; i++)
-      {
-        interpolated_x[i] = 0.0;
-      }
+      FixedSizeVector<double, 2> interpolated_x(0.0);
 
       // Calculate velocities and derivatives
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over velocity components
-        for (unsigned i = 0; i < Dim; i++)
+        for (unsigned i = 0; i < 2; i++)
         {
           interpolated_x[i] += nodal_position(l, i) * psif[l];
         }

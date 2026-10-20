@@ -249,7 +249,7 @@ class SpineGravityTractionElement :
  double *ReInvFr_pt;
 
  /// Pointer to global gravity Vector
- Vector<double> *G_pt;
+ FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> *G_pt;
 
  /// Pointer to the viscosity ratio (relative to the 
  /// viscosity used in the definition of the Reynolds number)
@@ -412,10 +412,12 @@ public:
  const double &re_invfr() const  {return *ReInvFr_pt;}
 
  /// Vector of gravitational components
- const Vector<double> &g() const {return *G_pt;}
+ const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> &g() const
+  {return *G_pt;}
 
  /// Pointer to Vector of gravitational components
- Vector<double>* &g_pt() {return G_pt;}
+ FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>* &g_pt()
+  {return G_pt;}
 
  /// Calculate the flow across the element
  double flow()
@@ -454,7 +456,7 @@ public:
      double W = w*J;
 
      //Get the velocity from the parent
-     Vector<double> interpolated_u(Dim,0.0);
+     FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> interpolated_u;
      bulk_el_pt->interpolated_u_nst(s_parent,interpolated_u);
 
      //Get the outer unit normal
@@ -564,7 +566,7 @@ public:
    //Get the Physical Variable
    double ReInvFr = re_invfr()*density_ratio();
    double Viscosity_Ratio = viscosity_ratio();
-   Vector<double> G = g();
+   const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& G = g();
 
    
    unsigned n_external =  this->nexternal_u_data();

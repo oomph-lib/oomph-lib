@@ -261,9 +261,13 @@ namespace oomph
     }
 
     /// Typedef for pointer to function that specifies the exact vorticity
-    /// and derivatives (for validation)
+    /// and derivatives (for validation). The 2D Eulerian coordinates x
+    /// have compile-time size 2 so they're passed as a FixedSizeVector;
+    /// vort_and_derivs is sized at run time according to the user's
+    /// choice of which derivatives to recover.
     typedef void (*ExactVorticityFctPt)(
-      const Vector<double>& x, Vector<Vector<double>>& vort_and_derivs);
+      const FixedSizeVector<double, 2>& x,
+      Vector<Vector<double>>& vort_and_derivs);
 
     /// Helper function to create a container for the vorticity and
     /// its partial derivatives. If the user wishes to output everything then
@@ -825,11 +829,17 @@ namespace oomph
     void output_analytical_veloc_and_vorticity(std::ostream& outfile,
                                                const unsigned& nplot)
     {
-      // Vector of local coordinates
-      Vector<double> s(N_dim, 0.0);
+      // Vector of local coordinates (compile-time size: 2). Maintained
+      // as a resizable Vector for consistency with
+      // FiniteElement::get_s_plot(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(N_dim);
 
-      // Global coordinates container
-      Vector<double> x(N_dim);
+      // Global coordinates container: compile-time size 2, passed to
+      // Exact_vorticity_fct_pt so we use a FixedSizeVector (no
+      // initialisation required since all entries are assigned below).
+      FixedSizeVector<double, 2> x;
 
       // Get the number of nodes in this element
       unsigned n_node = this->nnode();
@@ -898,11 +908,17 @@ namespace oomph
     /// Output the velocity, smoothed vorticity and derivatives
     void output_smoothed_vorticity(std::ostream& outfile, const unsigned& nplot)
     {
-      // Vector of local coordinates
-      Vector<double> s(N_dim, 0.0);
+      // Vector of local coordinates (compile-time size: 2). Maintained
+      // as a resizable Vector for consistency with
+      // FiniteElement::get_s_plot(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(N_dim);
 
-      // Vector of global coordinates
-      Vector<double> x(N_dim, 0.0);
+      // Global coordinates: compile-time size 2 and only accessed
+      // component-wise so use a FixedSizeVector (no initialisation
+      // required since all entries are assigned before use).
+      FixedSizeVector<double, 2> x;
 
       // Get the number of nodes in the element
       unsigned n_node = this->nnode();
@@ -916,9 +932,6 @@ namespace oomph
       // Create a container for the vorticity and its derivatives
       Vector<Vector<double>> vort_and_derivs =
         create_container_for_vorticity_and_derivatives();
-
-      // Vector of velocities
-      Vector<double> velocity(N_dim, 0.0);
 
       // Get the number of plot points
       unsigned num_plot_points = this->nplot_points(nplot);
@@ -996,8 +1009,11 @@ namespace oomph
                                const unsigned& i,
                                const unsigned& nplot) const
     {
-      // Vector of local coordinates
-      Vector<double> s(N_dim, 0.0);
+      // Vector of local coordinates (compile-time size: 2). Maintained
+      // as a resizable Vector for consistency with
+      // FiniteElement::get_s_plot(...) in generic; convert to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(N_dim);
 
       // Get the number of plot points
       unsigned num_plot_points = this->nplot_points_paraview(nplot);
@@ -1158,11 +1174,17 @@ namespace oomph
     /// smoothed vorticity
     void output(std::ostream& outfile, const unsigned& nplot)
     {
-      // Vector of local coordinates
-      Vector<double> s(N_dim, 0.0);
+      // Vector of local coordinates (compile-time size: 2). Maintained
+      // as a resizable Vector for consistency with
+      // FiniteElement::get_s_plot(...), FiniteElement::shape(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(N_dim);
 
-      // Global coordinates container
-      Vector<double> x(N_dim, 0.0);
+      // Global coordinates container: compile-time size 2 and only
+      // accessed component-wise so use a FixedSizeVector (no
+      // initialisation required since all entries are assigned below).
+      FixedSizeVector<double, 2> x;
 
       // Get the number of nodes in this element
       unsigned n_node = this->nnode();
@@ -1238,9 +1260,13 @@ namespace oomph
     } // End of output
 
 
-    /// Get raw derivative of velocity
+    /// Get raw derivative of velocity (4 components in 2D: du/dx, du/dy,
+    /// dv/dx, dv/dy; returned in a FixedSizeVector). Note: s (size 2) is
+    /// maintained as a resizable Vector for consistency with
+    /// FiniteElement::dshape_eulerian(...) in generic; convert to
+    /// FixedSizeVector<double, 2> once generic has been updated.
     void get_raw_velocity_deriv(const Vector<double>& s,
-                                Vector<double>& dveloc_dx) const
+                                FixedSizeVector<double, 4>& dveloc_dx) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1255,7 +1281,7 @@ namespace oomph
       this->dshape_eulerian(s, psif, dpsifdx);
 
       // Initialise all entries to zero
-      dveloc_dx.initialise(0.0);
+      dveloc_dx.fill(0.0);
 
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -1333,9 +1359,13 @@ namespace oomph
       }
     } // End of get_raw_velocity_deriv
 
-    /// Get raw derivative of smoothed vorticity
-    void get_raw_vorticity_deriv(const Vector<double>& s,
-                                 Vector<double>& dvorticity_dx) const
+    /// Get raw derivative of smoothed vorticity (2 components in 2D:
+    /// d/dx, d/dy; returned in a FixedSizeVector). Note: s (size 2) is
+    /// maintained as a resizable Vector for consistency with
+    /// FiniteElement::dshape_eulerian(...) in generic; convert to
+    /// FixedSizeVector<double, 2> once generic has been updated.
+    void get_raw_vorticity_deriv(
+      const Vector<double>& s, FixedSizeVector<double, 2>& dvorticity_dx) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1350,7 +1380,7 @@ namespace oomph
       this->dshape_eulerian(s, psif, dpsifdx);
 
       // Initialise all entries to zero
-      dvorticity_dx.initialise(0.0);
+      dvorticity_dx.fill(0.0);
 
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -1412,9 +1442,15 @@ namespace oomph
       }
     } // End of get_raw_vorticity_deriv
 
-    /// Get raw derivative of smoothed derivative vorticity
-    void get_raw_vorticity_second_deriv(const Vector<double>& s,
-                                        Vector<double>& dvorticity_dxdy) const
+    /// Get raw derivative of smoothed derivative vorticity (3 components
+    /// in 2D: d^2/dx^2, d^2/dxdy, d^2/dy^2; returned in a
+    /// FixedSizeVector). Note: s (size 2) is maintained as a resizable
+    /// Vector for consistency with FiniteElement::dshape_eulerian(...)
+    /// in generic; convert to FixedSizeVector<double, 2> once generic
+    /// has been updated.
+    void get_raw_vorticity_second_deriv(
+      const Vector<double>& s,
+      FixedSizeVector<double, 3>& dvorticity_dxdy) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1429,7 +1465,7 @@ namespace oomph
       this->dshape_eulerian(s, psif, dpsifdx);
 
       // Initialise all entries to zero
-      dvorticity_dxdy.initialise(0.0);
+      dvorticity_dxdy.fill(0.0);
 
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -1509,10 +1545,15 @@ namespace oomph
       }
     } // End of get_raw_vorticity_second_deriv
 
-    /// Get raw derivative of smoothed derivative vorticity
-    /// [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3
-    void get_raw_vorticity_third_deriv(const Vector<double>& s,
-                                       Vector<double>& dvorticity_dxdxdy) const
+    /// Get raw derivative of smoothed derivative vorticity (4 components
+    /// in 2D: [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2,
+    /// [3]: d^3/dy^3; returned in a FixedSizeVector). Note: s (size 2)
+    /// is maintained as a resizable Vector for consistency with
+    /// FiniteElement::dshape_eulerian(...) in generic; convert to
+    /// FixedSizeVector<double, 2> once generic has been updated.
+    void get_raw_vorticity_third_deriv(
+      const Vector<double>& s,
+      FixedSizeVector<double, 4>& dvorticity_dxdxdy) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1527,7 +1568,7 @@ namespace oomph
       this->dshape_eulerian(s, psif, dpsifdx);
 
       // Initialise all entries to zero
-      dvorticity_dxdxdy.initialise(0.0);
+      dvorticity_dxdxdy.fill(0.0);
 
       // Loop over the nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -1667,11 +1708,16 @@ namespace oomph
       // Number of integration points
       unsigned n_intpt = this->integral_pt()->nweight();
 
-      // Create the vector to hold local coordinates
-      Vector<double> s(N_dim, 0.0);
+      // Vector to hold local coordinates (compile-time size: 2).
+      // Maintained as a resizable Vector for consistency with
+      // FiniteElement::interpolated_x(...) and
+      // FiniteElement::dshape_eulerian(...) in generic; convert to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(N_dim);
 
-      // Create the vector to hold the global coordinates
-      Vector<double> x(N_dim, 0.0);
+      // Global coordinates: compile-time size 2, passed to
+      // Exact_vorticity_fct_pt so we use a FixedSizeVector.
+      FixedSizeVector<double, 2> x;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -1684,7 +1730,10 @@ namespace oomph
         }
 
         // Calculate the corresponding global coordinate
-        this->interpolated_x(s, x);
+        for (unsigned ii = 0; ii < N_dim; ii++)
+        {
+          x[ii] = this->interpolated_x(s, ii);
+        }
 
         // Get the integral weight
         double w = this->integral_pt()->weight(ipt);
@@ -2266,8 +2315,16 @@ namespace oomph
         // Create storage for the recovery shape function values
         Vector<double> psi_r(num_recovery_terms);
 
-        // Create vector to hold local coordinates
-        Vector<double> s(2, 0.0);
+        // Local coordinates (size 2) and global Eulerian coordinates
+        // (size 2). Both have compile-time size 2, but they have to be
+        // maintained as resizable Vectors for consistency with
+        // FiniteElement::J_eulerian(...),
+        // FiniteElement::interpolated_x(...) and
+        // FiniteElement::geometric_jacobian(...) in generic; convert both
+        // (and the first argument of shape_rec(...)) to
+        // FixedSizeVector<double, 2> once generic has been updated.
+        Vector<double> s(2);
+        Vector<double> x(2);
 
         // Find the number of integration points
         unsigned n_intpt = integ_pt->nweight();
@@ -2288,9 +2345,6 @@ namespace oomph
           // Jacobian of mapping
           double J = el_pt->J_eulerian(s);
 
-          // Allocate space for the global coordinates
-          Vector<double> x(2, 0.0);
-
           // Interpolate the global (Eulerian) coordinate
           el_pt->interpolated_x(s, x);
 
@@ -2307,7 +2361,11 @@ namespace oomph
           {
             case 0:
             {
-              Vector<double> vorticity(1, 0.0);
+              // The vorticity is returned in a fixed-size vector whose
+              // (compile-time) size is determined by the element: a
+              // single component since this is 2D. No initialisation
+              // required since get_vorticity(...) assigns it.
+              FixedSizeVector<double, ELEMENT::N_vorticity_component> vorticity;
               el_pt->get_vorticity(s, vorticity);
               recovered_quantity = vorticity[0];
               break;
@@ -2450,11 +2508,14 @@ namespace oomph
       // Start the timer
       double t_start = TimingHelpers::timer();
 
-      // Allocate space for the local coordinates
-      Vector<double> s(2, 0.0);
-
-      // Allocate space for the global coordinates
-      Vector<double> x(2, 0.0);
+      // Local coordinates (size 2) and global Eulerian coordinates
+      // (size 2). Maintained as resizable Vectors for consistency with
+      // FiniteElement::local_coordinate_of_node(...) and
+      // FiniteElement::interpolated_x(...) in generic; convert both (and
+      // the first argument of shape_rec(...)) to
+      // FixedSizeVector<double, 2> once generic has been updated.
+      Vector<double> s(2);
+      Vector<double> x(2);
 
       // Make patches
       //-------------
@@ -2568,6 +2629,9 @@ namespace oomph
           // Get the number of elements in adjacent_elements_pt
           unsigned nelem = (*(it->second)).size();
 
+          // Recovery shape functions at global (Eulerian) coordinate
+          Vector<double> psi_r(num_recovery_terms);
+
           // Loop over all elements to get recovered vorticity
           for (unsigned e = 0; e < nelem; e++)
           {
@@ -2588,9 +2652,6 @@ namespace oomph
 
               // Interpolate the global (Eulerian) coordinate
               el_pt->interpolated_x(s, x);
-
-              // Recovery shape functions at global (Eulerian) coordinate
-              Vector<double> psi_r(num_recovery_terms);
 
               // Recover the shape function values at the position x
               shape_rec(x, psi_r);

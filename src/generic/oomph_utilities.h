@@ -127,9 +127,12 @@ namespace oomph
 
   } // namespace DebugHelpers
 
-  // Forward declaration needed for second invariant helper
+  // Forward declarations needed for second invariant helper
   template<class TYPE>
   class DenseMatrix;
+
+  template<class T, unsigned NROW, unsigned NCOL>
+  class FixedSizeMatrix;
 
   //=====================================================================
   /// Helper namespace containing function that computes second invariant
@@ -139,6 +142,24 @@ namespace oomph
   {
     /// Compute second invariant of tensor
     extern double second_invariant(const DenseMatrix<double>& tensor);
+
+    /// Compute second invariant of a fixed-size square tensor (N x N)
+    template<unsigned N>
+    inline double second_invariant(const FixedSizeMatrix<double, N, N>& tensor)
+    {
+      double trace_of_tensor = 0.0;
+      double trace_of_tensor_squared = 0.0;
+      for (unsigned i = 0; i < N; i++)
+      {
+        trace_of_tensor += tensor(i, i);
+        for (unsigned j = 0; j < N; j++)
+        {
+          trace_of_tensor_squared += tensor(i, j) * tensor(j, i);
+        }
+      }
+      return 0.5 *
+             (trace_of_tensor * trace_of_tensor - trace_of_tensor_squared);
+    }
 
   } // namespace SecondInvariantHelper
 
