@@ -47,8 +47,8 @@ namespace oomph
   double AxisymmetricNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  FixedSizeVector<double, 3>
-    AxisymmetricNavierStokesEquations::Default_Gravity_vector(0.0);
+  FixedSizeVector<double, 3> AxisymmetricNavierStokesEquations::
+    Default_Gravity_vector(0.0);
 
 
   //================================================================
@@ -659,11 +659,10 @@ namespace oomph
 #ifdef PARANOID
     if (N[2] != 0.0)
     {
-      throw OomphLibError(
-        "Unit normal passed into this fct should have a "
-        "zero component in the theta-direction",
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError("Unit normal passed into this fct should have a "
+                          "zero component in the theta-direction",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
@@ -720,7 +719,6 @@ namespace oomph
   void AxisymmetricNavierStokesEquations::strain_rate(
     const Vector<double>& s, FixedSizeMatrix<double, 3, 3>& strainrate) const
   {
-
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
 

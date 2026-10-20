@@ -37,8 +37,8 @@ namespace oomph
 
   /// Navier--Stokes equations static data
   template<unsigned DIM>
-  FixedSizeVector<double, DIM>
-    GeneralisedNewtonianNavierStokesEquations<DIM>::Gamma(1.0);
+  FixedSizeVector<double, DIM> GeneralisedNewtonianNavierStokesEquations<
+    DIM>::Gamma(1.0);
 
   //=================================================================
   /// "Magic" negative number that indicates that the pressure is

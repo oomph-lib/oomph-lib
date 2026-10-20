@@ -47,8 +47,8 @@ namespace oomph
   double SphericalNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  FixedSizeVector<double, 3>
-    SphericalNavierStokesEquations::Default_Gravity_vector(0.0);
+  FixedSizeVector<double, 3> SphericalNavierStokesEquations::
+    Default_Gravity_vector(0.0);
 
 
   //================================================================

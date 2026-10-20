@@ -50,8 +50,8 @@ namespace oomph
   double PolarNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 
   /// Navier-Stokes equations default gravity vector
-  FixedSizeVector<double, 2>
-    PolarNavierStokesEquations::Default_Gravity_vector(0.0);
+  FixedSizeVector<double, 2> PolarNavierStokesEquations::Default_Gravity_vector(
+    0.0);
 
   //======================================================================
   /// Validate against exact velocity solution at given time.

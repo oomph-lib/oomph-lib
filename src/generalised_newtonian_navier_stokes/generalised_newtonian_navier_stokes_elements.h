@@ -707,8 +707,7 @@ namespace oomph
     /// based on the previous time steps evaluated at
     /// ipt-th integration point
     virtual void extrapolated_strain_rate(
-      const unsigned& ipt,
-      FixedSizeMatrix<double, DIM, DIM>& strain_rate) const
+      const unsigned& ipt, FixedSizeMatrix<double, DIM, DIM>& strain_rate) const
     {
       // Set the Vector to hold local coordinates
       Vector<double> s(DIM);

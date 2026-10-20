@@ -190,8 +190,9 @@ namespace oomph
 
     /// Calculate the source fct at given time and
     /// Eulerian position
-    virtual double get_source_spherical_nst(
-      double time, const unsigned& ipt, const FixedSizeVector<double, 2>& x)
+    virtual double get_source_spherical_nst(double time,
+                                            const unsigned& ipt,
+                                            const FixedSizeVector<double, 2>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)

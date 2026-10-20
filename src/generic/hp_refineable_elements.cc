@@ -4463,7 +4463,6 @@ namespace oomph
         }
 
 
-
         // Sum contributions from master element shapes (quadrature).
         // The order of quadrature must be high enough to evaluate a polynomial
         // of order N_s + N_m - 3 exactly, where N_s = n_dependent_nodes, N_m =
@@ -9363,7 +9362,6 @@ namespace oomph
             }
 
 
-
             // Sum contributions from master element shapes (quadrature).
             // The order of quadrature must be high enough to evaluate a
             // polynomial of order N_s + N_m - 3 exactly, where N_s =
@@ -10156,7 +10154,6 @@ namespace oomph
         {
           P[i].resize(n_master_nodes, 0.0);
         }
-
 
 
         // Sum contributions from master element shapes (quadrature).
