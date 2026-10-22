@@ -34,7 +34,7 @@ Inheritance diagram for oomph\+::Warped\+Circular\+Disk\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Position \doxylink{classoomph_1_1Vector}{Vector} at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Object is steady so calls time-\/independent version. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_aa24472806fff65e4950d71dd9536965f}{boundary\+\_\+triad}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tangent}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{binormal}})
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a813b57a1ae519913dc78b427fe7e9920}{boundary\+\_\+triad}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tangent}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{binormal}})
 \begin{DoxyCompactList}\small\item\em Boundary triad on boundary b at boundary coordinate zeta\+\_\+bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries}}}
 \begin{DoxyCompactItemize}
@@ -43,9 +43,11 @@ Inheritance diagram for oomph\+::Warped\+Circular\+Disk\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abc85fcf43c0bb0874c092431ec12209e}{nboundary}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em How many boundaries do we have? \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a45dd0a30f2265f97e65f1b1c4b336b2e}{position\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_ae37e4303f5cd8959c86815632af39f34}{position\+\_\+from\+\_\+fixed\+\_\+size\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 2 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object at current time\+: r(zeta). but specialised to 2D disk in 3D space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a8a85ffef080f0700c9ec460d74911720}{position\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Compute 3D vector of Eulerian coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_abed6833ebbafddb809ae8d209808c904}{zeta\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a0abe58e401dbec9f57d1284cea50d1c3}{zeta\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+bound}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 2 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Compute 2D vector of intrinsic coordinates at 1D boundary coordinate zeta\+\_\+bound on boundary b\+: \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a2c54de65c615a3c0747ac003d602d44a}{boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b. \end{DoxyCompactList}\item 
@@ -65,7 +67,7 @@ Inheritance diagram for oomph\+::Warped\+Circular\+Disk\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Specify intrinsic coordinates of a point within a specified region -- region ID, r, should be positive. \end{DoxyCompactList}\item 
 std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a521fd82f551f7178dcee127df006381d}{zeta\+\_\+in\+\_\+region}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Return map that stores zeta coordinates of points that identify regions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a83ccb39710e169bdf0f75082b33f3a56}{boundary\+\_\+lagrangian\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+global}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a4ae422dabe091f2543d09bce7b8af883}{boundary\+\_\+lagrangian\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+global}}, \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 2 $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
 \begin{DoxyCompactList}\small\item\em Lagrangian coordinates on the boundary (zeta\+\_\+1(zeta\+\_\+bound),zeta\+\_\+2(zeta\+\_\+bound)) As described in the class description, zeta\+\_\+global is enforced to lie between 0 and 2pi. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
 \begin{DoxyCompactItemize}
@@ -153,7 +155,11 @@ std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aa1de5b0b7af8d20c3675ae9b4b6f2e12}{Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object$<$1,2$>$ that parametrises intrinisc coordinates along boundary b; essentially provides a wrapper to zeta\+\_\+on\+\_\+boundary(...) \end{DoxyCompactList}\item 
 std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a915c63839a2156913cfcbcd59a0cd251}{Zeta\+\_\+in\+\_\+region}}
-\begin{DoxyCompactList}\small\item\em Map to store zeta coordinates of points that identify regions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Map to store zeta coordinates of points that identify regions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_afd61008feaf9dae7edb930de70b2a0c3}{R\+\_\+work\+\_\+space}}
+\begin{DoxyCompactList}\small\item\em Workspace to avoid re-\/allocation in wrapped call to \doxylink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position()} Mutable qualifier implies that it\textquotesingle{}s only used as scratch workspace so doesn\textquotesingle{}t actualy change the state of the object. It\textquotesingle{}s resized once (to size 3) and must not be resized! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a184ecf17a5b9415db8e3edc4c6d4b86c}{Zeta\+\_\+work\+\_\+space}}
+\begin{DoxyCompactList}\small\item\em Workspace to avoid re-\/allocation in wrapped call to \doxylink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position()} Mutable qualifier implies that it\textquotesingle{}s only used as scratch workspace so doesn\textquotesingle{}t actualy change the state of the object It\textquotesingle{}s resized once (to size 2) and must not be resized! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -168,7 +174,7 @@ std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}
 \doxysubsection{Detailed Description}
 Warped disk in 3d\+: zeta\mbox{[}0\mbox{]}=x; zeta\mbox{[}1\mbox{]}=y (so it doesn\textquotesingle{}t have coordinate singularities), with specification of two boundaries (b=0,1) that turn the whole thing into a circular disk. 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00431}{431}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00466}{466}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
@@ -185,11 +191,11 @@ Constructor. Pass amplitude and azimuthal wavenumber of warping as arguments. Ca
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00437}{437}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00472}{472}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00414}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00399}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+end}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00395}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+start}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00437}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00422}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+end}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00418}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+start}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a6715e7330692a145513fe6c04cf57773}\label{classoomph_1_1WarpedCircularDisk_a6715e7330692a145513fe6c04cf57773} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!WarpedCircularDisk@{WarpedCircularDisk}}
@@ -203,7 +209,7 @@ Empty default constructor.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00460}{460}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00495}{495}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a56d23d0e159757f0d4c9236b6db2241c}\label{classoomph_1_1WarpedCircularDisk_a56d23d0e159757f0d4c9236b6db2241c} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!WarpedCircularDisk@{WarpedCircularDisk}}
@@ -227,20 +233,20 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00475}{475}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00510}{510}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00414}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00077}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::nboundary()}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00437}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00081}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::nboundary()}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classoomph_1_1WarpedCircularDisk_aa24472806fff65e4950d71dd9536965f}\label{classoomph_1_1WarpedCircularDisk_aa24472806fff65e4950d71dd9536965f} 
+\Hypertarget{classoomph_1_1WarpedCircularDisk_a813b57a1ae519913dc78b427fe7e9920}\label{classoomph_1_1WarpedCircularDisk_a813b57a1ae519913dc78b427fe7e9920} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!boundary\_triad@{boundary\_triad}}
 \index{boundary\_triad@{boundary\_triad}!oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}}
 \doxysubsubsection{\texorpdfstring{boundary\_triad()}{boundary\_triad()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Warped\+Circular\+Disk\+::boundary\+\_\+triad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{zeta\+\_\+bound,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{normal,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{binormal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Warped\+Circular\+Disk\+::boundary\+\_\+triad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{zeta\+\_\+bound,  }\item[{\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&}]{tangent,  }\item[{\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&}]{normal,  }\item[{\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{Fixed\+Size\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, 3 $>$ \&}]{binormal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -248,15 +254,15 @@ Boundary triad on boundary b at boundary coordinate zeta\+\_\+bound.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_aafe14f8fb055a10b33da4e730f457308}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries_a08cd0e4b9f0f43078fea0a5a7f716c6e}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries}}.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00515}{515}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00550}{550}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00571}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00565}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00559}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00583}{Z\+\_\+offset}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00606}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00600}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00594}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00618}{Z\+\_\+offset}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a130db675bf148aa0a19395411dd5d3ce}\label{classoomph_1_1WarpedCircularDisk_a130db675bf148aa0a19395411dd5d3ce} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!dwdphi@{dwdphi}}
@@ -270,15 +276,15 @@ Deriv of vertical deflection w.\+r.\+t. angle.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00571}{571}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00606}{606}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00577}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00580}{N}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00612}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00615}{N}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00515}{boundary\+\_\+triad()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00550}{boundary\+\_\+triad()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_aed38bcf8e10ffcc2f978037d7201d6d2}\label{classoomph_1_1WarpedCircularDisk_aed38bcf8e10ffcc2f978037d7201d6d2} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!dwdr@{dwdr}}
@@ -292,15 +298,15 @@ Deriv of vertical deflection w.\+r.\+t. radius.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00565}{565}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00600}{600}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00577}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00580}{N}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00612}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00615}{N}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00515}{boundary\+\_\+triad()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00550}{boundary\+\_\+triad()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3}\label{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!epsilon@{epsilon}}
@@ -314,11 +320,11 @@ Access fct to amplitude of disk warping.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00486}{486}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00521}{521}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00577}{Epsilon}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00612}{Epsilon}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a15373fbc5052d144b6cbc2544136dbe7}\label{classoomph_1_1WarpedCircularDisk_a15373fbc5052d144b6cbc2544136dbe7} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!operator=@{operator=}}
@@ -346,11 +352,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00506}{506}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00541}{541}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00492}{position()}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00527}{position()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb}\label{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!position@{position}}
@@ -368,15 +374,15 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00492}{492}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00527}{527}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00559}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00583}{Z\+\_\+offset}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00594}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00618}{Z\+\_\+offset}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00506}{position()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00541}{position()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_abbb6f07ee89b3b87fa2edfee44beb7c9}\label{classoomph_1_1WarpedCircularDisk_abbb6f07ee89b3b87fa2edfee44beb7c9} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!w@{w}}
@@ -390,15 +396,15 @@ Vertical deflection.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00559}{559}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00594}{594}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00577}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00580}{N}}.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00612}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00615}{N}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00515}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00492}{position()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00550}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00527}{position()}}.
 
 
 
@@ -415,11 +421,11 @@ Amplitude of non-\/axisymmetric deformation.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00577}{577}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00612}{612}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00571}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00565}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00486}{epsilon()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00559}{w()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00606}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00600}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00521}{epsilon()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00594}{w()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_ab2c77c18aedee5f502637dfbf96c0794}\label{classoomph_1_1WarpedCircularDisk_ab2c77c18aedee5f502637dfbf96c0794} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!N@{N}}
@@ -433,11 +439,11 @@ Wavenumber of non-\/axisymmetric deformation.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00580}{580}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00615}{615}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00571}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00565}{dwdr()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00559}{w()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00606}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00600}{dwdr()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00594}{w()}}.
 
 \Hypertarget{classoomph_1_1WarpedCircularDisk_a7f07f7318757578b6c703d518174a811}\label{classoomph_1_1WarpedCircularDisk_a7f07f7318757578b6c703d518174a811} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!Z\_offset@{Z\_offset}}
@@ -451,11 +457,11 @@ Vertical offset.
 
 
 
-Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00583}{583}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00618}{618}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00515}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00492}{position()}}.
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00550}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00527}{position()}}.
 
 
 

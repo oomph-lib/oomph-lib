@@ -1,0 +1,200 @@
+\doxysection{oomph\+::Fixed\+Size\+Vector\texorpdfstring{$<$}{<} T, N \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FixedSizeVector}{}\label{classoomph_1_1FixedSizeVector}\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+
+
+Class for fixed-\/size vector storing N objects of type T. No resize or other STL functionality but (therefore) much less run-\/time overhead.  
+
+
+
+
+{\ttfamily \#include $<$fixed\+\_\+size\+\_\+vector.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector_aa0c1a4c3b6beeaaa74e6996bbe87c60e}{Fixed\+Size\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Constructor; no initialisiation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector_a5aef1f34f5cb7c5f83dcf788866ff5be}{Fixed\+Size\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Constructor with initialisation to value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector_ad2f63fe9fbeb9a0645bee4939f54cbe0}{Fixed\+Size\+Vector}} (std\+::initializer\+\_\+list$<$ T $>$ values)
+\begin{DoxyCompactList}\small\item\em Constructor from initializer list. Allows Fixed\+Size\+Vector$<$double,3$>$ = \{0.\+0,1.\+0,2.\+0\}; say. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeVector_ad7830d69cfd5fbc712e8889afb9ca8c4}{fill}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Fill all entries with specified value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeVector_a200456ed64d703db622c83b6f7b10821}{size}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Size of vector. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeVector_a03fabd95cadb7ee9cb129dd25f1c37b2}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Read/write access to i-\/th entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeVector_a63c3afeec6c429d0684ff16a5f67115a}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to i-\/th entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{classoomph_1_1FixedSizeVector_a3f74c23df0dd96750fc0a4731f35c443}{Data}} \mbox{[}N\mbox{]}
+\begin{DoxyCompactList}\small\item\em The data, stored as a raw C-\/style array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$\newline
+class oomph\+::\+Fixed\+Size\+Vector$<$ T, N $>$}
+Class for fixed-\/size vector storing N objects of type T. No resize or other STL functionality but (therefore) much less run-\/time overhead. 
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00047}{47}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FixedSizeVector_aa0c1a4c3b6beeaaa74e6996bbe87c60e}\label{classoomph_1_1FixedSizeVector_aa0c1a4c3b6beeaaa74e6996bbe87c60e} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!FixedSizeVector@{FixedSizeVector}}
+\index{FixedSizeVector@{FixedSizeVector}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeVector()}{FixedSizeVector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::\+Fixed\+Size\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor; no initialisiation. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00051}{51}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1FixedSizeVector_a5aef1f34f5cb7c5f83dcf788866ff5be}\label{classoomph_1_1FixedSizeVector_a5aef1f34f5cb7c5f83dcf788866ff5be} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!FixedSizeVector@{FixedSizeVector}}
+\index{FixedSizeVector@{FixedSizeVector}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeVector()}{FixedSizeVector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::\+Fixed\+Size\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with initialisation to value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00054}{54}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{fixed__size__vector_8h_source_l00089}{oomph\+::\+Fixed\+Size\+Vector$<$ T, N $>$\+::fill()}}.
+
+\Hypertarget{classoomph_1_1FixedSizeVector_ad2f63fe9fbeb9a0645bee4939f54cbe0}\label{classoomph_1_1FixedSizeVector_ad2f63fe9fbeb9a0645bee4939f54cbe0} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!FixedSizeVector@{FixedSizeVector}}
+\index{FixedSizeVector@{FixedSizeVector}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeVector()}{FixedSizeVector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::\+Fixed\+Size\+Vector (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ T $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from initializer list. Allows Fixed\+Size\+Vector$<$double,3$>$ = \{0.\+0,1.\+0,2.\+0\}; say. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00063}{63}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FixedSizeVector_ad7830d69cfd5fbc712e8889afb9ca8c4}\label{classoomph_1_1FixedSizeVector_ad7830d69cfd5fbc712e8889afb9ca8c4} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!fill@{fill}}
+\index{fill@{fill}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill all entries with specified value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00089}{89}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{fixed__size__vector_8h_source_l00054}{oomph\+::\+Fixed\+Size\+Vector$<$ T, N $>$\+::\+Fixed\+Size\+Vector()}}.
+
+\Hypertarget{classoomph_1_1FixedSizeVector_a03fabd95cadb7ee9cb129dd25f1c37b2}\label{classoomph_1_1FixedSizeVector_a03fabd95cadb7ee9cb129dd25f1c37b2} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read/write access to i-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00104}{104}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1FixedSizeVector_a63c3afeec6c429d0684ff16a5f67115a}\label{classoomph_1_1FixedSizeVector_a63c3afeec6c429d0684ff16a5f67115a} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to i-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00123}{123}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1FixedSizeVector_a200456ed64d703db622c83b6f7b10821}\label{classoomph_1_1FixedSizeVector_a200456ed64d703db622c83b6f7b10821} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!size@{size}}
+\index{size@{size}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Size of vector. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00098}{98}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FixedSizeVector_a3f74c23df0dd96750fc0a4731f35c443}\label{classoomph_1_1FixedSizeVector_a3f74c23df0dd96750fc0a4731f35c443} 
+\index{oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}!Data@{Data}}
+\index{Data@{Data}!oomph::FixedSizeVector$<$ T, N $>$@{oomph::FixedSizeVector$<$ T, N $>$}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N$>$ \\
+T \mbox{\hyperlink{classoomph_1_1FixedSizeVector}{oomph\+::\+Fixed\+Size\+Vector}}$<$ T, N $>$\+::\+Data\mbox{[}N\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The data, stored as a raw C-\/style array. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00142}{142}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fixed__size__vector_8h}{fixed\+\_\+size\+\_\+vector.\+h}}\end{DoxyCompactItemize}

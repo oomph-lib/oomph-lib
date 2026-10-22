@@ -1,0 +1,223 @@
+\doxysection{oomph\+::Fixed\+Size\+Matrix\texorpdfstring{$<$}{<} T, NROW, NCOL \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FixedSizeMatrix}{}\label{classoomph_1_1FixedSizeMatrix}\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+
+
+Class for fixed-\/size matrix storing NROW x NCOL objects of type T.  
+
+
+
+
+{\ttfamily \#include $<$fixed\+\_\+size\+\_\+vector.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_ab502ed9d041e79c5fd8b2d6cdd0d1a58}{Fixed\+Size\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a813f6a6493b0b4a4dc0edeb4816e5104}{Fixed\+Size\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Construct and fill all entries with specified value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_ad0f084ca33e4cd6e8bca0b604de256c7}{fill}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Fill all entries with specified value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a0c4da50027c58c990ad5b76b91dca5b6}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_ade646975c64fc0e7b1d19f077664de64}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of columns. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a624253ed5d1b0dbd21a77f8f60ded678}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Read/write access to (i,j)-\/th entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a2877e1eb8d59d27d7fc6dc3e26dac8ab}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to (i,j)-\/th entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a64f3ea51dd370556bbcca06e642525c2}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Fill all entries with specified value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix_a024c4c1eaf6d220f5d42f0c597e21af7}{Data}} \mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Matrix}{Matrix} entries stored in row-\/major order. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$\newline
+class oomph\+::\+Fixed\+Size\+Matrix$<$ T, NROW, NCOL $>$}
+Class for fixed-\/size matrix storing NROW x NCOL objects of type T. 
+
+No resize or other STL functionality but therefore much less run-\/time overhead.
+
+Storage is row-\/major\+:
+
+(0,0), (0,1), ..., (0,NCOL-\/1), (1,0), (1,1), ..., (1,NCOL-\/1), ... (NROW-\/1,NCOL-\/1) 
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00166}{166}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FixedSizeMatrix_ab502ed9d041e79c5fd8b2d6cdd0d1a58}\label{classoomph_1_1FixedSizeMatrix_ab502ed9d041e79c5fd8b2d6cdd0d1a58} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!FixedSizeMatrix@{FixedSizeMatrix}}
+\index{FixedSizeMatrix@{FixedSizeMatrix}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeMatrix()}{FixedSizeMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::\+Fixed\+Size\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00170}{170}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a813f6a6493b0b4a4dc0edeb4816e5104}\label{classoomph_1_1FixedSizeMatrix_a813f6a6493b0b4a4dc0edeb4816e5104} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!FixedSizeMatrix@{FixedSizeMatrix}}
+\index{FixedSizeMatrix@{FixedSizeMatrix}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeMatrix()}{FixedSizeMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::\+Fixed\+Size\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct and fill all entries with specified value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00173}{173}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{fixed__size__vector_8h_source_l00181}{oomph\+::\+Fixed\+Size\+Matrix$<$ T, NROW, NCOL $>$\+::fill()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FixedSizeMatrix_ad0f084ca33e4cd6e8bca0b604de256c7}\label{classoomph_1_1FixedSizeMatrix_ad0f084ca33e4cd6e8bca0b604de256c7} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!fill@{fill}}
+\index{fill@{fill}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill all entries with specified value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00181}{181}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{fixed__size__vector_8h_source_l00173}{oomph\+::\+Fixed\+Size\+Matrix$<$ T, NROW, NCOL $>$\+::\+Fixed\+Size\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a64f3ea51dd370556bbcca06e642525c2}\label{classoomph_1_1FixedSizeMatrix_a64f3ea51dd370556bbcca06e642525c2} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill all entries with specified value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00246}{246}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_ade646975c64fc0e7b1d19f077664de64}\label{classoomph_1_1FixedSizeMatrix_ade646975c64fc0e7b1d19f077664de64} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of columns. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00196}{196}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a0c4da50027c58c990ad5b76b91dca5b6}\label{classoomph_1_1FixedSizeMatrix_a0c4da50027c58c990ad5b76b91dca5b6} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of rows. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00190}{190}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a624253ed5d1b0dbd21a77f8f60ded678}\label{classoomph_1_1FixedSizeMatrix_a624253ed5d1b0dbd21a77f8f60ded678} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read/write access to (i,j)-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00202}{202}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a2877e1eb8d59d27d7fc6dc3e26dac8ab}\label{classoomph_1_1FixedSizeMatrix_a2877e1eb8d59d27d7fc6dc3e26dac8ab} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to (i,j)-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00224}{224}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FixedSizeMatrix_a024c4c1eaf6d220f5d42f0c597e21af7}\label{classoomph_1_1FixedSizeMatrix_a024c4c1eaf6d220f5d42f0c597e21af7} 
+\index{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}!Data@{Data}}
+\index{Data@{Data}!oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$@{oomph::FixedSizeMatrix$<$ T, NROW, NCOL $>$}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NROW, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NCOL$>$ \\
+T \mbox{\hyperlink{classoomph_1_1FixedSizeMatrix}{oomph\+::\+Fixed\+Size\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}} $>$\+::\+Data\mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NROW}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NCOL}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Matrix}{Matrix} entries stored in row-\/major order. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00256}{256}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fixed__size__vector_8h}{fixed\+\_\+size\+\_\+vector.\+h}}\end{DoxyCompactItemize}

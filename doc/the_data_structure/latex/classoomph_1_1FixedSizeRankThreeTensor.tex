@@ -1,0 +1,166 @@
+\doxysection{oomph\+::Fixed\+Size\+Rank\+Three\+Tensor\texorpdfstring{$<$}{<} T, N1, N2, N3 \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FixedSizeRankThreeTensor}{}\label{classoomph_1_1FixedSizeRankThreeTensor}\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+
+
+Class for fixed-\/size rank-\/three tensor storing N1 x N2 x N3 objects of type T.  
+
+
+
+
+{\ttfamily \#include $<$fixed\+\_\+size\+\_\+vector.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a37e2c366fd66f09b73e379eaca04c151}{Fixed\+Size\+Rank\+Three\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a57bde692a462e6b37ac986de8ff4885c}{Fixed\+Size\+Rank\+Three\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Constructor with initialisation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a517798cee1f509cfd2701789fb7adce3}{fill}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&value)
+\begin{DoxyCompactList}\small\item\em Fill all entries with specified value. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a6b83dafe6476d8623a94baa33741fc9e}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}})
+\begin{DoxyCompactList}\small\item\em Read/write access to (i,j,k)-\/th entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a97e20d4be06e9d889a034b876308a920}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to (i,j,k)-\/th entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor_a830bb8756f5e12840c439a2d4aa8bb58}{Data}} \mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Tensor data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$\newline
+class oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor$<$ T, N1, N2, N3 $>$}
+Class for fixed-\/size rank-\/three tensor storing N1 x N2 x N3 objects of type T. 
+
+Storage layout\+:
+
+(0,0,0), (0,0,1), ... , (0,0,N3-\/1), (0,1,0), ... ... (N1-\/1,N2-\/1,N3-\/1) 
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00277}{277}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a37e2c366fd66f09b73e379eaca04c151}\label{classoomph_1_1FixedSizeRankThreeTensor_a37e2c366fd66f09b73e379eaca04c151} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!FixedSizeRankThreeTensor@{FixedSizeRankThreeTensor}}
+\index{FixedSizeRankThreeTensor@{FixedSizeRankThreeTensor}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeRankThreeTensor()}{FixedSizeRankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::\+Fixed\+Size\+Rank\+Three\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00281}{281}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a57bde692a462e6b37ac986de8ff4885c}\label{classoomph_1_1FixedSizeRankThreeTensor_a57bde692a462e6b37ac986de8ff4885c} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!FixedSizeRankThreeTensor@{FixedSizeRankThreeTensor}}
+\index{FixedSizeRankThreeTensor@{FixedSizeRankThreeTensor}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{FixedSizeRankThreeTensor()}{FixedSizeRankThreeTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+\mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::\+Fixed\+Size\+Rank\+Three\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with initialisation. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00284}{284}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{fixed__size__vector_8h_source_l00290}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor$<$ T, N1, N2, N3 $>$\+::fill()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a517798cee1f509cfd2701789fb7adce3}\label{classoomph_1_1FixedSizeRankThreeTensor_a517798cee1f509cfd2701789fb7adce3} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!fill@{fill}}
+\index{fill@{fill}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill all entries with specified value. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00290}{290}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{fixed__size__vector_8h_source_l00284}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor$<$ T, N1, N2, N3 $>$\+::\+Fixed\+Size\+Rank\+Three\+Tensor()}}.
+
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a6b83dafe6476d8623a94baa33741fc9e}\label{classoomph_1_1FixedSizeRankThreeTensor_a6b83dafe6476d8623a94baa33741fc9e} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read/write access to (i,j,k)-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00299}{299}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a97e20d4be06e9d889a034b876308a920}\label{classoomph_1_1FixedSizeRankThreeTensor_a97e20d4be06e9d889a034b876308a920} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to (i,j,k)-\/th entry. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00321}{321}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FixedSizeRankThreeTensor_a830bb8756f5e12840c439a2d4aa8bb58}\label{classoomph_1_1FixedSizeRankThreeTensor_a830bb8756f5e12840c439a2d4aa8bb58} 
+\index{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}!Data@{Data}}
+\index{Data@{Data}!oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$@{oomph::FixedSizeRankThreeTensor$<$ T, N1, N2, N3 $>$}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} N3$>$ \\
+T \mbox{\hyperlink{classoomph_1_1FixedSizeRankThreeTensor}{oomph\+::\+Fixed\+Size\+Rank\+Three\+Tensor}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}} $>$\+::\+Data\mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N1}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N2}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{N3}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tensor data. 
+
+
+
+Definition at line \mbox{\hyperlink{fixed__size__vector_8h_source_l00346}{346}} of file \mbox{\hyperlink{fixed__size__vector_8h_source}{fixed\+\_\+size\+\_\+vector.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fixed__size__vector_8h}{fixed\+\_\+size\+\_\+vector.\+h}}\end{DoxyCompactItemize}
