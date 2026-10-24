@@ -292,4 +292,10 @@ if(NOT TARGET uninstall)
             ${CMAKE_CURRENT_LIST_DIR}/${OOMPH_PROJECT_NAME}Uninstall.cmake)
 endif()
 
+
+# --------------------------[ Ninja job limiter ]------------------------------
+
+# Export the job-count used when oomph-lib was configured
+set(oomph_NJOBS "@oomph_NJOBS@")
+
 # -----------------------------------------------------------------------------
