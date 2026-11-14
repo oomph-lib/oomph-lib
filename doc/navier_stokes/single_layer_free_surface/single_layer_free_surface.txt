@@ -516,7 +516,7 @@ is empty at this point.
 Having created the bulk elements, we now create the interface
 elements. We first build an empty mesh in which to store them, before
 looping over the bulk elements adjacent to the free surface and
-`attaching' interface elements to their upper faces. These
+"attaching" interface elements to their upper faces. These
 newly-created elements are then stored in the surface mesh.
 
 \skipline Create the
@@ -745,12 +745,12 @@ portion corresponding to the free surface. The velocity along \f$
 C_{solid} \f$ is prescribed by Dirichlet boundary conditions, and we <A HREF="../../../intro/html/index.html#galerkin">recall</A> 
 that the global test functions \f$ \psi_l \f$ vanish in this case. On
 non-Dirichlet boundaries we must either specify the external pressure \f$
-p_{ext} \f$, or deliberately neglect this term to obtain the `natural'
+p_{ext} \f$, or deliberately neglect this term to obtain the "natural"
 condition \f$ p_{ext} = 0 \f$.
 
 \subsection contact_line The contact line
 
-In this two-dimensional case, the contact `line' actually reduces to
+In this two-dimensional case, the contact "line" actually reduces to
 two contact points, \f$ c_1 \f$ and \f$ c_2 \f$, which are located at
 either side of the portion of the domain boundary corresponding to the
 free surface \f$ C_{surface} \f$. The two point contributions are
@@ -760,7 +760,7 @@ contact angle that the free surface makes with the
 neighbouring domain boundary. We note that in the problem considered
 here we do not explicitly apply any boundary conditions at either end
 of the free surface. Neglecting these contributions corresponds to the
-`natural' condition of prescribing a \f$ 90^o \f$ contact angle, which
+"natural" condition of prescribing a \f$ 90^o \f$ contact angle, which
 happens to be the appropriate condition in this case. Contact angles
 of arbitrary size can be enforced using \c FluidInterfaceBoundingElements,
 which are discussed in a <A HREF="../../static_single_layer/html/index.html#contact_angle">later tutorial</A>.

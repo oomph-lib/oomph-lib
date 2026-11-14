@@ -365,11 +365,11 @@ where the operator \f${\bf P}^{-1}\f$ represents
 the application of the preconditioner to a vector \f${\bf z}\f$. 
 Formally, the operator \f${\bf P}^{-1}\f$ represents the inverse of 
 the matrix \f${\bf P}\f$ but its application may, of course, be performed  
-approximately by another ``subsidiary'' preconditioner/inexact solver
+approximately by another "subsidiary" preconditioner/inexact solver
 e.g. by performing a small number of multigrid cycles, say.
-(Note that we say ``formally'' because the preconditioner does not
+(Note that we say "formally" because the preconditioner does not
 actually have to be associated with a specific matrix -- it simply has
-to act as a linear operator that ``turns \f${\bf z}\f$ into \f${\bf y}\f$'').
+to act as a linear operator that "turns \f${\bf z}\f$ into \f${\bf y}\f$").
 
 A specific block preconditioner must be derived from the
 \c BlockPreconditioner base class and must implement two 
@@ -403,7 +403,7 @@ defined by equations (@R[eqn:newton_system]@) and
 (@R[eqn:orig_linear_system]@). We stress that the purpose
 of this exercise is not the development of particularly clever
 preconditioners but simply an excuse to demonstrate the use of the
-available ``machinery''. Specifically we will demonstrate how to:
+available "machinery". Specifically we will demonstrate how to:
 
 - extract selected blocks from the system matrix (usually the Jacobian
   matrix assembled by the Newton solver).
@@ -475,16 +475,16 @@ five much smaller linear systems
 @E[eqn:diag_prec]@
 \f]
 where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
+are re-ordered into "block vectors" in the same way as
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
 "the original linear system" (@R[eqn:newton_system]@) are re-ordered into
-the ``block vectors'' in (@R[eqn:orig_linear_system]@).
+the "block vectors" in (@R[eqn:orig_linear_system]@).
 
 The implementation of the preconditioning operations in 
 (@R[eqn:diag_prec]@)  can naturally be subdivided into two
 distinct \c setup() and \c preconditioner\_solve(...) phases.
 Assuming that the linear systems in (@R[eqn:diag_prec]@) are solved exactly 
-by a direct solver (an ``exact preconditioner'') that 
+by a direct solver (an "exact preconditioner") that
 can pre-compute and store the LU decomposition of the diagonal matrix blocks,
 the \c setup() phase involves the following operations
 [text in square brackets refers to their \c oomph-lib -specific 
@@ -506,14 +506,14 @@ the diagonal matrix blocks are longer required and can be deleted.]
 Once the \c setup() phase has been completed, the solution of the linear
 system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
 function involves the following steps:
-- Extract the five ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,...,5\f$)
+- Extract the five "block vectors" \f${\bf z}_i\f$ (for \f$i=1,...,5\f$)
 from the vector \f${\bf z}\f$ [using the 
 \c BlockPreconditioner::get\_block\_vectors(...) function].
 - Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
 {\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)  using 
 the precomputed LU decomposition of the diagonal blocks \f${\bf J}_{ii}\f$ 
 (for \f$i=1,...,5\f$) created during the \c setup() phase.
-- Combine the five ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
+- Combine the five "block vectors" \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
 to the full-length vector \f${\bf y}\f$ [using the 
 \c BlockPreconditioner::return\_block\_vectors(...) function].
 
@@ -705,10 +705,10 @@ five much smaller linear systems
 \f]
 where we have again assumed that the two vectors 
 \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
+are re-ordered into "block vectors" in the same way as
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
 "the original linear system" (@R[eqn:newton_system]@) are re-ordered into
-the ``block vectors'' in (@R[eqn:orig_linear_system]@).
+the "block vectors" in (@R[eqn:orig_linear_system]@).
 
 The main difference to the block diagonal preconditioner considered
 before is that the right hand sides of the linear systems have to be
@@ -722,7 +722,7 @@ The implementation of the preconditioning operations in
 (@R[eqn:upper_triangular_prec]@)  can again be subdivided into two
 distinct \c setup() and \c preconditioner\_solve(...) phases.
 Assuming that the linear systems in (@R[eqn:upper_triangular_prec]@)
-are solved exactly by a direct solver (an ``exact preconditioner'')
+are solved exactly by a direct solver (an "exact preconditioner")
 that can pre-compute and store the LU decomposition of the diagonal
 matrix blocks, the \c setup() phase involves the following operations
 [text in square brackets refers to their \c oomph-lib specific 
@@ -954,7 +954,7 @@ the corresponding block vectors  \f$ Y_1, Y_2, Z_1 \f$ and \f$ Z_2 \f$.
 
 Assuming again that the linear systems in
 (@R[eqn:two_plus_three_prec1]@) and (@R[eqn:two_plus_three_prec2]@) are
-solved exactly by a direct solver (an ``exact preconditioner'') that 
+solved exactly by a direct solver (an "exact preconditioner") that
 can pre-compute and store the LU decomposition of the diagonal matrix blocks,
 \f$ B_{11} \f$ and \f$ B_{22} \f$, 
 the \c setup() phase involves the following operations
@@ -978,14 +978,14 @@ the diagonal matrix blocks are longer required and can be deleted.]
 Once the \c setup() phase has been completed, the solution of the linear
 system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
 function involves the following steps:
-- Extract the two ``block vectors'' \f${\bf Z}_i\f$ (for \f$i=1,2\f$)
+- Extract the two "block vectors" \f${\bf Z}_i\f$ (for \f$i=1,2\f$)
 from the vector \f${\bf z}\f$ [using the 
 \c BlockPreconditioner::get\_block\_vectors(...) function].
 - Solve the linear systems \f${\bf B}_{ii} \ {\bf Y}_i = 
 {\bf Z}_i\f$ for the vectors \f${\bf Y}_i\f$ (for \f$i=1,2\f$)  using 
 the precomputed LU decomposition of the diagonal blocks \f${\bf B}_{ii}\f$ 
 (for \f$i=1,2\f$) created during the \c setup() phase.
-- Combine the two ``block vectors'' \f${\bf Y}_i\f$ (for \f$i=1,...,2\f$)
+- Combine the two "block vectors" \f${\bf Y}_i\f$ (for \f$i=1,...,2\f$)
 to the full-length vector \f${\bf y}\f$ [using the 
 \c BlockPreconditioner::return\_block\_vectors(...) function].
 
@@ -1830,10 +1830,10 @@ z_5 \\
 \end{array}
 \f]
 where we have again assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
+are re-ordered into "block vectors" in the same way as
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
 "the original linear system" (@R[eqn:orig_linear_system]@) are re-ordered into
-the ``block vectors'' in
+the "block vectors" in
 (@R[eqn:two_plus_three_prec]@).
 We wish to continue to solve the linear systems involving
 the compound matrices \f$ B_{11}  \f$ and \f$ B_{22} \f$ 

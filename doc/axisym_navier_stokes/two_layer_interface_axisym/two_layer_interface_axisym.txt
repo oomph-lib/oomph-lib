@@ -19,13 +19,13 @@ Arbitrary Lagrangian Eulerian form of the equations, we can
 discretise the computational domain using a boundary-fitted mesh which
 deforms in 
 response to the change in position of the interface. The positions of the
-nodes in the `bulk' of the mesh are determined by treating the interior
+nodes in the "bulk" of the mesh are determined by treating the interior
 of the mesh as a fictitious elastic solid and solving a solid mechanics
-problem, a technique which we refer to as a `pseudo-solid node update
-strategy'. The deformation of the free surface boundary itself is imposed by
+problem, a technique which we refer to as a "pseudo-solid node update
+strategy". The deformation of the free surface boundary itself is imposed by
 solving the kinematic boundary condition for a field of Lagrange
 multipliers at the interface, and this condition is discretised by
-attaching \c FaceElements to those `bulk' elements in the `lower' of
+attaching \c FaceElements to those "bulk" elements in the "lower" of
 the two fluids which have boundaries adjacent to the interface.
 
 \section interface_def Choosing an appropriate interface deformation
@@ -34,7 +34,7 @@ The <A HREF="../../../navier_stokes/two_layer_interface/html/index.html">two-dim
 was started impulsively from a set of initial conditions such that the
 fluid was at rest and the interface was prescribed to be a cosine
 curve. Since this was an eigenmode of the system, the shape of the
-interface remained `in mode' throughout the simulation. Choosing a
+interface remained "in mode" throughout the simulation. Choosing a
 single eigenmode as an initial condition 
 allowed the results of the simulation to be compared with an
 analytical solution, and as we wish to do the same
@@ -70,7 +70,7 @@ any point along the \f$ r \f$-axis which corresponds to a zero of \f$
 J_1(kr) \f$, is itself zero. The velocity boundary condition in the
 axial direction is therefore the traction-free condition \f$ \partial
 u_z / \partial r = 0 \f$. This could be physically realised by having
-a `slippery' outer wall where the contact line can move but the
+a "slippery" outer wall where the contact line can move but the
 contact angle is fixed at \f$ 90^o \f$, and is in fact an identical
 condition to the symmetry boundary condition prescribed at the axis of
 symmetry (\f$ r=0 \f$).
@@ -145,7 +145,7 @@ and
 + \frac{\partial u_z}{\partial z} = 0
 \ \ \ \ \ \ \ \ \ \ @E[eqn:NSlower]@
 \f]
-in the `lower' fluid, and
+in the "lower" fluid, and
 \f[
 R_\rho Re \left[
  St \frac{\partial u_r}{\partial t}
@@ -196,7 +196,7 @@ and
 + \frac{\partial u_z}{\partial z} = 0
 \ \ \ \ \ \ \ \ \ \ @E[eqn:NSupper]@
 \f]
-in the `upper' fluid. Gravity acts in the negative \f$ z \f$
+in the "upper" fluid. Gravity acts in the negative \f$ z \f$
 direction and so \f$ G_r = G_\theta = 0 \f$ and \f$ G_z = 1 \f$. The
 governing equations are subject to the no slip boundary conditions
 \f[
@@ -230,7 +230,7 @@ and the dynamic condition
 <TABLE>
 <TR> 
 <TD>
-The non-dimensional, symmetric stress tensor in the `lower' fluid is
+The non-dimensional, symmetric stress tensor in the "lower" fluid is
 defined as
 \f[
 \tau_{rr} = -p
@@ -254,7 +254,7 @@ defined as
   \frac{\partial u_{\theta}}{\partial z},
 \ \ \ \ \ \ \ \ \ \ 
 \f]
-and that in the `upper' fluid is defined as
+and that in the "upper" fluid is defined as
 \f[
 \tau_{rr} = -p
 + 2R_\mu \frac{\partial u_r}{\partial r},
@@ -366,7 +366,7 @@ As in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#na
 solving for the unknown bulk nodal positions by treating the interior
 of
 the mesh as a fictitious elastic solid, we also need to define the
-Poisson ratio for this `pseudo-solid's' generalised Hookean
+Poisson ratio for this "pseudo-solid's" generalised Hookean
 constitutive law, \f$ \nu \f$. As before, we define the density and
 viscosity ratios of the top fluid to the bottom fluid and a unit
 vector \f$ G \f$ which points in the direction of gravity. The only
@@ -384,7 +384,7 @@ is an axisymmetric problem.
 \section main The driver code
 
 The first section of the driver code is identical to that of the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#main">earlier example</A>. We define a command line flag which allows us to run a
-`validation' version of the code (for \c oomph-lib's self-testing 
+"validation" version of the code (for \c oomph-lib's self-testing
 routines) and check that the non-dimensional quantities provided in
 the \c Global_Physical_Variables namespace are self-consistent.
 Next we specify the duration of the simulation and the
@@ -396,7 +396,7 @@ downwards.
 \skipline Set direction of gravity
 \until G[2]
 
-Finally, we build the problem using the `pseudo-solid' version of \c
+Finally, we build the problem using the "pseudo-solid" version of \c
 RefineableAxisymmetricQCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
 unsteady_run(...). This function solves the system at each timestep
 using the \c Problem::unsteady_newton_solve(...) function before

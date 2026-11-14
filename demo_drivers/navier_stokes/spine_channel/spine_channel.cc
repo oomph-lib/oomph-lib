@@ -46,7 +46,7 @@ namespace Global_Physical_Variables
 {
 
  /// Reynolds number
- double Re=100;
+ double Re=100.0;
 
 } // end_of_namespace
 

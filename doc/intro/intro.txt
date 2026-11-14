@@ -801,9 +801,9 @@ have a straightforward interpretation: \f$V_j\f$
 is the value of the function \f$ v(x) \f$ at node \f$ j \f$.
 The global shape functions vary linearly between the nodes, and so
 \f$ \tilde{v}(x) \f$ provides piecewise linear interpolation
-between the `nodal values' \f$V_j\f$.
+between the "nodal values" \f$V_j\f$.
 
-@I w 0.75\textwidth  fe_is_interpolant "The superposition of the (global) linear finite-element shape functions provides a piecewise linear interpolation between  the `nodal values'. "
+@I w 0.75\textwidth  fe_is_interpolant "The superposition of the (global) linear finite-element shape functions provides a piecewise linear interpolation between  the nodal values. "
 
 Why are these shape functions useful in the Galerkin 
 method? Consider the requirements listed at the beginning
@@ -1063,10 +1063,10 @@ in boxes):
  <B> Phase 1: Setup</B> 
  - Discretise the domain with \f$ N \f$ nodes which are located at
    \f$ X_j, \ j=1,...,N\f$, and choose the order of the global shape
- functions \f$ \psi_j(x).\f$
- <TABLE BORDER="0" >
- <TR>
- <TD bgcolor="cornsilk">
+   functions \f$ \psi_j(x).\f$
+#<TABLE BORDER="0">
+#<TR>
+#<TD bgcolor="cornsilk">
  - Initialise the total number of unknowns, \f$M=0.\f$
  - Loop over all nodes \f$ j=1,...,N \f$:
    - If node j lies on the boundary: 
@@ -1085,9 +1085,9 @@ in boxes):
       .
    .
 .
-</TD>
-</TR>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
  - Now that \f$ \psi_j(x) \f$ and  \f$ U_j \f$ have been defined and
    initialised, we can determine the current FE approximations for
    \f$ u(x)\f$ and \f$ \mbox{d} u(x)/\mbox{d} x\f$ from
@@ -1098,9 +1098,9 @@ in boxes):
 
  <B> Phase 2: Solution     </B> 
  \n
-<TABLE  BORDER="0">
-<TR>
-<TD bgcolor="cornsilk">
+#<TABLE  BORDER="0">
+#<TR>
+#<TD bgcolor="cornsilk">
 - Loop  over all  nodes \f$ k=1,...,N\f$:
   - Determine the equation number: \f$ {\cal E}(k) \f$
   - If \f$ {\cal E}(k) \ne -1 \f$:
@@ -1120,17 +1120,17 @@ in boxes):
     .
   .
 .
-</TD>
-</TR>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
 - Solve the \f$ M \times M\f$ linear system
   \f[ \sum_{j=1}^{M}  J_{kj} \ y_j = - r_k 
         \mbox{\ \  \ for $k=1,...,M.$} \f]
   for \f$ y_k \ (k=1,...,M)\f$.
 .
-<TABLE  BORDER="0">
-<TR>
-<TD bgcolor="cornsilk">
+#<TABLE  BORDER="0">
+#<TR>
+#<TD bgcolor="cornsilk">
 -  Loop over all  nodes \f$ j=1,...,N\f$:
   - Determine the equation number: \f$ {\cal E}(j) \f$
   - If \f$ {\cal E}(j) \ne -1 \f$: 
@@ -1138,9 +1138,9 @@ in boxes):
     \f[ U_{{\cal E}(j)} =  U_{{\cal E}(j)} +  y_{{\cal E}(j)} \f] 
   .
 .  
-</TD>
-</TR>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
 - P1 is a linear problem, so \f$ U_j  \ (j=1,...,N) \f$
   is the exact solution. For nonlinear problems, we would
   have to continue the \ref Newton iteration until the residuals
@@ -2346,9 +2346,9 @@ structure </a> is given elsewhere.
 #################################################################
 
 <CENTER>
-<TABLE bgcolor="pink">
-<TR>
-<TD>
+#<TABLE bgcolor="pink">
+#<TR>
+#<TD>
 <CENTER>
 <TABLE bgcolor="cornsilk">
 <TR>
@@ -2365,6 +2365,8 @@ structure </a> is given elsewhere.
 </TD>
 </TR>
 </TABLE>
+</CENTER>
+<CENTER>
 <TABLE bgcolor="cornsilk">
 <TR>
 <TD>
@@ -2377,18 +2379,20 @@ structure </a> is given elsewhere.
 </TD>
 </TR>
 </TABLE>
-</TD>
-</TR>
-</TABLE>
+</CENTER>
+#</TD>
+#</TR>
+#</TABLE>
 </CENTER>
 
 
 #################################################################
 #################################################################
 
-<TABLE bgcolor="pink">
-<TR>
-<TD>
+<CENTER>
+#<TABLE bgcolor="pink">
+#<TR>
+#<TD>
 <CENTER>
 <TABLE bgcolor="cornsilk">
 <TR>
@@ -2518,12 +2522,13 @@ structure </a> is given elsewhere.
     [V4] defined in \c FiniteElement.
   - provide any additional functionality that might be
     required at the \b Specific \b Element level.
-</TABLE>
 </TD>
 </TR>
 </TABLE>
 </CENTER>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
 </CENTER>
 
 <B>Note:</B> The subdivision into classes that define the
@@ -2542,9 +2547,9 @@ discrete constraints or boundary conditions.
 
 
 <CENTER>
-<TABLE bgcolor="pink">
-<TR>
-<TD>
+#<TABLE bgcolor="pink">
+#<TR>
+#<TD>
 <CENTER>
 <TABLE bgcolor="cornsilk">
 <TR>
@@ -2583,9 +2588,9 @@ discrete constraints or boundary conditions.
 </TR>
 </TABLE>
 </CENTER>
-</TD>
-</TR>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
 </CENTER>
 
 
@@ -2595,9 +2600,9 @@ discrete constraints or boundary conditions.
 
 
 <CENTER>
-<TABLE bgcolor="pink">
-<TR>
-<TD>
+#<TABLE bgcolor="pink">
+#<TR>
+#<TD>
 <CENTER>
 <TABLE bgcolor="cornsilk">
 <TR>
@@ -2649,9 +2654,9 @@ discrete constraints or boundary conditions.
 </TR>
 </TABLE>
 </CENTER>
-</TD>
-</TR>
-</TABLE>
+#</TD>
+#</TR>
+#</TABLE>
 </CENTER>
 
 <HR>
