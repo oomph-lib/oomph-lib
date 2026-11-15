@@ -136,8 +136,8 @@ boundary fitted mesh, which will need to deform in response to
 the motion of the free surface. This is achieved by treating the
 interior of the mesh as a fictitious elastic solid, and solving a
 solid mechanics problem for the (unknown) nodal positions. This
-technique, which will subsequently be referred to as a `pseudo-solid
-node-update strategy', employs wrapper elements to
+technique, which will subsequently be referred to as a "pseudo-solid
+node-update strategy", employs wrapper elements to
 existing fluid and solid equation classes. The specific element used
 in this example is a \c PseudoSolidNodeUpdateElement<QCrouzeixRaviartElement<2>, \c QPVDElement<2,3> \c >
 element, which takes two template arguments. The first is the standard
@@ -147,9 +147,9 @@ mesh deformation.
 
 The deformation of the free surface boundary is imposed by introducing
 a field of Lagrange multipliers at the free surface, following the
-method outlined in Cairncross et al., `A finite element method for
+method outlined in Cairncross et al., "A finite element method for
 free surface flows of incompressible fluids in three dimensions. Part
-I. Boundary fitted mesh motion' (2000). These new unknowns are stored
+I. Boundary fitted mesh motion" (2000). These new unknowns are stored
 as nodal values, and so the vector of values at each node is resized
 accordingly. Since this introduces further degrees of freedom into the
 problem, we require an additional equation: the kinematic boundary
@@ -170,9 +170,9 @@ etc.), and a general introduction can be found in <A HREF="../../../poisson/two_
 
 Within a finite element framework, the dynamic boundary condition is
 incorporated as contributions to each of the momentum equations at the
-free surface. We refer to Ruschak, `A method for incorporating free
+free surface. We refer to Ruschak, "A method for incorporating free
 boundaries with surface tension in finite element fluid-flow
-simulators' (1980), for details on the formulation, which can also be
+simulators" (1980), for details on the formulation, which can also be
 found in our <a href="../../surface_theory/html/index.html#boundary_conditions"> free
 surface theory </a> document.
 Since both Taylor--Hood and Crouzeix--Raviart elements
@@ -334,9 +334,9 @@ present the results in the figure below. For sufficiently small
 amplitudes, \f$ \epsilon \ll 1 \f$, we can linearise the governing
 equations by proposing that we can write the fluid velocities and
 pressure, \f$ u(x,y,t) \f$, \f$ v(x,y,t) \f$ and \f$ p(x,y,t) \f$, as
-well as the `height' of the interface, \f$ h(x,t) \f$, in the form \f$
+well as the "height" of the interface, \f$ h(x,t) \f$, in the form \f$
 x = \bar{x} + \epsilon \hat{x} \f$, where the barred quantities
-correspond to the `base' state, chosen here to be the trivial solution \f$
+correspond to the "base" state, chosen here to be the trivial solution \f$
 \bar{h} = \bar{u} = \bar{v} = \bar{p} = 0 \f$. Once the linearised
 forms of the governing equations and boundary conditions have been
 determined we propose a separable solution of the form
@@ -437,7 +437,7 @@ vertically downwards.
 \skipline Set direction of gravity
 \until G[1]
 
-Finally, we build the problem using the `pseudo-solid' version of \c
+Finally, we build the problem using the "pseudo-solid" version of \c
 QCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
 unsteady_run(...). This function solves the system at each timestep
 using the \c Problem::unsteady_newton_solve(...) function before
@@ -506,7 +506,7 @@ timestepper.
 Next we build the bulk mesh. The mesh we are using is the \c
 ElasticRectangularQuadMesh<ELEMENT>, which takes the bulk element as
 a template argument. The boolean argument in the mesh constructor,
-which is set to `true' here, indicates whether or not the domain is to
+which is set to "true" here, indicates whether or not the domain is to
 be periodic in \f$ x \f$. The surface mesh is also built, although it
 is empty at this point.
 

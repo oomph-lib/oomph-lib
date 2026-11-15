@@ -1740,7 +1740,7 @@ namespace oomph
   }
 
   //======================================================================
-  // Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1914,8 +1914,8 @@ namespace oomph
         error_stream << " ii) switching OFF the PARANOID flag" << std::endl
                      << std::endl;
 
-        /// Throw an inverted error so it can be caught by the adaptive
-        /// timestepper and arc length continuation for example.
+        // Throw an inverted error so it can be caught by the adaptive
+        // timestepper and arc length continuation for example.
         throw InvertedElementError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
@@ -6917,10 +6917,10 @@ namespace oomph
 
   //============================================================================
   /// Assign local equation numbers for the solid equations in the element.
-  //  This can be done at a high level assuming, as I am, that the equations
-  //  will always be formulated in terms of nodal positions.
   /// If the boolean argument is true then pointers to the dofs will be
   /// stored in Dof_pt.
+  //  This can be done at a high level assuming, as I am, that the equations
+  //  will always be formulated in terms of nodal positions.
   //============================================================================
   void SolidFiniteElement::assign_solid_local_eqn_numbers(
     const bool& store_local_dof_pt)
