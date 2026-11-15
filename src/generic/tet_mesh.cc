@@ -562,7 +562,7 @@ namespace oomph
       double min_height = DBL_MAX;
       for (unsigned j = 0; j < 4; j++)
       {
-        Vector<double> normal(3);
+        FixedSizeVector<double, 3> normal;
         unsigned e0 = 0;
         unsigned e1 = 0;
         unsigned e2 = 0;
@@ -883,11 +883,11 @@ namespace oomph
 
           // Compute zeta values of the interpolation parameters
           FixedSizeVector<double, 2> zeta_a;
-          Vector<double> zeta_b(2, 0.0);
-          Vector<double> zeta_c(2, 0.0);
+          FixedSizeVector<double, 2> zeta_b;
+          FixedSizeVector<double, 2> zeta_c;
           FixedSizeVector<double, 2> zeta_d;
-          Vector<double> zeta_e(2, 0.0);
-          Vector<double> zeta_f(2, 0.0);
+          FixedSizeVector<double, 2> zeta_e;
+          FixedSizeVector<double, 2> zeta_f;
           faceted_surface_pt->boundary_zeta01(facet_id_of_boundary, s1, zeta_a);
           faceted_surface_pt->boundary_zeta01(
             facet_id_of_boundary, 1.0 - s0, zeta_d);

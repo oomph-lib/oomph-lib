@@ -164,7 +164,7 @@ namespace oomph
       const unsigned n_intpt = this->integral_pt()->nweight();
 
       // Storage for the local coordinate
-      Vector<double> s(1);
+      FixedSizeVector<double, 1> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -179,8 +179,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psi, dpsids);
 
         // Get position and tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -315,12 +315,18 @@ namespace oomph
         s_bulk = local_coordinate_in_bulk(s);
 
         // Get the fluid traction from the NSt bulk element
-        Vector<double> traction_nst(3);
+        // FaceElement::outer_unit_normal(...) returns a dynamically sized
+        // Vector; copy its two components into the 3D normal required by the
+        // fluid-traction interface.
+        FixedSizeVector<double, 3> n_fixed(0.0);
+        n_fixed[0] = interpolated_normal[0];
+        n_fixed[1] = interpolated_normal[1];
+        FixedSizeVector<double, 3> traction_nst;
         dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
-          ->traction(s_bulk, interpolated_normal, traction_nst);
+          ->traction(s_bulk, n_fixed, traction_nst);
 
         // Get fluid velocity from bulk element
-        Vector<double> fluid_veloc(Dim + 1, 0.0);
+        FixedSizeVector<double, 3> fluid_veloc(0.0);
         dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc);
 
@@ -357,7 +363,7 @@ namespace oomph
           scaled_normal_wall_veloc + scaled_normal_poro_veloc;
         double total_poro_tangential_component =
           scaled_tangential_wall_veloc + scaled_tangential_poro_veloc;
-        Vector<double> poro_veloc(2, 0.0);
+        FixedSizeVector<double, 2> poro_veloc(0.0);
         for (unsigned i = 0; i < Dim; i++)
         {
           poro_veloc[i] +=
@@ -370,7 +376,7 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psi, dpsids);
 
         // Get tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -485,8 +491,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psi, dpsids);
 
         // Get position and tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -566,7 +572,7 @@ namespace oomph
 
 #ifdef PARANOID
 
-          Vector<double> x_face(2);
+          FixedSizeVector<double, 2> x_face;
           x_face[0] = ext_face_el_pt->interpolated_x(s_ext_face, 0);
           x_face[1] = ext_face_el_pt->interpolated_x(s_ext_face, 1);
 
@@ -604,7 +610,7 @@ namespace oomph
         s_bulk = local_coordinate_in_bulk(s);
 
         // Get fluid velocity from bulk element
-        Vector<double> fluid_veloc(Dim + 1, 0.0);
+        FixedSizeVector<double, 3> fluid_veloc(0.0);
         dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc);
 
@@ -895,7 +901,7 @@ namespace oomph
 #ifdef PARANOID
       {
         // Get fluid velocity from bulk element
-        Vector<double> fluid_veloc_from_bulk(Dim + 1, 0.0);
+        FixedSizeVector<double, 3> fluid_veloc_from_bulk(0.0);
         dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc_from_bulk);
 
@@ -1010,9 +1016,13 @@ namespace oomph
       double poro_tangential_component = 0.0;
 
       // Get the fluid traction from the NSt bulk element
-      Vector<double> traction_nst(3);
+      FixedSizeVector<double, 3> n_fixed(0.0);
+      n_fixed[0] = interpolated_normal[0];
+      // should be fixed size (above)
+      n_fixed[1] = interpolated_normal[1];
+      FixedSizeVector<double, 3> traction_nst;
       dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
-        ->traction(s_bulk, interpolated_normal, traction_nst);
+        ->traction(s_bulk, n_fixed, traction_nst);
 
       // Calculate the normal and tangential components
       for (unsigned i = 0; i < Dim; i++)
@@ -1043,7 +1053,7 @@ namespace oomph
       }
 
       // Setup bjs terms
-      Vector<double> bjs_term(2);
+      FixedSizeVector<double, 2> bjs_term;
       bjs_term[0] = nst_normal_component - poro_normal_component;
       bjs_term[1] = nst_tangential_component - poro_tangential_component;
 

@@ -315,8 +315,8 @@ namespace oomph
       }
 #endif
 
-      Vector<double> s_lo(2);
-      Vector<double> s_hi(2);
+      FixedSizeVector<double, 2> s_lo;
+      FixedSizeVector<double, 2> s_hi;
       Vector<double> s(2);
       Vector<double> xi(2);
       Vector<double> xi_fe(2);

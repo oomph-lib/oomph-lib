@@ -325,7 +325,7 @@ namespace oomph
     void scale_basis(Shape& basis) const
     {
       // Storage for the lengths of the edges of the element
-      Vector<double> length(3, 0.0);
+      FixedSizeVector<double, 3> length(0.0);
 
       // Temporary storage for the vertex positions
       double x0, y0, x1, y1;

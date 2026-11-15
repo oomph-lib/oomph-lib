@@ -815,10 +815,10 @@ namespace oomph
       this->dshape_local(s, psi, dpsi);
 
       // Eulerian coordinates at Gauss point
-      Vector<double> interpolated_x(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
 
       // Derivs of Eulerian coordinates w.r.t. local coordinates
-      Vector<double> interpolated_dxds(2);
+      FixedSizeVector<double, 2> interpolated_dxds(0.0);
       std::complex<double> interpolated_u(0.0, 0.0);
 
       // Assemble x and its derivs
@@ -943,7 +943,7 @@ namespace oomph
           Node* nod_pt = fe_pt->node_pt(j);
 
           // Extract nodal coordinates from node:
-          Vector<double> x(2);
+          FixedSizeVector<double, 2> x;
           x[0] = nod_pt->x(0);
           x[1] = nod_pt->x(1);
 

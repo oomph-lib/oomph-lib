@@ -20,8 +20,13 @@ endif()
 
 include(CTest)
 
-set(SUBDIRS vector_matrix_test block_selector_test complex_matrices_test
-    eigen_solver_test problem_test)
+set(SUBDIRS
+    vector_matrix_test
+    block_selector_test
+    complex_matrices_test
+    eigen_solver_test
+    problem_test
+    guarded_workspace)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})

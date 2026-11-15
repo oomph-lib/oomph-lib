@@ -298,7 +298,7 @@ namespace oomph
     int local_eqn = 0;
 
     // Setup memory for accelerations
-    Vector<double> accel(2);
+    FixedSizeVector<double, 2> accel;
 
     // Set up memory for the shape functions:
 
@@ -626,7 +626,7 @@ namespace oomph
     unsigned n_position_dofs = nnodal_position_type();
 
     // Setup memory for veloc
-    Vector<double> veloc(2);
+    FixedSizeVector<double, 2> veloc;
 
     // Set up memory for the shape functions:
 
@@ -764,8 +764,8 @@ namespace oomph
       double Adet = Amet; // Aup = 1.0/Amet;
 
       // Calculate the unit normal Vectors
-      Vector<double> n(2);
-      Vector<double> N(2);
+      FixedSizeVector<double, 2> n;
+      FixedSizeVector<double, 2> N;
       n[0] = -a(0, 1) / sqrt(adet);
       n[1] = a(0, 0) / sqrt(adet);
 
@@ -1401,7 +1401,7 @@ namespace oomph
       (r[1] - Vector_to_symmetry_line[1]) * Normal_to_symmetry_line[1];
 
     // Work out tangent to symmetry line
-    Vector<double> tangent_to_symmetry_line(2);
+    FixedSizeVector<double, 2> tangent_to_symmetry_line;
     tangent_to_symmetry_line[0] = -Normal_to_symmetry_line[1];
     tangent_to_symmetry_line[1] = Normal_to_symmetry_line[0];
 

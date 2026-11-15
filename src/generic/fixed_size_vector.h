@@ -27,11 +27,20 @@
 #ifndef OOMPH_FIXED_SIZE_VECTOR_HEADER
 #define OOMPH_FIXED_SIZE_VECTOR_HEADER
 
+// Config header
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
 
 // Standard library includes
 #include <initializer_list>
 #include <sstream>
 
+// Oomph-lib error handler (the only oomph-lib dependency of the containers
+// defined in this file). NOTE: We deliberately do NOT include the combined
+// "generic.h" header here: this file is part of the generic library itself
+// and is included from other generic headers, so pulling in the entire
+// library would be both circular and wasteful.
 #include "oomph_definitions.h"
 
 namespace oomph

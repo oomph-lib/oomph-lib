@@ -435,7 +435,7 @@ namespace oomph
     y0 = double(i) * Hleaflet / double(Ny1);
     y1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = -Lleft + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -477,7 +477,7 @@ namespace oomph
     y0 = double(i) * Hleaflet / double(Ny1);
     y1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = -Lleft + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -571,7 +571,7 @@ namespace oomph
     y0 = double(i) * Hleaflet / double(Ny1);
     y1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = Lright + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -615,7 +615,7 @@ namespace oomph
     y0 = double(i) * Hleaflet / double(Ny1);
     y1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = Lright + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -731,7 +731,7 @@ namespace oomph
     y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
     ;
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = -Lleft + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -775,7 +775,7 @@ namespace oomph
     y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
     ;
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = -Lleft + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -870,7 +870,7 @@ namespace oomph
     y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
     ;
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = Lright + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
@@ -914,7 +914,7 @@ namespace oomph
     y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
     ;
 
-    Vector<double> r_vert(2);
+    FixedSizeVector<double, 2> r_vert;
     r_vert[0] = Lright + X_0;
     r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 

@@ -701,10 +701,9 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 
-      Vector<double> s_lo(2);
-      Vector<double> s_hi(2);
+      FixedSizeVector<double, 2> s_lo;
+      FixedSizeVector<double, 2> s_hi;
       Vector<double> s(2);
-      Vector<double> x(2);
 
       // Setup vertex coordinates in father element:
       //--------------------------------------------
@@ -770,8 +769,6 @@ namespace oomph
       else
       {
         unsigned jnod = 0;
-        Vector<double> x_small(2);
-        Vector<double> x_large(2);
 
         Vector<double> s_fraction(2);
         // Loop over nodes in element
@@ -1618,7 +1615,7 @@ namespace oomph
           }
 
           // Finally we must sort out the translation scheme
-          Vector<unsigned> temp_translate(2);
+          FixedSizeVector<unsigned, 2> temp_translate;
           for (unsigned i = 0; i < 2; i++)
           {
             temp_translate[i] = translate_s_in_neigh[translate_s[i]];
@@ -1637,7 +1634,7 @@ namespace oomph
         for (unsigned i0 = 0; i0 < n_p; i0++)
         {
           // Storage for the fractional position of the node in the element
-          Vector<double> s_fraction(2);
+          FixedSizeVector<double, 2> s_fraction;
 
           // Find the local node and the fractional position of the node
           // which depends on the edge, of course
@@ -1847,10 +1844,10 @@ namespace oomph
 
     // Initialise errors
     max_error = 0.0;
-    Vector<double> max_error_x(2, 0.0);
+    FixedSizeVector<double, 2> max_error_x(0.0);
     double max_error_val = 0.0;
 
-    Vector<int> edges(4);
+    FixedSizeVector<int, 4> edges;
     edges[0] = S;
     edges[1] = N;
     edges[2] = W;

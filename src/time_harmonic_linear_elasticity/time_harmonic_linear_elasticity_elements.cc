@@ -238,7 +238,7 @@ namespace oomph
     unsigned n_intpt = this->integral_pt()->nweight();
 
     // Set the vector to hold the local coordinates in the element
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Integer to store the local equation number
     int local_eqn = 0, local_unknown = 0;
@@ -611,7 +611,7 @@ namespace oomph
     Vector<double> s(DIM);
 
     // Vector for coordintes
-    Vector<double> x(DIM);
+    FixedSizeVector<double, DIM> x;
 
     // Displacement vector
     Vector<std::complex<double>> disp(DIM);

@@ -183,11 +183,10 @@ namespace Global_Physical_Variables
 
  /// Traction applied on the fluid at the left (inflow) boundary
  void prescribed_traction(const double& t,
-                          const Vector<double>& x,
-                          const Vector<double>& n,
-                          Vector<double>& traction)
+                          const FixedSizeVector<double, 2>& x,
+                          const FixedSizeVector<double, 2>& n,
+                          FixedSizeVector<double, 2>& traction)
  {
-  traction.resize(2);
   traction[0]=P_up;
   traction[1]=0.0;
 

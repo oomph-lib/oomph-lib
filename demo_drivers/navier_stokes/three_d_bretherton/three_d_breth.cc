@@ -64,7 +64,7 @@ namespace Global_Physical_Variables
  double ReInvFr = Bo/Ca;
  
  // Direction of gravity
- Vector<double> G(3); 
+ FixedSizeVector<double, 3> G; 
  
  //Aspect ratio of the tube
  double Alpha = 1.0 ;
@@ -89,8 +89,10 @@ namespace Global_Physical_Variables
  double Rat_press = 2.87;
  
  /// Function that prescribes the hydrostatic pressure field at the outlet
- void hydrostatic_pressure(const double &time, const Vector<double> &x, 
-                           const Vector<double> &n, Vector<double> &traction)
+ void hydrostatic_pressure(const double &time,
+                           const FixedSizeVector<double, 3> &x, 
+                           const FixedSizeVector<double, 3> &n,
+                           FixedSizeVector<double, 3> &traction)
  {
   traction[0] = 0.0;
   traction[1] = ReInvFr*G[2]*x[2]; //Perpendicular to tube axis

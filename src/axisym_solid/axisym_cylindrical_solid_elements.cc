@@ -96,10 +96,10 @@ namespace oomph
       // and the derivatives of global position components
       // wrt lagrangian coordinates, as well as acceleration
       Vector<double> interpolated_xi(2, 0.0);
-      Vector<double> interpolated_X(2, 0.0);
-      Vector<double> accel(2, 0.0);
-      Vector<double> interpolated_dXdt(2, 0.0);
-      DenseMatrix<double> interpolated_dXdxi(2, 2, 0.0);
+      FixedSizeVector<double, 2> interpolated_X(0.0);
+      FixedSizeVector<double, 2> accel(0.0);
+      FixedSizeVector<double, 2> interpolated_dXdt(0.0);
+      FixedSizeMatrix<double, 2, 2> interpolated_dXdxi(0.0);
 
       // Calculate displacements and derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -402,10 +402,10 @@ namespace oomph
       // and the derivatives of global position components
       // wrt lagrangian coordinates, as well as acceleration
       Vector<double> interpolated_xi(2, 0.0);
-      Vector<double> interpolated_X(2, 0.0);
-      Vector<double> accel(2, 0.0);
-      Vector<double> interpolated_dXdt(2, 0.0);
-      DenseMatrix<double> interpolated_dXdxi(2, 2, 0.0);
+      FixedSizeVector<double, 2> interpolated_X(0.0);
+      FixedSizeVector<double, 2> accel(0.0);
+      FixedSizeVector<double, 2> interpolated_dXdt(0.0);
+      FixedSizeMatrix<double, 2, 2> interpolated_dXdxi(0.0);
       double interpolated_solid_p = 0.0;
 
       // Calculate displacements and derivatives

@@ -43,20 +43,20 @@ namespace oomph
     Vector<double> bound_W(2);
     Vector<double> bound_E(2);
 
-    Vector<double> diff_N(2);
-    Vector<double> diff_S(2);
-    Vector<double> diff_W(2);
-    Vector<double> diff_E(2);
+    FixedSizeVector<double, 2> diff_N;
+    FixedSizeVector<double, 2> diff_S;
+    FixedSizeVector<double, 2> diff_W;
+    FixedSizeVector<double, 2> diff_E;
 
-    Vector<double> f_rect(2);
+    FixedSizeVector<double, 2> f_rect;
 
     Vector<double> corner_SE(2);
     Vector<double> corner_SW(2);
     Vector<double> corner_NE(2);
     Vector<double> corner_NW(2);
 
-    Vector<double> edge_N(2);
-    Vector<double> edge_S(2);
+    FixedSizeVector<double, 2> edge_N;
+    FixedSizeVector<double, 2> edge_S;
 
     Vector<double> zeta(1);
 
@@ -131,20 +131,20 @@ namespace oomph
     Vector<double> bound_W(2);
     Vector<double> bound_E(2);
 
-    Vector<double> diff_N(2);
-    Vector<double> diff_S(2);
-    Vector<double> diff_W(2);
-    Vector<double> diff_E(2);
+    FixedSizeVector<double, 2> diff_N;
+    FixedSizeVector<double, 2> diff_S;
+    FixedSizeVector<double, 2> diff_W;
+    FixedSizeVector<double, 2> diff_E;
 
-    Vector<double> f_rect(2);
+    FixedSizeVector<double, 2> f_rect;
 
     Vector<double> corner_SE(2);
     Vector<double> corner_SW(2);
     Vector<double> corner_NE(2);
     Vector<double> corner_NW(2);
 
-    Vector<double> edge_N(2);
-    Vector<double> edge_S(2);
+    FixedSizeVector<double, 2> edge_N;
+    FixedSizeVector<double, 2> edge_S;
 
     Vector<double> zeta(1);
 

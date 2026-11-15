@@ -362,7 +362,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Storage for the local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Storage for the source function
     Vector<double> f(DIM);
@@ -398,7 +398,7 @@ namespace oomph
 
       // Storage for interpolated values
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_q(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_q(0.0);
       double interpolated_div_q_ds = 0.0;
       double interpolated_p = 0.0;
 

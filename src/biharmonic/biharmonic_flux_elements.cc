@@ -84,7 +84,7 @@ namespace oomph
     this->dshape_local(s, psi, dpsids);
 
     // computed dx_i/ds_t along edge element
-    Vector<double> interpolated_dxds_t(2);
+    FixedSizeVector<double, 2> interpolated_dxds_t(0.0);
 
     // Get the bulk position type corresponding to the slope
     const unsigned slope_index = this->bulk_position_type(1);
@@ -170,8 +170,8 @@ namespace oomph
       this->dshape_local(s, psi, dpsi);
 
       // compute dx_i/ds_t and dx_i/ds_n at ipt
-      Vector<double> dxds_t(2, 0.0);
-      Vector<double> dxds_n(2, 0.0);
+      FixedSizeVector<double, 2> dxds_t(0.0);
+      FixedSizeVector<double, 2> dxds_n(0.0);
       for (unsigned n = 0; n < n_node; n++)
       {
         for (unsigned d = 0; d < 2; d++)

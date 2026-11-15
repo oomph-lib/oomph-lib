@@ -55,8 +55,8 @@ namespace oomph
   private:
     /// Pointer to an imposed traction function
     void (*Traction_fct_pt)(const double& time,
-                            const Vector<double>& x,
-                            Vector<double>& result);
+                            const FixedSizeVector<double, 2>& x,
+                            FixedSizeVector<double, 2>& result);
 
     /// The highest dimension of the problem
     unsigned Dim;
@@ -94,14 +94,14 @@ namespace oomph
 
     /// Function to calculate the traction applied to the fluid
     void get_traction(double time,
-                      const Vector<double>& x,
-                      Vector<double>& result)
+                      const FixedSizeVector<double, 2>& x,
+                      FixedSizeVector<double, 2>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
       {
         // Loop over dimensions and set body forces to zero
-        for (unsigned i = 0; i < Dim; i++)
+        for (unsigned i = 0; i < 2; i++)
         {
           result[i] = 0.0;
         }
@@ -239,8 +239,8 @@ namespace oomph
 
     // Access function for the imposed traction pointer
     void (*&traction_fct_pt())(const double& t,
-                               const Vector<double>& x,
-                               Vector<double>& result)
+                               const FixedSizeVector<double, 2>& x,
+                               FixedSizeVector<double, 2>& result)
     {
       return Traction_fct_pt;
     }
@@ -387,8 +387,8 @@ namespace oomph
       double W = w * J;
 
       // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(Dim);
-      Vector<double> interpolated_u(Dim);
+      FixedSizeVector<double, 2> interpolated_x;
+      FixedSizeVector<double, 2> interpolated_u;
 
       // Initialise to zero
       for (unsigned i = 0; i < Dim; i++)
@@ -411,7 +411,7 @@ namespace oomph
       }
 
       // Get the user-defined traction terms
-      Vector<double> traction(Dim);
+      FixedSizeVector<double, 2> traction;
       get_traction(time, interpolated_x, traction);
 
       // Now add to the appropriate equations

@@ -89,7 +89,7 @@ namespace oomph
     (void)dshape_eulerian(s, psi, dpsidx);
 
     // Calculate interpolated values of the derivative of global position
-    DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+    FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
     // Loop over nodes
     for (unsigned l = 0; l < n_node; l++)
@@ -232,7 +232,7 @@ namespace oomph
     unsigned n_intpt = this->integral_pt()->nweight();
 
     // Set the vector to hold the local coordinates in the element
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Integer to store the local equation number
     int local_eqn = 0, local_unknown = 0;
@@ -257,10 +257,10 @@ namespace oomph
 
       // Calculate interpolated values of the derivative of global position
       // wrt lagrangian coordinates
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Setup memory for accelerations (initialised to zero)
-      Vector<double> accel(DIM, 0.0);
+      FixedSizeVector<double, DIM> accel(0.0);
 
       // Calculate displacements and derivatives and lagrangian coordinates
       for (unsigned l = 0; l < n_node; l++)

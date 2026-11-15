@@ -2237,7 +2237,7 @@ namespace oomph
     // Sort out corner node IDs:
     //--------------------------
     // Initialise a vector to store local node IDs of the corners
-    Vector<unsigned> corner_node_id(4, 0);
+    FixedSizeVector<unsigned, 4> corner_node_id(0);
 
     // Identify the local node ID of the first corner
     corner_node_id[0] = 0;
@@ -2261,11 +2261,11 @@ namespace oomph
 
     // Vector to store the (Eulerian) position of the first corner node
     // along a given edge of the element
-    Vector<double> first_node_x(2, 0.0);
+    FixedSizeVector<double, 2> first_node_x(0.0);
 
     // Vector to store the (Eulerian) position of the second corner node
     // along a given edge of the element
-    Vector<double> second_node_x(2, 0.0);
+    FixedSizeVector<double, 2> second_node_x(0.0);
 
     // Calculate h:
     //-------------
@@ -2377,7 +2377,7 @@ namespace oomph
         ->octree_pt();
 
     // Initialise a vector to store local node IDs of the corners
-    Vector<unsigned> corner_node_id(8, 0);
+    FixedSizeVector<unsigned, 8> corner_node_id(0);
 
     // Identify the local node ID of the first corner
     corner_node_id[0] =
@@ -2465,11 +2465,11 @@ namespace oomph
 
     // Vector to store the (Eulerian) position of the first corner node
     // along a given edge of the element
-    Vector<double> first_node_x(3, 0.0);
+    FixedSizeVector<double, 3> first_node_x(0.0);
 
     // Vector to store the (Eulerian) position of the second corner node
     // along a given edge of the element
-    Vector<double> second_node_x(3, 0.0);
+    FixedSizeVector<double, 3> second_node_x(0.0);
 
     // Calculate h:
     //-------------

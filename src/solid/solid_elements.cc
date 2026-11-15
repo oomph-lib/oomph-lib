@@ -73,16 +73,7 @@ namespace oomph
     (void)dshape_lagrangian(s, psi, dpsidxi);
 
     // Calculate interpolated values of the derivative of global position
-    DenseMatrix<double> interpolated_G(DIM);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        interpolated_G(i, j) = 0.0;
-      }
-    }
+    FixedSizeMatrix<double, DIM, DIM> interpolated_G(0.0);
 
     // Storage for Lagrangian coordinates (initialised to zero)
     Vector<double> interpolated_xi(DIM, 0.0);
@@ -246,21 +237,10 @@ namespace oomph
 
       // Calculate interpolated values of the derivative of global position
       // wrt lagrangian coordinates
-      DenseMatrix<double> interpolated_G(DIM);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_G(0.0);
 
       // Setup memory for accelerations
-      Vector<double> accel(DIM);
-
-      // Initialise to zero
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        // Initialise acclerations
-        accel[i] = 0.0;
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          interpolated_G(i, j) = 0.0;
-        }
-      }
+      FixedSizeVector<double, DIM> accel(0.0);
 
       // Storage for Lagrangian coordinates (initialised to zero)
       Vector<double> interpolated_xi(DIM, 0.0);
@@ -868,7 +848,7 @@ namespace oomph
 
       // Storage for Lagrangian coordinates and velocity (initialised to zero)
       Vector<double> interpolated_xi(DIM, 0.0);
-      Vector<double> veloc(DIM, 0.0);
+      FixedSizeVector<double, DIM> veloc(0.0);
 
       // Calculate lagrangian coordinates
       for (unsigned l = 0; l < n_node; l++)
@@ -997,16 +977,7 @@ namespace oomph
 
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
-    DenseMatrix<double> interpolated_G(DIM);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        interpolated_G(i, j) = 0.0;
-      }
-    }
+    FixedSizeMatrix<double, DIM, DIM> interpolated_G(0.0);
 
     // Calculate displacements and derivatives
     for (unsigned l = 0; l < n_node; l++)
@@ -1163,7 +1134,7 @@ namespace oomph
     }
 
     // Scaling factor to turn these vectors into unit vectors
-    Vector<double> norm(DIM);
+    FixedSizeVector<double, DIM> norm(0.0);
     for (unsigned i = 0; i < DIM; i++)
     {
       norm[i] = 0.0;
@@ -1353,21 +1324,10 @@ namespace oomph
       Vector<double> interpolated_xi(DIM, 0.0);
 
       // Deformed tangent vectors
-      DenseMatrix<double> interpolated_G(DIM);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_G(0.0);
 
       // Setup memory for accelerations
-      Vector<double> accel(DIM);
-
-      // Initialise to zero
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        // Initialise acclerations
-        accel[i] = 0.0;
-        for (unsigned j = 0; j < DIM; j++)
-        {
-          interpolated_G(i, j) = 0.0;
-        }
-      }
+      FixedSizeVector<double, DIM> accel(0.0);
 
       // Calculate displacements and derivatives and lagrangian coordinates
       for (unsigned l = 0; l < n_node; l++)
@@ -2322,16 +2282,7 @@ namespace oomph
 
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
-    DenseMatrix<double> interpolated_G(DIM);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      for (unsigned j = 0; j < DIM; j++)
-      {
-        interpolated_G(i, j) = 0.0;
-      }
-    }
+    FixedSizeMatrix<double, DIM, DIM> interpolated_G(0.0);
 
     // Calculate displacements and derivatives
     for (unsigned l = 0; l < n_node; l++)

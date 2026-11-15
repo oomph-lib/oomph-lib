@@ -389,7 +389,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  some_file2.open(filename);
  Vector<double> s(2); 
  Vector<double> x(2); 
- Vector<double> u(2);
+ FixedSizeVector<double, 2> u;
  double p=0.0;
  Vector<double> soln(3);
  unsigned nphi=Line_plot_point.size();

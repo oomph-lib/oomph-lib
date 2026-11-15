@@ -173,9 +173,9 @@ namespace Global_Parameters
 
  /// Applied traction on fluid at the inflow boundary
  void prescribed_inflow_traction(const double& t,
-                                 const Vector<double>& x,
-                                 const Vector<double>& n,
-                                 Vector<double>& traction)
+                                 const FixedSizeVector<double, 3>& x,
+                                 const FixedSizeVector<double, 3>& n,
+                                 FixedSizeVector<double, 3>& traction)
  {
   traction[0]=0.0;
   traction[1]=0.0;
@@ -188,9 +188,9 @@ namespace Global_Parameters
 
  /// Applied traction on fluid at the inflow boundary
  void prescribed_outflow_traction(const double& t,
-                                  const Vector<double>& x,
-                                  const Vector<double>& n,
-                                  Vector<double>& traction)
+                                  const FixedSizeVector<double, 3>& x,
+                                  const FixedSizeVector<double, 3>& n,
+                                  FixedSizeVector<double, 3>& traction)
  {
   traction[0]=0.0;
   traction[1]=0.0;

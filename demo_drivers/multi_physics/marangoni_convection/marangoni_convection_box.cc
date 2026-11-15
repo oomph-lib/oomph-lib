@@ -551,7 +551,7 @@ namespace Global_Physical_Variables
  double Capillary = 1.0;
 
  /// Gravity vector
- Vector<double> Direction_of_gravity(2);
+ FixedSizeVector<double, 2> Direction_of_gravity;
 
  
  /// Set the value of Pi

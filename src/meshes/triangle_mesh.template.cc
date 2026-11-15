@@ -1131,8 +1131,8 @@ namespace oomph
 #endif
 
         // Get the initial and final coordinates of the current segment
-        Vector<double> current_seg_initial_coord(2);
-        Vector<double> current_seg_final_coord(2);
+        FixedSizeVector<double, 2> current_seg_initial_coord;
+        FixedSizeVector<double, 2> current_seg_final_coord;
 
         // Get access to the initial element on the segment
         FiniteElement* current_seg_initial_ele_pt =
@@ -5493,8 +5493,8 @@ namespace oomph
                 // elements is the same then use the
                 // bottom-left criteria on the bulk
                 // elements to choose the main face element
-                Vector<double> main_ele_coordinates(2);
-                Vector<double> dependant_ele_coordinates(2);
+                FixedSizeVector<double, 2> main_ele_coordinates(0.0);
+                FixedSizeVector<double, 2> dependant_ele_coordinates(0.0);
                 // Get the number of nodes on the bulk
                 // elements
                 const unsigned n_bulk_nodes = main_bulk_ele_pt->nnode();
@@ -5821,8 +5821,8 @@ namespace oomph
                 // When the processor in charge for both elements is the same
                 // then use the bottom-left criteria on the bulk elements to
                 // choose the main face element
-                Vector<double> main_ele_coordinates(2);
-                Vector<double> dependant_ele_coordinates(2);
+                FixedSizeVector<double, 2> main_ele_coordinates(0.0);
+                FixedSizeVector<double, 2> dependant_ele_coordinates(0.0);
                 // Get the number of nodes on the bulk elements
                 const unsigned n_bulk_nodes = main_bulk_ele_pt->nnode();
                 for (unsigned inode = 0; inode < n_bulk_nodes; inode++)
@@ -7961,13 +7961,13 @@ namespace oomph
             // ... then the zeta values for the segment
             if (this->boundary_geom_object_pt(b) != 0)
             {
-              Vector<double> zeta_segment_initial(1);
+              FixedSizeVector<double, 1> zeta_segment_initial;
               restart_file >> zeta_segment_initial[0];
 
               // Ignore rest of line
               restart_file.ignore(80, '\n');
 
-              Vector<double> zeta_segment_final(1);
+              FixedSizeVector<double, 1> zeta_segment_final;
               restart_file >> zeta_segment_final[0];
 
               // Ignore rest of line
@@ -7981,13 +7981,13 @@ namespace oomph
             }
             else
             {
-              Vector<double> arclength_segment_initial(1);
+              FixedSizeVector<double, 1> arclength_segment_initial;
               restart_file >> arclength_segment_initial[0];
 
               // Ignore rest of line
               restart_file.ignore(80, '\n');
 
-              Vector<double> arclength_segment_final(1);
+              FixedSizeVector<double, 1> arclength_segment_final;
               restart_file >> arclength_segment_final[0];
 
               // Ignore rest of line
@@ -22973,7 +22973,7 @@ namespace oomph
           FiniteElement* face_ele_pt = tmp_unsorted_face_ele_pt[iproc][e];
           // Get the number of nodes of the face element
           const unsigned n_node = face_ele_pt->nnode();
-          Vector<double> bottom_left(2);
+          FixedSizeVector<double, 2> bottom_left;
           // Assign as the bottom-left node the first node
           // Get the node
           Node* node_pt = face_ele_pt->node_pt(0);
@@ -23031,7 +23031,7 @@ namespace oomph
         {
           // The index of the next bottom-left face element
           unsigned index = 0;
-          Vector<double> current_bottom_left(2);
+          FixedSizeVector<double, 2> current_bottom_left;
           for (unsigned e = 0; e < n_face_ele; e++)
           {
             // Get the first not done face element
@@ -35422,7 +35422,7 @@ namespace oomph
       double zeta_left = vector_bnd_vertices[inod][0];
 
       // Get position vector of "left" node
-      Vector<double> R_left(2);
+      FixedSizeVector<double, 2> R_left;
       for (unsigned i = 0; i < 2; i++)
       {
         R_left[i] = vector_bnd_vertices[inod][i + 1];
@@ -35432,7 +35432,7 @@ namespace oomph
       double zeta_right = vector_bnd_vertices[inod + 1][0];
 
       // Get position vector of "right" node
-      Vector<double> R_right(2);
+      FixedSizeVector<double, 2> R_right;
       for (unsigned i = 0; i < 2; i++)
       {
         R_right[i] = vector_bnd_vertices[inod + 1][i + 1];
@@ -35449,7 +35449,7 @@ namespace oomph
 
       // Get the position vector of the midpoint on the straight
       // line connecting "left" and "right" node
-      Vector<double> R_mid_polygon(2);
+      FixedSizeVector<double, 2> R_mid_polygon;
       for (unsigned i = 0; i < 2; i++)
       {
         R_mid_polygon[i] = 0.5 * (R_right[i] + R_left[i]);
@@ -35563,7 +35563,7 @@ namespace oomph
       double zeta_left = vector_bnd_vertices[inod][0];
 
       // Get position vector of "left" node
-      Vector<double> R_left(2);
+      FixedSizeVector<double, 2> R_left;
       for (unsigned i = 0; i < 2; i++)
       {
         R_left[i] = vector_bnd_vertices[inod][i + 1];
@@ -35573,7 +35573,7 @@ namespace oomph
       double zeta_right = vector_bnd_vertices[inod + 1][0];
 
       // Get position vector of "right" node
-      Vector<double> R_right(2);
+      FixedSizeVector<double, 2> R_right;
       for (unsigned i = 0; i < 2; i++)
       {
         R_right[i] = vector_bnd_vertices[inod + 1][i + 1];
@@ -36523,7 +36523,7 @@ namespace oomph
 
               for (unsigned p = 0; p < n_polyline; p++)
               {
-                Vector<double> poly_ave(2, 0.0);
+                FixedSizeVector<double, 2> poly_ave(0.0);
                 // How many vertices are there in the segment
                 unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
                 for (unsigned v = 0; v < n_vertex; v++)
@@ -37605,7 +37605,7 @@ namespace oomph
     // Loop over the regions to get their coords
     for (unsigned iregion = 0; iregion < nregions; iregion++)
     {
-      Vector<double> tmp_region_coordinates(2);
+      FixedSizeVector<double, 2> tmp_region_coordinates;
       // Read the regions coordinates
       poly_file >> dummy_region;
       poly_file >> tmp_region_coordinates[0];

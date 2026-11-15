@@ -108,15 +108,16 @@ namespace oomph
   {
   public:
     /// Function pointer to body force function fct(t,x,f(x))
-    /// x is a Vector!
-    typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-                                               const Vector<double>& x,
-                                               Vector<double>& body_force);
+    /// x is a FixedSizeVector!
+    typedef void (*NavierStokesBodyForceFctPt)(
+      const double& time,
+      const FixedSizeVector<double, 2>& x,
+      FixedSizeVector<double, 2>& body_force);
 
     /// Function pointer to source function fct(t,x)
-    /// x is a Vector!
-    typedef double (*NavierStokesSourceFctPt)(const double& time,
-                                              const Vector<double>& x);
+    /// x is a FixedSizeVector!
+    typedef double (*NavierStokesSourceFctPt)(
+      const double& time, const FixedSizeVector<double, 2>& x);
 
   private:
     /// Static "magic" number that indicates that the pressure is
@@ -132,7 +133,7 @@ namespace oomph
     static double Default_Physical_Ratio_Value;
 
     /// Static default value for the gravity vector
-    static Vector<double> Default_Gravity_vector;
+    static FixedSizeVector<double, 2> Default_Gravity_vector;
 
   protected:
     // Physical constants
@@ -160,8 +161,8 @@ namespace oomph
     /// (= Bond number / Capillary number)
     double* ReInvFr_pt;
 
-    /// Pointer to global gravity Vector
-    Vector<double>* G_pt;
+    /// Pointer to global gravity vector
+    FixedSizeVector<double, 2>* G_pt;
 
     /// Pointer to body force function
     NavierStokesBodyForceFctPt Body_force_fct_pt;
@@ -205,8 +206,8 @@ namespace oomph
 
     /// Calculate the body force at a given time and Eulerian position
     void get_body_force(double time,
-                        const Vector<double>& x,
-                        Vector<double>& result)
+                        const FixedSizeVector<double, 2>& x,
+                        FixedSizeVector<double, 2>& result)
     {
       // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
@@ -226,7 +227,7 @@ namespace oomph
 
     /// Calculate the source fct at given time and
     /// Eulerian position
-    double get_source_fct(double time, const Vector<double>& x)
+    double get_source_fct(double time, const FixedSizeVector<double, 2>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)
@@ -258,7 +259,7 @@ namespace oomph
     // N.B. This needs to be public so that the intel compiler gets things
     // correct somehow the access function messes things up when going to
     // refineable navier--stokes
-    static Vector<double> Gamma;
+    static FixedSizeVector<double, 2> Gamma;
 
     // Access functions for the physical constants
 
@@ -337,13 +338,13 @@ namespace oomph
     }
 
     /// Vector of gravitational components
-    const Vector<double>& g() const
+    const FixedSizeVector<double, 2>& g() const
     {
       return *G_pt;
     }
 
     /// Pointer to Vector of gravitational components
-    Vector<double>*& g_pt()
+    FixedSizeVector<double, 2>*& g_pt()
     {
       return G_pt;
     }
@@ -455,17 +456,17 @@ namespace oomph
 
     /// Strain-rate tensor: Now returns polar strain
     void strain_rate(const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, 2, 2>& strain_rate) const;
 
     /// Function to return polar strain multiplied by r
     void strain_rate_by_r(const Vector<double>& s,
-                          DenseMatrix<double>& strain_rate) const;
+                          FixedSizeMatrix<double, 2, 2>& strain_rate) const;
 
     /// Compute traction (on the viscous scale) at local coordinate s
     /// for outer unit normal N
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
+                      const FixedSizeVector<double, 2>& N,
+                      FixedSizeVector<double, 2>& traction);
 
     /// The potential loading on an external SolidElement is always
     /// provided by the traction function
@@ -475,7 +476,18 @@ namespace oomph
                   const Vector<double>& N,
                   Vector<double>& load)
     {
-      get_traction(s, N, load);
+      FixedSizeVector<double, 2> N_fixed;
+      for (unsigned i = 0; i < 2; i++)
+      {
+        N_fixed[i] = N[i];
+      }
+      FixedSizeVector<double, 2> load_fixed;
+      get_traction(s, N_fixed, load_fixed);
+      const unsigned n_load = load.size();
+      for (unsigned i = 0; i < n_load; i++)
+      {
+        load[i] = load_fixed[i];
+      }
     }
 
 
@@ -660,7 +672,7 @@ namespace oomph
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_pnst(const Vector<double>& s,
-                             Vector<double>& veloc) const
+                             FixedSizeVector<double, 2>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();

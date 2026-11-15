@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
  double Ca;  
 
  /// Direction of gravity
- Vector<double> G(2);
+ FixedSizeVector<double, 2> G;
 
  /// Pointer to film thickness at outflow on the lower wall
  double* H_lo_pt;

@@ -100,7 +100,7 @@ namespace oomph
 
     // Calculate local values of lagrangian position and
     // the derivative of global position wrt lagrangian coordinates
-    DenseMatrix<double> interpolated_A(2, 3);
+    FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
 
     // Initialise to zero
     for (unsigned i = 0; i < n_dim; i++)
@@ -182,23 +182,11 @@ namespace oomph
 
     // Calculate local values of lagrangian position and
     // the derivative of global position wrt lagrangian coordinates
-    Vector<double> interpolated_xi(2, 0.0), interpolated_x(3, 0.0);
-    Vector<double> accel(3, 0.0);
-    DenseMatrix<double> interpolated_A(2, 3);
-    DenseMatrix<double> interpolated_dAdxi(3);
-
-    // Initialise to zero
-    for (unsigned i = 0; i < n_dim; i++)
-    {
-      for (unsigned j = 0; j < n_lagrangian; j++)
-      {
-        interpolated_A(j, i) = 0.0;
-      }
-      for (unsigned j = 0; j < 3; j++)
-      {
-        interpolated_dAdxi(i, j) = 0.0;
-      }
-    }
+    Vector<double> interpolated_xi(2, 0.0);
+    FixedSizeVector<double, 3> interpolated_x(0.0);
+    FixedSizeVector<double, 3> accel(0.0);
+    FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
+    FixedSizeMatrix<double, 3, 3> interpolated_dAdxi(0.0);
 
     // Calculate displacements and derivatives
     for (unsigned l = 0; l < n_node; l++)
@@ -289,7 +277,7 @@ namespace oomph
     double sqrt_Adet = sqrt(Adet);
 
     // Calculate the normal Vectors
-    Vector<double> n(3), N(3);
+    FixedSizeVector<double, 3> n, N;
     n[0] = (interpolated_a(0, 1) * interpolated_a(1, 2) -
             interpolated_a(0, 2) * interpolated_a(1, 1)) /
            sqrt_adet;
@@ -408,22 +396,9 @@ namespace oomph
       // Calculate local values of lagrangian position and
       // the derivative of global position wrt lagrangian coordinates
       Vector<double> interpolated_xi(2, 0.0), interpolated_x(3, 0.0);
-      Vector<double> accel(3, 0.0);
-      DenseMatrix<double> interpolated_A(2, 3);
-      DenseMatrix<double> interpolated_dAdxi(3);
-
-      // Initialise to zero
-      for (unsigned i = 0; i < n_dim; i++)
-      {
-        for (unsigned j = 0; j < n_lagrangian; j++)
-        {
-          interpolated_A(j, i) = 0.0;
-        }
-        for (unsigned j = 0; j < 3; j++)
-        {
-          interpolated_dAdxi(i, j) = 0.0;
-        }
-      }
+      FixedSizeVector<double, 3> accel(0.0);
+      FixedSizeMatrix<double, 2, 3> interpolated_A(0.0);
+      FixedSizeMatrix<double, 3, 3> interpolated_dAdxi(0.0);
 
       // Calculate displacements and derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -953,7 +928,7 @@ namespace oomph
       double sqrt_Adet = sqrt(Adet);
 
       // Calculate the normal Vectors
-      Vector<double> n(3), N(3);
+      FixedSizeVector<double, 3> n, N;
       n[0] = (interpolated_a(0, 1) * interpolated_a(1, 2) -
               interpolated_a(0, 2) * interpolated_a(1, 1)) /
              sqrt_adet;

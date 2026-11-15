@@ -266,7 +266,9 @@ public:
                               Vector<double>& wind) const
  {
    //The wind function is simply the velocity at the points
-   this->interpolated_u_nst(s,wind);
+   FixedSizeVector<double, DIM> u_nst;
+   this->interpolated_u_nst(s,u_nst);
+   for(unsigned i=0;i<DIM;i++) {wind[i] = u_nst[i];}
  }
 
 
@@ -979,7 +981,9 @@ public:
                               Vector<double>& wind) const
  {
    //The wind function is simply the velocity at the points
-   this->interpolated_u_nst(s,wind);
+   FixedSizeVector<double, DIM> u_nst;
+   this->interpolated_u_nst(s,u_nst);
+   for(unsigned i=0;i<DIM;i++) {wind[i] = u_nst[i];}
  }
 
 

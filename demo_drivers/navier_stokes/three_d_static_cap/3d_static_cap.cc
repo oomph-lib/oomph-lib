@@ -59,7 +59,7 @@ namespace Global_Physical_Variables
  //Inverse Froude number
  double ReInvFr = 0.0;
 
- Vector<double> G(3); 
+ FixedSizeVector<double, 3> G; 
 
  double Angle;
 

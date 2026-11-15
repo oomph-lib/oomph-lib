@@ -27,7 +27,7 @@
  private:
 
   /// dimension
-  unsigned el_dim;
+  unsigned El_dim;
 
   /// Storage for elemental error estimate -- used for post-processing
   double Error;
@@ -52,7 +52,7 @@
   /// previous history values to be used for extrapolation of strain rate
   MyTaylorHoodElement()
    {
-    el_dim=2;
+    El_dim=2;
     Error=0.0;
     Nprev_for_extrapolation_of_strain_rate=4;
     Use_fixed_point_for_strain_rate=false;
@@ -67,8 +67,8 @@
       Fixed_point_iteration_guess_for_strain_rate[val].resize(n_intpt);
       for (unsigned ipt=0;ipt<n_intpt;ipt++)
        {
-        Fixed_point_iteration_guess_for_strain_rate[val][ipt].resize(el_dim,
-                                                                     el_dim,
+        Fixed_point_iteration_guess_for_strain_rate[val][ipt].resize(El_dim,
+                                                                     El_dim,
                                                                      0.0);
        }
      }
@@ -116,11 +116,11 @@
   /// Return latest guess (obtained via fixed point iteration)
   /// for strain rate at integration point ipt
   void latest_fixed_point_iteration_guess_for_strain_rate(
-   const unsigned& ipt, DenseMatrix<double>& strainrate) const
+   const unsigned& ipt, FixedSizeMatrix<double, 2, 2>& strainrate) const
    {
-    for (unsigned i=0;i<el_dim;i++)
+    for (unsigned i=0;i<El_dim;i++)
      {
-      for (unsigned j=0;j<el_dim;j++)
+      for (unsigned j=0;j<El_dim;j++)
        {
         strainrate(i,j)=
          Fixed_point_iteration_guess_for_strain_rate[Aitken_index-1][ipt](i,j);
@@ -133,16 +133,16 @@
   /// for strain rate from current actual strain rate
   void update_latest_fixed_point_iteration_guess_for_strain_rate()
    {
-    Vector<double> s(el_dim);
-    DenseMatrix<double> strain_rate(el_dim,el_dim,0.0);
+    Vector<double> s(El_dim);
+    FixedSizeMatrix<double, 2, 2> strain_rate(0.0);
     unsigned n_intpt = integral_pt()->nweight();
     for (unsigned ipt=0;ipt<n_intpt;ipt++)
      {
-      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      for(unsigned i=0;i<El_dim;i++) s[i] = integral_pt()->knot(ipt,i);
       this->strain_rate(s,strain_rate);
-      for (unsigned i=0;i<el_dim;i++)
+      for (unsigned i=0;i<El_dim;i++)
        {
-        for (unsigned j=0;j<el_dim;j++)
+        for (unsigned j=0;j<El_dim;j++)
          {
           Fixed_point_iteration_guess_for_strain_rate[Aitken_index][ipt](i,j)
            =strain_rate(i,j);
@@ -155,9 +155,9 @@
       Aitken_index = 0;
       for (unsigned ipt=0;ipt<n_intpt;ipt++)
        {
-        for (unsigned i=0;i<el_dim;i++)
+        for (unsigned i=0;i<El_dim;i++)
          {
-          for (unsigned j=0;j<el_dim;j++)
+          for (unsigned j=0;j<El_dim;j++)
            {
             double v0 = 
              Fixed_point_iteration_guess_for_strain_rate[0][ipt](i,j);
@@ -195,7 +195,7 @@
   /// from history values evaluated at integration point ipt. Overloaded
   /// version from base class.
   void extrapolated_strain_rate(const unsigned& ipt,
-                                DenseMatrix<double>& strainrate) const
+                                FixedSizeMatrix<double, 2, 2>& strainrate) const
    {
     if (Use_fixed_point_for_strain_rate)
      {
@@ -203,8 +203,8 @@
      }
     else
      {
-      Vector<double> s(el_dim);
-      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      Vector<double> s(El_dim);
+      for(unsigned i=0;i<El_dim;i++) s[i] = integral_pt()->knot(ipt,i);
       extrapolated_strain_rate(s,strainrate);
      }
    }
@@ -215,30 +215,13 @@
   /// from history values evaluated at local coordinate s. Overloaded
   /// version from base class.
   void extrapolated_strain_rate(const Vector<double>& s, 
-                                DenseMatrix<double>& strainrate) const
+                                FixedSizeMatrix<double, 2, 2>& strainrate) const
    {
-
-#ifdef PARANOID
-    if ((strainrate.ncol()!=2)||(strainrate.nrow()!=2))
-     {
-      std::ostringstream error_message;
-      error_message  << "The strain rate has incorrect dimensions " 
-                     << strainrate.ncol() << " x " 
-                     << strainrate.nrow() << " Not 2" << std::endl;
-      
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    
-    
     // Get required previous strain rates
-    Vector<DenseMatrix<double> > 
+    Vector<FixedSizeMatrix<double, 2, 2> > 
      previous_strain_rate(Nprev_for_extrapolation_of_strain_rate);
     for (unsigned it=0;it<Nprev_for_extrapolation_of_strain_rate;it++)
      {
-      previous_strain_rate[it].resize(el_dim,el_dim);
       strain_rate(it+1,s,previous_strain_rate[it]);
      }
     
@@ -277,9 +260,9 @@
      double dt_minus_1=time_stepper_pt->time_pt()->dt(1);
      
      // Extrapolate
-     for (unsigned i=0;i<el_dim;i++)
+     for (unsigned i=0;i<El_dim;i++)
       {
-       for (unsigned j=0;j<el_dim;j++)
+       for (unsigned j=0;j<El_dim;j++)
         {
          double u_minus_one=previous_strain_rate[0](i,j);
          double u_minus_two=previous_strain_rate[1](i,j);
@@ -299,9 +282,9 @@
     case 4:
     {
      // Extrapolate
-     for (unsigned i=0;i<el_dim;i++)
+     for (unsigned i=0;i<El_dim;i++)
       {
-       for (unsigned j=0;j<el_dim;j++)
+       for (unsigned j=0;j<El_dim;j++)
         {
          double u_minus_one  =previous_strain_rate[0](i,j);
          double u_minus_two  =previous_strain_rate[1](i,j);
@@ -494,13 +477,13 @@ dt_minus_3*dt_minus_3);
    {
     
     // Vector of local coordinates
-    Vector<double> s(el_dim);
+    Vector<double> s(El_dim);
     
     // Acceleration
-    Vector<double> dudt(el_dim);
+    Vector<double> dudt(El_dim);
     
     // Mesh velocity
-    Vector<double> mesh_veloc(el_dim,0.0);
+    Vector<double> mesh_veloc(El_dim,0.0);
    
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -513,7 +496,7 @@ dt_minus_3*dt_minus_3);
    
     //Set up memory for the shape functions
     Shape psif(n_node);
-    DShape dpsifdx(n_node,el_dim);
+    DShape dpsifdx(n_node,El_dim);
    
     // Loop over plot points
     unsigned num_plot_points=nplot_points(nplot);
@@ -527,19 +510,19 @@ dt_minus_3*dt_minus_3);
       dshape_eulerian(s,psif,dpsifdx);
      
       //Allocate storage
-      Vector<double> mesh_veloc(el_dim,0.0);
-      Vector<double> int_x(el_dim,0.0);
-      Vector<double> dudt(el_dim,0.0);
-      Vector<double> dudt_ALE(el_dim,0.0);
-      DenseMatrix<double> interpolated_dudx(el_dim,el_dim,0.0);
+      Vector<double> mesh_veloc(El_dim,0.0);
+      Vector<double> int_x(El_dim,0.0);
+      Vector<double> dudt(El_dim,0.0);
+      Vector<double> dudt_ALE(El_dim,0.0);
+      DenseMatrix<double> interpolated_dudx(El_dim,El_dim,0.0);
      
       // //Initialise everything to zero
-      // for(unsigned i=0;i<el_dim;i++)
+      // for(unsigned i=0;i<El_dim;i++)
       //  {
       //   mesh_veloc[i]=0.0;
       //   dudt[i]=0.0;
       //   dudt_ALE[i]=0.0;
-      //   for(unsigned j=0;j<el_dim;j++)
+      //   for(unsigned j=0;j<El_dim;j++)
       //    {
       //     interpolated_dudx(i,j) = 0.0;
       //    }
@@ -550,7 +533,7 @@ dt_minus_3*dt_minus_3);
       //Calculate velocities and derivatives
 
       //Loop over directions
-      for(unsigned i=0;i<el_dim;i++)
+      for(unsigned i=0;i<El_dim;i++)
        {
         //Get the index at which velocity i is stored
         unsigned u_nodal_index = u_index_nst(i);
@@ -563,7 +546,7 @@ dt_minus_3*dt_minus_3);
        }
      
       //Loop over directions
-      for(unsigned i=0;i<el_dim;i++)
+      for(unsigned i=0;i<El_dim;i++)
        {
         //Get the index at which velocity i is stored
         unsigned u_nodal_index = u_index_nst(i);
@@ -571,7 +554,7 @@ dt_minus_3*dt_minus_3);
         for(unsigned l=0;l<n_node;l++) 
          {
           //Loop over derivative directions for velocity gradients
-          for(unsigned j=0;j<el_dim;j++)
+          for(unsigned j=0;j<El_dim;j++)
            {                               
             interpolated_dudx(i,j) += nodal_value(l,u_nodal_index)*
              dpsifdx(l,j);
@@ -580,10 +563,10 @@ dt_minus_3*dt_minus_3);
        }
      
       // Get dudt in ALE form (incl mesh veloc)
-      for(unsigned i=0;i<el_dim;i++)
+      for(unsigned i=0;i<El_dim;i++)
        {
         dudt_ALE[i]=dudt[i];
-        for (unsigned k=0;k<el_dim;k++)
+        for (unsigned k=0;k<El_dim;k++)
          {
           dudt_ALE[i]-=mesh_veloc[k]*interpolated_dudx(i,k);
          }
@@ -591,11 +574,11 @@ dt_minus_3*dt_minus_3);
      
 
       // Actual rate of strain
-      DenseMatrix<double> rate_of_strain(el_dim,el_dim,0.0);
+      FixedSizeMatrix<double, 2, 2> rate_of_strain(0.0);
       this->strain_rate(s,rate_of_strain);
 
       // Extrapolated  (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> rate_of_strain_extrapol(rate_of_strain);
+      FixedSizeMatrix<double, 2, 2> rate_of_strain_extrapol(rate_of_strain);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,rate_of_strain_extrapol);
@@ -614,12 +597,12 @@ dt_minus_3*dt_minus_3);
        ->viscosity(second_invariant_strain_extrapol);
       
       // Stress
-      DenseMatrix<double> stress(el_dim,el_dim,0.0);
+      DenseMatrix<double> stress(El_dim,El_dim,0.0);
 
       // Calculate the stress
-      for(unsigned i=0;i<el_dim;i++)
+      for(unsigned i=0;i<El_dim;i++)
        {
-        for(unsigned j=0;j<el_dim;j++)
+        for(unsigned j=0;j<El_dim;j++)
          {
           stress(i,j)=viscosity*rate_of_strain(i,j);
          }
@@ -639,13 +622,13 @@ dt_minus_3*dt_minus_3);
        }
       
       // Coordinates
-      for(unsigned i=0;i<el_dim;i++) 
+      for(unsigned i=0;i<El_dim;i++) 
        {
         outfile << interpolated_x(s,i) << " ";
        }
      
       // Velocities
-      for(unsigned i=0;i<el_dim;i++) 
+      for(unsigned i=0;i<El_dim;i++) 
        {
         outfile << interpolated_u_nst(s,i) << " ";
        }
@@ -654,13 +637,13 @@ dt_minus_3*dt_minus_3);
       outfile << interpolated_p_nst(s)  << " ";
 
       // Accelerations
-      for(unsigned i=0;i<el_dim;i++) 
+      for(unsigned i=0;i<El_dim;i++) 
        {
         outfile << dudt_ALE[i] << " ";
        }
      
       // Mesh velocity
-      //for(unsigned i=0;i<el_dim;i++) 
+      //for(unsigned i=0;i<El_dim;i++) 
       // {
       //  outfile << mesh_veloc[i] << " ";
       // }
@@ -669,7 +652,7 @@ dt_minus_3*dt_minus_3);
       //unsigned n_prev=node_pt(0)->position_time_stepper_pt()->ntstorage();
       //for (unsigned t=1;t<n_prev-2;t++)
       // {
-      //  for(unsigned i=0;i<el_dim;i++) 
+      //  for(unsigned i=0;i<El_dim;i++) 
       //   {
       //    outfile << interpolated_x(t,s,i) << " ";
       //   }
@@ -679,7 +662,7 @@ dt_minus_3*dt_minus_3);
       //n_prev=node_pt(0)->time_stepper_pt()->ntstorage();
       //for (unsigned t=1;t<n_prev-2;t++)
       // {
-      //  for(unsigned i=0;i<el_dim;i++) 
+      //  for(unsigned i=0;i<El_dim;i++) 
       //   {
       //    outfile << interpolated_u_nst(t,s,i) << " ";
       //   }
@@ -742,7 +725,7 @@ dt_minus_3*dt_minus_3);
   void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
    {
 #ifdef PARANOID
-    unsigned num_entries=el_dim+(el_dim*(el_dim-1))/2;
+    unsigned num_entries=El_dim+(El_dim*(El_dim-1))/2;
     if (flux.size() < num_entries)
      {
       std::ostringstream error_message;
@@ -756,8 +739,8 @@ dt_minus_3*dt_minus_3);
 #endif
     
     // Get strain rate matrix
-    DenseMatrix<double> strainrate(el_dim);
-    DenseMatrix<double> stress(el_dim,el_dim,0.0);
+    FixedSizeMatrix<double, 2, 2> strainrate;
+    FixedSizeMatrix<double, 2, 2> stress(0.0);
 
     // get strainrate
     this->strain_rate(s,strainrate);
@@ -769,9 +752,9 @@ dt_minus_3*dt_minus_3);
      ->viscosity(second_invariant_strain);
 
     // Calculate the stress
-    for(unsigned i=0;i<el_dim;i++)
+    for(unsigned i=0;i<El_dim;i++)
      {
-      for(unsigned j=0;j<el_dim;j++)
+      for(unsigned j=0;j<El_dim;j++)
        {
         stress(i,j)=viscosity*strainrate(i,j);
        }
@@ -805,7 +788,7 @@ dt_minus_3*dt_minus_3);
     if (!add_yield_bias) yield=0.0;
 
     // Start with diagonal terms
-    for(unsigned i=0;i<el_dim;i++)
+    for(unsigned i=0;i<El_dim;i++)
      {
       // Force more refinement at yield surface by adding yield value
       // hierher: This does the right thing but triangle can't handle the refinement
@@ -816,9 +799,9 @@ dt_minus_3*dt_minus_3);
      }
     
     //Off diagonals row by row
-    for(unsigned i=0;i<el_dim;i++)
+    for(unsigned i=0;i<El_dim;i++)
      {
-      for(unsigned j=i+1;j<el_dim;j++)
+      for(unsigned j=i+1;j<El_dim;j++)
        {
         // force more refinement at yield surface by adding yield value
         flux[icount]=strainrate(i,j)+yield;
@@ -846,13 +829,13 @@ dt_minus_3*dt_minus_3);
     unsigned n_intpt = integral_pt()->nweight();
     
     //Set the Vector to hold local coordinates
-    Vector<double> s(el_dim);
+    Vector<double> s(El_dim);
 
     //Loop over the integration points
     for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {
       //Assign values of s
-      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      for(unsigned i=0;i<El_dim;i++) s[i] = integral_pt()->knot(ipt,i);
       
       //Get the integral weight
       double w = integral_pt()->weight(ipt);
@@ -864,13 +847,13 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> strainrate(el_dim,el_dim,0.0);
+      FixedSizeMatrix<double, 2, 2> strainrate(0.0);
       this->strain_rate(s,strainrate);
       double invariant=SecondInvariantHelper::second_invariant(strainrate);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> extrapolated_strainrate(strainrate);
+      FixedSizeMatrix<double, 2, 2> extrapolated_strainrate(strainrate);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,extrapolated_strainrate);
@@ -910,13 +893,13 @@ dt_minus_3*dt_minus_3);
     unsigned n_intpt = integral_pt()->nweight();
     
     //Set the Vector to hold local coordinates
-    Vector<double> s(el_dim);
+    Vector<double> s(El_dim);
 
     //Loop over the integration points
     for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {
       //Assign values of s
-      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      for(unsigned i=0;i<El_dim;i++) s[i] = integral_pt()->knot(ipt,i);
       
       //Get the integral weight
       double w = integral_pt()->weight(ipt);
@@ -928,7 +911,7 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> strainrate(el_dim,el_dim,0.0);
+      FixedSizeMatrix<double, 2, 2> strainrate(0.0);
       this->strain_rate(s,strainrate);
       double invariant=SecondInvariantHelper::second_invariant(strainrate);
 
@@ -936,7 +919,7 @@ dt_minus_3*dt_minus_3);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> extrapolated_strainrate(strainrate);
+      FixedSizeMatrix<double, 2, 2> extrapolated_strainrate(strainrate);
       if (Use_extrapolated_strainrate_to_compute_second_invariant)
        {
         this->extrapolated_strain_rate(s,extrapolated_strainrate);
@@ -997,14 +980,14 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       // Invariant of actual strain rate tensor
-      DenseMatrix<double> current_strainrate(el_dim,el_dim,0.0);
+      FixedSizeMatrix<double, 2, 2> current_strainrate(0.0);
       this->strain_rate(s,current_strainrate);
       double invariant=
        SecondInvariantHelper::second_invariant(current_strainrate);
 
       // Invariant of extrapolated strain rate tensor
       // (or recycle  actual one if there's no extrapol)
-      DenseMatrix<double> latest_guess_strainrate(el_dim,el_dim,0.0);
+      FixedSizeMatrix<double, 2, 2> latest_guess_strainrate(0.0);
       latest_fixed_point_iteration_guess_for_strain_rate(
        ipt, latest_guess_strainrate);
       
@@ -1037,24 +1020,24 @@ dt_minus_3*dt_minus_3);
     unsigned n_node = nnode();
     
     //Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[el_dim+1];
-    for(unsigned i=0;i<el_dim;i++) {u_nodal_index[i] = u_index_nst(i);}
+    unsigned u_nodal_index[El_dim+1];
+    for(unsigned i=0;i<El_dim;i++) {u_nodal_index[i] = u_index_nst(i);}
     
     //Set up memory for the velocity shape fcts
     Shape psif(n_node);
-    DShape dpsidx(n_node,el_dim);
+    DShape dpsidx(n_node,El_dim);
     
     //Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
     
     //Set the Vector to hold local coordinates
-    Vector<double> s(el_dim);
+    Vector<double> s(El_dim);
     
     //Loop over the integration points
     for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {
       //Assign values of s
-      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      for(unsigned i=0;i<El_dim;i++) s[i] = integral_pt()->knot(ipt,i);
       
       //Get the integral weight
       double w = integral_pt()->weight(ipt);
@@ -1067,13 +1050,13 @@ dt_minus_3*dt_minus_3);
       double W = w*J;
       
       //Calculate velocities
-      Vector<double> interpolated_u(el_dim,0.0);
+      Vector<double> interpolated_u(El_dim,0.0);
       
       // Loop over nodes
       for(unsigned l=0;l<n_node;l++)
        {
         //Loop over directions
-        for(unsigned i=0;i<el_dim;i++)
+        for(unsigned i=0;i<El_dim;i++)
          {
           //Get the nodal value
           double u_value = raw_nodal_value(l,u_nodal_index[i]);
@@ -1082,7 +1065,7 @@ dt_minus_3*dt_minus_3);
        }
 
       //Assemble square of L2 norm
-      for(unsigned i=0;i<el_dim;i++)
+      for(unsigned i=0;i<El_dim;i++)
        {
         sum+=interpolated_u[i]*interpolated_u[i]*W;
        }
@@ -1104,10 +1087,10 @@ dt_minus_3*dt_minus_3);
   /*   /// get the viscosity ratio */
   /*   // hierher not used double visc_ratio=this->viscosity_ratio(); */
 
-  /*   DenseMatrix<double> strainrate(el_dim,el_dim,0.0); */
+  /*   DenseMatrix<double> strainrate(El_dim,El_dim,0.0); */
   /*   this->strain_rate(s,strainrate); */
 
-  /*   DenseMatrix<double> extrapolated_strainrate(el_dim,el_dim,0.0); */
+  /*   DenseMatrix<double> extrapolated_strainrate(El_dim,El_dim,0.0); */
     
   /*   double second_invariant=0.0; */
     
@@ -1126,13 +1109,13 @@ dt_minus_3*dt_minus_3);
   /*   double viscosity=Constitutive_eqn_pt->viscosity(second_invariant); */
 
   /*   // Output the components of the position */
-  /*   for(unsigned i=0;i<el_dim;i++) */
+  /*   for(unsigned i=0;i<El_dim;i++) */
   /*    { */
   /*     data.push_back(interpolated_x(s,i)); // 1 2 */
   /*    } */
     
   /*   // Output the components of the FE representation of u at s */
-  /*   for(unsigned i=0;i<el_dim;i++) */
+  /*   for(unsigned i=0;i<El_dim;i++) */
   /*    { */
   /*     data.push_back(interpolated_u_nst(s,i)); // 3 4 */
   /*    } */

@@ -83,7 +83,7 @@ namespace oomph
       double W = w * J;
 
       // initialise storage for d2u_interpolated
-      Vector<double> d2u_interpolated(DIM);
+      FixedSizeVector<double, DIM> d2u_interpolated(0.0);
       for (unsigned i = 0; i < DIM; i++)
       {
         d2u_interpolated[i] = 0.0;

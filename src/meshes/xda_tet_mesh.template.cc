@@ -202,7 +202,7 @@ namespace oomph
       // conventions in '.xda' mesh files so that orientation of the
       // faces is always the same (required for computation of
       // outer unit normals
-      Vector<unsigned> side_node(6);
+      FixedSizeVector<unsigned, 6> side_node;
       switch (side_nmbr)
       {
         case 0:
@@ -465,7 +465,7 @@ namespace oomph
       Vector<double> zeta(2);
 
       // Unit vector connecting lower left and upper right nodes
-      Vector<double> b0(3);
+      FixedSizeVector<double, 3> b0(0.0);
       b0[0] = upper_right_node_pt->x(0) - lower_left_node_pt->x(0);
       b0[1] = upper_right_node_pt->x(1) - lower_left_node_pt->x(1);
       b0[2] = upper_right_node_pt->x(2) - lower_left_node_pt->x(2);
@@ -527,7 +527,7 @@ namespace oomph
 #endif
 
       // Cross-product to get second in-plane vector, normal to b0
-      Vector<double> b1(3);
+      FixedSizeVector<double, 3> b1;
       b1[0] = b0[1] * normal[2] - b0[2] * normal[1];
       b1[1] = b0[2] * normal[0] - b0[0] * normal[2];
       b1[2] = b0[0] * normal[1] - b0[1] * normal[0];
@@ -539,7 +539,7 @@ namespace oomph
         Node* nod_pt = this->boundary_node_pt(b, j);
 
         // Difference vector to lower left corner
-        Vector<double> delta(3);
+        FixedSizeVector<double, 3> delta;
         delta[0] = nod_pt->x(0) - lower_left_node_pt->x(0);
         delta[1] = nod_pt->x(1) - lower_left_node_pt->x(1);
         delta[2] = nod_pt->x(2) - lower_left_node_pt->x(2);

@@ -111,7 +111,7 @@ namespace oomph
       Vector<double> dcdt(NREAGENT, 0.0);
       Vector<double> interpolated_x(DIM, 0.0);
       DenseMatrix<double> interpolated_dcdx(NREAGENT, DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
 
       // Calculate function value and derivatives:

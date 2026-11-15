@@ -68,7 +68,7 @@ namespace Global_Physical_Variables
  double Lambda = 1.414;
 
  /// Gravity vector
- Vector<double> Direction_of_gravity(2);
+ FixedSizeVector<double, 2> Direction_of_gravity;
   
 } // end_of_namespace
 

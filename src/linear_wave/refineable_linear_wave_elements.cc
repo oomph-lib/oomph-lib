@@ -56,7 +56,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Set the Vector to hold local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Integers used to store the local equation number and local unknown
     // indices for the residuals and jacobians
@@ -87,7 +87,7 @@ namespace oomph
 
       // This needs to be a Vector to be ANSI C++, initialise to zero
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dudx(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------

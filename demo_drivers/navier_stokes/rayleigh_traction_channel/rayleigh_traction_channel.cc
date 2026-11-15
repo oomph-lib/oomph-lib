@@ -90,9 +90,9 @@ namespace ExactSoln
 
  /// Traction required at the top boundary
  void prescribed_traction(const double& t,
-                          const Vector<double>& x,
-                          const Vector<double> &n,
-                          Vector<double>& traction)
+                          const FixedSizeVector<double, 2>& x,
+                          const FixedSizeVector<double, 2> &n,
+                          FixedSizeVector<double, 2>& traction)
  {
   double y=x[1];
   // I=sqrt(-1)
@@ -110,7 +110,6 @@ namespace ExactSoln
    *I*lambda/(exp(I*lambda)-exp(-I*lambda)) );
    
   //Extract real part and stick into vector
-  traction.resize(2);
   traction[0]=real(sol);
   traction[1]=0.0;
  } 

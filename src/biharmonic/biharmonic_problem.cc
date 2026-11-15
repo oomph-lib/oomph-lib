@@ -70,7 +70,7 @@ namespace oomph
 
     // node position along edge b in macro element boundary representation
     // [-1,1]
-    Vector<double> s(1);
+    FixedSizeVector<double, 1> s;
 
     // Set the edge sign
     int edge_sign = 0;
@@ -155,8 +155,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // vectors for dx_i/ds_n and dx_i/ds_t
-        Vector<double> dxds_n(2);
-        Vector<double> dxds_t(2);
+        FixedSizeVector<double, 2> dxds_n;
+        FixedSizeVector<double, 2> dxds_t;
         dxds_n[0] = Bulk_element_mesh_pt->boundary_node_pt(b, n)->x_gen(
           1 + s_fixed_index, 0);
         dxds_n[1] = Bulk_element_mesh_pt->boundary_node_pt(b, n)->x_gen(
@@ -167,7 +167,7 @@ namespace oomph
           2 - s_fixed_index, 1);
 
         // vector for d2xi/ds_n ds_t
-        Vector<double> d2xds_nds_t(2);
+        FixedSizeVector<double, 2> d2xds_nds_t;
         d2xds_nds_t[0] =
           Bulk_element_mesh_pt->boundary_node_pt(b, n)->x_gen(3, 0);
         d2xds_nds_t[1] =
@@ -398,15 +398,15 @@ namespace oomph
     unsigned k_tangential = 2 - S_fixed_index;
 
     // vectors for dx_i/ds_n and dx_i/ds_t
-    Vector<double> dxds_n(2);
-    Vector<double> dxds_t(2);
+    FixedSizeVector<double, 2> dxds_n;
+    FixedSizeVector<double, 2> dxds_t;
     dxds_n[0] = this->node_pt(0)->x_gen(1 + S_fixed_index, 0);
     dxds_n[1] = this->node_pt(0)->x_gen(1 + S_fixed_index, 1);
     dxds_t[0] = this->node_pt(0)->x_gen(2 - S_fixed_index, 0);
     dxds_t[1] = this->node_pt(0)->x_gen(2 - S_fixed_index, 1);
 
     // vector for d2xi/ds_n ds_t
-    Vector<double> d2xds_nds_t(2);
+    FixedSizeVector<double, 2> d2xds_nds_t;
     d2xds_nds_t[0] = this->node_pt(0)->x_gen(3, 0);
     d2xds_nds_t[1] = this->node_pt(0)->x_gen(3, 1);
 
@@ -515,8 +515,8 @@ namespace oomph
     Hijacked<BiharmonicElement<2>>* hijacked_element_pt;
 
     // vectors for dx_i/ds_n and dx_i/ds_t
-    Vector<double> dxds_n(2);
-    Vector<double> dxds_t(2);
+    FixedSizeVector<double, 2> dxds_n;
+    FixedSizeVector<double, 2> dxds_t;
 
     // number of nodes along edge
     unsigned n_node = mesh_pt()->nboundary_node(b);
@@ -700,7 +700,7 @@ namespace oomph
 
     // node position along edge b in macro element boundary representation
     // [-1,1]
-    Vector<double> s(1);
+    FixedSizeVector<double, 1> s;
 
     // finite difference step
     const double h = 10e-8;
@@ -713,8 +713,8 @@ namespace oomph
       mesh_pt()->boundary_node_pt(b, n)->get_coordinates_on_boundary(b, m_N);
 
       // vectors for dx_i/ds_n and dx_i/ds_t
-      Vector<double> dxds_n(2);
-      Vector<double> dxds_t(2);
+      FixedSizeVector<double, 2> dxds_n;
+      FixedSizeVector<double, 2> dxds_t;
       dxds_n[0] =
         mesh_pt()->boundary_node_pt(b, n)->x_gen(1 + s_fixed_index, 0);
       dxds_n[1] =
@@ -725,7 +725,7 @@ namespace oomph
         mesh_pt()->boundary_node_pt(b, n)->x_gen(2 - s_fixed_index, 1);
 
       // vector for d2xi/ds_n ds_t
-      Vector<double> d2xds_nds_t(2);
+      FixedSizeVector<double, 2> d2xds_nds_t;
       d2xds_nds_t[0] = mesh_pt()->boundary_node_pt(b, n)->x_gen(3, 0);
       d2xds_nds_t[1] = mesh_pt()->boundary_node_pt(b, n)->x_gen(3, 1);
 

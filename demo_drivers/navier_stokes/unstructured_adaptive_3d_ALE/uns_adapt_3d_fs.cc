@@ -67,7 +67,7 @@ namespace Global_Parameters
  double Volume = -16.0*atan(1.0)*Radius*Radius*Radius/3.0;
 
  /// Gravity
- Vector<double> G(3);
+ FixedSizeVector<double, 3> G;
 
  /// The Reynolds INverse Froude number
  double ReInvFr = 0.0;

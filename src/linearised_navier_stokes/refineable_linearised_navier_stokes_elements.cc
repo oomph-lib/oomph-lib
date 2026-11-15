@@ -64,7 +64,7 @@ namespace oomph
 
     // Which nodal values represent the two pressure components?
     // (Negative if pressure is not based on nodal interpolation).
-    Vector<int> p_index(2);
+    FixedSizeVector<int, 2> p_index;
     for (unsigned i = 0; i < 2; i++)
     {
       p_index[i] = this->p_index_linearised_nst(i);
@@ -155,10 +155,10 @@ namespace oomph
 
       // Allocate storage for the velocity components (six of these)
       // and their derivatives w.r.t. time
-      Vector<std::complex<double>> interpolated_u(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_u;
       // Vector<double> dudt(6,0.0);
       // Allocate storage for the eigen function normalisation
-      Vector<std::complex<double>> interpolated_u_normalisation(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_u_normalisation;
       for (unsigned i = 0; i < DIM; ++i)
       {
         interpolated_u[i].real(0.0);

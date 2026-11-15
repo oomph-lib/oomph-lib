@@ -97,7 +97,7 @@ namespace oomph
       }
 #endif
       // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      FixedSizeMatrix<double, 3, 3> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -432,7 +432,7 @@ namespace oomph
         unsigned NNODE_1D = 2;
         // Storage for the index along each boundary
         // Note that it's only a 2D spatial element
-        Vector<int> index(2);
+        FixedSizeVector<int, 2> index;
         // Loop over the coordinates
         for (unsigned i = 0; i < 2; i++)
         {

@@ -127,7 +127,7 @@ namespace oomph
     static double Default_Physical_Ratio_Value;
 
     /// Static default value for the gravity vector
-    static Vector<double> Default_Gravity_vector;
+    static FixedSizeVector<double, 3> Default_Gravity_vector;
 
   protected:
     // Physical constants
@@ -156,16 +156,17 @@ namespace oomph
     /// (used when in a rotating frame)
     double* ReInvRo_pt;
 
-    /// Pointer to global gravity Vector
-    Vector<double>* G_pt;
+    /// Pointer to global gravity vector
+    FixedSizeVector<double, 3>* G_pt;
 
     /// Pointer to body force function
     void (*Body_force_fct_pt)(const double& time,
-                              const Vector<double>& x,
-                              Vector<double>& result);
+                              const FixedSizeVector<double, 2>& x,
+                              FixedSizeVector<double, 3>& result);
 
     /// Pointer to volumetric source function
-    double (*Source_fct_pt)(const double& time, const Vector<double>& x);
+    double (*Source_fct_pt)(const double& time,
+                            const FixedSizeVector<double, 2>& x);
 
     /// Boolean flag to indicate if ALE formulation is disabled when
     /// the time-derivatives are computed. Only set to true if you're sure
@@ -222,8 +223,8 @@ namespace oomph
     virtual void get_body_force_axi_nst(const double& time,
                                         const unsigned& ipt,
                                         const Vector<double>& s,
-                                        const Vector<double>& x,
-                                        Vector<double>& result)
+                                        const FixedSizeVector<double, 2>& x,
+                                        FixedSizeVector<double, 3>& result)
     {
       // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
@@ -248,21 +249,21 @@ namespace oomph
       const double& time,
       const unsigned& ipt,
       const Vector<double>& s,
-      const Vector<double>& x,
-      DenseMatrix<double>& d_body_force_dx)
+      const FixedSizeVector<double, 2>& x,
+      FixedSizeMatrix<double, 3, 2>& d_body_force_dx)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
       /*    if(Body_force_fct_gradient_pt==0) */
       {
         // Reference value
-        Vector<double> body_force(3, 0.0);
+        FixedSizeVector<double, 3> body_force;
         get_body_force_axi_nst(time, ipt, s, x, body_force);
 
         // FD it
         const double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
-        Vector<double> body_force_pls(3, 0.0);
-        Vector<double> x_pls(x);
+        FixedSizeVector<double, 3> body_force_pls;
+        FixedSizeVector<double, 2> x_pls(x);
         for (unsigned i = 0; i < 2; i++)
         {
           x_pls[i] += eps_fd;
@@ -285,7 +286,7 @@ namespace oomph
     /// Calculate the source fct at given time and Eulerian position
     double get_source_fct(const double& time,
                           const unsigned& ipt,
-                          const Vector<double>& x)
+                          const FixedSizeVector<double, 2>& x)
     {
       // If the function pointer is zero return zero
       if (Source_fct_pt == 0)
@@ -302,10 +303,11 @@ namespace oomph
 
     /// Get gradient of source term at (Eulerian) position x. Computed
     /// via function pointer (if set) or by finite differencing (default)
-    inline virtual void get_source_fct_gradient(const double& time,
-                                                const unsigned& ipt,
-                                                const Vector<double>& x,
-                                                Vector<double>& gradient)
+    inline virtual void get_source_fct_gradient(
+      const double& time,
+      const unsigned& ipt,
+      const FixedSizeVector<double, 2>& x,
+      FixedSizeVector<double, 2>& gradient)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
@@ -317,7 +319,7 @@ namespace oomph
         // FD it
         const double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
         double source_pls = 0.0;
-        Vector<double> x_pls(x);
+        FixedSizeVector<double, 2> x_pls(x);
         for (unsigned i = 0; i < 2; i++)
         {
           x_pls[i] += eps_fd;
@@ -336,10 +338,11 @@ namespace oomph
     /// Calculate the viscosity ratio relative to the
     /// viscosity used in the definition of the Reynolds number
     /// at given time and Eulerian position
-    virtual void get_viscosity_ratio_axisym_nst(const unsigned& ipt,
-                                                const Vector<double>& s,
-                                                const Vector<double>& x,
-                                                double& visc_ratio)
+    virtual void get_viscosity_ratio_axisym_nst(
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const FixedSizeVector<double, 2>& x,
+      double& visc_ratio)
     {
       visc_ratio = *Viscosity_Ratio_pt;
     }
@@ -390,7 +393,7 @@ namespace oomph
     // N.B. This needs to be public so that the intel compiler gets things
     // correct somehow the access function messes things up when going to
     // refineable navier--stokes
-    static Vector<double> Gamma;
+    static FixedSizeVector<double, 2> Gamma;
 
     // Access functions for the physical constants
 
@@ -443,13 +446,13 @@ namespace oomph
     }
 
     /// Vector of gravitational components
-    const Vector<double>& g() const
+    const FixedSizeVector<double, 3>& g() const
     {
       return *G_pt;
     }
 
     /// Pointer to Vector of gravitational components
-    Vector<double>*& g_pt()
+    FixedSizeVector<double, 3>*& g_pt()
     {
       return G_pt;
     }
@@ -482,14 +485,15 @@ namespace oomph
 
     /// Access function for the body-force pointer
     void (*&axi_nst_body_force_fct_pt())(const double& time,
-                                         const Vector<double>& x,
-                                         Vector<double>& f)
+                                         const FixedSizeVector<double, 2>& x,
+                                         FixedSizeVector<double, 3>& f)
     {
       return Body_force_fct_pt;
     }
 
     /// Access function for the source-function pointer
-    double (*&source_fct_pt())(const double& time, const Vector<double>& x)
+    double (*&source_fct_pt())(const double& time,
+                               const FixedSizeVector<double, 2>& x)
     {
       return Source_fct_pt;
     }
@@ -595,13 +599,13 @@ namespace oomph
 
     /// Strain-rate tensor: \f$ e_{ij} \f$  where \f$ i,j = r,z,\theta \f$ (in that order)
     void strain_rate(const Vector<double>& s,
-                     DenseMatrix<double>& strain_rate) const;
+                     FixedSizeMatrix<double, 3, 3>& strain_rate) const;
 
     /// Compute traction (on the viscous scale) at local coordinate s
     /// for outer unit normal N
     void traction(const Vector<double>& s,
-                  const Vector<double>& N,
-                  Vector<double>& traction) const;
+                  const FixedSizeVector<double, 3>& N,
+                  FixedSizeVector<double, 3>& traction) const;
 
     /// Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
@@ -863,7 +867,7 @@ namespace oomph
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_axi_nst(const Vector<double>& s,
-                                Vector<double>& veloc) const
+                                FixedSizeVector<double, 3>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -1319,8 +1323,8 @@ namespace oomph
 
     /// Compute traction at local coordinate s for outer unit normal N
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction) const;
+                      const FixedSizeVector<double, 3>& N,
+                      FixedSizeVector<double, 3>& traction) const;
 
     /// Overload the access function for the pressure's local
     /// equation numbers
@@ -1601,8 +1605,8 @@ namespace oomph
 
     /// Compute traction at local coordinate s for outer unit normal N
     void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction) const;
+                      const FixedSizeVector<double, 3>& N,
+                      FixedSizeVector<double, 3>& traction) const;
 
     /// Overload the access function for the pressure's local
     /// equation numbers
@@ -2242,7 +2246,20 @@ namespace oomph
                   const Vector<double>& N,
                   Vector<double>& load)
     {
-      get_traction(s, N, load);
+      FixedSizeVector<double, 3> N_fixed(0.0);
+      N_fixed[0] = N[0];
+      N_fixed[1] = N[1];
+      if (N.size() == 3)
+      {
+        N_fixed[2] = N[2];
+      }
+      FixedSizeVector<double, 3> load_fixed;
+      get_traction(s, N_fixed, load_fixed);
+      const unsigned n_load = load.size();
+      for (unsigned i = 0; i < n_load; i++)
+      {
+        load[i] = load_fixed[i];
+      }
     }
   };
 

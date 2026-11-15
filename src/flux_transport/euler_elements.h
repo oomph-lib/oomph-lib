@@ -152,7 +152,7 @@ namespace oomph
         norm[i] = 0.0;
       }
 
-      Vector<double> s(DIM);
+      FixedSizeVector<double, DIM> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -635,7 +635,7 @@ namespace oomph
         vel += vel_average[j] * n_out[j];
       }
 
-      Vector<double> eigA(3, 0.0);
+      FixedSizeVector<double, 3> eigA(0.0);
 
       eigA[0] = vel - a;
       eigA[1] = vel;

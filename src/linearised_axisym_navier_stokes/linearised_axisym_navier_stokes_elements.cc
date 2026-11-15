@@ -73,8 +73,8 @@ namespace oomph
     // Provide storage for vectors of local coordinates and
     // global coordinates and velocities
     Vector<double> s(2);
-    Vector<double> interpolated_x(2);
-    Vector<double> interpolated_u(6);
+    FixedSizeVector<double, 2> interpolated_x(0.0);
+    FixedSizeVector<double, 6> interpolated_u(0.0);
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -463,19 +463,19 @@ namespace oomph
       // Allocate storage for the position and the derivative of the
       // mesh positions w.r.t. time
       Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
 
       // Allocate storage for the velocity components (six of these)
       // and their derivatives w.r.t. time
-      Vector<double> interpolated_u(6, 0.0);
-      Vector<double> dudt(6, 0.0);
+      FixedSizeVector<double, 6> interpolated_u(0.0);
+      FixedSizeVector<double, 6> dudt(0.0);
 
       // Allocate storage for the pressure components (two of these)
-      Vector<double> interpolated_p(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_p(0.0);
 
       // Allocate storage for the derivatives of the velocity components
       // w.r.t. global coordinates (r and z)
-      DenseMatrix<double> interpolated_dudx(6, 2, 0.0);
+      FixedSizeMatrix<double, 6, 2> interpolated_dudx(0.0);
 
       // Calculate pressure at the integration point
       // -------------------------------------------

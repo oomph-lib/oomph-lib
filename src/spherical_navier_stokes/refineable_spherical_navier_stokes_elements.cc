@@ -104,7 +104,7 @@ namespace oomph
     const double scaled_re_inv_ro = re_invro() * dens_ratio;
     // const double scaled_re_inv_fr = re_invfr()*dens_ratio;
     // const double visc_ratio = viscosity_ratio();
-    Vector<double> G = g();
+    const FixedSizeVector<double, 3>& G = g();
 
     // Integers to store the local equation and unknown numbers
     int local_eqn = 0, local_unknown = 0;
@@ -137,11 +137,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       //--------------------------------------------------------------
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(3, 0.0);
-      Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
-      Vector<double> dudt(3, 0.0);
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
+      FixedSizeVector<double, 3> dudt(0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -194,7 +194,7 @@ namespace oomph
       } // End of loop over the nodes
 
       // Get the user-defined body force terms
-      Vector<double> body_force(3);
+      FixedSizeVector<double, 3> body_force;
       this->get_body_force_spherical_nst(
         time, ipt, s, interpolated_x, body_force);
 

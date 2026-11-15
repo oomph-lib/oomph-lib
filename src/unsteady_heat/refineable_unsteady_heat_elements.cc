@@ -56,7 +56,7 @@ namespace oomph
     unsigned n_intpt = integral_pt()->nweight();
 
     // Set the Vector to hold local coordinates
-    Vector<double> s(DIM);
+    FixedSizeVector<double, DIM> s;
 
     // Get Alpha and beta parameters number
     double alpha_local = this->alpha();
@@ -94,8 +94,8 @@ namespace oomph
 
       // This needs to be a Vector to be ANSI C++, initialise to zero
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> interpolated_dudx(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_dudx(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
 
 
       // Calculate function value and derivatives:

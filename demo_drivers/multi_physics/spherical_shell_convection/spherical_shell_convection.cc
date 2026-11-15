@@ -59,7 +59,7 @@ namespace Global_Physical_Variables
  double Ra = 10.0;
  
  /// Gravity
- Vector<double> G;
+ FixedSizeVector<double, 3> G(0.0);
 
 } // end of GPV namespace
 
@@ -352,7 +352,6 @@ void RefineableSphereConvectionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 int main(int argc, char **argv)
 {
  //Set gravity
- Global_Physical_Variables::G.resize(3,0.0);
  Global_Physical_Variables::G[0] = -1.0;
 
  // Label for output

@@ -241,7 +241,9 @@ public:
                               Vector<double>& wind) const
  {
    //The wind function is simply the velocity at the points
-   this->interpolated_u_nst(s,wind);
+   FixedSizeVector<double, DIM> u_nst;
+   this->interpolated_u_nst(s,u_nst);
+   for(unsigned i=0;i<DIM;i++) {wind[i] = u_nst[i];}
  }
 
 
@@ -251,12 +253,14 @@ public:
  /// temperature multiplied by the Rayleigh number acting in the
  /// direction opposite to gravity. 
  void get_body_force_nst(const double& time, const unsigned& ipt,
-                         const Vector<double> &s, const Vector<double> &x,
-                         Vector<double> &result)
+                         const Vector<double> &s,
+                         const FixedSizeVector<double, DIM> &x,
+                         FixedSizeVector<double, DIM> &result)
   {
    // Get vector that indicates the direction of gravity from
    // the Navier-Stokes equations
-   Vector<double> gravity(NavierStokesEquations<DIM>::g());
+   const FixedSizeVector<double, DIM>& gravity =
+    NavierStokesEquations<DIM>::g();
    
    //Get the indices at which the temp and concentration are stored
    unsigned c_index[2];

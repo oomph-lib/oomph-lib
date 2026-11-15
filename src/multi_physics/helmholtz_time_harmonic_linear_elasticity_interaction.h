@@ -311,7 +311,7 @@ namespace oomph
     const double q_value = q();
 
     // Storage for traction
-    Vector<std::complex<double>> traction(2);
+    FixedSizeVector<std::complex<double>, 2> traction;
 
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();

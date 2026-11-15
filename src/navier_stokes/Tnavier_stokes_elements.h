@@ -280,8 +280,15 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // The inherited ElementWithZ2ErrorEstimator::get_Z2_flux(...)
+      // interface uses dynamically sized Vector<double> arguments for s
+      // (size DIM) and flux (size DIM + DIM*(DIM - 1)/2).
+      //
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -512,7 +519,10 @@ namespace oomph
     DShape dpsi(7, 2);
     dshape_local(s, psi, dpsi);
 
-    // Allocate memory for the inverse 2x2 jacobian
+    // Allocate memory for the inverse 2x2 jacobian. Maintained as a
+    // resizable DenseMatrix for consistency with
+    // FiniteElement::local_to_eulerian_mapping(...) and
+    // FiniteElement::transform_derivatives(...) in generic.
     DenseMatrix<double> inverse_jacobian(2);
 
     // Now calculate the inverse jacobian
@@ -571,7 +581,10 @@ namespace oomph
     DShape dpsi(11, 3);
     dshape_local(s, psi, dpsi);
 
-    // Allocate memory for the inverse 3x3 jacobian
+    // Allocate memory for the inverse 3x3 jacobian. Maintained as a
+    // resizable DenseMatrix for consistency with
+    // FiniteElement::local_to_eulerian_mapping(...) and
+    // FiniteElement::transform_derivatives(...) in generic.
     DenseMatrix<double> inverse_jacobian(3);
 
     // Now calculate the inverse jacobian
@@ -964,8 +977,15 @@ namespace oomph
       }
 #endif
 
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(DIM);
+      // The inherited ElementWithZ2ErrorEstimator::get_Z2_flux(...)
+      // interface uses dynamically sized Vector<double> arguments for s
+      // (size DIM) and flux (size DIM + DIM*(DIM - 1)/2).
+      //
+      // Get strain rate matrix: its size (DIM x DIM) is known at compile
+      // time so we use a fixed-size matrix, allocated on the stack. No
+      // initialisation required since strain_rate(...) assigns all
+      // entries.
+      FixedSizeMatrix<double, DIM, DIM> strainrate;
       this->strain_rate(s, strainrate);
 
       // Pack into flux Vector
@@ -1139,7 +1159,10 @@ namespace oomph
     dppsidx(2, 0) = -1.0;
     dppsidx(2, 1) = -1.0;
 
-    // Allocate memory for the inverse 2x2 jacobian
+    // Allocate memory for the inverse 2x2 jacobian. Maintained as a
+    // resizable DenseMatrix for consistency with
+    // FiniteElement::local_to_eulerian_mapping(...) and
+    // FiniteElement::transform_derivatives(...) in generic.
     DenseMatrix<double> inverse_jacobian(2);
 
 
@@ -1204,7 +1227,10 @@ namespace oomph
     DShape dpsi(10, 3);
     dshape_local(s, psi, dpsi);
 
-    // Allocate memory for the inverse 3x3 jacobian
+    // Allocate memory for the inverse 3x3 jacobian. Maintained as a
+    // resizable DenseMatrix for consistency with
+    // FiniteElement::local_to_eulerian_mapping(...) and
+    // FiniteElement::transform_derivatives(...) in generic.
     DenseMatrix<double> inverse_jacobian(3);
 
     // Now calculate the inverse jacobian

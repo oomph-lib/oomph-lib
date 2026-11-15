@@ -130,7 +130,7 @@ namespace oomph
       const unsigned n_intpt = this->integral_pt()->nweight();
 
       // Storage for the local coordinate
-      Vector<double> s(1);
+      FixedSizeVector<double, 1> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -145,8 +145,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psif, dpsifds);
 
         // Get position and tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -202,7 +202,7 @@ namespace oomph
     const unsigned n_intpt = this->integral_pt()->nweight();
 
     // Storage for the local cooridinate
-    Vector<double> s(1);
+    FixedSizeVector<double, 1> s;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -217,8 +217,8 @@ namespace oomph
       this->dshape_local_at_knot(ipt, psif, dpsifds);
 
       // Get position and tangent vector
-      Vector<double> interpolated_t1(2, 0.0);
-      Vector<double> interpolated_x(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_t1(0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over directional components
@@ -280,7 +280,7 @@ namespace oomph
     const unsigned n_intpt = this->integral_pt()->nweight();
 
     // Storage for the local cooridinate
-    Vector<double> s(1);
+    FixedSizeVector<double, 1> s;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -295,8 +295,8 @@ namespace oomph
       this->dshape_local_at_knot(ipt, psif, dpsifds);
 
       // Get position and tangent vector
-      Vector<double> interpolated_t1(2, 0.0);
-      Vector<double> interpolated_x(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_t1(0.0);
+      FixedSizeVector<double, 2> interpolated_x(0.0);
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over directional components
@@ -367,7 +367,7 @@ namespace oomph
       const unsigned n_intpt = this->integral_pt()->nweight();
 
       // Storage for the local cooridinate
-      Vector<double> s(1);
+      FixedSizeVector<double, 1> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -382,8 +382,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psif, dpsifds);
 
         // Get position and tangent vector
-        Vector<double> interpolated_t1(2, 0.0);
-        Vector<double> interpolated_x(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_t1(0.0);
+        FixedSizeVector<double, 2> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -450,7 +450,7 @@ namespace oomph
       const unsigned n_intpt = this->integral_pt()->nweight();
 
       // Storage for the local coordinate
-      Vector<double> s(2);
+      FixedSizeVector<double, 2> s;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -468,8 +468,8 @@ namespace oomph
         this->dshape_local_at_knot(ipt, psif, dpsifds);
 
         // Get position and tangent vector
-        DenseMatrix<double> interpolated_g(2, 3, 0.0);
-        Vector<double> interpolated_x(3, 0.0);
+        FixedSizeMatrix<double, 2, 3> interpolated_g(0.0);
+        FixedSizeVector<double, 3> interpolated_x(0.0);
         for (unsigned l = 0; l < n_node; l++)
         {
           // Loop over directional components
@@ -489,7 +489,7 @@ namespace oomph
 
         // Define the (non-unit) normal vector (cross product of tangent
         // vectors)
-        Vector<double> interpolated_n(3);
+        FixedSizeVector<double, 3> interpolated_n(0.0);
         interpolated_n[0] = interpolated_g(0, 1) * interpolated_g(1, 2) -
                             interpolated_g(0, 2) * interpolated_g(1, 1);
         interpolated_n[1] = interpolated_g(0, 2) * interpolated_g(1, 0) -

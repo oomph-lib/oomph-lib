@@ -92,7 +92,7 @@ namespace oomph
       // Allocate
       double interpolated_u = 0.0;
       Vector<double> interpolated_x(2, 0.0);
-      Vector<double> interpolated_dudx(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------

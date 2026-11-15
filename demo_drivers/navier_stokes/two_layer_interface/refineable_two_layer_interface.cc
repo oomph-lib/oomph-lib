@@ -314,7 +314,7 @@ namespace oomph
   double Ca = 0.01; 
 
   /// Direction of gravity
-  Vector<double> G(2);
+  FixedSizeVector<double, 2> G;
   
   /// Pseudo-solid Poisson ratio
   double Nu=0.1;

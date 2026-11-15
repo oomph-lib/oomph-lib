@@ -1375,7 +1375,7 @@ namespace oomph
     GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line y=p11[1] corresponding to the initial x.
-    Vector<double> ref_point(2);
+    FixedSizeVector<double, 2> ref_point;
     ref_point[0] = ref_value[4];
     ref_point[1] = 0.778024390 * Height;
 
@@ -1413,7 +1413,7 @@ namespace oomph
     GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line y=p37[1] corresponding to the initial x.
-    Vector<double> ref_point(2);
+    FixedSizeVector<double, 2> ref_point;
     ref_point[0] = ref_value[4];
     ref_point[1] = 0.197585366 * Height;
 
@@ -1440,8 +1440,8 @@ namespace oomph
     const unsigned& t, AlgebraicNode*& node_pt)
   {
     // useful points
-    Vector<double> p15(2);
-    Vector<double> p35(2);
+    FixedSizeVector<double, 2> p15;
+    FixedSizeVector<double, 2> p35;
 
     p15[0] = 0.285123967 * Length;
     p15[1] = 0.625 * Height;
@@ -1459,7 +1459,7 @@ namespace oomph
     GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line x=p15[0]
-    Vector<double> ref_point(2);
+    FixedSizeVector<double, 2> ref_point;
     ref_point[0] = p15[0];
     ref_point[1] = p35[1] + ref_value[1] * (p15[1] - p35[1]);
 
@@ -1486,8 +1486,8 @@ namespace oomph
     const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful points
-    Vector<double> p15(2);
-    Vector<double> p25(2);
+    FixedSizeVector<double, 2> p15;
+    FixedSizeVector<double, 2> p25;
     Vector<double> top_flag(2);
 
     p15[0] = 0.285123967 * Length;
@@ -1512,12 +1512,12 @@ namespace oomph
     flag_pt->position(t, zeta, top_flag);
 
     // point on the line linking p15 et top_flag
-    Vector<double> p1(2);
+    FixedSizeVector<double, 2> p1;
     p1[0] = top_flag[0] + ref_value[0] * (p15[0] - top_flag[0]);
     p1[1] = top_flag[1] + ref_value[0] * (p15[1] - top_flag[1]);
 
     // Point on the line y = Height;
-    Vector<double> p2(2);
+    FixedSizeVector<double, 2> p2;
     p2[0] = p25[0] + ref_value[0] * (p15[0] - p25[0]);
     p2[1] = Height;
 
@@ -1534,8 +1534,8 @@ namespace oomph
     const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful points
-    Vector<double> p31(2);
-    Vector<double> p35(2);
+    FixedSizeVector<double, 2> p31;
+    FixedSizeVector<double, 2> p35;
     Vector<double> top_flag(2);
 
     p31[0] = Centre_x +
@@ -1561,12 +1561,12 @@ namespace oomph
     flag_pt->position(t, zeta, top_flag);
 
     // point on the line linking p35 et top_flag
-    Vector<double> p1(2);
+    FixedSizeVector<double, 2> p1;
     p1[0] = top_flag[0] + ref_value[0] * (p35[0] - top_flag[0]);
     p1[1] = top_flag[1] + ref_value[0] * (p35[1] - top_flag[1]);
 
     // Point on the line y = 0.0;
-    Vector<double> p2(2);
+    FixedSizeVector<double, 2> p2;
     p2[0] = p31[0] + ref_value[0] * (p35[0] - p31[0]);
     p2[1] = 0.;
 
@@ -1586,8 +1586,8 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Useful points
-    Vector<double> p14(2);
-    Vector<double> p5(2);
+    FixedSizeVector<double, 2> p14;
+    FixedSizeVector<double, 2> p5;
     Vector<double> point_flag(2);
 
     p14[0] = 0.211596 * Length;
@@ -1607,7 +1607,7 @@ namespace oomph
     flag_pt->position(t, zeta, point_flag);
 
     // point on the line linking p14 et p5
-    Vector<double> p1(2);
+    FixedSizeVector<double, 2> p1;
     p1[0] = p14[0] + ref_value[0] * (p5[0] - p14[0]);
     p1[1] = p14[1] + ref_value[0] * (p5[1] - p14[1]);
 
@@ -1627,8 +1627,8 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Useful points
-    Vector<double> p40(2);
-    Vector<double> p45(2);
+    FixedSizeVector<double, 2> p40;
+    FixedSizeVector<double, 2> p45;
     Vector<double> point_flag(2);
 
     p40[0] = 0.211596 * Length;
@@ -1648,7 +1648,7 @@ namespace oomph
     flag_pt->position(t, zeta, point_flag);
 
     // point on the line linking p40 et p45
-    Vector<double> p1(2);
+    FixedSizeVector<double, 2> p1;
     p1[0] = p40[0] + ref_value[0] * (p45[0] - p40[0]);
     p1[1] = p40[1] + ref_value[0] * (p45[1] - p40[1]);
 
@@ -1705,7 +1705,7 @@ namespace oomph
     Cylinder_pt->position(zeta, ref_point_on_circle);
 
     // Get reference point on right line
-    Vector<double> ref_point_on_right_line(2);
+    FixedSizeVector<double, 2> ref_point_on_right_line;
     ref_point_on_right_line[0] = // flag_end[0];
       outer_point[0] + (flag_end[0] - outer_point[0]) * (1.0 - omega_vertical);
     ref_point_on_right_line[1] =
@@ -1723,7 +1723,7 @@ namespace oomph
 
     // Get reference point on horizontal fraction of straight line
     // connecting the two bottom most reference points
-    Vector<double> r_bot(2);
+    FixedSizeVector<double, 2> r_bot;
     r_bot[0] = circle_bot[0] + (flag_end[0] - circle_bot[0]) * omega_horizontal;
     r_bot[1] = circle_bot[1] + (flag_end[1] - circle_bot[1]) * omega_horizontal;
 
@@ -1791,7 +1791,7 @@ namespace oomph
     Cylinder_pt->position(zeta, ref_point_on_circle);
 
     // Get reference point on right line
-    Vector<double> ref_point_on_right_line(2);
+    FixedSizeVector<double, 2> ref_point_on_right_line;
     ref_point_on_right_line[0] = // flag_end[0];
       outer_point[0] + (flag_end[0] - outer_point[0]) * omega_vertical;
     ref_point_on_right_line[1] =
@@ -1809,7 +1809,7 @@ namespace oomph
 
     // Get reference point on horizontal fraction of straight line
     // connecting the two top most reference points
-    Vector<double> r_top(2);
+    FixedSizeVector<double, 2> r_top;
     r_top[0] = circle_top[0] + (flag_end[0] - circle_top[0]) * omega_horizontal;
     r_top[1] = circle_top[1] + (flag_end[1] - circle_top[1]) * omega_horizontal;
 

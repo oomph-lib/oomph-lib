@@ -249,7 +249,7 @@ namespace oomph
       spine_node_pt->spine_pt()->geom_object_pt(2)->position(s_transition_up,
                                                              r_transition_up);
 
-      Vector<double> spine_centre(2);
+      FixedSizeVector<double, 2> spine_centre;
       // Horizontal position is always halfway between the walls
       spine_centre[0] = 0.5 * (r_transition_lo[0] + r_transition_up[0]);
       // Vertical spine centre is given by fraction between the walls
@@ -258,7 +258,7 @@ namespace oomph
         spine_centre_fraction() * (r_transition_up[1] - r_transition_lo[1]);
 
       // Get vector twoards spine origin
-      Vector<double> N(2);
+      FixedSizeVector<double, 2> N;
       N[0] = spine_centre[0] - r_wall_lo[0];
       N[1] = spine_centre[1] - r_wall_lo[1];
       double inv_length = 1.0 / sqrt(N[0] * N[0] + N[1] * N[1]);
@@ -291,7 +291,7 @@ namespace oomph
       double vertical_fraction = spine_node_pt->spine_pt()->geom_parameter(2);
 
       // Origin of spine
-      Vector<double> S0(2);
+      FixedSizeVector<double, 2> S0;
       S0[0] = r_lo[0] + vertical_fraction * (r_up[0] - r_lo[0]);
       S0[1] = r_lo[1] + vertical_fraction * (r_up[1] - r_lo[1]);
 
@@ -305,7 +305,7 @@ namespace oomph
       spine_node_pt->spine_pt()->geom_object_pt(3)->position(s_transition_up,
                                                              r_transition_up);
 
-      Vector<double> spine_centre(2);
+      FixedSizeVector<double, 2> spine_centre;
       // Horizontal position is always halfway between the walls
       spine_centre[0] = 0.5 * (r_transition_lo[0] + r_transition_up[0]);
       // Vertical spine centre is given by fraction between the walls
@@ -314,7 +314,7 @@ namespace oomph
         spine_centre_fraction() * (r_transition_up[1] - r_transition_lo[1]);
 
       // Get vector towards origin
-      Vector<double> N(2);
+      FixedSizeVector<double, 2> N;
       N[0] = spine_centre[0] - S0[0];
       N[1] = spine_centre[1] - S0[1];
 
@@ -348,7 +348,7 @@ namespace oomph
       double vertical_fraction = spine_node_pt->spine_pt()->geom_parameter(2);
 
       // Origin of spine
-      Vector<double> S0(2);
+      FixedSizeVector<double, 2> S0;
       S0[0] = r_lo[0] + vertical_fraction * (r_up[0] - r_lo[0]);
       S0[1] = r_lo[1] + vertical_fraction * (r_up[1] - r_lo[1]);
 
@@ -362,7 +362,7 @@ namespace oomph
       spine_node_pt->spine_pt()->geom_object_pt(3)->position(s_transition_up,
                                                              r_transition_up);
 
-      Vector<double> spine_centre(2);
+      FixedSizeVector<double, 2> spine_centre;
       // Horizontal position is always halfway between the walls
       spine_centre[0] = 0.5 * (r_transition_lo[0] + r_transition_up[0]);
       // Vertical spine centre is given by fraction between the walls
@@ -371,7 +371,7 @@ namespace oomph
         spine_centre_fraction() * (r_transition_up[1] - r_transition_lo[1]);
 
       // Get vector towards origin
-      Vector<double> N(2);
+      FixedSizeVector<double, 2> N;
       N[0] = spine_centre[0] - S0[0];
       N[1] = spine_centre[1] - S0[1];
 
@@ -409,7 +409,7 @@ namespace oomph
       spine_node_pt->spine_pt()->geom_object_pt(2)->position(s_transition_up,
                                                              r_transition_up);
 
-      Vector<double> spine_centre(2);
+      FixedSizeVector<double, 2> spine_centre;
       // Horizontal position is always halfway between the walls
       spine_centre[0] = 0.5 * (r_transition_lo[0] + r_transition_up[0]);
       // Vertical spine centre is given by fraction between the walls
@@ -418,7 +418,7 @@ namespace oomph
         spine_centre_fraction() * (r_transition_up[1] - r_transition_lo[1]);
 
       // Get vector towards origin
-      Vector<double> N(2);
+      FixedSizeVector<double, 2> N;
       N[0] = spine_centre[0] - r_wall_up[0];
       N[1] = spine_centre[1] - r_wall_up[1];
       double inv_length = 1.0 / sqrt(N[0] * N[0] + N[1] * N[1]);

@@ -550,7 +550,7 @@ namespace oomph
       std::complex<double>& pml_k_squared_factor)
     {
       /// Vector which points from the inner boundary to x
-      Vector<double> nu(DIM);
+      FixedSizeVector<double, DIM> nu;
       for (unsigned k = 0; k < DIM; k++)
       {
         nu[k] = x[k] - this->Pml_inner_boundary[k];
@@ -558,7 +558,7 @@ namespace oomph
 
       /// Vector which points from the inner boundary to the edge of the
       /// boundary
-      Vector<double> pml_width(DIM);
+      FixedSizeVector<double, DIM> pml_width;
       for (unsigned k = 0; k < DIM; k++)
       {
         pml_width[k] =
@@ -566,7 +566,7 @@ namespace oomph
       }
 
       // Declare gamma_i vectors of complex numbers for PML weights
-      Vector<std::complex<double>> pml_gamma(DIM);
+      FixedSizeVector<std::complex<double>, DIM> pml_gamma;
 
       if (this->Pml_is_enabled)
       {

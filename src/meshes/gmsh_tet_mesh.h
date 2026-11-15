@@ -761,7 +761,7 @@ namespace oomph
       // ----------------------------------------
 
       // Translate enumeration
-      Vector<unsigned> oomph_lib_node_number(4);
+      FixedSizeVector<unsigned, 4> oomph_lib_node_number;
       oomph_lib_node_number[0] = 0;
       oomph_lib_node_number[1] = 3;
       oomph_lib_node_number[2] = 2;

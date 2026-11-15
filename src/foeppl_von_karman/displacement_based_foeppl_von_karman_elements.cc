@@ -79,7 +79,7 @@ namespace oomph
     // Vector of local coordinates
     Vector<double> s(2);
     // Vector of Eulerian coordinates
-    Vector<double> x(2);
+    FixedSizeVector<double, 2> x;
 
     // Sigma_{\alpha \beta}
     DenseMatrix<double> sigma(2, 2);

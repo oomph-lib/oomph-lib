@@ -429,6 +429,53 @@ guards and library includes.
 
 \endcode
 
+\subsection mutable Mutable member data
+
+Do not use the \c mutable keyword merely to circumvent const
+requirements. Mutable member data is only allowed when it is used as a
+workspace, typically to avoid the frequent and potentially costly
+allocation and deallocation of resizable containers. In this case, the
+containers should be wrapped in \c GuardedWorkspace objects to ensure
+(at least in PARANOID mode) that a workspace cannot be modified by a
+re\-entrant call to a function while it is already in use. See \c
+demo\_drivers/self\_test/generic/guarded\_workspace/ for an
+illustration.
+
+\subsection fixed\_size\_containers Use \c FixedSize containers where possible
+
+\c oomph\-lib provides the resizable templated containers \c Vector,
+\c DenseMatrix, \c RankThreeTensor and \c RankFourTensor. Since
+these containers are resizable, their construction may involve dynamic
+memory allocation and can therefore be costly. There are situations in
+which the repeated construction and destruction of such containers can
+contribute significantly to the overall computational cost.
+
+If the size of a container is genuinely fixed and known at compile
+time (e.g. through template arguments), its fixed\-size equivalent \c
+FixedSizeVector, \c FixedSizeMatrix, \c FixedSizeRankThreeTensor or
+\c FixedSizeRankFourTensor should therefore be used wherever this is
+compatible with the interfaces through which the object is used.
+
+This is straightforward for objects that are used entirely locally and
+whose sizes are known at compile time. If an object has to be passed
+to functions defined elsewhere, the use of a resizable container may
+be unavoidable because the relevant interface requires it. Even then
+it may be beneficial to use \c FixedSize containers for the majority
+of the local computations and to copy their contents into resizable
+containers immediately before calls to interfaces that require them.
+
+If such conversions occur sufficiently frequently for repeated
+allocation and deallocation of the resizable containers to be a
+concern, a class may provide mutable workspaces containing resizable
+containers of the required sizes. These workspaces should be
+constructed at the required sizes and subsequently reused rather than
+resized. They must be implemented using \c GuardedWorkspace as
+described above.
+
+
+
+
+
 \subsection unsigned Only use int if a variable can actually take negative values
 
 - Just as the name of a variable gives some indication of its

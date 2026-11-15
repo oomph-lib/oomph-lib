@@ -127,9 +127,12 @@ namespace oomph
 
   } // namespace DebugHelpers
 
-  // Forward declaration needed for second invariant helper
+  // Forward declarations needed for second invariant helper
   template<class TYPE>
   class DenseMatrix;
+
+  template<class T, unsigned NROW, unsigned NCOL>
+  class FixedSizeMatrix;
 
   //=====================================================================
   /// Helper namespace containing function that computes second invariant
@@ -139,6 +142,24 @@ namespace oomph
   {
     /// Compute second invariant of tensor
     extern double second_invariant(const DenseMatrix<double>& tensor);
+
+    /// Compute second invariant of a fixed-size square tensor (N x N)
+    template<unsigned N>
+    inline double second_invariant(const FixedSizeMatrix<double, N, N>& tensor)
+    {
+      double trace_of_tensor = 0.0;
+      double trace_of_tensor_squared = 0.0;
+      for (unsigned i = 0; i < N; i++)
+      {
+        trace_of_tensor += tensor(i, i);
+        for (unsigned j = 0; j < N; j++)
+        {
+          trace_of_tensor_squared += tensor(i, j) * tensor(j, i);
+        }
+      }
+      return 0.5 *
+             (trace_of_tensor * trace_of_tensor - trace_of_tensor_squared);
+    }
 
   } // namespace SecondInvariantHelper
 
@@ -1254,5 +1275,245 @@ namespace oomph
   };
 
 
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+
+
+  //======================================================================
+  /// Forward declaration
+  //======================================================================
+  template<class CONTENT>
+  class GuardedWorkspace;
+
+
+  //======================================================================
+  /// A workspace that provides access to the content stored
+  /// in a GuardedWorkspace, typically used for mutable member data.
+  ///
+  /// The lifetime of this object describes one use of the underlying
+  /// workspace.
+  ///
+  /// In a PARANOID build, construction of this object records that the
+  /// underlying workspace is in active use. An attempt to construct a
+  /// second Workspace for the same GuardedWorkspace while this object
+  /// remains alive indicates overlapping use of the scratch storage and
+  /// results in an error.
+  ///
+  /// Destruction of this object records that the underlying workspace is
+  /// no longer in use. This also happens during stack unwinding if an
+  /// exception is thrown.
+  //======================================================================
+  template<class CONTENT>
+  class Workspace
+  {
+  public:
+    /// Broken copy constructor
+    Workspace(const Workspace&) = delete;
+
+    /// Broken assignment operator
+    Workspace& operator=(const Workspace&) = delete;
+
+    /// Destructor: Finish using the guarded workspace
+    ~Workspace()
+    {
+#ifdef PARANOID
+      Guarded_workspace.set_is_not_in_use();
+#endif
+    }
+
+    /// Access to the content of the workspace
+    CONTENT& content()
+    {
+      return Guarded_workspace.content();
+    }
+
+
+  private:
+    /// GuardedWorkspace is a friend so it (and only it!) can
+    /// access the constructor for the actual Workspace objects.
+    /// This means that access to the CONTENT can be checked
+    /// for illegal multiple live versions.
+    friend class GuardedWorkspace<CONTENT>;
+
+
+    /// Constructor: Begin using the guarded workspace
+    explicit Workspace(GuardedWorkspace<CONTENT>& guarded_workspace)
+      : Guarded_workspace(guarded_workspace)
+    {
+#ifdef PARANOID
+      Guarded_workspace.set_is_in_use();
+#endif
+    }
+
+    /// The guarded workspace whose content is being used
+    GuardedWorkspace<CONTENT>& Guarded_workspace;
+  };
+
+
+  //======================================================================
+  /// Wrapper around an object of type CONTENT that is to be used as
+  /// reusable workspace, typically as mutable member data in a class.
+  ///
+  /// The CONTENT can only be accessed through a temporary Workspace
+  /// object returned by workspace().
+  ///
+  /// In a PARANOID build, this allows us to verify that no two live
+  /// Workspace objects refer to this GuardedWorkspace at the same time.
+  ///
+  /// In a non-PARANOID build, the active-use check and its bookkeeping are
+  /// omitted.
+  ///
+  /// The constructors support the natural dimensional constructors of
+  /// oomph-lib's dynamically sized container families:
+  ///
+  /// - Vector: one dimension;
+  /// - DenseMatrix: two dimensions;
+  /// - RankThreeTensor: three dimensions;
+  /// - RankFourTensor: four dimensions.
+  ///
+  /// where the number of dimensions defines the number of unsigned
+  /// arguments needed by the constructors.
+  /// Only the constructor that is actually used for a particular CONTENT
+  /// type needs to be valid for that CONTENT type.
+  //======================================================================
+  template<class CONTENT>
+  class GuardedWorkspace
+  {
+    /// The Workspace class needs private access to the content and to the
+    /// PARANOID bookkeeping functions in the current class.
+    friend class Workspace<CONTENT>;
+
+
+  public:
+    /// Default constructor: Calls argument-free constructor for CONTENT
+    GuardedWorkspace()
+      : Content()
+#ifdef PARANOID
+        ,
+        In_use(false)
+#endif
+    {
+    }
+
+
+    /// Constructor for CONTENT whose constructor takes the size
+    /// by a single unsigned argument, n1.
+    explicit GuardedWorkspace(const unsigned& n1)
+      : Content(n1)
+#ifdef PARANOID
+        ,
+        In_use(false)
+#endif
+    {
+    }
+
+
+    /// Constructor for CONTENT whose constructor takes the size
+    /// via two unsigned arguments, n1, n2.
+    GuardedWorkspace(const unsigned& n1, const unsigned& n2)
+      : Content(n1, n2)
+#ifdef PARANOID
+        ,
+        In_use(false)
+#endif
+    {
+    }
+
+
+    /// Constructor for CONTENT whose constructor takes the size
+    /// via three unsigned arguments, n1, n2, n3.
+    GuardedWorkspace(const unsigned& n1, const unsigned& n2, const unsigned& n3)
+      : Content(n1, n2, n3)
+#ifdef PARANOID
+        ,
+        In_use(false)
+#endif
+    {
+    }
+
+
+    /// Constructor for CONTENT whose constructor takes the size
+    /// via four unsigned arguments, n1, n2, n3, n4
+    GuardedWorkspace(const unsigned& n1,
+                     const unsigned& n2,
+                     const unsigned& n3,
+                     const unsigned& n4)
+      : Content(n1, n2, n3, n4)
+#ifdef PARANOID
+        ,
+        In_use(false)
+#endif
+    {
+    }
+
+
+    /// Get access to a Workspace through which the CONTENT can be used
+    Workspace<CONTENT> workspace()
+    {
+      return Workspace<CONTENT>(*this);
+    }
+
+
+  private:
+    /// Access to the CONTENT of the workspace.
+    ///
+    /// This function is deliberately private. The content can only be
+    /// accessed through a (friendly!) Workspace object, so that
+    /// PARANOID builds can detect overlapping uses.
+    CONTENT& content()
+    {
+      return Content;
+    }
+
+
+#ifdef PARANOID
+
+    /// Record that the workspace is now in active use
+    /// (private, because only the friend class Workspace<CONTENT>
+    /// should access this)
+    void set_is_in_use()
+    {
+      if (In_use)
+      {
+        throw OomphLibError(
+          "Attempt to use a workspace that is already in active use",
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+      }
+
+      In_use = true;
+    }
+
+
+    /// Record that the workspace is no longer in active use
+    /// (private, because only the friend class Workspace<CONTENT>
+    /// should access this)
+    void set_is_not_in_use()
+    {
+      In_use = false;
+    }
+
+#endif
+
+
+    /// The actual workspace content: A resizable Vector, Matrix, etc.
+    CONTENT Content;
+
+
+#ifdef PARANOID
+
+    /// Is the workspace currently in active use?
+    ///
+    /// This is diagnostic state only. It does not provide synchronization
+    /// for concurrent use of the same object by multiple threads.
+    bool In_use;
+
+#endif
+  };
+
+
 } // namespace oomph
+
+
 #endif

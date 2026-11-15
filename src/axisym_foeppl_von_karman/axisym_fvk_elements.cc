@@ -101,7 +101,7 @@ namespace oomph
 
       // Calculate function values and derivatives:
       //-----------------------------------------
-      Vector<double> nodal_value(6, 0.0);
+      FixedSizeVector<double, 6> nodal_value(0.0);
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {

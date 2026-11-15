@@ -320,8 +320,8 @@ namespace oomph
     Inner_boundary_cross_section_pt->position(t, x, r_inner);
 
     // Get layer boundaries
-    Vector<double> r_top(2);
-    Vector<double> r_bot(2);
+    FixedSizeVector<double, 2> r_top;
+    FixedSizeVector<double, 2> r_bot;
     for (unsigned i = 0; i < 2; i++)
     {
       r_top[i] =
@@ -361,8 +361,8 @@ namespace oomph
     Inner_boundary_cross_section_pt->position(t, x, r_inner);
 
     // Get layer boundaries
-    Vector<double> r_top(2);
-    Vector<double> r_bot(2);
+    FixedSizeVector<double, 2> r_top;
+    FixedSizeVector<double, 2> r_bot;
     for (unsigned i = 0; i < 2; i++)
     {
       r_top[i] =

@@ -74,7 +74,7 @@ namespace oomph
       // Position and gradient
       std::complex<double> interpolated_u(0.0, 0.0);
       Vector<double> interpolated_x(DIM, 0.0);
-      Vector<std::complex<double>> interpolated_dudx(DIM);
+      FixedSizeVector<std::complex<double>, DIM> interpolated_dudx(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------

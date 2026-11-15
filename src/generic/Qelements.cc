@@ -51,7 +51,7 @@ namespace oomph
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
     // There is one possible index.
-    Vector<int> index(1);
+    FixedSizeVector<int, 1> index;
 
     // Determine the index
     // -------------------
@@ -268,7 +268,7 @@ namespace oomph
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
     // There are two possible indices.
-    Vector<int> index(2);
+    FixedSizeVector<int, 2> index;
     // Loop over the coordinates and determine the indices
     for (unsigned i = 0; i < 2; i++)
     {
@@ -536,7 +536,7 @@ namespace oomph
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
     // There are now three possible indices
-    Vector<int> index(3);
+    FixedSizeVector<int, 3> index;
     // Loop over the coordinates
     for (unsigned i = 0; i < 3; i++)
     {

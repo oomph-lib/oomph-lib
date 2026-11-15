@@ -63,7 +63,7 @@ namespace oomph
     Vector<double> s(2);
 
     // Vector for coordintes
-    Vector<double> x(2);
+    FixedSizeVector<double, 2> x;
 
     // Displacement vector
     Vector<std::complex<double>> disp(3);
@@ -151,7 +151,7 @@ namespace oomph
     this->dshape_eulerian(s, psi, dpsidx);
 
     // Storage for Eulerian coordinates (r,z; initialised to zero)
-    Vector<double> interpolated_x(2, 0.0);
+    FixedSizeVector<double, 2> interpolated_x(0.0);
 
     // Displacements u_r,u_z,u_theta
     Vector<std::complex<double>> interpolated_u(3,
@@ -282,7 +282,7 @@ namespace oomph
     unsigned n_intpt = this->integral_pt()->nweight();
 
     // Set the vector to hold the local coordinates in the element
-    Vector<double> s(2);
+    FixedSizeVector<double, 2> s;
 
     // Integers to store the local equation numbers
     int local_eqn_real = 0, local_eqn_imag = 0, local_unknown_real = 0,

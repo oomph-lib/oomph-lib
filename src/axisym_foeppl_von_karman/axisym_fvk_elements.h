@@ -766,7 +766,7 @@ namespace oomph
         Vector<double> s_ext(external_element_local_coord(0, ipt));
 
         // Get veloc
-        Vector<double> veloc(3);
+        FixedSizeVector<double, 3> veloc;
         ext_el_pt->interpolated_u_axi_nst(s_ext, veloc);
         Vector<double> x(2);
         ext_el_pt->interpolated_x(s_ext, x);

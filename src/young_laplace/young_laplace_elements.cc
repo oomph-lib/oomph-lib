@@ -165,7 +165,7 @@ namespace oomph
       // Allocate and initialise to zero
       double interpolated_u = 0.0;
       Vector<double> interpolated_zeta(2, 0.0);
-      Vector<double> interpolated_dudzeta(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_dudzeta(0.0);
 
       // Calculate function value and derivatives:
       //-----------------------------------------
@@ -223,7 +223,7 @@ namespace oomph
       Vector<double> area_variation_numerator_1(3, 0.0);
 
       // Vector position
-      Vector<double> r(3, 0.0);
+      FixedSizeVector<double, 3> r(0.0);
 
       // No spines
       //---------
@@ -501,7 +501,7 @@ namespace oomph
     outfile << tecplot_zone_string(nplot);
 
     // Exact solution Vector (here a scalar)
-    Vector<double> exact_soln(1);
+    FixedSizeVector<double, 1> exact_soln;
 
     // Loop over plot points
     unsigned num_plot_points = nplot_points(nplot);
@@ -553,7 +553,7 @@ namespace oomph
     Vector<double> s(2);
 
     // Vector for coordinates
-    Vector<double> x(2);
+    FixedSizeVector<double, 2> x;
 
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -562,7 +562,7 @@ namespace oomph
     outfile << "ZONE" << std::endl;
 
     // Exact solution Vector (here a scalar)
-    Vector<double> exact_soln(1);
+    FixedSizeVector<double, 1> exact_soln;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)

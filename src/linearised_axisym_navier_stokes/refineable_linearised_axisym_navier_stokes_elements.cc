@@ -62,7 +62,7 @@ namespace oomph
 
     // Which nodal values represent the two pressure components?
     // (Negative if pressure is not based on nodal interpolation).
-    Vector<int> p_index(2);
+    FixedSizeVector<int, 2> p_index;
     for (unsigned i = 0; i < 2; i++)
     {
       p_index[i] = this->p_index_linearised_axi_nst(i);
@@ -145,19 +145,19 @@ namespace oomph
       // Allocate storage for the position and the derivative of the
       // mesh positions w.r.t. time
       Vector<double> interpolated_x(2, 0.0);
-      Vector<double> mesh_velocity(2, 0.0);
+      FixedSizeVector<double, 2> mesh_velocity(0.0);
 
       // Allocate storage for the velocity components (six of these)
       // and their derivatives w.r.t. time
-      Vector<double> interpolated_u(6, 0.0);
-      Vector<double> dudt(6, 0.0);
+      FixedSizeVector<double, 6> interpolated_u(0.0);
+      FixedSizeVector<double, 6> dudt(0.0);
 
       // Allocate storage for the pressure components (two of these)
-      Vector<double> interpolated_p(2, 0.0);
+      FixedSizeVector<double, 2> interpolated_p(0.0);
 
       // Allocate storage for the derivatives of the velocity components
       // w.r.t. global coordinates (r and z)
-      DenseMatrix<double> interpolated_dudx(6, 2, 0.0);
+      FixedSizeMatrix<double, 6, 2> interpolated_dudx(0.0);
 
       // Calculate pressure at the integration point
       // -------------------------------------------

@@ -3528,7 +3528,7 @@ namespace oomph
         }
 
         // Initialise the translation scheme
-        Vector<int> translate_s_new(3);
+        FixedSizeVector<int, 3> translate_s_new;
 
         // Then the rotation of the coordinates
         for (unsigned i = 0; i < 3; i++)
@@ -3775,7 +3775,7 @@ namespace oomph
         }
 
         // Initialise the translation scheme
-        Vector<int> translate_s_new(3);
+        FixedSizeVector<int, 3> translate_s_new;
 
         // Then the rotation of the coordinates
         for (unsigned i = 0; i < 3; i++)
@@ -4284,7 +4284,6 @@ namespace oomph
     bool in_neighbouring_tree;
 
     Vector<double> s(3);
-    Vector<double> x(3);
 
     Vector<double> s_sw(3);
     Vector<double> s_ne(3);
@@ -4561,7 +4560,6 @@ namespace oomph
     int edge = OMEGA;
 
     Vector<double> s(3);
-    Vector<double> x(3);
 
     Vector<double> s_lo(3);
     Vector<double> s_hi(3);

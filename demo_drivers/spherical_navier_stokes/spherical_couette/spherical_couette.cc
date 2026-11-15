@@ -105,7 +105,7 @@ public:
    Vector<double> x(dim+1);
 
    //Need the traction as well
-   Vector<double> traction(3);
+   FixedSizeVector<double, 3> traction;
 
    double sum = 0.0;
 
@@ -138,7 +138,10 @@ public:
      this->outer_unit_normal(s,N);
 
      //Now get the traction from the bulk element
-     bulk_elem_pt->get_traction(s_bulk,N,traction);
+     FixedSizeVector<double, 2> n_fixed;
+     n_fixed[0] = N[0];
+     n_fixed[1] = N[1];
+     bulk_elem_pt->get_traction(s_bulk,n_fixed,traction);
 
      //Now sort out the magnitude of the torque the phi component
      //of the stress about the distance from the axis of rotation,

@@ -48,7 +48,7 @@ namespace oomph
     // Set all the initial positions of the nodes
     Vector<double> xi(1);
     Vector<double> base(2);
-    Vector<double> N(2);
+    FixedSizeVector<double, 2> N;
     const unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {

@@ -321,9 +321,9 @@ namespace oomph
       // Calculate the local Lagrangian coordinates, position components
       // and the derivatives of global position components
       // wrt lagrangian coordinates, as well as acceleration
-      Vector<double> interpolated_xi(2, 0.0);
-      Vector<double> interpolated_X(2, 0.0);
-      DenseMatrix<double> interpolated_dXdxi(2, 2, 0.0);
+      FixedSizeVector<double, 2> interpolated_xi(0.0);
+      FixedSizeVector<double, 2> interpolated_X(0.0);
+      FixedSizeMatrix<double, 2, 2> interpolated_dXdxi(0.0);
 
       // Calculate displacements and derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -451,10 +451,10 @@ namespace oomph
         solid_pshape_at_knot(ipt, psisp);
 
         // Storage for Lagrangian coordinates and velocity (initialised to zero)
-        Vector<double> interpolated_xi(2, 0.0);
-        Vector<double> interpolated_X(2, 0.0);
-        DenseMatrix<double> interpolated_dXdxi(2, 2, 0.0);
-        Vector<double> veloc(2, 0.0);
+        FixedSizeVector<double, 2> interpolated_xi(0.0);
+        FixedSizeVector<double, 2> interpolated_X(0.0);
+        FixedSizeMatrix<double, 2, 2> interpolated_dXdxi(0.0);
+        FixedSizeVector<double, 2> veloc(0.0);
         double interpolated_solid_p = 0.0;
 
         // Calculate lagrangian coordinates
@@ -539,7 +539,7 @@ namespace oomph
 
         // Build the stress tensor up from its pressure and deviatoric
         // components
-        DenseMatrix<double> sigma(3, 3, 0.0);
+        FixedSizeMatrix<double, 3, 3> sigma(0.0);
         for (unsigned i = 0; i < 3; i++)
         {
           for (unsigned j = 0; j < 3; j++)

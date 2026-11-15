@@ -86,7 +86,7 @@ namespace GlobalParameters
 
   /// Returns the vorticity field associated with the Taylor-Green vortex
   /// solution (for validation of vorticity projection)
-  void sin_cos_vorticity(const Vector<double>& x,
+  void sin_cos_vorticity(const FixedSizeVector<double, 2>& x,
                          Vector<Vector<double>>& vort_and_derivs)
   {
     // Time remains fixed so set to zero
@@ -181,7 +181,7 @@ namespace GlobalParameters
 
 
   /// Synthetic vorticity field and derivs for validation
-  void synthetic_vorticity(const Vector<double>& x,
+  void synthetic_vorticity(const FixedSizeVector<double, 2>& x,
                            Vector<Vector<double>>& vort_and_derivs)
   {
     // Get the sin/cos vorticity field

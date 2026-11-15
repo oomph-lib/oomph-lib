@@ -72,8 +72,8 @@ namespace Global_Physical_Variables
 
 /// A function to specify a constant axial body force
 void axial_pressure_gradient(const double &time,
-                             const Vector<double> &x,
-                             Vector<double> &result)
+                             const FixedSizeVector<double, 2> &x,
+                             FixedSizeVector<double, 3> &result)
 {
  using namespace Global_Physical_Variables;
 

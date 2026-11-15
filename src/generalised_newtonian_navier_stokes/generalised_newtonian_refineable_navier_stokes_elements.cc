@@ -72,7 +72,7 @@ namespace oomph
     Vector<double> s(DIM);
 
     // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(DIM);
+    FixedSizeVector<unsigned, DIM> u_nodal_index;
     for (unsigned i = 0; i < DIM; i++)
     {
       u_nodal_index[i] = this->u_index_nst(i);
@@ -355,7 +355,7 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    const FixedSizeVector<double, DIM>& G = this->g();
 
     // Integers that store the local equations and unknowns
     int local_eqn = 0, local_unknown = 0;
@@ -391,11 +391,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       //--------------------------------------------------------------
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_veloc(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_veloc(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -440,7 +440,7 @@ namespace oomph
       }
 
       // The strainrate used to compute the second invariant
-      DenseMatrix<double> strainrate_to_compute_second_invariant(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> strainrate_to_compute_second_invariant;
 
       // the strainrate used to calculate the second invariant
       // can be either the current one or the one extrapolated from
@@ -463,7 +463,7 @@ namespace oomph
       double viscosity = this->Constitutive_eqn_pt->viscosity(second_invariant);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
+      FixedSizeVector<double, DIM> body_force;
       this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
@@ -480,16 +480,16 @@ namespace oomph
           this->Constitutive_eqn_pt->dviscosity_dinvariant(second_invariant);
 
         // calculate the strainrate
-        DenseMatrix<double> strainrate(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> strainrate;
         this->strain_rate(s, strainrate);
 
         // pre-compute the derivative of the second invariant w.r.t. the
         // entries in the rate of strain tensor
-        DenseMatrix<double> dinvariant_dstrainrate(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> dinvariant_dstrainrate(0.0);
 
         // setting up a Kronecker Delta matrix, which has ones at the diagonal
         // and zeros off-diagonally
-        DenseMatrix<double> kroneckerdelta(DIM, DIM, 0.0);
+        FixedSizeMatrix<double, DIM, DIM> kroneckerdelta(0.0);
 
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1112,7 +1112,7 @@ namespace oomph
     double scaled_re_st = this->re_st() * this->density_ratio();
     double scaled_re_inv_fr = this->re_invfr() * this->density_ratio();
     double visc_ratio = this->viscosity_ratio();
-    Vector<double> G = this->g();
+    const FixedSizeVector<double, DIM>& G = this->g();
 
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
@@ -1143,7 +1143,7 @@ namespace oomph
         element_has_node_with_aux_node_update_fct = true;
 
         // Current nodal velocity
-        Vector<double> u_ref(DIM);
+        FixedSizeVector<double, DIM> u_ref;
         for (unsigned i = 0; i < DIM; i++)
         {
           u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
@@ -1210,11 +1210,11 @@ namespace oomph
       // Calculate local values of the pressure and velocity components
       // Allocate
       double interpolated_p = 0.0;
-      Vector<double> interpolated_u(DIM, 0.0);
-      Vector<double> interpolated_x(DIM, 0.0);
-      Vector<double> mesh_velocity(DIM, 0.0);
-      Vector<double> dudt(DIM, 0.0);
-      DenseMatrix<double> interpolated_dudx(DIM, DIM, 0.0);
+      FixedSizeVector<double, DIM> interpolated_u(0.0);
+      FixedSizeVector<double, DIM> interpolated_x(0.0);
+      FixedSizeVector<double, DIM> mesh_velocity(0.0);
+      FixedSizeVector<double, DIM> dudt(0.0);
+      FixedSizeMatrix<double, DIM, DIM> interpolated_dudx(0.0);
 
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
@@ -1289,19 +1289,19 @@ namespace oomph
         node_pt(0)->time_stepper_pt()->weight(1, 0);
 
       // Get the user-defined body force terms
-      Vector<double> body_force(DIM);
+      FixedSizeVector<double, DIM> body_force;
       this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       const double source = this->get_source_nst(time, ipt, interpolated_x);
 
       // Get gradient of body force function
-      DenseMatrix<double> d_body_force_dx(DIM, DIM, 0.0);
+      FixedSizeMatrix<double, DIM, DIM> d_body_force_dx(0.0);
       this->get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
-      Vector<double> source_gradient(DIM, 0.0);
+      FixedSizeVector<double, DIM> source_gradient(0.0);
       this->get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
 

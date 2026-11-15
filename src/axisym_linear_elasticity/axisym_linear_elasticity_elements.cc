@@ -86,14 +86,14 @@ namespace oomph
     DShape dpsidx(n_node, 2);
 
     // Storage for Eulerian coordinates (r,z; initialised to zero)
-    Vector<double> interpolated_x(2, 0.0);
+    FixedSizeVector<double, 2> interpolated_x(0.0);
 
     // Displacements u_r,u_z,u_theta
-    Vector<double> interpolated_u(3, 0.0);
+    FixedSizeVector<double, 3> interpolated_u(0.0);
 
     // Calculate interpolated values of the derivatives w.r.t.
     // Eulerian coordinates
-    DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+    FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
 
     // Calculate displacements and derivatives
@@ -212,7 +212,7 @@ namespace oomph
     unsigned n_intpt = this->integral_pt()->nweight();
 
     // Set the vector to hold the local coordinates in the element
-    Vector<double> s(2);
+    FixedSizeVector<double, 2> s;
 
     // Integers to store the local equation numbers
     int local_eqn = 0, local_unknown = 0;
@@ -236,13 +236,13 @@ namespace oomph
       Vector<double> interpolated_x(2, 0.0);
 
       // Displacements u_r,u_z,u_theta
-      Vector<double> interpolated_u(3, 0.0);
+      FixedSizeVector<double, 3> interpolated_u(0.0);
 
       // Calculate interpolated values of the derivatives w.r.t.
       // Eulerian coordinates
-      DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
+      FixedSizeMatrix<double, 3, 2> interpolated_dudx(0.0);
 
-      Vector<double> d2u_dt2(3, 0.0);
+      FixedSizeVector<double, 3> d2u_dt2(0.0);
 
       // Calculate displacements and derivatives
       for (unsigned l = 0; l < n_node; l++)

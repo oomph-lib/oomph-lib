@@ -949,7 +949,7 @@ namespace oomph
         unsigned nnode_1d = 2;
 
         // Storage for the index along each boundary
-        Vector<int> index(DIM + 1);
+        FixedSizeVector<int, DIM + 1> index;
 
         // Loop over the coordinate directions
         for (unsigned i = 0; i < DIM + 1; i++)

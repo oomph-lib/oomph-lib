@@ -217,7 +217,7 @@ namespace oomph
     void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(DIM);
-      Vector<unsigned> j_sub(DIM);
+      FixedSizeVector<unsigned, DIM> j_sub;
       unsigned j_copy = j;
       unsigned NNODE_1D = 2;
       const double S_min = this->s_min();
@@ -234,7 +234,7 @@ namespace oomph
     void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(DIM);
-      Vector<unsigned> j_sub(DIM);
+      FixedSizeVector<unsigned, DIM> j_sub;
       unsigned j_copy = j;
       unsigned NNODE_1D = 2;
       for (unsigned i = 0; i < DIM; i++)

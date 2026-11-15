@@ -517,9 +517,9 @@ namespace oomph
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);
-    Vector<double> p(3);
-    Vector<double> point1(3);
-    Vector<double> point2(3);
+    FixedSizeVector<double, 3> p;
+    FixedSizeVector<double, 3> point1;
+    FixedSizeVector<double, 3> point2;
 
     point1[0] = Radius - 0.5 * Radius * k0;
     point1[1] = 0.5 * Radius * k0;
@@ -556,7 +556,7 @@ namespace oomph
     r_right_R(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius;
     on_center[1] = 0.0;
     on_center[2] = 0.5 * Radius * 0.5 * (zeta[1] + 1.0);
@@ -584,7 +584,7 @@ namespace oomph
     r_right_R(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius;
     on_center[1] = 0.5 * Radius;
     on_center[2] = 0.5 * Radius * 0.5 * (zeta[1] + 1.0);
@@ -612,7 +612,7 @@ namespace oomph
     r_right_R(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius;
     on_center[1] = 0.5 * Radius * 0.5 * (zeta[1] + 1.0);
     on_center[2] = 0.0;
@@ -640,7 +640,7 @@ namespace oomph
     r_right_R(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius;
     on_center[1] = 0.5 * Radius * 0.5 * (zeta[1] + 1.0);
     on_center[2] = 0.5 * Radius;
@@ -668,7 +668,7 @@ namespace oomph
     r_up_U(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.0;
     on_center[1] = 0.5 * Radius;
     on_center[2] = 0.5 * Radius * 0.5 * (zeta[1] + 1.0);
@@ -712,9 +712,9 @@ namespace oomph
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);
-    Vector<double> p(3);
-    Vector<double> point1(3);
-    Vector<double> point2(3);
+    FixedSizeVector<double, 3> p;
+    FixedSizeVector<double, 3> point1;
+    FixedSizeVector<double, 3> point2;
 
     point1[0] = 0.5 * Radius * k0;
     point1[1] = Radius - 0.5 * Radius * k0;
@@ -751,7 +751,7 @@ namespace oomph
     r_up_U(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius * 0.5 * (zeta[0] + 1.0);
     on_center[1] = 0.5 * Radius;
     on_center[2] = 0.0;
@@ -779,7 +779,7 @@ namespace oomph
     r_up_U(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius * 0.5 * (zeta[0] + 1.0);
     on_center[1] = 0.5 * Radius;
     on_center[2] = 0.5 * Radius;
@@ -807,7 +807,7 @@ namespace oomph
     r_front_F(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.0;
     on_center[1] = 0.5 * Radius * 0.5 * (zeta[0] + 1.0);
     on_center[2] = 0.5 * Radius;
@@ -849,7 +849,7 @@ namespace oomph
     r_front_F(t, temp_zeta, on_sphere);
 
     // position vector on center box
-    Vector<double> on_center(3);
+    FixedSizeVector<double, 3> on_center;
     on_center[0] = 0.5 * Radius * 0.5 * (zeta[0] + 1.0);
     on_center[1] = 0.0;
     on_center[2] = 0.5 * Radius;
@@ -893,9 +893,9 @@ namespace oomph
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);
-    Vector<double> p(3);
-    Vector<double> point1(3);
-    Vector<double> point2(3);
+    FixedSizeVector<double, 3> p;
+    FixedSizeVector<double, 3> point1;
+    FixedSizeVector<double, 3> point2;
 
     point1[0] = 0.5 * Radius * k0;
     point1[1] = 0.0;

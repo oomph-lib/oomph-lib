@@ -978,7 +978,7 @@ namespace oomph
           sqrt(rhs[0] * rhs[0] + rhs[1] * rhs[1] + rhs[2] * rhs[2]);
 
         // Now find the shortest edge length
-        Vector<double> edge(3);
+        FixedSizeVector<double, 3> edge;
         double min_length = DBL_MAX;
         for (unsigned start = 0; start < 4; ++start)
         {

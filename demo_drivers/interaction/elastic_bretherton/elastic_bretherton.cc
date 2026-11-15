@@ -98,7 +98,7 @@ namespace Global_Physical_Variables
 
  double Pext = 0.0;
  /// Direction of gravity
- Vector<double> G(2);
+ FixedSizeVector<double, 2> G;
  
  /// The Poisson ratio
  double Nu = 0.49;
@@ -149,8 +149,10 @@ namespace Global_Physical_Variables
  map<double,pair<GeomObject*,Vector<double> > > lower_map;
 
  /// Function that prescribes the hydrostatic pressure field at the outlet
- void hydrostatic_pressure(const double &time, const Vector<double> &x, 
-                           const Vector<double>& n, Vector<double> &traction)
+ void hydrostatic_pressure(const double &time,
+                           const FixedSizeVector<double, 2> &x, 
+                           const FixedSizeVector<double, 2>& n,
+                           FixedSizeVector<double, 2> &traction)
  {
   traction[0] = -ReInvFr*G[1]*x[1];
   traction[1] = 0.0;
@@ -349,7 +351,7 @@ class SpineGravityTractionElement :
  double *ReInvFr_pt;
 
  /// Pointer to global gravity Vector
- Vector<double> *G_pt;
+ FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> *G_pt;
 
  /// Pointer to the viscosity ratio (relative to the 
  /// viscosity used in the definition of the Reynolds number)
@@ -516,10 +518,12 @@ public:
  const double &re_invfr() {return *ReInvFr_pt;}
 
  /// Vector of gravitational components
- const Vector<double> &g() const {return *G_pt;}
+ const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM> &g() const
+  {return *G_pt;}
 
  /// Pointer to Vector of gravitational components
- Vector<double>* &g_pt() {return G_pt;}
+ FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>* &g_pt()
+  {return G_pt;}
 
  /// Access function for the velocity. N. B. HEAVY ASSUMPTIONS HERE
  double u(const unsigned &l,const unsigned &i)
@@ -612,7 +616,7 @@ public:
    //Get the Physical Variable
    double ReInvFr = re_invfr()*density_ratio();
    double Viscosity_Ratio = viscosity_ratio();
-   Vector<double> G = g();
+   const FixedSizeVector<double, ELEMENT::TEMPLATE_PARAMETER_DIM>& G = g();
    double Delta_p = delta_p();
    
    unsigned n_external_u = nexternal_u_data();

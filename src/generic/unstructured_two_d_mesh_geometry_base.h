@@ -2959,7 +2959,6 @@ namespace oomph
 
       // How many connection vertices have we already created
       unsigned i_connection = 0;
-      Vector<double> zeta_connection(1);
 
       // If we have more connection points than the generated
       // by the number of segments then we have to change the
