@@ -560,7 +560,8 @@ namespace oomph
       : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          LineDerivatives,
                                          ELEMENT>(element_pt, face_index)
-    {}
+    {
+    }
   };
 
 
@@ -1224,7 +1225,8 @@ namespace oomph
       : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                            LineDerivatives,
                                            ELEMENT>(element_pt, face_index, id)
-    {}
+    {
+    }
   };
 
   /// Define the BoundingElement type associated with the 1D surface element
