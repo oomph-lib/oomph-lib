@@ -88,27 +88,26 @@ namespace oomph
       const FixedSizeVector<double, 2>& zeta,
       FixedSizeVector<double, 3>& r) const
     {
+      // (TOO MUCH) DETAIL ON THE WORKSPACE CODE BELOW:
+      // Get the workspaces containing zeta and the position vector in
+      // their Vector incarnation. The clever bit is that while creating
+      // this workspace (which gives access to the wrapped containers)
+      // in PARANOID mode we're also recording (in the GuardedWorkspace
+      // that actually stores these containers) that the workspace is
+      // in use! When the Workspace goes out of scope (at the end of
+      // this function) the status is reset to "not in use" by the
+      // Workspace destructor. This is safe even if an
+      // exception is thrown somewhere along the way -- the destructor is
+      // always called.
+      // In a non-PARANOID build the bookkeeping is absent, so acquiring and
+      // releasing the workspaces should introduce no runtime overhead.
 
-     // (TOO MUCH) DETAIL ON THE WORKSPACE CODE BELOW:
-     // Get the workspaces containing zeta and the position vector in
-     // their Vector incarnation. The clever bit is that while creating
-     // this workspace (which gives access to the wrapped containers)
-     // in PARANOID mode we're also recording (in the GuardedWorkspace
-     // that actually stores these containers) that the workspace is
-     // in use! When the Workspace goes out of scope (at the end of
-     // this function) the status is reset to "not in use" by the
-     // Workspace destructor. This is safe even if an
-     // exception is thrown somewhere along the way -- the destructor is
-     // always called.
-     // In a non-PARANOID build the bookkeeping is absent, so acquiring and
-     // releasing the workspaces should introduce no runtime overhead.
 
-
-     // GeomObject::position(...) uses dynamically sized Vectors. These
-     // pre-sized workspaces provide the required arguments while avoiding
-     // repeated allocation in this FixedSizeVector wrapper.
-     Workspace<Vector<double>> zeta_workspace = Zeta_workspace.workspace();
-     Workspace<Vector<double>> r_workspace = R_workspace.workspace();
+      // GeomObject::position(...) uses dynamically sized Vectors. These
+      // pre-sized workspaces provide the required arguments while avoiding
+      // repeated allocation in this FixedSizeVector wrapper.
+      Workspace<Vector<double>> zeta_workspace = Zeta_workspace.workspace();
+      Workspace<Vector<double>> r_workspace = R_workspace.workspace();
 
 
       // Copy the intrinsic coordinates into the generic interface argument.
@@ -464,13 +463,13 @@ namespace oomph
     std::map<unsigned, Vector<double>> Zeta_in_region;
 
 
-    /// Workspace containing a 3D vector. Mutable because it is scratch 
-    /// storage and is therefore not deemed to change the state of 
+    /// Workspace containing a 3D vector. Mutable because it is scratch
+    /// storage and is therefore not deemed to change the state of
     /// the object.
     mutable GuardedWorkspace<Vector<double>> R_workspace;
 
-    /// Workspace containing a 2D vector. Mutable because it is scratch 
-    /// storage and is therefore not deemed to change the state of 
+    /// Workspace containing a 2D vector. Mutable because it is scratch
+    /// storage and is therefore not deemed to change the state of
     /// the object.
     mutable GuardedWorkspace<Vector<double>> Zeta_workspace;
   };
