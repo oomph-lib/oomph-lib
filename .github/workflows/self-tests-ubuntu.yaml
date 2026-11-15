@@ -8,6 +8,8 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
+
   # IMPORTANT: A schedule workflow action *must* be placed on the default branch
   # of the repository. Only then will it run as scheduled. It is also placed in a
   # queue when scheduled, so it may not run exactly at the requested time.
