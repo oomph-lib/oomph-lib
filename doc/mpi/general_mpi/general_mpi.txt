@@ -334,8 +334,8 @@ complicated mesh partitionings.
    are shared between processors and are associated
    with the highest-numbered processor, as explained above.
    These additional elements/nodes that are retained but not associated
-   with the processor are termed ``halo'' elements/nodes. Conversely, 
-   objects are termed  ``haloed'' if they are associated with the
+   with the processor are termed "halo" elements/nodes. Conversely,
+   objects are termed  "haloed" if they are associated with the
    processor,  but they have halo counterparts on other processors. 
    [It is possible
     to request that all elements in a mesh are retained as halo
@@ -739,7 +739,7 @@ mpirun $1 $2 -x DISPLAY rungdb.sh -x cmds.gdb
 mpidbg and contain the following
 \code
 #!/bin/bash
-echo "Running GDB on node `hostname`"
+echo "Running GDB on node $(hostname)"
 echo $DISPLAY
 xterm -geometry 200x40 -e gdb $*
 exit 0

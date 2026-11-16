@@ -351,7 +351,7 @@ tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
  \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$} 
  \mbox{\boldmath$\nabla$}_{\!\!_{S}}
    \Gamma \right]\, \phi\, \mbox{d}S = 0. \f]
- In the above equation the time derivative is taken at fixed ``nodes''
+ In the above equation the time derivative is taken at fixed "nodes"
  in the finite element formulation and the ALE-like term compensates
  for tangential movement of these nodes along the surface. The normal
  movement is enforced to be exactly the same as the surface velocity by
@@ -584,7 +584,7 @@ element.
 
 \dontinclude specific_node_update_interface_elements.h
 \skipline SpineLineFluidInterfaceElement(
-\until {}
+\until }
 
 
  If a spine method is used to update the nodal positions then the
@@ -598,7 +598,7 @@ overloaded accordingly
 Finally, the element calculates the geometric contributions to the
 jacobian using the generic functionality in \c ElementWithMovingNodes
 \skipline fill_in_contribution_to_jacobian
-\until End of jacobian contribution
+\until }
 
 There are no additional contributions to the residuals or jacobian.
 
@@ -632,7 +632,7 @@ multipliers
 
 \dontinclude specific_node_update_interface_elements.h
 \skipline ElasticLineFluidInterfaceElement(
-\until //End of constructor
+\until }
 
 The kinematic boundary condition is associated with the Lagrange multiplier
 and \c kinematic_local_eqn(...) is

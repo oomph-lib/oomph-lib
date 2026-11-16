@@ -94,20 +94,21 @@ namespace BL_Squash
 ///   + A
 ///   \left(
 ///   \begin{array}{l}
-///   - B \sin\left(\frac{2\pi}{L_{collapsible}}\zeta\right) \\ \left(
-///   \frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta)
+///   - B \sin\left(\frac{2\pi}{L_{collapsible}}\zeta\right) \\
+///   \left(\frac{2}{L_{collapsible}}\right)^2 \zeta \ (L-\zeta)
 ///   \end{array}
 ///   \right)   
 ///   \ \sin\left(\frac{2\pi t}{T}\right)
 ///   \ {\cal R}(t)
-///  \f]
+/// \f]
 /// The parameter \f$ B \f$ is zero by default. If it is set to a nonzero
 /// value, the material particles on the wall also perform some 
-/// horizontal motion. The "ramp" function 
+/// horizontal motion. The "ramp" function
 /// \f[ 
 /// {\cal R}(t) =  \left\{ 
 /// \begin{array}{ll}  
-/// \frac{1}{2}(1-\cos(\pi t/T)) & \mbox{for $t<T$} \\ 1 & \mbox{for $t \ge T$}
+/// \frac{1}{2}(1-\cos(\pi t/T)) & \mbox{for } t<T \\
+/// 1 & \mbox{for } t \ge T
 /// \end{array} 
 /// \right.
 /// \f]

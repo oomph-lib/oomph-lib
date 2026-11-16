@@ -524,12 +524,9 @@ namespace oomph
   /// This function loops over the internal data of the element and assigns
   /// GLOBAL equation numbers to the data objects.
   ///
-  /// Pass:
-  /// - the current total number of dofs, global_number, which gets
-  ///   incremented.
-  /// - Dof_pt, the Vector of pointers to the global dofs
-  ///   (to which any internal dofs are added).
-  /// .
+  /// Pass the current total number of dofs, global_number, which gets
+  /// incremented, and Dof_pt, the Vector of pointers to the global dofs
+  /// (to which any internal dofs are added).
   //==========================================================================
   void GeneralisedElement::assign_internal_eqn_numbers(
     unsigned long& global_number, Vector<double*>& Dof_pt)
@@ -1743,7 +1740,7 @@ namespace oomph
   }
 
   //======================================================================
-  // Function to describe the local dofs of the element. The ostream
+  /// Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1917,8 +1914,8 @@ namespace oomph
         error_stream << " ii) switching OFF the PARANOID flag" << std::endl
                      << std::endl;
 
-        /// Throw an inverted error so it can be caught by the adaptive
-        /// timestepper and arc length continuation for example.
+        // Throw an inverted error so it can be caught by the adaptive
+        // timestepper and arc length continuation for example.
         throw InvertedElementError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
@@ -5113,10 +5110,9 @@ namespace oomph
   /// Data that can affect the fields interpolated by the FiniteElement.
   /// The information will typically be used in interaction problems in
   /// which the FiniteElement provides a forcing term for an
-  /// ElementWithExternalElement. The Data must be provided as
-  /// \c paired_load data containing
-  /// - the pointer to a Data object
-  /// - the index of the value in that Data object
+  /// ElementWithExternalElement. The Data must be provided
+  /// as \c paired_load data containing: (i) the pointer to a Data object
+  /// (ii) the index of the value in that Data object.
   /// The generic implementation (should be overloaded in more specific
   /// applications) is to include all nodal and internal Data stored in
   /// the FiniteElement. Note that the geometric data,
@@ -6921,10 +6917,10 @@ namespace oomph
 
   //============================================================================
   /// Assign local equation numbers for the solid equations in the element.
-  //  This can be done at a high level assuming, as I am, that the equations
-  //  will always be formulated in terms of nodal positions.
   /// If the boolean argument is true then pointers to the dofs will be
   /// stored in Dof_pt.
+  //  This can be done at a high level assuming, as I am, that the equations
+  //  will always be formulated in terms of nodal positions.
   //============================================================================
   void SolidFiniteElement::assign_solid_local_eqn_numbers(
     const bool& store_local_dof_pt)
