@@ -93,7 +93,7 @@ jobs:
         build_third_party_libs: ["OFF", "ON"]
 
     name: Ubuntu self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # -------------------
       # INITIAL SETUP:
