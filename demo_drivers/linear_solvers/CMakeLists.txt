@@ -73,6 +73,14 @@ if(NOT OOMPH_HAS_MPI)
       SOURCES TrilinosSolver_test.cc
       LIBRARIES oomph::poisson oomph::meshes oomph::generic)
   endif()
+  
+  if(OOMPH_HAS_TRILINOS)
+    oomph_add_executable(
+      NAME TrilinosSolver_test_transition
+      SOURCES TrilinosSolver_test_transition.cc
+      LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+  endif()
+
 endif()
 
 if(OOMPH_HAS_MUMPS)
@@ -100,6 +108,7 @@ if(NOT OOMPH_HAS_MPI)
 
   if(OOMPH_HAS_TRILINOS)
     list(APPEND TEST_TARGET_DEPS TrilinosSolver_test)
+    list(APPEND TEST_TARGET_DEPS TrilinosSolver_test_transition)
   endif()
 endif()
 
