@@ -21,14 +21,14 @@
 include_guard()
 
 set(TRILINOS_GIT_URL https://github.com/trilinos/Trilinos.git)
-set(TRILINOS_GIT_TAG trilinos-release-16-0-0)
+set(TRILINOS_GIT_TAG trilinos-release-16-2-2)
 set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
 
 # TODO: Handle deprecated packages more gracefully
-if (NOT TRILINOS_GIT_TAG STREQUAL "trilinos-release-16-0-0")
+if (NOT TRILINOS_GIT_TAG STREQUAL "trilinos-release-16-2-2")
   message(
     WARNING
-      "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 "
+      "Disabling deprecated Trilinos package warnings. Do not move past v16.2.2 "
       "without making the necessary oomph-lib changes to handle this."
   )
 endif()
