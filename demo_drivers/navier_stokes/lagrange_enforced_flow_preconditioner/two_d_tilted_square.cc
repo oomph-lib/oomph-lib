@@ -400,7 +400,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   // We choose either trilinos or oomph-lib's GMRES as our linear solver
   if(GV::Use_trilinos)
   {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     // Create the trilinos solver.
     TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
     trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
@@ -672,7 +672,7 @@ int main(int argc, char **argv)
   // Set the flag for trilinos solver
   if(CommandLineArgs::command_line_flag_has_been_set("--use_trilinos"))
   {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     GV::Use_trilinos = true;
 #else
     std::ostringstream warning_stream;

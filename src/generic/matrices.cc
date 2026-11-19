@@ -1220,7 +1220,7 @@ namespace oomph
     Built = false;
 
     // set the serial matrix-matrix multiply method
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     //    Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
@@ -1270,7 +1270,7 @@ namespace oomph
     Built = true;
 
     // set the serial matrix-matrix multiply method
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     // Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
@@ -1295,7 +1295,7 @@ namespace oomph
     Built = false;
 
 // set the serial matrix-matrix multiply method
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     //    Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
@@ -1325,7 +1325,7 @@ namespace oomph
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
 
     // set the serial matrix-matrix multiply method
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     // Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
@@ -1842,7 +1842,7 @@ namespace oomph
     if (this->distributed() &&
         this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       // This will only work if we have trilinos on board
       TrilinosEpetraHelpers::multiply(this, x, soln);
 #else
@@ -1935,7 +1935,7 @@ namespace oomph
     if (this->distributed() &&
         this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       // This will only work if we have trilinos on board
       TrilinosEpetraHelpers::multiply(this, x, soln);
 #else
@@ -2336,7 +2336,7 @@ namespace oomph
     // else we have to use trilinos
     else
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       bool use_ml = false;
       if (method == 5)
       {

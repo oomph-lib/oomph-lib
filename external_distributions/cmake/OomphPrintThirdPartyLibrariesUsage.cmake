@@ -194,7 +194,8 @@ function(oomph_print_third_party_libraries_usage)
     cgal
     mumps
     hypre
-    trilinos
+    trilinos16
+    trilinos17
   )
 
   # Build a list of only the targets that actually exist

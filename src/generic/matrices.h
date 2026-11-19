@@ -50,7 +50,7 @@
 #include "double_vector.h"
 
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #include "trilinos_helpers.h"
 #endif
 

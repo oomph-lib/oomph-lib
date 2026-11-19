@@ -192,7 +192,7 @@ only C calling FORTRAN subroutines will work using K&R style.*/
 #if        defined(__CYGWIN__)                 /* 04/11/02 LEB (CFITSIO) */
 #define       f2cFortran
 #endif
-#if        defined(__GNUC__) && defined(linux) /* 06/21/00 PDW (CFITSIO) */
+#if        defined(__GNUC__) && (defined(linux) || defined(__linux__)) /* 06/21/00 PDW (CFITSIO) */
 #define       f2cFortran
 #endif
 #if defined(macintosh)                         /* 11/1999 (CFITSIO) */

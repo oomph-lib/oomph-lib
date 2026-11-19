@@ -40,7 +40,7 @@ oomph_add_executable(
   SOURCES fsi_channel_with_leaflet.cc
   LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   oomph_add_executable(
     NAME TrilinosSolver_test
     SOURCES TrilinosSolver_test.cc
@@ -57,7 +57,7 @@ endif()
 set(TEST_TARGET_DEPS driven_cavity direct_solver_test airy_cantilever
     fsi_channel_with_leaflet)
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   list(APPEND TEST_TARGET_DEPS TrilinosSolver_test two_d_multi_poisson)
 endif()
 

@@ -536,7 +536,7 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
  // Setup equation numbering scheme
  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
  // Build iterative linear solver
  oomph_info << "Using Trilinos GMRES\n"; 

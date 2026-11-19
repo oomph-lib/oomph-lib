@@ -439,7 +439,7 @@ PrescribedBoundaryDisplacementProblem(const unsigned& nel_1d)
  IterativeLinearSolver* solver_pt=0;
 
  // If we have trilinos, use it
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
  // Create solver
  solver_pt = new TrilinosAztecOOSolver;
@@ -491,7 +491,7 @@ PrescribedBoundaryDisplacementProblem(const unsigned& nel_1d)
 #endif
 
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
  // Use Trilinos CG as subsidiary preconditioner (inexact solver) for
  // linear (sub-)systems to be solved in the Lagrange multiplier block?

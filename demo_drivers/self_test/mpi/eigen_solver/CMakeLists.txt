@@ -20,7 +20,7 @@ endif()
 
 include(CTest)
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   oomph_add_executable(
     NAME eigen_solver_test
     SOURCES eigen_solver_test.cc
@@ -29,7 +29,7 @@ endif()
 
 # ---------------------------------- TESTING ----------------------------------
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   oomph_add_test(
     TEST_NAME self_test.mpi.eigen_solver
     DEPENDS_ON eigen_solver

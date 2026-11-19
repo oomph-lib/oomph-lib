@@ -20,7 +20,7 @@ endif()
 
 include(CTest)
 
-if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_HYPRE AND OOMPH_HAS_OLD_TRILINOS)
   oomph_add_executable(
     NAME pseudo_solid_collapsible_tube
     SOURCES pseudo_solid_collapsible_tube.cc
@@ -30,7 +30,7 @@ endif()
 
 # ---------------------------------- TESTING ----------------------------------
 
-if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_HYPRE AND OOMPH_HAS_OLD_TRILINOS)
   oomph_add_test(
     TEST_NAME mpi.multi_domain.pseudo_solid_collapsible_tube
     DEPENDS_ON pseudo_solid_collapsible_tube

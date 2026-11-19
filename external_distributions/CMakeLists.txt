@@ -79,6 +79,12 @@ oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ON)
 oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
 oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
 oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Enable testing when building the third-party libraries?" OFF)
+set(OOMPH_TRILINOS_VERSION 16 CACHE STRING "Trilinos version to build.")
+set_property(CACHE OOMPH_TRILINOS_VERSION PROPERTY STRINGS 16 17)
+if(NOT OOMPH_TRILINOS_VERSION STREQUAL "16"
+   AND NOT OOMPH_TRILINOS_VERSION STREQUAL "17")
+  message(FATAL_ERROR "OOMPH_TRILINOS_VERSION must be either 16 or 17.")
+endif()
 
 # Set the default installation path
 if(PROJECT_IS_TOP_LEVEL AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -270,7 +276,11 @@ endif()
 # ---------------------------------[ TRILINOS ]--------------------------------
 
 if(OOMPH_BUILD_TRILINOS)
-  include(OomphGetExternalTrilinos)
+  if(OOMPH_TRILINOS_VERSION STREQUAL "16")
+    include(OomphGetExternalTrilinos16)
+  else()
+    include(OomphGetExternalTrilinos17)
+  endif()
 endif()
 
 # ----------------------------[ DOC CONFIGURATION ]----------------------------

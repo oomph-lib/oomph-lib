@@ -455,7 +455,7 @@ int main(int argc, char **argv)
  }
  clock_t t_end1 = clock();
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
  clock_t t_start2 = clock();
 //Solve with Anasazi
  {
@@ -469,7 +469,7 @@ int main(int argc, char **argv)
  std::cout << "LAPACK TIME: " << (double)(t_end1 - t_start1)/CLOCKS_PER_SEC
            << std::endl;
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
   std::cout << "ANASAZI TIME: " << (double)(t_end2 - t_start2)/CLOCKS_PER_SEC
            << std::endl;
 #else

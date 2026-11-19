@@ -16,7 +16,7 @@ set(
   TRILINOS_URL
   https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-17-0-0.tar.gz)
 
-set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
+set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos17")
 
 # Trilinos 17 requires CMake 3.27 or newer and a C++20-compatible compiler.
 if(CMAKE_VERSION VERSION_LESS 3.27)
@@ -167,7 +167,7 @@ endif()
 # CMake's ExternalProject git-submodule initialisation to fail. None of those
 # framework/CI repositories is required for our Trilinos library build.
 oomph_get_external_project_helper(
-  PROJECT_NAME trilinos
+  PROJECT_NAME trilinos17
   URL ${TRILINOS_URL}
   INSTALL_DIR ${TRILINOS_INSTALL_DIR}
   CONFIGURE_COMMAND
@@ -192,7 +192,7 @@ oomph_get_external_project_helper(
 # Trilinos depends on OpenBLAS. If we're building OpenBLAS ourselves then we
 # need to make sure that it gets built before Trilinos.
 if(TARGET openblas)
-  add_dependencies(trilinos openblas)
+  add_dependencies(trilinos17 openblas)
 endif()
 
 # ---------------------------------------------------------------------------------

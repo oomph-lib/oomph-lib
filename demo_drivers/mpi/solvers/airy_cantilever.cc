@@ -681,7 +681,7 @@ int main(int argc, char* argv[])
  Global_Physical_Variables::Gravity=0.0;
 
  // use trilinos gmres if available
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
  solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else

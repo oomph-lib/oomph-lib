@@ -489,7 +489,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
    // Build iterative linear solver
    //------------------------------
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
    
    TrilinosAztecOOSolver* iterative_linear_solver_pt = new
     TrilinosAztecOOSolver;

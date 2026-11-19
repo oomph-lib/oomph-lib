@@ -1559,7 +1559,7 @@ int main(int argc, char *argv[])
  bool validation_run=false;
 
  //Set Trilinos default value
-#ifdef OOMPH_HAS_TRILINOS 
+#ifdef OOMPH_HAS_OLD_TRILINOS
  unsigned f_ml_settings=1;
 #endif
  
@@ -1626,7 +1626,7 @@ int main(int argc, char *argv[])
      f_bamg_strength = atof(argv[arg_index++]);
     }
 #endif
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
    else if ( strcmp(argv[arg_index], "-f_ml_settings") == 0 )
     {
      arg_index++;
@@ -1765,7 +1765,7 @@ int main(int argc, char *argv[])
     }
    else if (p_solver==1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
      oomph_info << "Using ML SA-AMG on P matrix\n";
 #else
      oomph_info 
@@ -1791,7 +1791,7 @@ int main(int argc, char *argv[])
     }
    else if (f_solver==1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
      oomph_info << "Using ML SA-AMG on F matrix ";
      if (f_ml_settings==0)
       {
@@ -1942,10 +1942,10 @@ int main(int argc, char *argv[])
     }
 #endif
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
    if (p_solver==1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
      Preconditioner* p_preconditioner_pt = new TrilinosMLPreconditioner;
      ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
@@ -1971,10 +1971,10 @@ int main(int argc, char *argv[])
    }
 #endif
 
-#ifdef OOMPH_HAS_TRILINOS    
+#ifdef OOMPH_HAS_OLD_TRILINOS
    if (f_solver==1)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
      Preconditioner* f_preconditioner_pt = new TrilinosMLPreconditioner;
      TrilinosMLPreconditioner* trilinos_preconditioner_pt = 
       static_cast<TrilinosMLPreconditioner*>(f_preconditioner_pt);
