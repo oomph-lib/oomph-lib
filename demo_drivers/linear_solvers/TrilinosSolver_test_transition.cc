@@ -347,9 +347,22 @@ int main(int argc, char **argv)
  // Transition: Start with unpreconditioned GMRES
  {
 
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
   // Create a Trilinos Solver 
   TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;
+
+#endif
+  
+#ifdef OOMPH_HAS_NEW_TRILINOS
+
+  // Create new solver (either GMRES-only or some abstract iterative
+  // linear solver from Trilinos17 that can act as GMRES)
+  // TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;
+  
+  
+#endif
+
   
   // // Create the Trilinos ML preconditioner
   // TrilinosMLPreconditioner* preconditioner_pt = new TrilinosMLPreconditioner;
