@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.circular_driven_cavity
   DEPENDS_ON circular_driven_cavity
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata circular_cavity_1_partition.dat
              circular_cavity_2_partition.dat)
 

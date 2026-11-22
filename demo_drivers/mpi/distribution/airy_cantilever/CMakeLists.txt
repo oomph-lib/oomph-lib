@@ -31,7 +31,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.airy_cantilever
   DEPENDS_ON airy_cantilever2_adapt
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh
              validata
              airy_cantilever_0_partition.dat

@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.restart
   DEPENDS_ON two_d_unsteady_heat_2adapt_load_balance
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh
              validata
              load_balance.mcr

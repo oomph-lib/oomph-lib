@@ -282,13 +282,6 @@ oomph_target_silence_warnings(
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 # ------------------------------------------------------------------------------
-# If oomph-lib needs MPI, link it publically so that executables using the
-# library also inherit MPI
-if(OOMPH_HAS_MPI)
-  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX
-                                          MPI::MPI_Fortran)
-endif()
-
 target_link_libraries(${LIBNAME} PUBLIC ${OpenBLAS_LIBRARIES})
 
 # NOTE: We publicly link to third-party libraries so that these libraries get
@@ -339,6 +332,14 @@ endif()
 
 if(OOMPH_HAS_MUMPS)
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS)
+endif()
+
+# If oomph-lib needs MPI, link it publicly after its third-party libraries so
+# MPI implementations with deprecated C++ bindings resolve symbols from static
+# Trilinos libraries.
+if(OOMPH_HAS_MPI)
+  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX
+                                          MPI::MPI_Fortran)
 endif()
 
 message(VERBOSE "Leaving generic subdirectory")

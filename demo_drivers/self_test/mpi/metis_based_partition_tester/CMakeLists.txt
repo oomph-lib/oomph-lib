@@ -53,7 +53,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME self_test.mpi.metis_based_partition_tester
   DEPENDS_ON adaptive_driven_cavity
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata)
 
 # Don't run this test alongside any other tests hierher Puneet: how does ensure

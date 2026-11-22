@@ -28,12 +28,12 @@
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    DEPENDS_ON one_d_poisson
-#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
 #                    TEST_FILES validate.sh validata my_extra_data_file.dat)
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    DEPENDS_ON one_d_poisson
-#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_VARIABLENP_RUN_COMMAND}"
 #                    TEST_FILES validate.sh validata my_extra_data_file.dat)
 #
 # NOTE 1: Arguments to DEPENDS_ON must be already-defined executables
@@ -239,7 +239,13 @@ function(oomph_add_test)
 
   # Run the command
   file(APPEND "${TEST_SCRIPT}" "# Run the validation command\n")
-  list(JOIN VALIDATE_SH_COMMAND " " VALIDATE_SH_COMMAND_STRING)
+  set(VALIDATE_SH_COMMAND_STRING "")
+  foreach(VALIDATE_ARGUMENT IN LISTS VALIDATE_SH_COMMAND)
+    string(REPLACE "'" "'\\''" VALIDATE_ARGUMENT_ESCAPED
+                   "${VALIDATE_ARGUMENT}")
+    string(APPEND VALIDATE_SH_COMMAND_STRING
+           " '${VALIDATE_ARGUMENT_ESCAPED}'")
+  endforeach()
   file(APPEND "${TEST_SCRIPT}" "${VALIDATE_SH_COMMAND_STRING}\n\n")
 
   # Check exit code of test command

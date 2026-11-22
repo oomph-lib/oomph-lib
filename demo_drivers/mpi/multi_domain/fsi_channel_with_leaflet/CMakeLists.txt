@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.multi_domain.fsi_channel_with_leaflet
   DEPENDS_ON fsi_channel_with_leaflet
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata fsi_channel_with_leaflet_partition.dat)
 
 # Don't run this test alongside any other tests

@@ -18,6 +18,14 @@ set(
 
 set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos17")
 
+# Match CMake's default extension mode instead of passing an empty cache value
+# to Trilinos, which prevents Kokkos from exporting its extension support.
+if(NOT DEFINED CMAKE_CXX_EXTENSIONS OR "${CMAKE_CXX_EXTENSIONS}" STREQUAL "")
+  set(TRILINOS_CXX_EXTENSIONS ON)
+else()
+  set(TRILINOS_CXX_EXTENSIONS "${CMAKE_CXX_EXTENSIONS}")
+endif()
+
 # Trilinos 17 requires CMake 3.27 or newer and a C++20-compatible compiler.
 if(CMAKE_VERSION VERSION_LESS 3.27)
   message(FATAL_ERROR "Trilinos 17 requires CMake 3.27 or newer.")
@@ -40,7 +48,7 @@ set(
   TRILINOS_CMAKE_CONFIGURE_ARGS
   -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
   -DCMAKE_CXX_STANDARD=20
-  -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
+  -DCMAKE_CXX_EXTENSIONS=${TRILINOS_CXX_EXTENSIONS}
   -DCMAKE_INSTALL_PREFIX=${TRILINOS_INSTALL_DIR}
   -DTrilinos_ENABLE_TESTS=${ENABLE_TRILINOS_TESTS}
   -DTrilinos_ENABLE_Fortran=ON
