@@ -360,12 +360,18 @@ namespace oomph
         }
       }
 
-      // If we can't split the boundaries add the flag
+      // If we can't split the boundaries add the flag.
+      // According to the TetGen 1.4 User's Manual, Section 3.2.8,
+      // page 27, -Y prevents the insertion of Steiner points on
+      // exterior boundaries, while -YY additionally prevents the
+      // splitting of interior boundaries. This ensures that the
+      // original boundary discretisation is preserved.
+      //
+      // Reference:
+      // https://web.mit.edu/tetgen_v1.4.1/tetgen-manual.pdf
       if (can_boundaries_be_split == false)
       {
-        input_string << "YY"; // Note that the second Y appears
-                              // to be required; determined by trial and
-                              // error.
+        input_string << "YY";
       }
 
       // Now convert to a C-style string
