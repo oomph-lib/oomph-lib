@@ -18,6 +18,21 @@ if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 
+# Here's how to limit number of parallel build jobs for specific
+# sub-directories/sub-projects. Note that this only applies if the the project
+# is configured by itself. Building all the self-tests from the top level of
+# demo_drivers bypasses this.
+
+# Limit number of ninja jobs to what was used during oomph-lib build (ignored if
+# oomph-lib build wasn't limited) include(OomphLimitNinjaJobs)
+
+# Not assigned -- is ignored
+# oomph_limit_ninja_jobs(${oomph_NJOBS_undefined_variable})
+
+# Pass on oomph-lib specific variable oomph_limit_ninja_jobs(${oomph_NJOBS})
+
+# Set specific value just for this project oomph_limit_ninja_jobs(2)
+
 include(CTest)
 
 oomph_add_executable(
