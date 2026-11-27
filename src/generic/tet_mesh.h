@@ -621,7 +621,7 @@ namespace oomph
     /// zeta_boundary=1.0: we're on vertex 2.
     virtual void boundary_zeta12(const unsigned& facet_id,
                                  const double& zeta_boundary,
-                                 Vector<double>& zeta)
+                                 FixedSizeVector<double, 2>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(1)->zeta_in_geom_object();
@@ -640,7 +640,7 @@ namespace oomph
     /// zeta_boundary=1.0: we're on vertex 0.
     virtual void boundary_zeta20(const unsigned& facet_id,
                                  const double& zeta_boundary,
-                                 Vector<double>& zeta)
+                                 FixedSizeVector<double, 2>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(2)->zeta_in_geom_object();

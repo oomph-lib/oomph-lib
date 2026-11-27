@@ -8,6 +8,8 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
+
   # IMPORTANT: A schedule workflow action *must* be placed on the default branch
   # of the repository. Only then will it run as scheduled. It is also placed in a
   # queue when scheduled, so it may not run exactly at the requested time.
@@ -65,6 +67,7 @@ env:
 
 jobs:
   cache-mumps:
+    # hierher: re-enable this runs-on: ubuntu-latest
     runs-on: ubuntu-24.04
     steps:
       - name: Grab actions (only) from oomph-lib repository
@@ -93,6 +96,7 @@ jobs:
         build_third_party_libs: ["OFF", "ON"]
 
     name: Ubuntu self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
+    # hierher re-enable this: runs-on: ubuntu-latest
     runs-on: ubuntu-24.04
     steps:
       # -------------------
