@@ -736,7 +736,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
  IterativeLinearSolver* solver_pt=0;
  
  // If we have trilinos, use it
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
  
  // Create solver
  solver_pt = new TrilinosAztecOOSolver;
@@ -844,7 +844,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
 
 #endif
    
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
    // Use Trilinos CG as subsidiary preconditioner (inexact solver) for
    // linear (sub-)systems to be solved in the Lagrange multiplier block

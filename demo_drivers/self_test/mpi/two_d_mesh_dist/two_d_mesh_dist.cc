@@ -459,7 +459,7 @@ void parallel_test(const unsigned& n_refine_first,
  if (solve)
   {
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
   // Notify...
   oomph_info << "Using the TRILINOS solver" << std::endl;

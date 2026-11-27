@@ -1589,7 +1589,7 @@ set_pseudo_elastic_fsi_solver()
 {
 
 //setup the solver
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
   
   TrilinosAztecOOSolver* solver_pt = new
    TrilinosAztecOOSolver;
@@ -1631,7 +1631,7 @@ set_pseudo_elastic_fsi_solver()
 #endif
 
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
   prec_pt->pseudo_elastic_preconditioner_pt()
    ->set_lagrange_multiplier_subsidiary_preconditioner

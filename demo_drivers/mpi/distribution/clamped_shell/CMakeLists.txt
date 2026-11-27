@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.clamped_shell
   DEPENDS_ON clamped_shell_with_arclength_cont
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata)
 
 # Don't run this test alongside any other tests

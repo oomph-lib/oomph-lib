@@ -36,7 +36,7 @@ namespace oomph
     /// systems.
     Preconditioner* get_w_cg_preconditioner()
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       InnerIterationPreconditioner<TrilinosAztecOOSolver,
                                    MatrixBasedDiagPreconditioner>* prec_pt =
         new InnerIterationPreconditioner<TrilinosAztecOOSolver,

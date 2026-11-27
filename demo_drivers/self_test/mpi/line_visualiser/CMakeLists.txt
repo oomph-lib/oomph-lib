@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME self_test.mpi.line_visualiser
   DEPENDS_ON adaptive_driven_cavity
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata adaptive_cavity_1_partition.dat
              adaptive_cavity_2_partition.dat)
 

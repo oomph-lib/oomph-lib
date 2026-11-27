@@ -37,9 +37,9 @@
 #include "linear_solver.h"
 
 // Using CG to solve the projection problem
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #include "trilinos_solver.h"
-#endif // #ifdef OOMPH_HAS_TRILINOS
+#endif // #ifdef OOMPH_HAS_OLD_TRILINOS
 #include "iterative_linear_solver.h"
 
 // Use a preconditioner for the iterative solver
@@ -752,7 +752,7 @@ namespace oomph
       {
         // If oomph-lib has Trilinos installed then use the CG version
         // from Trilinos, otherwise use oomph-lib's own CG implementation
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
         // Check whether the problem is distributed?
         if (MPI_Helpers::mpi_has_been_initialised())
         {

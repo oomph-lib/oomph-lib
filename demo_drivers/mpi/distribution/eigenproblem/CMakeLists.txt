@@ -20,7 +20,7 @@ endif()
 
 include(CTest)
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   oomph_add_executable(
     NAME harmonic
     SOURCES harmonic.cc
@@ -29,11 +29,11 @@ endif()
 
 # ---------------------------------- TESTING ----------------------------------
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   oomph_add_test(
     TEST_NAME mpi.distribution.eigenproblem
     DEPENDS_ON harmonic
-    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
     TEST_FILES validate.sh validata)
 
   # Don't run this test alongside any other tests

@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.fish_poisson
   DEPENDS_ON fish_poisson
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata fish_fully_automatic_partition.dat
              fish_incremental_partition.dat fish_selective_partition.dat
              distributed_adapt.mcr)

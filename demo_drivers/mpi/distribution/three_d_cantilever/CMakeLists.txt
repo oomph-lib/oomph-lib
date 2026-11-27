@@ -31,7 +31,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.three_d_cantilever
   DEPENDS_ON three_d_cantilever_adapt
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh
              validata
              three_d_cantilever_0_partition.dat

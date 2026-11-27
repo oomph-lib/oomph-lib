@@ -30,7 +30,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.distribution.hp_adaptive_driven_cavity
   DEPENDS_ON hp_adaptive_driven_cavity
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata hp_adaptive_cavity_partition.dat)
 
 # Don't run this test alongside any other tests

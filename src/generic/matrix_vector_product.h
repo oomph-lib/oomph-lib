@@ -34,7 +34,7 @@
 
 #include "matrices.h"
 #include "linear_algebra_distribution.h"
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #include "trilinos_helpers.h"
 #endif
 
@@ -53,7 +53,7 @@ namespace oomph
     MatrixVectorProduct()
     {
       // null pointers
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       Epetra_matrix_pt = 0;
 #endif
       Oomph_matrix_pt = 0;
@@ -75,7 +75,7 @@ namespace oomph
     /// clear the memory
     void clean_up_memory()
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       delete Epetra_matrix_pt;
       Epetra_matrix_pt = 0;
 #endif
@@ -112,7 +112,7 @@ namespace oomph
     }
 
   private:
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     /// Helper function for multiply(...)
     void trilinos_multiply_helper(const DoubleVector& x, DoubleVector& y) const;
 

@@ -52,7 +52,7 @@ oomph_add_test(
   DEPENDS_ON multi_domain_boussinesq_convection
              multi_domain_boussinesq_convection_fd multi_domain_ref_b_convection
              refineable_b_convection
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh
              validata
              multi_domain_boussinesq_partition.dat

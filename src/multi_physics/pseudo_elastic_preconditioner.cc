@@ -70,7 +70,7 @@ namespace oomph
 
 #endif
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
     /// TrilinosML smoothing for the augmented elastic
     /// subsidiary linear systems

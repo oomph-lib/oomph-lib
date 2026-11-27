@@ -114,7 +114,8 @@ set(OOMPH_HAS_SUPERLU_DIST @OOMPH_HAS_SUPERLU_DIST@)
 set(OOMPH_HAS_CGAL @OOMPH_HAS_CGAL@)
 set(OOMPH_HAS_HYPRE @OOMPH_HAS_HYPRE@)
 set(OOMPH_HAS_MUMPS @OOMPH_HAS_MUMPS@)
-set(OOMPH_HAS_TRILINOS @OOMPH_HAS_TRILINOS@)
+set(OOMPH_HAS_OLD_TRILINOS @OOMPH_HAS_OLD_TRILINOS@)
+set(OOMPH_HAS_NEW_TRILINOS @OOMPH_HAS_NEW_TRILINOS@)
 
 # Capture user's decision to their own libraries
 set(OOMPH_USE_OPENBLAS_FROM "@OOMPH_USE_OPENBLAS_FROM@")
@@ -265,8 +266,19 @@ endif()
 # -------------------
 # Trilinos
 # -------------------
-if(OOMPH_HAS_TRILINOS AND (NOT Trilinos_FOUND))
-  find_dependency(Trilinos 16.0.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+if((OOMPH_HAS_OLD_TRILINOS OR OOMPH_HAS_NEW_TRILINOS)
+   AND (NOT Trilinos_FOUND))
+  # Some Trilinos package version files only accept requests from the same major version.
+  find_package(Trilinos 16.0.0 QUIET GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  if(NOT Trilinos_FOUND)
+    find_dependency(Trilinos REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  endif()
+  if(NOT DEFINED Trilinos_VERSION OR "${Trilinos_VERSION}" STREQUAL "")
+    message(FATAL_ERROR "Trilinos was found, but Trilinos_VERSION is unavailable.")
+  endif()
+  if(Trilinos_VERSION VERSION_LESS "16.0.0")
+    message(FATAL_ERROR "Trilinos 16.0.0 or newer is required.")
+  endif()
 endif()
 
 # cmake-format: on

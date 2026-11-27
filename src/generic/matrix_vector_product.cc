@@ -52,7 +52,7 @@ namespace oomph
 
     // determine whether we are using trilinos
     Using_trilinos = false;
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
@@ -81,7 +81,7 @@ namespace oomph
     // setup the operator
     if (Using_trilinos)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       double t_start = TimingHelpers::timer();
       Epetra_matrix_pt =
         TrilinosEpetraHelpers::create_distributed_epetra_matrix(
@@ -160,7 +160,7 @@ namespace oomph
     // apply the operator
     if (Using_trilinos)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       trilinos_multiply_helper(x, y);
 #endif
     }
@@ -224,7 +224,7 @@ namespace oomph
     // apply the transpose operator
     if (Using_trilinos)
     {
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
       trilinos_multiply_transpose_helper(x, y);
 #endif
     }
@@ -234,7 +234,7 @@ namespace oomph
     }
   }
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
   //============================================================================
   /// Apply the operator to the vector x and return
   /// the result in the vector y (helper function)

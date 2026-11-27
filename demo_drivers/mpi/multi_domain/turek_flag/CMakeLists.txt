@@ -37,7 +37,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.multi_domain.turek_flag
   DEPENDS_ON turek_flag turek_flag_load_balance
-  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_RUN_COMMAND}"
   TEST_FILES validate.sh validata turek_flag_partition.dat load_balance.mcr)
 
 # Don't run this test alongside any other tests

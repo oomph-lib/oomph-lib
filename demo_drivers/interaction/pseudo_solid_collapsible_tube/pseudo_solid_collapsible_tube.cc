@@ -1597,7 +1597,7 @@ typedef PseudoElasticCollapsibleChannelProblem<
 void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
 {
 // setup the solver
-//#ifdef OOMPH_HAS_TRILINOS
+//#ifdef OOMPH_HAS_OLD_TRILINOS
 // TrilinosAztecOOSolver* solver_pt = new
 //  TrilinosAztecOOSolver;
 // solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;

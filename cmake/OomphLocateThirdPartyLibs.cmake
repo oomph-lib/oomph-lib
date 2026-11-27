@@ -7,6 +7,8 @@ message(VERBOSE "Locating third-party libraries")
 
 # Targets to store the accumulated compiler flags and external libs to link
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
+set(OOMPH_HAS_OLD_TRILINOS FALSE CACHE INTERNAL "" FORCE)
+set(OOMPH_HAS_NEW_TRILINOS FALSE CACHE INTERNAL "" FORCE)
 
 if(NOT (OOMPH_USE_GKLIB_FROM AND OOMPH_USE_METIS_FROM AND OOMPH_USE_SUPERLU_FROM))
   message(
@@ -156,14 +158,30 @@ endif()
 
 # Trilinos
 if(OOMPH_USE_TRILINOS_FROM)
-  find_package(Trilinos 16.0.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  # Some Trilinos package version files only accept requests from the same major version.
+  find_package(Trilinos 16.0.0 QUIET GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  if(NOT Trilinos_FOUND)
+    find_package(Trilinos REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  endif()
+  if(NOT DEFINED Trilinos_VERSION OR "${Trilinos_VERSION}" STREQUAL "")
+    message(FATAL_ERROR "Trilinos was found, but Trilinos_VERSION is unavailable.")
+  endif()
+  if(Trilinos_VERSION VERSION_LESS "16.0.0")
+    message(FATAL_ERROR "Trilinos 16.0.0 or newer is required.")
+  endif()
+  message(STATUS "Found Trilinos version ${Trilinos_VERSION}")
   if(TARGET Trilinos::all_libs)
     message(STATUS "Hurray! The target Trilinos::all_libs is defined!")
   else()
     message(FATAL_ERROR "Target Trilinos::all_libs is not defined!")
   endif()
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
-  set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
+  if(Trilinos_VERSION VERSION_LESS "17.0.0")
+    list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_OLD_TRILINOS)
+    set(OOMPH_HAS_OLD_TRILINOS TRUE CACHE INTERNAL "" FORCE)
+  else()
+    list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_NEW_TRILINOS)
+    set(OOMPH_HAS_NEW_TRILINOS TRUE CACHE INTERNAL "" FORCE)
+  endif()
 endif()
 
 message(VERBOSE "Finished locating third-party libraries")

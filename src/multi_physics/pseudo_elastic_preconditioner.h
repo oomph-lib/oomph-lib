@@ -37,7 +37,7 @@
 #ifdef OOMPH_HAS_HYPRE
 #include "generic/hypre_solver.h"
 #endif
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #include "generic/trilinos_solver.h"
 #endif
 namespace oomph
@@ -61,7 +61,7 @@ namespace oomph
 
 #endif
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
     /// TrilinosML smoothing for the augmented elastic
     /// subsidiary linear systems

@@ -65,9 +65,18 @@ if(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION)
   list(APPEND MPIEXEC_PREFLAGS "--map-by :OVERSUBSCRIBE")
 endif()
 
-# Set MPIEXEC_NUMPROC_FLAG flag if it hasn't been set. The user can override
-# this by passing -DMPIEXEC_NUMPROC_FLAG="..." when configuring the project
-set(MPIEXEC_NUMPROC_FLAG "-np")
+# Resolve wrapper symlinks before invoking MPI. In particular, Open MPI can
+# interpret a launcher reached through /bin/mpiexec as having an invalid "/"
+# installation prefix.
+if(MPIEXEC_EXECUTABLE)
+  get_filename_component(MPIEXEC_EXECUTABLE "${MPIEXEC_EXECUTABLE}" REALPATH)
+endif()
+
+# FindMPI supplies this flag. Retain a fallback for implementations or custom
+# configurations that do not provide one.
+if(NOT MPIEXEC_NUMPROC_FLAG)
+  set(MPIEXEC_NUMPROC_FLAG "-np")
+endif()
 
 # Inform the user
 message(STATUS "MPI executable: '${MPIEXEC_EXECUTABLE}'")
@@ -92,7 +101,7 @@ endif()
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)
   set(OOMPH_MPI_RUN_COMMAND
-      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC} ${MPIEXEC_PREFLAGS} '"
+      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC} ${MPIEXEC_PREFLAGS}"
   )
 endif()
 message(STATUS "oomph-lib MPI run command: ${OOMPH_MPI_RUN_COMMAND}")
@@ -102,7 +111,7 @@ message(STATUS "oomph-lib MPI run command: ${OOMPH_MPI_RUN_COMMAND}")
 # number of processes they wish to use
 if(NOT DEFINED OOMPH_MPI_VARIABLENP_RUN_COMMAND)
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND
-      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ${MPIEXEC_PREFLAGS} '"
+      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ${MPIEXEC_PREFLAGS}"
   )
 endif()
 message(

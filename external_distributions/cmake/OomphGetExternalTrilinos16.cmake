@@ -21,14 +21,14 @@
 include_guard()
 
 set(TRILINOS_GIT_URL https://github.com/trilinos/Trilinos.git)
-set(TRILINOS_GIT_TAG trilinos-release-16-0-0)
-set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
+set(TRILINOS_GIT_TAG trilinos-release-16-2-2)
+set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos16")
 
 # TODO: Handle deprecated packages more gracefully
-if (NOT TRILINOS_GIT_TAG STREQUAL "trilinos-release-16-0-0")
+if (NOT TRILINOS_GIT_TAG STREQUAL "trilinos-release-16-2-2")
   message(
     WARNING
-      "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 "
+      "Disabling deprecated Trilinos package warnings. Do not move past v16.2.2 "
       "without making the necessary oomph-lib changes to handle this."
   )
 endif()
@@ -128,7 +128,7 @@ set(PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Patch-packages-amesos-test
 
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(
-  PROJECT_NAME trilinos
+  PROJECT_NAME trilinos16
   GIT_REPOSITORY ${TRILINOS_GIT_URL}
   GIT_TAG ${TRILINOS_GIT_TAG}
   INSTALL_DIR ${TRILINOS_INSTALL_DIR}
@@ -141,7 +141,7 @@ oomph_get_external_project_helper(
 # Trilinos depends on OpenBLAS. If we're building OpenBLAS ourselves then we
 # need to make sure that it gets built before Trilinos
 if(TARGET openblas)
-  add_dependencies(trilinos openblas)
+  add_dependencies(trilinos16 openblas)
 endif()
 
 # ---------------------------------------------------------------------------------

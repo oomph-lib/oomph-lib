@@ -217,7 +217,8 @@ if(OOMPH_HAS_HYPRE)
   list(APPEND SOURCES hypre_solver.cc)
 endif()
 
-if(OOMPH_HAS_TRILINOS)
+# The existing Trilinos wrappers use the legacy Epetra/AztecOO package stack.
+if(OOMPH_HAS_OLD_TRILINOS)
   list(APPEND HEADERS trilinos_helpers.h trilinos_preconditioners.h
        trilinos_solver.h trilinos_eigen_solver.h)
   list(APPEND SOURCES trilinos_helpers.cc trilinos_preconditioners.cc
@@ -281,13 +282,6 @@ oomph_target_silence_warnings(
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 # ------------------------------------------------------------------------------
-# If oomph-lib needs MPI, link it publically so that executables using the
-# library also inherit MPI
-if(OOMPH_HAS_MPI)
-  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX
-                                          MPI::MPI_Fortran)
-endif()
-
 target_link_libraries(${LIBNAME} PUBLIC ${OpenBLAS_LIBRARIES})
 
 # NOTE: We publicly link to third-party libraries so that these libraries get
@@ -328,12 +322,24 @@ if(OOMPH_HAS_HYPRE)
   target_link_libraries(${LIBNAME} PUBLIC HYPRE::HYPRE)
 endif()
 
-if(OOMPH_HAS_TRILINOS)
+if(OOMPH_HAS_OLD_TRILINOS)
   target_link_libraries(${LIBNAME} PUBLIC Trilinos::all_libs)
+elseif(OOMPH_HAS_NEW_TRILINOS)
+  # oomph-lib does not yet compile against the Trilinos 17 API, so only
+  # propagate its link dependencies and not its C++20 compile requirements.
+  target_link_libraries(${LIBNAME} PUBLIC "$<LINK_ONLY:Trilinos::all_libs>")
 endif()
 
 if(OOMPH_HAS_MUMPS)
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS)
+endif()
+
+# If oomph-lib needs MPI, link it publicly after its third-party libraries so
+# MPI implementations with deprecated C++ bindings resolve symbols from static
+# Trilinos libraries.
+if(OOMPH_HAS_MPI)
+  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX
+                                          MPI::MPI_Fortran)
 endif()
 
 message(VERBOSE "Leaving generic subdirectory")

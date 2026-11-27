@@ -39,7 +39,7 @@
 #include "double_vector.h"
 
 // Trilinos headerss
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 #include "Teuchos_Range1D.hpp"
 #endif
 
@@ -136,7 +136,7 @@ namespace oomph
       this->setup_doublevector_representation();
     }
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
     /// Constructor that builds a multivector from selected columns
     /// of the input multivector and the provided range. The optional
     /// boolean specifies whether it is a shallow or deep copy. The default

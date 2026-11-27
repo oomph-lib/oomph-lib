@@ -480,7 +480,7 @@ void parallel_test(const unsigned& n_refine_first,
  if (solve)
   {
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
 
   // Create a Trilinos solver
   TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;

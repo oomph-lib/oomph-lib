@@ -33,7 +33,7 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME self_test.mpi.matrix_addition
     DEPENDS_ON matrix_addition
-    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} "${OOMPH_MPI_VARIABLENP_RUN_COMMAND}"
     TEST_FILES validate.sh validata)
 
   # Don't run this test alongside any other tests

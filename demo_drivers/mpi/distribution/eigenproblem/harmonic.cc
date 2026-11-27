@@ -547,7 +547,7 @@ int main(int argc, char **argv)
  MPI_Helpers::init(argc,argv);
 #endif
 
-#ifdef OOMPH_HAS_TRILINOS
+#ifdef OOMPH_HAS_OLD_TRILINOS
  // Set up the problem: 
  unsigned n_element=100; //Number of elements
 
